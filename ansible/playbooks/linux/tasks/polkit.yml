@@ -1,0 +1,14 @@
+---
+- include_role: name=polkit-operators
+  tags: polkit
+  vars:
+    polkit_operators_groups_nopasswd: '{{
+      polkit_default_operators_nopasswd|d([]) +
+      polkit_group_operators_nopasswd|d([]) +
+      polkit_host_operators_nopasswd|d([])
+    }}'
+    polkit_operators_groups: '{{
+      polkit_default_operators|d([]) +
+      polkit_group_operators|d([]) +
+      polkit_host_operators|d([])
+    }}'

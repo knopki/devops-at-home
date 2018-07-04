@@ -1,0 +1,7 @@
+---
+ansible_user: root
+ansible_host: h.do-fra1.1984.run
+ansible_python_interpreter: /usr/bin/python3
+root_password: "{{ lookup('passwordstore','devices/do-fra1.1984.run/root') }}"
+system_locale: en_US.UTF-8
+network_primary_ip4: "{{ lookup('passwordstore','devices/do-fra1.1984.run/network_primary_ipv4') }}"

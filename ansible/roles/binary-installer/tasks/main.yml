@@ -1,0 +1,20 @@
+---
+- include: remove.yml path="{{ item.dest }}"
+  with_items:
+    - "{{ binaries }}"
+  when: item.state is defined and item.state == 'absent'
+  tags: binary-installer
+
+- include: simple_install.yml binary="{{ item }}"
+  with_items:
+    - "{{ binaries }}"
+  when: (item.archive is not defined or item.archive == false)
+    and (item.state is not defined or item.state != 'absent')
+  tags: binary-installer
+
+- include: archive_install.yml binary="{{ item }}"
+  with_items:
+    - "{{ binaries }}"
+  when: (item.archive is defined and item.archive == true)
+    and (item.state is not defined or item.state != 'absent')
+  tags: binary-installer

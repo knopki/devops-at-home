@@ -1,0 +1,14 @@
+---
+- name: RPM OStree upgrade
+  include_role: name=rpm-ostree-upgrade
+  tags: rpm-ostree-upgrade
+
+- name: RPM OStree install
+  include_role: name=rpm-ostree-install
+  tags: rpm-ostree-install
+  vars:
+    rpm_ostree_install: "{{
+      rpm_ostree_install_default|d([]) +
+      rpm_ostree_install_group|d([]) +
+      rpm_ostree_install_host|d([])
+    }}"

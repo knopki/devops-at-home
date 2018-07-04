@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - role: ansible-role-management-user
+      management_user_settings:
+        name: management
+        comment: Ansible
+        shell: '/bin/bash'
+        sudo:
+          hosts: ALL
+          as: ALL
+          commands: ALL

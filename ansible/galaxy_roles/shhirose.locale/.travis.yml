@@ -1,0 +1,47 @@
+---
+language: python
+
+python:
+  - 2.7
+
+sudo: required
+
+env:
+  - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=2.3.0
+  - ANSIBLE_VERSION=2.2.3
+  - ANSIBLE_VERSION=2.1.5
+  - ANSIBLE_VERSION=2.0.2
+  - ANSIBLE_VERSION=2.0.0
+
+install:
+  - sudo apt-get install -y python-pip
+
+  - \[ "${ANSIBLE_VERSION}" == "latest" \] && sudo pip install ansible ||  sudo pip install ansible\==${ANSIBLE_VERSION}
+
+  - sudo locale-gen ja_JP.UTF-8
+
+script:
+  - locale
+
+  - |
+    locale | grep -q 'LANG=en_US.UTF-8'
+    \[ $? -eq 0 \] && CHANGE_LANG='ja_JP.UTF-8' || CHANGE_LANG='en_US.UTF-8'
+
+  - sudo ansible-playbook tests/test.yml -i tests/inventory --extra-vars "shhirose_locale_locale=${CHANGE_LANG}" --syntax-check
+
+  - sudo ansible-playbook tests/test.yml -i tests/inventory --extra-vars "shhirose_locale_locale=${CHANGE_LANG}"
+
+  # retry
+  - sudo ansible-playbook tests/test.yml -i tests/inventory --extra-vars "shhirose_locale_locale=${CHANGE_LANG}" | grep -q 'changed=0.*failed=0' && (echo "" && exit 0) || (echo 'Changed or failed after retry' && exit 1)
+
+  - |
+    grep -q "LANG=${CHANGE_LANG}" /etc/default/locale
+    if \[ $? -ne 0 \]; then
+      echo "Failed change locale."
+
+      exit 1
+    fi
+
+notification:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

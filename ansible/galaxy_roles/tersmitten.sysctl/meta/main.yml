@@ -1,0 +1,22 @@
+# meta file for sysctl
+---
+galaxy_info:
+  author: Mischa ter Smitten
+  company: Oefenweb.nl B.V.
+  description: Manage sysctl settings
+  license: MIT
+  min_ansible_version: 2.2.0.0
+  platforms:
+    - name: Ubuntu
+      versions:
+        - precise
+        - trusty
+        - xenial
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
+  galaxy_tags:
+    - system
+    - networking
+dependencies: []

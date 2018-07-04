@@ -1,0 +1,36 @@
+---
+uci_uhttpd:
+  - command: set
+    key: uhttpd.main
+    type: uhttpd
+    value:
+      listen_http:
+        - '0.0.0.0:8080'
+        - '[::]:80'
+      listen_https:
+        - '[::]:443'
+      redirect_https: "1"
+      home: '/www'
+      rfc1918_filter: '0'
+      max_requests: '3'
+      max_connections: '100'
+      cert: '/etc/uhttpd.crt'
+      key: '/etc/uhttpd.key'
+      cgi_prefix: '/cgi-bin'
+      lua_prefix: '/luci'
+      lua_handler: '/usr/lib/lua/luci/sgi/uhttpd.lua'
+      script_timeout: '60'
+      network_timeout: '30'
+      http_keepalive: '20'
+      tcp_keepalive: '1'
+      ubus_prefix: '/ubus'
+  - command: set
+    key: uhttpd.defaults
+    type: cert
+    value:
+      days: '730'
+      bits: '2048'
+      country: 'ZZ'
+      state: 'Somewhere'
+      location: 'Unknown'
+      commonname: 'OpenWrt'

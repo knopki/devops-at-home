@@ -1,0 +1,73 @@
+---
+binaries_group:
+  - name: kubectl
+    url: https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kubectl
+    dest: /usr/local/bin/kubectl
+    checksum: sha1:bb7ed44771d1effd8692e191dc07b0412db1f0df
+  - name: helm
+    url: https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
+    dest: /usr/local/bin/helm
+    checksum: d77e12f417162211566eb0feea49a2182ec68eba
+    archive: yes
+    archive_path: linux-amd64/helm
+  - name: fly
+    url: "https://concourse.xod.show/api/v1/cli?arch=amd64&platform=linux"
+    dest: /usr/local/bin/fly
+    checksum: sha1:cdfec655b6474ce8bc4da6961702b0fd345e042a
+  - name: minikube
+    url: https://github.com/kubernetes/minikube/releases/download/v0.27.0/minikube-linux-amd64
+    dest: /usr/local/bin/minikube
+    checksum: sha1:1677dd631bad1b27e2d6aeb245fa3470870f31ab
+  - name: docker-machine-driver-kvm2
+    url: https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-kvm2
+    dest: /usr/local/bin/docker-machine-driver-kvm2
+    checksum: sha1:2bc74d0014c2bcbfc5b1422ece90613f5cf3b5fd
+  - name: gopass
+    url: https://github.com/gopasspw/gopass/releases/download/v1.8.1/gopass-1.8.1-linux-amd64.tar.gz
+    dest: /usr/local/bin/gopass
+    checksum: 9515db51cfa3e9d79aa4d4bd488d96f485f823b5
+    archive: yes
+    archive_path: gopass-1.8.1-linux-amd64/gopass
+  - name: ngrok
+    url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+    dest: /usr/local/bin/ngrok
+    checksum: 01ce7096b9e15e2e0cec4cc56d988a3cd3734b44
+    archive: yes
+    archive_path: ngrok
+  - name: mitmdump
+    url: https://snapshots.mitmproxy.org/4.0.1/mitmproxy-4.0.1-linux.tar.gz
+    dest: /usr/local/bin/mitmdump
+    checksum: 6c53619ae0fe10f8d4553b1447acff8be639a831
+    archive: yes
+    archive_path: mitmdump
+  - name: mitmproxy
+    url: https://snapshots.mitmproxy.org/4.0.1/mitmproxy-4.0.1-linux.tar.gz
+    dest: /usr/local/bin/mitmproxy
+    checksum: 929ae5f91388b3302987af438a7b1f5f09091a6b
+    archive: yes
+    archive_path: mitmproxy
+  - name: mitmweb
+    url: https://snapshots.mitmproxy.org/4.0.1/mitmproxy-4.0.1-linux.tar.gz
+    dest: /usr/local/bin/mitmweb
+    checksum: 430019d86b6bdd744ce43a051c37abb4f97c363f
+    archive: yes
+    archive_path: mitmweb
+  - name: exercism
+    url: https://github.com/exercism/cli/releases/download/v2.4.1/exercism-linux-64bit.tgz
+    dest: /usr/local/bin/exercism
+    checksum: d07238a6415c3b606c425847f8433be46b8b3834
+    archive: yes
+    archive_path: exercism
+  - name: bat
+    url: https://github.com/sharkdp/bat/releases/download/v0.4.1/bat-v0.4.1-x86_64-unknown-linux-gnu.tar.gz
+    dest: /usr/local/bin/bat
+    checksum: 112561240d1a2aafd563860813645991e205fbb4
+    archive: yes
+    archive_path: bat-v0.4.1-x86_64-unknown-linux-gnu/bat
+  - name: gotty
+    url: https://github.com/yudai/gotty/releases/download/v2.0.0-alpha.3/gotty_2.0.0-alpha.3_linux_amd64.tar.gz
+    dest: /usr/local/bin/gotty
+    checksum: 7898874a4c9438e8d12acaf7622e678e580a1ca4
+    archive: yes
+    archive_path: gotty
+

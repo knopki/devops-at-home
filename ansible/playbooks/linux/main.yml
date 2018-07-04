@@ -1,0 +1,14 @@
+---
+# OS preparation
+- import_playbook: fedora-atomic.yml
+
+# Server settings
+- import_playbook: servers.yml
+
+# Workstation settings
+- import_playbook: workstations.yml
+
+# Specific
+- import_playbook: mtproxy.yml
+- import_playbook: do-agent.yml
+- import_playbook: do-fra1.1984.run.yml

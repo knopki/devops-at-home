@@ -1,0 +1,30 @@
+---
+galaxy_info:
+  author: G. Roggemans
+  description: A role for managing sudo.
+  company: GROG
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: GenericUNIX
+    versions:
+    - all
+  - name: GenericBSD
+    versions:
+    - all
+  - name: GenericLinux
+    versions:
+    - all
+  galaxy_tags:
+  - sudo
+  - system
+
+allow_duplicates: yes
+
+dependencies:
+  - role: GROG.package
+    version: v1.2.2
+    when: >
+      (sudo_package|string in 'True,true,Yes,yes')
+    package_list:
+      - name: sudo

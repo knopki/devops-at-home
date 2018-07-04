@@ -1,0 +1,26 @@
+---
+galaxy_info:
+  author: G. Roggemans
+  description: A role for managing authorized keys.
+  company: GROG
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: GenericUNIX
+    versions:
+    - all
+  - name: GenericBSD
+    versions:
+    - all
+  - name: GenericLinux
+    versions:
+    - all
+  galaxy_tags:
+  - ssh
+  - key
+  - authorized
+  - system
+
+allow_duplicates: yes
+
+dependencies: []

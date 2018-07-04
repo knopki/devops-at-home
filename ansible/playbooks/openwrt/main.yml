@@ -1,0 +1,2 @@
+---
+- import_playbook: mir3g.1984.run.yml

@@ -1,0 +1,11 @@
+---
+- name: Deploy do-agent
+  docker_container:
+    name: do-agent
+    image: docker.io/knopki/do-agent:0.5.1
+    restart_policy: always
+    memory: 128m
+    memory_reservation: 16m
+    state: started
+    volumes:
+      - "/proc:/agent/proc:ro"

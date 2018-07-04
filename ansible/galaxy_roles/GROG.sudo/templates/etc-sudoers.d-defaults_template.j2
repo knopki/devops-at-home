@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+
+# Defaults
+{% for defaults in sudo_defaults %}
+Defaults {{ defaults }}
+{% endfor %}

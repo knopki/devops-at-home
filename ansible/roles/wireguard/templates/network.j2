@@ -1,0 +1,13 @@
+[Match]
+Name={{ item.name }}
+
+[Network]
+{% for ip in item.addresses %}
+Address={{ ip }}
+{% endfor %}
+
+{% for route in item.routes %}
+[Route]
+Gateway={{ route.gateway }}
+Destination={{ route.destination }}
+{% endfor %}

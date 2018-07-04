@@ -1,0 +1,128 @@
+---
+uci_network:
+  - command: set
+    key: network.loopback
+    type: interface
+    value:
+      ifname: lo
+      proto: 'static'
+      ipaddr: '127.0.0.1'
+      netmask: '255.0.0.0'
+
+  - command: set
+    key: network.globals
+    type: globals
+    value:
+      ula_prefix: 'fda4:bbdb:e32d::/48'
+
+  # lan bridge
+  - command: set
+    key: network.lan
+    type: interface
+    value:
+      ifname: eth0.1
+      type: 'bridge'
+      proto: 'static'
+      ipaddr: '10.66.6.1'
+      netmask: '255.255.255.0'
+      ip6assign: '60'
+      ra_management: '1'
+  - command: set
+    key: network.lan_dev
+    type: device
+    value:
+      name: 'eth0.1'
+      macaddr: '50:64:2b:19:2e:c4'
+
+  # wan
+  - command: set
+    key: network.wan
+    type: interface
+    value:
+      ifname: 'eth0.2'
+      proto: 'dhcp'
+      macaddr: 'D4:CA:6D:68:80:54'
+      metric: '10'
+  - command: set
+    key: network.wan6
+    type: interface
+    value:
+      ifname: 'eth0.2'
+      proto: 'dhcpv6'
+
+  # switches
+  - command: set
+    key: network.@switch[0]
+    type: switch
+    value:
+      name: 'switch0'
+      reset: '1'
+      enable_vlan: '1'
+  - command: set
+    key: network.@switch_vlan[0]
+    type: switch_wlan
+    value:
+      device: 'switch0'
+      vlan: '1'
+      ports: '2 3 6t'
+  - command: set
+    key: network.@switch_vlan[1]
+    type: switch_wlan
+    value:
+      device: 'switch0'
+      vlan: '2'
+      ports: '1 6t'
+
+  # cjdns
+  - command: set
+    key: network.cjdns
+    type: interface
+    value:
+      ifname: tuncjdns
+      proto: 'none'
+
+  # wireguard
+  - command: set
+    key: network.wg0
+    type: interface
+    value:
+      proto: 'wireguard'
+      private_key: "{{ lookup('passwordstore','devices/mir3g.1984.run/wireguard subkey=private') }}"
+      listen_port: '51820'
+      addresses:
+        - '10.66.7.5'
+      force_link: '1'
+      metric: '20'
+  - command: section
+    config: network
+    type: wireguard_wg0
+    find:
+      public_key: "{{ lookup('passwordstore','devices/do-fra1.1984.run/wireguard subkey=public') }}"
+    value:
+      allowed_ips:
+        - '0.0.0.0/0'
+      route_allowed_ips: '0'
+      endpoint_host: "{{ lookup('passwordstore', 'devices/do-fra1.1984.run/network_primary_ipv4') }}"
+      endpoint_port: '51820'
+      persistent_keepalive: '25'
+
+  # static routing
+  - command: section
+    config: network
+    type: route
+    find:
+      target: '10.66.7.0'
+      netmask: '255.255.255.224'
+    value:
+      gateway: '10.66.7.5'
+      interface: 'wg0'
+      mtu: '1420'
+      metric: '0'
+
+  # mesh
+  - command: set
+    key: network.mesh
+    type: interface
+    value:
+      proto: 'none'
+      ifname: 'hyperboria0'

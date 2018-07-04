@@ -1,0 +1,3 @@
+---
+mtproxy_secret: "{{ lookup('passwordstore','devices/do-fra1.1984.run/mtproxy subkey=secret') }}"
+mtproxy_tag: "{{ lookup('passwordstore','devices/do-fra1.1984.run/mtproxy subkey=tag') }}"

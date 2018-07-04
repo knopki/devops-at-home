@@ -1,0 +1,25 @@
+---
+- name: Deploy mtproxy
+  docker_container:
+    name: mtproxy
+    image: docker.io/telegrammessenger/proxy:1.0
+    restart_policy: always
+    memory: 128m
+    memory_reservation: 16m
+    state: started
+    ports:
+      - "1984:443"
+    env:
+      SECRET: "{{ mtproxy_secret }}"
+      SECRET_COUNT: 1
+      WORKERS: 1
+      TAG: "{{ mtproxy_tag }}"
+
+- name: Enable 1984 port for mtproxy on public firewalld zone
+  tags: firewalld
+  firewalld:
+    zone: public
+    port: 1984/tcp
+    state: enabled
+    immediate: yes
+    permanent: yes

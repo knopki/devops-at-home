@@ -1,0 +1,7 @@
+---
+sshd_default_parameters:
+  PasswordAuthentication: no
+  PermitEmptyPasswords: no
+  PermitRootLogin: without-password
+  PubkeyAuthentication: yes
+

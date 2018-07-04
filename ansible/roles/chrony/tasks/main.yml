@@ -1,0 +1,10 @@
+---
+- name: copy chrony.conf config
+  template:
+    src: "chrony.conf.j2"
+    dest: "/etc/chrony.conf"
+    mode: 0644
+  notify: restart chronyd
+
+- name: chronyd enabled and running
+  systemd: name=chronyd enabled=true state=started

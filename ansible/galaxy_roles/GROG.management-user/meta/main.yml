@@ -1,0 +1,46 @@
+---
+galaxy_info:
+  author: G. Roggemans
+  description: A role for managing a management user.
+  company: GROG
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: GenericUNIX
+    versions:
+    - all
+  - name: GenericBSD
+    versions:
+    - all
+  - name: GenericLinux
+    versions:
+    - all
+  galaxy_tags:
+  - user
+  - management
+  - sudo
+  - ssh
+  - authorized
+  - key
+  - system
+
+allow_duplicates: yes
+
+dependencies:
+  - role: GROG.user
+    version: v1.2.2
+    user_list: "{{ management_user_list }}"
+    user_list_host: "{{ management_user_list_host }}"
+    user_list_group: "{{ management_user_list_group }}"
+
+  - role: GROG.authorized-key
+    version: v1.1.2
+    authorized_key_list: "{{ management_user_list }}"
+    authorized_key_list_host: "{{ management_user_list_host }}"
+    authorized_key_list_group: "{{ management_user_list_group }}"
+
+  - role: GROG.sudo
+    version: v1.3.2
+    sudo_list: "{{ management_user_list }}"
+    sudo_list_host: "{{ management_user_list_host }}"
+    sudo_list_group: "{{ management_user_list_group }}"

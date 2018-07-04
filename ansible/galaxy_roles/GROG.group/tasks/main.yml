@@ -1,0 +1,12 @@
+---
+
+- name: Manage group
+  group:
+    gid: "{{ item.gid | default(omit) }}"
+    name: "{{ item.name }}"
+    state: "{{ item.state | default(group_state) }}"
+    system: "{{ item.system | default(group_system) }}"
+  with_flattened:
+    - "{{ group_list }}"
+    - "{{ group_list_host }}"
+    - "{{ group_list_group }}"

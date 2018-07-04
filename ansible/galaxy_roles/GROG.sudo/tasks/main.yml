@@ -1,0 +1,67 @@
+---
+
+- name: Make sure sudoers.d dir is available
+  file:
+    path: "{{ sudo_sudoersd_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Restore default sudoers file
+  copy:
+    backup: yes
+    src: "{{ sudo_default_sudoers_src_path }}"
+    dest: '/etc/sudoers'
+    owner: root
+    group: root
+    mode: 0440
+    validate: visudo -cf %s
+  when: sudo_default_sudoers|string in 'True.true.Yes.yes'
+    # Checked as string to make sure it can be specified from the command line.
+
+- name: Enable sudoers.d
+  lineinfile:
+    backup: yes
+    create: yes
+    dest: '/etc/sudoers'
+    line: "#includedir {{ sudo_sudoersd_dir }}"
+    regexp: '^#includedir .*'
+    validate: visudo -cf %s
+
+- name: Apply sudoers defaults configuration
+  template:
+    src: 'etc-sudoers.d-defaults_template.j2'
+    dest: "{{ sudo_sudoersd_dir }}/00defaults"
+    owner: root
+    group: root
+    mode: 0440
+    validate: visudo -cf %s
+  when: sudo_defaults|length > 0
+
+- name: Apply sudoers aliases configuration
+  template:
+    src: 'etc-sudoers.d-aliases_template.j2'
+    dest: "{{ sudo_sudoersd_dir }}/10aliases"
+    owner: root
+    group: root
+    mode: 0440
+    validate: visudo -cf %s
+  when: ( (sudo_host_aliases|length > 0) or
+          (sudo_user_aliases|length > 0) or
+          (sudo_runas_aliases|length > 0) or
+          (sudo_cmnd_aliases|length > 0) )
+
+- name: Apply sudoers user configuration
+  template:
+    src: 'etc-sudoers.d-user_template.j2'
+    dest: "{{ sudo_sudoersd_dir }}/20{{ item.name }}"
+    owner: root
+    group: root
+    mode: 0440
+    validate: visudo -cf %s
+  when: item.sudo is defined
+  with_flattened:
+    - "{{ sudo_list }}"
+    - "{{ sudo_list_group }}"
+    - "{{ sudo_list_host }}"

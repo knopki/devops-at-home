@@ -1,0 +1,13 @@
+# tasks file for sysctl
+---
+- name: set sysctl settings
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    reload: true
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ sysctl_settings }}"
+  tags:
+    - configuration
+    - sysctl
+    - sysctl-settings

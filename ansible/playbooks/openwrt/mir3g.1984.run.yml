@@ -1,0 +1,95 @@
+---
+- hosts: mir3g.1984.run
+  any_errors_fatal: true
+  become: true
+  handlers:
+    - name: uci commit
+      uci:
+        command: commit
+  roles:
+    - gekmihesg.openwrt
+  tasks:
+    - name: Uninstall packages
+      opkg:
+        name: "{{ item }}"
+        state: absent
+      with_items: "{{ opkg_packages_absent }}"
+      tags: opkg
+
+    - name: Install packages
+      opkg:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ opkg_packages_present }}"
+      tags: opkg
+
+    - name: Set root password
+      tags: users
+      user:
+        name: root
+        password: "{{ root_password|password_hash('md5', 65534|random(seed=inventory_hostname)|string) }}"
+        update_password: always
+
+    - name: Set authorized key
+      tags: users, ssh
+      authorized_key:
+        user: root
+        state: present
+        key: "{{ ssh_sk_pub_key }}"
+        path: /etc/dropbear/authorized_keys
+        manage_dir: no
+        exclusive : yes
+
+    - name: Add stangri repo key
+      tags: opkg
+      lineinfile:
+        path: /etc/opkg/keys/792d9d9b39f180dc
+        line: 'RWR5LZ2bOfGA3FGliZosEDhodiAKDOISmQs/mmjo4rhcbFtqkibJqMzo'
+        create: yes
+
+    - name: Add repository
+      tags: opkg
+      lineinfile:
+        path: /etc/opkg/customfeeds.conf
+        line: 'src/gz stangri_repo https://raw.githubusercontent.com/stangri/openwrt-repo/master'
+
+    - name: Set UCI variables
+      tags: uci
+      uci:
+        command: "{{ item.command }}"
+        config: "{{ item.config|default(omit) }}"
+        find: "{{ item.find|default(omit) }}"
+        keep_keys: "{{ item.keep_items|default(omit) }}"
+        key: "{{ item.key|default(omit) }}"
+        merge: "{{ item.merge|default(omit) }}"
+        name: "{{ item.name|default(omit) }}"
+        option: "{{ item.option|default(omit) }}"
+        replace: "{{ item.replace|default(omit) }}"
+        section: "{{ item.section|default(omit) }}"
+        set_find: "{{ item.set_find|default(omit) }}"
+        type: "{{ item.type|default(omit) }}"
+        unique: "{{ item.unique|default(omit) }}"
+        value: "{{ item.value|default(omit) }}"
+      with_items: "{{ uci }}"
+      notify:
+        - uci commit
+
+    - name: Set UCI variables (cjdns peers)
+      tags: uci
+      uci:
+        command: section
+        config: cjdns
+        find:
+          peerName: "{{ item.peerName }}"
+        type: udp_peer
+        value:
+          interface: "{{ '2' if item.address_type == 'ipv6' else '1' }}"
+          address: "{{ item.address }}"
+          port: "{{ item.port }}"
+          public_key: "{{ item.publicKey }}"
+          password: "{{ item.password }}"
+          user: "{{ item.peerName }}"
+          login: "{{ item.login|default(omit) }}"
+      with_items: "{{ cjdns_udp_peers|difference(cjdns_udp_peers_self) }}"
+      notify:
+        - uci commit

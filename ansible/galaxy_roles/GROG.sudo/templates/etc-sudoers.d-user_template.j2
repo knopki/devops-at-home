@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+# User privilege specification
+{% if item.sudo.hosts is defined %}
+{{ item.name }} {{ item.sudo.hosts }}=({{ item.sudo.as }}){{ " NOPASSWD:" if ( item.sudo.nopasswd | default(false) ) else "" }}{{ "PASSWD:" if ( item.sudo.passwd | default(false) ) else "" }}{{ "NOEXEC:" if ( item.sudo.noexec | default(false) ) else "" }}{{ "EXEC:" if ( item.sudo.exec | default(false) ) else "" }}{{ "NOSETENV:" if ( item.sudo.nosetenv | default(false) ) else "" }}{{ "SETENV:" if ( item.sudo.setenv | default(false) ) else "" }}{{ "NOLOG_INPUT:" if ( item.sudo.nologinput | default(false) ) else "" }}{{ "LOG_INPUT:" if ( item.sudo.loginput | default(false) ) else "" }}{{ "NOLOG_OUTPUT:" if ( item.sudo.nologoutput | default(false) ) else "" }}{{ "LOG_OUTPUT:" if ( item.sudo.logoutput | default(false) ) else "" }} {{ item.sudo.commands }}
+{% else %}
+{% for entry in item.sudo %}
+{{ item.name }} {{ entry.hosts }}=({{ entry.as }}){{ " NOPASSWD:" if ( entry.nopasswd | default(false) ) else "" }}{{ "PASSWD:" if ( entry.passwd | default(false) ) else "" }}{{ "NOEXEC:" if ( entry.noexec | default(false) ) else "" }}{{ "EXEC:" if ( entry.exec | default(false) ) else "" }}{{ "NOSETENV:" if ( entry.nosetenv | default(false) ) else "" }}{{ "SETENV:" if ( entry.setenv | default(false) ) else "" }}{{ "NOLOG_INPUT:" if ( entry.nologinput | default(false) ) else "" }}{{ "LOG_INPUT:" if ( entry.loginput | default(false) ) else "" }}{{ "NOLOG_OUTPUT:" if ( entry.nologoutput | default(false) ) else "" }}{{ "LOG_OUTPUT:" if ( entry.logoutput | default(false) ) else "" }} {{ entry.commands }}
+{% endfor %}
+{% endif %}

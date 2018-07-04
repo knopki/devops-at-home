@@ -1,0 +1,26 @@
+---
+sysctl_default_parameters:
+  - name: 'kernel.panic'
+    value: '20'
+    comment: Reboot on kernel panic
+    state: present
+
+  - name: 'kernel.panic_on_oops'
+    value: '1'
+    comment: Reboot on kernel panic
+    state: present
+
+  - name: 'vm.panic_on_oom'
+    value: 1
+    comment: Reboot on kernel panic
+    state: present
+
+  - name: 'net.ipv4.ip_nonlocal_bind'
+    value: 1
+    comment: Allow non-local binds IPv4
+    state: present
+
+  - name: 'net.ipv6.ip_nonlocal_bind'
+    value: 1
+    comment: Allow non-local binds IPv6
+    state: present

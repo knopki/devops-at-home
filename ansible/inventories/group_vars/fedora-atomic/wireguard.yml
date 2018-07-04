@@ -1,0 +1,4 @@
+---
+wireguard_prune_old_versions: "false"
+wireguard_sha256: "d9bedeb22b1f83d48581608a6521fea1d429fbeb8809419d08703ef2ec570020"
+wireguard_version: "0.0.20180625"

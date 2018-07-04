@@ -1,0 +1,9 @@
+---
+atomic_host_remote_name: "fedora-atomic"
+atomic_host_remote_url: "https://dl.fedoraproject.org/atomic/repo/"
+atomic_host_remote_gpg_verify: "true"
+atomic_host_desired_ref: "fedora/28/x86_64/atomic-host"
+atomic_host_autoupgrade: check
+rpm_ostree_install_default:
+  - cjdns
+  - cjdns-tools

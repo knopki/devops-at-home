@@ -1,0 +1,19 @@
+[NetDev]
+Name={{ item.name }}
+Kind=wireguard
+Description={{ item.description }}
+
+[WireGuard]
+PrivateKey={{ item.private_key }}
+ListenPort={{ item.port }}
+
+{% for peer in item.peers %}
+[WireGuardPeer]
+; {{ peer.name }}
+PublicKey={{ peer.public_key }}
+{% for ip in peer.allowed_ips %}
+AllowedIPs={{ ip }}
+{% endfor %}
+PersistentKeepalive=25
+
+{% endfor %}

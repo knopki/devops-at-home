@@ -1,0 +1,6 @@
+---
+- name: Remove absent binaries
+  file:
+    state: absent
+    path: "{{ path }}"
+  tags: binary-installer

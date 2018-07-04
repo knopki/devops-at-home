@@ -1,0 +1,52 @@
+---
+uci_system:
+  - command: set
+    key: system.@system[0]
+    type: system
+    value:
+      ttylogin: '0'
+      log_size: '64'
+      urandom_seed: '2342342'
+      hostname: 'mir3g'
+      zonename: 'Europe/Moscow'
+      timezone: 'MSK-3'
+      log_proto: 'udp'
+      conloglevel: '8'
+      cronloglevel: '8'
+  - command: set
+    key: system.ntp
+    type: timeserver
+    value:
+      enabled: '1'
+      server:
+        - '0.ru.pool.ntp.org'
+        - '1.ru.pool.ntp.org'
+        - '2.ru.pool.ntp.org'
+        - '3.ru.pool.ntp.org'
+  - command: set
+    key: system.led_wan_amber
+    type: led
+    value:
+      name: 'WAN (amber)'
+      sysfs: 'mir3g:amber:wan'
+      trigger: 'switch0'
+      port_mask: '0x02'
+      speed_mask: '0x08'
+  - command: set
+    key: system.led_lan1_amber
+    type: led
+    value:
+      name: 'LAN1 (amber)'
+      sysfs: 'mir3g:amber:lan1'
+      trigger: 'switch0'
+      port_mask: '0x08'
+      speed_mask: '0x08'
+  - command: set
+    key: system.led_lan2_amber
+    type: led
+    value:
+      name: 'LAN2 (amber)'
+      sysfs: 'mir3g:amber:lan2'
+      trigger: 'switch0'
+      port_mask: '0x04'
+      speed_mask: '0x08'

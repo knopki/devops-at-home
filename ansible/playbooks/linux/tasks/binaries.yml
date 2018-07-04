@@ -1,0 +1,10 @@
+---
+- name: Install binaries
+  include_role: name=binary-installer
+  tags: binary-installer
+  vars:
+    binaries: "{{
+        binaries_default|d([]) +
+        binaries_group|d([]) +
+        binaries_host|d([])
+      }}"

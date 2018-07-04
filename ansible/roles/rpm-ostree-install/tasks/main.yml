@@ -1,0 +1,32 @@
+---
+# Gather facts
+- name: Gather facts about ostree deployment
+  command: rpm-ostree status --json
+  register: rpmostree_status_raw
+  changed_when: false
+  check_mode: no
+  tags: rpm-ostree-install
+
+- name: Set fact about ostree deployment
+  set_fact: installed="{{ (rpmostree_status_raw.stdout | from_json | json_query(query))[0][0] }}"
+  vars:
+    query: "deployments[?booted][\"requested-packages\"]"
+  tags: rpm-ostree-install
+
+- name: Install packages
+  with_items: "{{ rpm_ostree_install }}"
+  when: item not in installed
+  command: "rpm-ostree install {{ item }}"
+  register: result
+  tags: rpm-ostree-install
+
+- name: Uninstall packages
+  with_items: "{{ installed }}"
+  when: item not in rpm_ostree_install
+  command: "rpm-ostree uninstall {{ item }}"
+  register: result
+  tags: rpm-ostree-install
+
+- when: result.changed
+  fail: msg="Please reboot {{ inventory_hostname }} to complete installation"
+  tags: rpm-ostree-install

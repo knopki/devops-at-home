@@ -1,0 +1,12 @@
+---
+uci_rpcd:
+  - command: set
+    key: rpcd.@login[0]
+    type: login
+    value:
+      username: root
+      password: '$p$root'
+      read:
+        - '*'
+      write:
+        - '*'

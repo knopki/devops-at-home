@@ -1,0 +1,60 @@
+---
+uci_cjdns:
+  - command: set
+    key: cjdns.cjdns
+    type: cjdns
+    value:
+      ipv6: 'fc22:99a1:d867:75cf:c280:58a8:9783:8444'
+      admin_password: "{{ cjdns_admin_password }}"
+      admin_port: '11234'
+      public_key: "{{ cjdns_public_key }}"
+      private_key: "{{ cjdns_private_key }}"
+      admin_address: '127.0.0.1'
+      seccomp: '1'
+      tun_device: 'tuncjdns'
+
+  - command: section
+    config: cjdns
+    type: eth_interface
+    find:
+      bind: 'br-lan'
+    value:
+      beacon: '2'
+  - command: section
+    config: cjdns
+    type: eth_interface
+    find:
+      bind: 'hyperboria0'
+    value:
+      beacon: '2'
+
+  - command: section
+    config: cjdns
+    type: udp_interface
+    find:
+      address: '0.0.0.0'
+    value:
+      port: '57338'
+  - command: section
+    config: cjdns
+    type: udp_interface
+    find:
+      address: '[::]'
+    value:
+      port: '57338'
+
+  - command: section
+    config: cjdns
+    type: password
+    find:
+      user: "default-login"
+    value:
+      password: "{{ cjdns_authorizedPasswords['default-login'] }}"
+
+  - command: section
+    config: cjdns
+    type: password
+    find:
+      user: "private"
+    value:
+      password: "{{ cjdns_authorizedPasswords['private'] }}"

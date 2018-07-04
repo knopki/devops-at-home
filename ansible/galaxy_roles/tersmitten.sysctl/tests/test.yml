@@ -1,0 +1,7 @@
+# test file for sysctl
+---
+- hosts: localhost
+  connection: local
+  become: true
+  roles:
+    - ../../

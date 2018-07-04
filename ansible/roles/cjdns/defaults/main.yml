@@ -1,0 +1,21 @@
+---
+cjdns_admin_bind: "127.0.0.1:11234"
+cjdns_admin_password: "NONE"
+cjdns_security_setuser: cjdns
+cjdns_security_keepNetAdmin: 1
+cjdns_security_chroot: /var/empty/cjdns
+cjdns_security_nofiles: 0
+cjdns_security_noforks: 1
+cjdns_security_seccomp: 1
+cjdns_security_setupComplete: 1
+cjdns_log_to_stdout: no
+cjdns_noBackground: 0
+cjdns_udp_interfaces:
+  - bind: "0.0.0.0:57338"
+    type: ipv4
+  - bind: "[::]:57338"
+    type: ipv6
+cjdns_eth_interfaces:
+  - bind: all
+    beacon: 2
+cjdns_tun_device: "tuncjdns"

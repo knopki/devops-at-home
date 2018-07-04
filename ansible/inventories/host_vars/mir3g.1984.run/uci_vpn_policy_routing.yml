@@ -1,0 +1,71 @@
+---
+uci_vpn_policy_routing:
+  - command: set
+    key: vpn-policy-routing.config
+    type: vpn-policy-routing
+    value:
+      verbosity: '2'
+      ipv6_enabled: '1'
+      supported_interface: 'wg0'
+      ignored_interface: 'cjdns'
+      udp_proto_enabled: '1'
+      wan_tid: '201'
+      wan_mark: '0x010000'
+      fw_mask: '0xff0000'
+      dnsmasq_enabled: '1'
+      strict_enforcement: '0'
+      forward_chain_enabled: '1'
+      input_chain_enabled: '1'
+      output_chain_enabled: '1'
+      enabled: '1'
+
+  - command: section
+    config: vpn-policy-routing
+    type: policy
+    find:
+      comment: 'ssh'
+    value:
+      interface: 'wan'
+      local_addresses: '10.66.6.0/24'
+      remote_ports: '22'
+
+  - command: section
+    config: vpn-policy-routing
+    type: policy
+    find:
+      comment: 'mtproxy'
+    value:
+      interface: 'wan'
+      local_addresses: '10.66.6.0/24'
+      remote_addresses: "{{ lookup('passwordstore', 'devices/do-fra1.1984.run/network_primary_ipv4') }}/32"
+      remote_ports: '1984'
+
+  - command: section
+    config: vpn-policy-routing
+    type: policy
+    find:
+      comment: 'wireguard'
+    value:
+      interface: 'wan'
+      local_addresses: '10.66.6.0/24'
+      remote_ports: '51820'
+
+  - command: section
+    config: vpn-policy-routing
+    type: policy
+    find:
+      comment: 'cjdns'
+    value:
+      interface: 'wan'
+      local_addresses: '10.66.6.0/24'
+      local_ports: '57338'
+
+  - command: section
+    config: vpn-policy-routing
+    type: policy
+    find:
+      comment: 'default_via_vpn1'
+    value:
+      interface: 'wg0'
+      local_addresses: '10.66.6.0/24'
+      remote_addresses: '0.0.0.0/0'

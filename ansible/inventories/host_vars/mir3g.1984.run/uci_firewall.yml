@@ -1,0 +1,570 @@
+---
+uci_firewall:
+  #
+  # defaults
+  #
+  - command: set
+    key: firewall.@defaults[0]
+    type: defaults
+    value:
+      synflood_protect: '1'
+      drop_invalid: '1'
+      input: 'REJECT'
+      output: 'ACCEPT'
+      forward: 'REJECT'
+
+  #
+  # zones
+  #
+  - command: section
+    config: firewall
+    type: zone
+    find:
+      name: 'lan'
+    value:
+      input: 'REJECT'
+      output: 'ACCEPT'
+      forward: 'ACCEPT'
+      network: 'lan'
+      log: '1'
+      log_limit: '10/minute'
+
+  - command: section
+    config: firewall
+    type: zone
+    find:
+      name: 'wan'
+    value:
+      input: 'REJECT'
+      output: 'ACCEPT'
+      forward: 'REJECT'
+      network: 'wan wan6'
+      masq: '1'
+      mtu_fix: '1'
+      conntrack: '1'
+      log: '1'
+      log_limit: '10/minute'
+
+  - command: section
+    config: firewall
+    type: zone
+    find:
+      name: 'cjdns'
+    value:
+      input: 'REJECT'
+      output: 'ACCEPT'
+      forward: 'REJECT'
+      network: 'cjdns'
+      conntrack: '1'
+      family: 'ipv6'
+      log: '1'
+      log_limit: '10/minute'
+
+  - command: section
+    config: firewall
+    type: zone
+    find:
+      name: 'wg0'
+    value:
+      input: 'REJECT'
+      output: 'ACCEPT'
+      forward: 'ACCEPT'
+      network: 'wg0'
+      conntrack: '1'
+      log: '1'
+      log_limit: '10/minute'
+
+  #
+  # forwarding
+  #
+  - command: set
+    key: firewall.@forwarding[0]
+    type: forwarding
+    value:
+      src: 'lan'
+      dest: 'wan'
+
+  - command: set
+    key: firewall.@forwarding[1]
+    type: forwarding
+    value:
+      src: 'lan'
+      dest: 'cjdns'
+
+  - command: set
+    key: firewall.@forwarding[2]
+    type: forwarding
+    value:
+      src: 'lan'
+      dest: 'wg0'
+
+  - command: set
+    key: firewall.@forwarding[3]
+    type: forwarding
+    value:
+      src: 'wg0'
+      dest: 'lan'
+
+  #
+  # rules
+  #
+
+  # ICMPv4 #####################################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'any2self-Allow-Ping'
+    value:
+      enabled: '1'
+      family: ipv4
+      src: '*'
+      proto: icmp
+      icmp_type: 'echo-request'
+      target: ACCEPT
+      limit: '1000/sec'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'any2any-Allow-Ping'
+    value:
+      enabled: '1'
+      family: ipv4
+      src: '*'
+      dest: '*'
+      proto: icmp
+      icmp_type: 'echo-request'
+      target: ACCEPT
+      limit: '1000/sec'
+
+  # ICMPv6 #####################################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: lan2self-Allow-ICMPv6
+    value:
+      enabled: '1'
+      src: 'lan'
+      proto: 'icmp'
+      icmp_type:
+        - 'echo-request'
+        - 'echo-reply'
+        - 'destination-unreachable'
+        - 'packet-too-big'
+        - 'time-exceeded'
+        - 'bad-header'
+        - 'unknown-header-type'
+        - 'router-solicitation'
+        - 'neighbour-solicitation'
+        - 'router-advertisement'
+        - 'neighbour-advertisement'
+      limit: '1000/sec'
+      family: 'ipv6'
+      target: 'ACCEPT'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'wan2self-Allow-ICMPv6'
+    value:
+      enabled: '1'
+      src: 'wan'
+      proto: 'icmp'
+      icmp_type:
+        - 'echo-request'
+        - 'echo-reply'
+        - 'destination-unreachable'
+        - 'packet-too-big'
+        - 'time-exceeded'
+        - 'bad-header'
+        - 'unknown-header-type'
+        - 'router-solicitation'
+        - 'neighbour-solicitation'
+        - 'router-advertisement'
+        - 'neighbour-advertisement'
+      limit: '1000/sec'
+      family: 'ipv6'
+      target: 'ACCEPT'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'wg2self-Allow-ICMPv6'
+    value:
+      enabled: '1'
+      src: 'wg0'
+      proto: 'icmp'
+      icmp_type:
+        - 'echo-request'
+        - 'echo-reply'
+        - 'destination-unreachable'
+        - 'packet-too-big'
+        - 'time-exceeded'
+        - 'bad-header'
+        - 'unknown-header-type'
+        - 'router-solicitation'
+        - 'neighbour-solicitation'
+        - 'router-advertisement'
+        - 'neighbour-advertisement'
+      limit: '1000/sec'
+      family: 'ipv6'
+      target: 'ACCEPT'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'cjdns2self-Allow-ICMPv6'
+    value:
+      enabled: '1'
+      src: 'cjdns'
+      proto: 'icmp'
+      icmp_type:
+        - 'echo-request'
+        - 'echo-reply'
+        - 'destination-unreachable'
+        - 'packet-too-big'
+        - 'time-exceeded'
+        - 'bad-header'
+        - 'unknown-header-type'
+      limit: '1000/sec'
+      family: 'ipv6'
+      target: 'ACCEPT'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'any2any-Allow-ICMPv6'
+    value:
+      enabled: '1'
+      src: '*'
+      dest: '*'
+      proto: 'icmp'
+      icmp_type:
+        - 'echo-request'
+        - 'echo-reply'
+        - 'destination-unreachable'
+        - 'packet-too-big'
+        - 'time-exceeded'
+        - 'bad-header'
+        - 'unknown-header-type'
+      limit: '1000/sec'
+      family: 'ipv6'
+      target: 'ACCEPT'
+
+  # IGMP/MLD ###################################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'wan2self-Allow-IGMP'
+    value:
+      enabled: '1'
+      src: 'wan'
+      proto: 'igmp'
+      family: 'ipv4'
+      target: 'ACCEPT'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: wan2self-Allow-MLD
+    value:
+      enabled: '1'
+      src: 'wan'
+      proto: 'icmp'
+      src_ip: 'fe80::/10'
+      icmp_type:
+        - '130/0'
+        - '131/0'
+        - '132/0'
+        - '143/0'
+      family: 'ipv6'
+      target: 'ACCEPT'
+
+  # IPSEC/ESP/AH/ISAKM #########################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: wan2lan-Allow-IPSec-ESP
+    value:
+      enabled: '1'
+      src: 'wan'
+      dest: 'lan'
+      proto: 'esp'
+      target: 'ACCEPT'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: wan2lan-Allow-IPSec-AH
+    value:
+      enabled: '1'
+      src: 'wan'
+      dest: 'lan'
+      proto: 'ah'
+      target: 'ACCEPT'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'wan2lan-Allow-ISAKMP'
+    value:
+      enabled: '1'
+      src: 'wan'
+      src_port: '500 4500'
+      dest: 'lan'
+      dest_port: '500 4500'
+      proto: udp
+      target: ACCEPT
+
+  # DHCP #######################################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'wan2self-Allow-DHCP-Renew'
+    value:
+      enabled: '1'
+      src: 'wan'
+      proto: 'udp'
+      dest_port: '68'
+      target: 'ACCEPT'
+      family: 'ipv4'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: 'wan2self-Allow-DHCPv6'
+    value:
+      enabled: '1'
+      src: 'wan'
+      proto: 'udp'
+      src_ip: 'fc00::/6'
+      dest_ip: 'fc00::/6'
+      dest_port: '546'
+      family: 'ipv6'
+      target: 'ACCEPT'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: lan2self-Allow-DHCP-Server
+    value:
+      enabled: '1'
+      src: lan
+      proto: udp
+      dest_port: '67'
+      target: 'ACCEPT'
+      family: ipv4
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: lan2self-Allow-DHCPv6-Server
+    value:
+      enabled: '1'
+      src: lan
+      src_ip: 'fc00::/6'
+      proto: udp
+      dest_ip: 'fc00::/6'
+      dest_port: '547'
+      target: 'ACCEPT'
+      family: ipv6
+
+  # DNS ########################################################################
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: lan2self-Allow-DNS
+    value:
+      enabled: '1'
+      src: lan
+      dest_port: '53'
+      target: 'ACCEPT'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: wg2self-Allow-DNS
+    value:
+      enabled: '1'
+      src: wg0
+      dest_port: '53'
+      target: 'ACCEPT'
+
+  # SSH ########################################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: any2self-Allow-SSH
+    value:
+      enabled: '1'
+      src: '*'
+      proto: tcp
+      dest_port: 22
+      target: ACCEPT
+      limit: '60/minute'
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: wg2any-Allow-SSH
+    value:
+      enabled: '1'
+      src: 'wg0'
+      dest: '*'
+      proto: tcp
+      dest_port: 22
+      target: ACCEPT
+      limit: '10/minute'
+
+  # Web interface ##############################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: any2self-Allow-Web
+    value:
+      enabled: '1'
+      src: '*'
+      proto: tcp
+      dest_port: 8080
+      target: ACCEPT
+      family: ipv4
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: any2self-Allow-Webv6
+    value:
+      enabled: '1'
+      src: '*'
+      proto: tcp
+      dest_port: 80
+      target: ACCEPT
+      family: ipv6
+      limit: '10/sec'
+
+  # Wireguard ##################################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: any2self-Allow-Wireguard
+    value:
+      enabled: '1'
+      src: '*'
+      proto: udp
+      dest_port: 51820
+      target: ACCEPT
+
+  # CJDNS ######################################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: any2self-Allow-CJDNS
+    value:
+      enabled: '1'
+      src: '*'
+      proto: udp
+      dest_port: 57338
+      target: ACCEPT
+
+  # UPNP/NAT-MP ################################################################
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: lan2self-Allow-UPnP-UDP
+    value:
+      enabled: '1'
+      src: lan
+      proto: udp
+      dest_port: 1900
+      target: ACCEPT
+      family: ipv4
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: lan2self-Allow-UPnP-TCP
+    value:
+      enabled: '1'
+      src: lan
+      proto: tcp
+      dest_port: 5000
+      target: ACCEPT
+      family: ipv4
+
+  - command: section
+    config: firewall
+    type: rule
+    find:
+      name: lan2self-Allow-NAT-MP
+    value:
+      enabled: '1'
+      src: lan
+      proto: tcpudp
+      dest_port: 5351
+      target: ACCEPT
+      family: ipv4
+
+  #
+  # port forwardind
+  #
+
+  # - command: section
+  #   config: firewall
+  #   type: redirect
+  #   find:
+  #     src: wan
+  #     src_port: 8080
+  #     proto: tcp
+  #   value:
+  #     name: wan2lan-DNAT-Web-Alternate
+  #     enabled: 1
+  #     target: DNAT
+  #     dest: lan
+  #     dest_port: 8080
+  #     dest_ip: 10.66.6.1
+
+
+  #
+  # addons
+  #
+  - command: set
+    key: firewall.@include[0]
+    type: include
+    value:
+      path: '/etc/firewall.user'
+
+  - command: set
+    key: firewall.miniupnpd
+    type: include
+    value:
+      type: 'script'
+      path: '/usr/share/miniupnpd/firewall.include'
+      family: 'any'
+      reload: '1'

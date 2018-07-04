@@ -1,0 +1,10 @@
+---
+uci_dropbear:
+  - command: set
+    key: dropbear.@dropbear[0]
+    type: dropbear
+    value:
+      Port: "22"
+      GatewayPorts: "on"
+      PasswordAuth: "off"
+      RootPasswordAuth: "off"

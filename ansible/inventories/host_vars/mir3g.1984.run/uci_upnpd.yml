@@ -1,0 +1,31 @@
+---
+uci_upnpd:
+  - command: set
+    key: upnpd.config
+    type: upnpd
+    value:
+      download: "4192"
+      upload: "4192"
+      internal_iface: lan
+      port: "5000"
+      upnp_lease_file: "/var/run/miniupnpd.leases"
+      enabled: "1"
+      uuid: "c56d339f-8209-436e-9a88-a74cacdfe424"
+  - command: set
+    key: upnpd.@perm_rule[0]
+    type: perm_rule
+    value:
+      action: allow
+      ext_ports: "1024-65535"
+      int_addr: "0.0.0.0/0"
+      int_ports: "1024-65535"
+      comment: "Allow high ports"
+  - command: set
+    key: upnpd.@perm_rule[1]
+    type: perm_rule
+    value:
+      action: deny
+      ext_ports: "0-65535"
+      int_addr: "0.0.0.0/0"
+      int_ports: "0-65535"
+      comment: "Default deny"

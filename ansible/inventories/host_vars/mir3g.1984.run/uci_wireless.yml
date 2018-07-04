@@ -1,0 +1,51 @@
+---
+uci_wireless:
+  - command: set
+    key: wireless.radio0
+    type: wifi-device
+    value:
+      type: 'mac80211'
+      hwmode: '11g'
+      path: 'pci0000:00/0000:00:00.0/0000:01:00.0'
+      disabled: '1'
+      channel: '5'
+      htmode: 'HT40'
+      country: 'RU'
+      legacy_rates: '0'
+
+  - command: section
+    config: wireless
+    type: wifi-iface
+    find:
+      ifname: 'hyperboria0'
+      mesh_id: 'hyperboria_mesh'
+    value:
+      device: 'radio0'
+      encryption: 'none'
+      mode: 'mesh'
+      mesh_fwding: '1'
+
+  - command: set
+    key: wireless.radio1
+    type: wifi-device
+    value:
+      type: 'mac80211'
+      hwmode: '11a'
+      path: 'pci0000:00/0000:00:01.0/0000:02:00.0'
+      htmode: 'VHT80'
+      legacy_rates: '0'
+      country: 'RU'
+      distance: '10'
+      channel: '52'
+
+  - command: section
+    config: wireless
+    type: wifi-iface
+    find:
+      ssid: 'KotikiHQ_5'
+    value:
+      device: 'radio1'
+      network: 'lan'
+      mode: 'ap'
+      encryption: 'psk2'
+      key: "{{ lookup('passwordstore','devices/mir3g.1984.run/KotikiHQ') }}"

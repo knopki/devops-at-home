@@ -1,0 +1,22 @@
+---
+# Linux facts
+- when: ansible_system == 'Linux'
+  block:
+    - name: Create /etc/ansible/facts.d directory
+      file:
+        path: "/etc/ansible/facts.d"
+        state: directory
+
+    - name: Copy scripts to /etc/ansible/facts.d directory
+      template:
+        src: linux/{{ item }}
+        dest: /etc/ansible/facts.d/{{ item }}
+        mode: u=rwx,g=rx,o=rx
+      with_items:
+        - "installed_packages.fact"
+      register: facts_deploy
+
+    - when: facts_deploy.changed
+      name: Reload local facts
+      setup:
+        filter: ansible_local

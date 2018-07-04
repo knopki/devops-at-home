@@ -1,0 +1,170 @@
+---
+ansible_user: root
+ansible_host: h.mir3g.1984.run
+
+root_password: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/root') }}"
+
+opkg_packages_absent:
+  - dnsmasq
+
+opkg_packages_present:
+  - ca-certificates
+  - cjdns
+  - dnsmasq-full
+  - ip-full
+  - ipset
+  - iptables
+  - kmod-ipt-ipset
+  - libustream-openssl
+  - luci
+  - luci-app-cjdns
+  - luci-app-ddns
+  - luci-app-sqm
+  - luci-app-upnp
+  - luci-app-vpn-policy-routing
+  - luci-app-wireguard
+  - luci-app-wol
+  - python-crypto
+  - python-light
+  - python-logging
+  - resolveip
+  - shadow-usermod
+  - tcpdump
+  - uclient-fetch
+  - vpn-policy-routing
+  - wireguard
+  - wireguard-tools
+
+
+uci:
+  - "{{ uci_cjdns }}"
+  - "{{ uci_ddns }}"
+  - "{{ uci_dhcp }}"
+  - "{{ uci_dropbear }}"
+  - "{{ uci_etherwake }}"
+  - "{{ uci_firewall }}"
+  - "{{ uci_luci }}"
+  - "{{ uci_network }}"
+  - "{{ uci_rpcd }}"
+  - "{{ uci_ubootenv }}"
+  - "{{ uci_uhttpd }}"
+  - "{{ uci_upnpd }}"
+  - "{{ uci_vpn_policy_routing }}"
+  - "{{ uci_wireless }}"
+  - "{{ uci_sqm }}"
+  - "{{ uci_system }}"
+
+cjdns_private_key: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/cjdns subkey=private') }}"
+cjdns_public_key: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/cjdns subkey=public') }}"
+cjdns_ipv6: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/cjdns subkey=ipv6') }}"
+cjdns_admin_password: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/cjdns subkey=admin_password') }}"
+cjdns_authorizedPasswords:
+  default-login: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/cjdns subkey=authorized_password_default_login') }}"
+  private: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/cjdns subkey=authorized_password_private') }}"
+
+cjdns_udp_peers_self:
+  - peerName: h.mir3g.1984.run
+    address: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/network_primary_ipv4') }}"
+    address_type: ipv4
+    port: 57338
+    publicKey: "{{ cjdns_public_key }}"
+    login: "private"
+    password: "{{ cjdns_authorizedPasswords['private'] }}"
+
+cjdns_udp_peers:
+  - "{{ cjdns_udp_peers_common|difference(cjdns_udp_peers_self) }}"
+  #
+  # Russia
+  # Moscow
+  - peerName: "h.bunjlabs.com"
+    address: 94.142.141.189
+    address_type: ipv4
+    port: 50433
+    contact: "contact@bunjlabs.com"
+    publicKey: "0gdj2xzn01lzjjcrykjvwp8flnxkp1b3jny0drl5b168lmpsmfj0.k"
+    login: "default-login"
+    password: "c5q2j63x5nkmt2yg2vjmlnfuh1jnjjf"
+
+  - peerName: node01.msk.ru-mesh.net
+    address: 194.67.213.84
+    address_type: ipv4
+    port: 24519
+    publicKey: 9f79752ml0p6glqdnj93352tj3hmctmf8jg8rbgp1wj8mh09lmv0.k
+    login: "default-login"
+    password: 37yuffz9hs4lk0wjnvyzj5yx45l444v
+    contact: show.vars@gmail.com
+
+  - peerName: h.ihc.cupivan.ru
+    address: 185.87.193.205
+    address_type: ipv4
+    port: 18842
+    publicKey: 7h898y2xdhtm9xgng7f97umx9wfjhkxfx2wkxw89mrq2y6k954d0.k
+    password: public
+    ipv6: fc9b:499a:dd7a:92a:7b3e:be3a:32fc:53dc
+
+  # Piter
+  - peerName: dskrylnikov
+    address: 95.213.251.59
+    address_type: ipv4
+    port: 60246
+    publicKey: v0wjlvtkxdu5tr7htymsuytwxtqlrnyjlhk59pw6s11mj4ggw7p0.k
+    login: public
+    password: public_passwd
+    contact: skrylnikov@protonmail.com
+
+  #
+  # Ukraine
+  #
+  # Kiev
+  - peerName: ic.hellomouse.cf
+    address: 185.140.54.19
+    address_type: ipv4
+    port: 35907
+    contact: iczero4@gmail.com
+    gpg: "613CE9DA0E9A3F70EC97760E4BAC4EBB8461FC7E"
+    publicKey: gtbfndu2tvfbwuydm7v0kpnqpgcburtymhz3ph9kfrjg4n8bh3j0.k
+    login: public
+    password: fwlmbx2f3udkd0ymknq4pwwgu2bjklx
+
+  #
+  # Sweden
+  #
+  - peerName: bliss.willeponken.me
+    address: 130.240.202.22
+    address_type: ipv4
+    port: 49960
+    publicKey: tpf7pdj6pby9r2smxuwmkvzfrfj6jb0brch8yhp3jsxbrf3ld0h0.k
+    login: "public-peer"
+    password: y4j84802yfyxpzrtbzbwtj3hd1l9mrc
+    contact: "See http://bliss.willeponken.me/nodeinfo.json"
+
+  #
+  # Deutch
+  #
+  - peerName: jazzanet
+    address: 176.9.105.201
+    address_type: ipv4
+    port: 4464
+    publicKey: yrgb0xwfr9pz8swvnv6m9by8zw7v7uxxhl07qz318cjuvfgs1fc0.k
+    password: ir88xwtel72fen3ch7aug603s26nu3a
+    contact: webmaster@jazzanet.com
+
+  #
+  # Latvia
+  #
+  - peerName: borg-vilnius
+    address: 185.25.48.153
+    address_type: ipv4
+    port: 13109
+    publicKey: pkq30hrl9zyzwn03u6lchh20crfgq46m1dfb5zwfhpx3c6v2l420.k
+    password: public
+
+  #
+  # Norwegia
+  #
+  - peerName: hyperboria.hackeriet.no
+    address: 185.35.202.206
+    address_type: ipv4
+    port: 21024
+    publicKey: ny7v0951b703j4t2n4pyz474nny46wvbtq46x7hc8r2jql40dmr0.k
+    password: tj0vkzk9rgub9888h3tf9gtm712tkuc

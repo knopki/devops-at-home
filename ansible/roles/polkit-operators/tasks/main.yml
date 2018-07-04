@@ -1,0 +1,10 @@
+---
+- name: Copy polkit operators rules
+  template:
+    src: 10-operators.rules.j2
+    dest: "/etc/polkit-1/rules.d/10-operators.rules"
+    mode: 0644
+    owner: root
+    group: root
+  notify: restart polkit
+  tags: polkit

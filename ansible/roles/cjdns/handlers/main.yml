@@ -1,0 +1,4 @@
+---
+- name: restart cjdns
+  systemd: name=cjdns.service state=restarted
+  tags: cjdns

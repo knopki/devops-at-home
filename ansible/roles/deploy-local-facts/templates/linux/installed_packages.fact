@@ -1,0 +1,27 @@
+#!{{ ansible_python.executable }}
+
+from subprocess import Popen, PIPE
+import json
+
+# rpm
+try:
+  process = Popen(["rpm", "-qa", "--queryformat", "%{name}\n"], stdout=PIPE)
+  (rpmout, err) = process.communicate()
+  exit_code = process.wait()
+except:
+  rpmout = b""
+
+# dpkg
+try:
+  process = Popen(["dpkg-query", "-f", "${binary:Package}\n", "-W"], stdout=PIPE)
+  (dpkgout, err) = process.communicate()
+  exit_code = process.wait()
+except:
+  dpkgout = b""
+
+
+pkgs = rpmout.decode("utf-8").split("\n") + dpkgout.decode("utf-8").split("\n")
+pkgs = [pkg for pkg in pkgs if pkg != ""]
+pkgs.sort()
+
+print(json.dumps(pkgs))

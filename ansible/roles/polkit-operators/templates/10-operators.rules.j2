@@ -1,0 +1,19 @@
+/* Allow members of the wheel group to execute any actions
+ * without password authentication, similar to "sudo NOPASSWD:"
+ */
+{% for group in polkit_operators_groups_nopasswd %}
+polkit.addRule(function(action, subject) {
+    if (subject.isInGroup("{{ group }}")) {
+        return polkit.Result.YES;
+    }
+});
+{% endfor %}
+
+/* Always authenticate Admins by prompting for the root
+ * password, similar to the rootpw option in sudo
+ */
+{% for group in polkit_operators_groups %}
+polkit.addAdminRule(function(action, subject) {
+    return ["unix-group:{{ group }}"];
+});
+{% endfor %}

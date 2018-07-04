@@ -1,0 +1,10 @@
+---
+- name: Setup sysctl parameters
+  include_role: name=tersmitten.sysctl
+  tags: sysctl
+  vars:
+    sysctl_settings: '{{
+      sysctl_default_parameters|d([]) +
+      sysctl_group_parameters|d([]) +
+      sysctl_host_parameters|d([])
+    }}'

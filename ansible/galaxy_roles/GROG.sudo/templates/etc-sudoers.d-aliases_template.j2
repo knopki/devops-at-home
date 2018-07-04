@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+
+# Host alias specification
+{% for host_alias in sudo_host_aliases %}
+Host_Alias {{ host_alias.name }} = {{ host_alias.alias }}
+{% endfor %}
+
+# User alias specification
+{% for user_alias in sudo_user_aliases %}
+User_Alias {{ user_alias.name }} = {{ user_alias.alias }}
+{% endfor %}
+
+# Run as alias specification
+{% for runas_alias in sudo_runas_aliases %}
+Runas_Alias {{ runas_alias.name }} = {{ runas_alias.alias }}
+{% endfor %}
+
+# Cmnd alias specification
+{% for cmnd_alias in sudo_cmnd_aliases %}
+Cmnd_Alias {{ cmnd_alias.name }} = {{ cmnd_alias.alias }}
+{% endfor %}

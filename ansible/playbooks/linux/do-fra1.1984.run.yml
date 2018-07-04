@@ -1,0 +1,56 @@
+---
+- hosts: do-fra1.1984.run
+  any_errors_fatal: true
+  become: true
+  roles:
+    - role: wireguard
+      tags: wireguard
+  tasks:
+    - name: Add interface eth0 to public firewalld zone
+      tags: firewalld
+      firewalld:
+        interface: eth0
+        zone: public
+        state: enabled
+        permanent: yes
+        immediate: yes
+
+    - name: Add interface cni0 to trusted firewalld zone
+      tags: firewalld
+      firewalld:
+        interface: cni0
+        zone: trusted
+        state: enabled
+        permanent: yes
+        immediate: yes
+
+    - name: Enable masquerade on public firewalld zone
+      tags: firewalld
+      firewalld:
+        zone: public
+        masquerade: yes
+        state: enabled
+        immediate: yes
+        permanent: True
+
+    - name: Deploy unbound dns server
+      docker_container:
+        name: unbound
+        image: docker.io/secns/unbound:1.7.2
+        restart_policy: always
+        memory: 128m
+        memory_reservation: 16m
+        state: started
+        ports: "{{ wireguard_servers_dns_listen }}"
+        dns_servers:
+          - 1.1.1.1
+          - 8.8.8.8
+
+    - name: Enable dns service in internal firewalld zone
+      tags: wireguard, firewalld
+      firewalld:
+        zone: internal
+        service: dns
+        state: enabled
+        permanent: yes
+        immediate: yes

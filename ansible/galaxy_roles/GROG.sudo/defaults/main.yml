@@ -1,0 +1,36 @@
+---
+# Install sudo if not available?
+sudo_package: yes
+
+# list of sudo users
+sudo_list: []
+
+# list of sudo users
+sudo_list_host: []
+
+# list of sudo users
+sudo_list_group: []
+
+# Restore default sudoers file?
+sudo_default_sudoers: no
+
+# Sudoers file to restore
+sudo_default_sudoers_src_path: 'etc-sudoers'
+
+# Defaults
+sudo_defaults: []
+
+# Host aliasses
+sudo_host_aliases: []
+
+# User aliasses
+sudo_user_aliases: []
+
+# Run as aliasses
+sudo_runas_aliases: []
+
+# Cmnd aliasses
+sudo_cmnd_aliases: []
+
+# Sudoersd directory
+sudo_sudoersd_dir: /etc/sudoers.d

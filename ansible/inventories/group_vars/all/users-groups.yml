@@ -1,0 +1,27 @@
+---
+# ref https://github.com/GROG/ansible-role-user
+#also: management_user_list_group for group vars
+#also: management_user_list_host for host vars
+management_user_list:
+  - name: root
+    uid: 0
+    password: "{{ root_password|password_hash('sha512', 65534|random(seed=inventory_hostname)|string) }}"
+    update_password: always
+    shell: /bin/bash
+    authorized_keys:
+      - key: "{{ lookup('passwordstore','keys/ssh_knopki subkey=public') }}"
+        exclusive: yes
+        manage_dir: yes
+  - name: fedora
+    state: absent
+
+# also: group_list_group for group vars
+# alsa: group_list_host for host vars
+# group_list:
+#   - name: example
+#     gid: 123 (optional)
+#     system: yes|no
+#     state: present|absent
+
+polkit_default_operators: []
+polkit_default_operators_nopasswd: []
