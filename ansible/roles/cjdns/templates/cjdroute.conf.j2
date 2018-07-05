@@ -178,13 +178,24 @@
         //     "ip4Address": "192.168.1.25",
         //     "ip4Prefix": 0,
         // }
+
+{% for node in cjdns_allowed_connections %}
+        {
+          "publicKey": "{{ node.key }}",
+          "ip4Address": "{{ node.ip4_address }}"
+        }{% if not loop.last %},{% endif %}
+
+{% endfor %}
+
       ],
 
       "outgoingConnections": [
-        // Connect to one or more machines and ask them for IP addresses.
-        // "6743gf5tw80ExampleExampleExampleExamplevlyb23zfnuzv0.k",
-        // "pw9tfmr8pcrExampleExampleExampleExample8rhg1pgwpwf80.k",
-        // "g91lxyxhq0kExampleExampleExampleExample6t0mknuhw75l0.k"
+
+{% for key in cjdns_outgoing_connections %}
+        "{{ key }}"{% if not loop.last %},{% endif %}
+
+{% endfor %}
+
       ]
     }
   },

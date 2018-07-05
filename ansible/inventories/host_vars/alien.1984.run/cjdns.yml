@@ -10,3 +10,7 @@ cjdns_authorizedPasswords:
 cjdns_udp_peers_self: []
 
 cjdns_udp_peers: "{{ cjdns_udp_peers_common|difference(cjdns_udp_peers_self) }}"
+
+cjdns_outgoing_connections:
+  - "{{ lookup('passwordstore','devices/do-fra1.1984.run/cjdns subkey=public') }}"
+  - "{{ lookup('passwordstore','devices/mir3g.1984.run/cjdns subkey=public') }}"

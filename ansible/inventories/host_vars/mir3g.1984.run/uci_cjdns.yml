@@ -58,3 +58,35 @@ uci_cjdns:
       user: "private"
     value:
       password: "{{ cjdns_authorizedPasswords['private'] }}"
+
+  - command: section
+    config: cjdns
+    type: iptunnel_outgoing
+    find:
+      public_key: "{{ lookup('passwordstore','devices/do-fra1.1984.run/cjdns subkey=public') }}"
+    value:
+
+  - command: section
+    config: cjdns
+    type: iptunnel_allowed
+    find:
+      public_key: "{{ lookup('passwordstore','devices/do-fra1.1984.run/cjdns subkey=public') }}"
+    value:
+      ipv4: 10.66.7.34/27
+
+  - command: section
+    config: cjdns
+    type: iptunnel_allowed
+    find:
+      public_key: "{{ lookup('passwordstore','devices/alien.1984.run/cjdns subkey=public') }}"
+    value:
+      ipv4: 10.66.7.35/27
+
+  - command: section
+    config: cjdns
+    type: iptunnel_allowed
+    find:
+      public_key: "{{ lookup('passwordstore','devices/knopa.1984.run/cjdns subkey=public') }}"
+    value:
+      ipv4: 10.66.7.36/27
+

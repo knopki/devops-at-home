@@ -241,3 +241,14 @@ cjdns_udp_peers_local:
 cjdns_udp_peers: "{{
   cjdns_udp_peers_common|difference(cjdns_udp_peers_self) +  cjdns_udp_peers_local
 }}"
+
+cjdns_outgoing_connections:
+  - "{{ lookup('passwordstore','devices/mir3g.1984.run/cjdns subkey=public') }}"
+
+cjdns_allowed_connections:
+  - key: "{{ lookup('passwordstore','devices/mir3g.1984.run/cjdns subkey=public') }}"
+    ip4_address: 10.66.7.66/27
+  - key: "{{ lookup('passwordstore','devices/alien.1984.run/cjdns subkey=public') }}"
+    ip4_address: 10.66.7.67/27
+  - key: "{{ lookup('passwordstore','devices/knopa.1984.run/cjdns subkey=public') }}"
+    ip4_address: 10.66.7.68/27

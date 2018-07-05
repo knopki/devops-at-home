@@ -79,7 +79,11 @@ uci_network:
     type: interface
     value:
       ifname: tuncjdns
-      proto: 'none'
+      proto: 'static'
+      ipaddr: '10.66.7.33'
+      netmask: '255.255.255.224'
+      auto: 1
+      delegate: 0
 
   # wireguard
   - command: set
