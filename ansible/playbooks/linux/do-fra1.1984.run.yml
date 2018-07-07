@@ -5,6 +5,8 @@
   roles:
     - role: wireguard
       tags: wireguard
+    - role: polipo
+      tags: polipo
   tasks:
     - name: Add interface eth0 to public firewalld zone
       tags: firewalld

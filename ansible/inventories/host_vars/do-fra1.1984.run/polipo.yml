@@ -1,0 +1,3 @@
+---
+polipo_username: "{{ lookup('passwordstore','devices/do-fra1.1984.run/polipo subkey=username')}}"
+polipo_password: "{{ lookup('passwordstore','devices/do-fra1.1984.run/polipo')}}"
