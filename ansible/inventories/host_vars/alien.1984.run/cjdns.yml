@@ -9,8 +9,16 @@ cjdns_authorizedPasswords:
 
 cjdns_udp_peers_self: []
 
-cjdns_udp_peers: "{{ cjdns_udp_peers_common|difference(cjdns_udp_peers_self) }}"
+cjdns_udp_peers_local: []
+
+cjdns_udp_peers: "{{
+  cjdns_udp_peers_common|difference(cjdns_udp_peers_self) +  cjdns_udp_peers_local
+}}"
 
 cjdns_outgoing_connections:
   - "{{ lookup('passwordstore','devices/do-fra1.1984.run/cjdns subkey=public') }}"
-  - "{{ lookup('passwordstore','devices/mir3g.1984.run/cjdns subkey=public') }}"
+
+cjdns_interface_networks:
+  - name: tuncjdns
+    ip4_routes:
+      - destination: 10.66.7.64/27

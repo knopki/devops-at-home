@@ -182,7 +182,8 @@
 {% for node in cjdns_allowed_connections %}
         {
           "publicKey": "{{ node.key }}",
-          "ip4Address": "{{ node.ip4_address }}"
+          "ip4Address": "{{ node.ip4_address }}",
+          "ip4Prefix": "{{ node.ip4_prefix }}"
         }{% if not loop.last %},{% endif %}
 
 {% endfor %}

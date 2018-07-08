@@ -6,8 +6,8 @@ uci_vpn_policy_routing:
     value:
       verbosity: '2'
       ipv6_enabled: '1'
-      supported_interface: 'wg0'
-      ignored_interface: 'cjdns'
+      supported_interface: "'wg0' 'tuncjdns'"
+      ignored_interface: ''
       udp_proto_enabled: '1'
       wan_tid: '201'
       wan_mark: '0x010000'
@@ -44,16 +44,6 @@ uci_vpn_policy_routing:
     config: vpn-policy-routing
     type: policy
     find:
-      comment: 'wireguard'
-    value:
-      interface: 'wan'
-      local_addresses: '10.66.6.0/24'
-      remote_ports: '51820'
-
-  - command: section
-    config: vpn-policy-routing
-    type: policy
-    find:
       comment: 'cjdns'
     value:
       interface: 'wan'
@@ -66,6 +56,6 @@ uci_vpn_policy_routing:
     find:
       comment: 'default_via_vpn1'
     value:
-      interface: 'wg0'
+      interface: 'cjdns'
       local_addresses: '10.66.6.0/24'
       remote_addresses: '0.0.0.0/0'

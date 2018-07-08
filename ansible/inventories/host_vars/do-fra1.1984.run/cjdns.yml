@@ -247,8 +247,18 @@ cjdns_outgoing_connections:
 
 cjdns_allowed_connections:
   - key: "{{ lookup('passwordstore','devices/mir3g.1984.run/cjdns subkey=public') }}"
-    ip4_address: 10.66.7.66/27
+    ip4_address: 10.66.7.66
+    ip4_prefix: 27
   - key: "{{ lookup('passwordstore','devices/alien.1984.run/cjdns subkey=public') }}"
-    ip4_address: 10.66.7.67/27
+    ip4_address: 10.66.7.67
+    ip4_prefix: 27
   - key: "{{ lookup('passwordstore','devices/knopa.1984.run/cjdns subkey=public') }}"
-    ip4_address: 10.66.7.68/27
+    ip4_address: 10.66.7.68
+    ip4_prefix: 27
+
+cjdns_interface_networks:
+  - name: tuncjdns
+    ip4_addresses:
+      - 10.66.7.65/27
+    ip4_routes:
+      - destination: 10.66.7.64/27

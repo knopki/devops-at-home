@@ -5,5 +5,4 @@ atomic_host_remote_gpg_verify: "true"
 atomic_host_desired_ref: "fedora/28/x86_64/atomic-host"
 atomic_host_desired_version: "28.20180625.0"
 atomic_host_autoupgrade: check
-rpm_ostree_install_group:
-  - atomic-wireguard
+rpm_ostree_install_group: []

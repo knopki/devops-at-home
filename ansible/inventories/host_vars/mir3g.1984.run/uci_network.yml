@@ -79,36 +79,7 @@ uci_network:
     type: interface
     value:
       ifname: tuncjdns
-      proto: 'static'
-      ipaddr: '10.66.7.33'
-      netmask: '255.255.255.224'
-      auto: 1
-      delegate: 0
-
-  # wireguard
-  - command: set
-    key: network.wg0
-    type: interface
-    value:
-      proto: 'wireguard'
-      private_key: "{{ lookup('passwordstore','devices/mir3g.1984.run/wireguard subkey=private') }}"
-      listen_port: '51820'
-      addresses:
-        - '10.66.7.5'
-      force_link: '1'
-      metric: '20'
-  - command: section
-    config: network
-    type: wireguard_wg0
-    find:
-      public_key: "{{ lookup('passwordstore','devices/do-fra1.1984.run/wireguard subkey=public') }}"
-    value:
-      allowed_ips:
-        - '0.0.0.0/0'
-      route_allowed_ips: '0'
-      endpoint_host: "{{ lookup('passwordstore', 'devices/do-fra1.1984.run/network_primary_ipv4') }}"
-      endpoint_port: '51820'
-      persistent_keepalive: '25'
+      proto: 'none'
 
   # static routing
   - command: section
@@ -120,6 +91,18 @@ uci_network:
     value:
       gateway: '10.66.7.5'
       interface: 'wg0'
+      mtu: '1420'
+      metric: '0'
+
+  - command: section
+    config: network
+    type: route
+    find:
+      target: '10.66.7.64'
+      netmask: '255.255.255.224'
+    value:
+      gateway: '10.66.7.66'
+      interface: 'cjdns'
       mtu: '1420'
       metric: '0'
 

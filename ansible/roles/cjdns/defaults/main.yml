@@ -20,3 +20,4 @@ cjdns_eth_interfaces:
     beacon: 2
 cjdns_tun_device: "tuncjdns"
 cjdns_allowed_connections: []
+cjdns_interface_networks: []

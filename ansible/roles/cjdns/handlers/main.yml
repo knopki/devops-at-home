@@ -2,3 +2,7 @@
 - name: restart cjdns
   systemd: name=cjdns.service state=restarted
   tags: cjdns
+
+- name: restart systemd-networkd
+  systemd: name=systemd-networkd.service state=restarted
+  tags: cjdns

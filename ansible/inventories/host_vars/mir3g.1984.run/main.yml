@@ -66,7 +66,7 @@ cjdns_udp_peers_self:
   - peerName: h.mir3g.1984.run
     address: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/network_primary_ipv4') }}"
     address_type: ipv4
-    port: 57338
+    port: 57339
     publicKey: "{{ cjdns_public_key }}"
     login: "private"
     password: "{{ cjdns_authorizedPasswords['private'] }}"

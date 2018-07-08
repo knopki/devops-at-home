@@ -55,21 +55,8 @@ uci_firewall:
       output: 'ACCEPT'
       forward: 'REJECT'
       network: 'cjdns'
-      conntrack: '1'
-      family: 'ipv6'
-      log: '1'
-      log_limit: '10/minute'
-
-  - command: section
-    config: firewall
-    type: zone
-    find:
-      name: 'wg0'
-    value:
-      input: 'REJECT'
-      output: 'ACCEPT'
-      forward: 'ACCEPT'
-      network: 'wg0'
+      masq: '1'
+      mtu_fix: '1'
       conntrack: '1'
       log: '1'
       log_limit: '10/minute'
@@ -90,20 +77,6 @@ uci_firewall:
     value:
       src: 'lan'
       dest: 'cjdns'
-
-  - command: set
-    key: firewall.@forwarding[2]
-    type: forwarding
-    value:
-      src: 'lan'
-      dest: 'wg0'
-
-  - command: set
-    key: firewall.@forwarding[3]
-    type: forwarding
-    value:
-      src: 'wg0'
-      dest: 'lan'
 
   #
   # rules
@@ -173,31 +146,6 @@ uci_firewall:
     value:
       enabled: '1'
       src: 'wan'
-      proto: 'icmp'
-      icmp_type:
-        - 'echo-request'
-        - 'echo-reply'
-        - 'destination-unreachable'
-        - 'packet-too-big'
-        - 'time-exceeded'
-        - 'bad-header'
-        - 'unknown-header-type'
-        - 'router-solicitation'
-        - 'neighbour-solicitation'
-        - 'router-advertisement'
-        - 'neighbour-advertisement'
-      limit: '1000/sec'
-      family: 'ipv6'
-      target: 'ACCEPT'
-
-  - command: section
-    config: firewall
-    type: rule
-    find:
-      name: 'wg2self-Allow-ICMPv6'
-    value:
-      enabled: '1'
-      src: 'wg0'
       proto: 'icmp'
       icmp_type:
         - 'echo-request'
@@ -398,17 +346,6 @@ uci_firewall:
       dest_port: '53'
       target: 'ACCEPT'
 
-  - command: section
-    config: firewall
-    type: rule
-    find:
-      name: wg2self-Allow-DNS
-    value:
-      enabled: '1'
-      src: wg0
-      dest_port: '53'
-      target: 'ACCEPT'
-
   # SSH ########################################################################
   - command: section
     config: firewall
@@ -422,20 +359,6 @@ uci_firewall:
       dest_port: 22
       target: ACCEPT
       limit: '60/minute'
-
-  - command: section
-    config: firewall
-    type: rule
-    find:
-      name: wg2any-Allow-SSH
-    value:
-      enabled: '1'
-      src: 'wg0'
-      dest: '*'
-      proto: tcp
-      dest_port: 22
-      target: ACCEPT
-      limit: '10/minute'
 
   # Web interface ##############################################################
   - command: section
@@ -465,19 +388,6 @@ uci_firewall:
       family: ipv6
       limit: '10/sec'
 
-  # Wireguard ##################################################################
-  - command: section
-    config: firewall
-    type: rule
-    find:
-      name: any2self-Allow-Wireguard
-    value:
-      enabled: '1'
-      src: '*'
-      proto: udp
-      dest_port: 51820
-      target: ACCEPT
-
   # CJDNS ######################################################################
   - command: section
     config: firewall
@@ -488,7 +398,7 @@ uci_firewall:
       enabled: '1'
       src: '*'
       proto: udp
-      dest_port: 57338
+      dest_port: 57339
       target: ACCEPT
 
   # UPNP/NAT-MP ################################################################

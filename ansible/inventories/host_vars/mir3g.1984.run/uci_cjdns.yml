@@ -34,14 +34,14 @@ uci_cjdns:
     find:
       address: '0.0.0.0'
     value:
-      port: '57338'
+      port: '57339'
   - command: section
     config: cjdns
     type: udp_interface
     find:
       address: '[::]'
     value:
-      port: '57338'
+      port: '57339'
 
   - command: section
     config: cjdns
@@ -59,34 +59,8 @@ uci_cjdns:
     value:
       password: "{{ cjdns_authorizedPasswords['private'] }}"
 
-  - command: section
-    config: cjdns
+  - command: set
+    key: cjdns.@iptunnel_outgoing[0]
     type: iptunnel_outgoing
-    find:
+    value:
       public_key: "{{ lookup('passwordstore','devices/do-fra1.1984.run/cjdns subkey=public') }}"
-    value:
-
-  - command: section
-    config: cjdns
-    type: iptunnel_allowed
-    find:
-      public_key: "{{ lookup('passwordstore','devices/do-fra1.1984.run/cjdns subkey=public') }}"
-    value:
-      ipv4: 10.66.7.34/27
-
-  - command: section
-    config: cjdns
-    type: iptunnel_allowed
-    find:
-      public_key: "{{ lookup('passwordstore','devices/alien.1984.run/cjdns subkey=public') }}"
-    value:
-      ipv4: 10.66.7.35/27
-
-  - command: section
-    config: cjdns
-    type: iptunnel_allowed
-    find:
-      public_key: "{{ lookup('passwordstore','devices/knopa.1984.run/cjdns subkey=public') }}"
-    value:
-      ipv4: 10.66.7.36/27
-
