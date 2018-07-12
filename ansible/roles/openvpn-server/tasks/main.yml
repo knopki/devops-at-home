@@ -1,0 +1,24 @@
+---
+- name: Deploy openvpn
+  docker_container:
+    name: openvpn
+    image: docker.io/kylemanna/openvpn:2.4
+    restart_policy: always
+    memory: 64m
+    memory_reservation: 16m
+    capabilities:
+      - NET_ADMIN
+    state: started
+    ports:
+      - "1194:1194/udp"
+    volumes:
+      - "/etc/openvpn:/etc/openvpn:Z"
+
+- name: Enable 1194 port for openvpn on public firewalld zone
+  tags: firewalld
+  firewalld:
+    zone: public
+    port: 1194/tcp
+    state: enabled
+    immediate: yes
+    permanent: yes

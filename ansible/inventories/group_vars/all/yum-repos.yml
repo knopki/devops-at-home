@@ -3,7 +3,3 @@ yum_repos_default:
   - name: knopki-github
     baseurl: https://knopki.github.io/rpms/f28/
     gpgkey: no
-  - name: jdoss-atomic-wireguard
-    description: Copr repo for atomic-wireguard owned by jdoss
-    baseurl: https://copr-be.cloud.fedoraproject.org/results/jdoss/atomic-wireguard/fedora-$releasever-$basearch/
-    gpgkey: https://copr-be.cloud.fedoraproject.org/results/jdoss/atomic-wireguard/pubkey.gpg

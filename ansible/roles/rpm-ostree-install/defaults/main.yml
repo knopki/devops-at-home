@@ -1,2 +1,6 @@
 ---
-rpm_ostree_install: []
+rpm_ostree_install: "{{
+  rpm_ostree_install_default|d([]) +
+  rpm_ostree_install_group|d([]) +
+  rpm_ostree_install_host|d([])
+}}"

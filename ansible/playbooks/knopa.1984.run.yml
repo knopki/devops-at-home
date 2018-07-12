@@ -1,0 +1,55 @@
+---
+- hosts: knopa.1984.run
+  any_errors_fatal: true
+  become: true
+  roles:
+    - role: deploy-local-facts
+      tags: facts
+
+    # Packages
+    - role: yum-repos
+      tags: yum-repos
+    - role: rpm-ostree-upgrade
+      tags: rpm-ostree-upgrade
+    - role: rpm-ostree-install
+      tags: rpm-ostree-install
+    - role: binary-installer
+      tags: binary-installer
+
+    # Essential settings and services
+    - role: hostname
+      tags: hostname
+    - role: timezone
+      tags: timezone
+    - role: shhirose.locale
+      tags: locale
+      shhirose_locale_locale: "{{ system_locale }}"
+    - role: chrony
+      tags: chrony
+    - role: tersmitten.sysctl
+      tags: sysctl
+      sysctl_settings: '{{
+        sysctl_default_parameters|d([]) +
+        sysctl_group_parameters|d([]) +
+        sysctl_host_parameters|d([])
+      }}'
+    - role: firewalld-common
+      tags: firewalld
+    - role: cjdns
+      tags: cjdns
+
+    # User management
+    - role: GROG.group
+      tags: groups
+    - role: GROG.management-user
+      tags: users
+    - role: polkit-operators
+      tags: polkit
+    - role: willshersystems.sshd
+      tags: sshd
+      sshd: '{{
+        sshd_default_parameters|d({}) |
+        combine(sshd_group_parameters|d({})) |
+        combine(sshd_host_parameters|d({}))
+      }}'
+      sshd_packages: []

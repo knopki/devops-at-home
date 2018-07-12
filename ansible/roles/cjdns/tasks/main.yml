@@ -29,16 +29,6 @@
     dest: /etc/NetworkManager/dispatcher.d/30-cjdns
     mode: 0755
 
-- name: Create network up.d script
-  tags: cjdns
-  template:
-    src: 10-iptunnel.j2
-    dest: "/etc/cjdns/up.d/10-iptunnel.sh"
-    owner: root
-    mode: 0755
-  notify:
-    - restart cjdns
-
 - name: Enable cjdns ports on public firewalld zone
   tags: firewalld, cjdns
   firewalld:

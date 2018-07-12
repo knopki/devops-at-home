@@ -1,7 +1,0 @@
----
-- hosts: do-agent
-  any_errors_fatal: true
-  become: true
-  roles:
-    - name: do-agent
-      tags: do-agent

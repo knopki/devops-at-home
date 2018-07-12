@@ -9,12 +9,24 @@ cjdns_authorizedPasswords:
 
 cjdns_udp_peers_self: []
 
-cjdns_udp_peers: "{{ cjdns_udp_peers_common|difference(cjdns_udp_peers_self) }}"
+cjdns_udp_peers_local:
+  - peerName: h.mir3g.1984.run
+    address: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/network_primary_ipv4') }}"
+    address_type: ipv4
+    port: 57338
+    publicKey: "{{ hostvars['mir3g.1984.run']['cjdns_public_key'] }}"
+    login: "private"
+    password: "{{ hostvars['mir3g.1984.run']['cjdns_authorizedPasswords']['private'] }}"
 
-cjdns_outgoing_connections:
-  - "{{ lookup('passwordstore','devices/do-fra1.1984.run/cjdns subkey=public') }}"
+  - peerName: h.mir3g.1984.run IPv6
+    address: "[{{ lookup('passwordstore', 'devices/mir3g.1984.run/network_primary_ipv6') }}]"
+    address_type: ipv6
+    port: 57338
+    publicKey: "{{ hostvars['mir3g.1984.run']['cjdns_public_key'] }}"
+    login: "private"
+    password: "{{ hostvars['mir3g.1984.run']['cjdns_authorizedPasswords']['private'] }}"
 
-cjdns_interface_networks:
-  - name: tuncjdns
-    ip4_routes:
-      - destination: 10.66.7.64/27
+
+cjdns_udp_peers: "{{
+  cjdns_udp_peers_common|difference(cjdns_udp_peers_self) +  cjdns_udp_peers_local
+}}"

@@ -1,0 +1,17 @@
+---
+- name: Enable default firewalld zone
+  tags: firewalld
+  firewalld:
+    zone: "{{ firewalld_default_zone }}"
+    state: present
+    permanent: yes
+
+- name: Enable default services in default firewalld zone
+  tags: firewalld
+  firewalld:
+    zone: "{{ firewalld_default_zone }}"
+    service: "{{ item }}"
+    state: enabled
+    permanent: yes
+    immediate: yes
+  with_items: "{{ firewalld_default_services }}"

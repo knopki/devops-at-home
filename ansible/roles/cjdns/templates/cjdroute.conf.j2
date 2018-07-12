@@ -179,7 +179,7 @@
         //     "ip4Prefix": 0,
         // }
 
-{% for node in cjdns_allowed_connections %}
+{% for node in cjdns_allowed_connections|default([]) %}
         {
           "publicKey": "{{ node.key }}",
           "ip4Address": "{{ node.ip4_address }}",
@@ -192,7 +192,7 @@
 
       "outgoingConnections": [
 
-{% for key in cjdns_outgoing_connections %}
+{% for key in cjdns_outgoing_connections|default([]) %}
         "{{ key }}"{% if not loop.last %},{% endif %}
 
 {% endfor %}

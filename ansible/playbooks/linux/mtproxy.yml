@@ -1,7 +1,0 @@
----
-- hosts: mtproxy
-  any_errors_fatal: true
-  become: true
-  roles:
-    - role: mtproxy
-      tags: mtproxy

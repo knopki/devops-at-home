@@ -1,22 +1,5 @@
 ---
-# Common stuff
-- hosts: all
-  any_errors_fatal: true
-  roles:
-    - role: deploy-local-facts
-      tags: facts
-      when: |
-        ansible_system is defined and (
-          ansible_system == 'Linux' or ansible_system == 'Win32NT')
-
-# Linux stuff
-- when: ansible_system is defined and ansible_system == 'Linux'
-  import_playbook: linux/main.yml
-
-# OpenWrt stuff
-- when: ansible_os_family is defined and ansible_os_family == 'OpenWRT'
-  import_playbook: openwrt/main.yml
-
-# Windows stuff
-# - when: ansible_system == 'Win32NT'
-#   import_playbook: windows/main.yml
+- import_playbook: alien.1984.run.yml
+- import_playbook: do-fra1.1984.run.yml
+- import_playbook: knopa.1984.run.yml
+- import_playbook: mir3g.1984.run.yml

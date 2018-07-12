@@ -24,27 +24,25 @@ cjdns_udp_peers_self:
     password: "{{ cjdns_authorizedPasswords['private'] }}"
 
 cjdns_udp_peers_local:
+  - peerName: h.mir3g.1984.run
+    address: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/network_primary_ipv4') }}"
+    address_type: ipv4
+    port: 57338
+    publicKey: "{{ hostvars['mir3g.1984.run']['cjdns_public_key'] }}"
+    login: "private"
+    password: "{{ hostvars['mir3g.1984.run']['cjdns_authorizedPasswords']['private'] }}"
+
+  - peerName: h.mir3g.1984.run IPv6
+    address: "[{{ lookup('passwordstore', 'devices/mir3g.1984.run/network_primary_ipv6') }}]"
+    address_type: ipv6
+    port: 57338
+    publicKey: "{{ hostvars['mir3g.1984.run']['cjdns_public_key'] }}"
+    login: "private"
+    password: "{{ hostvars['mir3g.1984.run']['cjdns_authorizedPasswords']['private'] }}"
+
   #
   # Russia
   # Moscow
-  - peerName: "h.bunjlabs.com"
-    address: 94.142.141.189
-    address_type: ipv4
-    port: 50433
-    contact: "contact@bunjlabs.com"
-    publicKey: "0gdj2xzn01lzjjcrykjvwp8flnxkp1b3jny0drl5b168lmpsmfj0.k"
-    login: "default-login"
-    password: "c5q2j63x5nkmt2yg2vjmlnfuh1jnjjf"
-
-  - peerName: node01.msk.ru-mesh.net
-    address: 194.67.213.84
-    address_type: ipv4
-    port: 24519
-    publicKey: 9f79752ml0p6glqdnj93352tj3hmctmf8jg8rbgp1wj8mh09lmv0.k
-    login: "default-login"
-    password: 37yuffz9hs4lk0wjnvyzj5yx45l444v
-    contact: show.vars@gmail.com
-
   - peerName: h.ihc.cupivan.ru
     address: 185.87.193.205
     address_type: ipv4
@@ -52,16 +50,6 @@ cjdns_udp_peers_local:
     publicKey: 7h898y2xdhtm9xgng7f97umx9wfjhkxfx2wkxw89mrq2y6k954d0.k
     password: public
     ipv6: fc9b:499a:dd7a:92a:7b3e:be3a:32fc:53dc
-
-  # Piter
-  - peerName: dskrylnikov
-    address: 95.213.251.59
-    address_type: ipv4
-    port: 60246
-    publicKey: v0wjlvtkxdu5tr7htymsuytwxtqlrnyjlhk59pw6s11mj4ggw7p0.k
-    login: public
-    password: public_passwd
-    contact: skrylnikov@protonmail.com
 
   #
   # Ukraine
@@ -87,18 +75,6 @@ cjdns_udp_peers_local:
     password: fwlmbx2f3udkd0ymknq4pwwgu2bjklx
 
   #
-  # Sweden
-  #
-  - peerName: bliss.willeponken.me
-    address: 130.240.202.22
-    address_type: ipv4
-    port: 49960
-    publicKey: tpf7pdj6pby9r2smxuwmkvzfrfj6jb0brch8yhp3jsxbrf3ld0h0.k
-    login: "public-peer"
-    password: y4j84802yfyxpzrtbzbwtj3hd1l9mrc
-    contact: "See http://bliss.willeponken.me/nodeinfo.json"
-
-  #
   # Deutch
   #
   - peerName: weuxel.modi
@@ -114,14 +90,6 @@ cjdns_udp_peers_local:
     port: 25761
     publicKey: hr153n9t2c4nrlzhwb9v2h5vg1sjv3bd34z3cttnbvlg97pbhwj0.k
     password: qxlr5j47jkz8hcc3jcrd50u0s379fr9
-
-  - peerName: jazzanet
-    address: 176.9.105.201
-    address_type: ipv4
-    port: 4464
-    publicKey: yrgb0xwfr9pz8swvnv6m9by8zw7v7uxxhl07qz318cjuvfgs1fc0.k
-    password: ir88xwtel72fen3ch7aug603s26nu3a
-    contact: webmaster@jazzanet.com
 
   #
   # Netherlands
@@ -185,13 +153,6 @@ cjdns_udp_peers_local:
     publicKey: 35mdjzlxmsnuhc30ny4rhjyu5r1wdvhb09dctd1q5dcbq6r40qs0.k
     password: cr36pn2tp8u91s672pw2uu61u54ryu8
 
-  - peerName: h.rwfr.k
-    address: 164.132.126.140
-    address_type: ipv4
-    port: 53340
-    publicKey: byxcwmgbhkcgt3vv2820vujbc65szwkn9sj7vk1x3tjdw4q0sc30.k
-    password: w6db8n5gb4wtjy0ud32vhql7469g1sb
-
   - peerName: Magik6k-sbg1
     address: 51.254.25.16
     address_type: ipv4
@@ -241,24 +202,3 @@ cjdns_udp_peers_local:
 cjdns_udp_peers: "{{
   cjdns_udp_peers_common|difference(cjdns_udp_peers_self) +  cjdns_udp_peers_local
 }}"
-
-cjdns_outgoing_connections:
-  - "{{ lookup('passwordstore','devices/mir3g.1984.run/cjdns subkey=public') }}"
-
-cjdns_allowed_connections:
-  - key: "{{ lookup('passwordstore','devices/mir3g.1984.run/cjdns subkey=public') }}"
-    ip4_address: 10.66.7.66
-    ip4_prefix: 27
-  - key: "{{ lookup('passwordstore','devices/alien.1984.run/cjdns subkey=public') }}"
-    ip4_address: 10.66.7.67
-    ip4_prefix: 27
-  - key: "{{ lookup('passwordstore','devices/knopa.1984.run/cjdns subkey=public') }}"
-    ip4_address: 10.66.7.68
-    ip4_prefix: 27
-
-cjdns_interface_networks:
-  - name: tuncjdns
-    ip4_addresses:
-      - 10.66.7.65/27
-    ip4_routes:
-      - destination: 10.66.7.64/27
