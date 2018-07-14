@@ -36,6 +36,7 @@ rpm_ostree_install_group:
   - kwalletmanager5
   - langpacks-ru
   - libvirt
+  - lm_sensors
   - mc
   - mpv
   - nmap

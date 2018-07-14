@@ -52,3 +52,6 @@
       }}'
       sshd_packages: []
 
+    # Specific
+    - role: fancontrol
+      tags: fancontrol

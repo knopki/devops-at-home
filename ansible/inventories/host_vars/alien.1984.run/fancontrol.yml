@@ -1,0 +1,10 @@
+---
+fancontrol_DEVPATH: "hwmon4="
+fancontrol_DEVNAME: "hwmon4=dell_smm"
+fancontrol_FCTEMPS: "hwmon4/pwm1=hwmon4/temp1_input hwmon4/pwm3=hwmon4/temp2_input"
+fancontrol_FCFANS: "hwmon4/pwm1=hwmon4/fan1_input  hwmon4/pwm3=hwmon4/fan3_input"
+fancontrol_MINTEMP: "hwmon4/pwm1=60 hwmon4/pwm3=60"
+fancontrol_MAXTEMP: "hwmon4/pwm1=90 hwmon4/pwm3=95"
+fancontrol_MINSTART: "hwmon4/pwm1=90 hwmon4/pwm3=75"
+fancontrol_MINSTOP: "hwmon4/pwm1=75 hwmon4/pwm3=75"
+fancontrol_MINPWM: "hwmon4/pwm1=0 hwmon4/pwm3=0"

@@ -1,0 +1,12 @@
+---
+- name: Create /etc/fancontrol
+  template:
+    src: fancontrol.j2
+    dest: /etc/fancontrol
+  notify:
+    - restart fancontrol
+  tags: fancontrol
+
+- name: Enable fancontrol service
+  systemd: name=fancontrol enabled=true state=started
+  tags: fancontrol
