@@ -70,4 +70,7 @@ binaries_group:
     checksum: 7898874a4c9438e8d12acaf7622e678e580a1ca4
     archive: yes
     archive_path: gotty
-
+  - name: kustomize
+    url: https://github.com/kubernetes-sigs/kustomize/releases/download/v1.0.3/kustomize_1.0.3_linux_amd64
+    dest: /usr/local/bin/kustomize
+    checksum: sha1:7abd6752082d102bb7e85248aac64c6c0df95c74
