@@ -1,7 +1,7 @@
 ---
 ansible_user: root
 ansible_host: h.knopa.1984.run
-ansible_python_interpreter: /usr/bin/python3
+ansible_python_interpreter: /usr/bin/python2
 root_password: "{{ lookup('passwordstore', 'devices/knopa.1984.run/root') }}"
 sk_password: "{{ lookup('passwordstore','devices/knopa.1984.run/sk') }}"
 system_locale: en_US.UTF-8

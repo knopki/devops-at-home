@@ -1,0 +1,25 @@
+---
+flatpak_remotes_group:
+  - name: flathub
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+  - name: kdeapps
+    flatpakrepo_url: https://distribute.kde.org/kdeapps.flatpakrepo
+  - name: winepak
+    flatpakrepo_url: https://dl.winepak.org/repo/winepak.flatpakrepo
+
+flatpaks_group:
+  - name: com.github.mdh34.quickdocs
+  - name: com.github.miguelmota.Cointop
+  - name: net.ankiweb.Anki
+  - name: org.fedoraproject.MediaWriter
+  - name: org.gimp.GIMP
+  - name: org.gtk.Gtk3theme.Breeze
+  - name: org.kde.kdeconnect
+    remote: kdeapps
+  - name: org.kde.krita
+  - name: org.keepassxc.KeePassXC
+  - name: org.libreoffice.LibreOffice
+  - name: org.nextcloud.Nextcloud
+  - name: org.qbittorrent.qBittorrent
+  - name: org.remmina.Remmina
+  - name: org.telegram.desktop

@@ -1,6 +1,6 @@
 ---
 ansible_user: root
 ansible_host: h.alien.1984.run
-ansible_python_interpreter: /usr/bin/python3
+ansible_python_interpreter: /usr/bin/python2
 root_password: "{{ lookup('passwordstore','devices/alien.1984.run/root') }}"
 sk_password: "{{ lookup('passwordstore','devices/alien.1984.run/sk') }}"

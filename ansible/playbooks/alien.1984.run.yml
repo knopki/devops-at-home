@@ -11,6 +11,8 @@
       tags: yum-repos
     - role: binary-installer
       tags: binary-installer
+    - role: flatpak
+      tags: flatpak
 
     # Essential settings and services
     - role: hostname

@@ -1,0 +1,19 @@
+---
+- name: Add flatpak remotes
+  flatpak_remote:
+    name: "{{ item.name }}"
+    state: "{{ item.state|default('present') }}"
+    flatpakrepo_url: "{{ item.flatpakrepo_url }}"
+    method: "{{ item.method|default('system') }}"
+  with_items: "{{ flatpak_remotes }}"
+  failed_when: None
+  tags: flatpak
+
+- name: Manage flatpaks
+  flatpak:
+    name: "{{ item.name }}"
+    remote: "{{ item.remote|default('flathub') }}"
+    state: "{{ item.state|default('present') }}"
+    method: "{{ item.method|default('system') }}"
+  with_items: "{{ flatpaks }}"
+  tags: flatpak

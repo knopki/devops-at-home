@@ -23,11 +23,12 @@ Set-up method: incredibly over-engineered Ansible orchestration.
 * sysctl configuration
 * chrony configuration
 * sudo/polkit configuration
-* wireguard tunnels
+* wireguard and openvpn tunnels
 * DigitalOcean agent
 * Telegram proxy
 * Cjdns mesh and overlay network on every machine
 * Installation of binary executables, that not in OS' repositories
+* Install flatpak remotes and packages
 
 ### Dotfiles
 
@@ -40,7 +41,7 @@ TODO: add keybindings table
 ## Prerequirements
 
 * `git`
-* `ansible` ^2.5
+* `ansible` ^2.6
 * `pass`/`gopass`
 
 ## Installation

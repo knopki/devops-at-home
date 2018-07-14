@@ -1,0 +1,12 @@
+---
+flatpak_remotes: "{{
+  flatpak_remotes_default|d([]) +
+  flatpak_remotes_group|d([]) +
+  flatpak_remotes_host|d([])
+}}"
+
+flatpaks: "{{
+  flatpaks_default|d([]) +
+  flatpaks_group|d([]) +
+  flatpaks_host|d([])
+}}"
