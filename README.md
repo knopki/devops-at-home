@@ -29,6 +29,7 @@ Set-up method: incredibly over-engineered Ansible orchestration.
 * Cjdns mesh and overlay network on every machine
 * Installation of binary executables, that not in OS' repositories
 * Install flatpak remotes and packages
+* Tuned profiles
 
 ### Dotfiles
 
