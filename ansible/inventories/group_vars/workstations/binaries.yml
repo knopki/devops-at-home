@@ -1,9 +1,9 @@
 ---
 binaries_group:
   - name: kubectl
-    url: https://storage.googleapis.com/kubernetes-release/release/v1.10.4/bin/linux/amd64/kubectl
+    url: https://storage.googleapis.com/kubernetes-release/release/v1.11.0/bin/linux/amd64/kubectl
     dest: /usr/local/bin/kubectl
-    checksum: sha1:bb7ed44771d1effd8692e191dc07b0412db1f0df
+    checksum: sha1:e23f251ca0cb848802f3cb0f69a4ba297d07bfc6
   - name: helm
     url: https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
     dest: /usr/local/bin/helm
@@ -15,19 +15,19 @@ binaries_group:
     dest: /usr/local/bin/fly
     checksum: sha1:cdfec655b6474ce8bc4da6961702b0fd345e042a
   - name: minikube
-    url: https://github.com/kubernetes/minikube/releases/download/v0.27.0/minikube-linux-amd64
+    url: https://github.com/kubernetes/minikube/releases/download/v0.28.0/minikube-linux-amd64
     dest: /usr/local/bin/minikube
     checksum: sha1:1677dd631bad1b27e2d6aeb245fa3470870f31ab
   - name: docker-machine-driver-kvm2
-    url: https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-kvm2
+    url: https://github.com/kubernetes/minikube/releases/download/v0.28.0/docker-machine-driver-kvm2
     dest: /usr/local/bin/docker-machine-driver-kvm2
-    checksum: sha1:2bc74d0014c2bcbfc5b1422ece90613f5cf3b5fd
+    checksum: sha1:d901a0a4ea64acf56849dcd1048d3506dcc04701
   - name: gopass
-    url: https://github.com/gopasspw/gopass/releases/download/v1.8.1/gopass-1.8.1-linux-amd64.tar.gz
+    url: https://github.com/gopasspw/gopass/releases/download/v1.8.2/gopass-1.8.2-linux-amd64.tar.gz
     dest: /usr/local/bin/gopass
-    checksum: 9515db51cfa3e9d79aa4d4bd488d96f485f823b5
+    checksum: 88dc1414356380d6997354ddc8a3f927dcd41b84
     archive: yes
-    archive_path: gopass-1.8.1-linux-amd64/gopass
+    archive_path: gopass-1.8.2-linux-amd64/gopass
   - name: ngrok
     url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
     dest: /usr/local/bin/ngrok
