@@ -33,6 +33,8 @@
         sysctl_group_parameters|d([]) +
         sysctl_host_parameters|d([])
       }}'
+    - role: tuned
+      tags: tuned
     - role: firewalld-common
       tags: firewalld
     - role: cjdns

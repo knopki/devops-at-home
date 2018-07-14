@@ -1,0 +1,111 @@
+[main]
+summary=Optimize for laptop on battery
+include=laptop-battery-powersave
+
+
+[audio]
+# Enable Audio codec power management
+timeout=1
+reset_controller=true
+
+
+[cpu]
+governor = intel_pstate
+no_turbo = 1
+
+
+[disk]
+devices = sda
+spindown = 1
+
+
+[sysctl]
+
+[sysfs]
+# Runtime PM for I2C Adapter i2c-0 (i915 gmbus dpc)
+/sys/bus/i2c/devices/i2c-0/device/power/control=auto
+
+# Autosuspend for USB device AW1517 [Alienware]
+/sys/bus/usb/devices/1-4/power/control=auto
+
+# Autosuspend for unknown USB device 1-5 (0cf3:e300)
+/sys/bus/usb/devices/1-5/power/control=auto
+
+# Autosuspend for USB device Integrated_Webcam_HD
+/sys/bus/usb/devices/1-7/power/control=auto
+
+# Autosuspend for USB device xHCI Host Controller [usb1]
+/sys/bus/usb/devices/usb1/power/control=auto
+
+# Autosuspend for USB device xHCI Host Controller [usb2]
+/sys/bus/usb/devices/usb2/power/control=auto
+
+# Runtime PM for I2C Adapter i2c-1 (i915 gmbus dpb)
+/sys/bus/i2c/devices/i2c-1/device/power/control=auto
+
+# Runtime PM for I2C Adapter i2c-2 (i915 gmbus dpd)
+/sys/bus/i2c/devices/i2c-2/device/power/control=auto
+
+# Runtime PM for I2C Adapter i2c-6
+/sys/bus/i2c/devices/i2c-6/device/power/control=auto
+
+# Runtime PM for I2C Adapter i2c-7 (NVIDIA i2c adapter 2 at 1:00.0)
+/sys/bus/i2c/devices/i2c-7/device/power/control=auto
+
+# Runtime PM for I2C Adapter i2c-8 (NVIDIA i2c adapter 6 at 1:00.0)
+/sys/bus/i2c/devices/i2c-8/device/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor PCIe Controller (x16)
+/sys/bus/pci/devices/0000:00:01.0/power/control=auto
+
+# Runtime PM for PCI Device Qualcomm Atheros Killer E2400 Gigabit Ethernet Controller
+/sys/bus/pci/devices/0000:3b:00.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Sunrise Point-H CSME HECI #1
+/sys/bus/pci/devices/0000:00:16.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Thermal Subsystem
+/sys/bus/pci/devices/0000:00:04.0/power/control=auto
+
+# Runtime PM for PCI Device Qualcomm Atheros QCA6174 802.11ac Wireless Network Adapter
+/sys/bus/pci/devices/0000:3c:00.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Sunrise Point-H HD Audio
+/sys/bus/pci/devices/0000:00:1f.3/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers
+/sys/bus/pci/devices/0000:00:00.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Sunrise Point-H LPC Controller
+/sys/bus/pci/devices/0000:00:1f.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Sunrise Point-H Thermal subsystem
+/sys/bus/pci/devices/0000:00:14.2/power/control=auto
+
+# Runtime PM for PCI Device Realtek Semiconductor Co., Ltd. RTS5227 PCI Express Card Reader
+/sys/bus/pci/devices/0000:3d:00.0/power/control=auto
+
+# Runtime PM for PCI Device Samsung Electronics Co Ltd NVMe SSD Controller SM951/PM951
+/sys/bus/pci/devices/0000:3e:00.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation HD Graphics 530
+/sys/bus/pci/devices/0000:00:02.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Sunrise Point-H USB 3.0 xHCI Controller
+/sys/bus/pci/devices/0000:00:14.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Sunrise Point-H PCI Express Root Ports
+/sys/bus/pci/devices/0000:00:1c.0/power/control=auto
+/sys/bus/pci/devices/0000:00:1c.4/power/control=auto
+/sys/bus/pci/devices/0000:00:1c.5/power/control=auto
+/sys/bus/pci/devices/0000:00:1c.6/power/control=auto
+/sys/bus/pci/devices/0000:00:1d.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Sunrise Point-H SATA Controller [AHCI mode]
+/sys/bus/pci/devices/0000:00:17.0/power/control=auto
+
+# Runtime PM for PCI Device Intel Corporation Sunrise Point-H PMC
+/sys/bus/pci/devices/0000:00:1f.2/power/control=auto
+
+[usb]
+autosuspend = 1

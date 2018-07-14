@@ -7,3 +7,4 @@ atomic_host_autoupgrade: check
 rpm_ostree_install_default:
   - cjdns
   - cjdns-tools
+  - tuned

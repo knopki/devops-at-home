@@ -1,0 +1,4 @@
+---
+tuned_profile: my-laptop-battery
+tuned_second_profile: my-laptop-ac
+tuned_battery_profile_switch: yes

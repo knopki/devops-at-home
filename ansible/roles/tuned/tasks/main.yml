@@ -1,0 +1,45 @@
+---
+- name: Create profiles directories
+  file:
+    path: "/etc/tuned/{{ item }}"
+    state: directory
+  with_items:
+    - my-laptop-battery
+    - my-laptop-ac
+  tags: tuned
+
+- name: Add my-laptop-battery profile
+  template:
+    src: my-laptop-battery-profile.j2
+    dest: /etc/tuned/my-laptop-battery/tuned.conf
+  tags: tuned
+
+- name: Add my-laptop-ac profile
+  template:
+    src: my-laptop-ac-profile.j2
+    dest: /etc/tuned/my-laptop-ac/tuned.conf
+  tags: tuned
+
+- name: Get current profile
+  command: cat /etc/tuned/active_profile
+  register: tuned_active_profile
+  changed_when: no
+  tags: tuned
+
+- name: Set current profile
+  command: "tuned-adm profile {{ tuned_profile }}"
+  when: tuned_active_profile.stdout not in [tuned_profile, tuned_second_profile]
+
+- name: Enable tuned service
+  systemd:
+    name: tuned
+    state: started
+    enabled: yes
+  tags: tuned
+
+- name: Create udev rule
+  template:
+    src: powersave.rules.j2
+    dest: /etc/udev/rules.d/powersave.rules
+  when: tuned_battery_profile_switch
+  tags: tuned
