@@ -12,18 +12,6 @@
     #
     # Packages
     #
-    - name: Add stangri repo key
-      tags: opkg
-      shell: |
-        opkg update
-        opkg list-installed | grep -q uclient-fetch || opkg install uclient-fetch
-        opkg list-installed | grep -q libustream || opkg install libustream-mbedtls
-        echo -e -n 'untrusted comment: LEDE usign key of Stan Grishin\nRWR//HUXxMwMVnx7fESOKO7x8XoW4/dRidJPjt91hAAU2L59mYvHy0Fa\n' > /tmp/stangri-repo.pub && opkg-key add /tmp/stangri-repo.pub
-        ! grep -q 'stangri_repo' /etc/opkg/customfeeds.conf && echo 'src/gz stangri_repo https://raw.githubusercontent.com/stangri/openwrt-repo/master' >> /etc/opkg/customfeeds.conf
-        opkg update
-      args:
-        creates: /etc/opkg/keys/7ffc7517c4cc0c56
-
     - name: Uninstall packages
       opkg:
         name: "{{ item }}"
@@ -38,20 +26,23 @@
         state: present
       with_items:
         - ca-certificates
+        - conntrack
         - cjdns
         - dnsmasq-full
         - ip-full
         - ipset
         - iptables
         - kmod-ipt-ipset
+        - kmod-ipt-nat6
+        - kmod-nf-nat6
         - libustream-openssl
         - luci
         - luci-app-cjdns
         - luci-app-ddns
+        - luci-app-mwan3
         - luci-app-openvpn
         - luci-app-sqm
-        - luci-app-upnp
-        - luci-app-vpn-policy-routing
+        - luci-app-wireguard
         - luci-app-wol
         - python-crypto
         - python-light
@@ -60,9 +51,6 @@
         - shadow-usermod
         - tcpdump
         - uclient-fetch
-        - vpn-policy-routing
-        - wireguard
-        - wireguard-tools
       tags: opkg
 
     #
@@ -106,13 +94,13 @@
       notify:
         - uci commit
 
-    - name: Set cjdns peering interfaces (br-lan)
+    - name: Set cjdns peering interfaces (all)
       uci:
         command: section
         config: cjdns
         type: eth_interface
         find:
-          bind: 'br-lan'
+          bind: 'all'
         value:
           beacon: '2'
       tags: uci, cjdns
@@ -252,8 +240,8 @@
           strictorder: '1'
           interface: "br-lan"
           server:
-            - '1.1.1.1'
-            - '8.8.8.8'
+            - '10.99.0.1'
+            - '193.138.219.228'
       tags: uci, dhcp
       notify:
         - uci commit
@@ -267,8 +255,9 @@
           start: '100'
           limit: '150'
           leasetime: '12h'
-          dhcpv6: 'server'
-          ra: 'server'
+          # dhcpv6: 'server'
+          # ra: 'server'
+          # ra_management: '60'
       tags: uci, dhcp
       notify:
         - uci commit
@@ -323,7 +312,6 @@
         value:
           dns: '1'
           ip: '10.66.6.100'
-          hostid: 2a02:2168:8fcd:5300::100
           leasetime: '1d'
       tags: uci, dhcp
       notify:
@@ -421,6 +409,20 @@
     #
     # Firewall
     #
+
+    # ip masq6
+    - file:
+        path: /etc/firewall.d/with_reload
+        recursive: yes
+        state: directory
+      tags: firewall
+    - name: Copy ipv6 nat script
+      copy:
+        src: files/90-nat6.fw
+        dest: /etc/firewall.d/with_reload/90-nat6.fw
+        mode: 0755
+      tags: firewall
+
     # defaults
     - uci:
         command: set
@@ -432,6 +434,8 @@
           input: 'REJECT'
           output: 'ACCEPT'
           forward: 'REJECT'
+          flow_offloading: '0'
+          flow_offloading_hw: '0'
       tags: uci, firewall
       notify:
         - uci commit
@@ -447,7 +451,7 @@
           input: 'REJECT'
           output: 'ACCEPT'
           forward: 'ACCEPT'
-          network: 'lan'
+          network: 'lan wg1'
           log: '1'
           log_limit: '10/minute'
       tags: uci, firewall
@@ -492,6 +496,27 @@
       notify:
         - uci commit
 
+    - uci:
+        command: section
+        config: firewall
+        type: zone
+        find:
+          name: 'vpn'
+        value:
+          input: 'REJECT'
+          output: 'ACCEPT'
+          forward: 'REJECT'
+          network: 'wg0'
+          masq: '1'
+          masq6: '1'
+          mtu_fix: '1'
+          conntrack: '1'
+          log: '1'
+          log_limit: '10/minute'
+      tags: uci, firewall
+      notify:
+        - uci commit
+
     # forwarding
     - uci:
         command: set
@@ -500,6 +525,18 @@
         value:
           src: 'lan'
           dest: 'wan'
+      tags: uci, firewall
+      notify:
+        - uci commit
+
+    # forwarding
+    - uci:
+        command: set
+        key: firewall.@forwarding[1]
+        type: forwarding
+        value:
+          src: 'lan'
+          dest: 'vpn'
       tags: uci, firewall
       notify:
         - uci commit
@@ -632,6 +669,36 @@
       notify:
         - uci commit
 
+    - name: 'vpn2self-Allow-ICMPv6'
+      uci:
+        command: section
+        config: firewall
+        type: rule
+        find:
+          name: 'vpn2self-Allow-ICMPv6'
+        value:
+          enabled: '1'
+          src: 'vpn'
+          proto: 'icmp'
+          icmp_type:
+            - 'echo-request'
+            - 'echo-reply'
+            - 'destination-unreachable'
+            - 'packet-too-big'
+            - 'time-exceeded'
+            - 'bad-header'
+            - 'unknown-header-type'
+            - 'router-solicitation'
+            - 'neighbour-solicitation'
+            - 'router-advertisement'
+            - 'neighbour-advertisement'
+          limit: '1000/sec'
+          family: 'ipv6'
+          target: 'ACCEPT'
+      tags: uci, firewall
+      notify:
+        - uci commit
+
     - name: 'any2any-Allow-ICMPv6'
       uci:
         command: section
@@ -745,6 +812,59 @@
         value:
           enabled: '1'
           src: 'wan'
+          src_port: '500 4500'
+          dest: 'lan'
+          dest_port: '500 4500'
+          proto: udp
+          target: ACCEPT
+      tags: uci, firewall
+      notify:
+        - uci commit
+
+    - name: vpn2lan-Allow-IPSec-ESP
+      uci:
+        command: section
+        config: firewall
+        type: rule
+        find:
+          name: vpn2lan-Allow-IPSec-ESP
+        value:
+          enabled: '1'
+          src: 'vpn'
+          dest: 'lan'
+          proto: 'esp'
+          target: 'ACCEPT'
+      tags: uci, firewall
+      notify:
+        - uci commit
+
+    - name: vpn2lan-Allow-IPSec-AH
+      uci:
+        command: section
+        config: firewall
+        type: rule
+        find:
+          name: vpn2lan-Allow-IPSec-AH
+        value:
+          enabled: '1'
+          src: 'vpn'
+          dest: 'lan'
+          proto: 'ah'
+          target: 'ACCEPT'
+      tags: uci, firewall
+      notify:
+        - uci commit
+
+    - name: 'vpn2lan-Allow-ISAKMP'
+      uci:
+        command: section
+        config: firewall
+        type: rule
+        find:
+          name: 'vpn2lan-Allow-ISAKMP'
+        value:
+          enabled: '1'
+          src: 'vpn'
           src_port: '500 4500'
           dest: 'lan'
           dest_port: '500 4500'
@@ -923,60 +1043,24 @@
       notify:
         - uci commit
 
-    # UPNP/NAT-MP ##############################################################
-    - name: lan2self-Allow-UPnP-UDP
+    - name: wan2self-Allow-Wireguard
       uci:
         command: section
         config: firewall
         type: rule
         find:
-          name: lan2self-Allow-UPnP-UDP
+          name: wan2self-Allow-Wireguard
         value:
           enabled: '1'
-          src: lan
+          src: wan
           proto: udp
-          dest_port: 1900
+          dest_port: 51820-51821
           target: ACCEPT
           family: ipv4
       tags: uci, firewall
       notify:
         - uci commit
 
-    - name: lan2self-Allow-UPnP-TCP
-      uci:
-        command: section
-        config: firewall
-        type: rule
-        find:
-          name: lan2self-Allow-UPnP-TCP
-        value:
-          enabled: '1'
-          src: lan
-          proto: tcp
-          dest_port: 5000
-          target: ACCEPT
-          family: ipv4
-      tags: uci, firewall
-      notify:
-        - uci commit
-
-    - name: lan2self-Allow-NAT-MP
-      uci:
-        command: section
-        config: firewall
-        type: rule
-        find:
-          name: lan2self-Allow-NAT-MP
-        value:
-          enabled: '1'
-          src: lan
-          proto: tcpudp
-          dest_port: 5351
-          target: ACCEPT
-          family: ipv4
-      tags: uci, firewall
-      notify:
-        - uci commit
 
     #
     # port forwarding
@@ -1023,19 +1107,6 @@
         type: include
         value:
           path: '/etc/firewall.user'
-      tags: uci, firewall
-      notify:
-        - uci commit
-
-    - uci:
-        command: set
-        key: firewall.miniupnpd
-        type: include
-        value:
-          type: 'script'
-          path: '/usr/share/miniupnpd/firewall.include'
-          family: 'any'
-          reload: '1'
       tags: uci, firewall
       notify:
         - uci commit
@@ -1103,19 +1174,6 @@
       notify:
         - uci commit
 
-    - uci:
-        command: set
-        key: luci.diag
-        type: internal
-        value:
-          dns: "lede-project.org"
-          ping: "lede-project.org"
-          route: "lede-project.org"
-      tags: uci, luci
-      notify:
-        - uci commit
-
-
     #
     # Network
     #
@@ -1137,7 +1195,7 @@
         key: network.globals
         type: globals
         value:
-          ula_prefix: 'fda4:bbdb:e32d::/48'
+          ula_prefix: 'dda4:bbdb:e32d::/48'
       tags: uci, network
       notify:
         - uci commit
@@ -1153,8 +1211,7 @@
           proto: 'static'
           ipaddr: '10.66.6.1'
           netmask: '255.255.255.0'
-          ip6assign: '60'
-          ra_management: '1'
+          ip6assign: '64'
       tags: uci, network
       notify:
         - uci commit
@@ -1191,6 +1248,8 @@
         value:
           ifname: 'eth0.2'
           proto: 'dhcpv6'
+          reqprefix: '56'
+          metric: '10'
       tags: uci, network
       notify:
         - uci commit
@@ -1244,6 +1303,57 @@
       notify:
         - uci commit
 
+    # wireguard
+    - uci:
+        command: set
+        key: network.wg0
+        type: interface
+        value:
+          proto: wireguard
+          listen_port: 51821
+          force_link: 1
+          metric: '20'
+          private_key: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-egress subkey=private') }}"
+          addresses:
+            - "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-egress subkey=ip4') }}"
+            - "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-egress subkey=ip6') }}"
+      tags: uci, network
+      notify:
+        - uci commit
+
+    - uci:
+        command: section
+        config: network
+        type: wireguard_wg0
+        find:
+          description: fi1-wireguard.mullvad.net
+        value:
+          endpoint_host: "{{ lookup('dig', 'fi1-wireguard.mullvad.net') }}"
+          endpoint_port: 51820
+          public_key: lA7gRTmiY9IcSQGXjOEaJjvgtO76BwYJsaaNQqemMWU=
+          route_allowed_ips: 1
+          allowed_ips:
+            - 0.0.0.0/0
+            - ::0/0
+      tags: uci, network
+      notify:
+        - uci commit
+
+    - uci:
+        command: set
+        key: network.wg1
+        type: interface
+        value:
+          proto: wireguard
+          listen_port: 51820
+          force_link: 1
+          private_key: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-ingress subkey=private') }}"
+          addresses:
+            - "10.66.7.1/27"
+      tags: uci, network
+      notify:
+        - uci commit
+
     # static routing
     # - uci:
     #     command: section
@@ -1260,23 +1370,6 @@
     #   tags: uci, network
     #   notify:
     #     - uci commit
-
-    - uci:
-        command: section
-        config: network
-        type: route
-        find:
-          target: '10.66.7.64'
-          netmask: '255.255.255.224'
-        value:
-          gateway: '10.66.7.66'
-          interface: 'cjdns'
-          mtu: '1420'
-          metric: '0'
-      tags: uci, network
-      notify:
-        - uci commit
-
 
     #
     # sqm
@@ -1306,31 +1399,31 @@
       notify:
         - uci commit
 
-    # - uci:
-    #     command: section
-    #     config: sqm
-    #     type: queue
-    #     find:
-    #       interface: "wg0"
-    #     value:
-    #       linklayer: "ethernet"
-    #       overhead: "80"
-    #       enabled: "1"
-    #       debug_logging: "0"
-    #       verbosity: "2"
-    #       download: "55000"
-    #       upload: "55000"
-    #       qdisc: cake
-    #       script: piece_of_cake.qos
-    #       qdisc_advanced: "1"
-    #       ingress_ecn: ECN
-    #       egress_ecn: NOECN
-    #       qdisc_really_really_advanced: "0"
-    #       squash_dscp: "0"
-    #       squash_ingress: "0"
-    #   tags: uci, sqm
-    #   notify:
-    #     - uci commit
+    - uci:
+        command: section
+        config: sqm
+        type: queue
+        find:
+          interface: "wg0"
+        value:
+          linklayer: "ethernet"
+          overhead: "80"
+          enabled: "1"
+          debug_logging: "0"
+          verbosity: "2"
+          download: "55000"
+          upload: "55000"
+          qdisc: cake
+          script: piece_of_cake.qos
+          qdisc_advanced: "1"
+          ingress_ecn: ECN
+          egress_ecn: NOECN
+          qdisc_really_really_advanced: "0"
+          squash_dscp: "0"
+          squash_ingress: "0"
+      tags: uci, sqm
+      notify:
+        - uci commit
 
 
     #
@@ -1459,138 +1552,6 @@
       notify:
         - uci commit
 
-
-    #
-    # upnpd
-    #
-    - uci:
-        command: set
-        key: upnpd.config
-        type: upnpd
-        value:
-          download: "4192"
-          upload: "4192"
-          internal_iface: lan
-          port: "5000"
-          upnp_lease_file: "/var/run/miniupnpd.leases"
-          enabled: "1"
-          uuid: "c56d339f-8209-436e-9a88-a74cacdfe424"
-      tags: uci, upnpd
-      notify:
-        - uci commit
-
-    - uci:
-        command: set
-        key: upnpd.@perm_rule[0]
-        type: perm_rule
-        value:
-          action: allow
-          ext_ports: "1024-65535"
-          int_addr: "0.0.0.0/0"
-          int_ports: "1024-65535"
-          comment: "Allow high ports"
-      tags: uci, upnpd
-      notify:
-        - uci commit
-
-    - uci:
-        command: set
-        key: upnpd.@perm_rule[1]
-        type: perm_rule
-        value:
-          action: deny
-          ext_ports: "0-65535"
-          int_addr: "0.0.0.0/0"
-          int_ports: "0-65535"
-          comment: "Default deny"
-      tags: uci, upnpd
-      notify:
-        - uci commit
-
-    #
-    # vpn-policy-routing
-    #
-    # - uci:
-    #     command: set
-    #     key: vpn-policy-routing.config
-    #     type: vpn-policy-routing
-    #     value:
-    #       verbosity: '2'
-    #       ipv6_enabled: '1'
-    #       supported_interface: "'wg0' 'tuncjdns'"
-    #       ignored_interface: ''
-    #       udp_proto_enabled: '1'
-    #       wan_tid: '201'
-    #       wan_mark: '0x010000'
-    #       fw_mask: '0xff0000'
-    #       dnsmasq_enabled: '1'
-    #       strict_enforcement: '0'
-    #       forward_chain_enabled: '1'
-    #       input_chain_enabled: '1'
-    #       output_chain_enabled: '1'
-    #       enabled: '0'
-    #   tags: uci, vpn-policy-routing
-    #   notify:
-    #     - uci commit
-
-    # - uci:
-    #     command: section
-    #     config: vpn-policy-routing
-    #     type: policy
-    #     find:
-    #       comment: 'ssh'
-    #     value:
-    #       interface: 'wan'
-    #       local_addresses: '10.66.6.0/24'
-    #       remote_ports: '22'
-    #   tags: uci, vpn-policy-routing
-    #   notify:
-    #     - uci commit
-
-    # - uci:
-    #     command: section
-    #     config: vpn-policy-routing
-    #     type: policy
-    #     find:
-    #       comment: 'openvpn'
-    #     value:
-    #       interface: 'wan'
-    #       local_addresses: '10.66.6.0/24'
-    #       remote_ports: '1194'
-    #   tags: uci, vpn-policy-routing
-    #   notify:
-    #     - uci commit
-
-    # - uci:
-    #     command: section
-    #     config: vpn-policy-routing
-    #     type: policy
-    #     find:
-    #       comment: 'mtproxy'
-    #     value:
-    #       interface: 'wan'
-    #       local_addresses: '10.66.6.0/24'
-    #       remote_addresses: "{{ lookup('passwordstore', 'devices/do-fra1.1984.run/network_primary_ipv4') }}/32"
-    #       remote_ports: '1984'
-    #   tags: uci, vpn-policy-routing
-    #   notify:
-    #     - uci commit
-
-    # - uci:
-    #     command: section
-    #     config: vpn-policy-routing
-    #     type: policy
-    #     find:
-    #       comment: 'cjdns'
-    #     value:
-    #       interface: 'wan'
-    #       local_addresses: '10.66.6.0/24'
-    #       local_ports: '57338'
-    #   tags: uci, vpn-policy-routing
-    #   notify:
-    #     - uci commit
-
-
     #
     # wireless
     #
@@ -1627,3 +1588,314 @@
       tags: uci, wireless
       notify:
         - uci commit
+
+    #
+    # mwan3
+    #
+    - name: mwan3 globals
+      uci:
+        command: set
+        key: mwan3.globals
+        type: globals
+        value:
+          local_source: 'lan'
+          mmx_mask: '0x3F00'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wan interface
+      uci:
+        command: set
+        key: mwan3.wan
+        type: interface
+        value:
+          enabled: '1'
+          initial_state: 'online'
+          family: 'ipv4'
+          track_ip:
+            - '77.37.251.33'
+            - '77.37.255.30'
+          track_method: 'ping'
+          reliability: '1'
+          count: '1'
+          size: '56'
+          timeout: '2'
+          recovery_interval: '5'
+          down: '3'
+          up: '3'
+          flush_conntrack: 'always'
+          check_quality: '0'
+          interval: '10'
+          failure_interval: '10'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wan6 interface
+      uci:
+        command: set
+        key: mwan3.wan6
+        type: interface
+        value:
+          enabled: '1'
+          initial_state: 'online'
+          family: 'ipv6'
+          track_ip:
+            - '2a02:2168:208:1::1'
+            - '2a02:2168:208:2::1'
+          track_method: 'ping'
+          reliability: '1'
+          count: '1'
+          size: '56'
+          timeout: '2'
+          recovery_interval: '5'
+          down: '3'
+          up: '3'
+          flush_conntrack: 'always'
+          check_quality: '0'
+          interval: '10'
+          failure_interval: '10'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wg0 interface
+      uci:
+        command: set
+        key: mwan3.wg0
+        type: interface
+        value:
+          enabled: '1'
+          initial_state: 'online'
+          family: 'ipv4'
+          track_ip:
+            - '10.64.0.1'
+          track_method: 'ping'
+          reliability: '1'
+          count: '1'
+          size: '56'
+          timeout: '2'
+          recovery_interval: '5'
+          down: '3'
+          up: '3'
+          flush_conntrack: 'always'
+          check_quality: '0'
+          interval: '10'
+          failure_interval: '10'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wg06 interface
+      uci:
+        command: set
+        key: mwan3.wg06
+        type: interface
+        value:
+          enabled: '1'
+          initial_state: 'online'
+          family: 'ipv6'
+          track_ip:
+            - '2a00:1450:400f:80d::200e'
+          track_method: 'ping'
+          reliability: '1'
+          count: '1'
+          size: '56'
+          timeout: '2'
+          recovery_interval: '5'
+          down: '3'
+          up: '3'
+          flush_conntrack: 'never'
+          check_quality: '0'
+          interval: '10'
+          failure_interval: '10'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wan_m1_w1 member
+      uci:
+        command: set
+        key: mwan3.wan_m1_w1
+        type: member
+        value:
+          interface: 'wan'
+          metric: '1'
+          weight: '1'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wg0_m1_w1 member
+      uci:
+        command: set
+        key: mwan3.wg0_m1_w1
+        type: member
+        value:
+          interface: 'wg0'
+          metric: '1'
+          weight: '1'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wan6_m1_w1 member
+      uci:
+        command: set
+        key: mwan3.wan6_m1_w1
+        type: member
+        value:
+          interface: 'wan6'
+          metric: '1'
+          weight: '1'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wg06_m1_w1 member
+      uci:
+        command: set
+        key: mwan3.wg06_m1_w1
+        type: member
+        value:
+          interface: 'wg06'
+          metric: '1'
+          weight: '1'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 only_wan policy
+      uci:
+        command: set
+        key: mwan3.only_wan
+        type: policy
+        value:
+          last_resort: 'unreachable'
+          use_member:
+            - 'wan_m1_w1'
+            - 'wan6_m1_w1'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 only_wg0 policy
+      uci:
+        command: set
+        key: mwan3.only_wg0
+        type: policy
+        value:
+          last_resort: 'unreachable'
+          use_member:
+            - 'wg0_m1_w1'
+            - 'wg06_m1_w1'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 ssh rule
+      uci:
+        command: set
+        key: mwan3.ssh
+        type: rule
+        value:
+          src_ip: '10.66.6.0/23'
+          dest_port: '22'
+          proto: 'tcp'
+          sticky: '0'
+          use_policy: 'only_wan'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 openvpn rule
+      uci:
+        command: set
+        key: mwan3.openvpn
+        type: rule
+        value:
+          src_ip: '10.66.6.0/23'
+          dest_port: '1194'
+          proto: 'udp'
+          sticky: '0'
+          use_policy: 'only_wan'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 mtproxy rule
+      uci:
+        command: set
+        key: mwan3.mtproxy
+        type: rule
+        value:
+          src_ip: '10.66.6.0/23'
+          dest_ip: "{{ lookup('passwordstore','devices/do-fra1.1984.run/network_primary_ipv4') }}"
+          dest_port: '1984'
+          proto: 'udp'
+          sticky: '0'
+          use_policy: 'only_wan'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wireguard rule
+      uci:
+        command: set
+        key: mwan3.wireguard
+        type: rule
+        value:
+          src_ip: '10.66.6.0/23'
+          dest_port: '51820'
+          proto: 'udp'
+          sticky: '0'
+          use_policy: 'only_wan'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 cjdns rule
+      uci:
+        command: set
+        key: mwan3.cjdns
+        type: rule
+        value:
+          src_ip: '10.66.6.0/23'
+          src_port: '57338'
+          proto: 'udp'
+          sticky: '0'
+          use_policy: 'only_wan'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 default_ipv4 rule
+      uci:
+        command: set
+        key: mwan3.default_ipv4
+        type: rule
+        value:
+          src_ip: '10.66.6.0/23'
+          proto: 'all'
+          sticky: '0'
+          use_policy: 'only_wg0'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 default_ipv6 rule
+      uci:
+        command: set
+        key: mwan3.default_ipv6
+        type: rule
+        value:
+          src_ip: '::0/0'
+          dest_ip: '::0/0'
+          proto: 'all'
+          sticky: '0'
+          use_policy: 'only_wg0'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
