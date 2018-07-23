@@ -120,19 +120,6 @@
       notify:
         - uci commit
 
-    - name: Set cjdns udp ipv6 binding
-      uci:
-        command: section
-        config: cjdns
-        type: udp_interface
-        find:
-          address: '[::]'
-        value:
-          port: '57338'
-      tags: uci, cjdns
-      notify:
-        - uci commit
-
     - name: Set cjdns inbound credentials
       uci:
         command: section
@@ -468,7 +455,7 @@
           input: 'REJECT'
           output: 'ACCEPT'
           forward: 'REJECT'
-          network: 'wan wan6'
+          network: 'wan'
           masq: '1'
           mtu_fix: '1'
           conntrack: '1'
@@ -1066,20 +1053,26 @@
     # port forwarding
     #
 
-    # - command: section
-    #   config: firewall
-    #   type: redirect
-    #   find:
-    #     src: wan
-    #     src_port: 8080
-    #     proto: tcp
-    #   value:
-    #     name: wan2lan-DNAT-Web-Alternate
-    #     enabled: 1
-    #     target: DNAT
-    #     dest: lan
-    #     dest_port: 8080
-    #     dest_ip: 10.66.6.1
+    - name: cjdns_alien dnat
+      uci:
+        command: section
+        config: firewall
+        type: redirect
+        find:
+          name: cjdns_alien
+        value:
+          enabled: 1
+          target: DNAT
+          src: wan
+          src_dport: 57339
+          dest: lan
+          dest_port: 57338
+          dest_ip: 10.66.6.100
+          proto: udp
+          reflection: 1
+      tags: uci, firewall
+      notify:
+        - uci commit
 
     # - name: NAT reflection for CJDNS
     #   uci:
@@ -1241,19 +1234,6 @@
       notify:
         - uci commit
 
-    - uci:
-        command: set
-        key: network.wan6
-        type: interface
-        value:
-          ifname: 'eth0.2'
-          proto: 'dhcpv6'
-          reqprefix: '56'
-          metric: '10'
-      tags: uci, network
-      notify:
-        - uci commit
-
     # switches
     - uci:
         command: set
@@ -1339,7 +1319,8 @@
       notify:
         - uci commit
 
-    - uci:
+    - name: wg1 interface
+      uci:
         command: set
         key: network.wg1
         type: interface
@@ -1350,6 +1331,40 @@
           private_key: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-ingress subkey=private') }}"
           addresses:
             - "10.66.7.1/27"
+      tags: uci, network
+      notify:
+        - uci commit
+
+    - name: wg1 peer mi5sergey
+      uci:
+        command: section
+        config: network
+        type: wireguard_wg1
+        find:
+          description: mi5sergey
+        value:
+          public_key: "{{ lookup('passwordstore', 'devices/Mi5Sergey/wg-home subkey=public') }}"
+          route_allowed_ips: 1
+          allowed_ips:
+            - 10.66.7.2/32
+          persistent_keepalive: 25
+      tags: uci, network
+      notify:
+        - uci commit
+
+    - name: wg1 peer mi5olga
+      uci:
+        command: section
+        config: network
+        type: wireguard_wg1
+        find:
+          description: mi5olga
+        value:
+          public_key: "{{ lookup('passwordstore', 'devices/Mi5Olga/wg-home subkey=public') }}"
+          route_allowed_ips: 1
+          allowed_ips:
+            - 10.66.7.3/32
+          persistent_keepalive: 25
       tags: uci, network
       notify:
         - uci commit
@@ -1632,34 +1647,6 @@
       notify:
         - uci commit
 
-    - name: mwan3 wan6 interface
-      uci:
-        command: set
-        key: mwan3.wan6
-        type: interface
-        value:
-          enabled: '1'
-          initial_state: 'online'
-          family: 'ipv6'
-          track_ip:
-            - '2a02:2168:208:1::1'
-            - '2a02:2168:208:2::1'
-          track_method: 'ping'
-          reliability: '1'
-          count: '1'
-          size: '56'
-          timeout: '2'
-          recovery_interval: '5'
-          down: '3'
-          up: '3'
-          flush_conntrack: 'always'
-          check_quality: '0'
-          interval: '10'
-          failure_interval: '10'
-      tags: uci, mwan3
-      notify:
-        - uci commit
-
     - name: mwan3 wg0 interface
       uci:
         command: set
@@ -1680,33 +1667,6 @@
           down: '3'
           up: '3'
           flush_conntrack: 'always'
-          check_quality: '0'
-          interval: '10'
-          failure_interval: '10'
-      tags: uci, mwan3
-      notify:
-        - uci commit
-
-    - name: mwan3 wg06 interface
-      uci:
-        command: set
-        key: mwan3.wg06
-        type: interface
-        value:
-          enabled: '1'
-          initial_state: 'online'
-          family: 'ipv6'
-          track_ip:
-            - '2a00:1450:400f:80d::200e'
-          track_method: 'ping'
-          reliability: '1'
-          count: '1'
-          size: '56'
-          timeout: '2'
-          recovery_interval: '5'
-          down: '3'
-          up: '3'
-          flush_conntrack: 'never'
           check_quality: '0'
           interval: '10'
           failure_interval: '10'
@@ -1740,32 +1700,6 @@
       notify:
         - uci commit
 
-    - name: mwan3 wan6_m1_w1 member
-      uci:
-        command: set
-        key: mwan3.wan6_m1_w1
-        type: member
-        value:
-          interface: 'wan6'
-          metric: '1'
-          weight: '1'
-      tags: uci, mwan3
-      notify:
-        - uci commit
-
-    - name: mwan3 wg06_m1_w1 member
-      uci:
-        command: set
-        key: mwan3.wg06_m1_w1
-        type: member
-        value:
-          interface: 'wg06'
-          metric: '1'
-          weight: '1'
-      tags: uci, mwan3
-      notify:
-        - uci commit
-
     - name: mwan3 only_wan policy
       uci:
         command: set
@@ -1775,7 +1709,6 @@
           last_resort: 'unreachable'
           use_member:
             - 'wan_m1_w1'
-            - 'wan6_m1_w1'
       tags: uci, mwan3
       notify:
         - uci commit
@@ -1789,7 +1722,6 @@
           last_resort: 'unreachable'
           use_member:
             - 'wg0_m1_w1'
-            - 'wg06_m1_w1'
       tags: uci, mwan3
       notify:
         - uci commit
@@ -1870,6 +1802,20 @@
       notify:
         - uci commit
 
+    - name: mwan3 vuk rule
+      uci:
+        command: set
+        key: mwan3.vuk
+        type: rule
+        value:
+          src_ip: '10.66.6.0/23'
+          dest_ip: '94.159.22.10/29'
+          sticky: '0'
+          use_policy: 'only_wan'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
     - name: mwan3 default_ipv4 rule
       uci:
         command: set
@@ -1883,19 +1829,3 @@
       tags: uci, mwan3
       notify:
         - uci commit
-
-    - name: mwan3 default_ipv6 rule
-      uci:
-        command: set
-        key: mwan3.default_ipv6
-        type: rule
-        value:
-          src_ip: '::0/0'
-          dest_ip: '::0/0'
-          proto: 'all'
-          sticky: '0'
-          use_policy: 'only_wg0'
-      tags: uci, mwan3
-      notify:
-        - uci commit
-
