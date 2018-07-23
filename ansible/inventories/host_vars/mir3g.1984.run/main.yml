@@ -1,6 +1,6 @@
 ---
 ansible_user: root
-ansible_host: h.mir3g.1984.run
+ansible_host: mir3g.lan
 
 root_password: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/root') }}"
 
@@ -27,7 +27,6 @@ cjdns_udp_peers:
     password: public
     ipv6: fc9b:499a:dd7a:92a:7b3e:be3a:32fc:53dc
 
-
   #
   # Ukraine
   #
@@ -35,15 +34,6 @@ cjdns_udp_peers:
   - peerName: ic.hellomouse.cf
     address: 185.140.54.19
     address_type: ipv4
-    port: 35907
-    contact: iczero4@gmail.com
-    gpg: "613CE9DA0E9A3F70EC97760E4BAC4EBB8461FC7E"
-    publicKey: gtbfndu2tvfbwuydm7v0kpnqpgcburtymhz3ph9kfrjg4n8bh3j0.k
-    login: public
-    password: fwlmbx2f3udkd0ymknq4pwwgu2bjklx
-  - peerName: ic.hellomouse.cf IPv6
-    address: "[2a05:dfc7:dfc7:20::1]"
-    address_type: ipv6
     port: 35907
     contact: iczero4@gmail.com
     gpg: "613CE9DA0E9A3F70EC97760E4BAC4EBB8461FC7E"
