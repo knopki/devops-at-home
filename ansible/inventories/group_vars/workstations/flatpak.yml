@@ -23,3 +23,4 @@ flatpaks_group:
   - name: org.qbittorrent.qBittorrent
   - name: org.remmina.Remmina
   - name: org.telegram.desktop
+  - name: com.getpostman.Postman
