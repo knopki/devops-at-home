@@ -74,3 +74,7 @@ binaries_group:
     url: https://github.com/kubernetes-sigs/kustomize/releases/download/v1.0.4/kustomize_1.0.4_linux_amd64
     dest: /usr/local/bin/kustomize
     checksum: sha1:d1ad398aed3170c5605f786995f9370e4e955f1e
+  - name: skaffold
+    url: https://github.com/GoogleContainerTools/skaffold/releases/download/v0.10.0/skaffold-linux-amd64
+    dest: /usr/local/bin/skaffold
+    checksum: sha1:8be931c40abb4f9403f1450394b6161d5770f24e
