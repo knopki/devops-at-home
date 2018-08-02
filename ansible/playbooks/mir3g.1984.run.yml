@@ -438,7 +438,7 @@
           input: 'REJECT'
           output: 'ACCEPT'
           forward: 'ACCEPT'
-          network: 'lan wg1'
+          network: 'lan'
           log: '1'
           log_limit: '10/minute'
       tags: uci, firewall
@@ -504,6 +504,25 @@
       notify:
         - uci commit
 
+    - uci:
+        command: section
+        config: firewall
+        type: zone
+        find:
+          name: 'warriors'
+        value:
+          input: 'ACCEPT'
+          output: 'ACCEPT'
+          forward: 'REJECT'
+          network: 'wg1'
+          mtu_fix: '1'
+          conntrack: '1'
+          log: '1'
+          log_limit: '10/minute'
+      tags: uci, firewall
+      notify:
+        - uci commit
+
     # forwarding
     - uci:
         command: set
@@ -516,7 +535,6 @@
       notify:
         - uci commit
 
-    # forwarding
     - uci:
         command: set
         key: firewall.@forwarding[1]
@@ -528,6 +546,49 @@
       notify:
         - uci commit
 
+    - uci:
+        command: set
+        key: firewall.@forwarding[2]
+        type: forwarding
+        value:
+          src: 'lan'
+          dest: 'warriors'
+      tags: uci, firewall
+      notify:
+        - uci commit
+
+    - uci:
+        command: set
+        key: firewall.@forwarding[3]
+        type: forwarding
+        value:
+          src: 'warriors'
+          dest: 'vpn'
+      tags: uci, firewall
+      notify:
+        - uci commit
+
+    - uci:
+        command: set
+        key: firewall.@forwarding[4]
+        type: forwarding
+        value:
+          src: 'warriors'
+          dest: 'wan'
+      tags: uci, firewall
+      notify:
+        - uci commit
+
+    - uci:
+        command: set
+        key: firewall.@forwarding[5]
+        type: forwarding
+        value:
+          src: 'warriors'
+          dest: 'lan'
+      tags: uci, firewall
+      notify:
+        - uci commit
     # rules
     # ICMPv4 ###################################################################
     - name: 'any2self-Allow-Ping'
@@ -1330,7 +1391,7 @@
           force_link: 1
           private_key: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-ingress subkey=private') }}"
           addresses:
-            - "10.66.7.1/27"
+            - "10.66.7.65/27"
       tags: uci, network
       notify:
         - uci commit
@@ -1346,7 +1407,7 @@
           public_key: "{{ lookup('passwordstore', 'devices/Mi5Sergey/wg-home subkey=public') }}"
           route_allowed_ips: 1
           allowed_ips:
-            - 10.66.7.2/32
+            - 10.66.7.66/32
           persistent_keepalive: 25
       tags: uci, network
       notify:
@@ -1363,7 +1424,7 @@
           public_key: "{{ lookup('passwordstore', 'devices/Mi5Olga/wg-home subkey=public') }}"
           route_allowed_ips: 1
           allowed_ips:
-            - 10.66.7.3/32
+            - 10.66.7.67/32
           persistent_keepalive: 25
       tags: uci, network
       notify:
@@ -1780,6 +1841,21 @@
         value:
           src_ip: '10.66.6.0/23'
           dest_port: '51820'
+          proto: 'udp'
+          sticky: '0'
+          use_policy: 'only_wan'
+      tags: uci, mwan3
+      notify:
+        - uci commit
+
+    - name: mwan3 wireguard_src rule
+      uci:
+        command: set
+        key: mwan3.wireguard_src
+        type: rule
+        value:
+          src_ip: '10.66.6.0/23'
+          src_port: '51820'
           proto: 'udp'
           sticky: '0'
           use_policy: 'only_wan'
