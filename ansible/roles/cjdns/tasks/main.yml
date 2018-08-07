@@ -28,6 +28,10 @@
     src: nm-dispatcher-cjdns.sh
     dest: /etc/NetworkManager/dispatcher.d/30-cjdns
     mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: NetworkManager_initrc_exec_t
+    selevel: s0
 
 - name: Enable cjdns ports on public firewalld zone
   tags: firewalld, cjdns
