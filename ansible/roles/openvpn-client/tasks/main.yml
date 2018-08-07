@@ -47,3 +47,14 @@
     state: enabled
     permanent: yes
     immediate: yes
+
+- name: Create NetworkManager dispatcher script
+  tags: openvpn
+  template:
+    src: nm-dispatcher.sh.j2
+    dest: "/etc/NetworkManager/dispatcher.d/30-openvpn-client-{{ client_name|default('default') }}"
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: NetworkManager_initrc_exec_t
+    selevel: s0
