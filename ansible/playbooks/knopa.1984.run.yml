@@ -57,3 +57,12 @@
         combine(sshd_host_parameters|d({}))
       }}'
       sshd_packages: []
+
+    # Specific
+    - role: openvpn-client
+      tags: openvpn
+      client_name: mullvad
+      ca: "{{ mullvad_ca }}"
+      crl: "{{ mullvad_crl }}"
+      userpass: "{{ mullvad_userpass }}"
+      config: "{{ mullvad_config }}"
