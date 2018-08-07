@@ -1809,7 +1809,7 @@
         type: rule
         value:
           src_ip: '10.66.6.0/23'
-          dest_port: '1194'
+          dest_port: '1194:1195'
           proto: 'udp'
           sticky: '0'
           use_policy: 'only_wan'

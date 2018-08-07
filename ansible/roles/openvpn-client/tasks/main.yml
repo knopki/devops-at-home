@@ -1,0 +1,49 @@
+---
+- name: Create CA file
+  when: ca is defined
+  tags: openvpn
+  copy:
+    content: "{{ ca }}"
+    dest: "/etc/openvpn/client/{{ client_name|default('default') }}_ca.crt"
+  notify: restart openvpn-client
+
+- name: Create CRL file
+  when: crl is defined
+  tags: openvpn
+  copy:
+    content: "{{ crl }}"
+    dest: "/etc/openvpn/client/{{ client_name|default('default') }}_crl.pem"
+  notify: restart openvpn-client
+
+- name: Create userpass file
+  when: userpass is defined
+  tags: openvpn
+  copy:
+    content: "{{ userpass }}"
+    dest: "/etc/openvpn/client/{{ client_name|default('default') }}_userpass.txt"
+  notify: restart openvpn-client
+
+- name: Create config file
+  when: config is defined
+  tags: openvpn
+  template:
+    src: conf.j2
+    dest: "/etc/openvpn/client/{{ client_name|default('default') }}.conf"
+  notify: restart openvpn-client
+
+- name: Enable and start openvpn service
+  tags: openvpn
+  systemd:
+    name: "openvpn-client@{{ client_name|default('default') }}"
+    state: started
+    enabled: yes
+
+- name: Add openvpn interface to public firewalld zone
+  when: client_name is defined
+  tags: openvpn, firewalld
+  firewalld:
+    interface: "{{ client_name }}"
+    zone: public
+    state: enabled
+    permanent: yes
+    immediate: yes

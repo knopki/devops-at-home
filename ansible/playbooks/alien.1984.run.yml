@@ -57,3 +57,10 @@
     # Specific
     - role: fancontrol
       tags: fancontrol
+    - role: openvpn-client
+      tags: openvpn
+      client_name: mullvad
+      ca: "{{ mullvad_ca }}"
+      crl: "{{ mullvad_crl }}"
+      userpass: "{{ mullvad_userpass }}"
+      config: "{{ mullvad_config }}"
