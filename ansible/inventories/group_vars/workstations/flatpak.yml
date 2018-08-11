@@ -8,8 +8,6 @@ flatpak_remotes_group:
     flatpakrepo_url: https://dl.winepak.org/repo/winepak.flatpakrepo
 
 flatpaks_group:
-  - name: com.github.mdh34.quickdocs
-  - name: com.github.miguelmota.Cointop
   - name: net.ankiweb.Anki
   - name: org.fedoraproject.MediaWriter
   - name: org.gimp.GIMP
