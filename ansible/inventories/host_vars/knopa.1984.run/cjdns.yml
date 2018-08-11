@@ -9,21 +9,7 @@ cjdns_authorizedPasswords:
 
 cjdns_udp_peers_self: []
 
-cjdns_udp_peers_local:
-  - peerName: h.mir3g.1984.run
-    address: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/network_primary_ipv4') }}"
-    address_type: ipv4
-    port: 57338
-    publicKey: "{{ hostvars['mir3g.1984.run']['cjdns_public_key'] }}"
-    login: "private"
-    password: "{{ hostvars['mir3g.1984.run']['cjdns_authorizedPasswords']['private'] }}"
-  - peerName: h.alien.1984.run
-    address: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/network_primary_ipv4') }}"
-    address_type: ipv4
-    port: 57339
-    publicKey: "{{ hostvars['alien.1984.run']['cjdns_public_key'] }}"
-    login: "private"
-    password: "{{ hostvars['alien.1984.run']['cjdns_authorizedPasswords']['private'] }}"
+cjdns_udp_peers_local: []
 
 cjdns_udp_peers: "{{
   cjdns_udp_peers_common|difference(cjdns_udp_peers_self) +  cjdns_udp_peers_local
