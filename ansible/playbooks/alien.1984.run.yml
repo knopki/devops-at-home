@@ -64,3 +64,10 @@
       crl: "{{ mullvad_crl }}"
       userpass: "{{ mullvad_userpass }}"
       config: "{{ mullvad_config }}"
+    - role: openvpn-client
+      tags: openvpn
+      client_name: home
+      ca: "{{ ovpn_home_ca }}"
+      crt: "{{ ovpn_home_crt }}"
+      key: "{{ ovpn_home_key }}"
+      config: "{{ ovpn_home_config }}"

@@ -26,8 +26,8 @@
         state: present
       with_items:
         - ca-certificates
-        - conntrack
         - cjdns
+        - conntrack
         - dnsmasq-full
         - ip-full
         - ipset
@@ -44,6 +44,8 @@
         - luci-app-sqm
         - luci-app-wireguard
         - luci-app-wol
+        - openssl-util
+        - openvpn-openssl
         - python-crypto
         - python-light
         - python-logging
@@ -514,12 +516,12 @@
           input: 'ACCEPT'
           output: 'ACCEPT'
           forward: 'REJECT'
-          network: 'wg1'
+          network: 'wg1 ovpn1'
           mtu_fix: '1'
           conntrack: '1'
           log: '1'
           log_limit: '10/minute'
-      tags: uci, firewall
+      tags: uci, firewall, openvpn
       notify:
         - uci commit
 
@@ -1109,6 +1111,24 @@
       notify:
         - uci commit
 
+    - name: any2self-Allow-OpenVPN
+      uci:
+        command: section
+        config: firewall
+        type: rule
+        find:
+          name: any2self-Allow-OpenVPN
+        value:
+          enabled: '1'
+          src: '*'
+          proto: udp
+          dest_port: 1194
+          target: ACCEPT
+          family: ipv4
+      tags: uci, firewall, openvpn
+      notify:
+        - uci commit
+
 
     #
     # port forwarding
@@ -1427,6 +1447,21 @@
             - 10.66.7.67/32
           persistent_keepalive: 25
       tags: uci, network
+      notify:
+        - uci commit
+
+    - name: ovpn1 interface
+      uci:
+        command: set
+        key: network.ovpn1
+        type: interface
+        value:
+          proto: none
+          ifname: ovpn1
+          force_link: '1'
+          delegate: '0'
+          auto: '1'
+      tags: uci, network, openvpn
       notify:
         - uci commit
 
@@ -1903,5 +1938,61 @@
           sticky: '0'
           use_policy: 'only_wg0'
       tags: uci, mwan3
+      notify:
+        - uci commit
+
+    #
+    # openvpn server
+    #
+    - name: Copy easy-rsa certs
+      copy:
+        content: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/{{ item.key }} returnall=true') }}"
+        dest: "{{ item.path }}"
+      with_items:
+        - key: ca.crt
+          path: /etc/easy-rsa/pki/ca.crt
+        - key: dh2048.pem
+          path: /etc/easy-rsa/pki/dh2048.pem
+        - key: ovpn-server.key
+          path: /etc/easy-rsa/pki/private/mir3g.key
+      tags: openvpn
+
+    - name: openvpn server config
+      uci:
+        command: set
+        key: openvpn.ovpn1
+        type: openvpn
+        value:
+          enabled: '1'
+          dev: ovpn1
+          dev_type: tun
+          topology: subnet
+          proto: udp
+          port: '1194'
+          server: '10.66.7.0 255.255.255.224'
+          ifconfig: '10.66.7.1 255.255.255.224'
+          push:
+            - 'route 10.66.6.0 255.255.255.0'
+            - 'sndbuf 393216'
+            - 'rcvbuf 393216'
+          cipher: AES-256-CBC
+          keepalive: '10 60'
+          comp_lzo: adaptive
+          client_to_client: '1'
+          persist_key: '1'
+          persist_tun: '1'
+          persist_local_ip: '1'
+          persist_remote_ip: '1'
+          sndbuf: '393216'
+          rcvbuf: '393216'
+          fragment: '0'
+          mssfix: '0'
+          tun_mtu: '48000'
+          fast_io: '1'
+          dh: /etc/easy-rsa/pki/dh2048.pem
+          ca: /etc/easy-rsa/pki/ca.crt
+          cert: /etc/easy-rsa/pki/issued/mir3g.crt
+          key: /etc/easy-rsa/pki/private/mir3g.key
+      tags: uci, openvpn
       notify:
         - uci commit

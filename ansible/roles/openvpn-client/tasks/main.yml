@@ -5,6 +5,7 @@
   copy:
     content: "{{ ca }}"
     dest: "/etc/openvpn/client/{{ client_name|default('default') }}_ca.crt"
+    mode: 0600
   notify: restart openvpn-client
 
 - name: Create CRL file
@@ -13,6 +14,25 @@
   copy:
     content: "{{ crl }}"
     dest: "/etc/openvpn/client/{{ client_name|default('default') }}_crl.pem"
+    mode: 0600
+  notify: restart openvpn-client
+
+- name: Create client crt file
+  when: crt is defined
+  tags: openvpn
+  copy:
+    content: "{{ crt }}"
+    dest: "/etc/openvpn/client/{{ client_name|default('default') }}.crt"
+    mode: 0600
+  notify: restart openvpn-client
+
+- name: Create client key file
+  when: key is defined
+  tags: openvpn
+  copy:
+    content: "{{ key }}"
+    dest: "/etc/openvpn/client/{{ client_name|default('default') }}.key"
+    mode: 0600
   notify: restart openvpn-client
 
 - name: Create userpass file
@@ -21,6 +41,7 @@
   copy:
     content: "{{ userpass }}"
     dest: "/etc/openvpn/client/{{ client_name|default('default') }}_userpass.txt"
+    mode: 0600
   notify: restart openvpn-client
 
 - name: Create config file
