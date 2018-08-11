@@ -8,7 +8,7 @@ ovpn_home_config:
   - dev home
   - dev-type tun
   - proto udp
-  - remote 10.66.6.1 1194
+  - remote mir3g.1984.run 1194
   - cipher AES-256-CBC
   - resolv-retry infinite
   - persist-key
