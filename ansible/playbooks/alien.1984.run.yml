@@ -37,6 +37,8 @@
       }}'
     - role: tuned
       tags: tuned
+    - role: thermald
+      tags: thermald
     - role: firewalld-common
       tags: firewalld
     - role: cjdns
