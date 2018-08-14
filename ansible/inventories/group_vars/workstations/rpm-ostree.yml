@@ -15,6 +15,7 @@ rpm_ostree_install_group:
   - code
   - createrepo
   - feh
+  - gnome-tweak-tools
   - golang
   - google-cloud-sdk
   - hdparm
