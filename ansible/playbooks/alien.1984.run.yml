@@ -9,6 +9,10 @@
     # Packages
     - role: yum-repos
       tags: yum-repos
+    - role: rpm-ostree-upgrade
+      tags: rpm-ostree-upgrade
+    - role: rpm-ostree-install
+      tags: rpm-ostree-install
     - role: binary-installer
       tags: binary-installer
     - role: flatpak

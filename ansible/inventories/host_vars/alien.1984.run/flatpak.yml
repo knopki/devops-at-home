@@ -1,11 +1,6 @@
 ---
 flatpaks_host:
-  - name: com.valvesoftware.Steam
-  - name: org.blender.Blender
   - name: org.darktable.Darktable
-  - name: org.kde.ark
-    remote: kdeapps
   - name: org.kde.kdenlive
-  - name: org.kde.okular
   - name: org.musicbrainz.Picard
   - name: org.pitivi.Pitivi

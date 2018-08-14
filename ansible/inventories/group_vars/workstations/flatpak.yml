@@ -9,16 +9,24 @@ flatpak_remotes_group:
 
 flatpaks_group:
   - name: net.ankiweb.Anki
-  - name: org.fedoraproject.MediaWriter
   - name: org.gimp.GIMP
-  - name: org.gtk.Gtk3theme.Breeze
-  - name: org.kde.kdeconnect
-    remote: kdeapps
   - name: org.kde.krita
   - name: org.keepassxc.KeePassXC
+  - name: org.kde.kdeconnect
+    remote: kdeapps
   - name: org.libreoffice.LibreOffice
   - name: org.nextcloud.Nextcloud
   - name: org.qbittorrent.qBittorrent
   - name: org.remmina.Remmina
   - name: org.telegram.desktop
   - name: com.getpostman.Postman
+  - name: org.blender.Blender
+  - name: org.gnome.Evince
+  - name: io.github.GnomeMpv
+  - name: org.gnome.Fractal
+  - name: com.github.bajoja.indicator-kdeconnect
+  - name: io.github.mujx.Nheko
+  - name: im.riot.Riot
+  - name: com.skype.Client
+  - name: com.transmissionbt.Transmission
+  - name: org.vim.Vim
