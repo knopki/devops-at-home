@@ -15,9 +15,9 @@ binaries_group:
     dest: /usr/local/bin/fly
     checksum: sha1:f397d4f516c0bd7e1c854ff6ea6d0b5bf9683750
   - name: minikube
-    url: https://github.com/kubernetes/minikube/releases/download/v0.28.0/minikube-linux-amd64
+    url: https://github.com/kubernetes/minikube/releases/download/v0.28.2/minikube-linux-amd64
     dest: /usr/local/bin/minikube
-    checksum: sha1:1677dd631bad1b27e2d6aeb245fa3470870f31ab
+    checksum: sha1:ac1a0c6fd23aa7ad151e1b8bafb5cd0e2861dcec
   - name: docker-machine-driver-kvm2
     url: https://github.com/kubernetes/minikube/releases/download/v0.28.0/docker-machine-driver-kvm2
     dest: /usr/local/bin/docker-machine-driver-kvm2
