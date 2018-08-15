@@ -1,4 +1,16 @@
 ---
+- name: Create /etc/modprobe.d/i8k.conf
+  copy:
+    content: "options i8k force=1"
+    dest: /etc/modprobe.d/i8k.conf
+  tags: fancontrol
+
+- name: Create /etc/modules-load.d/fancontrol.conf
+  copy:
+    content: "i8k\n"
+    dest: /etc/modules-load.d/fancontrol.conf
+  tags: fancontrol
+
 - name: Create /etc/fancontrol
   template:
     src: fancontrol.j2
