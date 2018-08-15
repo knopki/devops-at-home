@@ -35,6 +35,8 @@
         sysctl_group_parameters|d([]) +
         sysctl_host_parameters|d([])
       }}'
+    - role: modprobe-permanent
+      tags: modprobe_permanent
     - role: tuned
       tags: tuned
     - role: thermald
