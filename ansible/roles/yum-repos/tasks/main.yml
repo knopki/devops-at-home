@@ -14,3 +14,22 @@
         yum_repos_group|d([]) +
         yum_repos_host|d([])
       }}"
+  when: item.mirrorlist is not defined
+
+- name: Setup yum repositories - with mirrorlist
+  tags: yum-repos
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description|d(item.name) }}"
+    file: "{{ item.file|d(item.name) }}"
+    baseurl: "{{ item.baseurl }}"
+    mirrorlist : "{{ item.mirrorlist }}"
+    gpgcheck: "{{ item.gpgcheck|d('yes') }}"
+    gpgkey: "{{ item.gpgkey|d(None) }}"
+  with_items:
+    - "{{
+        yum_repos_default|d([]) +
+        yum_repos_group|d([]) +
+        yum_repos_host|d([])
+      }}"
+  when: item.mirrorlist is defined
