@@ -37,6 +37,8 @@
       }}'
     - role: modprobe-permanent
       tags: modprobe_permanent
+    - role: vconsole
+      tags: vconsole
     - role: tuned
       tags: tuned
     - role: thermald

@@ -1,0 +1,6 @@
+---
+- name: Deploy vconsole.conf
+  template:
+    src: vconsole.j2
+    dest: /etc/vconsole.conf
+  tags: vconsole
