@@ -27,6 +27,7 @@ rpm_ostree_install_group:
   - libvirt
   - lm_sensors
   - mc
+  - mpv
   - nmap
   - node-gyp
   - nodejs
@@ -36,6 +37,7 @@ rpm_ostree_install_group:
   - powertop
   - seahorse
   - speedcrunch
+  - sway
   - switchdesk
   - syncthing
   - thermald
