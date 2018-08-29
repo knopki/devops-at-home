@@ -1,10 +1,9 @@
 ---
-atomic_host_remote_name: "fedora-workstation"
-atomic_host_remote_url: "https://dl.fedoraproject.org/atomic/repo/"
-atomic_host_remote_gpg_verify: "true"
-atomic_host_desired_ref: "fedora/28/x86_64/workstation"
-atomic_host_desired_version: "28.20180814.0"
-atomic_host_autoupgrade: check
+rpm_ostree_remote_name: "fedora-workstation"
+rpm_ostree_remote_url: "https://dl.fedoraproject.org/atomic/repo/"
+rpm_ostree_desired_ref: "fedora/29/x86_64/workstation"
+# RPM-GPG-KEY-fedora-29-primary
+rpm_ostree_desired_version: "28.20180814.0"
 rpm_ostree_install_group:
   - android-tools
   - ansible

@@ -1,21 +1,21 @@
 ---
 # Set autoupgrade option
 - name: Set autoupgrade option
-  when: atomic_host_autoupgrade is defined
-    and atomic_host_autoupgrade == 'check'
+  when: rpm_ostree_autoupgrade is defined
+    and rpm_ostree_autoupgrade == 'check'
   ini_file:
     path: /etc/rpm-ostreed.conf
     section: Daemon
     option: AutomaticUpdatePolicy
-    value: "{{ atomic_host_autoupgrade }}"
+    value: "{{ rpm_ostree_autoupgrade }}"
     state: present
   notify:
     - rpm-ostreed restart
   tags: rpm-ostree-upgrade
 
 - name: Set autoupgrade option
-  when: atomic_host_autoupgrade is not defined
-    or atomic_host_autoupgrade == 'none'
+  when: rpm_ostree_autoupgrade is not defined
+    or rpm_ostree_autoupgrade == 'none'
   ini_file:
     path: /etc/rpm-ostreed.conf
     section: Daemon
@@ -27,23 +27,32 @@
   tags: rpm-ostree-upgrade
 
 # Create ostree remote
-- when: atomic_host_remote_name is defined and atomic_host_remote_url is defined and atomic_host_remote_gpg_verify is defined
+- when: rpm_ostree_remote_name is defined and rpm_ostree_remote_url is defined
   block:
   - name: Create ostree remote config
     ini_file:
-      path: "/etc/ostree/remotes.d/{{ atomic_host_remote_name }}.conf"
-      section: "remote \"{{ atomic_host_remote_name }}\""
+      path: "/etc/ostree/remotes.d/{{ rpm_ostree_remote_name }}.conf"
+      section: "remote \"{{ rpm_ostree_remote_name }}\""
       option: url
-      value: "{{ atomic_host_remote_url }}"
+      value: "{{ rpm_ostree_remote_url }}"
     tags: rpm-ostree-upgrade
 
   - name: Create ostree remote config
     ini_file:
-      path: "/etc/ostree/remotes.d/{{ atomic_host_remote_name }}.conf"
-      section: "remote \"{{ atomic_host_remote_name }}\""
+      path: "/etc/ostree/remotes.d/{{ rpm_ostree_remote_name }}.conf"
+      section: "remote \"{{ rpm_ostree_remote_name }}\""
       option: gpg-verify
-      value: "{{ atomic_host_remote_gpg_verify }}"
+      value: "{{ rpm_ostree_remote_gpg_verify|default('true') }}"
     tags: rpm-ostree-upgrade
+
+  - name: Create ostree remote config
+    ini_file:
+      path: "/etc/ostree/remotes.d/{{ rpm_ostree_remote_name }}.conf"
+      section: "remote \"{{ rpm_ostree_remote_name }}\""
+      option: gpgkeypath
+      value: "{{ rpm_ostree_remote_gpgkeypath }}"
+    tags: rpm-ostree-upgrade
+    when: rpm_ostree_remote_gpgkeypath is defined
 
 # Gather facts
 - name: Gather facts about ostree deployment
@@ -57,33 +66,33 @@
   set_fact: rpmostree_status={{ (rpmostree_status_raw.stdout | from_json).deployments | selectattr("booted","equalto",true) | join("")}}
   tags: rpm-ostree-upgrade
 - name: Set fact about ostree desired ref
-  set_fact: atomic_host_full_desired_ref="{{ atomic_host_remote_name }}:{{ atomic_host_desired_ref }}"
-  when: atomic_host_remote_name is defined and atomic_host_desired_ref is defined
+  set_fact: rpm_ostree_full_desired_ref="{{ rpm_ostree_remote_name }}:{{ rpm_ostree_desired_ref }}"
+  when: rpm_ostree_remote_name is defined and rpm_ostree_desired_ref is defined
   tags: rpm-ostree-upgrade
 
 # Rebase
-- when: atomic_host_full_desired_ref is defined
+- when: rpm_ostree_full_desired_ref is defined
   tags: rpm-ostree-upgrade
   block:
   - name: Rebase atomic host
-    when: rpmostree_status.origin != atomic_host_full_desired_ref
-    command: "rpm-ostree rebase {{ atomic_host_full_desired_ref }}"
+    when: rpmostree_status.origin != rpm_ostree_full_desired_ref
+    command: "rpm-ostree rebase {{ rpm_ostree_full_desired_ref }}"
     tags: rpm-ostree-upgrade
 
-  - when: rpmostree_status.origin != atomic_host_full_desired_ref
+  - when: rpmostree_status.origin != rpm_ostree_full_desired_ref
     fail: msg="Please reboot {{ inventory_hostname }} to complete rebase"
     tags: rpm-ostree-upgrade
 
 # Upgrade
-- when: atomic_host_desired_version is defined
+- when: rpm_ostree_desired_version is defined
   tags: rpm-ostree-upgrade
   block:
   - name: Upgrade Atomic Host
-    when: atomic_host_desired_version != rpmostree_status.version
+    when: rpm_ostree_desired_version != rpmostree_status.version
     atomic_host:
-      revision: "{{ atomic_host_desired_version }}"
+      revision: "{{ rpm_ostree_desired_version }}"
     tags: rpm-ostree-upgrade
 
-  - when: atomic_host_desired_version != rpmostree_status.version
+  - when: rpm_ostree_desired_version != rpmostree_status.version
     fail: msg="Please reboot {{ inventory_hostname }} to complete upgrade"
     tags: rpm-ostree-upgrade
