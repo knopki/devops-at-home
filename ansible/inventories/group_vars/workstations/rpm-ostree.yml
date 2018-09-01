@@ -8,9 +8,7 @@ rpm_ostree_install_group:
   - android-tools
   - ansible
   - borgbackup
-  - cabextract
   - chromium
-  - clementine
   - code
   - createrepo
   - feh

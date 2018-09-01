@@ -1,6 +1,4 @@
 ---
 flatpaks_host:
   - name: org.darktable.Darktable
-  - name: org.kde.kdenlive
   - name: org.musicbrainz.Picard
-  - name: org.pitivi.Pitivi
