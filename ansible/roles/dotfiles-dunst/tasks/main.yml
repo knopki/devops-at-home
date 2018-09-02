@@ -1,0 +1,34 @@
+---
+- name: Get user UID
+  command: id -u
+  register: uid
+  tags: dunst
+
+- name: Create dunst config directory
+  file:
+    path: "{{ lookup('env','HOME') }}/.config/dunst"
+    state: directory
+  tags: dunst
+
+- name: Deploy dunst config
+  template:
+    src: config.j2
+    dest: "{{ lookup('env','HOME') }}/.config/dunst/dunstrc"
+  tags: dunst
+  notify: restart dunst
+
+- name: Copy dunst systemd unit
+  template:
+    src: systemd.j2
+    dest: "{{ lookup('env','HOME') }}/.config/systemd/user/dunst.service"
+  tags: dunst
+
+- name: Enable dunst systemd service
+  systemd:
+    name: dunst.service
+    user: yes
+    state: started
+    enabled: yes
+  environment:
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/{{ uid.stdout }}/bus"
+  tags: dunst
