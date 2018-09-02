@@ -4,3 +4,4 @@ ansible_host: h.do-fra1.1984.run
 root_password: "{{ lookup('passwordstore','devices/do-fra1.1984.run/root') }}"
 system_locale: en_US.UTF-8
 network_primary_ip4: "{{ lookup('passwordstore','devices/do-fra1.1984.run/network_primary_ipv4') }}"
+main_user: sk

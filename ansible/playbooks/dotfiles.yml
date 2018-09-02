@@ -1,0 +1,10 @@
+---
+- hosts: workstations
+  any_errors_fatal: true
+  become: true
+  become_user: "{{ main_user }}"
+  roles:
+  - role: dotfiles-sway
+    tags: sway
+  - role: dotfiles-dunst
+    tags: dunst

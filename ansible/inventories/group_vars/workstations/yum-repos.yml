@@ -63,4 +63,8 @@ yum_repos_group:
     enabled: 1
     gpgcheck: 1
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-
+  - name: alunux-budgie-desktop-stable
+    baseurl: https://copr-be.cloud.fedoraproject.org/results/alunux/budgie-desktop-stable/fedora-$releasever-$basearch/
+    enabled: 1
+    gpgcheck: 1
+    gpgkey: https://copr-be.cloud.fedoraproject.org/results/alunux/budgie-desktop-stable/pubkey.gpg
