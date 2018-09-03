@@ -68,3 +68,17 @@ yum_repos_group:
     enabled: 1
     gpgcheck: 1
     gpgkey: https://copr-be.cloud.fedoraproject.org/results/alunux/budgie-desktop-stable/pubkey.gpg
+  - name: tjuberg-i3-desktop
+    baseurl: https://copr-be.cloud.fedoraproject.org/results/tjuberg/i3-desktop/fedora-$releasever-$basearch/
+    enabled: 1
+    gpgcheck: 1
+    gpgkey: https://copr-be.cloud.fedoraproject.org/results/tjuberg/i3-desktop/pubkey.gpg
+  - name: mskarbek-sway
+    baseurl: https://copr-be.cloud.fedoraproject.org/results/mskarbek/sway/fedora-$releasever-$basearch/
+    enabled: 1
+    gpgcheck: 1
+    gpgkey: https://copr-be.cloud.fedoraproject.org/results/mskarbek/sway/pubkey.gpg
+  - name: gregw-i3desktop
+    baseurl: https://copr-be.cloud.fedoraproject.org/results/gregw/i3desktop/fedora-$releasever-$basearch/
+    enabled: 1
+    gpgcheck: 0

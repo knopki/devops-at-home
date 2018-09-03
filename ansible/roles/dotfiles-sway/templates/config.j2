@@ -16,7 +16,7 @@ set $right l
 set $term gnome-terminal
 
 # Your preferred application launcher
-set $menu dmenu_run
+set $menu rofi -modi combi -show combi -combi-modi "drun,run,ssh" -show-icons -location 2 -terminal $term
 
 ### Output configuration
 #
@@ -28,6 +28,7 @@ output eDP-1 resolution 1920x1080 position 0,0
 
 # Default wallpaper
 output * bg {{ wallpaper }} fill
+
 
 ### Input configuration
 #
@@ -41,6 +42,14 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
   middle_emulation enabled
 }
 {% endif %}
+
+
+### Style
+#
+# gaps edge_gaps toggle
+# smart_gaps on
+# gaps outer 0
+# gaps inner 5
 
 
 ### Key bindings
@@ -202,6 +211,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+
 #
 # Status Bar:
 #
@@ -215,4 +225,11 @@ bar {
     }
 }
 
-include /etc/sway/config.d/*
+#
+# Autolock
+#
+exec swayidle \
+  timeout 300 'swaylock -i {{ wallpaper }} --scaling=fill' \
+  timeout 600 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock -i {{ wallpaper }} --scaling=fill
