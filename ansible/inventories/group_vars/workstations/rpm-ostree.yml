@@ -40,7 +40,6 @@ rpm_ostree_install_group:
   - polybar
   - powertop
   - rofi
-  - seahorse
   - speedcrunch
   - sway
   - switchdesk
