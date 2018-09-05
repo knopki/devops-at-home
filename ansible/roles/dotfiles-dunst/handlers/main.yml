@@ -1,3 +1,0 @@
----
-- name: restart dunst
-  systemd: name=dunst.service state=restarted
