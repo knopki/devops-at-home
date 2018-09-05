@@ -1,0 +1,10 @@
+---
+- name: Set value in lvm.conf
+  lineinfile:
+    path: /etc/lvm/lvm.conf
+    regexp: "(#\ )?{{ item.key }}\ =\ "
+    line: "{{ item.key }} = {{ item.value }}"
+    backrefs: yes
+    backup: yes
+  with_items: "{{ lvmconf }}"
+  tags: lvmconf
