@@ -28,7 +28,6 @@ flatpaks_group:
   - name: org.keepassxc.KeePassXC
   - name: org.libreoffice.LibreOffice
   - name: org.nextcloud.Nextcloud
-  - name: org.qbittorrent.qBittorrent
   - name: org.remmina.Remmina
   - name: org.telegram.desktop
   - name: org.vim.Vim
