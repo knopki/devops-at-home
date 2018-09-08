@@ -1,0 +1,5 @@
+gdm_custom: "{{
+  gdm_custom_default|d([]) +
+  gdm_custom_group|d([]) +
+  gdm_custom_host|d([])
+}}"

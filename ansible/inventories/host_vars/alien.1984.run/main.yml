@@ -10,3 +10,10 @@ lvmconf_host:
     value: '"partial"'
   - key: issue_discards
     value: 1
+gdm_custom_host:
+  - section: daemon
+    option: AutomaticLoginEnable
+    value: "True"
+  - section: daemon
+    option: AutomaticLogin
+    value: sk
