@@ -51,6 +51,8 @@
       tags: cjdns
     - role: gdm
       tags: gdm
+    - role: nm
+      tags: networkmanager
 
     # User management
     - role: GROG.group

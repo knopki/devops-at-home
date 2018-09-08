@@ -41,6 +41,8 @@
       tags: firewalld
     - role: cjdns
       tags: cjdns
+    - role: nm
+      tags: networkmanager
 
     # User management
     - role: GROG.group

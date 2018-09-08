@@ -1,0 +1,11 @@
+---
+- name: Set /etc/NetworkManager/NetworkManager.conf
+  ini_file:
+    path: /etc/NetworkManager/NetworkManager.conf
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  with_items: "{{ nm_conf }}"
+  notify:
+    - reload NetworkManager
+  tags: networkmanager

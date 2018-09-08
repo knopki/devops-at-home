@@ -1,0 +1,5 @@
+---
+nm_conf_group:
+  - section: main
+    option: dns
+    value: dnsmasq
