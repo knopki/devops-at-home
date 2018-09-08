@@ -40,6 +40,6 @@
 - name: Create udev rule
   template:
     src: powersave.rules.j2
-    dest: /etc/udev/rules.d/powersave.rules
+    dest: /etc/udev/rules.d/50-tuned.rules
   when: tuned_battery_profile_switch
   tags: tuned
