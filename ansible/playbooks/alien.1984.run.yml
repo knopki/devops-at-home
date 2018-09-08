@@ -53,6 +53,8 @@
       tags: gdm
     - role: nm
       tags: networkmanager
+    - role: lm-sensors
+      tags: lm-sensors
 
     # User management
     - role: GROG.group

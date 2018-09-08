@@ -1,0 +1,3 @@
+lm_sensors_service: yes
+lm_sensors_hwmon_modules_group:
+  - coretemp

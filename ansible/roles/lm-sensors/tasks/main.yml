@@ -1,0 +1,17 @@
+---
+- name: Create /etc/sysconfig/lm_sensors
+  template:
+    src: sysconfig.j2
+    dest: /etc/sysconfig/lm_sensors
+  notify:
+    - reload lm_sensors
+  tags: lm-sensors
+
+- name: Enable lm_sensors.service
+  systemd:
+    name: lm_sensors.service
+    state: started
+    enabled: yes
+  when: lm_sensors_service
+  tags: lm-sensors
+

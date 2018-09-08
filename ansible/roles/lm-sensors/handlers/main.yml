@@ -1,0 +1,6 @@
+---
+- name: reload lm_sensors
+  systemd:
+    name: lm_sensors.service
+    state: reloaded
+  when: lm_sensors_service is true

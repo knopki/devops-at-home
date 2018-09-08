@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+#
+# The format of this file is a shell script that simply defines variables:
+# HWMON_MODULES for hardware monitoring driver modules, and optionally
+# BUS_MODULES for any required bus driver module (for example for I2C or SPI).
+
+HWMON_MODULES="{% for mod in lm_sensors_hwmon_modules %}{{ mod }} {% endfor %}"
+BUS_MODULES="{% for mod in lm_sensors_bus_modules %}{{ mod }} {% endfor %}"
