@@ -1,45 +1,42 @@
 # {{ ansible_managed }}
 
+# Use public servers from the pool.ntp.org project.
+# Please consider joining the pool (http://www.pool.ntp.org/join.html).
 {% for host in chrony_ntp_servers %}
 server {{ host }} iburst
 {% endfor %}
 
-# Ignore stratum in source selection.
-stratumweight 0
-
 # Record the rate at which the system clock gains/losses time.
 driftfile /var/lib/chrony/drift
 
-# Enable kernel RTC synchronization.
+# Allow the system clock to be stepped in the first three updates
+# if its offset is larger than 1 second.
+makestep 1.0 3
+
+# Enable kernel synchronization of the real-time clock (RTC).
 rtcsync
 
-# In first three updates step the system clock instead of slew
-# if the adjustment is larger than 10 seconds.
-makestep 10 3
+# Enable hardware timestamping on all interfaces that support it.
+#hwtimestamp *
+
+# Increase the minimum number of selectable sources required to adjust
+# the system clock.
+#minsources 2
 
 # Allow NTP client access from local network.
-#allow 192.168/16
+#allow 192.168.0.0/16
 
-# Listen for commands only on localhost.
-bindcmdaddress 127.0.0.1
-bindcmdaddress ::1
-
-# Serve time even if not synchronized to any NTP server.
+# Serve time even if not synchronized to a time source.
 #local stratum 10
 
+# Specify file containing keys for NTP authentication.
 keyfile /etc/chrony.keys
 
-# Specify the key used as password for chronyc.
-commandkey 1
+# Get TAI-UTC offset and leap seconds from the system tz database.
+leapsectz right/UTC
 
-# Generate command key if missing.
-generatecommandkey
-
-# Disable logging of client accesses.
-noclientlog
-
-# Send a message to syslog if a clock adjustment is larger than 0.5 seconds.
-logchange 0.5
-
+# Specify directory for log files.
 logdir /var/log/chrony
+
+# Select which information is logged.
 #log measurements statistics tracking
