@@ -17,7 +17,7 @@ rpm_ostree_install_group:
   - dunst
   - feh
   - ffmpeg
-  - gnome-tweak-tools
+  - gnome-tweak-tool
   - golang
   - google-cloud-sdk
   - hdparm
@@ -42,14 +42,12 @@ rpm_ostree_install_group:
   - rofi
   - speedcrunch
   - sway
-  - switchdesk
   - syncthing
   - thermald
   - tmux
   - torbrowser-launcher
   - tuned
   - vim-enhanced
-  - virt-manager
   - wireshark
   - youtube-dl
   - zsh
