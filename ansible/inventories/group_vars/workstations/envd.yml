@@ -68,16 +68,18 @@ envd_add_group:
     value: 1
 
   # QT
-  - filename: 50-qt
-    key: QT_STYLE_OVERRIDE
-    value: gtk
+  # - filename: 50-qt
+  #   key: QT_STYLE_OVERRIDE
+  #   value: gtk
   - filename: 50-qt
     key: QT_QPA_PLATFORM
     value: wayland-egl
-  # disable decorations
-  # - filename: 50-qt
-  #   key: QT_WAYLAND_DISABLE_WINDOWDECORATION
-  #   value: 1
+  - filename: 50-qt
+    key: QT_WAYLAND_DISABLE_WINDOWDECORATION
+    value: 1
+  - filename: 50-qt
+    key: QT_QPA_PLATFORMTHEME
+    value: qt5ct
 
   # GTK
   #- filename: 50-gtk

@@ -39,6 +39,8 @@ rpm_ostree_install_group:
   - playerctl
   - polybar
   - powertop
+  - qt5ct
+  - qt5-qtwayland
   - rofi
   - speedcrunch
   - sway

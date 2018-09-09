@@ -84,7 +84,7 @@ bindsym Ctrl+Alt+l exec swaylock -i {{ wallpaper }} --scaling=fill
 # exit sway (logs you out of your wayland session)
 bindsym $mod+Shift+e exit
 
-# Volume
+# Volume TODO: notify-send
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pactl list sinks short | cut -f1) toggle
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | cut -f1) -3%
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | cut -f1) +3%
@@ -127,62 +127,40 @@ bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+set $ws10 10:💬
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
-
-# start applications
-#bind program to workspace
-# assign [class="Terminator"] $ws1
-# assign [class="Vivaldi-stable"] $ws2
-# assign [class="Geary"] $ws3
-# assign [class="Nautilus"] $ws4
-# assign [class="Terminator"] $ws1
-# assign [class="Clementine"] $ws5
-
-# exec_always --no-startup-id feh --bg-scale ~/.config/i3/quallen-1920x1080.png
-#exec --no-startup-id /usr/bin/wallee &
-# exec --no-startup-id sleep 3 && vivaldi-stable
-# exec --no-startup-id geary
-# exec --no-startup-id sleep 2 && nautilus
-# exec --no-startup-id sleep 1 && terminator
-#exec --no-startup-id sleep 3 && pamac-user-daemon &
-#exec --no-startup-id sleep 1 && redshift-gtk
-# exec --no-startup-id pacman -Qqen > ~/packages-repository.txt && pacman -Qqem > ~/packages-AUR.txt
-# exec --no-startup-id clementine
-
-#set floating (nontiling) for special apps
-# for_window [class="Pamac-manager" instance="pamac-manager"] floating enable
-# for_window [class="Pamac-updater" instance="pamac-updater"] floating enable
-# for_window [class="Xfce4-terminal" instance="xfce4-terminal"] floating enable
-# for_window [class="Gnome-terminal" instance="gnome-terminal"] floating enable
-#for_window [class="Gedit" instance="gedit"] floating enable
-# for_window [class="Empathy" instance="empathy"] floating enable
-# for_window [class="Xsane" instance="xsane"] floating enable
-# for_window [class="Redshiftgui.elf" instance="redshiftgui.elf"] floating enable
-# for_window [class="etcher-electron" instance="etcher-electron"] floating enable
-# for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
-# for_window [class="Gnome-control-center" instance="gnome-control-center"] floating enable
-
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 #
 # Layout stuff:
@@ -263,14 +241,49 @@ bar {
 }
 
 #
-# Background tools
+# Start applications
 #
+# bind program to workspace
+# assign [class="Terminator"] $ws1
+# assign [class="Vivaldi-stable"] $ws2
+# assign [class="Geary"] $ws3
+# assign [class="Nautilus"] $ws4
+# assign [class="Terminator"] $ws1
+# assign [class="Clementine"] $ws5
+assign [title="Telegram"] $ws10
+
+# set floating (nontiling) for special apps
+# for_window [class="Gnome-control-center" instance="gnome-control-center"] floating enable
+
+# app decoration styling
+for_window [title="^.*Mozilla\ Firefox$"] border none
+for_window [title="^.*Visual\ Studio\ Code$"] border none
+for_window [title="Calculator"] border none
+for_window [title="Image Viewer"] border none
+for_window [app_id=nautilus] border none
+for_window [app_id=eog] border none
+for_window [app_id=evince] border none
+for_window [app_id=gnome-boxes] border none
+for_window [app_id=gnome-calculator] border none
+for_window [app_id=gnome-control-center] border none
+for_window [app_id=gnome-disks] border none
+for_window [app_id=gnome-calculator] border none
+for_window [app_id=gnome-software] border none
+for_window [app_id=gnome-system-monitor] border none
+for_window [app_id=gnome-text-editor] border none
+for_window [app_id=gnome-tweaks] border none
+
+
+# autostart
+# lock on idle and sleep
 exec --no-startup-id swayidle \
-  timeout 300 'swaylock -i {{ wallpaper }} --scaling=fill' \
-  timeout 600 'swaymsg "output * dpms off"' \
+  timeout 600 'swaylock -i {{ wallpaper }} --scaling=fill' \
+  timeout 1200 'swaymsg "output * dpms off"' \
 	resume 'swaymsg "output * dpms on"' \
   before-sleep 'swaylock -i {{ wallpaper }} --scaling=fill'
 
 exec --no-startup-id /usr/bin/dunst
 
 exec --no-startup-id sh -c "echo '' | /usr/bin/gnome-keyring-daemon -r --components='gpg,pkcs11,secrets,ssh' --unlock"
+
+
