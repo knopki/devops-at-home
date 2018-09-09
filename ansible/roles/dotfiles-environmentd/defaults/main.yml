@@ -1,0 +1,16 @@
+envd_remove: "{{
+  envd_remove_default|d([]) +
+  envd_remove_group|d([]) +
+  envd_remove_host|d([])
+}}"
+envd_set: "{{
+  envd_add_default|d([]) +
+  envd_add_group|d([]) +
+  envd_add_host|d([])
+}}"
+
+envd_generators: "{{
+  envd_generators_default|d([]) +
+  envd_generators_group|d([]) +
+  envd_generators_host|d([])
+}}"
