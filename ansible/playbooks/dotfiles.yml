@@ -10,3 +10,5 @@
     tags: sway
   - role: dotfiles-dunst
     tags: dunst
+  - role: dotfiles-qt5ct
+    tags: qt5ct

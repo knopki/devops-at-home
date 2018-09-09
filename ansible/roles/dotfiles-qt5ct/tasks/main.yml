@@ -1,0 +1,13 @@
+---
+- name: Create qt5ct configuration directory
+  file:
+    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/qt5ct"
+
+- name: Set ~/.config/qt5ct/qt5ct.conf
+  ini_file:
+    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/qt5ct/qt5ct.conf"
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  with_items: "{{ qt5ct }}"
+  tags: qt5ct
