@@ -1,13 +1,13 @@
 ---
 - name: Create dunst config directory
   file:
-    path: "{{ lookup('env','HOME') }}/.config/dunst"
+    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/dunst"
     state: directory
   tags: dunst
 
 - name: Deploy dunst config
   template:
     src: config.j2
-    dest: "{{ lookup('env','HOME') }}/.config/dunst/dunstrc"
+    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/dunst/dunstrc"
   tags: dunst
   notify: restart dunst

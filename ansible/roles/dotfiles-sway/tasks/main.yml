@@ -1,12 +1,12 @@
 ---
 - name: Create sway config directory
   file:
-    path: "{{ lookup('env','HOME') }}/.config/sway"
+    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/sway"
     state: directory
   tags: sway
 
 - name: Deploy sway config
   template:
     src: config.j2
-    dest: "{{ lookup('env','HOME') }}/.config/sway/config"
+    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/sway/config"
   tags: sway
