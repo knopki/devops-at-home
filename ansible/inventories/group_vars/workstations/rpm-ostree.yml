@@ -45,6 +45,7 @@ rpm_ostree_install_group:
   - speedcrunch
   - sway
   - syncthing
+  - telepresence
   - thermald
   - tmux
   - torbrowser-launcher
