@@ -1,4 +1,17 @@
 ---
+- name: Create dunst config directory
+  file:
+    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/dunst"
+    state: directory
+  tags: dunst
+
+- name: Deploy dunst config
+  template:
+    src: dunst.j2
+    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/dunst/dunstrc"
+  tags: dunst
+  notify: restart dunst
+
 - name: Create sway config directory
   file:
     path: "{{ lookup('env','XDG_CONFIG_HOME') }}/sway"
@@ -7,6 +20,6 @@
 
 - name: Deploy sway config
   template:
-    src: config.j2
+    src: sway.j2
     dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/sway/config"
   tags: sway
