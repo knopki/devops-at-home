@@ -1,43 +1,9 @@
 ---
 envd_add_group:
-  # xdg paths
-  - filename: 00-xdg
-    key: XDG_CONFIG_HOME
-    value: "${HOME}/.config"
-  - filename: 00-xdg
-    key: XDG_CACHE_HOME
-    value: "${HOME}/.cache"
-  - filename: 00-xdg
-    key: XDG_DATA_HOME
-    value: "${HOME}/.local/share"
   # fake xdg desktop (use with sway)
   - filename: 00-xdg
     key: XDG_CURRENT_DESKTOP
     value: GNOME
-
-  # redefine locale
-  - filename: 50-locale
-    key: LANG
-    value: en_US.UTF-8
-  - filename: 50-locale
-    key: LC_CTYPE
-    value: ru_RU.UTF-8
-
-  # keyboard layouts
-  - filename: 50-xkb
-    key: XKB_DEFAULT_LAYOUT
-    value: us,ru
-  - filename: 50-xkb
-    key: XKB_DEFAULT_OPTIONS
-    value: grp:win_space_toggle
-
-  # default EDITOR
-  - filename: 50-editor
-    key: EDITOR
-    value: vi
-  - filename: 50-editor
-    key: VISUAL
-    value: vi
 
   # browser
   - filename: 50-browser

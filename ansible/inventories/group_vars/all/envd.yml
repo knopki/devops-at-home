@@ -14,10 +14,13 @@ envd_add_default:
   # redefine locale
   - filename: 50-locale
     key: LANG
-    value: en_US.UTF-8
+    value: en_US.utf8
   - filename: 50-locale
-    key: LC_CTYPE
-    value: ru_RU.UTF-8
+    key: LC_MONETARY
+    value: ru_RU.utf8
+  - filename: 50-locale
+    key: LC_TIME
+    value: ru_RU.utf8
 
   # keyboard layouts
   - filename: 50-xkb
