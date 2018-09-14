@@ -1,0 +1,12 @@
+---
+- name: Do something with pip packages
+  pip:
+    name: "{{ item.name }}"
+    executable: "{{ item.executable|default('pip3') }}"
+    extra_args: "{{ item.extra_args|default(omit) }}"
+    chdir: "{{ item.chdir|default(omit) }}"
+    state: "{{ item.state|default('present') }}"
+    umask: "{{ item.umask|default(omit) }}"
+    version: "{{ item.version|default(omit) }}"
+  with_items: "{{ pip }}"
+  tags: pip
