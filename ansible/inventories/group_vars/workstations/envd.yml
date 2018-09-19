@@ -51,9 +51,9 @@ envd_add_group:
   #- filename: 50-gtk
   #  key: GDK_BACKEND
   #  value: wayland
-  - filename: 50-gtk
-    key: CLUTTER_BACKEND
-    value: wayland
+  # - filename: 50-gtk
+  #   key: CLUTTER_BACKEND
+  #   value: wayland
   - filename: 50-gtk
     key: GTK_RC_FILES
     value: ${XDG_CONFIG_HOME}/gtk-1.0/gtkrc
