@@ -8,6 +8,7 @@
     baseurl: "{{ item.baseurl }}"
     gpgcheck: "{{ item.gpgcheck|d('yes') }}"
     gpgkey: "{{ item.gpgkey|d(None) }}"
+    enabled: "{{ item.enabled|d('1') }}"
   with_items:
     - "{{
         yum_repos_default|d([]) +
@@ -26,6 +27,7 @@
     mirrorlist : "{{ item.mirrorlist }}"
     gpgcheck: "{{ item.gpgcheck|d('yes') }}"
     gpgkey: "{{ item.gpgkey|d(None) }}"
+    enabled: "{{ item.enabled|d('1') }}"
   with_items:
     - "{{
         yum_repos_default|d([]) +
