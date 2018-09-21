@@ -1,0 +1,35 @@
+# {{ ansible_managed }}
+# Read `man 5 sway-bar` for more information about this section.
+
+bar {
+  status_command py3status -b -s -i "{{ lookup('env','XDG_CONFIG_HOME') }}/i3status/py3status"
+  position top
+  font pango:Hack Nerd Font 10
+  separator_symbol "| "
+  wrap_scroll no
+  workspace_buttons yes
+  strip_workspace_numbers yes
+  # height
+
+  # tray {
+  #   activate_button BTN_LEFT
+  #   context_button BTN_RIGHT
+  #   secondary_button BTN_MIDDLE
+  #   tray_output all
+  #   tray_padding 2
+  #   icon_theme Adwaita
+  # }
+
+  colors {
+    statusline #ffffff
+    background #323232
+    # separator
+    # focused_background
+    # focused_statusline
+    # focused_workspace
+    # activate_workspace
+    inactive_workspace #32323200 #32323200 #5c5c5c
+    # urgent_workspace
+    # binding_mode
+  }
+}

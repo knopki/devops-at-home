@@ -17,6 +17,8 @@
       tags: binary-installer
     - role: flatpak
       tags: flatpak
+    - role: pip
+      tags: pip
 
     # Essential settings and services
     - role: hostname

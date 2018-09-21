@@ -1,25 +1,48 @@
 ---
-- name: Create dunst config directory
+- name: Create config directories
   file:
-    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/dunst"
+    path: "{{ item }}"
     state: directory
-  tags: dunst
+  with_items:
+    - "{{ lookup('env','XDG_CONFIG_HOME') }}/sway/config.d"
+    - "{{ lookup('env','XDG_CONFIG_HOME') }}/rofi"
+    - "{{ lookup('env','XDG_CONFIG_HOME') }}/dunst"
+    - "{{ lookup('env','XDG_CONFIG_HOME') }}/i3status/py3status"
+  tags: sway
 
 - name: Deploy dunst config
   template:
     src: dunst.j2
     dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/dunst/dunstrc"
-  tags: dunst
-  notify: restart dunst
+  tags: sway
 
-- name: Create sway config directory
-  file:
-    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/sway"
-    state: directory
+- name: Deploy rofi config
+  template:
+    src: rofi.j2
+    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/rofi/config"
+  tags: sway
+
+- name: Deploy i3status.conf
+  template:
+    src: i3status.j2
+    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/i3status/config"
   tags: sway
 
 - name: Deploy sway config
   template:
     src: sway.j2
     dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/sway/config"
+  tags: sway
+
+- name: Deploy sway subconfig
+  template:
+    src: "sway-{{ item }}.j2"
+    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/sway/config.d/{{ item }}"
+  with_items:
+    - appearance
+    - bar
+    - input
+    - media-keys
+    - output
+    - programs
   tags: sway

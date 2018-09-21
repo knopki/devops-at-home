@@ -1,0 +1,150 @@
+py3status {
+  storage = '~/.cache/py3status_cache.data'
+}
+
+general {
+  interval = 5
+	colors = true
+  color_good = '#ebdbb2'
+  color_degraded = '#fabd2f'
+  color_bad = '#fb4934'
+}
+
+order += 'frame music'
+frame music {
+  format = '{output}{button}'
+  format_separator = ' '
+  format_button_closed = '♪'
+  open = False
+  mpris {
+    format = '{state} [{artist} - ][{title}] {previous}{toggle}{next}'
+    format_none = ''
+  }
+}
+
+order += 'frame bitcoin'
+frame bitcoin {
+  format = '{output}{button}'
+  format_separator = ' '
+  format_button_closed = ''
+  open = False
+  coin_market {
+    format_coin = ' ${price_usd:.0f} {percent_change_24h}%'
+  }
+}
+
+order += 'group system'
+group system {
+  button_next = 1
+  button_toggle = 0
+  click_mode = 'button'
+  format_button_open = '↻'
+  format = '{output}{button}'
+
+  frame cpu {
+    format = '{output}'
+    sysdata cpu_temp {
+      format = ' {cpu_temp:.0f}{temp_unit}'
+      thresholds = [(50, 'good'), (70, 'degraded'), (90, 'bad')]
+    }
+
+    sysdata {
+      format = '[\?min_length=4 {cpu_usage:.0f}%][\?min_length=4 {mem_used_percent:.0f}%]'
+    }
+  }
+
+  frame net {
+    format = '{output}'
+    {% if inventory_hostname == 'alien.1984.run' %}
+    wifi {
+      format = ' {icon} {ssid}| down'
+      bitrate_bad = 0
+      bitrate_degraded = 0
+    }
+    {% endif %}
+
+    net_rate {
+      format = '{down}↓ {up}↑'
+      format_value = '[\?min_length=6 {value:.1f}{unit:.1s}]'
+      thresholds = [(1048576, 'bad'), (1024, 'degraded'), (0, 'good')]
+    }
+
+    whatismyip {
+      colors = false
+      format = '{ip} {country_iso}'
+      expected = { 'country_eu': true }
+      button_refresh = 1
+      button_toggle = 99
+    }
+  }
+
+  frame disks {
+    format = '{output}'
+    {% if inventory_hostname == 'alien.1984.run' %}
+    diskdata root {
+      disk = '/dev/mapper/alien--vg-root'
+      format = ' {free}'
+      format_space = '[\?min_length=5 {value:.1f}G]'
+      separator = False
+      thresholds = {'free': [(1, 'bad'), (5, 'degraded'), (10, 'good')]}
+    }
+
+    diskdata home {
+      disk = '/dev/mapper/alien--vg-home'
+      format = '{free}'
+      format_space = '[\?min_length=5 {value:.1f}G]'
+      thresholds = {'free': [(1, 'bad'), (10, 'degraded'), (20, 'good')]}
+    }
+    {% endif %}
+
+    diskdata io {
+      format = '{total}'
+      format_rate = '[\?min_length=8 {value:.1f}{unit:.1s}↕]'
+    }
+  }
+}
+
+order += 'volume_status out'
+volume_status out {
+  command = 'pactl'
+  channel = 'Master'
+  format = ': {percentage}'
+  format_muted = ': ✘ '
+  volume_delta = 1
+  separator = False
+  cache_timeout = 1
+  interval = 1
+}
+
+order += 'volume_status mic'
+volume_status mic {
+  command = 'pactl'
+  channel = 'Capture'
+  format = '😮: {percentage}'
+  format_muted = '😶: ✘ '
+  volume_delta = 1
+  is_input = True
+  cache_timeout = 1
+  interval = 1
+}
+
+{% if inventory_hostname == 'alien.1984.run' %}
+order += 'battery_level'
+battery_level {
+  blocks = ""
+	charging_character = ""
+  format = "{icon}"
+  format_notify_charging = 'Charging ({percent}%)'
+  format_notify_discharging = 'Time ramaining: {time_remaining}'
+  hide_seconds = True
+  hide_when_full = True
+  measurement_mode = 'sys'
+  notify_low_level = True
+  notification = True
+}
+{% endif %}
+
+order += 'clock'
+clock {
+  format_time = " %d/%m {icon} %H:%M:%S"
+}

@@ -15,6 +15,8 @@
       tags: rpm-ostree-install
     - role: binary-installer
       tags: binary-installer
+    - role: pip
+      tags: pip
 
     # Essential settings and services
     - role: hostname

@@ -7,67 +7,23 @@
 set $mod Mod4
 
 # Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
-
-# Your preferred terminal emulator
-set $term gnome-terminal
-
-# Your preferred application launcher
-set $menu rofi -modi combi -show combi -combi-modi "drun,run,ssh" -show-icons -location 2 -terminal $term
-
-### Output configuration
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-{% if inventory_hostname == 'alien.1984.run' %}
-output eDP-1 resolution 1920x1080 position 0,0
-#output HDMI-A-1 resolution 1920x1080 position 1920,0
-{% endif %}
-
-# Default wallpaper
-output * bg {{ wallpaper }} fill
-
-
-### Input configuration
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-{% if inventory_hostname == 'alien.1984.run' %}
-input "2:7:SynPS/2_Synaptics_TouchPad" {
-  dwt enabled
-  tap enabled
-  natural_scroll disabled
-  middle_emulation enabled
-}
-{% endif %}
-
-
-### Style
-#
-gaps edge_gaps off
-gaps outer 0
-gaps inner 1
-smart_gaps on
-hide_edge_borders smart
-
-# Font for window titles.
-# font pango: Source Code Pro Black 11
-font pango:Cantarell 11
+set $left   h
+set $leftR  Cyrillic_er
+set $down   j
+set $downR  Cyrillic_o
+set $up     k
+set $upR    Cyrillic_el
+set $right  l
+set $rightR Cyrillic_de
 
 ### Key bindings
 #
 # Basics:
 #
-# start a terminal
-bindsym $mod+Return exec $term
 
 # kill focused window
-bindsym $mod+Shift+q kill
-
-# start your launcher
-bindsym $mod+d exec $menu
+bindsym $mod+Shift+q               kill
+bindsym $mod+Shift+Cyrillic_shorti kill
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -78,51 +34,44 @@ floating_modifier $mod normal
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-
-# lock session
-bindsym Ctrl+Alt+l exec swaylock -i {{ wallpaper }} --scaling=fill
+bindsym $mod+Shift+Cyrillic_es reload
 
 # exit sway (logs you out of your wayland session)
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-
-# Volume TODO: notify-send
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pactl list sinks short | cut -f1) toggle
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | cut -f1) -3%
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | cut -f1) +3%
-
-# Backlight
-bindsym XF86MonBrightnessUp   exec light -A 3 && notify-send 'Brightness' $(light) --expire-time 1
-bindsym XF86MonBrightnessDown exec light -U 3 && notify-send 'Brightness' $(light) --expire-time 1
-
-# Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+set $swaynagexit swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e          exec $swaynagexit
+bindsym $mod+Shift+Cyrillic_u exec $swaynagexit
 
 #
 # Moving around:
 #
 # Move your focus around
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
+bindsym $mod+$left   focus left
+bindsym $mod+$leftR  focus left
+bindsym $mod+$down   focus down
+bindsym $mod+$downR  focus down
+bindsym $mod+$up     focus up
+bindsym $mod+$upR    focus up
+bindsym $mod+$right  focus right
+bindsym $mod+$rightR focus right
 # or use $mod+[up|down|left|right]
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
 bindsym $mod+Right focus right
 
 # _move_ the focused window with the same, but add Shift
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+$left   move left
+bindsym $mod+Shift+$leftR  move left
+bindsym $mod+Shift+$down   move down
+bindsym $mod+Shift+$downR  move down
+bindsym $mod+Shift+$up     move up
+bindsym $mod+Shift+$upR    move up
+bindsym $mod+Shift+$right  move right
+bindsym $mod+Shift+$rightR move right
 # ditto, with arrow keys
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
 
 #
@@ -152,20 +101,20 @@ bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+Left  workspace prev
 
 #
 # Layout stuff:
@@ -173,17 +122,24 @@ bindsym $mod+Ctrl+Left workspace prev
 # You can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
 # respectively.
-bindsym $mod+b splith;exec notify-send 'tile horizontally'
-bindsym $mod+v splitv;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+bindsym $mod+b               splith;exec notify-send 'tile horizontally'
+bindsym $mod+Cyrillic_i      splith;exec notify-send 'tile horizontally'
+bindsym $mod+v               splitv;exec notify-send 'tile vertically'
+bindsym $mod+Cyrillic_em     splitv;exec notify-send 'tile vertically'
+bindsym $mod+q               split toggle
+bindsym $mod+Cyrillic_shorti split toggle
 
 # Switch the current container between different layout styles
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+s             layout stacking
+bindsym $mod+Cyrillic_yeru layout stacking
+bindsym $mod+w             layout tabbed
+bindsym $mod+Cyrillic_tse  layout tabbed
+bindsym $mod+e             layout toggle split
+bindsym $mod+Cyrillic_u    layout toggle split
 
 # Make the current focus fullscreen
-bindsym $mod+f fullscreen
+bindsym $mod+f          fullscreen
+bindsym $mod+Cyrillic_a fullscreen
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
@@ -192,7 +148,8 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+Ctrl+space focus mode_toggle
 
 # move focus to the parent container
-bindsym $mod+a focus parent
+bindsym $mod+a           focus parent
+bindsym $mod+Cyrillic_ef focus parent
 
 #
 # Scratchpad:
@@ -215,83 +172,27 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10 px or 10 ppt
-    bindsym $down resize grow height 10 px or 10 ppt
-    bindsym $up resize shrink height 10 px or 10 ppt
-    bindsym $right resize grow width 10 px or 10 ppt
+    bindsym $left   resize shrink width 10 px or 10 ppt
+    bindsym $leftR  resize shrink width 10 px or 10 ppt
+    bindsym $down   resize grow height 10 px or 10 ppt
+    bindsym $downR  resize grow height 10 px or 10 ppt
+    bindsym $up     resize shrink height 10 px or 10 ppt
+    bindsym $upR    resize shrink height 10 px or 10 ppt
+    bindsym $right  resize grow width 10 px or 10 ppt
+    bindsym $rightR resize grow width 10 px or 10 ppt
 
     # ditto, with arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Left  resize shrink width 10 px or 10 ppt
+    bindsym Down  resize grow height 10 px or 10 ppt
+    bindsym Up    resize shrink height 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
 
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+r           mode "resize"
+bindsym $mod+Cyrillic_ka mode "resize"
 
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
-
-#
-# Start applications
-#
-# bind program to workspace
-# assign [class="Terminator"] $ws1
-# assign [class="Vivaldi-stable"] $ws2
-# assign [class="Geary"] $ws3
-# assign [class="Nautilus"] $ws4
-# assign [class="Terminator"] $ws1
-# assign [class="Clementine"] $ws5
-assign [title="Telegram"] $ws10
-
-# set floating (nontiling) for special apps
-# for_window [class="Gnome-control-center" instance="gnome-control-center"] floating enable
-
-# app decoration styling
-for_window [title="^.*Mozilla\ Firefox$"] border none
-for_window [title="^.*Visual\ Studio\ Code$"] border none
-for_window [title="Calculator"] border none
-for_window [title="Image Viewer"] border none
-for_window [app_id=nautilus] border none
-for_window [app_id=eog] border none
-for_window [app_id=evince] border none
-for_window [app_id=gnome-boxes] border none
-for_window [app_id=gnome-calculator] border none
-for_window [app_id=gnome-control-center] border none
-for_window [app_id=gnome-disks] border none
-for_window [app_id=gnome-calculator] border none
-for_window [app_id=gnome-software] border none
-for_window [app_id=gnome-system-monitor] border none
-for_window [app_id=gnome-text-editor] border none
-for_window [app_id=gnome-tweaks] border none
-
-
-# autostart
-# lock on idle and sleep
-exec --no-startup-id swayidle \
-  timeout 600 'swaylock -i {{ wallpaper }} --scaling=fill' \
-  timeout 1200 'swaymsg "output * dpms off"' \
-	resume 'swaymsg "output * dpms on"' \
-  before-sleep 'swaylock -i {{ wallpaper }} --scaling=fill'
-
-exec --no-startup-id /usr/bin/dunst
-
-exec --no-startup-id sh -c "echo '' | /usr/bin/gnome-keyring-daemon -r --components='gpg,pkcs11,secrets,ssh' --unlock"
-
-
-# TODO: bar
-# TODO: screenshoter
+# Include other config parts
+include {{ lookup('env','XDG_CONFIG_HOME') }}/sway/config.d/*

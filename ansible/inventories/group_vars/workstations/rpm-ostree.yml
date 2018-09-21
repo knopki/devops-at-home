@@ -7,10 +7,6 @@ rpm_ostree_install_group:
   - android-tools
   - ansible
   - borgbackup
-  - budgie-brightness-control-applet
-  - budgie-desktop
-  - budgie-pixel-saver-applet
-  - budgie-screenshot-applet
   - chromium
   - code
   - createrepo
@@ -22,7 +18,6 @@ rpm_ostree_install_group:
   - google-cloud-sdk
   - hdparm
   - htop
-  - i3blocks
   - iftop
   - iotop
   - libselinux-python
@@ -31,20 +26,27 @@ rpm_ostree_install_group:
   - lm_sensors
   - mc
   - mpv
+  - NetworkManager-tui
   - nmap
   - node-gyp
   - nodejs
   - npm
   - p7zip
+  - pavucontrol
   - pass
   - playerctl
   - powertop
+  - py3status
+  - python3-pydbus
+  - python3-pytz
+  - python3-tzlocal
   - qt5ct
   - qt5-qtwayland
   - rofi
   - speedcrunch
   - sway
   - syncthing
+  - sysstat
   - telepresence
   - thermald
   - tmux
