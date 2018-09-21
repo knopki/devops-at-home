@@ -10,3 +10,5 @@
     tags: sway
   - role: dotfiles-qt5ct
     tags: qt5ct
+  - role: dotfiles-termite
+    tags: termite

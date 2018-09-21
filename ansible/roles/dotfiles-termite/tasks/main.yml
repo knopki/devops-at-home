@@ -1,0 +1,12 @@
+---
+- name: Create config directory
+  file:
+    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/termite"
+    state: directory
+  tags: termite
+
+- name: Deploy termite config
+  template:
+    src: termite.j2
+    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/termite/config"
+  tags: termite
