@@ -22,6 +22,8 @@ Set-up method: incredibly over-engineered Ansible orchestration.
 * hostname configuration
 * sysctl configuration
 * chrony configuration
+* lvm.conf
+* firewalld
 * sudo/polkit configuration
 * wireguard and openvpn tunnels
 * DigitalOcean agent
@@ -30,14 +32,20 @@ Set-up method: incredibly over-engineered Ansible orchestration.
 * Installation of binary executables, that not in OS' repositories
 * Install flatpak remotes and packages
 * Tuned profiles
+* thermald
+* `lm-sensors`
+* `fancontrol` configuration
+* gdm
+* modprobe
+* `pip` package installation
+* vconsole
 
 ### Dotfiles
 
-TODO: write something
-
-### Keybindings
-
-TODO: add keybindings table
+* `environment.d` variables set
+* `sway` environment with `dunst`, `py3status`, `rofi`
+* `termite`
+* `qt5ct`
 
 ## Prerequirements
 
