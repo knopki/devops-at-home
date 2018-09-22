@@ -4,8 +4,8 @@ bindsym XF86MonBrightnessDown exec light -U 3 && notify-send 'Brightness' $(ligh
 
 # Volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pactl list sinks short | cut -f1) toggle && pkill -USR1 py3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | cut -f1) -1% && pkill -USR1 py3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | cut -f1) +1% && pkill -USR1 py3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | head -n 1 | cut -f1) -1% && pkill -USR1 py3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | head -n 1 | cut -f1) +1% && pkill -USR1 py3status
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
