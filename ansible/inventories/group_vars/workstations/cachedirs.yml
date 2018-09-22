@@ -24,6 +24,7 @@ cachedirs_home_group:
   - "{{ lookup('env','HOME') }}/.vscode/extensions"
   - "{{ lookup('env','XDG_CACHE_HOME') }}"
   - "{{ lookup('env','XDG_CONFIG_HOME') }}/chromium"
+  - "{{ lookup('env','XDG_CONFIG_HOME') }}/fontconfig"
   - "{{ lookup('env','XDG_CONFIG_HOME') }}/Code/Backups"
   - "{{ lookup('env','XDG_CONFIG_HOME') }}/Code/Cache"
   - "{{ lookup('env','XDG_CONFIG_HOME') }}/Code/CachedData"
