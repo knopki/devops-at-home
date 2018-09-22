@@ -12,3 +12,9 @@
     tags: qt5ct
   - role: dotfiles-termite
     tags: termite
+  - role: cachedir
+    tags: cachedir
+    vars:
+      cachedirs_default: "{{ cachedirs_home_default|d([]) }}"
+      cachedirs_group: "{{ cachedirs_home_group|d([]) }}"
+      cachedirs_host: "{{ cachedirs_home_host|d([]) }}"

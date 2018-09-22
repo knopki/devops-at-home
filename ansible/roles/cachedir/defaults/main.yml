@@ -1,0 +1,6 @@
+---
+cachedirs: "{{
+  cachedirs_default|d([]) +
+  cachedirs_group|d([]) +
+  cachedirs_host|d([])
+}}"
