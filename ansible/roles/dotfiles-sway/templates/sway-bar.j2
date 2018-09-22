@@ -21,15 +21,15 @@ bar {
   # }
 
   colors {
-    statusline #ffffff
-    background #323232
-    # separator
+    statusline $base04
+    background $base00
+    separator $base01
     # focused_background
     # focused_statusline
-    # focused_workspace
-    # activate_workspace
-    inactive_workspace #32323200 #32323200 #5c5c5c
-    # urgent_workspace
-    # binding_mode
+    focused_workspace   $base05 $base05 $base00
+    active_workspace    $base05 $base03 $base00
+    inactive_workspace  $base03 $base01 $base05
+    urgent_workspace    $base08 $base08 $base00
+    binding_mode        $base00 $base0A $base00
   }
 }
