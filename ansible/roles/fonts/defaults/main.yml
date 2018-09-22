@@ -1,0 +1,5 @@
+---
+install_nerd_hack: no
+nerd_hack_url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hack.zip
+nerd_hack_install_path: /usr/local/share/fonts
+nerd_hack_check_path: "{{ nerd_hack_install_path }}/Hack Regular Nerd Font Complete Mono.ttf"

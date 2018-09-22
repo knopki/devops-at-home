@@ -45,3 +45,6 @@ exec --no-startup-id /usr/bin/dunst
 
 # ssh/gpg agent
 exec --no-startup-id sh -c "echo '' | /usr/bin/gnome-keyring-daemon -r --components='gpg,pkcs11,secrets,ssh' --unlock"
+
+# build font cache if needed
+exec --no-startup-id fc-cache

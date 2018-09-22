@@ -57,6 +57,8 @@
       tags: networkmanager
     - role: lm-sensors
       tags: lm-sensors
+    - role: fonts
+      tags: fonts
 
     # User management
     - role: GROG.group
