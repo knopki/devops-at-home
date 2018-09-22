@@ -77,6 +77,8 @@
     # Specific
     - role: fancontrol
       tags: fancontrol
+    - role: alieanware-15r2-pulseaudio-fix
+      tags: pulseaudio
     - role: openvpn-client
       tags: openvpn
       client_name: mullvad
