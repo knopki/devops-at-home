@@ -1,3 +1,8 @@
+# {{ ansible_managed }}
+
+# Theme
+include {{ taskwarrior_theme }}
+
 # Sync settings
 include {{ taskwarrior_config_directory }}/taskd
 
@@ -13,9 +18,8 @@ data.location={{ taskwarrior_data_directory }}
 search.case.sensitive=no
 weekstart=Monday
 
-{% if inventory_hostname != 'alien.1984.run' %}
+# use server-side recurrence
 recurrence=no
-{% endif %}
 
 # Tashsh
 report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
@@ -27,7 +31,7 @@ uda.reviewed.label=Reviewed
 
 # Contexts
 context.work=+xod
-context.home=+athome
+context.home=+@home
 context.my=-xod
 
 # Inbox filter
@@ -44,6 +48,7 @@ report.delegated.columns=id,description,start.age,depends,priority,project,recur
 report.delegated.laberls=ID,Description,Active,Deps,P,Project,Recur,S,Due,Until
 report.delegated.filter=status:pending -BLOCKED +delegated
 report.delegated.sort=urgency-
+report.delegated.description=Delegated tasks
 
 # Urgency
 uda.priority.values=H,M,,L
