@@ -18,3 +18,13 @@
       cachedirs_default: "{{ cachedirs_home_default|d([]) }}"
       cachedirs_group: "{{ cachedirs_home_group|d([]) }}"
       cachedirs_host: "{{ cachedirs_home_host|d([]) }}"
+  - role: dotfiles-taskwarrior
+    tags: taskwarrior
+    vars:
+      taskd_certs:
+        - name: ca.cert.pem
+          content: "{{ lookup('passwordstore','websites/inthe.am/ca.cert.pem returnall=true') }}"
+        - name: private.key.pem
+          content: "{{ lookup('passwordstore','websites/inthe.am/private.key.pem returnall=true') }}"
+        - name: private.certificate.pem
+          content: "{{ lookup('passwordstore','websites/inthe.am/private.certificate.pem returnall=true') }}"

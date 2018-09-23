@@ -1,0 +1,51 @@
+---
+- name: Deploy taskrc
+  copy:
+    dest: "{{ lookup('env','HOME') }}/.taskrc"
+    content: "include {{ taskwarrior_config_directory }}/rc"
+  tags: taskwarrior
+
+- name: Create config directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ taskwarrior_config_directory }}"
+    - "{{ bugwarrior_config_directory }}"
+  tags: taskwarrior
+
+- name: Deploy taskwarrior's configs
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ taskwarrior_config_directory }}/{{ item }}"
+  with_items:
+    - bugwarrior
+    - intheam
+    - rc
+    - taskd
+  tags: taskwarrior
+
+- name: Create taskwarrior's certs
+  copy:
+    dest: "{{ taskwarrior_config_directory }}/{{ item.name }}"
+    content: "{{ item.content }}"
+  with_items: "{{ taskd_certs }}"
+  no_log: true
+  tags: taskwarrior
+
+- name: Create taskwarrior's hooks
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ taskwarrior_data_directory }}/hooks/{{ item }}"
+    mode: 0755
+  with_items:
+    - on-modify.relative-recur
+    - on-add.habitrpg.01.py
+    - on-modify.habitrpg.01.py
+  tags: taskwarrior
+
+- name: Deploy bugwarrior config
+  template:
+    src: bugwarriorrc.j2
+    dest: "{{ bugwarrior_config_directory }}/bugwarriorrc"
+  tags: taskwarrior

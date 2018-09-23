@@ -7,12 +7,14 @@ rpm_ostree_install_group:
   - android-tools
   - ansible
   - borgbackup
+  - bugwarrior
   - chromium
   - code
   - createrepo
   - dunst
   - feh
   - ffmpeg
+  - flatpak-builder
   - gnome-tweak-tool
   - golang
   - google-cloud-sdk
@@ -32,21 +34,23 @@ rpm_ostree_install_group:
   - nodejs
   - npm
   - p7zip
-  - pavucontrol
   - pass
+  - pavucontrol
   - playerctl
   - powertop
   - py3status
   - python3-pydbus
   - python3-pytz
   - python3-tzlocal
-  - qt5ct
   - qt5-qtwayland
+  - qt5ct
   - rofi
   - speedcrunch
   - sway
   - syncthing
   - sysstat
+  - task
+  - tasksh
   - telepresence
   - thermald
   - tmux

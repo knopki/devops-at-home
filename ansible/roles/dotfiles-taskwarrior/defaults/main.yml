@@ -1,0 +1,5 @@
+---
+taskwarrior_config_directory: "{{ lookup('env','XDG_CONFIG_HOME') }}/taskwarrior"
+taskwarrior_data_directory: "{{ lookup('env','XDG_DATA_HOME') }}/taskwarrior"
+taskd_certs: []
+bugwarrior_config_directory: "{{ lookup('env','XDG_CONFIG_HOME') }}/bugwarrior"
