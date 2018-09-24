@@ -2,7 +2,7 @@
 rpm_ostree_remote_name: "fedora-atomic"
 rpm_ostree_remote_url: "https://dl.fedoraproject.org/atomic/repo/"
 rpm_ostree_remote_gpg_verify: "true"
-rpm_ostree_remote_gpgkeypath: "/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-29-primary"
+rpm_ostree_remote_gpgkeypath: "/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-28-primary"
 rpm_ostree_desired_ref: "fedora/28/x86_64/atomic-host"
 rpm_ostree_autoupgrade: check
 rpm_ostree_install_default:
