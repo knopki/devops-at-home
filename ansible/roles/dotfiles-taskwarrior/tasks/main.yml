@@ -11,6 +11,7 @@
     state: directory
   with_items:
     - "{{ taskwarrior_config_directory }}"
+    - "{{ taskwarrior_data_directory }}/hooks"
     - "{{ bugwarrior_config_directory }}"
   tags: taskwarrior
 
