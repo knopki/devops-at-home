@@ -1,5 +1,9 @@
 ---
 yum_repos_group:
+  - name: knopki-desktop
+    baseurl: https://copr-be.cloud.fedoraproject.org/results/knopki/desktop/fedora-$releasever-$basearch/
+    enabled: 1
+    gpgkey: https://copr-be.cloud.fedoraproject.org/results/knopki/desktop/pubkey.gpg
   - name: rpmfusion-free
     baseurl: "https://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/$releasever/Everything/$basearch/os/"
     mirrorlist: "http://mirrors.rpmfusion.org/free/fedora/$releasever/$basearch"

@@ -6,17 +6,13 @@ rpm_ostree_desired_version: "28.20180923.0"
 rpm_ostree_install_group:
   - android-tools
   - ansible
-  - borgbackup
-  - bugwarrior
   - chromium
   - code
-  - createrepo
   - dunst
   - feh
   - ffmpeg
   - flatpak-builder
   - gnome-tweak-tool
-  - golang
   - google-cloud-sdk
   - hdparm
   - htop
