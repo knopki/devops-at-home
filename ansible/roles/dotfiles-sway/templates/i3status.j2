@@ -97,6 +97,23 @@ group system {
     }
     {% endif %}
 
+    {% if inventory_hostname == 'knopa.1984.run' %}
+    diskdata root {
+      disk = '/dev/mapper/fedora-root'
+      format = ' {free}'
+      format_space = '[\?min_length=5 {value:.1f}G]'
+      separator = False
+      thresholds = {'free': [(1, 'bad'), (5, 'degraded'), (10, 'good')]}
+    }
+
+    diskdata home {
+      disk = '/dev/mapper/fedora-home'
+      format = '{free}'
+      format_space = '[\?min_length=5 {value:.1f}G]'
+      thresholds = {'free': [(1, 'bad'), (10, 'degraded'), (20, 'good')]}
+    }
+    {% endif %}
+
     diskdata io {
       format = '{total}'
       format_rate = '[\?min_length=8 {value:.1f}{unit:.1s}↕]'
