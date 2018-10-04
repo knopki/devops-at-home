@@ -1,8 +1,0 @@
-# {{ ansible_managed }}
-
-taskd.certificate={{ taskwarrior_config_directory }}/private.certificate.pem
-taskd.key={{ taskwarrior_config_directory }}/private.key.pem
-taskd.ca={{ taskwarrior_config_directory }}/ca.cert.pem
-taskd.server=taskwarrior.inthe.am:53589
-taskd.credentials={{ lookup('passwordstore','websites/inthe.am/credentials') }}
-taskd.trust=ignore hostname
