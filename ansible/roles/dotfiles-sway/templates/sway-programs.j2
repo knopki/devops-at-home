@@ -18,17 +18,14 @@ bindsym Ctrl+Alt+Cyrillic_de exec $swaylock
 
 
 # bind program to workspace
-# assign [class="Terminator"] $ws1
-# assign [class="Vivaldi-stable"] $ws2
-# assign [class="Geary"] $ws3
-# assign [class="Nautilus"] $ws4
-# assign [class="Terminator"] $ws1
-# assign [class="Clementine"] $ws5
 assign [title="Telegram"] $ws10
 
 # set floating (nontiling) for special apps
 # for_window [class="Gnome-control-center" instance="gnome-control-center"] floating enable
 
+# auto fullscreen
+for_window [title="feh\ .*"] fullscreen enable
+for_window [title="Media viewer"] fullscreen enable
 
 #
 # autorstart
