@@ -9,3 +9,18 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
   middle_emulation enabled
 }
 {% endif %}
+
+{% if inventory_hostname == 'knopki.1984.run' %}
+input "6127:24647:Lenovo_ThinkPad_Compact_USB_Keyboard_with_TrackPoint" {
+  dwt enabled
+  tap enabled
+  natural_scroll disabled
+  middle_emulation enabled
+}
+input "7119:5:USB_Optical_Mouse" {
+  dwt enabled
+  tap enabled
+  natural_scroll disabled
+  middle_emulation enabled
+}
+{% endif %}
