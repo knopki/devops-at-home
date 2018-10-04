@@ -1,18 +1,2 @@
 ---
-rpm_ostree_install_host:
-  - libselinux-python
-  - dolphin
-  - kde-print-manager
-  - kde-settings
-  - kdeplasma-addons
-  - kgpg
-  - konsole5
-  - kscreen
-  - kwalletmanager5
-  - plasma-desktop
-  - plasma-nm-l2tp
-  - plasma-workspace
-  - sddm
-  - sddm-breeze
-  - sddm-kcm
-  - spectacle
+rpm_ostree_install_host: []
