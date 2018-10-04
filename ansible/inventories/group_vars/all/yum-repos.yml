@@ -1,5 +1,2 @@
 ---
-yum_repos_default:
-  - name: knopki-github
-    baseurl: https://knopki.github.io/rpms/f28/
-    gpgkey: no
+yum_repos_default: []
