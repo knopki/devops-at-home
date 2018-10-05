@@ -71,9 +71,9 @@ binaries_group:
     archive: yes
     archive_path: gotty
   - name: kustomize
-    url: https://github.com/kubernetes-sigs/kustomize/releases/download/v1.0.5/kustomize_1.0.5_linux_amd64
+    url: https://github.com/kubernetes-sigs/kustomize/releases/download/v1.0.8/kustomize_1.0.8_linux_amd64
     dest: /usr/local/bin/kustomize
-    checksum: sha1:c8d04f03897855da221a014c0887623fcba7f664
+    checksum: sha1:0dbcf31a0c9eb38ff7d4fda380ab7aa988da022a
   - name: skaffold
     url: https://github.com/GoogleContainerTools/skaffold/releases/download/v0.10.0/skaffold-linux-amd64
     dest: /usr/local/bin/skaffold
