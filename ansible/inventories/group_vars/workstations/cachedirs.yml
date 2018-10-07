@@ -30,6 +30,7 @@ cachedirs_home_group:
   - "{{ lookup('env','XDG_CONFIG_HOME') }}/Code/CachedExtensions"
   - "{{ lookup('env','XDG_CONFIG_HOME') }}/Code/GPUCache"
   - "{{ lookup('env','XDG_CONFIG_HOME') }}/Code/logs"
+  - "{{ lookup('env','XDG_DATA_HOME') }}/containers"
   - "{{ lookup('env','XDG_DATA_HOME') }}/flatpak"
   - "{{ lookup('env','XDG_DATA_HOME') }}/npm"
   - "{{ lookup('env','XDG_DATA_HOME') }}/Trash"
