@@ -13,7 +13,7 @@ binaries_group:
   - name: fly
     url: "https://concourse.xod.show/api/v1/cli?arch=amd64&platform=linux"
     dest: /usr/local/bin/fly
-    checksum: sha1:f397d4f516c0bd7e1c854ff6ea6d0b5bf9683750
+    checksum: sha1:7b0805adfba328d09cfa7ac377777cb6e270d66f
   - name: minikube
     url: https://github.com/kubernetes/minikube/releases/download/v0.28.2/minikube-linux-amd64
     dest: /usr/local/bin/minikube
