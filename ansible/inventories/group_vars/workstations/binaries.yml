@@ -82,3 +82,7 @@ binaries_group:
     url: https://s3.amazonaws.com/amazingmarvin/Marvin-1.31.1-x86_64.AppImage
     dest: /usr/local/bin/marvin
     checksum: sha1:97c57f8d75888dd6fa2af9f96565fe3085b4c4f2
+  - name: simpleos
+    url: https://github.com/eosrio/simpleos/releases/download/v0.6.9/simpleos-0.6.9-x86_64.AppImage
+    dest: /usr/local/bin/simpleos
+    checksum: sha1:a0d07812b31d38e0d8b1f26fa4b41dcf97b23e1e
