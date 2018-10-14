@@ -18,6 +18,7 @@ rpm_ostree_install_group:
   - htop
   - iftop
   - iotop
+  - kubectl
   - libselinux-python
   - libvirt
   - light

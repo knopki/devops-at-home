@@ -1,9 +1,5 @@
 ---
 binaries_group:
-  - name: kubectl
-    url: https://storage.googleapis.com/kubernetes-release/release/v1.11.0/bin/linux/amd64/kubectl
-    dest: /usr/local/bin/kubectl
-    checksum: sha1:e23f251ca0cb848802f3cb0f69a4ba297d07bfc6
   - name: helm
     url: https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
     dest: /usr/local/bin/helm
