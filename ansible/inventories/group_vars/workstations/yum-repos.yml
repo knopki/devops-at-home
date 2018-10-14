@@ -52,11 +52,6 @@ yum_repos_group:
     baseurl: "https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-$basearch"
     enabled: 1
     gpgcheck: 0
-  - name: kubernetes
-    baseurl: "https://packages.cloud.google.com/yum/repos/kubernetes-el7-$basearch"
-    enabled: 1
-    gpgcheck: 1
-    gpgkey: "https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg"
   - name: microsoft
     baseurl: https://packages.microsoft.com/rhel/7/prod/
     enabled: 1
@@ -67,20 +62,11 @@ yum_repos_group:
     enabled: 1
     gpgcheck: 1
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-  - name: tjuberg-i3-desktop
-    baseurl: https://copr-be.cloud.fedoraproject.org/results/tjuberg/i3-desktop/fedora-$releasever-$basearch/
-    enabled: 1
-    gpgcheck: 1
-    gpgkey: https://copr-be.cloud.fedoraproject.org/results/tjuberg/i3-desktop/pubkey.gpg
   - name: mskarbek-sway
     baseurl: https://copr-be.cloud.fedoraproject.org/results/mskarbek/sway/fedora-28-$basearch/
     enabled: 1
     gpgcheck: 1
     gpgkey: https://copr-be.cloud.fedoraproject.org/results/mskarbek/sway/pubkey.gpg
-  - name: gregw-i3desktop
-    baseurl: https://copr-be.cloud.fedoraproject.org/results/gregw/i3desktop/fedora-28-$basearch/
-    enabled: 1
-    gpgcheck: 0
   - name: datawireio_telepresence
     baseurl: https://packagecloud.io/datawireio/telepresence/fedora/28/$basearch
     enabled: 1
