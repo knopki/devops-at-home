@@ -62,11 +62,6 @@ yum_repos_group:
     enabled: 1
     gpgcheck: 1
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-  - name: mskarbek-sway
-    baseurl: https://copr-be.cloud.fedoraproject.org/results/mskarbek/sway/fedora-28-$basearch/
-    enabled: 1
-    gpgcheck: 1
-    gpgkey: https://copr-be.cloud.fedoraproject.org/results/mskarbek/sway/pubkey.gpg
   - name: datawireio_telepresence
     baseurl: https://packagecloud.io/datawireio/telepresence/fedora/28/$basearch
     enabled: 1
