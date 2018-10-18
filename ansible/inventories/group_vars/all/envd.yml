@@ -1,5 +1,10 @@
 ---
 envd_add_default:
+  # path
+  - filename: 00-path
+    key: PATH
+    value: "${HOME}/.local/share/zplug/bin:${HOME}/.local/bin:${PATH}"
+
   # xdg paths
   - filename: 00-xdg
     key: XDG_CONFIG_HOME
