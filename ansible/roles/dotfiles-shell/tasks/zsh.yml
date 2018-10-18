@@ -75,6 +75,13 @@
     depth: 1
   tags: shell, zsh
 
+- name: Download calc zsh plugin
+  git:
+    repo: https://github.com/arzzen/calc.plugin.zsh.git
+    dest: "{{ ZDATADIR }}/plugins/calc"
+    version: 9b888dc78bf1c02fac77fa422ad1521440145b0c
+  tags: shell, zsh
+
 - name: Deploy zsh configs
   copy:
     src: "zsh/{{ item }}"
