@@ -82,6 +82,14 @@
     version: 9b888dc78bf1c02fac77fa422ad1521440145b0c
   tags: shell, zsh
 
+- name: Download zsh-you-should-use zsh plugin
+  git:
+    repo: https://github.com/MichaelAquilina/zsh-you-should-use.git
+    dest: "{{ ZDATADIR }}/plugins/zsh-you-should-use"
+    version: 0.5.1
+    depth: 1
+  tags: shell, zsh
+
 - name: Deploy zsh configs
   copy:
     src: "zsh/{{ item }}"
