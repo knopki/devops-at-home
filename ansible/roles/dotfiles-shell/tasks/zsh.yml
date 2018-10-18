@@ -51,11 +51,11 @@
     depth: 1
   tags: shell, zsh
 
-- name: Download zsh-syntax-highlighting zsh plugin
+- name: Download fast-syntax-highlighting zsh plugin
   git:
-    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-    dest: "{{ ZDATADIR }}/plugins/zsh-syntax-highlighting"
-    version: 0.6.0
+    repo: https://github.com/zdharma/fast-syntax-highlighting.git
+    dest: "{{ ZDATADIR }}/plugins/fast-syntax-highlighting"
+    version: v1.27
     depth: 1
   tags: shell, zsh
 
@@ -112,4 +112,4 @@
     src: "{{ ZDOTDIR }}/rc.zsh"
     dest: "{{ lookup('env','HOME') }}/.zshrc"
     state: link
-  tags: shell, zsh, test
+  tags: shell, zsh
