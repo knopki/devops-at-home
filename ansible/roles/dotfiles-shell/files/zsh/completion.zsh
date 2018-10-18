@@ -72,15 +72,15 @@ source_if_possible /usr/share/google-cloud-sdk/completion.zsh.inc
 
 # kubectl completion
 if (( $+commands[gopass] )); then
-  if [ ! -f "$ZDOTDIR/functions/_kubectl" ] || $(find "$ZDOTDIR/functions/_kubectl" -mtime +30 -print); then
+  if [ ! -f "$ZDOTDIR/functions/_kubectl" ]; then
     kubectl completion zsh > "$ZDOTDIR/functions/_kubectl"
   fi
 fi
 
 # gopass completion
 if (( $+commands[gopass] )); then
-  if [ ! -f "$ZDOTDIR/functions/_gopass" ] || $(find "$ZDOTDIR/functions/_gopass" -mtime +30 -print); then
+  if [ ! -f "$ZDOTDIR/functions/_gopass" ]; then
     gopass completion zsh | head -n -1 | tail -n +2 > "$ZDOTDIR/functions/_gopass"
-    echo "compdef _gopass gopass" >> "$ZDOTDIR/functions/_gopass"
   fi
+  compdef _gopass gopass
 fi
