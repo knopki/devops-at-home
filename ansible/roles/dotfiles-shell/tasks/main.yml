@@ -1,0 +1,9 @@
+---
+- name: Deploy .profile
+  template:
+    src: dotprofile.j2
+    dest: "{{ lookup('env','HOME') }}/.profile"
+  tags: shell
+
+- import_tasks: zsh.yml
+

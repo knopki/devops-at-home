@@ -1,0 +1,115 @@
+---
+- name: Deploy .zprofile
+  template:
+    src: zsh/dotzprofile.j2
+    dest: "{{ lookup('env','HOME') }}/.zprofile"
+  tags: shell, zsh
+
+# TODO: create ~/.zshrc symlink
+
+- name: Create zsh directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ ZDOTDIR }}"
+    - "{{ ZDOTDIR }}/functions"
+    - "{{ ZDATADIR }}"
+    - "{{ ZDATADIR }}/plugins"
+    - "{{ ZCACHEDIR }}"
+  tags: shell, zsh
+
+- name: Download zsh265color zsh plugin
+  git:
+    repo: https://github.com/chrissicool/zsh-256color.git
+    dest: "{{ ZDATADIR }}/plugins/zsh-256color"
+    version: ae40a49ccfc7520d2d7b575aaea160ff876fe3dc
+    force: yes
+  tags: shell, zsh
+
+- name: Download spaceship-prompt zsh plugin
+  git:
+    repo: https://github.com/denysdovhan/spaceship-prompt.git
+    dest: "{{ ZDATADIR }}/plugins/spaceship-prompt"
+    version: v3.6.0
+    depth: 1
+  tags: shell, zsh
+
+- name: Download fzf zsh plugin
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: "{{ ZDATADIR }}/plugins/fzf"
+    version: 0.17.5
+    depth: 1
+  tags: shell, zsh
+
+- name: Download zsh-completions zsh plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-completions.git
+    dest: "{{ ZDATADIR }}/plugins/zsh-completions"
+    version: 0.28.0
+    depth: 1
+  tags: shell, zsh
+
+- name: Download zsh-syntax-highlighting zsh plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "{{ ZDATADIR }}/plugins/zsh-syntax-highlighting"
+    version: 0.6.0
+    depth: 1
+  tags: shell, zsh
+
+- name: Download zsh-history-substring-search zsh plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-history-substring-search.git
+    dest: "{{ ZDATADIR }}/plugins/zsh-history-substring-search"
+    version: v1.0.1
+    depth: 1
+  tags: shell, zsh
+
+- name: Download zsh-autosuggestions zsh plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: "{{ ZDATADIR }}/plugins/zsh-autosuggestions"
+    version: v0.4.3
+    depth: 1
+  tags: shell, zsh
+
+- name: Deploy zsh configs
+  copy:
+    src: "zsh/{{ item }}"
+    dest: "{{ ZDOTDIR }}/{{ item }}"
+  with_items:
+    - completion.zsh
+    - history.zsh
+    - title.zsh
+    - aliases.zsh
+    - fzf.zsh
+    - key-bindings.zsh
+    - functions/source_if_possible
+    - functions/fda
+    - functions/fdr
+    - functions/fcd
+    - functions/fe
+    - functions/fgshow
+    - functions/fgstash
+    - functions/fh
+    - functions/fkill
+    - functions/fo
+    - functions/cdf
+  tags: shell, zsh
+
+- name: Deploy zsh configs (templates)
+  template:
+    src: "zsh/{{ item }}.j2"
+    dest: "{{ ZDOTDIR }}/{{ item }}.zsh"
+  with_items:
+    - rc
+  tags: shell, zsh
+
+- name: Create symbolic link for .zshrc
+  file:
+    src: "{{ ZDOTDIR }}/rc.zsh"
+    dest: "{{ lookup('env','HOME') }}/.zshrc"
+    state: link
+  tags: shell, zsh, test

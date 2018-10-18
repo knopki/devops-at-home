@@ -1,0 +1,21 @@
+# export environment.d
+export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
+eval $(systemctl --user show-environment | awk '{print "export " $0}')
+
+# create tmux temporary directory if not exist
+[ -d $TMUX_TMPDIR ] || mkdir -p $TMUX_TMPDIR
+
+# NPM stuff
+PATH=$PATH:$XDG_DATA_HOME/npm/bin
+
+# If running bash
+if [ -n "$BASH_VERSION" ]; then
+  # include .bashrc if it exists
+  if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+  fi
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+  PATH=$HOME/.local/bin:$PATH
+fi

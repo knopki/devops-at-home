@@ -1,0 +1,4 @@
+---
+ZDOTDIR: "{{ lookup('env','XDG_CONFIG_HOME') }}/zsh"
+ZDATADIR: "{{ lookup('env','XDG_DATA_HOME') }}/zsh"
+ZCACHEDIR: "{{ lookup('env','XDG_CACHE_HOME') }}/zsh"

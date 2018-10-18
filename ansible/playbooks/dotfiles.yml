@@ -18,3 +18,5 @@
       cachedirs_default: "{{ cachedirs_home_default|d([]) }}"
       cachedirs_group: "{{ cachedirs_home_group|d([]) }}"
       cachedirs_host: "{{ cachedirs_home_host|d([]) }}"
+  - role: dotfiles-shell
+    tags: shell
