@@ -95,24 +95,25 @@
     src: "zsh/{{ item }}"
     dest: "{{ ZDOTDIR }}/{{ item }}"
   with_items:
-    - completion.zsh
-    - history.zsh
-    - title.zsh
     - aliases.zsh
-    - fzf.zsh
-    - key-bindings.zsh
-    - functions/source_if_possible
+    - completion.zsh
+    - functions/cdf
+    - functions/fcd
     - functions/fda
     - functions/fdr
-    - functions/fcd
     - functions/fe
     - functions/fgshow
     - functions/fgstash
     - functions/fh
     - functions/fkill
+    - functions/_fly
     - functions/fo
-    - functions/cdf
-  tags: shell, zsh
+    - functions/source_if_possible
+    - fzf.zsh
+    - history.zsh
+    - key-bindings.zsh
+    - title.zsh
+  tags: shell, zsh, test
 
 - name: Deploy zsh configs (templates)
   template:
