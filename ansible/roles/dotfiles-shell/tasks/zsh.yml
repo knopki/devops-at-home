@@ -97,6 +97,8 @@
   with_items:
     - aliases.zsh
     - completion.zsh
+    - functions/_fly
+    - functions/_fzf_complete_pass
     - functions/cdf
     - functions/fcd
     - functions/fda
@@ -106,10 +108,14 @@
     - functions/fgstash
     - functions/fh
     - functions/fkill
-    - functions/_fly
     - functions/fo
+    - functions/gb
+    - functions/gf
+    - functions/gh
+    - functions/gr
+    - functions/gt
+    - functions/is_in_git_repo
     - functions/source_if_possible
-    - fzf.zsh
     - history.zsh
     - key-bindings.zsh
     - title.zsh

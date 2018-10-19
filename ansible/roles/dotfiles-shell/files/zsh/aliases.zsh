@@ -9,3 +9,4 @@ alias rsync-synchronize="rsync -avzu --delete --progress -h"
 alias rsync-update="rsync -avzu --progress -h"
 alias sudo='nocorrect sudo'
 alias fzf='fzf-tmux -m'
+alias _fzf_complete_gopass='_fzf_complete_pass'

@@ -39,6 +39,16 @@ SPACESHIP_BATTERY_SHOW=false
 SPACESHIP_EXIT_CODE_SHOW=true
 source_if_possible "${ZPLUGINSDIR}/spaceship-prompt/spaceship.zsh"
 
+# fzf settings
+if [ -z $TMUX ]; then
+  FZF_TMUX=1
+fi
+#FZF_DEFAULT_COMMAND=''
+FZF_DEFAULT_OPTS="--color=dark"
+FZF_COMPLETION_TRIGGER='**'
+#FZF_COMPLETION_OPTS='+c -x'
+#FZF_CTRL_T_COMMAND
+
 # Automopletion stuff
 source "${ZDOTDIR}/completion.zsh"
 
@@ -50,9 +60,6 @@ source "${ZDOTDIR}/title.zsh"
 
 # Aliases
 source "${ZDOTDIR}/aliases.zsh"
-
-# FZF
-source "${ZDOTDIR}/fzf.zsh"
 
 # calculator
 source "${ZPLUGINSDIR}/calc/calc.plugin.zsh"
