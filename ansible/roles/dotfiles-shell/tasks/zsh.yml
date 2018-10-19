@@ -115,6 +115,7 @@
     - functions/gr
     - functions/gt
     - functions/is_in_git_repo
+    - functions/save_pwd
     - functions/source_if_possible
     - history.zsh
     - key-bindings.zsh
@@ -127,7 +128,7 @@
     dest: "{{ ZDOTDIR }}/{{ item }}.zsh"
   with_items:
     - rc
-  tags: shell, zsh
+  tags: shell, zsh, test
 
 - name: Create symbolic link for .zshrc
   file:

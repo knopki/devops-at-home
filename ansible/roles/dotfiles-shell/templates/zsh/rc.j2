@@ -15,6 +15,9 @@ for f in `ls $ZDOTDIR/functions`; do
   autoload -Uz $f
 done
 
+# add functions to prompt
+precmd_functions=($precmd_functions save_pwd)
+
 # enable 256 colors
 source_if_possible "${ZPLUGINSDIR}/zsh-256color/zsh-256color.plugin.zsh"
 

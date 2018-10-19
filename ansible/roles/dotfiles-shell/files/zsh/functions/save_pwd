@@ -1,0 +1,3 @@
+if [[ $TERM == xterm-termite ]] && [[ -z "$SSH_CLIENT" ]] || [[ -z "$SSH_TTY" ]]; then
+  echo $PWD > "/tmp/${USER}-pwd"
+fi
