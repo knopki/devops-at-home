@@ -48,12 +48,6 @@ binaries_group:
     checksum: 430019d86b6bdd744ce43a051c37abb4f97c363f
     archive: yes
     archive_path: mitmweb
-  - name: exercism
-    url: https://github.com/exercism/cli/releases/download/v2.4.1/exercism-linux-64bit.tgz
-    dest: /usr/local/bin/exercism
-    checksum: d07238a6415c3b606c425847f8433be46b8b3834
-    archive: yes
-    archive_path: exercism
   - name: bat
     url: https://github.com/sharkdp/bat/releases/download/v0.4.1/bat-v0.4.1-x86_64-unknown-linux-gnu.tar.gz
     dest: /usr/local/bin/bat

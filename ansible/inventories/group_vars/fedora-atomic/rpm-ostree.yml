@@ -8,4 +8,8 @@ rpm_ostree_autoupgrade: check
 rpm_ostree_install_default:
   - cjdns
   - cjdns-tools
+  - fzf
+  - jq
+  - ranger
+  - ripgrep
   - tuned

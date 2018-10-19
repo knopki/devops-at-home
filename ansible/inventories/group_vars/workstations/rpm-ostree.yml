@@ -8,7 +8,9 @@ rpm_ostree_install_group:
   - ansible
   - chromium
   - code
+  - docker-compose
   - dunst
+  - exercism
   - feh
   - ffmpeg
   - flatpak-builder
@@ -23,7 +25,6 @@ rpm_ostree_install_group:
   - libvirt
   - light
   - lm_sensors
-  - mc
   - mpv
   - NetworkManager-tui
   - nmap

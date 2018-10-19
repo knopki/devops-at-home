@@ -1,34 +1,8 @@
 ---
 binaries_default:
-  - name: jq
-    url: https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
-    dest: /usr/local/bin/jq
-    checksum: sha1:d8e36831c3c94bb58be34dd544f44a6c6cb88568
-  - name: docker-compose
-    url: https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64
-    dest: /usr/local/bin/docker-compose
-    checksum: sha1:3a6a0a2b1ec85fb74159891c4bae672b342d039a
   - name: fd
     url: https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-v7.0.0-x86_64-unknown-linux-gnu.tar.gz
     dest: /usr/local/bin/fd
     checksum: fc86351a92a6a8c3a7b9c18e62164a16d2dc8055
     archive: yes
     archive_path: fd-v7.0.0-x86_64-unknown-linux-gnu/fd
-  - name: fzf
-    url: https://github.com/junegunn/fzf-bin/releases/download/0.17.4/fzf-0.17.4-linux_amd64.tgz
-    dest: /usr/local/bin/fzf
-    checksum: 22e3558324b4a926f4afe3f32d28539438db84f5
-    archive: yes
-    archive_path: fzf
-  - name: fzf-tmux
-    url: https://github.com/junegunn/fzf/archive/0.17.4.tar.gz
-    dest: /usr/local/bin/fzf-tmux
-    checksum: 763ff0dba530f3dd799b0ecff131e29a5106082a
-    archive: yes
-    archive_path: fzf-0.17.4/bin/fzf-tmux
-  - name: ripgrep
-    url: https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep-0.8.1-x86_64-unknown-linux-musl.tar.gz
-    dest: /usr/local/bin/rg
-    checksum: 1b1823a40ae4ea43635ebd9a9291c1c91785ba84
-    archive: yes
-    archive_path: ripgrep-0.8.1-x86_64-unknown-linux-musl/rg
