@@ -62,13 +62,13 @@ zstyle ':completion:*' rehash true
 
 # Addons
 # zsh-completions
-source_if_possible "${ZPLUGINSDIR}/zsh-completions/zsh-completions.plugin.zsh"
+source "${ZPLUGINSDIR}/zsh-completions/zsh-completions.plugin.zsh"
 
 # fzf
-source_if_possible "${ZPLUGINSDIR}/fzf/shell/completion.zsh"
+source "${ZPLUGINSDIR}/fzf/shell/completion.zsh"
 
 # Google Cloud SDK
-source_if_possible /usr/share/google-cloud-sdk/completion.zsh.inc
+source /usr/share/google-cloud-sdk/completion.zsh.inc
 
 # kubectl completion
 if (( $+commands[gopass] )); then

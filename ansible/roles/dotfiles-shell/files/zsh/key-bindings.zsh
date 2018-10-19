@@ -46,4 +46,4 @@ _bind-git-helper() {
 _bind-git-helper f b t r h
 unset -f _bind-git-helper
 
-source_if_possible "${ZPLUGINSDIR}/fzf/shell/key-bindings.zsh"
+source "${ZPLUGINSDIR}/fzf/shell/key-bindings.zsh"

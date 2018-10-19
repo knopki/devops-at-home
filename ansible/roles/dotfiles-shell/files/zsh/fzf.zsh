@@ -2,15 +2,11 @@ if [ -z $TMUX ]; then
   FZF_TMUX=1
 fi
 
-alias fzf='fzf-tmux -m'
-
 #FZF_DEFAULT_COMMAND=''
 FZF_DEFAULT_OPTS="--color=dark"
 FZF_COMPLETION_TRIGGER='**'
 #FZF_COMPLETION_OPTS='+c -x'
 #FZF_CTRL_T_COMMAND
-
-
 
 # ALT-I - Paste the selected entry from locate output into the command line
 fzf-locate-widget() {

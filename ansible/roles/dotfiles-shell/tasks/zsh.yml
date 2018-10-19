@@ -113,7 +113,7 @@
     - history.zsh
     - key-bindings.zsh
     - title.zsh
-  tags: shell, zsh, test
+  tags: shell, zsh
 
 - name: Deploy zsh configs (templates)
   template:
