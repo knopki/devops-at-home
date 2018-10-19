@@ -14,19 +14,15 @@
   tags: rpm-ostree-install
 
 - name: Install packages
-  with_items: "{{ rpm_ostree_install }}"
-  when: item not in installed
-  command: "rpm-ostree install {{ item }}"
+  command: "rpm-ostree install --unchanged-exit-77 --idempotent {{ rpm_ostree_install|join(' ') }}"
   register: result
+  changed_when: result.rc != 77
+  failed_when: result.rc != 0 and result.rc != 77
   tags: rpm-ostree-install
 
 - name: Uninstall packages
-  with_items: "{{ installed }}"
-  when: item not in rpm_ostree_install
-  command: "rpm-ostree uninstall {{ item }}"
+  command: "rpm-ostree uninstall --idempotent {{ installed|difference(rpm_ostree_install)|join(' ') }}"
   register: result
-  tags: rpm-ostree-install
-
-- when: result.changed
-  fail: msg="Please reboot {{ inventory_hostname }} to complete installation"
+  changed_when: result.rc != 77
+  failed_when: result.rc != 0 and result.rc != 77
   tags: rpm-ostree-install

@@ -26,6 +26,7 @@ rpm_ostree_install_group:
   - light
   - lm_sensors
   - mpv
+  - neovim
   - NetworkManager-tui
   - nmap
   - node-gyp
@@ -50,6 +51,7 @@ rpm_ostree_install_group:
   - task
   - tasksh
   - telepresence
+  - termite
   - thermald
   - tmux
   - torbrowser-launcher
