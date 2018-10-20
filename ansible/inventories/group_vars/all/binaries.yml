@@ -1,8 +1,2 @@
 ---
-binaries_default:
-  - name: fd
-    url: https://github.com/sharkdp/fd/releases/download/v7.0.0/fd-v7.0.0-x86_64-unknown-linux-gnu.tar.gz
-    dest: /usr/local/bin/fd
-    checksum: fc86351a92a6a8c3a7b9c18e62164a16d2dc8055
-    archive: yes
-    archive_path: fd-v7.0.0-x86_64-unknown-linux-gnu/fd
+binaries_default: []
