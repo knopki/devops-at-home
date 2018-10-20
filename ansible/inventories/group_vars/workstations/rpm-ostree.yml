@@ -25,6 +25,7 @@ rpm_ostree_install_group:
   - libvirt
   - light
   - lm_sensors
+  - mako
   - mpv
   - neovim
   - NetworkManager-tui
