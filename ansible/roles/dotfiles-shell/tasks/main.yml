@@ -7,6 +7,7 @@
 
 - import_tasks: curl.yml
 - import_tasks: dircolors.yml
+- import_tasks: npm.yml
 - import_tasks: readline.yml
 - import_tasks: wget.yml
 - import_tasks: zsh.yml

@@ -1,0 +1,12 @@
+---
+- name: Create readline config directory
+  file:
+    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/npm"
+    state: directory
+  tags: shell, npm
+
+- name: Deploy npm configuration
+  copy:
+    src: npm/npmrc
+    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/npm/npmrc"
+  tags: shell, npm
