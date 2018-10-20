@@ -5,5 +5,5 @@
     dest: "{{ lookup('env','HOME') }}/.profile"
   tags: shell
 
+- import_tasks: wget.yml
 - import_tasks: zsh.yml
-
