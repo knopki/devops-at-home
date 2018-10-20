@@ -1,0 +1,6 @@
+---
+- name: Deploy .curlrc
+  copy:
+    src: .curlrc
+    dest: "{{ lookup('env','HOME') }}/.curlrc"
+  tags: shell, curl
