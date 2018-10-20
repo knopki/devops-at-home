@@ -38,7 +38,7 @@ exec --no-startup-id swayidle \
   before-sleep 'swaylock -i {{ wallpaper }} --scaling=fill'
 
 # notification daemon
-exec --no-startup-id /usr/bin/dunst
+exec --no-startup-id /usr/bin/mako --font 'pango:Hack Nerd Font 10' --markup 1
 
 # ssh/gpg agent
 exec --no-startup-id sh -c "echo '' | /usr/bin/gnome-keyring-daemon -r --components='gpg,pkcs11,secrets,ssh' --unlock"

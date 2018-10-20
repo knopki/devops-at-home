@@ -6,14 +6,7 @@
   with_items:
     - "{{ lookup('env','XDG_CONFIG_HOME') }}/sway/config.d"
     - "{{ lookup('env','XDG_CONFIG_HOME') }}/rofi"
-    - "{{ lookup('env','XDG_CONFIG_HOME') }}/dunst"
     - "{{ lookup('env','XDG_CONFIG_HOME') }}/i3status/py3status"
-  tags: sway
-
-- name: Deploy dunst config
-  template:
-    src: dunst.j2
-    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/dunst/dunstrc"
   tags: sway
 
 - name: Deploy rofi config

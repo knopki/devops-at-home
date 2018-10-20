@@ -141,10 +141,10 @@ bindsym $mod+Ctrl+Left  workspace prev
 # You can "split" the current object of your focus with
 # $mod+b or $mod+v, for horizontal and vertical splits
 # respectively.
-bindsym $mod+b               splith;exec notify-send 'tile horizontally'
-bindsym $mod+Cyrillic_i      splith;exec notify-send 'tile horizontally'
-bindsym $mod+v               splitv;exec notify-send 'tile vertically'
-bindsym $mod+Cyrillic_em     splitv;exec notify-send 'tile vertically'
+bindsym $mod+b               splith;exec notify-send 'tile horizontally' --expire-time 500
+bindsym $mod+Cyrillic_i      splith;exec notify-send 'tile horizontally' --expire-time 500
+bindsym $mod+v               splitv;exec notify-send 'tile vertically' --expire-time 500
+bindsym $mod+Cyrillic_em     splitv;exec notify-send 'tile vertically' --expire-time 500
 bindsym $mod+q               split toggle
 bindsym $mod+Cyrillic_shorti split toggle
 
