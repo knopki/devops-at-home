@@ -1,0 +1,18 @@
+---
+- name: Create gnupg config directory
+  file:
+    path: "{{ lookup('env','GNUPGHOME') }}"
+    state: directory
+  tags: shell, gnupg
+
+- name: Deploy gpg-agent.conf
+  copy:
+    src: gnupg/gpg-agent.conf
+    dest: "{{ lookup('env','GNUPGHOME') }}/gpg-agent.conf"
+  tags: shell, gnupg
+
+- name: Deploy gpg.conf
+  template:
+    src: gnupg/gpg.conf.j2
+    dest: "{{ lookup('env','GNUPGHOME') }}/gpg.conf"
+  tags: shell, gnupg

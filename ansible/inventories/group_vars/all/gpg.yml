@@ -1,0 +1,2 @@
+---
+GPG_DEFAULT_KEY: "{{ lookup('passwordstore','keys/gpg_default') }}"
