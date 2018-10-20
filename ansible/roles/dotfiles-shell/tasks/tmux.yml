@@ -70,3 +70,26 @@
     src: "tmux/tmux.j2"
     dest: "{{ lookup('env','HOME') }}/.tmux.conf"
   tags: shell, tmux
+
+- name: Deploy tmux service
+  template:
+    src: "tmux/service.j2"
+    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/systemd/user/tmux.service"
+  tags: shell, tmux
+
+
+# haaaack
+- name: Register uid of user
+  command: id -u
+  register: uid
+  tags: shell, tmux
+
+- name: Enable tmux service
+  systemd:
+    name: tmux.service
+    enabled: yes
+    state: started
+    scope: user
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{uid.stdout}}"
+  tags: shell, tmux
