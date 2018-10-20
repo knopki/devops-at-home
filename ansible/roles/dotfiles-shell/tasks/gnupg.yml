@@ -16,3 +16,10 @@
     src: gnupg/gpg.conf.j2
     dest: "{{ lookup('env','GNUPGHOME') }}/gpg.conf"
   tags: shell, gnupg
+
+- name: Create symbolic link for .gnupg dir
+  file:
+    src: "{{ lookup('env','HOME') }}/.gnupg"
+    dest: "{{ lookup('env','GNUPGHOME') }}"
+    state: link
+  tags: shell, zsh
