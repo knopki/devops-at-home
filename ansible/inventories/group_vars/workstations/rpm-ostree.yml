@@ -9,7 +9,6 @@ rpm_ostree_install_group:
   - chromium
   - code
   - docker-compose
-  - dunst
   - exercism
   - feh
   - ffmpeg
