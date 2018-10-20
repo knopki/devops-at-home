@@ -16,6 +16,7 @@ rpm_ostree_install_group:
   - flatpak-builder
   - gnome-tweak-tool
   - google-cloud-sdk
+  - habitctl
   - hdparm
   - htop
   - iftop
