@@ -11,5 +11,6 @@
 - import_tasks: gnupg.yml
 - import_tasks: npm.yml
 - import_tasks: readline.yml
+- import_tasks: ssh.yml
 - import_tasks: wget.yml
 - import_tasks: zsh.yml
