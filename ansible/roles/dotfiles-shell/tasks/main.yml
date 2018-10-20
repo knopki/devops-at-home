@@ -6,5 +6,6 @@
   tags: shell
 
 - import_tasks: curl.yml
+- import_tasks: dircolors.yml
 - import_tasks: wget.yml
 - import_tasks: zsh.yml
