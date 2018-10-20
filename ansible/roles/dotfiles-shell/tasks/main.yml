@@ -1,7 +1,7 @@
 ---
 - name: Deploy .profile
-  template:
-    src: dotprofile.j2
+  copy:
+    src: .profile
     dest: "{{ lookup('env','HOME') }}/.profile"
   tags: shell
 

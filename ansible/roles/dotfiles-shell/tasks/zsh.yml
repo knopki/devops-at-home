@@ -1,11 +1,9 @@
 ---
 - name: Deploy .zprofile
-  template:
-    src: zsh/dotzprofile.j2
+  copy:
+    src: zsh/.zprofile
     dest: "{{ lookup('env','HOME') }}/.zprofile"
   tags: shell, zsh
-
-# TODO: create ~/.zshrc symlink
 
 - name: Create zsh directories
   file:
