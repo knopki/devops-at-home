@@ -2,6 +2,9 @@
 # gnupg
 GPG_DEFAULT_KEY: null
 
+# tmux
+tmux_data_dir: "{{ lookup('env','XDG_DATA_HOME') }}/tmux"
+
 # zsh
 ZDOTDIR: "{{ lookup('env','XDG_CONFIG_HOME') }}/zsh"
 ZDATADIR: "{{ lookup('env','XDG_DATA_HOME') }}/zsh"

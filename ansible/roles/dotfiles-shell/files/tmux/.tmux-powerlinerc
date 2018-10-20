@@ -1,0 +1,39 @@
+# Default configuration file for tmux-powerline.
+# Modeline {
+#	 vi: foldmarker={,} foldmethod=marker foldlevel=0 tabstop=4 filetype=sh
+# }
+
+# General {
+	# Show which segment fails and its exit code.
+	export TMUX_POWERLINE_DEBUG_MODE_ENABLED="false"
+	# Use patched font symbols.
+	export TMUX_POWERLINE_PATCHED_FONT_IN_USE="true"
+	# The theme to use.
+	export TMUX_POWERLINE_THEME="mytheme"
+	# Overlay directory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
+	export TMUX_POWERLINE_DIR_USER_THEMES="~/.tmux/powerline/themes"
+	# Overlay directory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
+	export TMUX_POWERLINE_DIR_USER_SEGMENTS="~/.tmux/powerline/segments"
+# }
+
+# date.sh {
+	# date(1) format for the date. If you don't, for some reason, like ISO 8601 format you might want to have "%D" or "%m/%d/%Y".
+	export TMUX_POWERLINE_SEG_DATE_FORMAT="%F"
+# }
+
+# hostname.sh {
+	# Use short or long format for the hostname. Can be {"short, long"}.
+	export TMUX_POWERLINE_SEG_HOSTNAME_FORMAT="short"
+# }
+
+# time.sh {
+	# date(1) format for the time. Americans might want to have "%I:%M %p".
+	export TMUX_POWERLINE_SEG_TIME_FORMAT="%H:%M"
+# }
+
+# uptime.sh {
+	# Name of GNU grep binary if in PATH, or path to it.
+	export TMUX_POWERLINE_SEG_UPTIME_GREP="grep"
+# }
+
+export TMUX_POWERLINE_SEG_CONTEXT_DEFAULT_USER="sk"
