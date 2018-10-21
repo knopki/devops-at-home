@@ -76,4 +76,4 @@
   template:
     src: vim/vimrc.j2
     dest: "{{ lookup('env','HOME') }}/.vimrc"
-  tags: shell, vim
+  tags: shell, vim, test

@@ -10,3 +10,4 @@ alias rsync-move="rsync -avz --progress -h --remove-source-files"
 alias rsync-synchronize="rsync -avzu --delete --progress -h"
 alias rsync-update="rsync -avzu --progress -h"
 alias sudo='nocorrect sudo'
+alias svim='sudo -E vim'

@@ -20,11 +20,13 @@ if !isdirectory($VIM_CACHE_DIR . "/swap")
   call mkdir($VIM_CACHE_DIR . "/swap", "p")
 endif
 set directory=$VIM_CACHE_DIR/swap//,/var/tmp//,/tmp//
+set noswapfile
 
 if !isdirectory($VIM_CACHE_DIR . "/backup")
   call mkdir($VIM_CACHE_DIR . "/backup", "p")
 endif
 set backupdir=$VIM_CACHE_DIR/backup//,/var/tmp//,/tmp//
+set nobackup
 
 " Double slash does not actually work for backupdir, here's a fix
 au BufWritePre * let &backupext='@'.substitute(substitute(substitute(expand('%:p:h'), '/', '%', 'g'), '\', '%', 'g'), ':', '', 'g')
@@ -62,7 +64,7 @@ set backspace=indent,eol,start
 
 "" Tabs. May be overriten by autocmd rules
 set tabstop=4
-set softtabstop=0
+set softtabstop=4
 set shiftwidth=4
 set expandtab
 
@@ -78,9 +80,26 @@ set incsearch
 set ignorecase
 set smartcase
 
+"" Disable folding
+set nofoldenable
+
+" wait for ambigous key in key map forever
+set notimeout
+
+set nowrap
+
 
 set fileformats=unix,dos,mac
 set showcmd
+
+
+set scrolloff=5     " keep at minimum few lines from top and bottom when scrolling
+set linebreak       " break on word boundaries if word wrap enabled
+set listchars=eol:$,tab:–→,trail:~,extends:>,precedes:<,nbsp:•
+
+" Auto-reload files when changed outside of the editor
+set autoread
+autocmd FocusGained * :checktime
 
 
 " **********************************************************************
@@ -92,6 +111,7 @@ set ruler
 set number
 
 let no_buffers_menu=1
+set background=dark
 color dracula
 
 set mousemodel=popup
@@ -120,8 +140,6 @@ endif
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
-
-set scrolloff=3
 
 "" Status bar
 set laststatus=2
@@ -223,6 +241,23 @@ endif
 " Autocmd Rules
 " **********************************************************************
 
+" For all text files set 'textwidth' to 78 characters.
+autocmd FileType text setlocal textwidth=78
+
+" Enable custom syntax highlight
+augroup filetype
+  au! BufRead,BufNewFile *.ino setfiletype cpp
+  au! BufRead,BufNewFile *.json5 setfiletype javascript
+augroup end
+
+" Custom settings for file types
+augroup filetype
+  au! FileType javascript set sw=2 sts=2
+  au! FileType json set sw=2 sts=2
+  au! FileType yaml set sw=2 sts=2
+  au! FileType cpp set sw=4 sts=4
+augroup end
+
 "" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
 augroup vimrc-sync-fromstart
   autocmd!
@@ -275,7 +310,7 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 "" fzf.vim
 set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__,*.orig,.hg,.svn,*.jpg,*.png
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
 " Disable visualbell
@@ -318,6 +353,9 @@ vmap > >gv
 "" Move visual block
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" Allow saving of files as sudo when I forgot to start vim using sudo
+cmap w!! w !sudo tee > /dev/null %
 
 
 " **********************************************************************
