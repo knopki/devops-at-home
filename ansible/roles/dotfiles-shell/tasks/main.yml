@@ -11,6 +11,7 @@
 - import_tasks: gnupg.yml
 - import_tasks: npm.yml
 - import_tasks: readline.yml
+- import_tasks: scripts.yml
 - import_tasks: ssh.yml
 - import_tasks: tmux.yml
 - import_tasks: user-dirs.yml

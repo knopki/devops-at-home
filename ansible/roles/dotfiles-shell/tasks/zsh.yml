@@ -113,7 +113,6 @@
     - functions/gr
     - functions/gt
     - functions/is_in_git_repo
-    - functions/minikube
     - functions/save_pwd
     - functions/source_if_possible
     - history.zsh

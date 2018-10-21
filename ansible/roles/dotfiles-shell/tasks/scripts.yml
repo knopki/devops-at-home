@@ -1,0 +1,8 @@
+---
+- name: Deploy scripts
+  copy:
+    src: "scripts/{{ item }}"
+    dest: "{{ lookup('env','HOME') }}/.local/bin/{{ item }}"
+  with_items:
+    - minikube
+  tags: shell, scripts

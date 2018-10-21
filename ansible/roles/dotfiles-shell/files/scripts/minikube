@@ -1,3 +1,5 @@
+#!/bin/sh
+
 sudo -i env \
   PATH=$PATH \
   MINIKUBE_HOME=$HOME \
