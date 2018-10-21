@@ -30,4 +30,3 @@ flatpaks_group:
   - name: org.nextcloud.Nextcloud
   - name: org.remmina.Remmina
   - name: org.telegram.desktop
-  - name: org.vim.Vim

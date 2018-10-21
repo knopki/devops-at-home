@@ -35,3 +35,4 @@ cachedirs_home_group:
   - "{{ lookup('env','XDG_DATA_HOME') }}/npm"
   - "{{ lookup('env','XDG_DATA_HOME') }}/tmux"
   - "{{ lookup('env','XDG_DATA_HOME') }}/Trash"
+  - "{{ lookup('env','XDG_DATA_HOME') }}/vim"

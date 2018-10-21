@@ -15,5 +15,6 @@
 - import_tasks: ssh.yml
 - import_tasks: tmux.yml
 - import_tasks: user-dirs.yml
+- import_tasks: vim.yml
 - import_tasks: wget.yml
 - import_tasks: zsh.yml

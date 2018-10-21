@@ -14,3 +14,4 @@ rpm_ostree_install_default:
   - ranger
   - ripgrep
   - tuned
+  - vim-enhanced

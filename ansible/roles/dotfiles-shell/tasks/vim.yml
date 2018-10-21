@@ -1,0 +1,79 @@
+---
+- name: Create vim directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ vim_config_dir }}"
+    - "{{ vim_data_dir }}/pack/plugins/start"
+    - "{{ vim_data_dir }}/pack/plugins/opt"
+    - "{{ vim_cache_dir }}"
+  tags: shell, vim
+
+- name: Download indentLine vim plugin
+  git:
+    repo: https://github.com/Yggdroot/indentLine.git
+    dest: "{{ vim_data_dir }}/pack/plugins/start/indentLine"
+    version: v2.0
+    depth: 1
+  tags: shell, vim
+
+- name: Download vim-airline plugin
+  git:
+    repo: https://github.com/vim-airline/vim-airline.git
+    dest: "{{ vim_data_dir }}/pack/plugins/start/vim-airline"
+    version: v0.9
+    depth: 1
+  tags: shell, vim
+
+- name: Download vim-airline-themes plugin
+  git:
+    repo: https://github.com/vim-airline/vim-airline-themes.git
+    dest: "{{ vim_data_dir }}/pack/plugins/start/vim-airline-themes"
+    version: d67794b28c8dc088ee56caaa2288fc26a69034cc # 2018-10-13
+  tags: shell, vim
+
+- name: Download vim-sensible plugin
+  git:
+    repo: https://github.com/tpope/vim-sensible.git
+    dest: "{{ vim_data_dir }}/pack/plugins/start/vim-sensible"
+    version: v1.2
+    depth: 1
+  tags: shell, vim
+
+- name: Download vim-commentary plugin
+  git:
+    repo: https://github.com/tpope/vim-commentary.git
+    dest: "{{ vim_data_dir }}/pack/plugins/start/vim-commentary"
+    version: v1.3
+    depth: 1
+  tags: shell, vim
+
+- name: Download dracula vim theme
+  git:
+    repo: https://github.com/dracula/vim.git
+    dest: "{{ vim_data_dir }}/pack/plugins/start/dracula-theme"
+    version: v1.5.0
+    depth: 1
+  tags: shell, vim
+
+- name: Download vim-polyglot plugin
+  git:
+    repo: https://github.com/sheerun/vim-polyglot.git
+    dest: "{{ vim_data_dir }}/pack/plugins/start/vim-polyglot"
+    version: v3.3.3
+    depth: 1
+  tags: shell, vim
+
+- name: Download fzf vim plugin
+  git:
+    repo: https://github.com/junegunn/fzf.vim.git
+    dest: "{{ vim_data_dir }}/pack/plugins/start/fzf"
+    version: c6275ee1080de4d94bb3f3cfd6e7cc0ccecd9e64 # 2018-10-01
+  tags: shell, vim
+
+- name: Deploy .vimrc
+  template:
+    src: vim/vimrc.j2
+    dest: "{{ lookup('env','HOME') }}/.vimrc"
+  tags: shell, vim
