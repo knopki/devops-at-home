@@ -27,7 +27,6 @@ rpm_ostree_install_group:
   - lm_sensors
   - mako
   - mpv
-  - neovim
   - NetworkManager-tui
   - nmap
   - node-gyp
@@ -57,7 +56,6 @@ rpm_ostree_install_group:
   - tmux
   - torbrowser-launcher
   - tuned
-  - vim-enhanced
   - wireshark
   - youtube-dl
   - zsh
