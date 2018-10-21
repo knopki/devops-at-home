@@ -1,8 +1,9 @@
 ---
 rpm_ostree_remote_name: "fedora-workstation"
 rpm_ostree_remote_url: "https://dl.fedoraproject.org/atomic/repo/"
-rpm_ostree_desired_ref: "fedora/28/x86_64/workstation"
-rpm_ostree_desired_version: "28.20180923.0"
+rpm_ostree_desired_ref: "fedora/29/x86_64/silverblue"
+rpm_ostree_remote_gpgkeypath: "/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-29-primary"
+rpm_ostree_desired_version: "29.20181021.n.0"
 rpm_ostree_install_group:
   - android-tools
   - ansible
@@ -11,8 +12,6 @@ rpm_ostree_install_group:
   - docker-compose
   - exercism
   - feh
-  - ffmpeg
-  - flatpak-builder
   - gnome-tweak-tool
   - google-cloud-sdk
   - habitctl
@@ -26,7 +25,6 @@ rpm_ostree_install_group:
   - light
   - lm_sensors
   - mako
-  - mpv
   - NetworkManager-tui
   - nmap
   - node-gyp
@@ -59,3 +57,4 @@ rpm_ostree_install_group:
   - wireshark
   - youtube-dl
   - zsh
+# TODO: ffmpeg mpv
