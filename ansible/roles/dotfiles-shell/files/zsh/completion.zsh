@@ -11,8 +11,8 @@ setopt correct       # spelling correction for commands
 zmodload zsh/terminfo
 
 # Treat these characters as part of a word.
-# WORDCHARS=''
-WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+WORDCHARS=''
+#WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 zmodload -i zsh/complist
 
