@@ -19,7 +19,7 @@
 
 - name: Create symbolic link for .gnupg dir
   file:
-    src: "{{ lookup('env','HOME') }}/.gnupg"
-    dest: "{{ lookup('env','GNUPGHOME') }}"
+    src: "{{ lookup('env','GNUPGHOME') }}"
+    dest: "{{ lookup('env','HOME') }}/.gnupg"
     state: link
-  tags: shell, zsh
+  tags: shell, gnupg
