@@ -54,6 +54,9 @@ log = true
 ff = only
 conflictstyle = diff3
 
+[rebase]
+autosquash = true
+
 [include]
 path = local
 
@@ -62,6 +65,8 @@ prune = fetch --prune
 undo = reset --soft HEAD^
 stash-all = stash save --include-untracked
 glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+st = status
+co = checkout
 
 [commit]
 gpgSign = true
