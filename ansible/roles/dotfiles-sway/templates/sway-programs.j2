@@ -1,5 +1,5 @@
 # Your preferred terminal emulator
-set $term termite -d $(cat /tmp/$USER-pwd || echo $HOME)
+set $term termite -d "$(cat /tmp/$USER-pwd || echo $HOME)"
 
 # Your preferred application launcher
 set $menu rofi -modi combi -show combi -combi-modi "drun,run,ssh" -show-icons -terminal $term
