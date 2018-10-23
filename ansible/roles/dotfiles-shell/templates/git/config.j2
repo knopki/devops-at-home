@@ -62,8 +62,7 @@ path = local
 
 [alias]
 prune = fetch --prune
-undo = reset --soft HEAD^
-stash-all = stash save --include-untracked
+undo-last-commit = reset --soft HEAD^
 glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 st = status
 co = checkout
