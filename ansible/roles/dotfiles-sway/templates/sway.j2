@@ -107,6 +107,22 @@ set $ws8 8
 set $ws9 9
 set $ws10 10:💬
 
+{% if inventory_hostname == 'knopka.1984.run' %}
+# assign workspaces to outputs
+set $leftDisplay DP-1
+set $rightDisplay HDMI-A-1
+workspace $ws1 output $leftDisplay
+workspace $ws2 output $leftDisplay
+workspace $ws3 output $leftDisplay
+workspace $ws4 output $leftDisplay
+workspace $ws5 output $leftDisplay
+workspace $ws6 output $rightDisplay
+workspace $ws7 output $rightDisplay
+workspace $ws8 output $rightDisplay
+workspace $ws9 output $rightDisplay
+workspace $ws10 output $rightDisplay
+{% endif %}
+
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
