@@ -49,11 +49,11 @@ binaries_group:
     archive: yes
     archive_path: mitmweb
   - name: bat
-    url: https://github.com/sharkdp/bat/releases/download/v0.4.1/bat-v0.4.1-x86_64-unknown-linux-gnu.tar.gz
+    url: https://github.com/sharkdp/bat/releases/download/v0.8.0/bat-v0.8.0-x86_64-unknown-linux-gnu.tar.gz
     dest: /usr/local/bin/bat
-    checksum: 112561240d1a2aafd563860813645991e205fbb4
+    checksum: sha1:4a8d1e4a237dc31e750796816434bd8dc89a4d3c
     archive: yes
-    archive_path: bat-v0.4.1-x86_64-unknown-linux-gnu/bat
+    archive_path: bat-v0.8.0-x86_64-unknown-linux-gnu/bat
   - name: gotty
     url: https://github.com/yudai/gotty/releases/download/v2.0.0-alpha.3/gotty_2.0.0-alpha.3_linux_amd64.tar.gz
     dest: /usr/local/bin/gotty
