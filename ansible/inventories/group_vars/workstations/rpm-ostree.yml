@@ -40,6 +40,7 @@ rpm_ostree_install_group:
   - python3-pydbus
   - python3-pytz
   - python3-tzlocal
+  - qemu-kvm
   - qt5-qtwayland
   - qt5ct
   - rofi
