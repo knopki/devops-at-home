@@ -18,6 +18,7 @@
   register: result
   changed_when: result.rc != 77
   failed_when: result.rc != 0 and result.rc != 77
+  when: rpm_ostree_install|length > 0
   tags: rpm-ostree-install
 
 - name: Uninstall packages
@@ -25,4 +26,5 @@
   register: result
   changed_when: result.rc != 77
   failed_when: result.rc != 0 and result.rc != 77
+  when: installed|difference(rpm_ostree_install)|length > 0
   tags: rpm-ostree-install
