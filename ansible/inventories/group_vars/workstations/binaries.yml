@@ -11,13 +11,13 @@ binaries_group:
     dest: /usr/local/bin/fly
     checksum: sha1:7b0805adfba328d09cfa7ac377777cb6e270d66f
   - name: minikube
-    url: https://github.com/kubernetes/minikube/releases/download/v0.28.2/minikube-linux-amd64
+    url: https://github.com/kubernetes/minikube/releases/download/v0.30.0/minikube-linux-amd64
     dest: /usr/local/bin/minikube
-    checksum: sha1:ac1a0c6fd23aa7ad151e1b8bafb5cd0e2861dcec
+    checksum: sha1:29051485abbf4c5329265bf053d599b0cb066d13
   - name: docker-machine-driver-kvm2
-    url: https://github.com/kubernetes/minikube/releases/download/v0.28.0/docker-machine-driver-kvm2
+    url: https://github.com/kubernetes/minikube/releases/download/v0.30.0/docker-machine-driver-kvm2
     dest: /usr/local/bin/docker-machine-driver-kvm2
-    checksum: sha1:d901a0a4ea64acf56849dcd1048d3506dcc04701
+    checksum: sha1:abfda3812ffc5c85ec5e91aa02dac83d49068ba7
   - name: gopass
     url: https://github.com/gopasspw/gopass/releases/download/v1.8.2/gopass-1.8.2-linux-amd64.tar.gz
     dest: /usr/local/bin/gopass
