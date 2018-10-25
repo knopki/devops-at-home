@@ -65,9 +65,9 @@ binaries_group:
     dest: /usr/local/bin/kustomize
     checksum: sha1:bf8daea556af43c24776c0ce4f89c16ed24325c7
   - name: skaffold
-    url: https://github.com/GoogleContainerTools/skaffold/releases/download/v0.10.0/skaffold-linux-amd64
+    url: https://github.com/GoogleContainerTools/skaffold/releases/download/v0.16.0/skaffold-linux-amd64
     dest: /usr/local/bin/skaffold
-    checksum: sha1:8be931c40abb4f9403f1450394b6161d5770f24e
+    checksum: sha1:2da8dfbf1e3dcc655a166c1f693510c152f60381
   - name: marvin
     url: https://s3.amazonaws.com/amazingmarvin/Marvin-1.31.1-x86_64.AppImage
     dest: /usr/local/bin/marvin
