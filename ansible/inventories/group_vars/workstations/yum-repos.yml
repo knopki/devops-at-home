@@ -3,22 +3,22 @@ yum_repos_group:
   - name: rpmfusion-free
     baseurl: "https://mirror.yandex.ru/fedora/rpmfusion/free/fedora/releases/$releasever/Everything/$basearch/os/"
     mirrorlist: "http://mirrors.rpmfusion.org/free/fedora/$releasever/$basearch"
-    enabled: 0
+    enabled: 1
     gpgkey: "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-$releasever"
   - name: rpmfusion-free-updates
     baseurl: "https://mirror.yandex.ru/fedora/rpmfusion/free/fedora/updates/$releasever/$basearch/"
     mirrorlist: "http://mirrors.rpmfusion.org/free/fedora/updates/$releasever/$basearch"
-    enabled: 0
+    enabled: 1
     gpgkey: "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-$releasever"
   - name: rpmfusion-nonfree
     baseurl: "https://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/releases/$releasever/Everything/$basearch/os/"
     mirrorlist: "http://mirrors.rpmfusion.org/nonfree/fedora/$releasever/$basearch"
-    enabled: 0
+    enabled: 1
     gpgkey: "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-$releasever"
   - name: rpmfusion-nonfree-updates
     baseurl: "http://mirror.yandex.ru/fedora/rpmfusion/nonfree/fedora/updates/$releasever/$basearch/"
     mirrorlist: "http://mirrors.rpmfusion.org/nonfree/fedora/updates/$releasever/$basearch"
-    enabled: 0
+    enabled: 1
     gpgkey: "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-$releasever"
   - name: rfremix-fixes
     baseurl: "https://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$releasever/Everything/$basearch/os/"
@@ -42,7 +42,7 @@ yum_repos_group:
     gpgcheck: 0
   - name: rfremix-nonfree-updates
     baseurl: "https://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$releasever/$basearch/"
-    enabled: 0
+    enabled: 1
     gpgcheck: 0
   - name: google-cloud-sdk
     baseurl: "https://packages.cloud.google.com/yum/repos/cloud-sdk-el7-$basearch"
