@@ -12,6 +12,7 @@ rpm_ostree_install_group:
   - docker-compose
   - exercism
   - feh
+  - ffmpeg
   - gnome-tweak-tool
   - google-cloud-sdk
   - grim
@@ -20,6 +21,7 @@ rpm_ostree_install_group:
   - htop
   - iftop
   - iotop
+  - kmod-wireguard
   - kubectl
   - libselinux-python
   - libvirt
@@ -60,4 +62,3 @@ rpm_ostree_install_group:
   - wireshark
   - youtube-dl
   - zsh
-# TODO: ffmpeg mpv
