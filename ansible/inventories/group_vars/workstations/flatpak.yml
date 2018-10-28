@@ -9,7 +9,6 @@ flatpak_remotes_group:
 
 flatpaks_group:
   - name: com.getpostman.Postman
-  - name: com.github.bajoja.indicator-kdeconnect
   - name: com.skype.Client
   - name: com.transmissionbt.Transmission
   - name: im.riot.Riot
@@ -22,8 +21,6 @@ flatpaks_group:
   - name: org.gnome.Evince
   - name: org.gnome.Fractal
   - name: org.gnome.Rhythmbox3
-  - name: org.kde.kdeconnect
-    remote: kdeapps
   - name: org.kde.krita
   - name: org.keepassxc.KeePassXC
   - name: org.libreoffice.LibreOffice

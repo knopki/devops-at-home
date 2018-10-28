@@ -1,5 +1,2 @@
 ---
-flatpaks_host:
-  - name: org.kde.ark
-    remote: kdeapps
-  - name: org.kde.okular
+flatpaks_host: []
