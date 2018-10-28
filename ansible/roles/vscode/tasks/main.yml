@@ -1,0 +1,58 @@
+---
+- name: Create config directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ vscode_config_path }}/User"
+  tags: vscode
+
+- name: Run code --list-extensions and register result
+  command: code --list-extensions
+  register: vscode_installed_exts_stdout
+  changed_when: false
+  check_mode: no
+  tags: vscode
+
+- name: Set fact about installed vscode extensions
+  set_fact: vscode_installed_exts="{{ vscode_installed_exts_stdout.stdout.split('\n') }}"
+  tags: vscode
+
+- name: Install VS Code extensions
+  command: "code --install-extension {{ item }}"
+  with_items: "{{ vscode_extensions|difference(vscode_installed_exts) }}"
+  tags: vscode
+
+- name: Uninstall VS Code extensions
+  command: "code --uninstall-extension {{ item }}"
+  with_items: "{{ vscode_installed_exts|difference(vscode_extensions) }}"
+  tags: vscode
+
+- name: Deploy settings.json
+  template:
+    src: json.j2
+    dest: "{{ vscode_settings_path }}"
+  vars:
+    payload: "{{ vscode_settings }}"
+  tags: vscode
+
+- name: Deploy keybindings.json
+  template:
+    src: json.j2
+    dest: "{{ vscode_keybindings_path }}"
+  vars:
+    payload: "{{ vscode_keybindings }}"
+  tags: vscode
+
+- debug: msg="{{ item.path }}/{{ item.name }}.code-workspace"
+  with_items: "{{ vscode_workspaces }}"
+  tags: vscode
+
+- name: Deploy workspaces
+  template:
+    src: json.j2
+    dest: "{{ item.path }}/{{ item.name }}.code-workspace"
+  vars:
+    payload: "{{ item.workspace }}"
+  with_items: "{{ vscode_workspaces }}"
+  tags: vscode

@@ -1,0 +1,27 @@
+---
+vscode_config_path: "{{ lookup('env', 'HOME') }}/.config/Code"
+vscode_settings_path: "{{ vscode_config_path }}/User/settings.json"
+vscode_keybindings_path: "{{ vscode_config_path }}/User/keybindings.json"
+json_comment:
+  __ansible: Do not edit. This file managed by Ansible.
+vscode_settings: "{{
+  json_comment |
+  combine(vscode_settings_default|d([])) |
+  combine(vscode_settings_group|d([])) |
+  combine(vscode_settings_host|d([]))
+}}"
+vscode_extensions: "{{
+  vscode_extensions_default|d([]) +
+  vscode_extensions_group|d([]) +
+  vscode_extensions_host|d([])
+}}"
+vscode_keybindings: "{{
+  vscode_keybindings_default|d([]) +
+  vscode_keybindings_group|d([]) +
+  vscode_keybindings_host|d([])
+}}"
+vscode_workspaces: "{{
+  vscode_workspaces_default|d([]) +
+  vscode_workspaces_group|d([]) +
+  vscode_workspaces_host|d([])
+}}"

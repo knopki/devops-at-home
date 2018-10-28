@@ -1,4 +1,14 @@
 ---
+- hosts: servers
+  any_errors_fatal: true
+  become: true
+  become_user: "{{ main_user }}"
+  roles:
+  - role: dotfiles-environmentd
+    tags: environmentd
+  - role: dotfiles-shell
+    tags: shell
+
 - hosts: workstations
   any_errors_fatal: true
   become: true
@@ -20,3 +30,5 @@
       cachedirs_host: "{{ cachedirs_home_host|d([]) }}"
   - role: dotfiles-shell
     tags: shell
+  - role: vscode
+    tags: vscode
