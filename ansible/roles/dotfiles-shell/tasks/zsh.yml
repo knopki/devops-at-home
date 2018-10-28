@@ -126,7 +126,7 @@
     dest: "{{ ZDOTDIR }}/{{ item }}.zsh"
   with_items:
     - rc
-  tags: shell, zsh, test
+  tags: shell, zsh
 
 - name: Create symbolic link for .zshrc
   file:
