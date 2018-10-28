@@ -30,6 +30,7 @@ Set-up method: incredibly over-engineered Ansible orchestration.
 * Telegram proxy
 * Cjdns mesh and overlay network on every machine
 * Installation of binary executables, that not in OS' repositories
+* Installation of fonts
 * Install flatpak remotes and packages
 * Tuned profiles
 * thermald
@@ -39,13 +40,17 @@ Set-up method: incredibly over-engineered Ansible orchestration.
 * modprobe
 * `pip` package installation
 * vconsole
+* Alienware 15 R2 sound fix
 
 ### Dotfiles
 
 * `environment.d` variables set
-* `sway` environment with `dunst`, `py3status`, `rofi`
+* shell environment (`zsh`, `tmux`, `git`, `ssh`, `vim`, etc)
+* `sway` environment with `mako`, `py3status`, `rofi`, etc
 * `termite`
 * `qt5ct`
+* CACHEDIR.TAG files
+* VS Code
 
 ## Prerequirements
 
