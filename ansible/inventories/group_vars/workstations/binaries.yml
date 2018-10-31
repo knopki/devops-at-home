@@ -69,9 +69,9 @@ binaries_group:
     dest: /usr/local/bin/skaffold
     checksum: sha1:2da8dfbf1e3dcc655a166c1f693510c152f60381
   - name: marvin
-    url: https://s3.amazonaws.com/amazingmarvin/Marvin-1.31.1-x86_64.AppImage
+    url: https://s3.amazonaws.com/amazingmarvin/Marvin-1.32.0-x86_64.AppImage
     dest: /usr/local/bin/marvin
-    checksum: sha1:97c57f8d75888dd6fa2af9f96565fe3085b4c4f2
+    checksum: sha1:23bbb93ef45ca25c1de70c4d5b7708807b3c2320
   - name: simpleos
     url: https://github.com/eosrio/simpleos/releases/download/v0.6.9/simpleos-0.6.9-x86_64.AppImage
     dest: /usr/local/bin/simpleos
