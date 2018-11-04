@@ -9,6 +9,7 @@
 - import_tasks: dircolors.yml
 - import_tasks: git.yml
 - import_tasks: gnupg.yml
+- import_tasks: gtk.yml
 - import_tasks: npm.yml
 - import_tasks: readline.yml
 - import_tasks: scripts.yml

@@ -2,6 +2,33 @@
 # gnupg
 GPG_DEFAULT_KEY: null
 
+# gtk
+gtk3_bookmarks: "{{
+  gtk3_bookmarks_default|d([]) +
+  gtk3_bookmarks_group|d([]) +
+  gtk3_bookmarks_host|d([])
+}}"
+gtk3_settings_add: "{{
+  gtk3_settings_add_default|d([]) +
+  gtk3_settings_add_group|d([]) +
+  gtk3_settings_add_host|d([])
+}}"
+gtk3_settings_remove: "{{
+  gtk3_settings_remove_default|d([]) +
+  gtk3_settings_remove_group|d([]) +
+  gtk3_settings_remove_host|d([])
+}}"
+gtk4_settings_add: "{{
+  gtk4_settings_add_default|d([]) +
+  gtk4_settings_add_group|d([]) +
+  gtk4_settings_add_host|d([])
+}}"
+gtk4_settings_remove: "{{
+  gtk4_settings_remove_default|d([]) +
+  gtk4_settings_remove_group|d([]) +
+  gtk4_settings_remove_host|d([])
+}}"
+
 # tmux
 tmux_data_dir: "{{ lookup('env','XDG_DATA_HOME') }}/tmux"
 

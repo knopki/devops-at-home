@@ -1,0 +1,4 @@
+---
+gtk3_bookmarks_host:
+  - name: OSMC
+    path: "ftp://osmc.local/home/osmc"
