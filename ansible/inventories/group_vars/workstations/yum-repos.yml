@@ -22,7 +22,7 @@ yum_repos_group:
     gpgkey: "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-$releasever"
   - name: rfremix-fixes
     baseurl: "https://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/releases/$releasever/Everything/$basearch/os/"
-    enabled: 0
+    enabled: 1
     gpgcheck: 0
   - name: rfremix-fixes-updates
     baseurl: "https://mirror.yandex.ru/fedora/russianfedora/russianfedora/fixes/fedora/updates/$releasever/$basearch/"
@@ -30,7 +30,7 @@ yum_repos_group:
     gpgcheck: 0
   - name: rfremix-free
     baseurl: "https://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/releases/$releasever/Everything/$basearch/os/"
-    enabled: 0
+    enabled: 1
     gpgcheck: 0
   - name: rfremix-free-updates
     baseurl: "https://mirror.yandex.ru/fedora/russianfedora/russianfedora/free/fedora/updates/$releasever/$basearch/"
@@ -38,7 +38,7 @@ yum_repos_group:
     gpgcheck: 0
   - name: rfremix-nonfree
     baseurl: "https://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/releases/$releasever/Everything/$basearch/os/"
-    enabled: 0
+    enabled: 1
     gpgcheck: 0
   - name: rfremix-nonfree-updates
     baseurl: "https://mirror.yandex.ru/fedora/russianfedora/russianfedora/nonfree/fedora/updates/$releasever/$basearch/"
