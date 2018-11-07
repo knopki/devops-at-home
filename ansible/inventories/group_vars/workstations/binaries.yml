@@ -80,3 +80,9 @@ binaries_group:
     url: https://github.com/mvdan/sh/releases/download/v2.5.1/shfmt_v2.5.1_linux_amd64
     dest: /usr/local/bin/shfmt
     checksum: sha1:86941dffcd42f650699343deab9c1b18909f64b8
+  - name: kube-score
+    url: https://github.com/zegl/kube-score/releases/download/v0.3.0/kube-score_0.3.0_Linux_x86_64.tar.gz
+    dest: /usr/local/bin/kube-score
+    archive: yes
+    archive_path: kube-score
+    checksum: sha1:cf52644c0c5c15182a185a7ff426b0e681c5daa2
