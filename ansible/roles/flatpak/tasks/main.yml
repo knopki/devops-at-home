@@ -17,3 +17,9 @@
     method: "{{ item.method|default('system') }}"
   with_items: "{{ flatpaks }}"
   tags: flatpak
+
+- name: Install Telegram desktop file (fix unstability)
+  copy:
+    src: org.telegram.desktop.desktop
+    dest: "{{ lookup('env','XDG_DATA_HOME') }}/applications/org.telegram.desktop.desktop"
+  tags: flatpak
