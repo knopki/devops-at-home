@@ -15,3 +15,4 @@ rpm_ostree_install_default:
   - ripgrep
   - tuned
   - vim-enhanced
+  - zerotier-one
