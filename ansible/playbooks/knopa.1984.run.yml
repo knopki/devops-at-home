@@ -47,6 +47,7 @@
       tags: thermald
     - role: firewalld-common
       tags: firewalld
+      firewalld_add_interface_to_zone: enp0s31f6
     - role: cjdns
       tags: cjdns
     - role: gdm
@@ -82,3 +83,12 @@
       crl: "{{ mullvad_crl }}"
       userpass: "{{ mullvad_userpass }}"
       config: "{{ mullvad_config }}"
+    - role: zerotier
+      tags: zerotier
+      zerotier_network_id: "{{ lookup('passwordstore', 'keys/zerotier/1984/network_id') }}"
+      zerotier_access_token: "{{ lookup('passwordstore', 'keys/zerotier/knopki subkey=access_token') }}"
+      zerotier_firewalld_zone: public
+      zerotier_member_ip_assignments:
+        - 172.25.0.101
+        - fccc:be38:6292:c919:fb79::1
+

@@ -1,0 +1,5 @@
+---
+zerotier_api_url: https://my.zerotier.com
+zerotier_apt_state: present
+zerotier_register_short_hostname: false
+zerotier_authorize_member: true

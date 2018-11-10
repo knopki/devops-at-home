@@ -1,0 +1,84 @@
+---
+- name: Enable and start zerotier-one service
+  systemd:
+    name: zerotier-one
+    state: started
+    enabled: yes
+  tags: zerotier
+
+- name: Join ZeroTier network
+  command: zerotier-cli join {{ zerotier_network_id }}
+  args:
+    creates: /var/lib/zerotier-one/networks.d/{{ zerotier_network_id }}.conf
+  tags: zerotier
+
+- when: zerotier_firewalld_zone is defined
+  tags: zerotier
+  block:
+  - name: Get Zerotier interface
+    shell: zerotier-cli listnetworks | grep "{{ zerotier_network_id }}" | awk '{print $8}'
+    register: interface
+    changed_when: false
+
+  - name: Set interface as fact
+    set_fact:
+      zerotier_interface: "{{ interface.stdout }}"
+
+  - name: Enable zerotier port on firewalld zone
+    firewalld:
+      zone: "{{ zerotier_firewalld_zone }}"
+      port: "9993/udp"
+      state: enabled
+      immediate: yes
+      permanent: yes
+
+  - name: Add zerotier interface to firewalld zone
+    firewalld:
+      interface: "{{ zerotier_interface }}"
+      zone: "{{ zerotier_firewalld_zone }}"
+      state: enabled
+      permanent: yes
+      immediate: yes
+
+- when: zerotier_access_token is defined
+  tags: zerotier
+  block:
+  - name: Get Zerotier NodeID
+    shell: zerotier-cli info | awk '{print $3}'
+    register: nodeid
+    changed_when: false
+
+  - name: Set NodeID as fact
+    set_fact:
+      zerotier_node_id: "{{ nodeid.stdout }}"
+
+  - name: Authorize members to network
+    local_action:
+      module: uri
+      url: "{{ zerotier_api_url }}/api/network/{{ zerotier_network_id }}/member/{{ zerotier_node_id }}"
+      method: POST
+      headers:
+        Authorization: bearer {{ zerotier_access_token }}
+      body:
+        hidden: false
+        config:
+          authorized: "{{ zerotier_authorize_member }}"
+      body_format: json
+    register: auth_apiresult
+    become: false
+
+  - name: Configure members in network
+    local_action:
+      module: uri
+      url: "{{ zerotier_api_url }}/api/network/{{ zerotier_network_id }}/member/{{ zerotier_node_id }}"
+      method: POST
+      headers:
+        Authorization: bearer {{ zerotier_access_token }}
+      body:
+        name: "{{ zerotier_register_short_hostname | ternary(inventory_hostname_short, inventory_hostname) }}"
+        description: "{{ zerotier_member_description | default() }}"
+        config:
+          ipAssignments: "{{ zerotier_member_ip_assignments | default([]) | list }}"
+      body_format: json
+    register: conf_apiresult
+    become: false

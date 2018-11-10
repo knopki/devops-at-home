@@ -15,3 +15,13 @@
     permanent: yes
     immediate: yes
   with_items: "{{ firewalld_default_services }}"
+
+- name: Add interface to default zone
+  tags: firewalld
+  when: firewalld_add_interface_to_zone is defined
+  firewalld:
+    interface: "{{ firewalld_add_interface_to_zone }}"
+    zone: "{{ firewalld_default_zone }}"
+    state: enabled
+    permanent: yes
+    immediate: yes
