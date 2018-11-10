@@ -53,6 +53,7 @@
         - shadow-usermod
         - tcpdump
         - uclient-fetch
+        - zerotier
       tags: opkg
 
     #
