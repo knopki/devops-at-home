@@ -4,3 +4,7 @@ yum_repos_default:
     baseurl: https://copr-be.cloud.fedoraproject.org/results/knopki/desktop/fedora-$releasever-$basearch/
     enabled: 1
     gpgkey: https://copr-be.cloud.fedoraproject.org/results/knopki/desktop/pubkey.gpg
+  - name: zerotier
+    baseurl: https://download.zerotier.com/redhat/fc/$releasever/
+    enabled: 1
+    gpgkey: https://download.zerotier.com/contact%40zerotier.com.gpg
