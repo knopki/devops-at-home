@@ -1,6 +1,6 @@
 ---
 ansible_user: root
-ansible_host: mir3g.lan
+ansible_host: z.mir3g.1984.run
 
 root_password: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/root') }}"
 
