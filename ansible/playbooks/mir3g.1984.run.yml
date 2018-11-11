@@ -1128,6 +1128,23 @@
       notify:
         - uci commit
 
+    - name: any2self-Allow-Zerotier
+      uci:
+        command: section
+        config: firewall
+        type: rule
+        find:
+          name: any2self-Allow-Zerotier
+        value:
+          enabled: '1'
+          src: '*'
+          proto: udp
+          dest_port: 9993
+          target: ACCEPT
+      tags: uci, firewall, zerotier
+      notify:
+        - uci commit
+
 
     #
     # port forwarding
@@ -1279,7 +1296,7 @@
         key: network.lan
         type: interface
         value:
-          ifname: eth0.1
+          ifname: eth0.1 zt2lruyn34
           type: 'bridge'
           proto: 'static'
           ipaddr: '10.66.6.1'
@@ -1897,17 +1914,33 @@
       notify:
         - uci commit
 
-    - name: mwan3 vuk rule
+    - name: mwan3 zerotier rule
       uci:
         command: set
-        key: mwan3.vuk
+        key: mwan3.zerotier
         type: rule
         value:
           src_ip: '10.66.6.0/23'
-          dest_ip: '94.159.22.10/29'
+          dest_port: '9993'
+          proto: 'udp'
           sticky: '0'
           use_policy: 'only_wan'
-      tags: uci, mwan3
+      tags: uci, mwan3, zerotier
+      notify:
+        - uci commit
+
+    - name: mwan3 zerotier_src rule
+      uci:
+        command: set
+        key: mwan3.zerotier_src
+        type: rule
+        value:
+          src_ip: '10.66.6.0/23'
+          src_port: '9993'
+          proto: 'udp'
+          sticky: '0'
+          use_policy: 'only_wan'
+      tags: uci, mwan3, zerotier
       notify:
         - uci commit
 
@@ -1922,5 +1955,21 @@
           sticky: '0'
           use_policy: 'only_wg0'
       tags: uci, mwan3
+      notify:
+        - uci commit
+
+    #
+    # zerotier
+    #
+    - uci:
+        command: set
+        key: zerotier.1984
+        type: rule
+        value:
+          enabled: '1'
+          join:
+            - "{{ lookup('passwordstore', 'keys/zerotier/1984/network_id') }}"
+          secret: "{{ lookup('passwordstore', 'keys/zerotier/1984/mir3g_secret') }}"
+      tags: uci, zerotier
       notify:
         - uci commit

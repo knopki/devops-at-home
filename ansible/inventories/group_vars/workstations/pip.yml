@@ -1,1 +1,2 @@
-pip_group: []
+pip_group:
+  - name: dnspython
