@@ -7,7 +7,7 @@ mullvad_config:
   - dev mullvad
   - dev-type tun
   - proto udp
-  - remote se-sto.mullvad.net 1195
+  - remote fi-hel-006.mullvad.net 1195
   - cipher AES-256-CBC
   - resolv-retry infinite
   - nobind
