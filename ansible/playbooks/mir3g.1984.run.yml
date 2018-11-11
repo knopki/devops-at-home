@@ -41,6 +41,7 @@
         - luci-app-ddns
         - luci-app-mwan3
         - luci-app-sqm
+        - luci-app-upnp
         - luci-app-wireguard
         - luci-app-wol
         - openssl-util
@@ -439,7 +440,7 @@
           input: 'REJECT'
           output: 'ACCEPT'
           forward: 'ACCEPT'
-          network: 'lan'
+          network: lan zt1984
           log: '1'
           log_limit: '10/minute'
       tags: uci, firewall
@@ -502,25 +503,6 @@
           log: '1'
           log_limit: '10/minute'
       tags: uci, firewall
-      notify:
-        - uci commit
-
-    - uci:
-        command: section
-        config: firewall
-        type: zone
-        find:
-          name: 'warriors'
-        value:
-          input: 'ACCEPT'
-          output: 'ACCEPT'
-          forward: 'REJECT'
-          network: 'wg1 ovpn1'
-          mtu_fix: '1'
-          conntrack: '1'
-          log: '1'
-          log_limit: '10/minute'
-      tags: uci, firewall, openvpn
       notify:
         - uci commit
 
@@ -1296,7 +1278,7 @@
         key: network.lan
         type: interface
         value:
-          ifname: eth0.1 zt2lruyn34
+          ifname: eth0.1
           type: 'bridge'
           proto: 'static'
           ipaddr: '10.66.6.1'
@@ -1380,6 +1362,18 @@
       notify:
         - uci commit
 
+    # zerotier
+    - uci:
+        command: set
+        key: network.zt1984
+        type: interface
+        value:
+          ifname: zt2lruyn34
+          proto: none
+      tags: uci, network, zerotier
+      notify:
+        - uci commit
+
     # wireguard
     - uci:
         command: set
@@ -1405,63 +1399,13 @@
         find:
           description: fi1-wireguard.mullvad.net
         value:
-          endpoint_host: "{{ lookup('dig', 'fi1-wireguard.mullvad.net') }}"
+          endpoint_host: 185.212.149.201
           endpoint_port: 51820
           public_key: lA7gRTmiY9IcSQGXjOEaJjvgtO76BwYJsaaNQqemMWU=
           route_allowed_ips: 1
           allowed_ips:
             - 0.0.0.0/0
             - ::0/0
-      tags: uci, network
-      notify:
-        - uci commit
-
-    - name: wg1 interface
-      uci:
-        command: set
-        key: network.wg1
-        type: interface
-        value:
-          proto: wireguard
-          listen_port: 51820
-          force_link: 1
-          private_key: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-ingress subkey=private') }}"
-          addresses:
-            - "10.66.7.65/27"
-      tags: uci, network
-      notify:
-        - uci commit
-
-    - name: wg1 peer mi5sergey
-      uci:
-        command: section
-        config: network
-        type: wireguard_wg1
-        find:
-          description: mi5sergey
-        value:
-          public_key: "{{ lookup('passwordstore', 'devices/Mi5Sergey/wg-home subkey=public') }}"
-          route_allowed_ips: 1
-          allowed_ips:
-            - 10.66.7.66/32
-          persistent_keepalive: 25
-      tags: uci, network
-      notify:
-        - uci commit
-
-    - name: wg1 peer mi5olga
-      uci:
-        command: section
-        config: network
-        type: wireguard_wg1
-        find:
-          description: mi5olga
-        value:
-          public_key: "{{ lookup('passwordstore', 'devices/Mi5Olga/wg-home subkey=public') }}"
-          route_allowed_ips: 1
-          allowed_ips:
-            - 10.66.7.67/32
-          persistent_keepalive: 25
       tags: uci, network
       notify:
         - uci commit
@@ -1816,7 +1760,7 @@
         key: mwan3.only_wg0
         type: policy
         value:
-          last_resort: 'unreachable'
+          last_resort: 'default'
           use_member:
             - 'wg0_m1_w1'
       tags: uci, mwan3
@@ -1970,6 +1914,56 @@
           join:
             - "{{ lookup('passwordstore', 'keys/zerotier/1984/network_id') }}"
           secret: "{{ lookup('passwordstore', 'keys/zerotier/1984/mir3g_secret') }}"
+          interface: zt2lruyn34
       tags: uci, zerotier
+      notify:
+        - uci commit
+
+    #
+    # upnpd
+    #
+    - name: Enable upnp
+      uci:
+        command: set
+        key: upnpd.upnpd
+        type: config
+        value:
+          enabled: 1
+          enable_natpmp: 1
+          enable_upnp: 1
+          secure_mode: 1
+          internal_interface: lan
+          external_interface: wan
+      tags: uci, cjdns, upnpd
+      notify:
+        - uci commit
+
+    - name: Allow zetorier in upnpd
+      uci:
+        command: section
+        config: upnpd
+        type: perm_rule
+        find:
+          comment: "allow zerotier"
+        value:
+          action: allow
+          int_ports: 9993
+          comment: "allow zerotier"
+      tags: uci, cjdns, upnpd
+      notify:
+        - uci commit
+
+    - name: Deny all in upnpd
+      uci:
+        command: section
+        config: upnpd
+        type: perm_rule
+        find:
+          comment: "deny all"
+        value:
+          action: deny
+          int_ports: 0-65535
+          comment: "deny all"
+      tags: uci, cjdns, upnpd
       notify:
         - uci commit
