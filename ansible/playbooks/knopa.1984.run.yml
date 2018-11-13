@@ -76,13 +76,20 @@
       sshd_packages: []
 
     # Specific
+    # - role: openvpn-client
+    #   tags: openvpn
+    #   client_name: mullvad
+    #   ca: "{{ mullvad_ca }}"
+    #   crl: "{{ mullvad_crl }}"
+    #   userpass: "{{ mullvad_userpass }}"
+    #   config: "{{ mullvad_config }}"
     - role: openvpn-client
       tags: openvpn
-      client_name: mullvad
-      ca: "{{ mullvad_ca }}"
-      crl: "{{ mullvad_crl }}"
-      userpass: "{{ mullvad_userpass }}"
-      config: "{{ mullvad_config }}"
+      client_name: azire
+      ca: "{{ azire_ca }}"
+      key: "{{ azire_key }}"
+      userpass: "{{ azire_userpass }}"
+      config: "{{ azire_config }}"
     - role: zerotier
       tags: zerotier
       zerotier_network_id: "{{ lookup('passwordstore', 'keys/zerotier/1984/network_id') }}"
