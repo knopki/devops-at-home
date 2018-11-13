@@ -229,8 +229,8 @@
           strictorder: '1'
           interface: "br-lan"
           server:
-            - '10.99.0.1'
-            - '193.138.219.228'
+            - '91.231.153.2'
+            - '2001:67c:15ec:1337::2'
       tags: uci, dhcp
       notify:
         - uci commit
@@ -244,9 +244,9 @@
           start: '100'
           limit: '150'
           leasetime: '12h'
-          # dhcpv6: 'server'
-          # ra: 'server'
-          # ra_management: '60'
+          dhcpv6: relay
+          ndp: relay
+          ra: relay
       tags: uci, dhcp
       notify:
         - uci commit
@@ -457,7 +457,7 @@
           input: 'REJECT'
           output: 'ACCEPT'
           forward: 'REJECT'
-          network: 'wan'
+          network: wan wan6
           masq: '1'
           mtu_fix: '1'
           conntrack: '1'
@@ -1267,7 +1267,7 @@
         key: network.globals
         type: globals
         value:
-          ula_prefix: 'dda4:bbdb:e32d::/48'
+          ula_prefix: '2a03:8600:1001:56e6::/64'
       tags: uci, network
       notify:
         - uci commit
@@ -1309,6 +1309,26 @@
           proto: 'dhcp'
           macaddr: 'D4:CA:6D:68:80:54'
           metric: '10'
+          peerdns: '0'
+          dns:
+            - 91.231.153.2
+      tags: uci, network
+      notify:
+        - uci commit
+
+    # wan6
+    - uci:
+        command: set
+        key: network.wan6
+        type: interface
+        value:
+          ifname: 'eth0.2'
+          proto: 'dhcpv6'
+          reqaddress: try
+          reqprefix: 'no'
+          peerdns: '0'
+          dns:
+            - 2001:67c:15ec:1337::2
       tags: uci, network
       notify:
         - uci commit
@@ -1384,10 +1404,10 @@
           listen_port: 51821
           force_link: 1
           metric: '20'
-          private_key: "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-egress subkey=private') }}"
+          private_key: "{{ lookup('passwordstore', 'websites/azirevpn.com/knopki subkey=mir3g_se1_wg_private') }}"
           addresses:
-            - "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-egress subkey=ip4') }}"
-            - "{{ lookup('passwordstore', 'devices/mir3g.1984.run/wg-egress subkey=ip6') }}"
+            - 10.10.22.232/19
+            - 2a03:8600:1001:4000::16e9/64
       tags: uci, network
       notify:
         - uci commit
@@ -1397,11 +1417,11 @@
         config: network
         type: wireguard_wg0
         find:
-          description: fi1-wireguard.mullvad.net
+          description: se1.wg.azirevpn.net
         value:
-          endpoint_host: 185.212.149.201
+          endpoint_host: 193.180.164.58
           endpoint_port: 51820
-          public_key: lA7gRTmiY9IcSQGXjOEaJjvgtO76BwYJsaaNQqemMWU=
+          public_key: "T28Qn5VFzT4wiwEPd7DscwcP3Rsmq23QcnjH1N5G/wc="
           route_allowed_ips: 1
           allowed_ips:
             - 0.0.0.0/0
@@ -1409,23 +1429,6 @@
       tags: uci, network
       notify:
         - uci commit
-
-    # static routing
-    # - uci:
-    #     command: section
-    #     config: network
-    #     type: route
-    #     find:
-    #       target: '10.66.7.0'
-    #       netmask: '255.255.255.224'
-    #     value:
-    #       gateway: '10.66.7.5'
-    #       interface: 'wg0'
-    #       mtu: '1420'
-    #       metric: '0'
-    #   tags: uci, network
-    #   notify:
-    #     - uci commit
 
     #
     # sqm
@@ -1698,7 +1701,7 @@
           initial_state: 'online'
           family: 'ipv4'
           track_ip:
-            - '10.64.0.1'
+            - '91.231.153.2'
           track_method: 'ping'
           reliability: '1'
           count: '1'
