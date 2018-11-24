@@ -16,7 +16,6 @@ vscode_extensions_group:
   - foxundermoon.shell-format
   - GitHub.vscode-pull-request-github
   - GrapeCity.gc-excelviewer
-  - humao.rest-client
   - joaompinto.vscode-graphviz
   - jpoissonnier.vscode-styled-components
   - LaurentTreguier.rpm-spec
@@ -77,6 +76,7 @@ vscode_settings_group:
   typescript.disableAutomaticTypeAcquisition: false
   update.channel: none
   vsicons.dontShowNewVersionMessage: true
+  window.titleBarStyle: custom
   window.zoomLevel: 0
   workbench.colorTheme: Monokai
   workbench.startupEditor: newUntitledFile
