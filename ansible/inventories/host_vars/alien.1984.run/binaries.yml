@@ -1,5 +1,5 @@
 binaries_host:
-  - name: eos-voter
-    url: https://github.com/greymass/eos-voter/releases/download/v0.3.3/linux-eos-voter-0.3.3-x86_64.AppImage
-    dest: /usr/local/bin/eos-voter
-    checksum: sha1:886266d12358bd2225738dcf6c051180d6017f2f
+  - name: simpleos
+    url: https://github.com/eosrio/simpleos/releases/download/v0.6.9/simpleos-0.6.9-x86_64.AppImage
+    dest: /usr/local/bin/simpleos
+    checksum: sha1:a0d07812b31d38e0d8b1f26fa4b41dcf97b23e1e

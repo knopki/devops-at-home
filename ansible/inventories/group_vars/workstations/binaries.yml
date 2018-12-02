@@ -66,10 +66,6 @@ binaries_group:
     url: https://s3.amazonaws.com/amazingmarvin/Marvin-1.33.3-x86_64.AppImage
     dest: /usr/local/bin/marvin
     checksum: sha1:8056bb029435146ceb62bb7eb498c65318a63acd
-  - name: simpleos
-    url: https://github.com/eosrio/simpleos/releases/download/v0.6.9/simpleos-0.6.9-x86_64.AppImage
-    dest: /usr/local/bin/simpleos
-    checksum: sha1:a0d07812b31d38e0d8b1f26fa4b41dcf97b23e1e
   - name: shfmt
     url: https://github.com/mvdan/sh/releases/download/v2.5.1/shfmt_v2.5.1_linux_amd64
     dest: /usr/local/bin/shfmt
