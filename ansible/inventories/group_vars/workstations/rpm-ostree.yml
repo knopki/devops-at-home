@@ -3,13 +3,12 @@ rpm_ostree_remote_name: "fedora-workstation"
 rpm_ostree_remote_url: "https://dl.fedoraproject.org/atomic/repo/"
 rpm_ostree_desired_ref: "fedora/29/x86_64/updates/silverblue"
 rpm_ostree_remote_gpgkeypath: "/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-29-primary"
-rpm_ostree_desired_version: "29.20181109.0"
+rpm_ostree_desired_version: "29.20181123.0"
 rpm_ostree_install_group:
   - android-tools
   - ansible
   - chromium
   - code
-  - docker-compose
   - exercism
   - feh
   - ffmpeg
@@ -21,6 +20,7 @@ rpm_ostree_install_group:
   - htop
   - iftop
   - iotop
+  - kmod-wireguard
   - kubectl
   - libselinux-python
   - libvirt
@@ -58,6 +58,7 @@ rpm_ostree_install_group:
   - tmux
   - torbrowser-launcher
   - tuned
+  - wireguard
   - wireshark
   - youtube-dl
   - zsh
