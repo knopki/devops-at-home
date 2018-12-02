@@ -1,0 +1,13 @@
+---
+flatpak_remotes_default:
+  - name: flathub
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+flatpak_remotes_manual_default:
+  - name: knopki-bat
+    flatpakrepo_url: https://knopki.github.com/bat-flatpak
+    gpg_verify: no
+    method: system
+
+flatpaks_default:
+  - { name: com.github.sharkdp.Bat, remote: knopki-bat }
