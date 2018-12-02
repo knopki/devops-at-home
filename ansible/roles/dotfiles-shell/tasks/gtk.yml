@@ -1,4 +1,13 @@
 ---
+- name: Create Gtk config directories
+  file:
+    path: "{{ lookup('env','XDG_CONFIG_HOME') }}/{{ item }}"
+    state: directory
+  with_items:
+    - gtk-3.0
+    - gtk-4.0
+  tags: shell, gnupg
+
 - name: Set Gtk3 settings
   ini_file:
     path: "{{ lookup('env','XDG_CONFIG_HOME') }}/gtk-3.0/settings.ini"

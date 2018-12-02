@@ -1,4 +1,10 @@
 ---
+- name: Create scripts directory
+  file:
+    path: "{{ lookup('env','HOME') }}/.local/bin"
+    state: directory
+  tags: shell, gnupg
+
 - name: Deploy scripts
   copy:
     src: "scripts/{{ item }}"
