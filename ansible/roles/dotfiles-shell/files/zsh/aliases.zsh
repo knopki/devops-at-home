@@ -18,3 +18,8 @@ alias gco="git checkout"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 alias gst="git status"
 alias gundo="git reset --soft HEAD^"
+
+# flatpaks
+if which com.github.sharkdp.Bat; then
+  alias bat="com.github.sharkdp.Bat"
+fi

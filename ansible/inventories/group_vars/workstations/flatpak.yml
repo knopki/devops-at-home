@@ -7,13 +7,19 @@ flatpak_remotes_group:
   - name: winepak
     flatpakrepo_url: https://dl.winepak.org/repo/winepak.flatpakrepo
 
+flatpak_remotes_manual_group:
+  - name: knopki-bat
+    flatpakrepo_url: https://knopki.github.com/bat-flatpak
+    gpg_verify: no
+    method: system
+
 flatpaks_group:
+  - { name: com.github.sharkdp.Bat, remote: knopki-bat }
   - name: com.getpostman.Postman
   - name: com.skype.Client
   - name: com.transmissionbt.Transmission
   - name: im.riot.Riot
   - name: io.github.GnomeMpv
-  - name: io.github.mujx.Nheko
   - name: net.ankiweb.Anki
   - name: org.blender.Blender
   - name: org.gimp.GIMP

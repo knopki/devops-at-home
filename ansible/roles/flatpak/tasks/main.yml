@@ -9,6 +9,14 @@
   failed_when: None
   tags: flatpak
 
+- name: Add flatpak remote (manual)
+  command: "flatpak remote-add {% if item.method=='user' %}--user{% endif %} --if-not-exists {% if not item.gpg_verify %}--no-gpg-verify{% endif %} {{ item.name }} {{ item.flatpakrepo_url }}"
+  args:
+    creates: "{% if item.method=='user' %}{{ lookup('env','XDG_DATA_DIRS')}}{% else %}/var/lib/flatpak{% endif %}/repo/refs/remotes/{{ item.name }}"
+  with_items: "{{ flatpak_remotes_manual }}"
+  failed_when: None
+  tags: flatpak
+
 - name: Manage flatpaks
   flatpak:
     name: "{{ item.name }}"
