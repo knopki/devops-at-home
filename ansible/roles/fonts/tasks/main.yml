@@ -1,3 +1,0 @@
----
-- include_tasks: nerd-hack.yml
-  when: install_nerd_hack

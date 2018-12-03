@@ -27,6 +27,7 @@ rpm_ostree_install_group:
   - light
   - lm_sensors
   - mako
+  - nerd-hack-fonts
   - nmap
   - node-gyp
   - nodejs
