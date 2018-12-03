@@ -63,9 +63,9 @@ binaries_group:
     dest: /usr/local/bin/skaffold
     checksum: sha1:2da8dfbf1e3dcc655a166c1f693510c152f60381
   - name: marvin
-    url: https://s3.amazonaws.com/amazingmarvin/Marvin-1.33.3-x86_64.AppImage
+    url: https://s3.amazonaws.com/amazingmarvin/Marvin-1.34.2-x86_64.AppImage
     dest: /usr/local/bin/marvin
-    checksum: sha1:8056bb029435146ceb62bb7eb498c65318a63acd
+    checksum: sha1:cf71846f26ec7872aa9c10ea36a890defe2e3b60
   - name: shfmt
     url: https://github.com/mvdan/sh/releases/download/v2.5.1/shfmt_v2.5.1_linux_amd64
     dest: /usr/local/bin/shfmt
