@@ -1,7 +1,7 @@
 ---
 fancontrol_DEVPATH: "hwmon1="
-fancontrol_DEVNAME: "hwmon1=dell_smm"
-fancontrol_FCTEMPS: "hwmon1/pwm1=hwmon1/temp1_input hwmon1/pwm3=hwmon1/temp2_input"
+fancontrol_DEVNAME: "hwmon0=nouveau hwmon1=dell_smm"
+fancontrol_FCTEMPS: "hwmon1/pwm1=hwmon1/temp1_input hwmon1/pwm3=hwmon0/temp1_input"
 fancontrol_FCFANS: "hwmon1/pwm1=hwmon1/fan1_input  hwmon1/pwm3=hwmon1/fan3_input"
 fancontrol_MINTEMP: "hwmon1/pwm1=60 hwmon1/pwm3=60"
 fancontrol_MAXTEMP: "hwmon1/pwm1=90 hwmon1/pwm3=95"
