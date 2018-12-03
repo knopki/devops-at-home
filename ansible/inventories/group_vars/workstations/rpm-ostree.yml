@@ -27,7 +27,6 @@ rpm_ostree_install_group:
   - light
   - lm_sensors
   - mako
-  - NetworkManager-tui
   - nmap
   - node-gyp
   - nodejs
