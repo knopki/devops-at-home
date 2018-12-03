@@ -71,7 +71,7 @@ source "${ZPLUGINSDIR}/fzf/shell/completion.zsh"
 source /usr/share/google-cloud-sdk/completion.zsh.inc
 
 # kubectl completion
-if (( $+commands[gopass] )); then
+if (( $+commands[kubectl] )); then
   if [ ! -f "$ZDOTDIR/functions/_kubectl" ]; then
     kubectl completion zsh > "$ZDOTDIR/functions/_kubectl"
   fi
