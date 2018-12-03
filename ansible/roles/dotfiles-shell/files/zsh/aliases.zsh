@@ -20,6 +20,6 @@ alias gst="git status"
 alias gundo="git reset --soft HEAD^"
 
 # flatpaks
-if type com.github.sharkdp.Bat > /dev/null; then
+if (( $+commands[com.github.sharkdp.Bat] )); then
   alias bat="com.github.sharkdp.Bat"
 fi
