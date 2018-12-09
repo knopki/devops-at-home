@@ -56,6 +56,5 @@ rpm_ostree_install_group:
   - torbrowser-launcher
   - tuned
   - wireguard
-  - wireshark
   - youtube-dl
   - zsh
