@@ -3,4 +3,5 @@ rpm_ostree_remote_name: "fedora-atomic"
 rpm_ostree_remote_url: "https://dl.fedoraproject.org/atomic/repo/"
 rpm_ostree_desired_ref: "fedora/28/x86_64/atomic-host"
 rpm_ostree_desired_version: "28.20180708.0"
-rpm_ostree_install_group: []
+rpm_ostree_install_group:
+  - git

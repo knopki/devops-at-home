@@ -5,14 +5,12 @@ rpm_ostree_desired_ref: "fedora/29/x86_64/updates/silverblue"
 rpm_ostree_remote_gpgkeypath: "/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-29-primary"
 rpm_ostree_desired_version: "29.20181123.0"
 rpm_ostree_install_group:
-  - android-tools
   - ansible
   - chromium
   - code
   - exercism
   - feh
   - ffmpeg
-  - gnome-tweak-tool
   - google-cloud-sdk
   - grim
   - habitctl
