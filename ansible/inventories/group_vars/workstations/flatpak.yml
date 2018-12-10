@@ -9,6 +9,7 @@ flatpaks_group:
   - name: com.getpostman.Postman
   - name: com.skype.Client
   - name: com.transmissionbt.Transmission
+  - name: com.visualstudio.code.oss
   - name: im.riot.Riot
   - name: io.github.GnomeMpv
   - name: net.ankiweb.Anki
@@ -22,6 +23,7 @@ flatpaks_group:
   - name: org.keepassxc.KeePassXC
   - name: org.libreoffice.LibreOffice
   - name: org.nextcloud.Nextcloud
-  - name: org.speedcrunch.SpeedCrunch
   - name: org.remmina.Remmina
+  - name: org.speedcrunch.SpeedCrunch
   - name: org.telegram.desktop
+
