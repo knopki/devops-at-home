@@ -2,6 +2,8 @@
 flatpak_remotes_default:
   - name: flathub
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+  - name: fedora
+    flatpakrepo_url: oci+https://registry.fedoraproject.org
 
 flatpak_remotes_manual_default:
   - name: knopki-bat
