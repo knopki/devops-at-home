@@ -42,7 +42,7 @@ vscode_extensions_group:
 
 vscode_settings_group:
   debug.inlineValues: true
-  docker.enableLinting: true,
+  docker.enableLinting: true
   editor.fontFamily: "'Hack Nerd Font','Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'"
   editor.fontLigatures: true
   editor.minimap.enabled: false
@@ -52,11 +52,11 @@ vscode_settings_group:
   editor.wordWrap: on
   explorer.confirmDelete: false
   extensions.autoUpdate: true
-  files.autoSave: off
+  files.autoSave: 'off'
   flow.useNPMPackagedFlow: true
   flow.useLSP: true
   git.autofetch: true
-  github.hosts:
+  githubPullRequests.hosts:
     - host: https://github.com
       username: oauth
       token: system
@@ -66,12 +66,12 @@ vscode_settings_group:
     suppressUpdateNotice: true
   gitlens.codeLens.authors.enabled: false
   gitlens.codeLens.recentChange.enabled: false
-  gitlens.historyExplorer.enabled: false
   gitlens.hovers.annotations.enabled: false
   gitlens.keymap: chorded
   javascript.updateImportsOnFileMove.enabled: never
   javascript.validate.enable: false
   prettier.trailingComma: es5
+  tslint.packageManager: yarn
   typescript.check.tscVersion: false
   typescript.disableAutomaticTypeAcquisition: false
   update.channel: none
@@ -101,13 +101,10 @@ vscode_workspaces:
           - christian-kohler.path-intellisense
           - codezombiech.gitignore
           - CoenraadS.bracket-pair-colorizer
-          - dbaeumer.vscode-eslint
           - DeepInThought.vscode-shell-snippets
-          - dzannotti.vscode-babel-coloring
           - eamodio.gitlens
           - EditorConfig.EditorConfig
           - esbenp.prettier-vscode
-          - flowtype.flow-for-vscode
           - foxundermoon.shell-format
           - GitHub.vscode-pull-request-github
           - ms-kubernetes-tools.vscode-kubernetes-tools
