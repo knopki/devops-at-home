@@ -29,7 +29,7 @@
   git:
     repo: https://github.com/denysdovhan/spaceship-prompt.git
     dest: "{{ ZDATADIR }}/plugins/spaceship-prompt"
-    version: v3.8.1
+    version: v3.9.0
     depth: 1
   tags: shell, zsh
 

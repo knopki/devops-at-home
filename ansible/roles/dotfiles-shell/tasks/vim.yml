@@ -22,7 +22,7 @@
   git:
     repo: https://github.com/vim-airline/vim-airline.git
     dest: "{{ vim_data_dir }}/pack/plugins/start/vim-airline"
-    version: v0.9
+    version: v0.10
     depth: 1
   tags: shell, vim
 
