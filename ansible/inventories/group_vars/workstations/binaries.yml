@@ -19,11 +19,11 @@ binaries_group:
     dest: /usr/local/bin/docker-machine-driver-kvm2
     checksum: sha1:dce8bbe1e1f223ff0a3b12065b3783d12401fab5
   - name: gopass
-    url: https://github.com/gopasspw/gopass/releases/download/v1.8.3/gopass-1.8.3-linux-amd64.tar.gz
+    url: https://github.com/gopasspw/gopass/releases/download/v1.8.4/gopass-1.8.4-linux-amd64.tar.gz
     dest: /usr/local/bin/gopass
-    checksum: 1d3672d3ead876af40f9d597c0c350b6897f4006
+    checksum: dbd335c59d24fbf346589a0519e142bca68a593d
     archive: yes
-    archive_path: gopass-1.8.3-linux-amd64/gopass
+    archive_path: gopass-1.8.4-linux-amd64/gopass
   - name: ngrok
     url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
     dest: /usr/local/bin/ngrok
