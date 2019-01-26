@@ -3,7 +3,7 @@ rpm_ostree_remote_name: "fedora-workstation"
 rpm_ostree_remote_url: "https://dl.fedoraproject.org/atomic/repo/"
 rpm_ostree_desired_ref: "fedora/29/x86_64/updates/silverblue"
 rpm_ostree_remote_gpgkeypath: "/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-29-primary"
-rpm_ostree_desired_version: "29.20181123.0"
+rpm_ostree_desired_version: "29.20190124.0"
 rpm_ostree_install_group:
   - ansible
   - chromium
@@ -22,6 +22,7 @@ rpm_ostree_install_group:
   - kubectl
   - libselinux-python
   - libvirt
+  - libvirt-daemon-kvm
   - light
   - lm_sensors
   - mako
