@@ -1,0 +1,39 @@
+---
+- name: Register channels keys
+  shell: "nix-channel --list | awk -F' ' '{print $1}'"
+  changed_when: no
+  check_mode: no
+  register: nixos_channels_keys
+
+- name: Register channels urls
+  shell: "nix-channel --list | awk -F' ' '{print $2}'"
+  changed_when: no
+  check_mode: no
+  register: nixos_channels_urls
+
+- when: nixos_channels_add.keys()|difference(nixos_channels_keys.stdout_lines)|length > 0
+  set_fact:
+    nixos_channels_update_needed: true
+
+- when: nixos_channels_add.values()|difference(nixos_channels_urls.stdout_lines)|length > 0
+  set_fact:
+    nixos_channels_update_needed: true
+
+- when: item in nixos_channels_keys.stdout_lines
+  with_items: "{{ nixos_channels_remove }}"
+  set_fact:
+    nixos_channels_update_needed: true
+
+- name: Remove channels
+  command: "nix-channel --remove {{ item }}"
+  with_items: "{{ nixos_channels_remove }}"
+  when: nixos_channels_update_needed is defined
+
+- name: Add channels
+  command: "nix-channel --add {{ item.value }} {{ item.key }}"
+  with_dict: "{{ nixos_channels_add }}"
+  when: nixos_channels_update_needed is defined
+
+- name: Update channels
+  command: nix-channel --update
+  when: nixos_channels_update_needed is defined

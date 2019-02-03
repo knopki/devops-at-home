@@ -1,0 +1,68 @@
+---
+- name: Create directories
+  file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+    state: directory
+  with_items:
+    - path: /etc/nixos/lib
+      owner: root
+      group: root
+      mode: "0750"
+    - path: /etc/nixos/modules
+      owner: root
+      group: root
+      mode: "0750"
+    - path: /etc/nixos/overlays
+      owner: root
+      group: root
+      mode: "0750"
+    - path: /etc/nixos/secrets
+      owner: root
+      group: root
+      mode: "0755"
+  notify:
+    - nixos-rebuild
+
+- name: Push configuration libs
+  synchronize:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: no
+    group: no
+    perms: no
+    delete: yes
+  with_items:
+    - src: lib
+      dest: /etc/nixos
+    - src: modules
+      dest: /etc/nixos
+    - src: overlays
+      dest: /etc/nixos
+  notify:
+    - nixos-rebuild
+
+- name: Push secrets
+  copy:
+    content: "{{ item.content }}"
+    dest: "/etc/nixos/secrets/{{ item.name }}"
+    owner: "{{ item.owner|default('root') }}"
+    group: "{{ item.owner|default('root') }}"
+    mode: "{{ item.owner|default('0640') }}"
+  no_log: yes
+  with_items:
+    - "{{ nixos_secrets }}"
+  notify:
+    - nixos-rebuild
+
+- name: Copy configuration
+  copy:
+    src: "config/{{ inventory_hostname }}.nix"
+    dest: /etc/nixos/configuration.nix
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nixos-rebuild
