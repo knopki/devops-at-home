@@ -15,6 +15,8 @@ with builtins; {
     (import ./xdg.nix { })
     (import ./zsh.nix { inherit config pkgs lib username; })
     {
+      home.language.monetary = "ru_RU.UTF-8";
+      home.language.time = "ru_RU.UTF-8";
       home.stateVersion = "18.09";
     }
   ];
