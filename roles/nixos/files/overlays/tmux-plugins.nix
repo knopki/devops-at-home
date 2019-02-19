@@ -1,17 +1,3 @@
-# (self: super: {
-#   tmuxPlugins = super.tmuxPlugins // {
-#     tmux-colors-solarized = with super; stdenv.mkDerivation rec {
-#       pluginName = "tmux-colors-solarized";
-#       rtpFilePath = "tmuxcolors.tmux";
-#       src = fetchgit {
-#         url = "https://github.com/seebi/tmux-colors-solarized";
-#         rev = "b74be1f5076240d278e78b6fd132d531d5c41cda";
-#         sha256 = "1qjm6w00rk5pi1a9l50h1i3x1jys4n8zmmigh2gigcr4r7rgr2jv";
-#       };
-#     };
-#   };
-# })
-
 self: super:
 let
   rtpPath = "share/tmux-plugins";
