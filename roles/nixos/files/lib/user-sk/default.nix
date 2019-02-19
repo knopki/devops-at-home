@@ -8,6 +8,7 @@ with builtins; {
   };
 
   hm = lib.mkMerge [
+    (import ./cachedirs.nix { inherit config lib username; })
     (import ./env.nix { inherit config pkgs lib username; })
     (import ./fzf.nix { })
     (import ./profile.nix { })
