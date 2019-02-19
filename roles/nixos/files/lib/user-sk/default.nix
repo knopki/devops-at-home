@@ -8,6 +8,7 @@ with builtins; {
   };
 
   hm = lib.mkMerge [
+    (import ./env.nix { inherit config pkgs lib username; })
     (import ./fzf.nix { })
     (import ./profile.nix { })
     (import ./tmux.nix { inherit config pkgs lib username; })
