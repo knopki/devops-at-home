@@ -11,6 +11,7 @@ with builtins; {
     # common
     (import ../cachedirs.nix { inherit config lib username; })
     (import ../fzf.nix { })
+    (import ../git.nix { })
     (import ../gpg-agent.nix { })
     (import ../profile.nix { })
     (import ../readline.nix { })
@@ -18,6 +19,7 @@ with builtins; {
     (import ../xdg.nix { })
     # specific
     (import ./env.nix { inherit config pkgs lib username; })
+    (import ./git.nix { })
     (import ./gnupg.nix { })
     (import ./tmux.nix { inherit config pkgs lib username; })
     (import ./zsh.nix { inherit config pkgs lib username; })

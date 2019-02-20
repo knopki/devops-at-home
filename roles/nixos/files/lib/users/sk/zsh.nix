@@ -294,12 +294,8 @@ in with builtins;
     shellAliases = {
       _fzf_complete_gopass = "_fzf_complete_pass";
       fzf = "fzf-tmux -m";
-      gco = "git checkout";
-      glog = "git log --graph --pretty=format:\"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\"";
       gmpv = "flatpak run --filesystem=xdg-download io.github.GnomeMpv --enqueue";
       grep = "grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
-      gst = "git status";
-      gundo = "git reset --soft HEAD^";
       history = "fc -il 1";
       ls = "ls --color=auto";
       man = "nocorrect man";
