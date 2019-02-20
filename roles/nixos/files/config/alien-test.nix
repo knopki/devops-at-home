@@ -2,7 +2,7 @@
 with builtins;
 let
   username = "sk";
-  userSk = (import ./lib/user-sk) {
+  userSk = (import ./lib/users/sk) {
     inherit config lib pkgs username;
   };
 in {

@@ -14,6 +14,8 @@ in with builtins;
     ]
   );
 
+  programs.fzf.enableZshIntegration = true;
+
   programs.zsh = {
     dotDir = ".config/zsh";
     enable = true;

@@ -8,13 +8,15 @@ with builtins; {
   };
 
   hm = lib.mkMerge [
-    (import ./cachedirs.nix { inherit config lib username; })
+    # common
+    (import ../cachedirs.nix { inherit config lib username; })
+    (import ../fzf.nix { })
+    (import ../profile.nix { })
+    (import ../readline.nix { })
+    (import ../xdg.nix { })
+    # specific
     (import ./env.nix { inherit config pkgs lib username; })
-    (import ./fzf.nix { })
-    (import ./profile.nix { })
-    (import ./readline.nix { })
     (import ./tmux.nix { inherit config pkgs lib username; })
-    (import ./xdg.nix { })
     (import ./zsh.nix { inherit config pkgs lib username; })
     {
       home.language.monetary = "ru_RU.UTF-8";
