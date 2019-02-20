@@ -13,6 +13,7 @@ with builtins;
 
   environment.systemPackages = with pkgs; [
     gnome3.dconf-editor
+    pinentry_gnome
   ];
 
   programs = {

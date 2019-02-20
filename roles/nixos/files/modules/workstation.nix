@@ -98,10 +98,6 @@ in {
     chromium = {
       enable = true;
     };
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
     npm.enable = true;
     zsh.enable = true;
   };

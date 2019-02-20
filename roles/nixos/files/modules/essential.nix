@@ -23,6 +23,8 @@ in with builtins; {
     iftop
     iotop
     jq
+    pinentry
+    pinentry_ncurses
     pstree
     python3 # required by ansible
     ripgrep

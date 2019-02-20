@@ -11,13 +11,14 @@ with builtins; {
     # common
     (import ../cachedirs.nix { inherit config lib username; })
     (import ../fzf.nix { })
+    (import ../gpg-agent.nix { })
     (import ../profile.nix { })
     (import ../readline.nix { })
     (import ../ssh.nix { })
     (import ../xdg.nix { })
     # specific
     (import ./env.nix { inherit config pkgs lib username; })
-    (import ./ssh.nix { })
+    (import ./gnupg.nix { })
     (import ./tmux.nix { inherit config pkgs lib username; })
     (import ./zsh.nix { inherit config pkgs lib username; })
     {
