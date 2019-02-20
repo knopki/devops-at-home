@@ -12,6 +12,7 @@ with builtins; {
     (import ./env.nix { inherit config pkgs lib username; })
     (import ./fzf.nix { })
     (import ./profile.nix { })
+    (import ./readline.nix { })
     (import ./tmux.nix { inherit config pkgs lib username; })
     (import ./xdg.nix { })
     (import ./zsh.nix { inherit config pkgs lib username; })
