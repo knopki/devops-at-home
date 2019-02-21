@@ -17,8 +17,10 @@ with builtins; {
     (import ../readline.nix { })
     (import ../ssh.nix { })
     (import ../xdg.nix { })
+    (import ../zsh.nix { inherit config pkgs lib username; })
     # specific
     (import ./env.nix { inherit config pkgs lib username; })
+    (import ./fish.nix { inherit config pkgs lib username; })
     (import ./git.nix { })
     (import ./gnupg.nix { })
     (import ./tmux.nix { inherit config pkgs lib username; })
@@ -88,7 +90,7 @@ with builtins; {
       yarn
       youtube-dl
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     uid = 1000;
   };
 }

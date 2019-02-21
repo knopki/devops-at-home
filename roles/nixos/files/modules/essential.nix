@@ -1,6 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   nixpkgsUnstable = import ../overlays/nixpkgs-unstable.nix;
+  userRoot = (import ../lib/users/root) {
+    inherit config lib pkgs;
+    username = "root";
+  };
 in with builtins; {
   boot.kernel.sysctl = {
     "kernel.panic_on_oops" = 1;
@@ -17,6 +21,8 @@ in with builtins; {
     curl
     fd
     file
+    fish
+    fish-foreign-env
     fzf
     gnupg
     htop
@@ -32,6 +38,8 @@ in with builtins; {
     sysstat
     wget
   ];
+
+  home-manager.users.root = userRoot.hm;
 
   i18n = {
     consoleFont = "latarcyrheb-sun16";
@@ -67,12 +75,16 @@ in with builtins; {
 
   nixpkgs.overlays = [
     nixpkgsUnstable
+    (self: super: {
+      fish = super.unstable.fish;
+    })
   ];
 
   programs = {
     bash = {
       enableCompletion = true;
     };
+    fish.enable = true;
     tmux = {
       enable = true;
     };
@@ -123,10 +135,5 @@ in with builtins; {
   };
 
   users.mutableUsers = false;
-  users.users.root = {
-    hashedPassword = readFile "/etc/nixos/secrets/root_password";
-    openssh.authorizedKeys.keyFiles = [
-      "/etc/nixos/secrets/sk_id_rsa.pub"
-    ];
-  };
+  users.users.root = userRoot.systemUser;
 }
