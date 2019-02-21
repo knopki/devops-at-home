@@ -4,10 +4,16 @@ with builtins;
   environment.gnome3.excludePackages = with pkgs; [
     epiphany
     gnome3.accerciser
-    gnome3.gnome-documents
     gnome3.evolution
+    gnome3.gnome-documents
+    gnome3.gnome-documents
+    gnome3.gnome-logs
+    gnome3.gnome-maps
     gnome3.gnome-music
+    gnome3.gnome-photos
     gnome3.gnome-software
+    gnome3.gnome-system-log
+    gnome3.gnome-todo
     gnome3.totem
   ];
 
