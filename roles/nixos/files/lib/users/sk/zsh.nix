@@ -1,37 +1,17 @@
 { config, pkgs, username, lib, ...}:
 let
   selfHM = config.home-manager.users."${username}";
-  zshFunctions = (import ../zsh-functions.nix);
+  # zshFunctions = (import ../zsh-functions.nix);
   zshPlugins = (import ../zsh-plugins.nix) { inherit pkgs; };
 in with builtins;
 {
-  home.file = lib.mkMerge (
-    map (x: {
-      "${selfHM.programs.zsh.dotDir}/functions/${x}".text = zshFunctions.${x};
-    }) [
-      "cdf" "fcd" "fda" "fdr" "fe" "fgshow" "fgstash" "fh" "fkill" "fo" "gb"
-      "gf" "gh" "gr" "gt" "is_in_git_repo" "save_pwd" "source_if_possible"
-    ]
-  );
-
-  programs.fzf.enableZshIntegration = true;
+  # home.file = lib.mkMerge (
+  #   map (x: {
+  #     "${selfHM.programs.zsh.dotDir}/functions/${x}".text = zshFunctions.${x};
+  #   }) [ ]
+  # );
 
   programs.zsh = {
-    dotDir = ".config/zsh";
-    enable = true;
-    enableCompletion = true;
-    enableAutosuggestions = true;
-
-    history = {
-      expireDuplicatesFirst = true;
-      extended = true;
-      ignoreDups = true;
-      path = ".local/share/zsh/history/history.$(date +%Y).$(whoami)@$(hostname -s)";
-      save = 100000000;
-      share = true;
-      size = 100000000;
-    };
-
     initExtra = ''
       # autoload functions
       fpath=( $ZDOTDIR/functions "''${fpath[@]}" )
@@ -247,8 +227,6 @@ in with builtins;
       }
       _bind-git-helper f b t r h
       unset -f _bind-git-helper
-
-
     '';
 
     localVariables = rec {
@@ -266,12 +244,6 @@ in with builtins;
       ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=10";
     };
 
-    loginExtra = ''
-      # login extra
-    '';
-
-
-    # plugins = (import ../../lib/zsh-plugins.nix) { pkgs = pkgs; };
     plugins = with zshPlugins; [
       zsh-256color
       zsh-async
@@ -283,30 +255,6 @@ in with builtins;
       zsh-history-substring-search
     ];
 
-    profileExtra = ''
-      # profile extra
-    '';
-
-    sessionVariables = {
-      SESSIONVARTEST = "test";
-    };
-
-    shellAliases = {
-      _fzf_complete_gopass = "_fzf_complete_pass";
-      fzf = "fzf-tmux -m";
-      gmpv = "flatpak run --filesystem=xdg-download io.github.GnomeMpv --enqueue";
-      grep = "grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
-      history = "fc -il 1";
-      ls = "ls --color=auto";
-      man = "nocorrect man";
-      mv = "nocorrect mv";
-      o = "xdg-open";
-      rsync-copy = "rsync -avz --progress -h";
-      rsync-move = "rsync -avz --progress -h --remove-source-files";
-      rsync-synchronize = "rsync -avzu --delete --progress -h";
-      rsync-update = "rsync -avzu --progress -h";
-      sudo = "nocorrect sudo";
-      svim = "sudo -E vim";
-    };
+    shellAliases = { };
   };
 }
