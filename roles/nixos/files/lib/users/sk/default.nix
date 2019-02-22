@@ -39,6 +39,7 @@ with builtins; {
       "adbusers"
       "audio"
       "disk"
+      "docker"
       "input"
       "libvirtd"
       "networkmanager"
