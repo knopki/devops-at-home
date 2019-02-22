@@ -124,6 +124,7 @@ in {
   };
 
   home-manager.users."${username}" = userSk.hm;
+  home-manager.useUserPackages = true;
 
   networking = {
     hostId = "ff0b9d65";
