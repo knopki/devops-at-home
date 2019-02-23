@@ -2,9 +2,8 @@
 {
   home.file = {
     ".profile".text = ''
-      # export environment.d
+      # fix systemctl from sudo
       export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
-      eval $(systemctl --user show-environment | awk '{print "export " $0}')
 
       # create tmux temporary directory if not exist
       [ -d $TMUX_TMPDIR ] || mkdir -p $TMUX_TMPDIR
