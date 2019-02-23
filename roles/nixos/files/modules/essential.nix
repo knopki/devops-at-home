@@ -23,6 +23,7 @@ in with builtins; {
     file
     fish
     fish-foreign-env
+    fish-theme-pure
     fzf
     gnupg
     htop
@@ -77,6 +78,7 @@ in with builtins; {
     nixpkgsUnstable
     (self: super: {
       fish = super.unstable.fish;
+      fish-theme-pure = pkgs.callPackage ../overlays/fish-theme-pure.nix {};
     })
   ];
 

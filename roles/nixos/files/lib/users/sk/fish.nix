@@ -6,6 +6,9 @@ in with builtins;
 {
   programs.fish = {
     interactiveShellInit = ''
+      # Enable theme Pure
+      set THEME_PURE true
+
       ${fishParts.interactiveShellInitCommon}
     '';
 
