@@ -231,26 +231,4 @@ set-option -g status-right "#(${pkgs.tmuxPlugins.tmux-powerline}/share/tmux-plug
     ];
     terminal = "screen-256color";
   };
-
-  systemd.user.services = {
-    tmux = {
-      Unit = {
-        Description = "tmux default session (detached)";
-      };
-
-      Service = {
-        Type = "forking";
-        ExecStart = "/bin/sh -a -c '. ${selfHM.home.homeDirectory}/.profile && ${pkgs.tmux}/bin/tmux new-session -d'";
-        ExecStop = "${pkgs.tmux}/bin/tmux kill-server";
-        Restart = "always";
-        KillMode = "none";
-      };
-
-      Install = {
-        WantedBy = ["default.target"];
-      };
-    };
-  };
-
-  systemd.user.startServices = true;
 }
