@@ -25,12 +25,14 @@ with builtins; {
     (import ./git.nix { })
     (import ./gnupg.nix { })
     (import ./termite.nix { })
+    (import ./vscode.nix { inherit config username; })
     (import ./tmux.nix { inherit config pkgs lib username; })
     (import ./zsh.nix { inherit config pkgs lib username; })
     {
       home.language.monetary = "ru_RU.UTF-8";
       home.language.time = "ru_RU.UTF-8";
       home.stateVersion = "18.09";
+      nixpkgs.config.allowUnfree = true;
       services.gnome-keyring = {
         enable = true;
         components = ["pkcs11" "secrets" "ssh"];
@@ -93,7 +95,7 @@ with builtins; {
       transmission-gtk
       unstable.kustomize
       unstable.postman
-      vscode
+      vscode-with-extensions
       yarn
       youtube-dl
     ];

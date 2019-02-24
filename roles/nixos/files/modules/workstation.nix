@@ -4,6 +4,7 @@ let
   nixpkgsWayland = import ../overlays/nixpkgs-wayland.nix;
   nur = import ../overlays/nur.nix;
   tmuxPlugins = import ../overlays/tmux-plugins.nix;
+  vscodeExts = import ../overlays/vscode-with-extensions.nix;
 in {
   imports = [
     ./earlyoom.nix
@@ -83,6 +84,7 @@ in {
     nixpkgsWayland
     nur
     tmuxPlugins
+    vscodeExts
     (self: super: {
       sway = super.unstable.sway-beta;
       kustomize2 = pkgs.callPackage ../overlays/kustomize.nix { };
