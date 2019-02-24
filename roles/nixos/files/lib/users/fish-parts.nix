@@ -10,6 +10,7 @@
     if test $THEME_PURE = true
       source ${pkgs.fish-theme-pure}/conf.d/pure.fish
       set fish_function_path ${pkgs.fish-theme-pure} $fish_function_path
+      set pure_separate_prompt_on_error true
     end
   '';
 
