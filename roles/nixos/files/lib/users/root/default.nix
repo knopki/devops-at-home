@@ -1,6 +1,6 @@
 { config, pkgs, lib, username, ... }:
 with builtins; {
-  hm = lib.mkMerge [
+  hm = lib.mkMerge (lib.reverseList [
     # common
     (import ../fish.nix { inherit config pkgs lib username; })
     (import ../fzf.nix { })
@@ -23,7 +23,7 @@ with builtins; {
         userName = "Root";
       };
     }
-  ];
+  ]);
 
   systemUser = {
     hashedPassword = readFile "/etc/nixos/secrets/root_password";

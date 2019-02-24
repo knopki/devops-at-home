@@ -7,7 +7,7 @@ with builtins; {
     };
   };
 
-  hm = lib.mkMerge [
+  hm = lib.mkMerge (lib.reverseList [
     # common
     (import ../cachedirs.nix { inherit config lib username; })
     (import ../fish.nix { inherit config pkgs lib username; })
@@ -31,7 +31,7 @@ with builtins; {
       home.language.time = "ru_RU.UTF-8";
       home.stateVersion = "18.09";
     }
-  ];
+  ]);
 
   systemUser = {
     createHome = true;
