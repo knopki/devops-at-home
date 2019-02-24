@@ -32,6 +32,7 @@ in {
     hdparm
     lm_sensors
     minikube
+    mosh
     neovim
     neovim-remote
     nix-du
