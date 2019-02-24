@@ -11,7 +11,7 @@ with super.vscode-utils; {
         name = "vscode-ansible";
         publisher = "vscoss";
         version = "0.5.2";
-        sha256 = "1x0lkdvc0247bms200nn2z5m7qaq9lg96ppbgk6lg3mgmxknjijv";
+        sha256 = "0r1aqfc969354j8b1k9xsg682fynbk4xjp196f3yknlwj66jnpwx";
       }
       {
         name = "bracket-pair-colorizer";
@@ -71,7 +71,7 @@ with super.vscode-utils; {
         name = "prettier-vscode";
         publisher = "esbenp";
         version = "1.8.1";
-        sha256 = "0mk1ijbrkj0h3g5pm95arh3aka4jz47zzr8m81055h8q6xsj0rzm";
+        sha256 = "0qcm2784n9qc4p77my1kwqrswpji7bp895ay17yzs5g84cj010ln";
       }
       {
         name = "viml";
@@ -83,7 +83,7 @@ with super.vscode-utils; {
         name = "flow-for-vscode";
         publisher = "flowtype";
         version = "1.0.1";
-        sha256 = "0mk1ijbrkj0h3g5pm95arh3aka4jz47zzr8m81055h8q6xsj0rzm";
+        sha256 = "0b3rldawl64divbf6rpk7crxxf6gpfiai84svafyif2726ibyjd2";
       }
       {
         name = "shell-format";
@@ -112,8 +112,8 @@ with super.vscode-utils; {
       {
         name = "jinjahtml";
         publisher = "samuelcolvin";
-        version = "0.0.0";
-        sha256 = "12qgx56g79snkf9r7sgmx3lv0gnzp7avf3a5910i0xq9shfr67n0";
+        version = "0.8.0";
+        sha256 = "0mhiag5jz2np0w9vlj6vgd7vpj0x39m1cyr2lbcwib8mzk2d3zlp";
       }
       {
         name = "rust";
