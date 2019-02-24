@@ -32,7 +32,7 @@ with builtins; {
       home.language.monetary = "ru_RU.UTF-8";
       home.language.time = "ru_RU.UTF-8";
       home.stateVersion = "18.09";
-      nixpkgs.config.allowUnfree = true;
+      nixpkgs.config = config.nixpkgs.config;
       services.gnome-keyring = {
         enable = true;
         components = ["pkcs11" "secrets" "ssh"];

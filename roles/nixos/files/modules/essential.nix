@@ -70,17 +70,20 @@ in with builtins; {
     trustedUsers = [ "@wheel" ];
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    pkgs = import (import ../overlays/nixpkgs-stable.nix) {
+      config = config.nixpkgs.config;
+      overlays = config.nixpkgs.overlays;
+    };
+    overlays = [
+      nixpkgsUnstable
+      (self: super: {
+        fish = super.unstable.fish;
+        fish-theme-pure = pkgs.callPackage ../overlays/fish-theme-pure.nix {};
+      })
+    ];
   };
-
-  nixpkgs.overlays = [
-    nixpkgsUnstable
-    (self: super: {
-      fish = super.unstable.fish;
-      fish-theme-pure = pkgs.callPackage ../overlays/fish-theme-pure.nix {};
-    })
-  ];
 
   programs = {
     bash = {
