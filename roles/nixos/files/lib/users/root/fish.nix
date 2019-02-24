@@ -1,19 +1,18 @@
 { config, pkgs, username, lib, ...}:
 let
   selfHM = config.home-manager.users."${username}";
-  fishParts = import ../fish-parts.nix { inherit pkgs; };
 in with builtins;
 {
   programs.fish = {
     interactiveShellInit = ''
-      # Enable theme Pure
-      set THEME_PURE true
-
-      ${fishParts.interactiveShellInitCommon}
+      fix_term # setup terminal
+      activate_pure_theme # Enable theme Pure
+      colorize_man_pages # Colored man pages
     '';
 
     shellInit = ''
-      ${fishParts.shellInitCommon}
+      activate_fenv # activate fenv command
+      load_profile # load profile with fenv
     '';
   };
 }
