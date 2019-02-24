@@ -13,6 +13,7 @@ in with builtins;
       fzf = "fzf-tmux -m";
       gmpv = "flatpak run --filesystem=xdg-download io.github.GnomeMpv --enqueue";
       grep = "grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
+      myip = "curl ifconfig.co";
       rsync-copy = "rsync -avz --progress -h";
       rsync-move = "rsync -avz --progress -h --remove-source-files";
       rsync-synchronize = "rsync -avzu --delete --progress -h";

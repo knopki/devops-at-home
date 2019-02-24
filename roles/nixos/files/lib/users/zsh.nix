@@ -44,6 +44,7 @@ in with builtins;
       ls = "ls --color=auto";
       man = "nocorrect man";
       mv = "nocorrect mv";
+      myip = "curl ifconfig.co";
       o = "xdg-open";
       rsync-copy = "rsync -avz --progress -h";
       rsync-move = "rsync -avz --progress -h --remove-source-files";
