@@ -24,6 +24,7 @@ with builtins; {
     (import ./fish.nix { inherit config pkgs lib username; })
     (import ./git.nix { })
     (import ./gnupg.nix { })
+    (import ./termite.nix { })
     (import ./tmux.nix { inherit config pkgs lib username; })
     (import ./zsh.nix { inherit config pkgs lib username; })
     {
