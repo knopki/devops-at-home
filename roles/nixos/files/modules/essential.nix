@@ -1,11 +1,16 @@
 { config, pkgs, lib, ... }:
 let
   nixpkgsUnstable = import ../overlays/nixpkgs-unstable.nix;
+  homeManager = import ../overlays/home-manager.nix;
   userRoot = (import ../lib/users/root) {
     inherit config lib pkgs;
     username = "root";
   };
 in with builtins; {
+  imports = [
+    "${homeManager}/nixos"
+  ];
+
   boot.kernel.sysctl = {
     "kernel.panic_on_oops" = 1;
     "kernel.panic" = 20;
