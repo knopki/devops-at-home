@@ -1,8 +1,19 @@
 { config, pkgs, username, lib, ...}:
 let
   selfHM = config.home-manager.users."${username}";
+  fishFunctions = (import ./fish-parts.nix { inherit pkgs; }).functions;
 in with builtins;
 {
+  home.file = lib.mkMerge (
+    map (x: {
+      "${selfHM.xdg.configHome}/fish/functions/${x}.fish".text = fishFunctions.${x};
+    }) [
+      "capitalize"
+      "to-lower"
+      "to-upper"
+    ]
+  );
+
   programs.fish = {
     enable = true;
     shellAbbrs = {
