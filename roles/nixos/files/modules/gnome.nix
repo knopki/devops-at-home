@@ -10,6 +10,7 @@ with builtins;
     gnome3.gnome-logs
     gnome3.gnome-maps
     gnome3.gnome-music
+    gnome3.gnome-nettool
     gnome3.gnome-photos
     gnome3.gnome-software
     gnome3.gnome-system-log
