@@ -19,6 +19,9 @@ in with builtins; {
     "vm.panic_on_oom" = 1;
   };
 
+  # Save current configuration to generation every time
+  environment.etc.current-configuration.source = "/etc/nixos";
+
   environment.pathsToLink = [ "/share/zsh" ];
 
   environment.systemPackages = with pkgs; [
