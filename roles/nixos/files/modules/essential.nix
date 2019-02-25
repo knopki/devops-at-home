@@ -122,6 +122,7 @@ in with builtins; {
   };
 
   services = {
+    dbus.socketActivated = true;
     openssh = {
       enable = true;
       openFirewall = true;
