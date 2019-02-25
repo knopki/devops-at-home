@@ -23,6 +23,7 @@ with builtins; {
     (import ./env.nix { inherit config pkgs lib username; })
     (import ./fish.nix { inherit config pkgs lib username; })
     (import ./git.nix { })
+    (import ./gnome.nix { inherit config; })
     (import ./gnupg.nix { })
     (import ./termite.nix { })
     (import ./vscode.nix { inherit config username; })
