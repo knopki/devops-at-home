@@ -81,14 +81,30 @@ in {
     usePredictableInterfaceNames = true;
   };
 
+  nix = {
+    binaryCachePublicKeys = [
+      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+    ];
+    binaryCaches = [ "https://nixpkgs-wayland.cachix.org" ];
+  };
+
   nixpkgs.overlays = [
     nixpkgsWayland
     nur
     tmuxPlugins
     vscodeExts
     (self: super: {
-      sway = super.unstable.sway-beta;
+      grim = super.grim.override {
+        meson = super.unstable.meson;
+      };
       kube-score = pkgs.callPackage ../overlays/kube-score { };
+      mako = super.mako.override {
+        meson = super.unstable.meson;
+      };
+      sway = super.unstable.sway-beta;
+      slurp = super.slurp.override {
+        meson = super.unstable.meson;
+      };
     })
   ];
 
