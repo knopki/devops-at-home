@@ -88,7 +88,6 @@ in {
     vscodeExts
     (self: super: {
       sway = super.unstable.sway-beta;
-      kustomize2 = pkgs.callPackage ../overlays/kustomize.nix { };
       kube-score = pkgs.callPackage ../overlays/kube-score { };
     })
   ];
