@@ -1,6 +1,11 @@
-{ ... }:
-with builtins;
-{
+{ config, username, ... }:
+let
+  uid = builtins.toString config.users.users."${username}".uid;
+in {
+  home.sessionVariables = {
+    XDG_RUNTIME_DIR = "\${XDG_RUNTIME_DIR:-/run/user/${uid}";
+  };
+
   xdg.enable = true;
 
   xdg.configFile = {

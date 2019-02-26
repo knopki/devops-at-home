@@ -6,10 +6,9 @@ with builtins; {
     (import ../fzf.nix { })
     (import ../git.nix { })
     (import ../gpg-agent.nix { })
-    (import ../profile.nix { inherit config username; })
     (import ../readline.nix { })
-    (import ../ssh.nix { })
-    (import ../xdg.nix { })
+    (import ../ssh.nix { inherit config username; })
+    (import ../xdg.nix { inherit config username; })
     (import ../zsh.nix { inherit config pkgs lib username; })
     # specific
     (import ./env.nix { inherit config pkgs lib; })

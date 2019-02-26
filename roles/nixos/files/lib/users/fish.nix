@@ -48,10 +48,8 @@ in with builtins;
     # Load .profile
     "${selfHM.xdg.configHome}/fish/conf.d/load_profile.fish".text = ''
       function load_profile --description 'Load .profile'
-        if type -q fenv -a (test -e ~/.profile)
+        type -q fenv; and test -e ~/.profile; and begin
           fenv source ~/.profile
-        else
-          echo ".profile not loading!"
         end
       end
     '';

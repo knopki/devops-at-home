@@ -1,6 +1,11 @@
-{ ... }:
-with builtins;
-{
+{ config, username, ...}:
+let
+  selfHM = config.home-manager.users."${username}";
+in {
+  home.sessionVariables = {
+    SSH_AUTH_SOCK = "\${SSH_AUTH_SOCK:-${selfHM.home.sessionVariables.XDG_RUNTIME_DIR}}";
+  };
+
   programs.ssh = {
     enable = true;
     compression = true;
