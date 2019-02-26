@@ -38,6 +38,19 @@ in {
     };
   };
 
+  gtk = {
+    enable = true;
+    font.name = "Sans Serif 10";
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 0;
+      gtk-button-images = 1;
+      gtk-enable-primary-paste = 1;
+      gtk-fallback-icon-theme = "hicolor";
+      gtk-menu-images = 1;
+      gtk-primary-button-warps-slider = 0;
+    };
+  };
+
   home.sessionVariables = {
     # CLUTTER_BACKEND = "wayland";
     # GDK_BACKEND = "wayland";
