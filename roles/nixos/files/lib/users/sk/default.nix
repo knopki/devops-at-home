@@ -10,6 +10,7 @@ with builtins; {
   hm = lib.mkMerge (lib.reverseList [
     # common
     (import ../cachedirs.nix { inherit config lib username; })
+    (import ../editorconfig.nix { inherit lib; })
     (import ../fish.nix { inherit config pkgs lib username; })
     (import ../fzf.nix { })
     (import ../git.nix { })
