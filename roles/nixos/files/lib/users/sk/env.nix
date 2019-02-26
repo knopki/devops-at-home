@@ -19,7 +19,7 @@ in with builtins;
     GTK_RC_FILES = "${selfHM.xdg.configHome}/gtk-1.0/gtkrc";
     GTK2_RC_FILES = "${selfHM.xdg.configHome}/gtk-2.0/gtkrc";
     PASSWORD_STORE_ENABLE_EXTENSIONS = "true";
-    PATH = "${selfHM.home.homeDirectory}/.local/bin:${selfHM.xdg.dataHome}/flatpak/exports/bin:/var/lib/flatpak/exports/bin:\${PATH}";
+    PATH = "${selfHM.home.homeDirectory}/.local/bin:${selfHM.home.homeDirectory}/.local/npm/bin:${selfHM.xdg.dataHome}/flatpak/exports/bin:/var/lib/flatpak/exports/bin:\${PATH}";
     QT_QPA_PLATFORM = "wayland-egl";
     QT_QPA_PLATFORMTHEME = "qt5ct";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";

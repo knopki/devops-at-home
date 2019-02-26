@@ -14,6 +14,7 @@ with builtins; {
     (import ../fzf.nix { })
     (import ../git.nix { })
     (import ../gpg-agent.nix { })
+    (import ../npm.nix { })
     (import ../profile.nix { inherit config username; })
     (import ../readline.nix { })
     (import ../ssh.nix { })
