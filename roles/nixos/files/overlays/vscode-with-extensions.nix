@@ -121,6 +121,12 @@ with super.vscode-utils; {
         version = "0.5.3";
         sha256 = "0nkf6cg1hmmsrvryjs5r0pdwsilfmrmy44wz47jjygyy62ixcad9";
       }
+      {
+        name = "EditorConfig";
+        publisher = "EditorConfig";
+        version = "0.13.0";
+        sha256 = "1dy7rf9w1mvk65fmxbvhbi5pf6cw2lwi07yhafq9x20c36g6dwyz";
+      }
     ];
   };
 }
