@@ -29,6 +29,7 @@ with builtins; {
     (import ./termite.nix { })
     (import ./vscode.nix { inherit config username; })
     (import ./tmux.nix { inherit config pkgs lib username; })
+    (import ./qt.nix { inherit config lib username; })
     (import ./zsh.nix { inherit config pkgs lib username; })
     {
       home.language.monetary = "ru_RU.UTF-8";
