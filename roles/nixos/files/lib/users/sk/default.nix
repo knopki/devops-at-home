@@ -55,10 +55,11 @@ in with builtins; {
     (import ./git.nix { })
     (import ./gnome.nix { inherit config username; })
     (import ./gnupg.nix { })
-    (import ./termite.nix { })
-    (import ./vscode.nix { inherit config username; })
-    (import ./tmux.nix { inherit config pkgs lib username; })
     (import ./qt.nix { inherit config lib username; })
+    (import ./swaywm.nix { inherit config lib pkgs username; })
+    (import ./termite.nix { })
+    (import ./tmux.nix { inherit config pkgs lib username; })
+    (import ./vscode.nix { inherit config username; })
     (import ./zsh.nix { inherit config pkgs lib username; })
     {
       home.language.monetary = "ru_RU.UTF-8";
