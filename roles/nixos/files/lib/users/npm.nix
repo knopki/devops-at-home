@@ -1,9 +1,11 @@
-{ ... }:
-{
+{ config, username, ... }:
+let
+  selfHM = config.home-manager.users."${username}";
+in {
   home.file = {
     ".npmrc".text = ''
-      cache="''${XDG_CACHE_HOME}/npm"
-      prefix="''${XDG_DATA_HOME}/npm"
+      cache="${selfHM.xdg.cacheHome}/npm"
+      prefix="${selfHM.xdg.configHome}/npm"
     '';
   };
 }

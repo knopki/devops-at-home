@@ -1,17 +1,26 @@
 { config, pkgs, lib, username, ... }:
-with builtins; {
+let
+  selfHM = config.home-manager.users."${username}";
+  envd = {
+    "00-system" = {
+      DBUS_SESSION_BUS_ADDRESS = "${selfHM.home.sessionVariables.DBUS_SESSION_BUS_ADDRESS}";
+      XDG_RUNTIME_DIR = "${selfHM.home.sessionVariables.XDG_RUNTIME_DIR}";
+    };
+  };
+in with builtins; {
   hm = lib.mkMerge (lib.reverseList [
     # common
+    (import ../envd.nix { inherit config envd lib username; })
     (import ../fish.nix { inherit config pkgs lib username; })
     (import ../fzf.nix { })
     (import ../git.nix { })
     (import ../gpg-agent.nix { })
     (import ../readline.nix { })
     (import ../ssh.nix { inherit config username; })
-    (import ../xdg.nix { inherit config username; })
+    (import ../xdg.nix { })
     (import ../zsh.nix { inherit config pkgs lib username; })
     # specific
-    (import ./env.nix { inherit config pkgs lib; })
+    (import ./env.nix { inherit config pkgs lib username; })
     (import ./fish.nix { inherit config pkgs lib username; })
     {
       home.language.monetary = "ru_RU.UTF-8";

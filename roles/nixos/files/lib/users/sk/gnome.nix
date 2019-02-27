@@ -50,12 +50,4 @@ in {
       gtk-primary-button-warps-slider = 0;
     };
   };
-
-  home.sessionVariables = {
-    # CLUTTER_BACKEND = "wayland";
-    # GDK_BACKEND = "wayland";
-    GTK_RC_FILES = "${selfHM.xdg.configHome}/gtk-1.0/gtkrc";
-    GTK2_RC_FILES = "${selfHM.xdg.configHome}/gtk-2.0/gtkrc";
-    XDG_CURRENT_DESKTOP = "GNOME";
-  };
 }

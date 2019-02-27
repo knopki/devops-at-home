@@ -18,11 +18,5 @@ in {
       };
     };
   };
-
-  home.sessionVariables = {
-    QT_QPA_PLATFORM = "wayland-egl";
-    QT_QPA_PLATFORMTHEME = "qt5ct";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-  };
 }
 

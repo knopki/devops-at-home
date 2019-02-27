@@ -1,5 +1,33 @@
 { config, pkgs, lib, username, ... }:
-with builtins; {
+let
+  selfHM = config.home-manager.users."${username}";
+  envd = {
+    "00-system" = {
+      DBUS_SESSION_BUS_ADDRESS = "${selfHM.home.sessionVariables.DBUS_SESSION_BUS_ADDRESS}";
+      PATH = "${selfHM.home.sessionVariables.PATH}";
+      XDG_RUNTIME_DIR = "${selfHM.home.sessionVariables.XDG_RUNTIME_DIR}";
+    };
+    "50-graphics" = {
+      __GL_SHADER_DISK_CACHE_PATH = "${selfHM.xdg.cacheHome}/nv";
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+      _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
+      # CLUTTER_BACKEND = "wayland";
+      # GDK_BACKEND = "wayland";
+      CUDA_CACHE_PATH = "${selfHM.xdg.cacheHome}/nv";
+      GTK_RC_FILES = "${selfHM.xdg.configHome}/gtk-1.0/gtkrc";
+      GTK2_RC_FILES = "${selfHM.xdg.configHome}/gtk-2.0/gtkrc";
+      QT_QPA_PLATFORM = "wayland-egl";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      SDL_VIDEODRIVER = "wayland";
+      XDG_CURRENT_DESKTOP = "GNOME";
+    };
+    "50-keyboard" = {
+      XKB_DEFAULT_LAYOUT = "us,ru";
+      XKB_DEFAULT_OPTIONS = "grp:win_space_toggle";
+    };
+  };
+in with builtins; {
   groups = {
     "${username}" = {
       name = "${username}";
@@ -11,14 +39,15 @@ with builtins; {
     # common
     (import ../cachedirs.nix { inherit config lib username; })
     (import ../editorconfig.nix { inherit lib; })
+    (import ../envd.nix { inherit config envd lib username; })
     (import ../fish.nix { inherit config pkgs lib username; })
     (import ../fzf.nix { })
     (import ../git.nix { })
     (import ../gpg-agent.nix { })
-    (import ../npm.nix { })
+    (import ../npm.nix { inherit config username; })
     (import ../readline.nix { })
     (import ../ssh.nix { inherit config username; })
-    (import ../xdg.nix { inherit config username; })
+    (import ../xdg.nix { })
     (import ../zsh.nix { inherit config pkgs lib username; })
     # specific
     (import ./env.nix { inherit config pkgs lib username; })
