@@ -1,10 +1,7 @@
 { config, lib, pkgs, ... }:
 with builtins;
 let
-  nixpkgsWayland = import ../overlays/nixpkgs-wayland.nix;
-  nur = import ../overlays/nur.nix;
-  tmuxPlugins = import ../overlays/tmux-plugins.nix;
-  vscodeExts = import ../overlays/vscode-with-extensions.nix;
+
 in {
   imports = [
     ./earlyoom.nix
@@ -80,26 +77,6 @@ in {
     };
     usePredictableInterfaceNames = true;
   };
-
-  nixpkgs.overlays = [
-    nixpkgsWayland
-    nur
-    tmuxPlugins
-    vscodeExts
-    (self: super: {
-      grim = super.grim.override {
-        meson = super.unstable.meson;
-      };
-      kube-score = pkgs.callPackage ../overlays/kube-score { };
-      mako = super.mako.override {
-        meson = super.unstable.meson;
-      };
-      sway = super.unstable.sway-beta;
-      slurp = super.slurp.override {
-        meson = super.unstable.meson;
-      };
-    })
-  ];
 
   # powerManagement.powertop.enable = true;
 
