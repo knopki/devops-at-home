@@ -61,23 +61,6 @@ in with builtins; {
     22 # SSH
   ];
 
-  nix = {
-    extraOptions = ''
-      gc-keep-outputs = true
-      gc-keep-derivations = true
-      tarball-ttl = ${toString (60 * 60 * 96)}
-    '';
-    gc = {
-      automatic = true;
-      dates = "3:15";
-    };
-    optimise = {
-      automatic = true;
-      dates = [ "4:15" ];
-    };
-    trustedUsers = [ "@wheel" ];
-  };
-
   nixpkgs = {
     config.allowUnfree = true;
     pkgs = import (import ../overlays/nixpkgs-stable.nix) {

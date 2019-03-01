@@ -7,6 +7,7 @@ let
   };
 in {
   imports = [
+    ./modules
     ./modules/workstation.nix
     <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
   ];
