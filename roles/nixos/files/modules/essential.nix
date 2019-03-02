@@ -43,22 +43,6 @@ in with builtins; {
 
   time.timeZone = "Europe/Moscow";
 
-  security.sudo = {
-    enable = true;
-    extraRules = [
-      {
-        commands = [
-          {
-            command = "/run/current-system/sw/bin/nixos-rebuild switch";
-            options = [ "NOPASSWD" ];
-          }
-        ];
-        groups = [ "wheel" ];
-      }
-    ];
-    wheelNeedsPassword = true;
-  };
-
   services = {
     dbus.socketActivated = true;
     openssh = {
