@@ -12,6 +12,7 @@ with lib;
       apps = {
         gnome.enable = true;
         swaywm.enable = true;
+        xserver.enable = true;
         zsh.enable = true;
       };
 

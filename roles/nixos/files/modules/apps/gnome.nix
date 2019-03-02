@@ -35,6 +35,7 @@ with lib;
     };
 
     services = {
+      accounts-daemon.enable = true;
       dbus.packages = with pkgs; [ gnome3.dconf ];
       gnome3.gnome-keyring.enable = true;
       xserver = {

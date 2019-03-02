@@ -82,25 +82,12 @@ in {
   };
 
   services = {
-    accounts-daemon.enable = true;
     flatpak = {
       enable = true;
       # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
     # thermald.enable = true;
     upower.enable = true;
-    xserver = {
-      desktopManager.xterm.enable = false;
-      enable = true;
-      layout = "us,ru";
-      libinput = {
-        enable = true;
-        sendEventsMode = "disabled-on-external-mouse";
-        middleEmulation = false;
-        naturalScrolling = true;
-      };
-      xkbOptions = "grp:caps_toggle,grp_led:caps";
-    };
   };
 
   sound.enable = true;
