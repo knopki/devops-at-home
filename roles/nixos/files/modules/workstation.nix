@@ -5,7 +5,6 @@ let
 in {
   imports = [
     ./essential.nix
-    ./fonts.nix
     ./gnome.nix
     ./sway.nix
   ];

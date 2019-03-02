@@ -13,6 +13,10 @@ with lib;
         zsh.enable = true;
       };
 
+      general = {
+        fonts.enable = true;
+      };
+
       roles = {
         # "inherit" from `essential` role
         essential.enable = true;
