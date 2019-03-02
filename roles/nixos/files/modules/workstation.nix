@@ -115,10 +115,6 @@ in {
   sound.enable = true;
 
   virtualisation = {
-    docker = {
-      enable = true;
-      autoPrune.enable = true;
-    };
     libvirtd = {
       enable = true;
     };

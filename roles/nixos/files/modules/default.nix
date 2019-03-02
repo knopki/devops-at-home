@@ -6,5 +6,6 @@
     ./general
     ./roles
     ./services
+    ./virtualization
   ];
 }

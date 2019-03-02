@@ -25,6 +25,10 @@ with lib;
       services = {
         earlyoom.enable = true;
       };
+
+      virtualisation = {
+        docker.enable = true;
+      };
     };
   };
 }
