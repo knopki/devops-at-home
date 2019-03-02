@@ -8,6 +8,8 @@ with lib;
   };
 
   config = mkIf config.local.roles.essential.enable {
+    local.apps.fish.enable = true;
+
     local.general.nix.enable = true;
     local.general.nixpkgs.enable = true;
     local.general.security.enable = true;
@@ -19,9 +21,6 @@ with lib;
       curl
       fd
       file
-      fish
-      fish-foreign-env
-      fish-theme-pure
       fzf
       gnupg
       htop

@@ -30,7 +30,6 @@ in with builtins; {
     bash = {
       enableCompletion = true;
     };
-    fish.enable = true;
     tmux = {
       enable = true;
     };
