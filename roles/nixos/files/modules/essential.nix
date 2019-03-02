@@ -6,22 +6,6 @@ let
   };
 in with builtins; {
   home-manager.users.root = userRoot.hm;
-
-  programs = {
-    bash = {
-      enableCompletion = true;
-    };
-    tmux = {
-      enable = true;
-    };
-  };
-
-  time.timeZone = "Europe/Moscow";
-
-  services = {
-    dbus.socketActivated = true;
-  };
-
   users.mutableUsers = false;
   users.users.root = userRoot.systemUser;
 }

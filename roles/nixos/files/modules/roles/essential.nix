@@ -58,5 +58,14 @@ with lib;
       sysstat
       wget
     ];
+
+    programs = {
+      bash.enableCompletion = true;
+      tmux.enable = true;
+    };
+
+    time.timeZone = "Europe/Moscow";
+
+    services.dbus.socketActivated = true;
   };
 }
