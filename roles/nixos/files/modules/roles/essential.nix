@@ -16,6 +16,8 @@ with lib;
     local.general.security.enable = true;
     local.general.system.enable = true;
 
+    local.services.timesyncd.enable = true;
+
     boot.kernel.sysctl = {
       "kernel.panic_on_oops" = 1;
       "kernel.panic" = 20;

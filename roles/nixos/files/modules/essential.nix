@@ -30,15 +30,6 @@ in with builtins; {
       passwordAuthentication = false;
       startWhenNeeded = true;
     };
-    timesyncd = {
-      enable = true;
-      servers = [
-        "0.ru.pool.ntp.org"
-        "1.ru.pool.ntp.org"
-        "2.ru.pool.ntp.org"
-        "3.ru.pool.ntp.org"
-      ];
-    };
   };
 
   users.mutableUsers = false;

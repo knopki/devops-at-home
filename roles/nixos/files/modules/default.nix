@@ -5,5 +5,6 @@
     ./apps
     ./general
     ./roles
+    ./services
   ];
 }
