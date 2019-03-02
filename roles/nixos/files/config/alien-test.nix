@@ -114,18 +114,12 @@ in {
     bluetooth.enable = true;
     cpu.intel.updateMicrocode = true;
     opengl.driSupport32Bit = true;
-    pulseaudio = {
-      extraConfig = ''
-        load-module module-alsa-sink device=hw:0,0 sink_properties=device.description="Analog-Output" control=PCM
-        load-module module-alsa-sink device=hw:0,1 sink_properties=device.description="HDMI-Output" control=PCM
-      '';
-      support32Bit = true;
-    };
   };
 
   home-manager.users."${username}" = userSk.hm;
   home-manager.useUserPackages = true;
 
+  local.hardware.machine = "alienware-15r2";
   local.roles.workstation.enable = true;
 
   networking = {

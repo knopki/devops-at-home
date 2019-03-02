@@ -52,10 +52,6 @@ in {
     enableRedistributableFirmware = true;
     opengl.enable = true;
     sane.enable = true;
-    pulseaudio = {
-      enable = true;
-      package = pkgs.pulseaudioFull;
-    };
   };
 
   home-manager.useUserPackages = true;
@@ -89,6 +85,4 @@ in {
     # thermald.enable = true;
     upower.enable = true;
   };
-
-  sound.enable = true;
 }

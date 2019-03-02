@@ -20,6 +20,10 @@ with lib;
         fonts.enable = true;
       };
 
+      hardware = {
+        sound.enable = true;
+      };
+
       roles = {
         # "inherit" from `essential` role
         essential.enable = true;
