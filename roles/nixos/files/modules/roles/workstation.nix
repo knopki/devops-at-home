@@ -24,6 +24,7 @@ with lib;
 
       services = {
         earlyoom.enable = true;
+        printing.enable = true;
       };
 
       virtualisation = {

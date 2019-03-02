@@ -85,16 +85,9 @@ in {
 
   services = {
     accounts-daemon.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns = true;
-    };
     flatpak = {
       enable = true;
       # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    };
-    printing = {
-      enable = true;
     };
     # thermald.enable = true;
     upower.enable = true;
