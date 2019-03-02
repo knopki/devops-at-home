@@ -7,7 +7,6 @@ in {
     ./essential.nix
     ./fonts.nix
     ./gnome.nix
-    ./polkit.nix
     ./sway.nix
   ];
 
