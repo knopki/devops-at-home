@@ -113,10 +113,4 @@ in {
   };
 
   sound.enable = true;
-
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-    };
-  };
 }
