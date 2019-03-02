@@ -36,6 +36,7 @@ with lib;
       dbus.packages = with pkgs; [ gnome3.dconf ];
       gnome3.gnome-keyring.enable = true;
       xserver = {
+        enable = true;
         displayManager.session = [
           {
             manage = "desktop";

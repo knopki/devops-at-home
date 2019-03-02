@@ -5,7 +5,6 @@ let
 in {
   imports = [
     ./essential.nix
-    ./gnome.nix
   ];
 
   boot.kernel.sysctl = {
