@@ -10,6 +10,7 @@ with lib;
   config = mkIf config.local.roles.workstation.enable {
     local = {
       apps = {
+        swaywm.enable = true;
         zsh.enable = true;
       };
 

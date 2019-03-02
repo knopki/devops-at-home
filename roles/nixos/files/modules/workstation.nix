@@ -6,7 +6,6 @@ in {
   imports = [
     ./essential.nix
     ./gnome.nix
-    ./sway.nix
   ];
 
   boot.kernel.sysctl = {
