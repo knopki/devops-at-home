@@ -10,5 +10,7 @@ with lib;
   config = mkIf config.local.roles.workstation.enable {
     # "inherit" from `essential` role
     local.roles.essential.enable = true;
+
+    local.apps.zsh.enable = true;
   };
 }

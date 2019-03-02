@@ -16,8 +16,6 @@ in with builtins; {
   # Save current configuration to generation every time
   environment.etc.current-configuration.source = "/etc/nixos";
 
-  environment.pathsToLink = [ "/share/zsh" ];
-
   home-manager.users.root = userRoot.hm;
 
   i18n = {
