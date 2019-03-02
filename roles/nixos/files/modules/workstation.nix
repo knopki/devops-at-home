@@ -4,7 +4,6 @@ let
 
 in {
   imports = [
-    ./earlyoom.nix
     ./essential.nix
     ./fonts.nix
     ./gnome.nix
