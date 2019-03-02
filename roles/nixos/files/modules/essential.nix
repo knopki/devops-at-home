@@ -7,10 +7,6 @@ let
 in with builtins; {
   home-manager.users.root = userRoot.hm;
 
-  networking.firewall.allowedTCPPorts = [
-    22 # SSH
-  ];
-
   programs = {
     bash = {
       enableCompletion = true;
@@ -24,12 +20,6 @@ in with builtins; {
 
   services = {
     dbus.socketActivated = true;
-    openssh = {
-      enable = true;
-      openFirewall = true;
-      passwordAuthentication = false;
-      startWhenNeeded = true;
-    };
   };
 
   users.mutableUsers = false;

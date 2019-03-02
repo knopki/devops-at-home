@@ -8,15 +8,24 @@ with lib;
   };
 
   config = mkIf config.local.roles.essential.enable {
-    local.apps.fish.enable = true;
+    local = {
+      apps = {
+        fish.enable = true;
+      };
 
-    local.general.i18n.enable = true;
-    local.general.nix.enable = true;
-    local.general.nixpkgs.enable = true;
-    local.general.security.enable = true;
-    local.general.system.enable = true;
+      general = {
+        i18n.enable = true;
+        nix.enable = true;
+        nixpkgs.enable = true;
+        security.enable = true;
+        system.enable = true;
+      };
 
-    local.services.timesyncd.enable = true;
+      services = {
+        timesyncd.enable = true;
+        ssh.enable = true;
+      };
+    };
 
     boot.kernel.sysctl = {
       "kernel.panic_on_oops" = 1;
