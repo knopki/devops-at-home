@@ -5,22 +5,7 @@ let
     username = "root";
   };
 in with builtins; {
-  boot.kernel.sysctl = {
-    "kernel.panic_on_oops" = 1;
-    "kernel.panic" = 20;
-    "net.ipv4.ip_nonlocal_bind" = 1;
-    "net.ipv6.ip_nonlocal_bind" = 1;
-    "vm.panic_on_oom" = 1;
-  };
-
   home-manager.users.root = userRoot.hm;
-
-  i18n = {
-    consoleFont = "latarcyrheb-sun16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-    supportedLocales = [ "en_US.UTF-8/UTF-8" "ru_RU.UTF-8/UTF-8" ];
-  };
 
   networking.firewall.allowedTCPPorts = [
     22 # SSH

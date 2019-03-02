@@ -34,7 +34,6 @@ in {
     neovim-remote
     nix-du
     nix-prefetch-git
-    nnn
     nodejs-10_x
     openvpn
     p7zip
@@ -46,12 +45,10 @@ in {
     python27Packages.pytz
     python27Packages.tzlocal
     qt5ct
-    ranger
     selinux-python
     syncthing
     unstable.go2nix
     unstable.vgo2nix
-    vim
     virtmanager
     zerotierone
   ];
