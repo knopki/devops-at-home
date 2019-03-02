@@ -21,6 +21,7 @@ with lib;
       };
 
       hardware = {
+        scanning.enable = true;
         sound.enable = true;
       };
 
@@ -38,6 +39,69 @@ with lib;
         docker.enable = true;
         libvirtd.enable = true;
       };
+    };
+
+    boot.kernel.sysctl = {
+      "fs.inotify.max_user_watches" = 524288;
+      "vm.swappiness" = 0;
+    };
+    boot.tmpOnTmpfs = true;
+
+    environment.systemPackages = with pkgs; [
+      ansible
+      docker-machine-kvm2
+      gcc
+      gitAndTools.gitFull
+      go
+      gopass
+      hdparm
+      lm_sensors
+      minikube
+      mosh
+      neovim
+      neovim-remote
+      nix-du
+      nix-prefetch-git
+      nodejs-10_x
+      p7zip
+      pass
+      pass-otp
+      powertop
+      python27Packages.dnspython
+      python27Packages.pydbus
+      python27Packages.pytz
+      python27Packages.tzlocal
+      qt5ct
+      selinux-python
+      zerotierone
+    ];
+
+    hardware = {
+      opengl.enable = true;
+    };
+
+    networking = {
+      firewall = {
+        enable = true;
+      };
+      networkmanager = {
+        enable = true;
+        dns = "dnsmasq";
+      };
+      usePredictableInterfaceNames = true;
+    };
+
+    programs = {
+      adb.enable = true;
+      npm.enable = true;
+    };
+
+    services = {
+      flatpak.enable = true;
+      fwupd.enable = true;
+      # thermald.enable = true;
+      trezord.enable = true;
+      upower.enable = true;
     };
   };
 }

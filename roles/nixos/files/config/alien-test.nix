@@ -2,15 +2,23 @@
 with builtins;
 let
   username = "sk";
+  userRoot = (import ./lib/users/root) {
+    inherit config lib pkgs;
+    username = "root";
+  };
   userSk = (import ./lib/users/sk) {
     inherit config lib pkgs username;
   };
 in {
   imports = [
     ./modules
-    ./modules/workstation.nix
     <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
   ];
+
+  # TODO: remove
+  home-manager.users.root = userRoot.hm;
+  users.mutableUsers = false;
+  users.users.root = userRoot.systemUser;
 
   boot = {
     extraModprobeConfig = ''

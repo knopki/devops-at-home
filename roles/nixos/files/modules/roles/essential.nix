@@ -47,6 +47,7 @@ with lib;
       iftop
       iotop
       jq
+      neovim
       nnn
       pinentry
       pinentry_ncurses
@@ -58,6 +59,10 @@ with lib;
       sysstat
       wget
     ];
+
+    hardware.enableRedistributableFirmware = true;
+
+    home-manager.useUserPackages = true;
 
     programs = {
       bash.enableCompletion = true;

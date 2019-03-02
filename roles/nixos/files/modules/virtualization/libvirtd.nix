@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 {
@@ -9,5 +9,9 @@ with lib;
       enable = true;
       qemuRunAsRoot = true;
     };
+
+    environment.systemPackages = mkIf config.local.roles.workstation.enable [
+      pkgs.virtmanager
+    ];
   };
 }
