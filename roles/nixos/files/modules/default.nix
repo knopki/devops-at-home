@@ -4,5 +4,6 @@
   [
     ./apps
     ./general
+    ./roles
   ];
 }

@@ -126,6 +126,8 @@ in {
   home-manager.users."${username}" = userSk.hm;
   home-manager.useUserPackages = true;
 
+  local.roles.workstation.enable = true;
+
   networking = {
     hostId = "ff0b9d65";
     hostName = "alien-test";
