@@ -120,13 +120,6 @@ in {
 
   sound.enable = true;
 
-  system = {
-    autoUpgrade = {
-      channel = "https://nixos.org/channels/nixos-18.09";
-    };
-    stateVersion = "18.09";
-  };
-
   virtualisation = {
     docker = {
       enable = true;

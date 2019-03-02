@@ -13,9 +13,6 @@ in with builtins; {
     "vm.panic_on_oom" = 1;
   };
 
-  # Save current configuration to generation every time
-  environment.etc.current-configuration.source = "/etc/nixos";
-
   home-manager.users.root = userRoot.hm;
 
   i18n = {
@@ -58,14 +55,6 @@ in with builtins; {
         "3.ru.pool.ntp.org"
       ];
     };
-  };
-
-  system = {
-    autoUpgrade = {
-      dates = "2:15";
-      enable = true;
-    };
-    copySystemConfiguration = true;
   };
 
   users.mutableUsers = false;

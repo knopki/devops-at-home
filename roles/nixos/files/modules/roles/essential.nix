@@ -11,6 +11,7 @@ with lib;
     local.general.nix.enable = true;
     local.general.nixpkgs.enable = true;
     local.general.security.enable = true;
+    local.general.system.enable = true;
 
     # common packages on all machines
     environment.systemPackages = with pkgs; [
