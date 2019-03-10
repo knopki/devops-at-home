@@ -7,6 +7,7 @@
     ./hardware
     ./roles
     ./services
+    ./users
     ./virtualization
   ];
 }

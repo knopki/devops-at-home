@@ -1,24 +1,10 @@
 { config, lib, pkgs, ... }:
 with builtins;
-let
-  username = "sk";
-  userRoot = (import ./lib/users/root) {
-    inherit config lib pkgs;
-    username = "root";
-  };
-  userSk = (import ./lib/users/sk) {
-    inherit config lib pkgs username;
-  };
-in {
+{
   imports = [
     ./modules
     <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
   ];
-
-  # TODO: remove
-  home-manager.users.root = userRoot.hm;
-  users.mutableUsers = false;
-  users.users.root = userRoot.systemUser;
 
   boot = {
     extraModprobeConfig = ''
@@ -124,11 +110,11 @@ in {
     opengl.driSupport32Bit = true;
   };
 
-  home-manager.users."${username}" = userSk.hm;
-  home-manager.useUserPackages = true;
-
-  local.hardware.machine = "alienware-15r2";
-  local.roles.workstation.enable = true;
+  local = {
+    hardware.machine = "alienware-15r2";
+    roles.workstation.enable = true;
+    users.setupUsers = [ "sk" ];
+  };
 
   networking = {
     hostId = "ff0b9d65";
@@ -149,7 +135,4 @@ in {
       device = "/dev/mapper/alien--vg-swap";
     }
   ];
-
-  users.groups = userSk.groups;
-  users.users."${username}" = userSk.systemUser;
 }

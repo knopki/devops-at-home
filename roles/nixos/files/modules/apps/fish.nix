@@ -8,14 +8,11 @@ with lib;
   };
 
   config = mkIf config.local.apps.fish.enable {
-    environment.systemPackages = with pkgs; [
-      fish
-      fish-foreign-env
-      fish-theme-pure
-    ];
-
     programs.fish = {
       enable = true;
+      vendor.completions.enable = true;
+      vendor.config.enable = true;
+      vendor.functions.enable = true;
     };
   };
 }

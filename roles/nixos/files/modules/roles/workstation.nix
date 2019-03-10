@@ -48,29 +48,22 @@ with lib;
     boot.tmpOnTmpfs = true;
 
     environment.systemPackages = with pkgs; [
-      ansible
-      docker-machine-kvm2
       gcc
-      gitAndTools.gitFull
       go
       gopass
       hdparm
       lm_sensors
-      minikube
       mosh
       neovim
       neovim-remote
-      nix-du
-      nix-prefetch-git
-      nodejs-10_x
       p7zip
       pass
       pass-otp
       powertop
-      python27Packages.dnspython
-      python27Packages.pydbus
-      python27Packages.pytz
-      python27Packages.tzlocal
+      python27Packages.dnspython # ???
+      python27Packages.pydbus # ???
+      python27Packages.pytz # ???
+      python27Packages.tzlocal # ???
       qt5ct
       selinux-python
       zerotierone

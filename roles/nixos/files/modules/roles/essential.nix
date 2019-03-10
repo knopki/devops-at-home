@@ -25,6 +25,8 @@ with lib;
         timesyncd.enable = true;
         ssh.enable = true;
       };
+
+      users.setupUsers = [ "root" ];
     };
 
     boot.kernel.sysctl = {
@@ -41,7 +43,7 @@ with lib;
       curl
       fd
       file
-      fzf
+      gitAndTools.gitFull
       gnupg
       htop
       iftop
@@ -57,6 +59,7 @@ with lib;
       ripgrep
       rsync
       sysstat
+      tree
       wget
     ];
 

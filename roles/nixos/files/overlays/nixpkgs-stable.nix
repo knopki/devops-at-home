@@ -1,6 +1,6 @@
 (import ../lib/fetchGHTarball.nix) {
   owner = "NixOS";
   repo = "nixpkgs-channels";
-  rev = "235487585edef271b191ac242be05f4d56f0be0c"; # 2019-02-25
-  sha256 = "1x0xa6jrg4259fmrq35pnb0m1kffqqfii96dgxfs3rc4f843h77z";
+  rev = "37694c8cc0e9ecab60d06f1d9a2fd0073bcc5fa3"; # 2019-03-10
+  sha256 = "1ibjg6ln2y764wfg0yd0v055jm4xzhmxy5lfz63m6jr3y16jdmzb";
 }
