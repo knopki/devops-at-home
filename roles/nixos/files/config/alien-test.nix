@@ -128,6 +128,10 @@ with builtins;
     fstrim.enable = true;
     spice-vdagentd.enable = true;
     qemuGuest.enable = true;
+    zerotierone = {
+      enable = true;
+      joinNetworks = [ "1c33c1ced08df9ac" ];
+    };
   };
 
   swapDevices = [

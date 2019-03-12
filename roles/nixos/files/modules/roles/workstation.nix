@@ -66,7 +66,6 @@ with lib;
       python27Packages.tzlocal # ???
       qt5ct
       selinux-python
-      zerotierone
     ];
 
     hardware = {
