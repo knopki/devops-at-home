@@ -28,7 +28,7 @@ in {
         open = False
         mpris {
           format = '{state} [{artist} - ][{title}] {previous}{toggle}{next}'
-          format_none = ''''
+          format_none = '''
         }
       }
 
