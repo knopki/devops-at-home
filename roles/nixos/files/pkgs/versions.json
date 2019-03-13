@@ -1,0 +1,50 @@
+{
+  "home-manager": {
+    "owner": "rycee",
+    "repo": "home-manager",
+    "rev": "267afa5a3b2851e9948adacb21013bb0656c1370",
+    "sha256": "18dw64z6ry99k95xmlibg6ah2i8nas2slqria24gys1s9dv88v23"
+  },
+  "fish-theme-pure": {
+    "owner": "rafaelrinaldi",
+    "repo": "pure",
+    "rev": "v2.1.1",
+    "sha256": "1zdag12dyl7h6f046l411vmysw8fiim49zx5x4bh66vld8nj0h7k"
+  },
+  "nixpkgs-stable": {
+    "owner": "NixOS",
+    "repo": "nixpkgs-channels",
+    "rev": "37694c8cc0e9ecab60d06f1d9a2fd0073bcc5fa3",
+    "sha256": "1ibjg6ln2y764wfg0yd0v055jm4xzhmxy5lfz63m6jr3y16jdmzb"
+  },
+  "nixpkgs-unstable": {
+    "owner": "NixOS",
+    "repo": "nixpkgs-channels",
+    "rev": "5d3fd3674a66c5b1ada63e2eace140519849c967",
+    "sha256": "1yjn56jsczih4chjcll63a20v3nwv1jhl2rf6rk8d8cwvb10g0mk"
+  },
+  "nixpkgs-wayland": {
+    "owner": "colemickens",
+    "repo": "nixpkgs-wayland",
+    "rev": "bf332c6369fb79e677b277db225513b14e4e8874",
+    "sha256": "0bwx9fp0z4cjbq9lf0pxq5y7zcha3m9jcsaqqw8gjvghavfcg6ql"
+  },
+  "nur": {
+    "owner": "nix-community",
+    "repo": "NUR",
+    "rev": "c7fb02c89ecf706c364d86a1ae6cf44c0f039a16",
+    "sha256": "037zadd560k0xcw54r9r560x3rwplg186v6ypgk36p3k2fzfmym8"
+  },
+  "tmux-colots-solarized": {
+    "owner": "seebi",
+    "repo": "tmux-colors-solarized",
+    "rev": "b74be1f5076240d278e78b6fd132d531d5c41cda",
+    "sha256": "1qjm6w00rk5pi1a9l50h1i3x1jys4n8zmmigh2gigcr4r7rgr2jv"
+  },
+  "tmux-powerline": {
+    "owner": "erikw",
+    "repo": "tmux-powerline",
+    "rev": "V1.1",
+    "sha256": "0zv8f6nmf0x1x59v1jdv7j97cbb78gaqbx4fx5r0i2pd94w5jxps"
+  }
+}

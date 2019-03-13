@@ -4,12 +4,9 @@ stdenv.mkDerivation rec {
   name = "fish-theme-pure-${version}";
   version = "2.1.1";
 
-  src = fetchFromGitHub {
-    owner = "rafaelrinaldi";
-    repo = "pure";
-    rev = "v2.1.1";
-    sha256 = "1zdag12dyl7h6f046l411vmysw8fiim49zx5x4bh66vld8nj0h7k";
-  };
+  src = fetchFromGitHub
+    (builtins.fromJSON
+      (builtins.readFile ./versions.json)).fish-theme-pure;
 
   dontBuild = true;
 

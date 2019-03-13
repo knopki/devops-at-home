@@ -15,7 +15,7 @@
       owner: root
       group: root
       mode: "0750"
-    - path: /etc/nixos/overlays
+    - path: /etc/nixos/pkgs
       owner: root
       group: root
       mode: "0750"
@@ -39,7 +39,7 @@
       dest: /etc/nixos
     - src: modules
       dest: /etc/nixos
-    - src: overlays
+    - src: pkgs
       dest: /etc/nixos
   notify:
     - nixos-rebuild

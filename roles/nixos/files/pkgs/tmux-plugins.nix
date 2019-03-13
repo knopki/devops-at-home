@@ -1,5 +1,8 @@
 self: super:
+with import <nixpkgs> {};
 let
+  versions = builtins.fromJSON (builtins.readFile ./versions.json);
+
   rtpPath = "share/tmux-plugins";
 
   addRtp = path: rtpFilePath: attrs: derivation:
@@ -50,21 +53,13 @@ in rec {
     tmux-colors-solarized = mkDerivation rec {
       pluginName = "tmux-colors-solarized";
       rtpFilePath = "tmuxcolors.tmux";
-      src = super.fetchgit {
-        url = "https://github.com/seebi/tmux-colors-solarized";
-        rev = "b74be1f5076240d278e78b6fd132d531d5c41cda";
-        sha256 = "1qjm6w00rk5pi1a9l50h1i3x1jys4n8zmmigh2gigcr4r7rgr2jv";
-      };
+      src = fetchFromGitHub versions.tmux-colots-solarized;
     };
 
     tmux-powerline = mkDerivation rec {
       pluginName = "tmux-powerline";
       rtpFilePath = "powerline.sh";
-      src = super.fetchgit {
-        url = "https://github.com/erikw/tmux-powerline";
-        rev = "V1.1";
-        sha256 = "0zv8f6nmf0x1x59v1jdv7j97cbb78gaqbx4fx5r0i2pd94w5jxps";
-      };
+      src = fetchFromGitHub versions.tmux-powerline;
     };
   };
 }

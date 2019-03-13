@@ -1,11 +1,9 @@
 { config, pkgs, lib, ... }:
 with lib;
+with import <nixpkgs> {};
 let
-  homeManager = import ../../overlays/home-manager.nix;
-  nixpkgsUnstable = import ../../overlays/nixpkgs-unstable.nix;
-  nixpkgsWayland = import ../../overlays/nixpkgs-wayland.nix;
-  nur = import ../../overlays/nur.nix;
-  tmuxPlugins = import ../../overlays/tmux-plugins.nix;
+  versions = builtins.fromJSON (builtins.readFile ../../pkgs/versions.json);
+  homeManager = fetchFromGitHub versions.home-manager;
 in {
   imports = [
     "${homeManager}/nixos"
@@ -19,23 +17,28 @@ in {
     nixpkgs = {
       config.allowUnfree = true;
 
-      pkgs = import (import ../../overlays/nixpkgs-stable.nix) {
+      pkgs = import (fetchFromGitHub versions.nixpkgs-stable) {
         config = config.nixpkgs.config;
         overlays = config.nixpkgs.overlays;
       };
 
       overlays = [
-        nixpkgsUnstable
-        nixpkgsWayland
-        nur
-        tmuxPlugins
+        (self: super: {
+          unstable = import (fetchFromGitHub versions.nixpkgs-unstable) {
+            config.allowUnfree = true;
+          };
+          nur = import (fetchFromGitHub versions.nur) {
+            inherit super;
+          };
+        })
+        (import (fetchFromGitHub versions.nixpkgs-wayland))
         (self: super: {
           fish = super.unstable.fish;
-          fish-theme-pure = pkgs.callPackage ../../overlays/fish-theme-pure.nix {};
+          fish-theme-pure = pkgs.callPackage ../../pkgs/fish-theme-pure.nix {};
           grim = super.grim.override {
             meson = super.unstable.meson;
           };
-          kube-score = pkgs.callPackage ../../overlays/kube-score { };
+          kube-score = pkgs.callPackage ../../pkgs/kube-score { };
           mako = super.mako.override {
             meson = super.unstable.meson;
           };
@@ -44,6 +47,7 @@ in {
             meson = super.unstable.meson;
           };
         })
+        (import ../../pkgs/tmux-plugins.nix)
       ];
     };
   };
