@@ -26,8 +26,8 @@
   "nixpkgs-wayland": {
     "owner": "colemickens",
     "repo": "nixpkgs-wayland",
-    "rev": "bf332c6369fb79e677b277db225513b14e4e8874",
-    "sha256": "0bwx9fp0z4cjbq9lf0pxq5y7zcha3m9jcsaqqw8gjvghavfcg6ql"
+    "rev": "6351985134b113a532ef214331ad9ff6ef60f117",
+    "sha256": "0hy039ddy0jfjr105dfxk0giqmpb65xdnsgifixfyg0v8ibxnbpf"
   },
   "nur": {
     "owner": "nix-community",
