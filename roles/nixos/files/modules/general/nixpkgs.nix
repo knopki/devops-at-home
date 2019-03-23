@@ -4,6 +4,7 @@ with import <nixpkgs> {};
 let
   versions = builtins.fromJSON (builtins.readFile ../../pkgs/versions.json);
   homeManager = fetchFromGitHub versions.home-manager;
+  # waylandOverlay = fetchFromGitHub versions.nixpkgs-wayland;
 in {
   imports = [
     "${homeManager}/nixos"
@@ -30,22 +31,18 @@ in {
           nur = import (fetchFromGitHub versions.nur) {
             inherit super;
           };
+          # wayland-server = super.unstable.wayland-server;
         })
-        (import (fetchFromGitHub versions.nixpkgs-wayland))
         (self: super: {
           fish = super.unstable.fish;
           fish-theme-pure = pkgs.callPackage ../../pkgs/fish-theme-pure.nix {};
-          grim = super.grim.override {
-            meson = super.unstable.meson;
-          };
-          kube-score = pkgs.callPackage ../../pkgs/kube-score { };
-          mako = super.mako.override {
-            meson = super.unstable.meson;
-          };
-          sway = super.unstable.sway-beta;
-          slurp = super.slurp.override {
-            meson = super.unstable.meson;
-          };
+          grim = super.unstable.grim;
+          kube-score = pkgs.callPackage ../../pkgs/kube-score {};
+          mako = super.unstable.mako;
+          slurp = super.unstable.slurp;
+          sway = super.unstable.sway;
+          swayidle = super.unstable.swayidle;
+          swaylock = super.unstable.swaylock;
         })
         (import ../../pkgs/tmux-plugins.nix)
       ];
