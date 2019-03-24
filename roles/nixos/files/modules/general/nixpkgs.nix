@@ -34,15 +34,10 @@ in {
           # wayland-server = super.unstable.wayland-server;
         })
         (self: super: {
-          fish = super.unstable.fish;
           fish-theme-pure = pkgs.callPackage ../../pkgs/fish-theme-pure.nix {};
-          grim = super.unstable.grim;
           kube-score = pkgs.callPackage ../../pkgs/kube-score {};
-          mako = super.unstable.mako;
-          slurp = super.unstable.slurp;
-          sway = super.unstable.sway;
-          swayidle = super.unstable.swayidle;
-          swaylock = super.unstable.swaylock;
+          wf-recorder = super.unstable.wf-recorder;
+          wl-clipboard = super.unstable.wl-clipboard;
         })
         (import ../../pkgs/tmux-plugins.nix)
       ];

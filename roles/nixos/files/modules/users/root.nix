@@ -6,10 +6,6 @@ with lib;
       hashedPassword = readFile "/etc/nixos/secrets/root_password";
       home-config = {
         local.fish.enable = true;
-        programs.git = {
-          userEmail = "root@localhost";
-          userName = "Root";
-        };
       };
       openssh.authorizedKeys.keyFiles = mkDefault [ "/etc/nixos/secrets/sk_id_rsa.pub" ];
       setupUser = true;

@@ -31,7 +31,7 @@ with lib;
       rsync
       shfmt
       sysstat
-      telepresence
+      # telepresence TODO:broken
       unstable.kustomize
       wget
     ];

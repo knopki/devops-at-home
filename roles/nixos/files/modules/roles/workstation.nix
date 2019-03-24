@@ -65,7 +65,7 @@ with lib;
       python27Packages.pytz # ???
       python27Packages.tzlocal # ???
       qt5ct
-      selinux-python
+      # selinux-python TODO:BROKEN
     ];
 
     hardware = {

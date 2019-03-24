@@ -24,6 +24,7 @@ with lib;
       gc = {
         automatic = true;
         dates = "3:15";
+        options = "--delete-older-than 30d";
       };
 
       optimise = {

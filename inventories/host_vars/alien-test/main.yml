@@ -3,7 +3,7 @@ ansible_user: root
 ansible_host: 192.168.124.227
 ansible_python_interpreter: /usr/bin/env python3
 nixos_channels_add:
-  nixos: https://nixos.org/channels/nixos-18.09
+  nixos: https://nixos.org/channels/nixos-19.03
 nixos_channels_remove: []
 nixos_secrets:
   - name: root_password

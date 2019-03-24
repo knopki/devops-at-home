@@ -25,9 +25,11 @@ with lib;
           rofi
           rofi-pass
           slurp
+          swayidle
+          swaylock
           termite
-          unstable.swayidle
-          unstable.swaylock
+          wf-recorder
+          wl-clipboard
         ];
       };
     };

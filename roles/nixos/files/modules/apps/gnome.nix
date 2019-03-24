@@ -20,7 +20,6 @@ with lib;
       gnome3.gnome-nettool
       gnome3.gnome-photos
       gnome3.gnome-software
-      gnome3.gnome-system-log
       gnome3.gnome-todo
       gnome3.totem
     ];

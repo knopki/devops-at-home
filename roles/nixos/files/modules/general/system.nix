@@ -13,12 +13,12 @@ with lib;
 
     system = {
       autoUpgrade = {
-        channel = "https://nixos.org/channels/nixos-18.09";
+        channel = "https://nixos.org/channels/nixos-19.03";
         dates = "2:15";
         enable = true;
       };
       copySystemConfiguration = true;
-      stateVersion = "18.09";
+      stateVersion = "19.03";
     };
   };
 }
