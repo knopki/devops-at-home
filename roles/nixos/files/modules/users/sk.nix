@@ -39,7 +39,6 @@ in {
 
         home.sessionVariables = {
           BROWSER = "firefox";
-          PASSWORD_STORE_ENABLE_EXTENSIONS = "true";
           PATH = "${selfHM.home.homeDirectory}/.local/bin:${selfHM.home.homeDirectory}/.local/npm/bin:\${PATH}";
           TERMINAL = "termite";
         };
@@ -68,15 +67,6 @@ in {
           desktop-pack.enable = true;
           devops.enable = true;
           env.graphics = true;
-          envd = {
-            "00-system" = {
-              PATH = "${selfHM.home.sessionVariables.PATH}";
-            };
-            "50-keyboard" = {
-              XKB_DEFAULT_LAYOUT = "us,ru";
-              XKB_DEFAULT_OPTIONS = "grp:win_space_toggle";
-            };
-          };
           fish.enable = true;
           gnome.enable = true;
           jsdev.enable = true;
@@ -92,6 +82,12 @@ in {
           };
           userEmail = "korolev.srg@gmail.com";
           userName = "Sergey Korolev";
+        };
+        systemd.user.sessionVariables = {
+          PASSWORD_STORE_ENABLE_EXTENSIONS = "true";
+          PATH = "${selfHM.home.sessionVariables.PATH}";
+          XKB_DEFAULT_LAYOUT = "us,ru";
+          XKB_DEFAULT_OPTIONS = "grp:win_space_toggle";
         };
       };
       isAdmin = true;

@@ -57,14 +57,12 @@ with lib;
       };
     };
 
-    local.envd = {
-      "50-gnome" = {
-        # CLUTTER_BACKEND = "wayland";
-        # GDK_BACKEND = "wayland";
-        GTK_RC_FILES = "${config.xdg.configHome}/gtk-1.0/gtkrc";
-        GTK2_RC_FILES = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-        XDG_CURRENT_DESKTOP = "GNOME";
-      };
+    systemd.user.sessionVariables = {
+      # CLUTTER_BACKEND = "wayland";
+      # GDK_BACKEND = "wayland";
+      GTK_RC_FILES = "${config.xdg.configHome}/gtk-1.0/gtkrc";
+      GTK2_RC_FILES = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+      XDG_CURRENT_DESKTOP = "GNOME";
     };
   };
 }
