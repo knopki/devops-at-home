@@ -96,9 +96,9 @@ with lib;
         }
         {
           name = "vscode-icons";
-          publisher = "robertohuertasm";
-          version = "8.2.0";
-          sha256 = "0zfcqs8iy8gsc9b7hkq1xbk7xc5w4g25w3jc5kn2nf9j99g7sh35";
+          publisher = "vscode-icons-team";
+          version = "8.4.0";
+          sha256 = "0s5r8gsdyvkh471906mf4msf95xxrmr3p4msq93p8ldj7wwka18r";
         }
         {
           name = "vscode-yaml";
@@ -157,14 +157,14 @@ with lib;
         {
           name = "jinjahtml";
           publisher = "samuelcolvin";
-          version = "0.8.0";
-          sha256 = "0mhiag5jz2np0w9vlj6vgd7vpj0x39m1cyr2lbcwib8mzk2d3zlp";
+          version = "0.9.0";
+          sha256 = "14vshlq208qqznpz5qix6pl8h64z4fvyhvp1ijyss9fnl7jf2q54";
         }
         {
           name = "rust";
           publisher = "rust-lang";
-          version = "0.5.3";
-          sha256 = "0nkf6cg1hmmsrvryjs5r0pdwsilfmrmy44wz47jjygyy62ixcad9";
+          version = "0.6.0";
+          sha256 = "1yympisq2p034vxvyn12nzhsmslls1yhfbf68yi3in0ly4xfrb19";
         }
         {
           name = "EditorConfig";
