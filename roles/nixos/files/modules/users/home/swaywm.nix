@@ -470,12 +470,15 @@ in {
 
     home.file."${swayDir}/config.d/output".text = ''
       # You can get the names of your outputs by running: swaymsg -t get_outputs
-      ${(if nixosConfig.networking.hostName == "alien" then ''
+      ${(if nixosConfig.local.hardware.machine == "alienware-15r2" then ''
       output eDP-1    resolution 1920x1080 position 0,0
       '' else "")}
       ${(if nixosConfig.networking.hostName == "knopa" then ''
       output DP-1    resolution 1920x1080 position 0,0
       output HDMI-A-1 resolution 1920x1080 position 1920,0
+      '' else "")}
+      ${(if nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
+      output LVDS-1   resolution 1600x900 position 0,0
       '' else "")}
 
       # Default wallpaper

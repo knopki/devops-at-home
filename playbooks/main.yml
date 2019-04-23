@@ -5,3 +5,4 @@
 - import_playbook: mir3g.1984.run.yml
 - import_playbook: dotfiles.yml
 - import_playbook: alien-test.yml
+- import_playbook: panzer.yml

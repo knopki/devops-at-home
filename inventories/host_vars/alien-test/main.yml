@@ -1,6 +1,6 @@
 ---
 ansible_user: root
-ansible_host: 192.168.124.227
+ansible_host: fccc:be38:620f:7a8c:8c8e:0000:0000:0001
 ansible_python_interpreter: /usr/bin/env python3
 nixos_channels_add:
   nixos: https://nixos.org/channels/nixos-19.03
