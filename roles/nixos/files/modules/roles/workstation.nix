@@ -43,7 +43,6 @@ with lib;
 
     boot.kernel.sysctl = {
       "fs.inotify.max_user_watches" = 524288;
-      "vm.swappiness" = 0;
     };
     boot.tmpOnTmpfs = true;
 

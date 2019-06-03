@@ -12,6 +12,7 @@ with lib;
       enableFontDir = true;
       fonts = with pkgs; [
         hack-font
+        # nerdfonts
         noto-fonts
         noto-fonts-emoji
         powerline-fonts

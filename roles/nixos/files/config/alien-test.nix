@@ -71,16 +71,14 @@ with builtins;
   };
 
   environment.etc = {
-    "lvm/lvm.conf" = {
-      text = ''
-        activation {
-          activation_mode = "partial"
-        }
-        devices {
-          issue_discards = 1
-        }
-      '';
-    };
+    "lvm/lvm.conf".text = ''
+      activation {
+        activation_mode = "partial"
+      }
+      devices {
+        issue_discards = 1
+      }
+    '';
   };
 
   environment.systemPackages = with pkgs; [
@@ -123,6 +121,8 @@ with builtins;
   };
 
   nix.maxJobs = lib.mkDefault 4;
+
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
   services = {
     fstrim.enable = true;
