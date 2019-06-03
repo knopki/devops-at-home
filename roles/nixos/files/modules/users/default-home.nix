@@ -20,7 +20,17 @@ with lib;
       gpg-agent.defaults = true;
       readline = true;
       ssh = true;
-      xdgDirs = true;
+      xdgUserDirs = {
+        enable = true;
+        desktop = "desktop";
+        documents = "docs";
+        download = "downloads";
+        music = "music";
+        pictures = "pics";
+        publicshare = "public";
+        templates = "templates";
+        videos = "videos";
+      };
     };
   };
 }
