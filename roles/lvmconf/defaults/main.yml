@@ -1,5 +1,0 @@
-lvmconf: "{{
-  lvmconf_default|d([]) +
-  lvmconf_group|d([]) +
-  lvmconf_host|d([])
-}}"

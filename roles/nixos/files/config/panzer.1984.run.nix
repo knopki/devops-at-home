@@ -115,7 +115,7 @@ with builtins;
     fstrim.enable = true;
     zerotierone = {
       enable = true;
-      joinNetworks = [ "1c33c1ced08df9ac" ];
+      joinNetworks = [ "1c33c1ced08df9ac" "0cccb752f7043dce" ];
     };
   };
 

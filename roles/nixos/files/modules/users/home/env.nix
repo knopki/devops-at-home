@@ -28,10 +28,8 @@ in {
     (mkIf config.local.env.graphics {
       systemd.user.sessionVariables = {
         __GL_SHADER_DISK_CACHE_PATH = "${config.xdg.cacheHome}/nv";
-        _JAVA_AWT_WM_NONREPARENTING = "1";
         _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
         CUDA_CACHE_PATH = "${config.xdg.cacheHome}/nv";
-        SDL_VIDEODRIVER = "wayland";
       };
     })
   ];

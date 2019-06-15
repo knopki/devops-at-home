@@ -7,6 +7,453 @@ in {
   options.local.swaywm.enable = mkEnableOption "setup sway, bar, rofi";
 
   config = mkIf config.local.swaywm.enable {
+    #
+    # SwayWM configuration
+    #
+    home.file."${swayDir}/config".text = ''
+      ### Variables
+      # Logo key. Use Mod1 for Alt.
+      set $mod Mod4
+
+      # Home row direction keys, like vim
+      set $left   h
+      set $leftR  Cyrillic_er
+      set $down   j
+      set $downR  Cyrillic_o
+      set $up     k
+      set $upR    Cyrillic_el
+      set $right  l
+      set $rightR Cyrillic_de
+
+      ### Common colors
+      set $color00 #2d2d2d
+      set $color01 #393939
+      set $color02 #515151
+      set $color03 #747369
+      set $color04 #a09f93
+      set $color05 #d3d0c8
+      set $color06 #e8e6df
+      set $color07 #f2f0ec
+      set $color08 #f2777a
+      set $color09 #f99157
+      set $color0A #ffcc66
+      set $color0B #99cc99
+      set $color0C #66cccc
+      set $color0D #6699cc
+      set $color0E #cc99cc
+      set $color0F #d27b53
+
+      # Wallpaper (default)
+      set $wallpaper ${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png
+
+      # Include other config parts
+      include ${swayDir}/config.d/*
+    '';
+
+    home.file."${swayDir}/config.d/10-systemd".text = ''
+      exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+    '';
+
+    home.file."${swayDir}/config.d/10-outputs".text = ''
+      # You can get the names of your outputs by running: swaymsg -t get_outputs
+      ${(if nixosConfig.local.hardware.machine == "kvm" then ''
+      output Virtual-1    resolution 1920x1080 position 0,0
+      '' else "")}
+      ${(if nixosConfig.local.hardware.machine == "alienware-15r2" then ''
+      output eDP-1    resolution 1920x1080 position 0,0
+      '' else "")}
+      ${(if nixosConfig.networking.hostName == "knopa" then ''
+      output DP-1    resolution 1920x1080 position 0,0
+      output HDMI-A-1 resolution 1920x1080 position 1920,0
+      '' else "")}
+      ${(if nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
+      output eDP-1   resolution 1600x900 position 0,0
+      '' else "")}
+
+      # Default wallpaper
+      output * bg $wallpaper fill
+    '';
+
+    home.file."${swayDir}/config.d/10-inputs".text = ''
+      # man 5 sway-input
+      # swaymsg -t get_inputs
+
+      input * {
+        xkb_layout "us,ru"
+        xkb_options "grp:win_space_toggle"
+
+        dwt enabled
+        tap enabled
+        natural_scroll disabled
+        middle_emulation enabled
+      }
+    '';
+
+    home.file."${swayDir}/config.d/20-appearance".text = ''
+      # Font for window titles.
+      font pango:Hack 10
+
+      # class                 border  backgr. text    indicat child
+      client.focused          $color05 $color05 $color00 $color05 $color05
+      client.focused_inactive $color01 $color01 $color05 $color03 $color01
+      client.unfocused        $color01 $color00 $color05 $color01 $color01
+      client.urgent           $color08 $color08 $color00 $color08 $color08
+
+
+      default_border pixel 1
+      default_floating_border pixel 1
+      hide_edge_borders smart
+
+      #gaps edge_gaps off
+      gaps outer 0
+      gaps inner 1
+      smart_gaps on
+
+      # app decoration styling
+      for_window [title="^.*Mozilla\ Firefox$"] border none
+      for_window [title="^.*Visual\ Studio\ Code$"] border none
+      for_window [title="Calculator"] border none
+      for_window [title="Image Viewer"] border none
+      for_window [app_id=nautilus] border none
+      for_window [app_id=eog] border none
+      for_window [app_id=evince] border none
+      for_window [app_id=gnome-boxes] border none
+      for_window [app_id=gnome-calculator] border none
+      for_window [app_id=gnome-control-center] border none
+      for_window [app_id=gnome-disks] border none
+      for_window [app_id=gnome-calculator] border none
+      for_window [app_id=gnome-software] border none
+      for_window [app_id=gnome-system-monitor] border none
+      for_window [app_id=gnome-text-editor] border none
+      for_window [app_id=gnome-tweaks] border none
+    '';
+
+    home.file."${swayDir}/config.d/50-basic-key-bindings".text = ''
+      # kill focused window
+      bindsym $mod+Shift+q               kill
+      bindsym $mod+Shift+Cyrillic_shorti kill
+
+      # Drag floating windows by holding down $mod and left mouse button.
+      # Resize them with right mouse button + $mod.
+      # Despite the name, also works for non-floating windows.
+      # Change normal to inverse to use left mouse button for resizing and right
+      # mouse button for dragging.
+      floating_modifier $mod normal
+
+      # reload the configuration file
+      bindsym $mod+Shift+c reload
+      bindsym $mod+Shift+Cyrillic_es reload
+    '';
+
+    home.file."${swayDir}/config.d/50-moving-key-bindings".text = ''
+      # Move your focus around
+      bindsym $mod+$left   focus left
+      bindsym $mod+$leftR  focus left
+      bindsym $mod+$down   focus down
+      bindsym $mod+$downR  focus down
+      bindsym $mod+$up     focus up
+      bindsym $mod+$upR    focus up
+      bindsym $mod+$right  focus right
+      bindsym $mod+$rightR focus right
+      # or use $mod+[up|down|left|right]
+      bindsym $mod+Left  focus left
+      bindsym $mod+Down  focus down
+      bindsym $mod+Up    focus up
+      bindsym $mod+Right focus right
+
+      # _move_ the focused window with the same, but add Shift
+      bindsym $mod+Shift+$left   move left
+      bindsym $mod+Shift+$leftR  move left
+      bindsym $mod+Shift+$down   move down
+      bindsym $mod+Shift+$downR  move down
+      bindsym $mod+Shift+$up     move up
+      bindsym $mod+Shift+$upR    move up
+      bindsym $mod+Shift+$right  move right
+      bindsym $mod+Shift+$rightR move right
+      # ditto, with arrow keys
+      bindsym $mod+Shift+Left  move left
+      bindsym $mod+Shift+Down  move down
+      bindsym $mod+Shift+Up    move up
+      bindsym $mod+Shift+Right move right
+    '';
+
+    home.file."${swayDir}/config.d/50-layout-key-bindings".text = ''
+      # You can "split" the current object of your focus with
+      # $mod+b or $mod+v, for horizontal and vertical splits
+      # respectively.
+      bindsym $mod+b               splith;exec ${pkgs.libnotify}/bin/notify-send 'tile horizontally' --expire-time 500
+      bindsym $mod+Cyrillic_i      splith;exec ${pkgs.libnotify}/bin/notify-send 'tile horizontally' --expire-time 500
+      bindsym $mod+v               splitv;exec ${pkgs.libnotify}/bin/notify-send 'tile vertically' --expire-time 500
+      bindsym $mod+Cyrillic_em     splitv;exec ${pkgs.libnotify}/bin/notify-send 'tile vertically' --expire-time 500
+      bindsym $mod+q               split toggle
+      bindsym $mod+Cyrillic_shorti split toggle
+
+      # Switch the current container between different layout styles
+      bindsym $mod+s             layout stacking
+      bindsym $mod+Cyrillic_yeru layout stacking
+      bindsym $mod+w             layout tabbed
+      bindsym $mod+Cyrillic_tse  layout tabbed
+      bindsym $mod+e             layout toggle split
+      bindsym $mod+Cyrillic_u    layout toggle split
+
+      # Make the current focus fullscreen
+      bindsym $mod+f          fullscreen
+      bindsym $mod+Cyrillic_a fullscreen
+
+      # Toggle the current focus between tiling and floating mode
+      bindsym $mod+Shift+space floating toggle
+
+      # Swap focus between the tiling area and the floating area
+      bindsym $mod+Ctrl+space focus mode_toggle
+
+      # move focus to the parent container
+      bindsym $mod+a           focus parent
+      bindsym $mod+Cyrillic_ef focus parent
+    '';
+
+    home.file."${swayDir}/config.d/50-resizing-key-bindings".text = ''
+      mode "resize" {
+          # left will shrink the containers width
+          # right will grow the containers width
+          # up will shrink the containers height
+          # down will grow the containers height
+          bindsym $left   resize shrink width 10 px or 10 ppt
+          bindsym $leftR  resize shrink width 10 px or 10 ppt
+          bindsym $down   resize grow height 10 px or 10 ppt
+          bindsym $downR  resize grow height 10 px or 10 ppt
+          bindsym $up     resize shrink height 10 px or 10 ppt
+          bindsym $upR    resize shrink height 10 px or 10 ppt
+          bindsym $right  resize grow width 10 px or 10 ppt
+          bindsym $rightR resize grow width 10 px or 10 ppt
+
+          # ditto, with arrow keys
+          bindsym Left  resize shrink width 10 px or 10 ppt
+          bindsym Down  resize grow height 10 px or 10 ppt
+          bindsym Up    resize shrink height 10 px or 10 ppt
+          bindsym Right resize grow width 10 px or 10 ppt
+
+          # return to default mode
+          bindsym Return mode "default"
+          bindsym Escape mode "default"
+      }
+      bindsym $mod+r           mode "resize"
+      bindsym $mod+Cyrillic_ka mode "resize"
+    '';
+
+    home.file."${swayDir}/config.d/50-scratchpad".text = ''
+      # Sway has a "scratchpad", which is a bag of holding for windows.
+      # You can send windows there and get them back later.
+
+      # Move the currently focused window to the scratchpad
+      bindsym $mod+Shift+minus move scratchpad
+
+      # Show the next scratchpad window or hide the focused scratchpad window.
+      # If there are multiple scratchpad windows, this command cycles through them.
+      bindsym $mod+minus scratchpad show
+    '';
+
+    home.file."${swayDir}/config.d/50-workspaces".text = ''
+      #
+      # Workspaces:
+      #
+      set $ws1 1
+      set $ws2 2
+      set $ws3 3
+      set $ws4 4
+      set $ws5 5
+      set $ws6 6
+      set $ws7 7
+      set $ws8 8
+      set $ws9 9
+      set $ws10 10:💬
+
+      ${(if nixosConfig.networking.hostName == "knopa" then ''
+      # assign workspaces to outputs
+      set $leftDisplay DP-1
+      set $rightDisplay HDMI-A-1
+      workspace $ws1 output $leftDisplay
+      workspace $ws2 output $leftDisplay
+      workspace $ws3 output $leftDisplay
+      workspace $ws4 output $leftDisplay
+      workspace $ws5 output $leftDisplay
+      workspace $ws6 output $rightDisplay
+      workspace $ws7 output $rightDisplay
+      workspace $ws8 output $rightDisplay
+      workspace $ws9 output $rightDisplay
+      workspace $ws10 output $rightDisplay
+      '' else "")}
+
+      # switch to workspace
+      bindsym $mod+1 workspace $ws1
+      bindsym $mod+2 workspace $ws2
+      bindsym $mod+3 workspace $ws3
+      bindsym $mod+4 workspace $ws4
+      bindsym $mod+5 workspace $ws5
+      bindsym $mod+6 workspace $ws6
+      bindsym $mod+7 workspace $ws7
+      bindsym $mod+8 workspace $ws8
+      bindsym $mod+9 workspace $ws9
+      bindsym $mod+0 workspace $ws10
+
+      # move focused container to workspace
+      bindsym $mod+Shift+1 move container to workspace $ws1
+      bindsym $mod+Shift+2 move container to workspace $ws2
+      bindsym $mod+Shift+3 move container to workspace $ws3
+      bindsym $mod+Shift+4 move container to workspace $ws4
+      bindsym $mod+Shift+5 move container to workspace $ws5
+      bindsym $mod+Shift+6 move container to workspace $ws6
+      bindsym $mod+Shift+7 move container to workspace $ws7
+      bindsym $mod+Shift+8 move container to workspace $ws8
+      bindsym $mod+Shift+9 move container to workspace $ws9
+      bindsym $mod+Shift+0 move container to workspace $ws10
+
+      # navigate workspaces next / previous
+      bindsym $mod+Ctrl+Right workspace next
+      bindsym $mod+Ctrl+Left  workspace prev
+
+      # move workspace to next display
+      bindsym $mod+m                 move workspace to output left
+      bindsym $mod+Cyrillic_softsign move workspace to output left
+      bindsym $mod+comma             move workspace to output right
+      bindsym $mod+Cyrillic_be       move workspace to output right
+
+      # bind program to workspace
+      assign [title="Telegram"] $ws10
+    '';
+
+    home.file."${swayDir}/config.d/50-autolayout".text = ''
+      # set floating (nontiling) for special apps
+      # for_window [class="Gnome-control-center" instance="gnome-control-center"] floating enable
+
+      # auto fullscreen
+      for_window [title="feh\ .*"] fullscreen enable
+      for_window [title="Media viewer"] fullscreen enable
+    '';
+
+    home.file."${swayDir}/config.d/60-terminal".text = ''
+      # Your preferred terminal emulator
+      set $term ${pkgs.termite}/bin/termite #-d "$(cat /tmp/$USER-pwd || echo $HOME)"
+
+      # start a terminal
+      bindsym $mod+Return exec $term
+      bindsym $mod+Ctrl+Return exec $term
+    '';
+
+    home.file."${swayDir}/config.d/70-rofi".text = ''
+      # Your preferred application launcher
+      set $menu ${pkgs.rofi}/bin/rofi -modi combi -show combi -combi-modi "drun,run,ssh" -show-icons -terminal $term
+
+      # start your launcher
+      bindsym $mod+d           exec $menu
+      bindsym $mod+Cyrillic_ve exec $menu
+    '';
+
+    home.file."${swayDir}/config.d/70-mako".text = ''
+      bindsym $mod+n exec ${pkgs.mako}/bin/makoctl dismiss
+      bindsym $mod+Shift+n exec ${pkgs.mako}/bin/makoctl dismiss --all
+    '';
+
+    home.file."${swayDir}/config.d/70-backlight".text = ''
+      bindsym --locked XF86MonBrightnessUp   exec ${pkgs.light}/bin/light -A 3 && \
+        ${pkgs.libnotify}/bin/notify-send 'Brightness' $(light) --expire-time 200
+      bindsym --locked XF86MonBrightnessDown exec ${pkgs.light}/bin/light -U 3 && \
+        ${pkgs.libnotify}/bin/notify-send 'Brightness' $(light) --expire-time 200
+    '';
+
+    home.file."${swayDir}/config.d/70-volume".text = ''
+      bindsym --locked XF86AudioMute exec --no-startup-id sh -c \
+        "for s in \$(${pkgs.pulseaudio}/bin/pactl list sinks short | cut -f1); do ${pkgs.pulseaudio}/bin/pactl set-sink-mute \$s toggle; done" && ${pkgs.procps}/bin/pkill -USR1 py3status
+      bindsym --locked XF86AudioLowerVolume exec --no-startup-id \
+        ${pkgs.pulseaudio}/bin/pactl set-sink-volume $(${pkgs.pulseaudio}/bin/pactl list sinks short | head -n 1 | cut -f1) -1% && \
+        ${pkgs.procps}/bin/pkill -USR1 py3status
+      bindsym --locked XF86AudioRaiseVolume exec --no-startup-id \
+        ${pkgs.pulseaudio}/bin/pactl set-sink-volume $(${pkgs.pulseaudio}/bin/pactl list sinks short | head -n 1 | cut -f1) +1% && \
+        ${pkgs.procps}/bin/pkill -USR1 py3status
+      ${(if nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
+      bindsym --locked XF86AudioMicMute exec --no-startuo-id sh -c \
+        '${pkgs.pulseaudio}/bin/pactl set-source-mute 1 toggle' && \
+        ${pkgs.procps}/bin/pkill -USR1 py3status
+      '' else "")}
+      ${(if nixosConfig.local.hardware.machine == "alienware-15r2" then ''
+      bindsym --locked XF86AudioMicMute exec --no-startuo-id sh -c \
+        '${pkgs.pulseaudio}/bin/pactl set-source-mute 2 toggle' && \
+        ${pkgs.procps}/bin/pkill -USR1 py3status
+      '' else "")}
+    '';
+
+    home.file."${swayDir}/config.d/70-playerctl".text = ''
+      bindsym --locked XF86AudioPlay exec ${pkgs.playerctl}/bin/playerctl play
+      bindsym --locked XF86AudioPause exec ${pkgs.playerctl}/bin/playerctl pause
+      bindsym --locked XF86AudioNext exec ${pkgs.playerctl}/bin/playerctl next
+      bindsym --locked XF86AudioPrev exec ${pkgs.playerctl}/bin/playerctl previous
+    '';
+
+    home.file."${swayDir}/config.d/70-screenshots".text = ''
+      # make target directory
+      exec --no-startup-id ${pkgs.coreutils}/bin/mkdir -p $(xdg-user-dir PICTURES)/screenshots
+      # just make screenshot
+      bindsym $mod+Print exec ${pkgs.grim}/bin/grim $(xdg-user-dir PICTURES)/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+      # make screenshot of the screen area
+      bindsym $mod+Shift+Print exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $(xdg-user-dir PICTURES)/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+    '';
+
+    home.file."${swayDir}/config.d/99-bar".text = ''
+      bar {
+        status_command ${pkgs.python36Packages.py3status}/bin/py3status -b -s -i "${config.xdg.configHome}/i3status/py3status"
+        position top
+        font pango:Hack 10
+        separator_symbol "| "
+        wrap_scroll no
+        workspace_buttons yes
+        strip_workspace_numbers yes
+        # height
+
+        # TODO: Tray?
+        # tray {
+        #   activate_button BTN_LEFT
+        #   context_button BTN_RIGHT
+        #   secondary_button BTN_MIDDLE
+        #   tray_output all
+        #   tray_padding 2
+        #   icon_theme Adwaita
+        # }
+
+        colors {
+          statusline $color04
+          background $color00
+          separator $color01
+          # focused_background
+          # focused_statusline
+          focused_workspace   $color05 $color05 $color00
+          active_workspace    $color05 $color03 $color00
+          inactive_workspace  $color03 $color01 $color05
+          urgent_workspace    $color08 $color08 $color00
+          binding_mode        $color00 $color0A $color00
+        }
+      }
+    '';
+
+    home.file."${swayDir}/config.d/99-exit-menu".text = ''
+      set $mode_system System: (l) lock, (e) exit, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+      mode "$mode_system" {
+          bindsym l exec --no-startup-id ${pkgs.swaylock}/bin/swaylock -i $wallpaper --scaling=fill, mode "default"
+          bindsym e exit
+          bindsym s exec --no-startup-id systemctl suspend, mode "default"
+          bindsym r exec --no-startup-id systemctl reboot, mode "default"
+          bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+          bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+
+          # return to default mode
+          bindsym Return mode "default"
+          bindsym Escape mode "default"
+      }
+      bindsym $mod+Shift+e          mode "$mode_system"
+      bindsym $mod+Shift+Cyrillic_u mode "$mode_system"
+    '';
+
+    #
+    # i3status
+    #
     home.file."${i3statusDir}/config".text = ''
       py3status {
         storage = '${config.xdg.cacheHome}/py3status_cache.data'
@@ -155,7 +602,8 @@ in {
         interval = 1
       }
 
-      ${(if nixosConfig.networking.hostName == "alien" then ''
+      ${(if nixosConfig.local.hardware.machine == "alienware-15r2" ||
+        nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
       order += 'battery_level'
       battery_level {
         blocks = ""
@@ -177,441 +625,9 @@ in {
       }
     '';
 
-    home.file."${swayDir}/config".text = ''
-      # Read `man 5 sway` for a complete reference.
-
-      ### Variables
-      #
-      # Logo key. Use Mod1 for Alt.
-      set $mod Mod4
-
-      # Home row direction keys, like vim
-      set $left   h
-      set $leftR  Cyrillic_er
-      set $down   j
-      set $downR  Cyrillic_o
-      set $up     k
-      set $upR    Cyrillic_el
-      set $right  l
-      set $rightR Cyrillic_de
-
-      ### Common colors
-      #
-      set $base00 #2d2d2d
-      set $base01 #393939
-      set $base02 #515151
-      set $base03 #747369
-      set $base04 #a09f93
-      set $base05 #d3d0c8
-      set $base06 #e8e6df
-      set $base07 #f2f0ec
-      set $base08 #f2777a
-      set $base09 #f99157
-      set $base0A #ffcc66
-      set $base0B #99cc99
-      set $base0C #66cccc
-      set $base0D #6699cc
-      set $base0E #cc99cc
-      set $base0F #d27b53
-
-      ### Key bindings
-      #
-      # Basics:
-      #
-
-      # kill focused window
-      bindsym $mod+Shift+q               kill
-      bindsym $mod+Shift+Cyrillic_shorti kill
-
-      # Drag floating windows by holding down $mod and left mouse button.
-      # Resize them with right mouse button + $mod.
-      # Despite the name, also works for non-floating windows.
-      # Change normal to inverse to use left mouse button for resizing and right
-      # mouse button for dragging.
-      floating_modifier $mod normal
-
-      # reload the configuration file
-      bindsym $mod+Shift+c reload
-      bindsym $mod+Shift+Cyrillic_es reload
-
-      # exit sway (logs you out of your wayland session)
-      set $swaynagexit swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-      bindsym $mod+Shift+e          exec $swaynagexit
-      bindsym $mod+Shift+Cyrillic_u exec $swaynagexit
-
-      #
-      # Moving around:
-      #
-      # Move your focus around
-      bindsym $mod+$left   focus left
-      bindsym $mod+$leftR  focus left
-      bindsym $mod+$down   focus down
-      bindsym $mod+$downR  focus down
-      bindsym $mod+$up     focus up
-      bindsym $mod+$upR    focus up
-      bindsym $mod+$right  focus right
-      bindsym $mod+$rightR focus right
-      # or use $mod+[up|down|left|right]
-      bindsym $mod+Left  focus left
-      bindsym $mod+Down  focus down
-      bindsym $mod+Up    focus up
-      bindsym $mod+Right focus right
-
-      # _move_ the focused window with the same, but add Shift
-      bindsym $mod+Shift+$left   move left
-      bindsym $mod+Shift+$leftR  move left
-      bindsym $mod+Shift+$down   move down
-      bindsym $mod+Shift+$downR  move down
-      bindsym $mod+Shift+$up     move up
-      bindsym $mod+Shift+$upR    move up
-      bindsym $mod+Shift+$right  move right
-      bindsym $mod+Shift+$rightR move right
-      # ditto, with arrow keys
-      bindsym $mod+Shift+Left  move left
-      bindsym $mod+Shift+Down  move down
-      bindsym $mod+Shift+Up    move up
-      bindsym $mod+Shift+Right move right
-
-      #
-      # Workspaces:
-      #
-      set $ws1 1
-      set $ws2 2
-      set $ws3 3
-      set $ws4 4
-      set $ws5 5
-      set $ws6 6
-      set $ws7 7
-      set $ws8 8
-      set $ws9 9
-      set $ws10 10:💬
-
-      ${(if nixosConfig.networking.hostName == "knopa" then ''
-      # assign workspaces to outputs
-      set $leftDisplay DP-1
-      set $rightDisplay HDMI-A-1
-      workspace $ws1 output $leftDisplay
-      workspace $ws2 output $leftDisplay
-      workspace $ws3 output $leftDisplay
-      workspace $ws4 output $leftDisplay
-      workspace $ws5 output $leftDisplay
-      workspace $ws6 output $rightDisplay
-      workspace $ws7 output $rightDisplay
-      workspace $ws8 output $rightDisplay
-      workspace $ws9 output $rightDisplay
-      workspace $ws10 output $rightDisplay
-      '' else "")}
-
-      # switch to workspace
-      bindsym $mod+1 workspace $ws1
-      bindsym $mod+2 workspace $ws2
-      bindsym $mod+3 workspace $ws3
-      bindsym $mod+4 workspace $ws4
-      bindsym $mod+5 workspace $ws5
-      bindsym $mod+6 workspace $ws6
-      bindsym $mod+7 workspace $ws7
-      bindsym $mod+8 workspace $ws8
-      bindsym $mod+9 workspace $ws9
-      bindsym $mod+0 workspace $ws10
-
-      # move focused container to workspace
-      bindsym $mod+Shift+1 move container to workspace $ws1
-      bindsym $mod+Shift+2 move container to workspace $ws2
-      bindsym $mod+Shift+3 move container to workspace $ws3
-      bindsym $mod+Shift+4 move container to workspace $ws4
-      bindsym $mod+Shift+5 move container to workspace $ws5
-      bindsym $mod+Shift+6 move container to workspace $ws6
-      bindsym $mod+Shift+7 move container to workspace $ws7
-      bindsym $mod+Shift+8 move container to workspace $ws8
-      bindsym $mod+Shift+9 move container to workspace $ws9
-      bindsym $mod+Shift+0 move container to workspace $ws10
-
-      # navigate workspaces next / previous
-      bindsym $mod+Ctrl+Right workspace next
-      bindsym $mod+Ctrl+Left  workspace prev
-
-      #
-      # Layout stuff:
-      #
-      # You can "split" the current object of your focus with
-      # $mod+b or $mod+v, for horizontal and vertical splits
-      # respectively.
-      bindsym $mod+b               splith;exec notify-send 'tile horizontally' --expire-time 500
-      bindsym $mod+Cyrillic_i      splith;exec notify-send 'tile horizontally' --expire-time 500
-      bindsym $mod+v               splitv;exec notify-send 'tile vertically' --expire-time 500
-      bindsym $mod+Cyrillic_em     splitv;exec notify-send 'tile vertically' --expire-time 500
-      bindsym $mod+q               split toggle
-      bindsym $mod+Cyrillic_shorti split toggle
-
-      # Switch the current container between different layout styles
-      bindsym $mod+s             layout stacking
-      bindsym $mod+Cyrillic_yeru layout stacking
-      bindsym $mod+w             layout tabbed
-      bindsym $mod+Cyrillic_tse  layout tabbed
-      bindsym $mod+e             layout toggle split
-      bindsym $mod+Cyrillic_u    layout toggle split
-
-      # Make the current focus fullscreen
-      bindsym $mod+f          fullscreen
-      bindsym $mod+Cyrillic_a fullscreen
-
-      # Toggle the current focus between tiling and floating mode
-      bindsym $mod+Shift+space floating toggle
-
-      # Swap focus between the tiling area and the floating area
-      bindsym $mod+Ctrl+space focus mode_toggle
-
-      # move focus to the parent container
-      bindsym $mod+a           focus parent
-      bindsym $mod+Cyrillic_ef focus parent
-
-      # move workspace to next display
-      bindsym $mod+m                 move workspace to output left
-      bindsym $mod+Cyrillic_softsign move workspace to output left
-      bindsym $mod+comma             move workspace to output right
-      bindsym $mod+Cyrillic_be       move workspace to output right
-
-      #
-      # Scratchpad:
-      #
-      # Sway has a "scratchpad", which is a bag of holding for windows.
-      # You can send windows there and get them back later.
-
-      # Move the currently focused window to the scratchpad
-      bindsym $mod+Shift+minus move scratchpad
-
-      # Show the next scratchpad window or hide the focused scratchpad window.
-      # If there are multiple scratchpad windows, this command cycles through them.
-      bindsym $mod+minus scratchpad show
-
-      #
-      # Resizing containers:
-      #
-      mode "resize" {
-          # left will shrink the containers width
-          # right will grow the containers width
-          # up will shrink the containers height
-          # down will grow the containers height
-          bindsym $left   resize shrink width 10 px or 10 ppt
-          bindsym $leftR  resize shrink width 10 px or 10 ppt
-          bindsym $down   resize grow height 10 px or 10 ppt
-          bindsym $downR  resize grow height 10 px or 10 ppt
-          bindsym $up     resize shrink height 10 px or 10 ppt
-          bindsym $upR    resize shrink height 10 px or 10 ppt
-          bindsym $right  resize grow width 10 px or 10 ppt
-          bindsym $rightR resize grow width 10 px or 10 ppt
-
-          # ditto, with arrow keys
-          bindsym Left  resize shrink width 10 px or 10 ppt
-          bindsym Down  resize grow height 10 px or 10 ppt
-          bindsym Up    resize shrink height 10 px or 10 ppt
-          bindsym Right resize grow width 10 px or 10 ppt
-
-          # return to default mode
-          bindsym Return mode "default"
-          bindsym Escape mode "default"
-      }
-      bindsym $mod+r           mode "resize"
-      bindsym $mod+Cyrillic_ka mode "resize"
-
-      # Include other config parts
-      include ${swayDir}/config.d/*
-    '';
-
-    home.file."${swayDir}/config.d/programs".text = ''
-      # Your preferred terminal emulator
-      set $term termite -d "$(cat /tmp/$USER-pwd || echo $HOME)"
-
-      # Your preferred application launcher
-      set $menu rofi -modi combi -show combi -combi-modi "drun,run,ssh" -show-icons -terminal $term
-
-      # start a terminal
-      bindsym $mod+Return exec $term
-
-      # start your launcher
-      bindsym $mod+d           exec $menu
-      bindsym $mod+Cyrillic_ve exec $menu
-
-      # lock session
-      # TODO: add wallpaper
-      # set $swaylock swaylock -i {{ wallpaper }} --scaling=fill
-      set $swaylock swaylock
-      bindsym Ctrl+Alt+l           exec $swaylock
-      bindsym Ctrl+Alt+Cyrillic_de exec $swaylock
-
-
-      # bind program to workspace
-      assign [title="Telegram"] $ws10
-
-      # set floating (nontiling) for special apps
-      # for_window [class="Gnome-control-center" instance="gnome-control-center"] floating enable
-
-      # auto fullscreen
-      for_window [title="feh\ .*"] fullscreen enable
-      for_window [title="Media viewer"] fullscreen enable
-
-      #
-      # autorstart
-      #
-      # lock on idle and sleep TODO: add wallpaper
-      exec --no-startup-id swayidle \
-        timeout 600 'swaylock' \
-        timeout 1200 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock --scaling=fill'
-
-      # notification daemon
-      exec --no-startup-id /usr/bin/mako --font 'pango:Hack Nerd Font 10' --markup 1
-
-      # ssh/gpg agent
-      # TODO: enable or delete
-      #exec --no-startup-id sh -c "echo '''' | /usr/bin/gnome-keyring-daemon -r --components='gpg,pkcs11,secrets,ssh' --unlock"
-    '';
-
-    home.file."${swayDir}/config.d/output".text = ''
-      # You can get the names of your outputs by running: swaymsg -t get_outputs
-      ${(if nixosConfig.local.hardware.machine == "alienware-15r2" then ''
-      output eDP-1    resolution 1920x1080 position 0,0
-      '' else "")}
-      ${(if nixosConfig.networking.hostName == "knopa" then ''
-      output DP-1    resolution 1920x1080 position 0,0
-      output HDMI-A-1 resolution 1920x1080 position 1920,0
-      '' else "")}
-      ${(if nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
-      output LVDS-1   resolution 1600x900 position 0,0
-      '' else "")}
-
-      # Default wallpaper
-      # TODO: add wallpaper
-      # output * bg {{ wallpaper }} fill
-    '';
-
-    home.file."${swayDir}/config.d/media-keys".text = ''
-      # Backlight
-      bindsym XF86MonBrightnessUp   exec light -A 3 && notify-send 'Brightness' $(light) --expire-time 200
-      bindsym XF86MonBrightnessDown exec light -U 3 && notify-send 'Brightness' $(light) --expire-time 200
-
-      # Volume
-      bindsym XF86AudioMute exec --no-startup-id sh -c "for s in \$(pactl list sinks short | cut -f1); do pactl set-sink-mute \$s toggle; done"  && pkill -USR1 py3status
-      bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | head -n 1 | cut -f1) -1% && pkill -USR1 py3status
-      bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl list sinks short | head -n 1 | cut -f1) +1% && pkill -USR1 py3status
-
-      # Media player controls
-      bindsym XF86AudioPlay exec playerctl play
-      bindsym XF86AudioPause exec playerctl pause
-      bindsym XF86AudioNext exec playerctl next
-      bindsym XF86AudioPrev exec playerctl previous
-
-      # Screenshots
-      bindsym $mod+Print        exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-      bindsym $mod+Shift+Print  exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-    '';
-
-    home.file."${swayDir}/config.d/input".text = ''
-      # man 5 sway-input
-      # swaymsg -t get_inputs
-
-      ${(if nixosConfig.networking.hostName == "alien" then ''
-      input "2:7:SynPS/2_Synaptics_TouchPad" {
-        dwt enabled
-        tap enabled
-        natural_scroll disabled
-        middle_emulation enabled
-      }
-      '' else "")}
-
-      ${(if nixosConfig.networking.hostName == "knopa" then ''
-      input "6127:24647:Lenovo_ThinkPad_Compact_USB_Keyboard_with_TrackPoint" {
-        dwt enabled
-        tap enabled
-        natural_scroll disabled
-        middle_emulation enabled
-      }
-      input "7119:5:USB_Optical_Mouse" {
-        dwt enabled
-        tap enabled
-        natural_scroll disabled
-        middle_emulation enabled
-      }
-      '' else "")}
-    '';
-
-    home.file."${swayDir}/config.d/bar".text = ''
-      # Read `man 5 sway-bar` for more information about this section.
-
-      bar {
-        status_command py3status -b -s -i "${config.xdg.configHome}/i3status/py3status"
-        position top
-        font pango:Hack Nerd Font 10
-        separator_symbol "| "
-        wrap_scroll no
-        workspace_buttons yes
-        strip_workspace_numbers yes
-        # height
-
-        # tray {
-        #   activate_button BTN_LEFT
-        #   context_button BTN_RIGHT
-        #   secondary_button BTN_MIDDLE
-        #   tray_output all
-        #   tray_padding 2
-        #   icon_theme Adwaita
-        # }
-
-        colors {
-          statusline $base04
-          background $base00
-          separator $base01
-          # focused_background
-          # focused_statusline
-          focused_workspace   $base05 $base05 $base00
-          active_workspace    $base05 $base03 $base00
-          inactive_workspace  $base03 $base01 $base05
-          urgent_workspace    $base08 $base08 $base00
-          binding_mode        $base00 $base0A $base00
-        }
-      }
-    '';
-
-    home.file."${swayDir}/config.d/appearance".text = ''
-      # Font for window titles.
-      font pango:Hack Nerd Font 10
-
-      # class                 border  backgr. text    indicat child
-      client.focused          $base05 $base05 $base00 $base05 $base05
-      client.focused_inactive $base01 $base01 $base05 $base03 $base01
-      client.unfocused        $base01 $base00 $base05 $base01 $base01
-      client.urgent           $base08 $base08 $base00 $base08 $base08
-
-
-      default_border pixel 1
-      default_floating_border pixel 1
-      hide_edge_borders smart
-
-      #gaps edge_gaps off
-      gaps outer 0
-      gaps inner 1
-      smart_gaps on
-
-      # app decoration styling
-      for_window [title="^.*Mozilla\ Firefox$"] border none
-      for_window [title="^.*Visual\ Studio\ Code$"] border none
-      for_window [title="Calculator"] border none
-      for_window [title="Image Viewer"] border none
-      for_window [app_id=nautilus] border none
-      for_window [app_id=eog] border none
-      for_window [app_id=evince] border none
-      for_window [app_id=gnome-boxes] border none
-      for_window [app_id=gnome-calculator] border none
-      for_window [app_id=gnome-control-center] border none
-      for_window [app_id=gnome-disks] border none
-      for_window [app_id=gnome-calculator] border none
-      for_window [app_id=gnome-software] border none
-      for_window [app_id=gnome-system-monitor] border none
-      for_window [app_id=gnome-text-editor] border none
-      for_window [app_id=gnome-tweaks] border none
-    '';
-
+    #
+    # rofi
+    #
     programs.rofi = {
       enable = true;
       borderWidth = 1;
@@ -657,7 +673,7 @@ in {
         rofi.fake-transparency: true
         rofi.fixed-num-lines: true
       '';
-      font = "Hack Nerd Font 12";
+      font = "Hack 12";
       lines = 12;
       location = "center";
       padding = 16;
@@ -669,6 +685,55 @@ in {
     services.gnome-keyring = {
       enable = true;
       components = ["pkcs11" "secrets" "ssh"];
+    };
+
+    systemd.user.targets = {
+      sway-session = {
+        Unit = {
+          Description = "sway compositor session";
+          Documentation = "man:systemd.special(7)";
+          BindsTo = "graphical-session.target";
+          Wants = "graphical-session-pre.target";
+          After = "graphical-session-pre.target";
+        };
+      };
+    };
+
+    systemd.user.services = {
+      mako = {
+        Unit = {
+          Description = "A lightweight Wayland notification daemon";
+          Documentation = "man:mako(1)";
+          PartOf = "graphical-session.target";
+        };
+        Service = {
+          Type = "simple";
+          ExecStart = "${pkgs.mako}/bin/mako --font 'pango:Hack 10' --markup 1";
+        };
+        Install = {
+          WantedBy = ["sway-session.target"];
+        };
+      };
+      swayidle = {
+        Unit = {
+          Description = "Idle manager for Wayland";
+          Documentation = "man:swayidle(1)";
+          PartOf = "graphical-session.target";
+        };
+        Service = {
+          Type = "simple";
+          ExecStart = ''
+            ${pkgs.swayidle}/bin/swayidle -w \
+              timeout 300  '${pkgs.swaylock}/bin/swaylock -i ${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png --scaling=fill -f' \
+              timeout 600  '${pkgs.sway}/bin/swaymsg "output * dpms off"' \
+                    resume '${pkgs.sway}/bin/swaymsg "output * dpms on"' \
+              before-sleep '${pkgs.swaylock}/bin/swaylock -i ${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png --scaling=fill -f'
+          '';
+        };
+        Install = {
+          WantedBy = ["sway-session.target"];
+        };
+      };
     };
   };
 }

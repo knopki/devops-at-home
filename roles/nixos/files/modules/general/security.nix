@@ -8,9 +8,6 @@ with lib;
   };
 
   config = mkIf config.local.general.security.enable {
-    # hide process information of other users when running non-root
-    security.hideProcessInformation = true;
-
     security.polkit.extraConfig = ''
       /* Allow users in wheel group to manage systemd units without authentication */
       polkit.addRule(function(action, subject) {

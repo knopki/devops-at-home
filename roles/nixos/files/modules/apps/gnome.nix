@@ -38,12 +38,7 @@ with lib;
       dbus.packages = with pkgs; [ gnome3.dconf ];
       gnome3.gnome-keyring.enable = true;
       xserver = {
-        enable = true;
         desktopManager.gnome3.enable = true;
-        displayManager.gdm = {
-          enable = true;
-          wayland = false;
-        };
       };
     };
   };

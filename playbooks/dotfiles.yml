@@ -9,7 +9,7 @@
   - role: dotfiles-shell
     tags: shell
 
-- hosts: workstations
+- hosts: workstations:!nixos
   any_errors_fatal: true
   become: true
   become_user: "{{ main_user }}"

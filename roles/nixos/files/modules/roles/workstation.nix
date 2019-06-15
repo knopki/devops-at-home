@@ -12,7 +12,7 @@ with lib;
       apps = {
         gnome.enable = true;
         swaywm.enable = true;
-        xserver.enable = true;
+        # xserver.enable = true;
         zsh.enable = true;
       };
 
@@ -63,6 +63,7 @@ with lib;
       python27Packages.pydbus # ???
       python27Packages.pytz # ???
       python27Packages.tzlocal # ???
+      qt5.qtwayland
       qt5ct
       # selinux-python TODO:BROKEN
     ];
@@ -82,6 +83,8 @@ with lib;
       usePredictableInterfaceNames = true;
     };
 
+    powerManagement.powertop.enable = true;
+
     programs = {
       adb.enable = true;
       npm.enable = true;
@@ -90,7 +93,6 @@ with lib;
     services = {
       flatpak.enable = true;
       fwupd.enable = true;
-      # thermald.enable = true;
       trezord.enable = true;
       upower.enable = true;
     };

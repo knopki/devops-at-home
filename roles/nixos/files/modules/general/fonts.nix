@@ -11,10 +11,10 @@ with lib;
     fonts = {
       enableFontDir = true;
       fonts = with pkgs; [
+        emojione
+        font-awesome_4
         hack-font
-        # nerdfonts
         noto-fonts
-        noto-fonts-emoji
         powerline-fonts
         roboto
         roboto-mono

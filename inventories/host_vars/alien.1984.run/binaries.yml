@@ -1,5 +1,0 @@
-binaries_host:
-  - name: simpleos
-    url: https://github.com/eosrio/simpleos/releases/download/v0.6.9/simpleos-0.6.9-x86_64.AppImage
-    dest: /usr/local/bin/simpleos
-    checksum: sha1:a0d07812b31d38e0d8b1f26fa4b41dcf97b23e1e

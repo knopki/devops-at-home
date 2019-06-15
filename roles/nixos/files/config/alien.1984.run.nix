@@ -3,7 +3,7 @@ with builtins;
 {
   imports = [
     ./modules
-    <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
   ];
 
   boot = {
@@ -15,50 +15,36 @@ with builtins;
     extraModulePackages = [ ];
     initrd = {
       availableKernelModules = [
-        "ata_piix"
-        "uhci_hcd"
-        "ehci_pci"
-        "virtio_pci"
-        "sr_mod"
-        "virtio_blk"
-        "dm_persistent_data"
-        "dm_multipath"
+        "ahci"
+        "nvme"
+        "rtsx_pci_sdmmc"
+        "sd_mod"
+        "usb_storage"
+        "xhci_pci"
       ];
 
-      extraUtilsCommands = ''
-        copy_bin_and_libs ${pkgs.thin-provisioning-tools}/bin/pdata_tools
-        copy_bin_and_libs ${pkgs.thin-provisioning-tools}/bin/thin_check
-      ''; # hack to boot on thin pool
-
-      kernelModules = [ "dm_thin_pool" ]; # hack to boot on thin pool
+      kernelModules = [ "kvm-intel" ];
 
       luks.devices = [
         {
           name = "luks-nvme";
-          device = "/dev/vda3";
+          device = "/dev/nvme0n1p2";
           preLVM = true;
           allowDiscards = true;
         }
         {
           name = "luks-sata";
-          device = "/dev/vdb1";
+          device = "/dev/sda1";
           preLVM = true;
           allowDiscards = true;
         }
       ];
-
-      preLVMCommands = ''
-        mkdir -p /etc/lvm
-        echo "global/thin_check_executable = \"$(which thin_check)\"" >> /etc/lvm/lvm.conf
-      ''; # hack to boot on thin pool
     };
-
-    kernelModules = [ "dm_thin_pool" ]; # hack to boot on thin pool
 
     kernelParams = [
       "quiet"
       "splash"
-      "resume=/dev/mapper/alien--vg-swap"
+      "resume=/dev/mapper/nvme--vg-swap"
       "acpiphp.disable=1"
       "nohz_full=1-7"
       "drm.rnodes=1"
@@ -81,23 +67,19 @@ with builtins;
     '';
   };
 
-  environment.systemPackages = with pkgs; [
-    thin-provisioning-tools # required to boot on the encrypted lvm thin pool
-  ];
-
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/80a2378d-62a9-4115-b8c0-6660e7800944";
+      device = "/dev/disk/by-uuid/e384e984-2dbf-470d-82b2-7d994f4b4a7b";
       fsType = "ext4";
-      options = ["relatime" "discard"];
+      options = ["relatime" ];
     };
     "/home" = {
-      device = "/dev/disk/by-uuid/f95ecea9-05b3-4332-9431-1b96f53189c9";
+      device = "/dev/disk/by-uuid/e494917c-d1d3-46c5-894e-fa9954e8386e";
       fsType = "ext4";
-      options = ["relatime" "discard"];
+      options = ["relatime" ];
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/821A-938A";
+      device = "/dev/disk/by-uuid/6964-B539";
       fsType = "vfat";
     };
   };
@@ -116,27 +98,25 @@ with builtins;
 
   networking = {
     hostId = "ff0b9d65";
-    hostName = "alien-test";
+    hostName = "alien";
     search = [ "1984.run" ];
   };
 
-  nix.maxJobs = lib.mkDefault 4;
+  nix.maxJobs = lib.mkDefault 8;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
   services = {
     fstrim.enable = true;
-    spice-vdagentd.enable = true;
-    qemuGuest.enable = true;
     zerotierone = {
       enable = true;
-      joinNetworks = [ "1c33c1ced08df9ac" ];
+      joinNetworks = [ "1c33c1ced08df9ac" "0cccb752f7043dce" ];
     };
   };
 
   swapDevices = [
     {
-      device = "/dev/mapper/alien--vg-swap";
+      device = "/dev/mapper/nvme--vg-swap";
     }
   ];
 }
