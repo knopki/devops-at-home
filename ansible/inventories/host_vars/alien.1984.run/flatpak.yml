@@ -1,4 +1,0 @@
----
-flatpaks_host:
-  - name: org.darktable.Darktable
-  - name: org.musicbrainz.Picard

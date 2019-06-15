@@ -1,6 +1,0 @@
----
-- name: Deploy pulseaudio config default.pa
-  template:
-    src: default.j2
-    dest: /etc/pulse/default.pa
-  tags: pulseaudio

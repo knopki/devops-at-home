@@ -1,9 +1,0 @@
----
-modprobe_permanent_host:
-  - name: snd
-    values:
-      - blacklist snd-intel8x0m
-      - options snd_hda_intel position_fix=1
-  - name: i8k
-    values:
-      - options i8k force=1

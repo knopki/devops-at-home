@@ -1,3 +1,0 @@
----
-- name: restart fancontrol
-  systemd: name=fancontrol state=restarted

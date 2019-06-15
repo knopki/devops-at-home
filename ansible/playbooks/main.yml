@@ -1,6 +1,0 @@
----
-- import_playbook: alien.1984.run.yml
-- import_playbook: do-fra1.1984.run.yml
-- import_playbook: knopa.1984.run.yml
-- import_playbook: mir3g.1984.run.yml
-- import_playbook: dotfiles.yml
