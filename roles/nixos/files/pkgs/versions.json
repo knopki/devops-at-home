@@ -2,8 +2,8 @@
   "home-manager": {
     "owner": "rycee",
     "repo": "home-manager",
-    "rev": "24b734500f525c4bfe8797b6f25d5c4e0ff9cc18",
-    "sha256": "1y4d57girr6v2g2dc7av38s2fbc19haid2405z310rqyv8qai9wy"
+    "rev": "4f13f06b016d59420cafe34915abdd6b795d3416",
+    "sha256": "1chl04jimba1n1r4cqaq66kry4fy2xgsdgbqcl3rkw4ykd5yfcsc"
   },
   "fish-theme-pure": {
     "owner": "rafaelrinaldi",
@@ -14,20 +14,20 @@
   "nixpkgs-stable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "606306e0eaacdaba1d3ada33485ae4cb413faeb5",
-    "sha256": "06c10c5ayxjhim4c5a3xf3f71g3alklf7wh8lnp1vr5qr6kw4ci7"
+    "rev": "303729afa024a8bbf2b72ff9ee17cf7acf8cdbb3",
+    "sha256": "1fdcx0nmj5kl3gfgklcvc4v5dfw04lsifjcqf1nlcby2y9g86jfv"
   },
   "nixpkgs-unstable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "d26027792812fbfad4d0f451b5f47fdabf7fdeb9",
-    "sha256": "0khm8khgyfhmnnmm7wjs5mh2cfvk124drflwswn9q341bkc4bqnw"
+    "rev": "83ba5afcc9682b52b39a9a958f730b966cc369c5",
+    "sha256": "0swh1i3rm8a7fij6drz11s5nyzr145yh4n17k0572pp8knpxw762"
   },
   "nixpkgs-wayland": {
     "owner": "colemickens",
     "repo": "nixpkgs-wayland",
-    "rev": "d45df08851161dcd4b210e3b90d0bc030d4cb334",
-    "sha256": "0g7sf2z772gj1pmm34dkd78579msbmy82836168ayj93w4qwhmaw"
+    "rev": "738f75cf63968529634a999b59f7dfb60d7bb92f",
+    "sha256": "06kqrjgq4xabr2qxig6jj1ib8vqp3qp4bdykg0z1a3n32g8606rq"
   },
   "nur": {
     "owner": "nix-community",
