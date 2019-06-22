@@ -7,7 +7,7 @@ with lib;
     home.packages = with pkgs; [
       nodejs-10_x
       unstable.postman
-      yarn
+      (yarn.override { nodejs = nodejs-10_x; })
     ];
 
     home.file = {
