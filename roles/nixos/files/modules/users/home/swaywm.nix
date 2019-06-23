@@ -1,8 +1,30 @@
 { config, lib, pkgs, user, nixosConfig, ... }:
 with lib;
 let
+  # binary paths
+  grimBin = "${pkgs.grim}/bin/grim";
+  lightBin = "${pkgs.light}/bin/light";
+  makoctlBin = "${pkgs.mako}/bin/makoctl";
+  mkdirBin = "${pkgs.coreutils}/bin/mkdir";
+  notifySendBin = "${pkgs.libnotify}/bin/notify-send";
+  pactlBin = "${pkgs.pulseaudio}/bin/pactl";
+  pkillBin = "${pkgs.procps}/bin/pkill";
+  playerctlBin = "${pkgs.playerctl}/bin/playerctl";
+  py3statusBin = "${pkgs.python36Packages.py3status}/bin/py3status";
+  rofiBin = "${pkgs.rofi}/bin/rofi";
+  slurpBin = "${pkgs.slurp}/bin/slurp";
+  swayidleBin = "${pkgs.swayidle}/bin/swayidle";
+  swaylockBin = "${pkgs.swaylock}/bin/swaylock";
+  swaymsgBin = "${pkgs.sway}/bin/swaymsg";
+  systemctlBin = "${pkgs.systemd}/bin/systemctl";
+  termiteBin = "${pkgs.termite}/bin/termite";
+
   i3statusDir = "${config.xdg.configHome}/i3status";
   swayDir = "${config.xdg.configHome}/sway";
+
+  defaultWallpaper = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png";
+  screenShotDir = "$(xdg-user-dir PICTURES)/screenshots";
+  screenshotPath = "${screenShotDir}/scrn-$(date +\"%Y-%m-%d-%H-%M-%S\").png";
 in {
   options.local.swaywm.enable = mkEnableOption "setup sway, bar, rofi";
 
@@ -44,14 +66,14 @@ in {
       set $color0F #d27b53
 
       # Wallpaper (default)
-      set $wallpaper ${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png
+      set $wallpaper ${defaultWallpaper}
 
       # Include other config parts
       include ${swayDir}/config.d/*
     '';
 
     home.file."${swayDir}/config.d/10-systemd".text = ''
-      exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+      exec "${systemctlBin} --user import-environment; ${systemctlBin} --user start sway-session.target"
     '';
 
     home.file."${swayDir}/config.d/10-outputs".text = ''
@@ -181,10 +203,10 @@ in {
       # You can "split" the current object of your focus with
       # $mod+b or $mod+v, for horizontal and vertical splits
       # respectively.
-      bindsym $mod+b               splith;exec ${pkgs.libnotify}/bin/notify-send 'tile horizontally' --expire-time 500
-      bindsym $mod+Cyrillic_i      splith;exec ${pkgs.libnotify}/bin/notify-send 'tile horizontally' --expire-time 500
-      bindsym $mod+v               splitv;exec ${pkgs.libnotify}/bin/notify-send 'tile vertically' --expire-time 500
-      bindsym $mod+Cyrillic_em     splitv;exec ${pkgs.libnotify}/bin/notify-send 'tile vertically' --expire-time 500
+      bindsym $mod+b               splith;exec ${notifySendBin} 'tile horizontally' --expire-time 500
+      bindsym $mod+Cyrillic_i      splith;exec ${notifySendBin} 'tile horizontally' --expire-time 500
+      bindsym $mod+v               splitv;exec ${notifySendBin} 'tile vertically' --expire-time 500
+      bindsym $mod+Cyrillic_em     splitv;exec ${notifySendBin} 'tile vertically' --expire-time 500
       bindsym $mod+q               split toggle
       bindsym $mod+Cyrillic_shorti split toggle
 
@@ -332,7 +354,7 @@ in {
 
     home.file."${swayDir}/config.d/60-terminal".text = ''
       # Your preferred terminal emulator
-      set $term ${pkgs.termite}/bin/termite #-d "$(cat /tmp/$USER-pwd || echo $HOME)"
+      set $term ${termiteBin}
 
       # start a terminal
       bindsym $mod+Return exec $term
@@ -341,7 +363,7 @@ in {
 
     home.file."${swayDir}/config.d/70-rofi".text = ''
       # Your preferred application launcher
-      set $menu ${pkgs.rofi}/bin/rofi -modi combi -show combi -combi-modi "drun,run,ssh" -show-icons -terminal $term
+      set $menu ${rofiBin} -modi combi -show combi -combi-modi "drun,run,ssh" -show-icons -terminal $term
 
       # start your launcher
       bindsym $mod+d           exec $menu
@@ -349,57 +371,49 @@ in {
     '';
 
     home.file."${swayDir}/config.d/70-mako".text = ''
-      bindsym $mod+n exec ${pkgs.mako}/bin/makoctl dismiss
-      bindsym $mod+Shift+n exec ${pkgs.mako}/bin/makoctl dismiss --all
+      bindsym $mod+n exec ${makoctlBin} dismiss
+      bindsym $mod+Shift+n exec ${makoctlBin} dismiss --all
     '';
 
     home.file."${swayDir}/config.d/70-backlight".text = ''
-      bindsym --locked XF86MonBrightnessUp   exec ${pkgs.light}/bin/light -A 3 && \
-        ${pkgs.libnotify}/bin/notify-send 'Brightness' $(light) --expire-time 200
-      bindsym --locked XF86MonBrightnessDown exec ${pkgs.light}/bin/light -U 3 && \
-        ${pkgs.libnotify}/bin/notify-send 'Brightness' $(light) --expire-time 200
+      bindsym --locked XF86MonBrightnessUp   exec ${lightBin} -A 3 && \
+        ${notifySendBin} 'Brightness' $(light) --expire-time 200
+      bindsym --locked XF86MonBrightnessDown exec ${lightBin} -U 3 && \
+        ${notifySendBin} 'Brightness' $(light) --expire-time 200
     '';
 
     home.file."${swayDir}/config.d/70-volume".text = ''
       bindsym --locked XF86AudioMute exec --no-startup-id sh -c \
-        "for s in \$(${pkgs.pulseaudio}/bin/pactl list sinks short | cut -f1); do ${pkgs.pulseaudio}/bin/pactl set-sink-mute \$s toggle; done" && ${pkgs.procps}/bin/pkill -USR1 py3status
+        "for s in \$(${pactlBin} list sinks short | cut -f1); do ${pactlBin} set-sink-mute \$s toggle; done" && ${pkillBin} -USR1 py3status
       bindsym --locked XF86AudioLowerVolume exec --no-startup-id \
-        ${pkgs.pulseaudio}/bin/pactl set-sink-volume $(${pkgs.pulseaudio}/bin/pactl list sinks short | head -n 1 | cut -f1) -1% && \
-        ${pkgs.procps}/bin/pkill -USR1 py3status
+        ${pactlBin} set-sink-volume $(${pactlBin} list sinks short | head -n 1 | cut -f1) -0.99% && \
+       ${pkillBin} -USR1 py3status
       bindsym --locked XF86AudioRaiseVolume exec --no-startup-id \
-        ${pkgs.pulseaudio}/bin/pactl set-sink-volume $(${pkgs.pulseaudio}/bin/pactl list sinks short | head -n 1 | cut -f1) +1% && \
-        ${pkgs.procps}/bin/pkill -USR1 py3status
-      ${(if nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
-      bindsym --locked XF86AudioMicMute exec --no-startuo-id sh -c \
-        '${pkgs.pulseaudio}/bin/pactl set-source-mute 1 toggle' && \
-        ${pkgs.procps}/bin/pkill -USR1 py3status
-      '' else "")}
-      ${(if nixosConfig.local.hardware.machine == "alienware-15r2" then ''
-      bindsym --locked XF86AudioMicMute exec --no-startuo-id sh -c \
-        '${pkgs.pulseaudio}/bin/pactl set-source-mute 2 toggle' && \
-        ${pkgs.procps}/bin/pkill -USR1 py3status
-      '' else "")}
+        ${pactlBin} set-sink-volume $(${pactlBin} list sinks short | head -n 1 | cut -f1) +0.99% && \
+       ${pkillBin} -USR1 py3status
+      bindsym --locked XF86AudioMicMute exec --no-startup-id sh -c \
+        "for s in \$(${pactlBin} list sources short | cut -f1); do ${pactlBin} set-source-mute \$s toggle; done" &&${pkillBin} -USR1 py3status
     '';
 
     home.file."${swayDir}/config.d/70-playerctl".text = ''
-      bindsym --locked XF86AudioPlay exec ${pkgs.playerctl}/bin/playerctl play
-      bindsym --locked XF86AudioPause exec ${pkgs.playerctl}/bin/playerctl pause
-      bindsym --locked XF86AudioNext exec ${pkgs.playerctl}/bin/playerctl next
-      bindsym --locked XF86AudioPrev exec ${pkgs.playerctl}/bin/playerctl previous
+      bindsym --locked XF86AudioPlay exec ${playerctlBin} play
+      bindsym --locked XF86AudioPause exec ${playerctlBin} pause
+      bindsym --locked XF86AudioNext exec ${playerctlBin} next
+      bindsym --locked XF86AudioPrev exec ${playerctlBin} previous
     '';
 
     home.file."${swayDir}/config.d/70-screenshots".text = ''
       # make target directory
-      exec --no-startup-id ${pkgs.coreutils}/bin/mkdir -p $(xdg-user-dir PICTURES)/screenshots
+      exec --no-startup-id ${mkdirBin} -p ${screenShotDir}
       # just make screenshot
-      bindsym $mod+Print exec ${pkgs.grim}/bin/grim $(xdg-user-dir PICTURES)/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+      bindsym $mod+Print exec ${grimBin} "${screenshotPath}"
       # make screenshot of the screen area
-      bindsym $mod+Shift+Print exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $(xdg-user-dir PICTURES)/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+      bindsym $mod+Shift+Print exec ${slurpBin} | ${grimBin} -g - ${screenshotPath}
     '';
 
     home.file."${swayDir}/config.d/99-bar".text = ''
       bar {
-        status_command ${pkgs.python36Packages.py3status}/bin/py3status -b -s -i "${config.xdg.configHome}/i3status/py3status"
+        status_command ${py3statusBin} -b -s -i "${config.xdg.configHome}/i3status/py3status"
         position top
         font pango:Hack 10
         separator_symbol "| "
@@ -436,12 +450,12 @@ in {
     home.file."${swayDir}/config.d/99-exit-menu".text = ''
       set $mode_system System: (l) lock, (e) exit, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
       mode "$mode_system" {
-          bindsym l exec --no-startup-id ${pkgs.swaylock}/bin/swaylock -i $wallpaper --scaling=fill, mode "default"
+          bindsym l exec --no-startup-id ${swaylockBin} -i $wallpaper --scaling=fill, mode "default"
           bindsym e exit
-          bindsym s exec --no-startup-id systemctl suspend, mode "default"
-          bindsym r exec --no-startup-id systemctl reboot, mode "default"
-          bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-          bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+          bindsym s exec --no-startup-id ${systemctlBin} suspend, mode "default"
+          bindsym r exec --no-startup-id ${systemctlBin} reboot, mode "default"
+          bindsym Shift+s exec --no-startup-id ${systemctlBin} poweroff -i, mode "default"
+          bindsym Shift+r exec --no-startup-id ${systemctlBin} reboot --firmware-setup, mode "default"
 
           # return to default mode
           bindsym Return mode "default"
@@ -723,11 +737,11 @@ in {
         Service = {
           Type = "simple";
           ExecStart = ''
-            ${pkgs.swayidle}/bin/swayidle -w \
-              timeout 300  '${pkgs.swaylock}/bin/swaylock -i ${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png --scaling=fill -f' \
-              timeout 600  '${pkgs.sway}/bin/swaymsg "output * dpms off"' \
-                    resume '${pkgs.sway}/bin/swaymsg "output * dpms on"' \
-              before-sleep '${pkgs.swaylock}/bin/swaylock -i ${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png --scaling=fill -f'
+            ${swayidleBin} -w \
+              timeout 300  '${swaylockBin} -i ${defaultWallpaper} --scaling=fill -f' \
+              timeout 600  '${swaymsgBin} "output * dpms off"' \
+                    resume '${swaymsgBin} "output * dpms on"' \
+              before-sleep '${swaylockBin} -i ${defaultWallpaper} --scaling=fill -f'
           '';
         };
         Install = {
