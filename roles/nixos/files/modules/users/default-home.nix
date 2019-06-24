@@ -15,6 +15,10 @@ with lib;
         fixTerm = true;
         loadProfile = true;
         pureTheme = true;
+        interactiveShellInit."99-binds" = ''
+          bind --user \cw backward-kill-word # Ctrl-W
+          bind --user \e\[3\;5~ kill-word  # Ctrl-Delete
+        '';
       };
       git = true;
       gpg-agent.defaults = true;
