@@ -11,6 +11,7 @@ with lib;
         enable = true;
         package = pkgs.pulseaudioFull;
         support32Bit = mkIf config.local.roles.workstation.enable true;
+      };
     };
 
     environment.systemPackages = with pkgs; [
