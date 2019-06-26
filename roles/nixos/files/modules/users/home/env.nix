@@ -14,8 +14,8 @@ in {
     (mkIf config.local.env.default {
       home.sessionVariables = {
         DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/${toString user.uid}/bus";
-        EDITOR = "vim";
-        VISUAL = "vim";
+        EDITOR = "nvim";
+        VISUAL = "nvim";
         XDG_RUNTIME_DIR = "/run/user/${toString user.uid}";
       };
       systemd.user.sessionVariables = {

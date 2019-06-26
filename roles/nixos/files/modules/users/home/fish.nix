@@ -77,10 +77,12 @@ in {
           "\n"
           (attrValues config.local.fish.promptInit);
         shellAbbrs = {
+          gco = "git checkout";
+          gst = "git status";
           o = "xdg-open";
-          svim = "sudo -E vim";
         };
         shellAliases = {
+          e = "$EDITOR";
           fzf = "fzf-tmux -m";
           grep = "grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
           myip = "curl ifconfig.co";
@@ -88,6 +90,7 @@ in {
           rsync-move = "rsync -avz --progress -h --remove-source-files";
           rsync-synchronize = "rsync -avzu --delete --progress -h";
           rsync-update = "rsync -avzu --progress -h";
+          se = "sudo -E $EDITOR";
         };
       };
 

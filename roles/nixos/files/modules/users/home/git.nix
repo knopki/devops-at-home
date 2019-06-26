@@ -7,7 +7,7 @@ with lib;
     programs.git = {
       aliases = {
         co = "checkout";
-        hist = "log --graph --pretty=format:\"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\"";
+        hist = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
         st = "status";
         undo = "reset --soft HEAD^";
       };
