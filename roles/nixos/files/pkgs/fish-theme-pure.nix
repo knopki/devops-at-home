@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation rec {
   name = "fish-theme-pure-${version}";
-  version = "2.1.1";
+  version = "2.1.5";
 
   src = fetchFromGitHub
     (builtins.fromJSON
