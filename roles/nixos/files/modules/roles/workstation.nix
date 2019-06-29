@@ -47,6 +47,7 @@ with lib;
     boot.tmpOnTmpfs = true;
 
     environment.systemPackages = with pkgs; [
+      fd
       gcc
       go
       gopass

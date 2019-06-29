@@ -42,7 +42,6 @@ with lib;
       bat
       bind
       curl
-      fd
       file
       gitAndTools.gitFull
       gnupg
