@@ -48,6 +48,7 @@ with lib;
 
     environment.systemPackages = with pkgs; [
       fd
+      fish-kubectl-completions
       gcc
       go
       gopass

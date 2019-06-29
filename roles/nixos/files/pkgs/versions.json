@@ -5,6 +5,12 @@
     "rev": "4f13f06b016d59420cafe34915abdd6b795d3416",
     "sha256": "1chl04jimba1n1r4cqaq66kry4fy2xgsdgbqcl3rkw4ykd5yfcsc"
   },
+  "fish-kubectl-completions": {
+    "owner": "evanlucas",
+    "repo": "fish-kubectl-completions",
+    "rev": "30b708d1342e3c2881fdf41fc441b09b10801d7a",
+    "sha256": "16ndz58zl4c61waf33wacm7p4mngyhg9116zz843s118pkxl10ww"
+  },
   "fish-theme-pure": {
     "owner": "rafaelrinaldi",
     "repo": "pure",
