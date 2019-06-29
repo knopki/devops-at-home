@@ -40,6 +40,7 @@ with lib;
     # common packages on all machines
     environment.systemPackages = with pkgs; [
       bat
+      bind
       curl
       fd
       file
