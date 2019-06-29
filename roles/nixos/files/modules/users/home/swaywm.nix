@@ -13,6 +13,7 @@ let
   py3statusBin = "${pkgs.python36Packages.py3status}/bin/py3status";
   rofiBin = "${pkgs.rofi}/bin/rofi";
   slurpBin = "${pkgs.slurp}/bin/slurp";
+  sshaddBin = "${pkgs.openssh}/bin/ssh-add";
   swayidleBin = "${pkgs.swayidle}/bin/swayidle";
   swaylockBin = "${pkgs.swaylock}/bin/swaylock";
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
@@ -463,6 +464,10 @@ in {
       }
       bindsym $mod+Shift+e          mode "$mode_system"
       bindsym $mod+Shift+Cyrillic_u mode "$mode_system"
+    '';
+
+    home.file."${swayDir}/config.d/99-unlock-ssh".text = ''
+      exec --no-startup-id sh -c "echo | ${sshaddBin}"
     '';
 
     #

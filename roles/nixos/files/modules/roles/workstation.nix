@@ -88,6 +88,7 @@ with lib;
     programs = {
       adb.enable = true;
       npm.enable = true;
+      ssh.startAgent = true;
     };
 
     services = {

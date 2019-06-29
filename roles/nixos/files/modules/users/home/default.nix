@@ -10,7 +10,6 @@
     ./fzf.nix
     ./git.nix
     ./gnome.nix
-    ./gpg-agent.nix
     ./jsdev.nix
     ./qt.nix
     ./readline.nix

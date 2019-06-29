@@ -21,7 +21,6 @@ with lib;
         '';
       };
       git = true;
-      gpg-agent.defaults = true;
       readline = true;
       ssh = true;
       xdgUserDirs = {

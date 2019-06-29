@@ -17,6 +17,7 @@ with lib;
       sway = {
         enable = true;
         extraPackages = with pkgs; [
+          gnome3.seahorse
           grim
           i3status
           libnotify
@@ -42,6 +43,8 @@ with lib;
           # Fix for some Java AWT applications (e.g. Android Studio),
           # use this if they aren't displayed properly:
           export _JAVA_AWT_WM_NONREPARENTING=1
+
+          export SSH_ASKPASS=${pkgs.gnome3.seahorse}/libexec/seahorse/ssh-askpass
         '';
       };
     };
