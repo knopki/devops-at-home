@@ -60,13 +60,8 @@ with lib;
       pass
       pass-otp
       powertop
-      python27Packages.dnspython # ???
-      python27Packages.pydbus # ???
-      python27Packages.pytz # ???
-      python27Packages.tzlocal # ???
       qt5.qtwayland
       qt5ct
-      # selinux-python TODO:BROKEN
     ];
 
     hardware = {
