@@ -162,10 +162,6 @@ in {
       # Change normal to inverse to use left mouse button for resizing and right
       # mouse button for dragging.
       floating_modifier $mod normal
-
-      # reload the configuration file
-      bindsym $mod+Shift+c reload
-      bindsym $mod+Shift+Cyrillic_es reload
     '';
 
     home.file."${swayDir}/config.d/50-moving-key-bindings".text = ''
@@ -449,14 +445,15 @@ in {
     '';
 
     home.file."${swayDir}/config.d/99-exit-menu".text = ''
-      set $mode_system System: (l) lock, (e) exit, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+      set $mode_system System: (l) lock, (c) reload config, (e) exit, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
       mode "$mode_system" {
           bindsym l exec --no-startup-id ${swaylockBin} -i $wallpaper --scaling=fill, mode "default"
+          bindsym c reload
           bindsym e exit
-          bindsym s exec --no-startup-id ${systemctlBin} suspend, mode "default"
-          bindsym r exec --no-startup-id ${systemctlBin} reboot, mode "default"
+          bindsym s exec --no-startup-id ${systemctlBin} suspend -i, mode "default"
+          bindsym r exec --no-startup-id ${systemctlBin} reboot -i, mode "default"
           bindsym Shift+s exec --no-startup-id ${systemctlBin} poweroff -i, mode "default"
-          bindsym Shift+r exec --no-startup-id ${systemctlBin} reboot --firmware-setup, mode "default"
+          bindsym Shift+r exec --no-startup-id ${systemctlBin} reboot -i --firmware-setup, mode "default"
 
           # return to default mode
           bindsym Return mode "default"
