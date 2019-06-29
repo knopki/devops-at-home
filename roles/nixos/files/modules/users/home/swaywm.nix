@@ -1,6 +1,12 @@
 { config, lib, pkgs, user, nixosConfig, ... }:
 with lib;
 let
+  defaultWallpaper = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png";
+  i3statusDir = "${config.xdg.configHome}/i3status";
+  screenShotDir = "$(xdg-user-dir PICTURES)/screenshots";
+  screenshotPath = "${screenShotDir}/scrn-$(date +\"%Y-%m-%d-%H-%M-%S\").png";
+  swayDir = "${config.xdg.configHome}/sway";
+
   # binary paths
   grimBin = "${pkgs.grim}/bin/grim";
   lightBin = "${pkgs.light}/bin/light";
@@ -16,16 +22,10 @@ let
   sshaddBin = "${pkgs.openssh}/bin/ssh-add";
   swayidleBin = "${pkgs.swayidle}/bin/swayidle";
   swaylockBin = "${pkgs.swaylock}/bin/swaylock";
+  swaylockCmd = "${swaylockBin} -i ${defaultWallpaper} --scaling=fill";
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
   termiteBin = "${pkgs.termite}/bin/termite";
-
-  i3statusDir = "${config.xdg.configHome}/i3status";
-  swayDir = "${config.xdg.configHome}/sway";
-
-  defaultWallpaper = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png";
-  screenShotDir = "$(xdg-user-dir PICTURES)/screenshots";
-  screenshotPath = "${screenShotDir}/scrn-$(date +\"%Y-%m-%d-%H-%M-%S\").png";
 in {
   options.local.swaywm.enable = mkEnableOption "setup sway, bar, rofi";
 
@@ -447,7 +447,7 @@ in {
     home.file."${swayDir}/config.d/99-exit-menu".text = ''
       set $mode_system System: (l) lock, (c) reload config, (e) exit, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
       mode "$mode_system" {
-          bindsym l exec --no-startup-id ${swaylockBin} -i $wallpaper --scaling=fill, mode "default"
+          bindsym l exec --no-startup-id ${swaylockCmd}, mode "default"
           bindsym c reload
           bindsym e exit
           bindsym s exec --no-startup-id ${systemctlBin} suspend -i, mode "default"
@@ -738,12 +738,13 @@ in {
         };
         Service = {
           Type = "simple";
+          Environment = "PATH=${pkgs.bash}/bin";
           ExecStart = ''
             ${swayidleBin} -w \
-              timeout 300  '${swaylockBin} -i ${defaultWallpaper} --scaling=fill -f' \
-              timeout 600  '${swaymsgBin} "output * dpms off"' \
+              timeout 600  '${swaylockCmd} -f' \
+              timeout 1200 '${swaymsgBin} "output * dpms off"' \
                     resume '${swaymsgBin} "output * dpms on"' \
-              before-sleep '${swaylockBin} -i ${defaultWallpaper} --scaling=fill -f'
+              before-sleep '${swaylockCmd} -f'
           '';
         };
         Install = {
