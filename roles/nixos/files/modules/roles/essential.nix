@@ -50,6 +50,7 @@ with lib;
       iftop
       iotop
       jq
+      lsof
       neovim
       nnn
       pinentry
