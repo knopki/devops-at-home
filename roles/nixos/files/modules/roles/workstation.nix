@@ -63,6 +63,7 @@ with lib;
       powertop
       qt5.qtwayland
       qt5ct
+      skypeforlinux
     ];
 
     hardware = {
