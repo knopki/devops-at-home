@@ -82,8 +82,6 @@ with lib;
       usePredictableInterfaceNames = true;
     };
 
-    powerManagement.powertop.enable = true;
-
     programs = {
       adb.enable = true;
       npm.enable = true;

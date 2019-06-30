@@ -109,10 +109,20 @@ with builtins;
 
   nix.maxJobs = lib.mkDefault 4;
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-
   services = {
     fstrim.enable = true;
+    tlp = {
+      enable = true;
+      extraConfig = ''
+        TLP_DEFAULT_MODE=BAT
+        CPU_HWP_ON_BAT=power
+        CPU_SCALING_GOVERNOR_ON_BAT=powersave
+        DISK_IOSCHED="noop cfq"
+        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth wwan"
+        DEVICES_TO_DISABLE_ON_LAN_CONNECT="wifi wwan"
+        DEVICES_TO_ENABLE_ON_LAN_DISCONNECT="wifi wwan"
+      '';
+    };
     zerotierone = {
       enable = true;
       joinNetworks = [ "1c33c1ced08df9ac" "0cccb752f7043dce" ];

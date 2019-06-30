@@ -11,6 +11,7 @@ with builtins;
       blacklist snd-intel8x0m
       options snd_hda_intel position_fix=1
       options i8k force=1
+      options i915 enable_fbc=1 enable_guc=3 enable_psr=1
     '';
     extraModulePackages = [ ];
     initrd = {
@@ -47,7 +48,7 @@ with builtins;
       "resume=/dev/mapper/nvme--vg-swap"
       "acpiphp.disable=1"
       "nohz_full=1-7"
-      "drm.rnodes=1"
+      "pcie_aspm.policy=powersave"
     ];
 
     loader = {
@@ -104,10 +105,20 @@ with builtins;
 
   nix.maxJobs = lib.mkDefault 8;
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-
   services = {
     fstrim.enable = true;
+    tlp = {
+      enable = true;
+      extraConfig = ''
+        TLP_DEFAULT_MODE=BAT
+        CPU_HWP_ON_BAT=power
+        CPU_SCALING_GOVERNOR_ON_BAT=powersave
+        DISK_IOSCHED="noop cfq"
+        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth wwan"
+        DEVICES_TO_DISABLE_ON_LAN_CONNECT="wifi wwan"
+        DEVICES_TO_ENABLE_ON_LAN_DISCONNECT="wifi wwan"
+      '';
+    };
     zerotierone = {
       enable = true;
       joinNetworks = [ "1c33c1ced08df9ac" "0cccb752f7043dce" ];
