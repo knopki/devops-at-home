@@ -47,6 +47,7 @@ with lib;
     boot.tmpOnTmpfs = true;
 
     environment.systemPackages = with pkgs; [
+      borgbackup
       fd
       fish-kubectl-completions
       gcc
