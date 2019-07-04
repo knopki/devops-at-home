@@ -77,11 +77,9 @@ with lib;
     networking = {
       firewall = {
         enable = true;
+        rejectPackets = true;
       };
-      networkmanager = {
-        enable = true;
-        dns = "dnsmasq";
-      };
+      networkmanager.enable = true;
       usePredictableInterfaceNames = true;
     };
 

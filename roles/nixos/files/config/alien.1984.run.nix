@@ -94,6 +94,11 @@ with builtins;
   local = {
     hardware.machine = "alienware-15r2";
     roles.workstation.enable = true;
+    services.azire-vpn = {
+      enabled = true;
+      ips = [ "10.10.16.213/19" "2a03:8600:1001:4000::10d6/64" ];
+      publicKey = "T28Qn5VFzT4wiwEPd7DscwcP3Rsmq23QcnjH1N5G/wc=";
+    };
     users.setupUsers = [ "sk" ];
   };
 
