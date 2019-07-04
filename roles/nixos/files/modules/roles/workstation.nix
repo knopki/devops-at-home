@@ -58,6 +58,8 @@ with lib;
       mosh
       neovim
       neovim-remote
+      ngrep
+      nmap
       p7zip
       pass
       pass-otp
