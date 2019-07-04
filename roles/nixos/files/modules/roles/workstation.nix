@@ -65,6 +65,7 @@ with lib;
       qt5.qtwayland
       qt5ct
       skypeforlinux
+      wine
     ];
 
     hardware = {
