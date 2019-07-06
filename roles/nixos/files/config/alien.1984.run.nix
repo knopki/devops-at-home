@@ -69,12 +69,12 @@ with builtins;
     "/" = {
       device = "/dev/disk/by-uuid/e384e984-2dbf-470d-82b2-7d994f4b4a7b";
       fsType = "ext4";
-      options = ["relatime" ];
+      options = [ "relatime" ];
     };
     "/home" = {
-      device = "/dev/disk/by-uuid/e494917c-d1d3-46c5-894e-fa9954e8386e";
+      device = "/dev/disk/by-uuid/ce307698-b1ea-4ef1-b104-304275e71818";
       fsType = "ext4";
-      options = ["relatime" ];
+      options = [ "relatime" ];
     };
     "/boot" = {
       device = "/dev/disk/by-uuid/6964-B539";
