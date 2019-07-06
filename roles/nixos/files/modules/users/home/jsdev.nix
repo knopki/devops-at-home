@@ -6,6 +6,7 @@ with lib;
   config = mkIf config.local.jsdev.enable {
     home.packages = with pkgs; [
       nodejs-10_x
+      nodePackages.node2nix
       unstable.postman
       (yarn.override { nodejs = nodejs-10_x; })
     ];

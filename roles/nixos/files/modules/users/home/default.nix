@@ -11,6 +11,7 @@
     ./git.nix
     ./gnome.nix
     ./jsdev.nix
+    ./nixdev.nix
     ./qt.nix
     ./readline.nix
     ./ssh.nix

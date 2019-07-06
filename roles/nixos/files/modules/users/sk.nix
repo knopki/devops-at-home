@@ -70,6 +70,7 @@ in {
           fish.enable = true;
           gnome.enable = true;
           jsdev.enable = true;
+          nixdev.enable = true;
           qt.enable = true;
           swaywm.enable = true;
           termite.enable = true;
