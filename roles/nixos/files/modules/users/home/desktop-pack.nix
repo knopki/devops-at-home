@@ -20,9 +20,11 @@ with lib;
       pavucontrol
       picard
       playerctl
+      skypeforlinux
       tdesktop
       tor-browser-bundle-bin
       transmission-gtk
+      wine
       youtube-dl
     ];
   };
