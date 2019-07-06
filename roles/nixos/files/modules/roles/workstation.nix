@@ -51,7 +51,6 @@ with lib;
       fd
       fish-kubectl-completions
       gcc
-      go
       gopass
       hdparm
       lm_sensors
