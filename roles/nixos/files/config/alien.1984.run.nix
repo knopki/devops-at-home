@@ -59,9 +59,6 @@ with builtins;
 
   environment.etc = {
     "lvm/lvm.conf".text = ''
-      activation {
-        activation_mode = "partial"
-      }
       devices {
         issue_discards = 1
       }
