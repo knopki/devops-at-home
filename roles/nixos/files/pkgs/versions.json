@@ -20,14 +20,14 @@
   "nixpkgs-stable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "2516c454c35344d551420fb74541371c6bfcc5e9",
-    "sha256": "1fsxwd3x5ag1ihgprrlgk06s5ja7rkk5a5s04qmrp32784iylkpn"
+    "rev": "754763ff4ba1dd03fe3fad3a0fea36d2e39f5860",
+    "sha256": "10752kda1rzljlpcchi826hmbc8853vnbg9rkh7s89mxq6yjnm15"
   },
   "nixpkgs-unstable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "20b993ef2c9e818a636582ade9597f71a485209d",
-    "sha256": "0plb93vw662lwxpfac7karsqkkajwr6xp5pfgij2l67bn1if3xd6"
+    "rev": "73392e79aa62e406683d6a732eb4f4101f4732be",
+    "sha256": "049fq37sxdn5iis7ni407j2jsfrxbb41pgv5zawi02qj47f74az9"
   },
   "nixpkgs-wayland": {
     "owner": "colemickens",
