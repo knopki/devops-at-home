@@ -6,7 +6,6 @@ with lib;
   config = mkIf config.local.desktop-pack.enable {
     home.packages = with pkgs; [
       anki
-      appimage-run
       blender
       chromium
       darktable
