@@ -11,12 +11,7 @@ with lib;
     services = {
       timesyncd = {
         enable = true;
-        servers = [
-          "0.ru.pool.ntp.org"
-          "1.ru.pool.ntp.org"
-          "2.ru.pool.ntp.org"
-          "3.ru.pool.ntp.org"
-        ];
+        servers = ["time.cloudflare.com"];
       };
     };
   };
