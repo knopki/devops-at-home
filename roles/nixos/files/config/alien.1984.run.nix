@@ -113,7 +113,7 @@ with builtins;
       enable = true;
       extraConfig = ''
         TLP_DEFAULT_MODE=BAT
-        CPU_HWP_ON_BAT=power
+        CPU_HWP_ON_BAT=balance_power
         CPU_SCALING_GOVERNOR_ON_BAT=powersave
         DISK_IOSCHED="noop cfq"
         DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth wwan"
