@@ -345,7 +345,6 @@ in {
       # for_window [class="Gnome-control-center" instance="gnome-control-center"] floating enable
 
       # auto fullscreen
-      for_window [title="feh\ .*"] fullscreen enable
       for_window [title="Media viewer"] fullscreen enable
     '';
 
