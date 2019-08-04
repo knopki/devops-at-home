@@ -49,9 +49,11 @@ with lib;
 
     programs.vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        bbenoist.Nix
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      extensions = with pkgs; [
+        vscode-extensions.bbenoist.Nix
+        unstable.vscode-extensions.ms-python.python
+      ] ++
+      pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "vscode-ansible";
           publisher = "vscoss";
@@ -143,12 +145,6 @@ with lib;
           sha256 = "12qgx56g79snkf9r7sgmx3lv0gnzp7avf3a5910i0xq9shfr67n0";
         }
         {
-          name = "python";
-          publisher = "ms-python";
-          version = "2019.1.0";
-          sha256 = "1jp9i0qxdbrw3jk4in9za9cmfyrd6ii1ilgyg2van3mkq6xpp92w";
-        }
-        {
           name = "Go";
           publisher = "ms-vscode";
           version = "0.9.2";
@@ -176,7 +172,6 @@ with lib;
 
       userSettings = {
         "debug.inlineValues" = true;
-        "docker.enableLinting" = true;
         "editor.fontFamily" = "'Hack Nerd Font','Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'";
         "editor.fontLigatures" = true;
         "editor.minimap.enabled" = false;
@@ -190,13 +185,6 @@ with lib;
         "flow.useNPMPackagedFlow" = true;
         "flow.useLSP" = true;
         "git.autofetch" = true;
-        "githubPullRequests.hosts" = [
-          {
-            host = "https://github.com";
-            username = "oauth";
-            token = "system";
-          }
-        ];
         "gitlens.advanced.messages" = {
           suppressFileNotUnderSourceControlWarning = true;
           suppressShowKeyBindingsNotice = true;
@@ -209,15 +197,19 @@ with lib;
         "javascript.updateImportsOnFileMove.enabled" = "never";
         "javascript.validate.enable" = false;
         "prettier.trailingComma" = "es5";
-        "tslint.packageManager" = "yarn";
-        "typescript.check.tscVersion" = false;
         "typescript.disableAutomaticTypeAcquisition" = false;
-        "update.channel" = "none";
+        "update.mode" = "none";
         "vsicons.dontShowNewVersionMessage" = true;
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = 0;
         "workbench.colorTheme" = "Monokai";
         "workbench.startupEditor" = "newUntitledFile";
+        "[json]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[jsonc]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
       };
     };
   };

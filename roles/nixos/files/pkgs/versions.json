@@ -32,8 +32,8 @@
   "nixpkgs-unstable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "239fffc90d792b5362a20ec1a009978de7b8f91a",
-    "sha256": "0z0c438b5q1066x6p9qfriym5cipw8f52a456f91qzg6q1r296f8"
+    "rev": "4e8a8a13ef6f730b7f785483a1ef79512a20a6fe",
+    "sha256": "0p02jx16jsij1g1kzy3hwck4adw99fy2r39fmq53yjyyydmg55ky"
   },
   "nixpkgs-wayland": {
     "owner": "colemickens",
