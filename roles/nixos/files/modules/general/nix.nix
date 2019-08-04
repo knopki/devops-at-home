@@ -43,5 +43,7 @@ with lib;
 
       trustedUsers = [ "root" "@wheel" ];
     };
+
+    systemd.timers.nixos-upgrade.timerConfig.Persistent = true;
   };
 }
