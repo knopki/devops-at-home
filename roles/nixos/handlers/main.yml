@@ -1,3 +1,8 @@
 ---
 - name: nixos-rebuild
   command: nixos-rebuild switch
+  notify:
+    - nixos-rebuild-second-pass
+
+- name: nixos-rebuild-second-pass
+  command: nixos-rebuild switch

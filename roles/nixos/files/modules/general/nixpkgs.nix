@@ -4,7 +4,7 @@ with import <nixpkgs> {};
 let
   versions = builtins.fromJSON (builtins.readFile ../../pkgs/versions.json);
   homeManager = fetchFromGitHub versions.home-manager;
-  # waylandOverlay = fetchFromGitHub versions.nixpkgs-wayland;
+  nixpkgsSrcStable = fetchFromGitHub versions.nixpkgs-stable;
 in {
   imports = [
     "${homeManager}/nixos"
@@ -18,7 +18,7 @@ in {
     nixpkgs = {
       config.allowUnfree = true;
 
-      pkgs = import (fetchFromGitHub versions.nixpkgs-stable) {
+      pkgs = import "${nixpkgsSrcStable}" {
         config = config.nixpkgs.config;
         overlays = config.nixpkgs.overlays;
       };
@@ -31,7 +31,6 @@ in {
           nur = import (fetchFromGitHub versions.nur) {
             inherit super;
           };
-          # wayland-server = super.unstable.wayland-server;
         })
         (self: super: {
           fish-kubectl-completions = pkgs.callPackage ../../pkgs/fish-kubectl-completions.nix {};
@@ -43,5 +42,7 @@ in {
         (import ../../pkgs/tmux-plugins.nix)
       ];
     };
+
+    nix.nixPath = [ "nixpkgs=${nixpkgsSrcStable}:nixos-config=/etc/nixos/configuration.nix" ];
   };
 }
