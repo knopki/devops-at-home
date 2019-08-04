@@ -3,7 +3,7 @@
     "owner": "rycee",
     "repo": "home-manager",
     "rev": "d625186ce599a663b0115b83b70ea0be0ba8afbf",
-    "sha256": "1chl04jimba1n1r4cqaq66kry4fy2xgsdgbqcl3rkw4ykd5yfcsc"
+    "sha256": "12hlaz5yfrhsgk8p7l7ma7sm3jkfq630rxwcig2s48wqsmnrh7km"
   },
   "fish-kubectl-completions": {
     "owner": "evanlucas",
