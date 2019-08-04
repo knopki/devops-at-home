@@ -18,7 +18,7 @@ with lib;
         default = "/etc/nixos/secrets/azire_wg_priv";
       };
       endpoint = mkOption {
-        default = "se1.wg.azirevpn.net:51820";
+        default = "193.180.164.58:51820"; # se1.wg.azirevpn.net
         type = with types; nullOr str;
       };
       publicKey = mkOption {
