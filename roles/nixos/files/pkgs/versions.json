@@ -2,7 +2,7 @@
   "home-manager": {
     "owner": "rycee",
     "repo": "home-manager",
-    "rev": "4f13f06b016d59420cafe34915abdd6b795d3416",
+    "rev": "d625186ce599a663b0115b83b70ea0be0ba8afbf",
     "sha256": "1chl04jimba1n1r4cqaq66kry4fy2xgsdgbqcl3rkw4ykd5yfcsc"
   },
   "fish-kubectl-completions": {
@@ -14,38 +14,38 @@
   "fish-theme-pure": {
     "owner": "rafaelrinaldi",
     "repo": "pure",
-    "rev": "v2.1.5",
-    "sha256": "0z8z8b7fplxpx84d9k9vwbnqhdfc9834gm6qn3sgg1fp26rj4ig4"
+    "rev": "v2.1.8",
+    "sha256": "1ki1wh2lcdpbnsa2msl5w2fi7gi5l725vj01b4s3dc69761q49xn"
   },
   "nixpkgs-stable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "754763ff4ba1dd03fe3fad3a0fea36d2e39f5860",
-    "sha256": "10752kda1rzljlpcchi826hmbc8853vnbg9rkh7s89mxq6yjnm15"
+    "rev": "93ea6db29cc56f0f90c47014842c6cedc5eeb6de",
+    "sha256": "07n8h4psnlhhj8zc9n0bl1v7yxmls51lj022lcmgh7v81gjknqi0"
   },
   "nixpkgs-unstable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "73392e79aa62e406683d6a732eb4f4101f4732be",
-    "sha256": "049fq37sxdn5iis7ni407j2jsfrxbb41pgv5zawi02qj47f74az9"
+    "rev": "239fffc90d792b5362a20ec1a009978de7b8f91a",
+    "sha256": "0z0c438b5q1066x6p9qfriym5cipw8f52a456f91qzg6q1r296f8"
   },
   "nixpkgs-wayland": {
     "owner": "colemickens",
     "repo": "nixpkgs-wayland",
-    "rev": "738f75cf63968529634a999b59f7dfb60d7bb92f",
-    "sha256": "06kqrjgq4xabr2qxig6jj1ib8vqp3qp4bdykg0z1a3n32g8606rq"
+    "rev": "13f640a0ad5c8072e9c21a7011962586398a8354",
+    "sha256": "0rfsrfsh23xxj6srbpqpy6izawszk8s292m4kki9i9rb6jnd6r60"
   },
   "nur": {
     "owner": "nix-community",
     "repo": "NUR",
-    "rev": "8c650e42815f9a48b058fc806a576a0951efc067",
-    "sha256": "0lm0cfhazhsg132zgjah6vw50adw9yx05h7k2gpp55614hjz28z3"
+    "rev": "09e768a7c114ba994de47d5594731d2bca21805c",
+    "sha256": "0b0a80dasl6md6h76ri2gi719gn2nav5cfm9z4skcfyp9clc4vy8"
   },
-  "tmux-colots-solarized": {
+  "tmux-colors-solarized": {
     "owner": "seebi",
     "repo": "tmux-colors-solarized",
-    "rev": "b74be1f5076240d278e78b6fd132d531d5c41cda",
-    "sha256": "1qjm6w00rk5pi1a9l50h1i3x1jys4n8zmmigh2gigcr4r7rgr2jv"
+    "rev": "e5e7b4f1af37f8f3fc81ca17eadee5ae5d82cd09",
+    "sha256": "1l3i82abzi4b395cgdsjg7lcfaq15kyyhijwvrgchzxi95z3hl4x"
   },
   "tmux-powerline": {
     "owner": "erikw",

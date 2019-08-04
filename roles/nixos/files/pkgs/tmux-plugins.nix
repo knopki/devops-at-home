@@ -53,7 +53,7 @@ in rec {
     tmux-colors-solarized = mkDerivation rec {
       pluginName = "tmux-colors-solarized";
       rtpFilePath = "tmuxcolors.tmux";
-      src = fetchFromGitHub versions.tmux-colots-solarized;
+      src = fetchFromGitHub versions.tmux-colors-solarized;
     };
 
     tmux-powerline = mkDerivation rec {
