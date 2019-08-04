@@ -17,6 +17,12 @@
     "rev": "v2.1.8",
     "sha256": "1ki1wh2lcdpbnsa2msl5w2fi7gi5l725vj01b4s3dc69761q49xn"
   },
+  "nixfmt": {
+    "owner": "serokell",
+    "repo": "nixfmt",
+    "rev": "v0.2.0",
+    "sha256": "03w7fh9bjhy0ysglky56mb2bmbyrhvk7gqy7x5hjidp48vm5yb8c"
+  },
   "nixpkgs-stable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",

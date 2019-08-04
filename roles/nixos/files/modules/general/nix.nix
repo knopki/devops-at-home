@@ -34,10 +34,12 @@ with lib;
 
       binaryCaches = [
         "https://cache.nixos.org/"
+        "https://nixfmt.cachix.org"
         "https://nixpkgs-wayland.cachix.org"
       ];
 
       binaryCachePublicKeys = [
+        "nixfmt.cachix.org-1:uyEQg16IhCFeDpFV07aL+Dbmh18XHVUqpkk/35WAgJI="
         "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
       ];
 

@@ -5,6 +5,7 @@ with lib;
 
   config = mkIf config.local.nixdev.enable {
     home.packages = with pkgs; [
+      nixfmt
       nodePackages.node2nix
     ];
   };

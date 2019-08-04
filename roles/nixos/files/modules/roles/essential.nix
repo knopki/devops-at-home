@@ -41,6 +41,7 @@ with lib;
     environment.systemPackages = with pkgs; [
       bat
       bind
+      cachix
       curl
       file
       gitAndTools.gitFull

@@ -36,6 +36,7 @@ in {
           fish-kubectl-completions = pkgs.callPackage ../../pkgs/fish-kubectl-completions.nix {};
           fish-theme-pure = pkgs.callPackage ../../pkgs/fish-theme-pure.nix {};
           kube-score = pkgs.callPackage ../../pkgs/kube-score {};
+          nixfmt = import (fetchFromGitHub versions.nixfmt) {};
           wf-recorder = super.unstable.wf-recorder;
           wl-clipboard = super.unstable.wl-clipboard;
         })
