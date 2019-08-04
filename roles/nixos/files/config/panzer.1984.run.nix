@@ -1,9 +1,6 @@
 { config, lib, pkgs, ... }:
-with builtins;
-{
-  imports = [
-    ./modules
-  ];
+with builtins; {
+  imports = [ ./modules ];
 
   boot = {
     initrd = {
@@ -26,14 +23,12 @@ with builtins;
 
       kernelModules = [ "dm_thin_pool" ]; # hack to boot on thin pool
 
-      luks.devices = [
-        {
-          name = "luks-ssd";
-          device = "/dev/sdb2";
-          preLVM = true;
-          allowDiscards = true;
-        }
-      ];
+      luks.devices = [{
+        name = "luks-ssd";
+        device = "/dev/sdb2";
+        preLVM = true;
+        allowDiscards = true;
+      }];
 
       preLVMCommands = ''
         mkdir -p /etc/lvm
@@ -43,11 +38,7 @@ with builtins;
 
     kernelModules = [ "dm_thin_pool" "kvm-intel" ];
 
-    kernelParams = [
-      "quiet"
-      "splash"
-      "resume=/dev/mapper/panzer--vg-swap"
-    ];
+    kernelParams = [ "quiet" "splash" "resume=/dev/mapper/panzer--vg-swap" ];
 
     loader = {
       efi.canTouchEfiVariables = true;
@@ -66,21 +57,22 @@ with builtins;
     '';
   };
 
-  environment.systemPackages = with pkgs; [
-    thin-provisioning-tools # required to boot on the encrypted lvm thin pool
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      thin-provisioning-tools # required to boot on the encrypted lvm thin pool
+    ];
 
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/dc4bc91d-f0b2-4975-8be2-5d57494754c7";
       fsType = "ext4";
-      options = ["relatime" "discard"];
+      options = [ "relatime" "discard" ];
     };
 
     "/home" = {
       device = "/dev/disk/by-uuid/1f0402b3-871e-4a6a-be68-c37f799afced";
       fsType = "ext4";
-      options = ["relatime" "discard"];
+      options = [ "relatime" "discard" ];
     };
 
     "/boot" = {
@@ -129,9 +121,5 @@ with builtins;
     };
   };
 
-  swapDevices = [
-    {
-      device = "/dev/mapper/panzer--vg-swap";
-    }
-  ];
+  swapDevices = [{ device = "/dev/mapper/panzer--vg-swap"; }];
 }

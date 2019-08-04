@@ -1,6 +1,5 @@
 { config, lib, pkgs, user, nixosConfig, ... }:
-with lib;
-{
+with lib; {
   options.local.tmux.enable = mkEnableOption "setup tmux";
 
   config = mkIf config.local.tmux.enable {
@@ -218,16 +217,16 @@ with lib;
         {
           plugin = tmuxPlugins.tmux-powerline;
           extraConfig = ''
-            set-option -g status on
-            set-option -g status-interval 3
-            set-option -g status-justify "left"
-            set-option -g status-left-length 5
-            set-option -g status-right-length 90
-            set-option -g status-left "#(${pkgs.tmuxPlugins.tmux-powerline}/share/tmux-plugins/tmux-powerline/powerline.sh left) "
-  set-option -g status-right "#(${pkgs.tmuxPlugins.tmux-powerline}/share/tmux-plugins/tmux-powerline/powerline.sh right)"
-            set-window-option -g window-status-current-format "#I:#W "
-            set-window-option -g window-status-format "#I:#W "
-          '';
+                      set-option -g status on
+                      set-option -g status-interval 3
+                      set-option -g status-justify "left"
+                      set-option -g status-left-length 5
+                      set-option -g status-right-length 90
+                      set-option -g status-left "#(${pkgs.tmuxPlugins.tmux-powerline}/share/tmux-plugins/tmux-powerline/powerline.sh left) "
+            set-option -g status-right "#(${pkgs.tmuxPlugins.tmux-powerline}/share/tmux-plugins/tmux-powerline/powerline.sh right)"
+                      set-window-option -g window-status-current-format "#I:#W "
+                      set-window-option -g window-status-format "#I:#W "
+                    '';
         }
       ];
       terminal = "screen-256color";

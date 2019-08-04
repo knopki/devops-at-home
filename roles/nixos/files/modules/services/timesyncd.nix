@@ -11,7 +11,7 @@ with lib;
     services = {
       timesyncd = {
         enable = true;
-        servers = ["time.cloudflare.com"];
+        servers = [ "time.cloudflare.com" ];
       };
     };
   };

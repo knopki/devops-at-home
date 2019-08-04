@@ -3,9 +3,7 @@
 with lib;
 
 {
-  options = {
-    local.apps.xserver.enable = mkEnableOption "Enable X Server";
-  };
+  options = { local.apps.xserver.enable = mkEnableOption "Enable X Server"; };
 
   config = mkIf config.local.apps.xserver.enable {
     services.xserver = {

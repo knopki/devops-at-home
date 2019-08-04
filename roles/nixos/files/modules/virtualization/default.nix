@@ -1,8 +1,1 @@
-{...}:
-{
-  imports =
-  [
-    ./docker.nix
-    ./libvirtd.nix
-  ];
-}
+{ ... }: { imports = [ ./docker.nix ./libvirtd.nix ]; }

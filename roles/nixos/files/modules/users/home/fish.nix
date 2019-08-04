@@ -18,7 +18,7 @@ in {
     pureTheme = mkEnableOption "enable Pure fish theme";
 
     shellInit = mkOption {
-      default = {};
+      default = { };
       description = ''
         Attribute set of lines ordered by attribute name, called during
         fish shell initialisation.
@@ -28,7 +28,7 @@ in {
     };
 
     loginShellInit = mkOption {
-      default = {};
+      default = { };
       description = ''
         Attribute set of lines ordered by attribute name, called during
         fish login shell initialisation.
@@ -38,7 +38,7 @@ in {
     };
 
     interactiveShellInit = mkOption {
-      default = {};
+      default = { };
       description = ''
         Attribute set of lines ordered by attribute name, called during
         interactive fish shell initialisation.
@@ -48,7 +48,7 @@ in {
     };
 
     promptInit = mkOption {
-      default = {};
+      default = { };
       description = ''
         Attribute set of lines ordered by attribute name,
         used to initialise fish prompt.
@@ -64,18 +64,14 @@ in {
 
       programs.fish = {
         enable = true;
-        shellInit = concatStringsSep
-          "\n"
-          (attrValues config.local.fish.shellInit);
-        loginShellInit = concatStringsSep
-          "\n"
-          (attrValues config.local.fish.loginShellInit);
-        interactiveShellInit = concatStringsSep
-          "\n"
+        shellInit =
+          concatStringsSep "\n" (attrValues config.local.fish.shellInit);
+        loginShellInit =
+          concatStringsSep "\n" (attrValues config.local.fish.loginShellInit);
+        interactiveShellInit = concatStringsSep "\n"
           (attrValues config.local.fish.interactiveShellInit);
-        promptInit = concatStringsSep
-          "\n"
-          (attrValues config.local.fish.promptInit);
+        promptInit =
+          concatStringsSep "\n" (attrValues config.local.fish.promptInit);
         shellAbbrs = {
           gco = "git checkout";
           gst = "git status";
@@ -153,7 +149,8 @@ in {
         end
       '';
       local.fish.ffe = true;
-      local.fish.shellInit."10-load-profile" = "load_profile # load profile with fenv";
+      local.fish.shellInit."10-load-profile" =
+        "load_profile # load profile with fenv";
     })
 
     # fix $TERM
@@ -177,7 +174,8 @@ in {
           end
         end
       '';
-      local.fish.interactiveShellInit."00-fix-term" = "fix_term # setup terminal";
+      local.fish.interactiveShellInit."00-fix-term" =
+        "fix_term # setup terminal";
     })
 
     # colorize man pages
@@ -193,7 +191,8 @@ in {
           set -gx LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
         end
       '';
-      local.fish.interactiveShellInit."50-colorize-man" = "colorize_man_pages # Colored man pages";
+      local.fish.interactiveShellInit."50-colorize-man" =
+        "colorize_man_pages # Colored man pages";
     })
 
     # colorize man pages
@@ -206,7 +205,8 @@ in {
           set pure_separate_prompt_on_error true
         end
       '';
-      local.fish.interactiveShellInit."50-pure-theme" = "activate_pure_theme # Pure theme";
+      local.fish.interactiveShellInit."50-pure-theme" =
+        "activate_pure_theme # Pure theme";
     })
   ]);
 }

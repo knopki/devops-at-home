@@ -1,10 +1,7 @@
 { config, lib, pkgs, ... }:
-with builtins;
-{
-  imports = [
-    ./modules
-    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-  ];
+with builtins; {
+  imports =
+    [ ./modules <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
 
   boot = {
     extraModprobeConfig = ''
@@ -15,14 +12,8 @@ with builtins;
     '';
     extraModulePackages = [ ];
     initrd = {
-      availableKernelModules = [
-        "ahci"
-        "nvme"
-        "rtsx_pci_sdmmc"
-        "sd_mod"
-        "usb_storage"
-        "xhci_pci"
-      ];
+      availableKernelModules =
+        [ "ahci" "nvme" "rtsx_pci_sdmmc" "sd_mod" "usb_storage" "xhci_pci" ];
 
       kernelModules = [ "kvm-intel" ];
 
@@ -127,9 +118,5 @@ with builtins;
     };
   };
 
-  swapDevices = [
-    {
-      device = "/dev/mapper/nvme--vg-swap";
-    }
-  ];
+  swapDevices = [{ device = "/dev/mapper/nvme--vg-swap"; }];
 }

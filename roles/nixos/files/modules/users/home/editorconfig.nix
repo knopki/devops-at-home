@@ -1,16 +1,15 @@
 { config, lib, pkgs, user, ... }:
-with lib;
-{
+with lib; {
   options.local.editorconfig = mkEnableOption "create root editorconfig";
 
   config = mkIf config.local.editorconfig {
     home.file = {
       ".editorconfig".text = concatStringsSep "\n" [
-        (generators.toKeyValue {} {
+        (generators.toKeyValue { } {
           # top-most EditorConfig file
           root = true;
         })
-        (generators.toINI {} {
+        (generators.toINI { } {
           # Unix-style newlines with a newline ending every file
           "*" = {
             end_of_line = "lf";

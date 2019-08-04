@@ -1,6 +1,5 @@
 { config, lib, pkgs, user, ... }:
-with lib;
-{
+with lib; {
   options.local.devops.enable = mkEnableOption "devops pack";
 
   config = mkIf config.local.devops.enable {

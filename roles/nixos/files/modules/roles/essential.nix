@@ -3,15 +3,11 @@
 with lib;
 
 {
-  options = {
-    local.roles.essential.enable = mkEnableOption "Essential Role";
-  };
+  options = { local.roles.essential.enable = mkEnableOption "Essential Role"; };
 
   config = mkIf config.local.roles.essential.enable {
     local = {
-      apps = {
-        fish.enable = true;
-      };
+      apps = { fish.enable = true; };
 
       general = {
         i18n.enable = true;

@@ -7,15 +7,16 @@ buildGoPackage rec {
 
   goPackagePath = "github.com/zegl/kube-score";
 
-  buildFlagsArray = let t = "${goPackagePath}/pkg/commands"; in ''
-    -ldflags=
-      -s -X ${t}.kubeScoreVersion=${version}
-         -X ${t}.gitCommit=${rev}
-         -X ${t}.buildDate=unknown
-  '';
+  buildFlagsArray = let t = "${goPackagePath}/pkg/commands";
+    in ''
+      -ldflags=
+        -s -X ${t}.kubeScoreVersion=${version}
+           -X ${t}.gitCommit=${rev}
+           -X ${t}.buildDate=unknown
+    '';
 
   src = fetchFromGitHub {
-  sha256 = "11yzz8p8d1qh3gskr8m6lgj9dzi21ksfq6fyhzzb0yg1w4jnn2id";
+    sha256 = "11yzz8p8d1qh3gskr8m6lgj9dzi21ksfq6fyhzzb0yg1w4jnn2id";
     rev = "v${version}";
     repo = "kube-score";
     owner = "zegl";
@@ -28,7 +29,7 @@ buildGoPackage rec {
       multiple purposes, leaving the original YAML untouched and usable
       as is.
     '';
-    homepage = https://github.com/zegl/kube-score;
+    homepage = "https://github.com/zegl/kube-score";
     license = licenses.mit;
     maintainers = with maintainers; [ ];
   };

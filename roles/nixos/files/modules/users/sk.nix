@@ -16,14 +16,8 @@ in {
     local.users.users."${username}" = {
       createHome = true;
       description = "Sergey Korolev";
-      extraGroups = [
-        "adbusers"
-        "disk"
-        "docker"
-        "libvirtd"
-        "networkmanager"
-        "wireshark"
-      ];
+      extraGroups =
+        [ "adbusers" "disk" "docker" "libvirtd" "networkmanager" "wireshark" ];
       group = "${username}";
       hashedPassword = readFile "/etc/nixos/secrets/sk_password";
       home = "/home/${username}";
@@ -39,7 +33,8 @@ in {
 
         home.sessionVariables = {
           BROWSER = "firefox";
-          PATH = "${selfHM.home.homeDirectory}/.local/bin:${selfHM.home.homeDirectory}/.local/npm/bin:\${PATH}";
+          PATH =
+            "${selfHM.home.homeDirectory}/.local/bin:${selfHM.home.homeDirectory}/.local/npm/bin:\${PATH}";
           TERMINAL = "termite";
         };
 
@@ -103,7 +98,8 @@ in {
       };
       isAdmin = true;
       isNormalUser = true;
-      openssh.authorizedKeys.keyFiles = mkDefault [ "/etc/nixos/secrets/sk_id_rsa.pub" ];
+      openssh.authorizedKeys.keyFiles =
+        mkDefault [ "/etc/nixos/secrets/sk_id_rsa.pub" ];
 
       setupUser = true;
       shell = pkgs.fish;

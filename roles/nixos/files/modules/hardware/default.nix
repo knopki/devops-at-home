@@ -1,9 +1,1 @@
-{...}:
-{
-  imports =
-  [
-    ./machine.nix
-    ./scanning.nix
-    ./sound.nix
-  ];
-}
+{ ... }: { imports = [ ./machine.nix ./scanning.nix ./sound.nix ]; }

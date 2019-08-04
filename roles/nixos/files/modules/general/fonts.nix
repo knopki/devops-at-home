@@ -3,9 +3,7 @@
 with lib;
 
 {
-  options = {
-    local.general.fonts.enable = mkEnableOption "Fonts Options";
-  };
+  options = { local.general.fonts.enable = mkEnableOption "Fonts Options"; };
 
   config = mkIf config.local.general.fonts.enable {
     fonts = {

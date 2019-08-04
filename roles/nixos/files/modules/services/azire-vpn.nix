@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
-with lib;
-{
+with lib; {
   options = {
     local.services.azire-vpn = {
       enabled = mkEnableOption "Enable AzireVPN connection";
@@ -10,7 +9,7 @@ with lib;
         default = "azire-vpn";
       };
       ips = mkOption {
-        default = [];
+        default = [ ];
         type = with types; listOf str;
       };
       privateKeyFile = mkOption {
@@ -21,9 +20,7 @@ with lib;
         default = "193.180.164.58:51820"; # se1.wg.azirevpn.net
         type = with types; nullOr str;
       };
-      publicKey = mkOption {
-        type = types.str;
-      };
+      publicKey = mkOption { type = types.str; };
     };
   };
 

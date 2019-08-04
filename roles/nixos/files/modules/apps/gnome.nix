@@ -3,9 +3,7 @@
 with lib;
 
 {
-  options = {
-    local.apps.gnome.enable = mkEnableOption "Enable Gnome";
-  };
+  options = { local.apps.gnome.enable = mkEnableOption "Enable Gnome"; };
 
   config = mkIf config.local.apps.gnome.enable {
     environment.gnome3.excludePackages = with pkgs; [
@@ -29,17 +27,13 @@ with lib;
       pinentry_gnome
     ];
 
-    programs = {
-      dconf.enable = true;
-    };
+    programs = { dconf.enable = true; };
 
     services = {
       accounts-daemon.enable = true;
       dbus.packages = with pkgs; [ gnome3.dconf ];
       gnome3.gnome-keyring.enable = true;
-      xserver = {
-        desktopManager.gnome3.enable = true;
-      };
+      xserver = { desktopManager.gnome3.enable = true; };
     };
   };
 }

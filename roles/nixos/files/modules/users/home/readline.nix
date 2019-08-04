@@ -1,6 +1,5 @@
 { config, lib, pkgs, user, ... }:
-with lib;
-{
+with lib; {
   options.local.readline = mkEnableOption "setup readline in .inputrc";
 
   config = mkIf config.local.readline {

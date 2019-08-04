@@ -4,9 +4,8 @@ stdenv.mkDerivation rec {
   name = "fish-kubectl-completions-${version}";
   version = "0.0.0";
 
-  src = fetchFromGitHub
-    (builtins.fromJSON
-      (builtins.readFile ./versions.json)).fish-kubectl-completions;
+  src = fetchFromGitHub (builtins.fromJSON
+    (builtins.readFile ./versions.json)).fish-kubectl-completions;
 
   dontBuild = true;
 

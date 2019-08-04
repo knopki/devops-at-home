@@ -3,8 +3,7 @@ with lib;
 let
   dag = config.lib.dag;
   cfg = config.local.xdgUserDirs;
-in
-{
+in {
   options.local = {
     xdgUserDirs = {
       enable = mkEnableOption "Customization of XDG user directories";
@@ -61,7 +60,7 @@ in
       XDG_PUBLICSHARE_DIR="${config.home.homeDirectory}/${cfg.publicshare}"
       XDG_TEMPLATES_DIR="${config.home.homeDirectory}/${cfg.templates}"
       XDG_VIDEOS_DIR="${config.home.homeDirectory}/${cfg.videos}"
-      '';
+    '';
 
     xdg.configFile."user-dirs.locale".text = cfg.locale;
 

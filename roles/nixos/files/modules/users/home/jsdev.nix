@@ -1,6 +1,5 @@
 { config, lib, pkgs, user, ... }:
-with lib;
-{
+with lib; {
   options.local.jsdev.enable = mkEnableOption "JS develper pack";
 
   config = mkIf config.local.jsdev.enable {

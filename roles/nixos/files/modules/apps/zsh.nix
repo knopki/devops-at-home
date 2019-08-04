@@ -3,9 +3,7 @@
 with lib;
 
 {
-  options = {
-    local.apps.zsh.enable = mkEnableOption "ZSH Options";
-  };
+  options = { local.apps.zsh.enable = mkEnableOption "ZSH Options"; };
 
   config = mkIf config.local.apps.zsh.enable {
     # install all completions libraries for system packages

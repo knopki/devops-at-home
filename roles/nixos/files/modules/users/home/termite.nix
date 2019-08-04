@@ -1,6 +1,5 @@
 { config, lib, pkgs, user, ... }:
-with lib;
-{
+with lib; {
   options.local.termite.enable = mkEnableOption "setup termite";
 
   config = mkIf config.local.termite.enable {

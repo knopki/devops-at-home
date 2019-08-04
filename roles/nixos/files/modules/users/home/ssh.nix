@@ -1,6 +1,5 @@
 { config, lib, pkgs, user, ... }:
-with lib;
-{
+with lib; {
   options.local.ssh = mkEnableOption "ssh default config";
 
   config = mkIf config.local.fzf.enable {

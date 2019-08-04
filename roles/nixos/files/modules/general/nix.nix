@@ -3,9 +3,7 @@
 with lib;
 
 {
-  options = {
-    local.general.nix.enable = mkEnableOption "NIX Options";
-  };
+  options = { local.general.nix.enable = mkEnableOption "NIX Options"; };
 
   config = {
     nix = mkIf config.local.general.nix.enable {

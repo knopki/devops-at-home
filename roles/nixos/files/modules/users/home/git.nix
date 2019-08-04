@@ -1,13 +1,13 @@
 { config, lib, pkgs, user, ... }:
-with lib;
-{
+with lib; {
   options.local.git = mkEnableOption "git defaults";
 
   config = mkIf config.local.git {
     programs.git = {
       aliases = {
         co = "checkout";
-        hist = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
+        hist =
+          "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'";
         st = "status";
         undo = "reset --soft HEAD^";
       };
@@ -25,12 +25,8 @@ with lib;
           default = "current";
           followTags = "true";
         };
-        apply = {
-          whitespace = "fix";
-        };
-        color = {
-          ui = "auto";
-        };
+        apply = { whitespace = "fix"; };
+        color = { ui = "auto"; };
         "color \"branch\"" = {
           current = "yellow reverse";
           local = "yellow";
@@ -47,44 +43,24 @@ with lib;
           changed = "green";
           untracked = "cyan";
         };
-        diff = {
-          renames = "copies";
-        };
-        "diff \"bin\"" = {
-          textconv = "hexdump -v -C";
-        };
+        diff = { renames = "copies"; };
+        "diff \"bin\"" = { textconv = "hexdump -v -C"; };
         "diff \"odf\"" = {
           binary = "true";
           textconv = "odt2txt";
         };
-        help = {
-          autocorrect = "1";
-        };
+        help = { autocorrect = "1"; };
         merge = {
           log = "true";
           ff = "only";
           conflictstyle = "diff3";
         };
-        rebase = {
-          autosquash = "true";
-        };
-        include = {
-          path = "local";
-        };
-        status = {
-          showUntrackedFiles = "all";
-        };
-        transfer = {
-          fsckobjects = "true";
-        };
+        rebase = { autosquash = "true"; };
+        include = { path = "local"; };
+        status = { showUntrackedFiles = "all"; };
+        transfer = { fsckobjects = "true"; };
       };
-      ignores = [
-        "._*"
-        ".DS_Store"
-        "*.pyc"
-        "Desktop.ini"
-        "Thumbs.db"
-      ];
+      ignores = [ "._*" ".DS_Store" "*.pyc" "Desktop.ini" "Thumbs.db" ];
       lfs = {
         enable = true;
         skipSmudge = true;

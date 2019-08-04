@@ -3,14 +3,10 @@
 with lib;
 
 {
-  options = {
-    local.apps.swaywm.enable = mkEnableOption "Enable SwayWM";
-  };
+  options = { local.apps.swaywm.enable = mkEnableOption "Enable SwayWM"; };
 
   config = mkIf config.local.apps.swaywm.enable {
-    environment.systemPackages = with pkgs; [
-      gnome3.dconf-editor
-    ];
+    environment.systemPackages = with pkgs; [ gnome3.dconf-editor ];
 
     programs = {
       light.enable = true;
@@ -20,6 +16,7 @@ with lib;
           gnome3.seahorse
           grim
           i3status
+          iw # required by i3status
           libnotify
           libnotify
           mako

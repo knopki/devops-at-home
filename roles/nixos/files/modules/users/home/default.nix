@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   imports = [
     ./cachedir.nix
     ./desktop-pack.nix

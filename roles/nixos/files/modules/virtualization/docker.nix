@@ -1,7 +1,6 @@
 { config, lib, ... }:
 
-with lib;
-{
+with lib; {
   options.local.virtualisation.docker.enable = mkEnableOption "Enable Docker";
 
   config = mkIf config.local.virtualisation.docker.enable {

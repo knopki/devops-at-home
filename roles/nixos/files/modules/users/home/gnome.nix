@@ -1,19 +1,14 @@
 { config, lib, pkgs, user, nixosConfig, ... }:
-with lib;
-{
+with lib; {
   options.local.gnome.enable = mkEnableOption "setup gnome";
 
   config = mkIf config.local.gnome.enable {
-    home.packages = with pkgs; [
-      gnome3.rhythmbox
-    ];
+    home.packages = with pkgs; [ gnome3.rhythmbox ];
 
     dconf = {
       enable = true;
       settings = {
-        "system/locale" = {
-          region = nixosConfig.i18n.defaultLocale;
-        };
+        "system/locale" = { region = nixosConfig.i18n.defaultLocale; };
 
         "org/gnome/nautilus/preferences" = {
           search-view = "list-view";
@@ -30,9 +25,7 @@ with lib;
           icon-theme = "Adwaita";
         };
 
-        "org/gnome/desktop/peripherals/touchpad" = {
-          natural-scroll = false;
-        };
+        "org/gnome/desktop/peripherals/touchpad" = { natural-scroll = false; };
 
         "org/gtk/settings/file-chooser" = {
           sort-column = "name";

@@ -23,17 +23,13 @@ with lib;
       extraConfig = ''
         Defaults timestamp_timeout=120
       '';
-      extraRules = [
-        {
-          commands = [
-            {
-              command = "/run/current-system/sw/bin/nixos-rebuild switch";
-              options = [ "NOPASSWD" ];
-            }
-          ];
-          groups = [ "wheel" ];
-        }
-      ];
+      extraRules = [{
+        commands = [{
+          command = "/run/current-system/sw/bin/nixos-rebuild switch";
+          options = [ "NOPASSWD" ];
+        }];
+        groups = [ "wheel" ];
+      }];
       wheelNeedsPassword = true;
     };
   };

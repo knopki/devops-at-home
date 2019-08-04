@@ -1,35 +1,28 @@
 self: super:
-with import <nixpkgs> {};
+with import <nixpkgs> { };
 let
   versions = builtins.fromJSON (builtins.readFile ./versions.json);
 
   rtpPath = "share/tmux-plugins";
 
   addRtp = path: rtpFilePath: attrs: derivation:
-    derivation // { rtp = "${derivation}/${path}/${rtpFilePath}"; } // {
+    derivation // {
+      rtp = "${derivation}/${path}/${rtpFilePath}";
+    } // {
       overrideAttrs = f: mkDerivation (attrs // f attrs);
     };
 
-  mkDerivation = a@{
-    pluginName,
-    rtpFilePath ? (builtins.replaceStrings ["-"] ["_"] pluginName) + ".tmux",
-    namePrefix ? "tmuxplugin-",
-    src,
-    unpackPhase ? "",
-    postPatch ? "",
-    configurePhase ? ":",
-    buildPhase ? ":",
-    addonInfo ? null,
-    preInstall ? "",
-    postInstall ? "",
-    path ? (builtins.parseDrvName pluginName).name,
-    dependencies ? [],
-    ...
-  }:
+  mkDerivation = a@{ pluginName, rtpFilePath ?
+    (builtins.replaceStrings [ "-" ] [ "_" ] pluginName)
+    + ".tmux", namePrefix ? "tmuxplugin-", src, unpackPhase ? "", postPatch ?
+      "", configurePhase ? ":", buildPhase ? ":", addonInfo ? null, preInstall ?
+        "", postInstall ? "", path ?
+          (builtins.parseDrvName pluginName).name, dependencies ? [ ], ... }:
     addRtp "${rtpPath}/${path}" rtpFilePath a (super.stdenv.mkDerivation (a // {
       name = namePrefix + pluginName;
 
-      inherit pluginName unpackPhase postPatch configurePhase buildPhase addonInfo preInstall postInstall;
+      inherit pluginName unpackPhase postPatch configurePhase buildPhase
+        addonInfo preInstall postInstall;
 
       installPhase = ''
         runHook postPatch

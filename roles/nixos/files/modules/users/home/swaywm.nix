@@ -1,10 +1,11 @@
 { config, lib, pkgs, user, nixosConfig, ... }:
 with lib;
 let
-  defaultWallpaper = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png";
+  defaultWallpaper =
+    "${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png";
   i3statusDir = "${config.xdg.configHome}/i3status";
   screenShotDir = "$(xdg-user-dir PICTURES)/screenshots";
-  screenshotPath = "${screenShotDir}/scrn-$(date +\"%Y-%m-%d-%H-%M-%S\").png";
+  screenshotPath = ''${screenShotDir}/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png'';
   swayDir = "${config.xdg.configHome}/sway";
 
   # binary paths
@@ -80,18 +81,22 @@ in {
     home.file."${swayDir}/config.d/10-outputs".text = ''
       # You can get the names of your outputs by running: swaymsg -t get_outputs
       ${(if nixosConfig.local.hardware.machine == "kvm" then ''
-      output Virtual-1    resolution 1920x1080 position 0,0
-      '' else "")}
+        output Virtual-1    resolution 1920x1080 position 0,0
+      '' else
+        "")}
       ${(if nixosConfig.local.hardware.machine == "alienware-15r2" then ''
-      output eDP-1    resolution 1920x1080 position 0,0
-      '' else "")}
+        output eDP-1    resolution 1920x1080 position 0,0
+      '' else
+        "")}
       ${(if nixosConfig.networking.hostName == "knopa" then ''
-      output DP-1    resolution 1920x1080 position 0,0
-      output HDMI-A-1 resolution 1920x1080 position 1920,0
-      '' else "")}
+        output DP-1    resolution 1920x1080 position 0,0
+        output HDMI-A-1 resolution 1920x1080 position 1920,0
+      '' else
+        "")}
       ${(if nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
-      output eDP-1   resolution 1600x900 position 0,0
-      '' else "")}
+        output eDP-1   resolution 1600x900 position 0,0
+      '' else
+        "")}
 
       # Default wallpaper
       output * bg $wallpaper fill
@@ -287,20 +292,21 @@ in {
       set $ws10 10:💬
 
       ${(if nixosConfig.networking.hostName == "knopa" then ''
-      # assign workspaces to outputs
-      set $leftDisplay DP-1
-      set $rightDisplay HDMI-A-1
-      workspace $ws1 output $leftDisplay
-      workspace $ws2 output $leftDisplay
-      workspace $ws3 output $leftDisplay
-      workspace $ws4 output $leftDisplay
-      workspace $ws5 output $leftDisplay
-      workspace $ws6 output $rightDisplay
-      workspace $ws7 output $rightDisplay
-      workspace $ws8 output $rightDisplay
-      workspace $ws9 output $rightDisplay
-      workspace $ws10 output $rightDisplay
-      '' else "")}
+        # assign workspaces to outputs
+        set $leftDisplay DP-1
+        set $rightDisplay HDMI-A-1
+        workspace $ws1 output $leftDisplay
+        workspace $ws2 output $leftDisplay
+        workspace $ws3 output $leftDisplay
+        workspace $ws4 output $leftDisplay
+        workspace $ws5 output $leftDisplay
+        workspace $ws6 output $rightDisplay
+        workspace $ws7 output $rightDisplay
+        workspace $ws8 output $rightDisplay
+        workspace $ws9 output $rightDisplay
+        workspace $ws10 output $rightDisplay
+      '' else
+        "")}
 
       # switch to workspace
       bindsym $mod+1 workspace $ws1
@@ -527,13 +533,16 @@ in {
 
         frame net {
           format = '{output}'
-          ${(if nixosConfig.networking.hostName == "alien" then ''
+          ${
+        (if nixosConfig.networking.hostName == "alien" then ''
           wifi {
             format = ' {icon} {ssid}| down'
             bitrate_bad = 0
             bitrate_degraded = 0
           }
-          '' else "")}
+        '' else
+          "")
+          }
 
           net_rate {
             format = '{down}↓ {up}↑'
@@ -552,9 +561,10 @@ in {
 
         frame disks {
           format = '{output}'
-          ${(if nixosConfig.networking.hostName == "alien" then ''
+          ${
+        (if nixosConfig.networking.hostName == "alien" then ''
           diskdata root {
-            disk = '/dev/mapper/alien--vg-root'
+            disk = '/dev/dm-4'
             format = ' {free}'
             format_space = '[\?min_length=5 {value:.1f}G]'
             separator = False
@@ -562,14 +572,17 @@ in {
           }
 
           diskdata home {
-            disk = '/dev/mapper/alien--vg-home'
+            disk = '/dev/mapper/sata--vg-home'
             format = '{free}'
             format_space = '[\?min_length=5 {value:.1f}G]'
             thresholds = {'free': [(1, 'bad'), (10, 'degraded'), (20, 'good')]}
           }
-          '' else "")}
+        '' else
+          "")
+          }
 
-          ${(if nixosConfig.networking.hostName == "knopa" then ''
+          ${
+        (if nixosConfig.networking.hostName == "knopa" then ''
           diskdata root {
             disk = '/dev/mapper/fedora-root'
             format = ' {free}'
@@ -584,7 +597,9 @@ in {
             format_space = '[\?min_length=5 {value:.1f}G]'
             thresholds = {'free': [(1, 'bad'), (10, 'degraded'), (20, 'good')]}
           }
-          '' else "")}
+        '' else
+          "")
+          }
 
           diskdata io {
             format = '{total}'
@@ -617,22 +632,23 @@ in {
         interval = 1
       }
 
-      ${(if nixosConfig.local.hardware.machine == "alienware-15r2" ||
-        nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
-      order += 'battery_level'
-      battery_level {
-        blocks = ""
-        charging_character = ""
-        format = "{icon}"
-        format_notify_charging = 'Charging ({percent}%)'
-        format_notify_discharging = 'Time ramaining: {time_remaining}'
-        hide_seconds = True
-        hide_when_full = True
-        measurement_mode = 'sys'
-        notify_low_level = True
-        notification = True
-      }
-      '' else "")}
+      ${(if nixosConfig.local.hardware.machine == "alienware-15r2"
+      || nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
+        order += 'battery_level'
+        battery_level {
+          blocks = ""
+          charging_character = ""
+          format = "{icon}"
+          format_notify_charging = 'Charging ({percent}%)'
+          format_notify_discharging = 'Time ramaining: {time_remaining}'
+          hide_seconds = True
+          hide_when_full = True
+          measurement_mode = 'sys'
+          notify_low_level = True
+          notification = True
+        }
+      '' else
+        "")}
 
       order += 'clock'
       clock {
@@ -699,7 +715,7 @@ in {
 
     services.gnome-keyring = {
       enable = true;
-      components = ["pkcs11" "secrets" "ssh"];
+      components = [ "pkcs11" "secrets" "ssh" ];
     };
 
     systemd.user.targets = {
@@ -725,9 +741,7 @@ in {
           Type = "simple";
           ExecStart = "${pkgs.mako}/bin/mako --font 'pango:Hack 10' --markup 1";
         };
-        Install = {
-          WantedBy = ["sway-session.target"];
-        };
+        Install = { WantedBy = [ "sway-session.target" ]; };
       };
       swayidle = {
         Unit = {
@@ -746,9 +760,7 @@ in {
               before-sleep '${swaylockCmd} -f'
           '';
         };
-        Install = {
-          WantedBy = ["sway-session.target"];
-        };
+        Install = { WantedBy = [ "sway-session.target" ]; };
       };
     };
   };

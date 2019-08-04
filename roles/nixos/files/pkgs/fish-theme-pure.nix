@@ -5,8 +5,7 @@ stdenv.mkDerivation rec {
   version = "2.1.8";
 
   src = fetchFromGitHub
-    (builtins.fromJSON
-      (builtins.readFile ./versions.json)).fish-theme-pure;
+    (builtins.fromJSON (builtins.readFile ./versions.json)).fish-theme-pure;
 
   dontBuild = true;
 

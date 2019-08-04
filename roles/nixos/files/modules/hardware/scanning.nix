@@ -8,7 +8,7 @@ with lib;
   config = mkIf config.local.hardware.scanning.enable {
     hardware.sane = {
       enable = true;
-      extraBackends = [];
+      extraBackends = [ ];
     };
   };
 }

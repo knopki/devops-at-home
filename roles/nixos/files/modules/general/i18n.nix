@@ -3,9 +3,7 @@
 with lib;
 
 {
-  options = {
-    local.general.i18n.enable = mkEnableOption "i18n Options";
-  };
+  options = { local.general.i18n.enable = mkEnableOption "i18n Options"; };
 
   config = mkIf config.local.general.i18n.enable {
     i18n = {

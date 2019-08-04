@@ -3,9 +3,7 @@
 with lib;
 
 {
-  options = {
-    local.general.system.enable = mkEnableOption "System Options";
-  };
+  options = { local.general.system.enable = mkEnableOption "System Options"; };
 
   config = mkIf config.local.general.system.enable {
     # Save current configuration to generation every time

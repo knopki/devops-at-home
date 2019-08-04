@@ -16,9 +16,7 @@ with lib;
         zsh.enable = true;
       };
 
-      general = {
-        fonts.enable = true;
-      };
+      general = { fonts.enable = true; };
 
       hardware = {
         scanning.enable = true;
@@ -41,9 +39,7 @@ with lib;
       };
     };
 
-    boot.kernel.sysctl = {
-      "fs.inotify.max_user_watches" = 524288;
-    };
+    boot.kernel.sysctl = { "fs.inotify.max_user_watches" = 524288; };
     boot.tmpOnTmpfs = true;
 
     environment.systemPackages = with pkgs; [
@@ -67,9 +63,7 @@ with lib;
       qt5ct
     ];
 
-    hardware = {
-      opengl.enable = true;
-    };
+    hardware = { opengl.enable = true; };
 
     networking = {
       firewall = {

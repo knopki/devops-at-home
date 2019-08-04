@@ -3,9 +3,7 @@
 with lib;
 
 {
-  options = {
-    local.apps.fish.enable = mkEnableOption "Fish Shell Options";
-  };
+  options = { local.apps.fish.enable = mkEnableOption "Fish Shell Options"; };
 
   config = mkIf config.local.apps.fish.enable {
     programs.fish = {

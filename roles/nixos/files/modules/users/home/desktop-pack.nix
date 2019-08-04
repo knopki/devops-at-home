@@ -1,6 +1,5 @@
 { config, lib, pkgs, user, ... }:
-with lib;
-{
+with lib; {
   options.local.desktop-pack.enable = mkEnableOption "install desktop apps";
 
   config = mkIf config.local.desktop-pack.enable {
