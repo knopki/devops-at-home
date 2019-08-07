@@ -58,6 +58,7 @@ with lib;
       rsync
       sysstat
       tree
+      usbutils
       wget
     ];
 
