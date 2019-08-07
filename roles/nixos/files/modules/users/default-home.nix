@@ -7,6 +7,7 @@ with lib; {
     nixpkgs.config = config.nixpkgs.config;
     nixpkgs.overlays = config.nixpkgs.overlays;
     local = {
+      curl = true;
       env.default = true;
       fish = {
         colorizeMan = true;
