@@ -19,6 +19,7 @@
     ./termite.nix
     ./tmux.nix
     ./vscode.nix
+    ./wget.nix
     ./xdg.nix
   ];
 }

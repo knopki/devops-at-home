@@ -22,6 +22,7 @@ with lib; {
       };
       git = true;
       readline = true;
+      wget = true;
       ssh = true;
       xdgUserDirs = {
         enable = true;
