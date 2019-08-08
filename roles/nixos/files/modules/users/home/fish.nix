@@ -16,6 +16,7 @@ in {
     fixTerm = mkEnableOption "fix $TERM in fish";
     colorizeMan = mkEnableOption "fix $TERM in fish";
     pureTheme = mkEnableOption "enable Pure fish theme";
+    lsColors = mkEnableOption "enable cool LS_COLORS";
 
     shellInit = mkOption {
       default = { };
@@ -207,6 +208,18 @@ in {
       '';
       local.fish.interactiveShellInit."50-pure-theme" =
         "activate_pure_theme # Pure theme";
+    })
+
+    # cool LS_COLORS
+    (mkIf config.local.fish.lsColors {
+      home.packages = with pkgs; [ coreutils trapd00r-ls-colors ];
+      home.file."${fishCfgDir}/conf.d/activate_ls_colors.fish".text = ''
+        function activate_ls_colors --description 'Activate LS_COLORS'
+          eval (${pkgs.coreutils}/bin/dircolors -c ${pkgs.trapd00r-ls-colors}/LS_COLORS)
+        end
+      '';
+      local.fish.interactiveShellInit."50-ls-colors" =
+        "activate_ls_colors # LS_COLORS";
     })
   ]);
 }

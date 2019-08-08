@@ -14,6 +14,7 @@ with lib; {
         defaultFuncs = true;
         fixTerm = true;
         loadProfile = true;
+        lsColors = true;
         pureTheme = true;
         interactiveShellInit."99-binds" = ''
           bind --user \cw backward-kill-word # Ctrl-W

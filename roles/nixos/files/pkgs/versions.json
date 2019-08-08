@@ -17,6 +17,12 @@
     "rev": "v2.1.8",
     "sha256": "1ki1wh2lcdpbnsa2msl5w2fi7gi5l725vj01b4s3dc69761q49xn"
   },
+  "LS_COLORS": {
+    "owner": "trapd00r",
+    "repo": "LS_COLORS",
+    "rev": "6fe816f95860e33523b79c2c768d229b546379b3",
+    "sha256": "0s1b3nwlxlw7wakm7z4d6bh9dxwjyh1mf776v916w1gjiiccld7l"
+  },
   "nixfmt": {
     "owner": "serokell",
     "repo": "nixfmt",
