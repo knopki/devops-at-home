@@ -49,6 +49,7 @@ with lib;
       lsof
       neovim
       nnn
+      pciutils
       pinentry
       pinentry_ncurses
       pstree

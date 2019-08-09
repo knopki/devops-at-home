@@ -5,8 +5,7 @@ with builtins; {
 
   boot = {
     extraModprobeConfig = ''
-      blacklist snd-intel8x0m
-      options snd_hda_intel position_fix=1
+      options snd_hda_intel index=0 model=alienware enable_msi=1 position_fix=0
       options i8k force=1
       options i915 enable_fbc=1 enable_guc=3 enable_psr=1
     '';
