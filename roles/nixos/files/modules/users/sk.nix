@@ -17,7 +17,7 @@ in {
       createHome = true;
       description = "Sergey Korolev";
       extraGroups =
-        [ "adbusers" "disk" "docker" "libvirtd" "networkmanager" "wireshark" ];
+        [ "adbusers" "disk" "docker" "libvirtd" "mlocate" "networkmanager" "wireshark" ];
       group = "${username}";
       hashedPassword = readFile "/etc/nixos/secrets/sk_password";
       home = "/home/${username}";

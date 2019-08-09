@@ -83,6 +83,11 @@ with lib;
     services = {
       flatpak.enable = true;
       fwupd.enable = true;
+      locate = {
+        enable = true;
+        locate = pkgs.mlocate;
+        pruneBindMounts = true;
+      };
       trezord.enable = true;
       upower.enable = true;
     };
