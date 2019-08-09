@@ -69,6 +69,7 @@ with lib;
 
     programs = {
       bash.enableCompletion = true;
+      mosh.enable = true;
       mtr.enable = true;
       tmux.enable = true;
     };
