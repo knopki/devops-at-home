@@ -22,9 +22,10 @@ with lib; {
         '';
       };
       git = true;
+      htop = true;
       readline = true;
-      wget = true;
       ssh = true;
+      wget = true;
       xdgUserDirs = {
         enable = true;
         desktop = "desktop";

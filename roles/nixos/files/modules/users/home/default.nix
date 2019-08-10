@@ -10,6 +10,7 @@
     ./fzf.nix
     ./git.nix
     ./gnome.nix
+    ./htop.nix
     ./jsdev.nix
     ./nixdev.nix
     ./qt.nix
