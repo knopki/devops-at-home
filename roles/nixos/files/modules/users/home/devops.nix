@@ -11,7 +11,6 @@ with lib; {
       gnupg
       google-cloud-sdk
       htop
-      iotop
       jq
       keepassxc
       kube-score

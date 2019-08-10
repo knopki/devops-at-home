@@ -43,7 +43,6 @@ with lib;
       gitAndTools.gitFull
       gnupg
       htop
-      iotop
       jq
       lsof
       neovim
@@ -69,6 +68,7 @@ with lib;
     programs = {
       bash.enableCompletion = true;
       iftop.enable = true;
+      iotop.enable = true;
       mosh.enable = true;
       mtr.enable = true;
       tmux.enable = true;
