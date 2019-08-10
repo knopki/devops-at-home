@@ -15,6 +15,9 @@ with lib; {
         file://${config.home.homeDirectory}/videos Videos
         file://${config.home.homeDirectory}/library Library
         file://${config.home.homeDirectory}/trash Trash
+        ${(if nixosConfig.networking.hostName == "alien" then ''
+        ftp://osmc@10.66.6.20/media/wd TVBox
+        '' else "")}
       '';
     };
 
