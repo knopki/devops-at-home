@@ -11,7 +11,6 @@ with lib;
       gnome3.accerciser
       gnome3.evolution
       gnome3.gnome-documents
-      gnome3.gnome-documents
       gnome3.gnome-logs
       gnome3.gnome-maps
       gnome3.gnome-music
