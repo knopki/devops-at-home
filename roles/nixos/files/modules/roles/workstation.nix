@@ -85,6 +85,7 @@ with lib;
       fwupd.enable = true;
       locate = {
         enable = true;
+        localuser = null;
         locate = pkgs.mlocate;
         pruneBindMounts = true;
       };
