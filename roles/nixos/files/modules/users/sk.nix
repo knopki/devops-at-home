@@ -4,6 +4,7 @@ let
   username = "sk";
   self = local.users.users."${username}";
   selfHM = config.home-manager.users."${username}";
+  isWorkstation = config.local.roles.workstation.enable;
 in {
   config = mkIf (elem "sk" config.local.users.setupUsers) {
     users.groups = {
@@ -16,8 +17,15 @@ in {
     local.users.users."${username}" = {
       createHome = true;
       description = "Sergey Korolev";
-      extraGroups =
-        [ "adbusers" "disk" "docker" "libvirtd" "mlocate" "networkmanager" "wireshark" ];
+      extraGroups = [
+        "adbusers"
+        "disk"
+        "docker"
+        "libvirtd"
+        "mlocate"
+        "networkmanager"
+        "wireshark"
+      ];
       group = "${username}";
       hashedPassword = readFile "/etc/nixos/secrets/sk_password";
       home = "/home/${username}";
@@ -39,7 +47,7 @@ in {
         };
 
         local = {
-          cachedirs = [
+          cachedirs = mkIf isWorkstation [
             ".kube/cache"
             ".kube/http-cache"
             ".minikube"
@@ -69,17 +77,16 @@ in {
             "${selfHM.xdg.dataHome}/vim"
             "downloads"
           ];
-          desktop-pack.enable = true;
-          devops.enable = true;
-          env.graphics = true;
+          devops.enable = isWorkstation;
+          env.graphics = isWorkstation;
           fish.enable = true;
-          gnome.enable = true;
-          jsdev.enable = true;
-          nixdev.enable = true;
-          qt.enable = true;
-          swaywm.enable = true;
-          termite.enable = true;
-          tmux.enable = true;
+          gnome.enable = isWorkstation;
+          jsdev.enable = isWorkstation;
+          nixdev.enable = isWorkstation;
+          qt.enable = isWorkstation;
+          swaywm.enable = isWorkstation;
+          termite.enable = isWorkstation;
+          tmux.enable = isWorkstation;
         };
         programs.git = {
           signing = {

@@ -1,5 +1,7 @@
 { config, lib, pkgs, ... }:
-with lib; {
+with lib;
+let isWorkstation = config.local.roles.workstation.enable;
+in {
   local.home-manager.config = {
     home.language.monetary = "ru_RU.UTF-8";
     home.language.time = "ru_RU.UTF-8";
@@ -8,6 +10,7 @@ with lib; {
     nixpkgs.overlays = config.nixpkgs.overlays;
     local = {
       curl = true;
+      desktop-pack.enable = isWorkstation;
       env.default = true;
       fish = {
         colorizeMan = true;
@@ -27,7 +30,7 @@ with lib; {
       ssh = true;
       wget = true;
       xdgUserDirs = {
-        enable = true;
+        enable = isWorkstation;
         desktop = "desktop";
         documents = "docs";
         download = "downloads";
