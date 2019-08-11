@@ -2,7 +2,7 @@
 with lib; {
   options.local.curl = mkEnableOption "curl configuration";
 
-  config = mkIf config.local.jsdev.enable {
+  config = mkIf config.local.curl {
     home.packages = with pkgs; [ curl ];
 
     home.file = {
