@@ -9,7 +9,6 @@ with lib; {
       chromium
       darktable
       feh
-      firefox
       gimp
       krita
       libreoffice-unwrapped

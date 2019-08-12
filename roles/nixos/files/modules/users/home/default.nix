@@ -6,6 +6,7 @@
     ./devops.nix
     ./editorconfig.nix
     ./env.nix
+    ./firefox.nix
     ./fish.nix
     ./fzf.nix
     ./git.nix

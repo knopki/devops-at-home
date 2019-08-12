@@ -79,6 +79,7 @@ in {
           ];
           devops.enable = isWorkstation;
           env.graphics = isWorkstation;
+          firefox = isWorkstation;
           fish.enable = true;
           gnome.enable = isWorkstation;
           jsdev.enable = isWorkstation;
