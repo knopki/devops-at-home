@@ -208,6 +208,9 @@ with lib; {
         "workbench.startupEditor" = "newUntitledFile";
         "[json]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
         "[jsonc]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+        "[javascript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
       };
     };
   };
