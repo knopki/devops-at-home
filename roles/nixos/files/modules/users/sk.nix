@@ -77,6 +77,7 @@ in {
             "${selfHM.xdg.dataHome}/vim"
             "downloads"
           ];
+          chromium = isWorkstation;
           devops.enable = isWorkstation;
           env.graphics = isWorkstation;
           firefox = isWorkstation;

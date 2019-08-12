@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./cachedir.nix
+    ./chromium.nix
     ./curl.nix
     ./desktop-pack.nix
     ./devops.nix
