@@ -20,6 +20,7 @@ with lib;
         fonts.enable = true;
         system = {
           latestKernel = true;
+          makeLinuxFastAgain = true;
         };
       };
 
