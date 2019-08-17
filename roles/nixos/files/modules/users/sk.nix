@@ -5,6 +5,8 @@ let
   self = local.users.users."${username}";
   selfHM = config.home-manager.users."${username}";
   isWorkstation = config.local.roles.workstation.enable;
+  pathNpmPart =
+    if selfHM.local.jsdev.enable then ":${selfHM.xdg.dataHome}/npm/bin" else "";
 in {
   config = mkIf (elem "sk" config.local.users.setupUsers) {
     users.groups = {
@@ -42,7 +44,7 @@ in {
         home.sessionVariables = {
           BROWSER = "firefox";
           PATH =
-            "${selfHM.home.homeDirectory}/.local/bin:${selfHM.home.homeDirectory}/.local/npm/bin:\${PATH}";
+            "${selfHM.home.homeDirectory}/.local/bin${pathNpmPart}:\${PATH}";
           TERMINAL = "termite";
         };
 
