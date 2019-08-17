@@ -3,9 +3,19 @@
 with lib;
 
 {
-  options = { local.general.system.enable = mkEnableOption "System Options"; };
+  options = {
+    local.general.system = {
+      enable = mkEnableOption "System Options";
+      latestKernel = mkEnableOption "Use latest kernel package";
+    };
+  };
 
   config = mkIf config.local.general.system.enable {
+    boot = {
+      kernelPackages =
+        mkIf config.local.general.system.latestKernel pkgs.linuxPackages_latest;
+    };
+
     # Save current configuration to generation every time
     environment.etc.current-configuration.source = "/etc/nixos";
 

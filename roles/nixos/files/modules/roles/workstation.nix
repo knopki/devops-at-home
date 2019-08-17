@@ -16,7 +16,12 @@ with lib;
         zsh.enable = true;
       };
 
-      general = { fonts.enable = true; };
+      general = {
+        fonts.enable = true;
+        system = {
+          latestKernel = true;
+        };
+      };
 
       hardware = {
         scanning.enable = true;
