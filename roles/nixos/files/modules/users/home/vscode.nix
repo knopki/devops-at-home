@@ -175,6 +175,12 @@ with lib; {
             version = "1.2.2";
             sha256 = "1n2yv37ljaadp84iipv7czzs32dbs4q2vmb98l3z0aan5w2g8x3z";
           }
+          {
+            name = "vscodeintellicode";
+            publisher = "VisualStudioExptTeam";
+            version = "1.1.9";
+            sha256 = "00x203w2pacs68svccmbsq3hb7gyin2zblb1abyvqw0nxba5kzww";
+          }
         ];
 
       userSettings = {
