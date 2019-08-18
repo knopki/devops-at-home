@@ -21,7 +21,7 @@ with lib;
     security.sudo = {
       enable = true;
       extraConfig = ''
-        Defaults timestamp_timeout=120
+        Defaults !tty_tickets,timestamp_timeout=120
       '';
       extraRules = [{
         commands = [{
