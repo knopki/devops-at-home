@@ -33,6 +33,7 @@ with lib; {
       mosh
       nix-du
       nix-prefetch-git
+      nixpkgs-with-kustomize-1.kustomize
       nmap-graphical
       openssh
       pstree
@@ -42,7 +43,7 @@ with lib; {
       shfmt
       sysstat
       # telepresence TODO:broken
-      unstable.kustomize
+
       wget
     ];
 

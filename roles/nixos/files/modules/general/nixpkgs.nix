@@ -21,10 +21,14 @@ in {
 
       overlays = [
         (self: super: {
+          nixpkgs-with-kustomize-1 =
+            import (fetchFromGitHub versions.nixpkgs-kustomize-1) {
+              config.allowUnfree = true;
+            };
+          nur = import (fetchFromGitHub versions.nur) { inherit super; };
           unstable = import (fetchFromGitHub versions.nixpkgs-unstable) {
             config.allowUnfree = true;
           };
-          nur = import (fetchFromGitHub versions.nur) { inherit super; };
         })
         (self: super: {
           fish-kubectl-completions =
