@@ -42,8 +42,7 @@ with lib; {
       rsync
       shfmt
       sysstat
-      # telepresence TODO:broken
-
+      telepresence
       wget
     ];
 
