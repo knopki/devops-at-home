@@ -169,6 +169,12 @@ with lib; {
             version = "0.13.0";
             sha256 = "1dy7rf9w1mvk65fmxbvhbi5pf6cw2lwi07yhafq9x20c36g6dwyz";
           }
+          {
+            name = "vscode-typescript-tslint-plugin";
+            publisher = "ms-vscode";
+            version = "1.2.2";
+            sha256 = "1n2yv37ljaadp84iipv7czzs32dbs4q2vmb98l3z0aan5w2g8x3z";
+          }
         ];
 
       userSettings = {
