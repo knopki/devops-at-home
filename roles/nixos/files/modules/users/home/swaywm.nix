@@ -274,6 +274,10 @@ in {
       # Show the next scratchpad window or hide the focused scratchpad window.
       # If there are multiple scratchpad windows, this command cycles through them.
       bindsym $mod+minus scratchpad show
+
+      # bind program to scratchpad
+      for_window [title="Telegram"] move scratchpad
+      exec --no-startup-id ${pkgs.tdesktop}/bin/telegram-desktop
     '';
 
     home.file."${swayDir}/config.d/50-workspaces".text = ''
@@ -289,7 +293,7 @@ in {
       set $ws7 7
       set $ws8 8
       set $ws9 9
-      set $ws10 10:💬
+      set $ws10 10
 
       ${(if nixosConfig.networking.hostName == "knopa" then ''
         # assign workspaces to outputs
@@ -341,9 +345,6 @@ in {
       bindsym $mod+Cyrillic_softsign move workspace to output left
       bindsym $mod+comma             move workspace to output right
       bindsym $mod+Cyrillic_be       move workspace to output right
-
-      # bind program to workspace
-      assign [title="Telegram"] $ws10
     '';
 
     home.file."${swayDir}/config.d/50-autolayout".text = ''
@@ -422,17 +423,6 @@ in {
         wrap_scroll no
         workspace_buttons yes
         strip_workspace_numbers yes
-        # height
-
-        # TODO: Tray?
-        # tray {
-        #   activate_button BTN_LEFT
-        #   context_button BTN_RIGHT
-        #   secondary_button BTN_MIDDLE
-        #   tray_output all
-        #   tray_padding 2
-        #   icon_theme Adwaita
-        # }
 
         colors {
           statusline $color04
