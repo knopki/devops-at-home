@@ -130,12 +130,12 @@ in {
 
       default_border pixel 1
       default_floating_border pixel 1
-      hide_edge_borders smart
 
-      #gaps edge_gaps off
       gaps outer 0
-      gaps inner 1
+      gaps inner 6
       smart_gaps on
+      smart_borders no_gaps
+      hide_edge_borders smart
 
       # app decoration styling
       for_window [title="^.*Mozilla\ Firefox$"] border none
