@@ -70,20 +70,20 @@ with lib; {
           {
             name = "gitlens";
             publisher = "eamodio";
-            version = "9.5.1";
-            sha256 = "10s2g98wv8i0w6fr0pr5xyi8zmh229zn30jn1gg3m5szpaqi1v92";
+            version = "9.9.3";
+            sha256 = "04rns3bwc9cav5rdk5bjm6m0lzjqpm9x99539bhk319l83ksffyv";
           }
           {
             name = "indent-rainbow";
             publisher = "oderwat";
-            version = "7.2.4";
-            sha256 = "02b71r4jfzppm8i65yghw37kmk67ymrm1sdlkv13lj24k297d3v6";
+            version = "7.4.0";
+            sha256 = "1xnsdwrcx24vlbpd2igjaqlk3ck5d6jzcfmxaisrgk7sac1aa81p";
           }
           {
             name = "vscode-kubernetes-tools";
             publisher = "ms-kubernetes-tools";
-            version = "0.1.16";
-            sha256 = "0hdlxh36gllzm9k83lkad5c2bwlfwhnzv5q98hwgpx2bj6s9cara";
+            version = "1.0.2";
+            sha256 = "1xf96llx8nn69bpdl4px7ql7skzyajqk8fljp9z87pcs41qfa8a3";
           }
           {
             name = "vscode-todo-highlight";
@@ -100,26 +100,26 @@ with lib; {
           {
             name = "vscode-icons";
             publisher = "vscode-icons-team";
-            version = "8.4.0";
-            sha256 = "0s5r8gsdyvkh471906mf4msf95xxrmr3p4msq93p8ldj7wwka18r";
+            version = "9.2.0";
+            sha256 = "0cyyhfm18nbgnp17ixqf3b4v658afxi56xl6rgh0zq411pb36zf8";
           }
           {
             name = "vscode-yaml";
             publisher = "redhat";
-            version = "0.3.0";
-            sha256 = "13f094s3qgm3lby7q026gjnamm5bpwj3aqsnwa8qv3y22a7a784j";
+            version = "0.4.1";
+            sha256 = "01qh61x4hgsqb6l5rcq60w87g8hm0mv9d5gkcdhjdikgqjxfsx6z";
           }
           {
             name = "vscode-eslint";
             publisher = "dbaeumer";
-            version = "1.8.0";
-            sha256 = "0mk1ijbrkj0h3g5pm95arh3aka4jz47zzr8m81055h8q6xsj0rzm";
+            version = "1.9.0";
+            sha256 = "1lr25v236cz8kbgbgqj6izh3f4nwp9cxygpa0zzfvfrg8gg0x49w";
           }
           {
             name = "prettier-vscode";
             publisher = "esbenp";
-            version = "1.8.1";
-            sha256 = "0qcm2784n9qc4p77my1kwqrswpji7bp895ay17yzs5g84cj010ln";
+            version = "1.9.0";
+            sha256 = "1an9dlkicj1s0ffy9l9jdvzpcdl0slvln9k05rd6l8g42ri9fp49";
           }
           {
             name = "viml";
@@ -130,38 +130,38 @@ with lib; {
           {
             name = "flow-for-vscode";
             publisher = "flowtype";
-            version = "1.0.1";
-            sha256 = "0b3rldawl64divbf6rpk7crxxf6gpfiai84svafyif2726ibyjd2";
+            version = "1.3.0";
+            sha256 = "177vvhmkzxsk5crpsl77f4j4v2g2gb6jkn0vcf8ag5bbwqzd9bmm";
           }
           {
             name = "shell-format";
             publisher = "foxundermoon";
-            version = "4.0.4";
-            sha256 = "0s4jw2ybwp8aj8sgv7xk0qqy7w3cpbgqz8v9r6vpwalmm6g3319s";
+            version = "6.1.1";
+            sha256 = "00znldmhy7ns56jv4fm490hdkaxfabq953pbyn6r0z6kj42rg7wz";
           }
           {
             name = "vscode-styled-components";
             publisher = "jpoissonnier";
-            version = "0.0.25";
-            sha256 = "12qgx56g79snkf9r7sgmx3lv0gnzp7avf3a5910i0xq9shfr67n0";
+            version = "0.0.26";
+            sha256 = "09lgc1fjdrgzw6n72w833kyfk7m0008lmd17r0vljcd572igfhhc";
           }
           {
             name = "Go";
             publisher = "ms-vscode";
-            version = "0.9.2";
-            sha256 = "0yxnsby8zz1dvnx8nqrhi4xx316mpjf2hs2c5r6fkzh8zhjccwqz";
+            version = "0.11.4";
+            sha256 = "0h0z4kgm0d2milbmna2j0saic3yq5p07l18dflyqwvm9zvjx9x5f";
           }
           {
             name = "jinjahtml";
             publisher = "samuelcolvin";
-            version = "0.9.0";
-            sha256 = "14vshlq208qqznpz5qix6pl8h64z4fvyhvp1ijyss9fnl7jf2q54";
+            version = "0.10.5";
+            sha256 = "1mv2zkp09dgqdvvr42mwajm0cninqqw2g2adi5b5ki63niv5xx2y";
           }
           {
             name = "rust";
             publisher = "rust-lang";
-            version = "0.6.0";
-            sha256 = "1yympisq2p034vxvyn12nzhsmslls1yhfbf68yi3in0ly4xfrb19";
+            version = "0.6.1";
+            sha256 = "0f66z6b374nvnrn7802dg0xz9f8wq6sjw3sb9ca533gn5jd7n297";
           }
           {
             name = "EditorConfig";
@@ -214,9 +214,7 @@ with lib; {
         "[typescriptreact]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
         };
-        "[yaml]" = {
-          "editor.defaultFormatter" = "esbenp.prettier-vscode";
-        };
+        "[yaml]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
       };
     };
   };
