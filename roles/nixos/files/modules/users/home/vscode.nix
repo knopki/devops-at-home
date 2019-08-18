@@ -214,6 +214,9 @@ with lib; {
         "[typescriptreact]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
         };
+        "[yaml]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
       };
     };
   };
