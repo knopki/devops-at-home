@@ -3,6 +3,19 @@ with lib; {
   options.local.devops.enable = mkEnableOption "devops pack";
 
   config = mkIf config.local.devops.enable {
+    home.file = {
+      ".minikube/config/config.json".text = builtins.toJSON {
+        dashboard = false;
+        disk-size = "20g";
+        ingress = false;
+        memory = 4096;
+        ShowBootstrapperDeprecationNotification = false;
+        vm-driver = "kvm2";
+        WantKubectlDownloadMsg = false;
+        WantUpdateNotification = false;
+      };
+    };
+
     home.packages = with pkgs; [
       ansible
       bat
