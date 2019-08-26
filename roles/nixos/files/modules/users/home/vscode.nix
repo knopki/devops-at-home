@@ -181,6 +181,30 @@ with lib; {
             version = "1.1.9";
             sha256 = "00x203w2pacs68svccmbsq3hb7gyin2zblb1abyvqw0nxba5kzww";
           }
+          {
+            name = "vetur";
+            publisher = "octref";
+            version = "0.22.2";
+            sha256 = "1746fdpbk2kb3hc3ygkszpkaxpm4sm6p8xpl5gw96jk2hdg8zx9b";
+          }
+          {
+            name = "stylelint";
+            publisher = "shinnn";
+            version = "0.51.0";
+            sha256 = "0qxa6jcfjl9vkx06shxjpa8k99ysvar3i0pzqdnc4aizjcayn3i4";
+          }
+          {
+            name = "svelte-intellisense";
+            publisher = "ardenivanov";
+            version = "0.6.0";
+            sha256 = "0x9d6yzs0cyj0cc6if4yvaalwilb1rddg4zzn5f70frnws1snzdv";
+          }
+          {
+            name = "svelte-vscode";
+            publisher = "JamesBirtles";
+            version = "0.9.2";
+            sha256 = "05h2nrnzzdyxkrpkmdnb5i0mb9xdxcqa3hr74frl82q6xk7k6djy";
+          }
         ];
 
       userSettings = {
