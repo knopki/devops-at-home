@@ -2,8 +2,8 @@
   "home-manager": {
     "owner": "rycee",
     "repo": "home-manager",
-    "rev": "5203340b64328d14a7d6eee68d846d13fe97fb0d",
-    "sha256": "0zgjzzcydlcr2gibplh162gg0aw47c22qmjsxv4k6blhwm0xi4an"
+    "rev": "eb1b86a5ec7baf1a1ce2c277d568a8751c24a7ee",
+    "sha256": "0qx1kxr81w9642375np1kfzbk95rlf984s8q6yv16xbx5shyjy2z"
   },
   "fish-kubectl-completions": {
     "owner": "evanlucas",
@@ -32,14 +32,14 @@
   "nixpkgs-stable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "35841f87afa7faaeb3fd0f558f9226ebdae0b954",
-    "sha256": "1chmiz98xl5k044cxcrd01nha6x24dmsxssxbi3256d0lsjd1zna"
+    "rev": "9e2d258f92880b7dddab3854b1fcd785f11beb08",
+    "sha256": "15bihk2vq97yyczpcvwm6i1f64636cy1d0cjcv8idmckz7xkn02h"
   },
   "nixpkgs-unstable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "8746c77a383f5c76153c7a181f3616d273acfa2a",
-    "sha256": "1dvhx9hcij3j94yv102f7bhqy73k50sr3lazn28zzj8yg5lbahar"
+    "rev": "af9f401b9a438ec3f5bf0e8946a53b96f72599f5",
+    "sha256": "0vjfdgic0q5b8apql3qmf9w4533765460vjxwrbdwx8k0whd734z"
   },
   "nixpkgs-kustomize-1": {
     "owner": "NixOS",
