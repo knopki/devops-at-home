@@ -1,8 +1,8 @@
 { config, lib, pkgs, user, ... }:
 with lib; {
-  options.local.readline = mkEnableOption "setup readline in .inputrc";
+  options.local.readline.enable = mkEnableOption "setup readline in .inputrc";
 
-  config = mkIf config.local.readline {
+  config = mkIf config.local.readline.enable {
     home.file = {
       ".inputrc".text = ''
         # do not make noise

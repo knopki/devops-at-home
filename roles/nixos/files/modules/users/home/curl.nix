@@ -1,8 +1,8 @@
 { config, lib, pkgs, user, ... }:
 with lib; {
-  options.local.curl = mkEnableOption "curl configuration";
+  options.local.curl.enable = mkEnableOption "curl configuration";
 
-  config = mkIf config.local.curl {
+  config = mkIf config.local.curl.enable {
     home.packages = with pkgs; [ curl ];
 
     home.file = {

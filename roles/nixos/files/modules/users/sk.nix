@@ -79,10 +79,10 @@ in {
             "${selfHM.xdg.dataHome}/vim"
             "downloads"
           ];
-          chromium = isWorkstation;
+          chromium.enable = isWorkstation;
           devops.enable = isWorkstation;
           env.graphics = isWorkstation;
-          firefox = isWorkstation;
+          firefox.enable = isWorkstation;
           fish.enable = true;
           gnome.enable = isWorkstation;
           jsdev.enable = isWorkstation;

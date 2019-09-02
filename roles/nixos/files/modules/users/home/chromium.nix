@@ -1,8 +1,8 @@
 { config, lib, pkgs, user, ... }:
 with lib; {
-  options.local.chromium = mkEnableOption "chromium configuration";
+  options.local.chromium.enable = mkEnableOption "chromium configuration";
 
-  config = mkIf config.local.chromium {
+  config = mkIf config.local.chromium.enable {
     programs.chromium = {
       enable = true;
       extensions = [

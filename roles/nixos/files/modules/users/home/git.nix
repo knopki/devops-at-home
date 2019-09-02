@@ -1,8 +1,8 @@
 { config, lib, pkgs, user, ... }:
 with lib; {
-  options.local.git = mkEnableOption "git defaults";
+  options.local.git.enable = mkEnableOption "git defaults";
 
-  config = mkIf config.local.git {
+  config = mkIf config.local.git.enable {
     programs.git = {
       aliases = {
         co = "checkout";

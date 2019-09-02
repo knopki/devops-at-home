@@ -9,8 +9,9 @@ in {
     nixpkgs.config = config.nixpkgs.config;
     nixpkgs.overlays = config.nixpkgs.overlays;
     local = {
-      curl = true;
+      curl.enable = true;
       desktop-pack.enable = isWorkstation;
+      editorconfig = true;
       env.default = true;
       fish = {
         colorizeMan = true;
@@ -24,11 +25,11 @@ in {
           bind --user \e\[3\;5~ kill-word  # Ctrl-Delete
         '';
       };
-      git = true;
-      htop = true;
-      readline = true;
-      ssh = true;
-      wget = true;
+      git.enable = true;
+      htop.enable = true;
+      readline.enable = true;
+      ssh.enable = true;
+      wget.enable = true;
       xdgUserDirs = {
         enable = isWorkstation;
         desktop = "desktop";

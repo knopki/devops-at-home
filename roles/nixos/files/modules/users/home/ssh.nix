@@ -1,8 +1,8 @@
 { config, lib, pkgs, user, ... }:
 with lib; {
-  options.local.ssh = mkEnableOption "ssh default config";
+  options.local.ssh.enable = mkEnableOption "ssh default config";
 
-  config = mkIf config.local.fzf.enable {
+  config = mkIf config.local.ssh.enable {
     home.packages = with pkgs; [ openssh ];
 
     programs.ssh = {

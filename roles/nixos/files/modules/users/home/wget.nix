@@ -1,8 +1,8 @@
 { config, lib, pkgs, user, ... }:
 with lib; {
-  options.local.wget = mkEnableOption "wget configuration";
+  options.local.wget.enable = mkEnableOption "wget configuration";
 
-  config = mkIf config.local.jsdev.enable {
+  config = mkIf config.local.wget.enable {
     home.packages = with pkgs; [ wget ];
 
     home.file = {

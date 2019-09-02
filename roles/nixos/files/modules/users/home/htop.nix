@@ -1,8 +1,8 @@
 { config, lib, pkgs, user, ... }:
 with lib; {
-  options.local.htop = mkEnableOption "enable htop for user";
+  options.local.htop.enable = mkEnableOption "enable htop for user";
 
-  config = mkIf config.local.htop {
+  config = mkIf config.local.htop.enable {
     programs.htop = {
       enable = true;
       sortKey = "PERCENT_MEM";

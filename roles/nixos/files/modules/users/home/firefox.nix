@@ -1,8 +1,8 @@
 { config, lib, pkgs, user, ... }:
 with lib; {
-  options.local.firefox = mkEnableOption "firefox configuration";
+  options.local.firefox.enable = mkEnableOption "firefox configuration";
 
-  config = mkIf config.local.firefox {
+  config = mkIf config.local.firefox.enable {
     programs.firefox = {
       enable = true;
 
