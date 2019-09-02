@@ -216,6 +216,7 @@ with lib; {
         "editor.minimap.renderCharacters" = false;
         "editor.multiCursorModifier" = "alt";
         "editor.rulers" = [ 80 120 ];
+        "editor.suggestSelection" = "first";
         "editor.wordWrap" = "on";
         "explorer.confirmDelete" = false;
         "extensions.autoUpdate" = false;
@@ -223,15 +224,6 @@ with lib; {
         "flow.useNPMPackagedFlow" = true;
         "flow.useLSP" = true;
         "git.autofetch" = true;
-        "gitlens.advanced.messages" = {
-          suppressFileNotUnderSourceControlWarning = true;
-          suppressShowKeyBindingsNotice = true;
-          suppressUpdateNotice = true;
-        };
-        "gitlens.codeLens.authors.enabled" = false;
-        "gitlens.codeLens.recentChange.enabled" = false;
-        "gitlens.hovers.annotations.enabled" = false;
-        "gitlens.keymap" = "chorded";
         "javascript.updateImportsOnFileMove.enabled" = "never";
         "javascript.validate.enable" = false;
         "prettier.trailingComma" = "es5";
@@ -245,6 +237,9 @@ with lib; {
         "[json]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
         "[jsonc]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
         "[javascript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[typescript]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
         };
         "[typescriptreact]" = {
