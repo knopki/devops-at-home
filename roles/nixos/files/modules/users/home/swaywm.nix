@@ -9,7 +9,12 @@ let
   swayDir = "${config.xdg.configHome}/sway";
 
   # binary paths
+  alacrittyBin = "${pkgs.alacritty}/bin/alacritty";
+  bashBin = "${pkgs.bashInteractive}/bin/bash";
+  fzfBin = "${pkgs.fzf}/bin/fzf";
+  gopassBin = "${pkgs.gopass}/bin/gopass";
   grimBin = "${pkgs.grim}/bin/grim";
+  i3dmenuBin = "${pkgs.i3}/bin/i3-dmenu-desktop";
   lightBin = "${pkgs.light}/bin/light";
   makoctlBin = "${pkgs.mako}/bin/makoctl";
   mkdirBin = "${pkgs.coreutils}/bin/mkdir";
@@ -365,8 +370,8 @@ in {
 
     home.file."${swayDir}/config.d/70-launcher".text = ''
       # Your preferred application launcher
-      set $menu ${termiteBin} --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'"
-      for_window [app_id="^launcher$"] floating enable, border none
+      set $menu ${alacrittyBin} --class=launcher -e ${i3dmenuBin} --dmenu="${fzfBin} --prompt='Run: ' --cycle --print-query | tail -n1"
+      for_window [app_id="^launcher$"] floating enable, resize set width 649 px height 300 px
 
       # start your launcher
       bindsym $mod+d           exec $menu
@@ -412,6 +417,18 @@ in {
       bindsym $mod+Print exec ${grimBin} "${screenshotPath}"
       # make screenshot of the screen area
       bindsym $mod+Shift+Print exec ${slurpBin} | ${grimBin} -g - ${screenshotPath}
+    '';
+
+    home.file."${swayDir}/config.d/70-passmenu".text = ''
+      set $passmenu ${alacrittyBin} --class=passmenu -e ${bashBin} -c "${gopassBin} find . | ${fzfBin} --print-query | tail -n1 | xargs -r ${swaymsgBin} -t command exec -- ${gopassBin} show -c"
+      set $passmenuOTP ${alacrittyBin} --class=passmenu -e ${bashBin} -c "${gopassBin} find . | ${fzfBin} --print-query | tail -n1 | xargs -r ${swaymsgBin} -t command exec -- ${gopassBin} otp -c"
+
+      for_window [app_id="^passmenu$"] floating enable, resize set width 649 px height 300 px
+
+      bindsym $mod+p                 exec $passmenu
+      bindsym $mod+Cyrillic_ze       exec $passmenu
+      bindsym $mod+Shift+p           exec $passmenuOTP
+      bindsym $mod+Shift+Cyrillic_ze exec $passmenuOTP
     '';
 
     home.file."${swayDir}/config.d/99-bar".text = ''

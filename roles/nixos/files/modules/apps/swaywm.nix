@@ -13,8 +13,10 @@ with lib;
       sway = {
         enable = true;
         extraPackages = with pkgs; [
+          alacritty
           gnome3.seahorse
           grim
+          i3
           i3status
           iw # required by i3status
           libnotify
