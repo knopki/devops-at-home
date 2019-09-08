@@ -13,7 +13,6 @@ with lib;
         gnome.enable = true;
         swaywm.enable = true;
         # xserver.enable = true;
-        zsh.enable = true;
       };
 
       general = {
@@ -57,8 +56,6 @@ with lib;
       hdparm
       lm_sensors
       mosh
-      neovim
-      neovim-remote
       ngrep
       nmap
       p7zip
