@@ -22,8 +22,6 @@ with lib;
           mako
           playerctl
           python36Packages.py3status
-          rofi
-          rofi-pass
           slurp
           swayidle
           swaylock

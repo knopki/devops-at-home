@@ -18,7 +18,6 @@ let
   pkillBin = "${pkgs.procps}/bin/pkill";
   playerctlBin = "${pkgs.playerctl}/bin/playerctl";
   py3statusBin = "${pkgs.python36Packages.py3status}/bin/py3status";
-  rofiBin = "${pkgs.rofi}/bin/rofi";
   slurpBin = "${pkgs.slurp}/bin/slurp";
   sshaddBin = "${pkgs.openssh}/bin/ssh-add";
   swayidleBin = "${pkgs.swayidle}/bin/swayidle";
@@ -28,7 +27,7 @@ let
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
   termiteBin = "${pkgs.termite}/bin/termite";
 in {
-  options.local.swaywm.enable = mkEnableOption "setup sway, bar, rofi";
+  options.local.swaywm.enable = mkEnableOption "setup sway, bar, etc";
 
   config = mkIf config.local.swaywm.enable {
     #
@@ -364,9 +363,10 @@ in {
       bindsym $mod+Ctrl+Return exec $term
     '';
 
-    home.file."${swayDir}/config.d/70-rofi".text = ''
+    home.file."${swayDir}/config.d/70-launcher".text = ''
       # Your preferred application launcher
-      set $menu ${rofiBin} -modi combi -show combi -combi-modi "drun,run,ssh" -show-icons -terminal $term
+      set $menu ${termiteBin} --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'"
+      for_window [app_id="^launcher$"] floating enable, border none
 
       # start your launcher
       bindsym $mod+d           exec $menu
@@ -645,63 +645,6 @@ in {
         format_time = " %d/%m {icon} %H:%M:%S"
       }
     '';
-
-    #
-    # rofi
-    #
-    programs.rofi = {
-      enable = true;
-      borderWidth = 1;
-      colors = {
-        window = {
-          background = "#393939";
-          border = "#393939";
-          separator = "#2d2d2d";
-        };
-        rows = {
-          normal = {
-            background = "#393939";
-            foreground = "#d3d0c8";
-            backgroundAlt = "#393939";
-            highlight = {
-              background = "#393939";
-              foreground = "#f2f0ec";
-            };
-          };
-          active = {
-            background = "#393939";
-            foreground = "#6699cc";
-            backgroundAlt = "#393939";
-            highlight = {
-              background = "#393939";
-              foreground = "#6699cc";
-            };
-          };
-          urgent = {
-            background = "#393939";
-            foreground = "#f2777a";
-            backgroundAlt = "#393939";
-            highlight = {
-              background = "#393939";
-              foreground = "#f2777a";
-            };
-          };
-        };
-      };
-      extraConfig = ''
-        rofi.color-enabled: true
-        rofi.columns: 1
-        rofi.fake-transparency: true
-        rofi.fixed-num-lines: true
-      '';
-      font = "Hack 12";
-      lines = 12;
-      location = "center";
-      padding = 16;
-      separator = "solid";
-      width = 500;
-      yoffset = 0;
-    };
 
     services.gnome-keyring = {
       enable = true;
