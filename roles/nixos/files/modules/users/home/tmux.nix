@@ -3,6 +3,8 @@ with lib; {
   options.local.tmux.enable = mkEnableOption "setup tmux";
 
   config = mkIf config.local.tmux.enable {
+    home.packages = with pkgs; [ bc ];
+
     home.file = {
       ".tmux-powerlinerc".text = ''
         # Default configuration file for tmux-powerline.
