@@ -158,7 +158,7 @@ in {
     (mkIf config.local.fish.fixTerm {
       home.file."${fishCfgDir}/conf.d/fix_term.fish".text = ''
         function fix_term --description "Fix $TERM and colors"
-          test $TERM = "xterm-termite" -o $TERM = "termite"; and begin
+          test $TERM = "xterm-termite" -o $TERM = "termite" -o $TERM = "alacritty"; and begin
             set -x TERM "xterm-256color"
           end
 

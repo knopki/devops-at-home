@@ -45,10 +45,11 @@ in {
           BROWSER = "firefox";
           PATH =
             "${selfHM.home.homeDirectory}/.local/bin${pathNpmPart}:\${PATH}";
-          TERMINAL = "termite";
+          TERMINAL = "alacritty";
         };
 
         local = {
+          alacritty.enable = isWorkstation;
           cachedirs = mkIf isWorkstation [
             ".kube/cache"
             ".kube/http-cache"
@@ -89,7 +90,6 @@ in {
           nixdev.enable = isWorkstation;
           qt.enable = isWorkstation;
           swaywm.enable = isWorkstation;
-          termite.enable = isWorkstation;
           tmux.enable = isWorkstation;
         };
         programs.git = {

@@ -30,11 +30,28 @@ let
   swaylockCmd = "${swaylockBin} -i ${defaultWallpaper} --scaling=fill";
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
-  termiteBin = "${pkgs.termite}/bin/termite";
 in {
   options.local.swaywm.enable = mkEnableOption "setup sway, bar, etc";
 
   config = mkIf config.local.swaywm.enable {
+    home.packages = with pkgs; [
+      fzf
+      gopass
+      grim
+      i3
+      i3status
+      iw # required by i3status
+      libnotify
+      mako
+      playerctl
+      python36Packages.py3status
+      slurp
+      wf-recorder
+      wl-clipboard
+    ];
+
+    local.alacritty.enable = true;
+
     #
     # SwayWM configuration
     #
@@ -361,10 +378,10 @@ in {
 
     home.file."${swayDir}/config.d/60-terminal".text = ''
       # Your preferred terminal emulator
-      set $term ${termiteBin}
+      set $term ${alacrittyBin}
 
       # start a terminal
-      bindsym $mod+Return exec $term
+      bindsym $mod+Return      exec $term
       bindsym $mod+Ctrl+Return exec $term
     '';
 

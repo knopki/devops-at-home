@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./alacritty.nix
     ./cachedir.nix
     ./chromium.nix
     ./curl.nix
@@ -14,6 +15,7 @@
     ./gnome.nix
     ./htop.nix
     ./jsdev.nix
+    ./kitty.nix
     ./nixdev.nix
     ./qt.nix
     ./readline.nix

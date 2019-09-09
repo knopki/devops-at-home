@@ -54,7 +54,7 @@ with lib; {
       dynamicTitle = false;
       enable = true;
       filterUnmatchedUrls = true;
-      font = "Hack 10";
+      font = "Fira Code 10";
       foregroundBoldColor = "#e8e6df";
       foregroundColor = "#d3d0c8";
       fullscreen = true;
@@ -63,7 +63,7 @@ with lib; {
       hintsBackgroundColor = "#3f3f3f";
       hintsBorderColor = "#3f3f3f";
       hintsBorderWidth = "0.5";
-      hintsFont = "Hack 12";
+      hintsFont = "Fira Code 12";
       hintsForegroundColor = "#dcdccc";
       hintsPadding = 2;
       hintsRoundness = "2.0";

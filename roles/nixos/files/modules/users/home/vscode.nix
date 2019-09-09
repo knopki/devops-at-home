@@ -210,8 +210,9 @@ with lib; {
       userSettings = {
         "debug.inlineValues" = true;
         "editor.fontFamily" =
-          "'Hack Nerd Font','Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'";
+          "'Fira Code','Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'";
         "editor.fontLigatures" = true;
+        "editor.fontSize" = 12;
         "editor.minimap.enabled" = false;
         "editor.minimap.renderCharacters" = false;
         "editor.multiCursorModifier" = "alt";

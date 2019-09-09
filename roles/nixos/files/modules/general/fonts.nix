@@ -10,6 +10,8 @@ with lib;
       enableFontDir = true;
       fonts = with pkgs; [
         emojione
+        fira-code
+        fira-code-symbols
         font-awesome_4
         hack-font
         noto-fonts
