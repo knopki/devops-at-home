@@ -76,7 +76,7 @@ with lib; {
 
         dynamic_title = true;
 
-        key_bindings = { };
+        # key_bindings = { };
       };
     };
   };
