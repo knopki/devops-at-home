@@ -59,7 +59,9 @@ with lib; {
         include = { path = "local"; };
         status = { showUntrackedFiles = "all"; };
         transfer = { fsckobjects = "true"; };
-        credential = { helper = "!${pkgs.gopass}/bin/gopass git-credential $@"; };
+        credential = {
+          helper = "!${pkgs.gopass}/bin/gopass git-credential $@";
+        };
       };
       ignores = [ "._*" ".DS_Store" "*.pyc" "Desktop.ini" "Thumbs.db" ];
       lfs = {
