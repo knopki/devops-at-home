@@ -205,6 +205,12 @@ with lib; {
             version = "0.9.2";
             sha256 = "05h2nrnzzdyxkrpkmdnb5i0mb9xdxcqa3hr74frl82q6xk7k6djy";
           }
+          {
+            name = "material-theme";
+            publisher = "zhuangtongfa";
+            version = "2.27.1";
+            sha256 = "01kxcl5j8r2j6y244yvybxyva8m48lv8xdhqf1n5y186p43mr5ny";
+          }
         ];
 
       userSettings = {
@@ -233,7 +239,7 @@ with lib; {
         "vsicons.dontShowNewVersionMessage" = true;
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = 0;
-        "workbench.colorTheme" = "Monokai";
+        "workbench.colorTheme" = "One Dark Pro";
         "workbench.startupEditor" = "newUntitledFile";
         "[json]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
         "[jsonc]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
