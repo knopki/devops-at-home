@@ -10,9 +10,8 @@ with lib; {
       feh
       gimp
       krita
-      libreoffice-unwrapped
+      libreoffice
       mpv
-      neovim-qt
       pavucontrol
       picard
       playerctl
@@ -21,6 +20,7 @@ with lib; {
       tor-browser-bundle-bin
       transmission-gtk
       wine
+      xdg_utils
       youtube-dl
     ];
   };
