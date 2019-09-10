@@ -215,8 +215,7 @@ with lib; {
 
       userSettings = {
         "debug.inlineValues" = true;
-        "editor.fontFamily" =
-          "'FuraCode Nerd Font Mono','Noto Sans Mono','Courier New',monospace";
+        "editor.fontFamily" = "'FuraCode Nerd Font',monospace";
         "editor.fontLigatures" = true;
         "editor.fontSize" = 14;
         "editor.minimap.enabled" = false;
