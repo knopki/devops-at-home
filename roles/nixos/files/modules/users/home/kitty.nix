@@ -19,48 +19,48 @@ with lib; {
 
         term xterm-256color
 
-        foreground #d3d0c8
-        background #2D2D2D
-        selection_foreground #3f3f3f
-        selection_background #e68080
+        # Base16 OneDark - kitty color config
+        # Scheme by Lalit Magant (http://github.com/tilal6991)
+        background #282c34
+        foreground #abb2bf
+        selection_background #abb2bf
+        selection_foreground #282c34
+        url_color #565c64
+        cursor #abb2bf
+        active_border_color #545862
+        inactive_border_color #353b45
+        active_tab_background #282c34
+        active_tab_foreground #abb2bf
+        inactive_tab_background #353b45
+        inactive_tab_foreground #565c64
 
-        # Black, Gray, Silver, White
-        color0  #2d2d2d
-        color8  #747369
-        color7  #d3d0c8
-        color15 #f2f0ec
+        # normal
+        color0 #282c34
+        color1 #e06c75
+        color2 #98c379
+        color3 #e5c07b
+        color4 #61afef
+        color5 #c678dd
+        color6 #56b6c2
+        color7 #abb2bf
 
-        # Red
-        color1  #f2777a
-        color9  #f2777a
+        # bright
+        color8 #545862
+        color9 #e06c75
+        color10 #98c379
+        color11 #e5c07b
+        color12 #61afef
+        color13 #c678dd
+        color14 #56b6c2
+        color15 #abb2bf
 
-        # Green
-        color2  #99cc99
-        color10 #99cc99
-
-        # Yellow
-        color3  #ffcc66
-        color11 #ffcc66
-
-        # Blue
-        color4  #6699cc
-        color12 #6699cc
-
-        # Purple
-        color5  #cc99cc
-        color13 #cc99cc
-
-        # Teal
-        color6  #66cccc
-        color14 #66cccc
-
-        # Extra colors
-        color16 #f99157
-        color17 #d27b53
-        color18 #393939
-        color19 #515151
-        color20 #a09f93
-        color21 #e8e6df
+        # extended base16 colors
+        color16 #d19a66
+        color17 #be5046
+        color18 #353b45
+        color19 #3e4451
+        color20 #565c64
+        color21 #b6bdca
       '';
     };
   };
