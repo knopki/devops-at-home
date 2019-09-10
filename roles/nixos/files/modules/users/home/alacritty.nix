@@ -1,4 +1,4 @@
-{ config, lib, pkgs, user, ... }:
+{ config, nixosConfig, lib, pkgs, user, ... }:
 with lib; {
   options.local.alacritty = {
     enable = mkEnableOption "enable alacritty for user";
@@ -28,9 +28,10 @@ with lib; {
 
         # Font configuration
         font = {
-          normal = { family = "Fira Code"; };
-
+          normal = { family = "FuraCode Nerd Font Mono"; };
           size = 12;
+          glyph_offset = { x = 0; y = -1; };
+          use_thin_strokes = false;
         };
 
         # If `true`, bold text is drawn using the bright color variants.

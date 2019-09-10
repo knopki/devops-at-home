@@ -140,7 +140,7 @@ in {
 
     home.file."${swayDir}/config.d/20-appearance".text = ''
       # Font for window titles.
-      font pango:Hack 10
+      font pango:Noto Sans 12
 
       # class                 border  backgr. text    indicat child
       client.focused          $color05 $color05 $color00 $color05 $color05
@@ -452,7 +452,7 @@ in {
       bar {
         status_command ${py3statusBin} -b -s -i "${config.xdg.configHome}/i3status/py3status"
         position top
-        font pango:Hack 10
+        font pango:Noto Sans 11
         separator_symbol "| "
         wrap_scroll no
         workspace_buttons yes
@@ -706,7 +706,7 @@ in {
         };
         Service = {
           Type = "simple";
-          ExecStart = "${pkgs.mako}/bin/mako --font 'pango:Hack 10' --markup 1";
+          ExecStart = "${pkgs.mako}/bin/mako --font 'pango:Noto Sans 10' --markup 1";
         };
         Install = { WantedBy = [ "sway-session.target" ]; };
       };

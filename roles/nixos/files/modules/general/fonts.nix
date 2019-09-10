@@ -10,24 +10,42 @@ with lib;
       enableFontDir = true;
       fonts = with pkgs; [
         emojione
-        fira-code
-        fira-code-symbols
+        fira-code-nerd
         font-awesome_4
-        hack-font
         noto-fonts
-        powerline-fonts
-        roboto
-        roboto-mono
-        roboto-slab
+        noto-fonts-emoji
       ];
       fontconfig = {
         enable = true;
         defaultFonts = {
-          monospace = [ "Roboto Mono 13" ];
-          sansSerif = [ "Roboto 13" ];
-          serif = [ "Roboto Slab 13" ];
+          monospace = [
+            "Noto Color Emoji"
+            "EmojiOne Color"
+            "Noto Emoji"
+            "Noto Sans Mono"
+          ];
+          sansSerif =
+            [ "Noto Color Emoji" "EmojiOne Color" "Noto Emoji" "Noto Sans" ];
+          serif =
+            [ "Noto Color Emoji" "EmojiOne Color" "Noto Emoji" "Noto Serif" ];
         };
+        penultimate.enable = true;
         ultimate.enable = true;
+        localConf = ''
+          <?xml version="1.0" ?>
+          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+          <fontconfig>
+            <!-- there we fix huge icons -->
+            <match target="scan">
+              <test name="family">
+                <string>Noto Color Emoji</string>
+              </test>
+              <edit name="scalable" mode="assign">
+                <bool>false</bool>
+              </edit>
+            </match>
+          </fontconfig>
+        '';
       };
       enableDefaultFonts = true;
     };

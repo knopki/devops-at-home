@@ -31,6 +31,7 @@ in {
           };
         })
         (self: super: {
+          fira-code-nerd = pkgs.callPackage ../../pkgs/fira-code-nerd.nix { };
           fish-kubectl-completions =
             pkgs.callPackage ../../pkgs/fish-kubectl-completions.nix { };
           fish-theme-pure = pkgs.callPackage ../../pkgs/fish-theme-pure.nix { };
