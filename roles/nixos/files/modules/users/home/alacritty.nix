@@ -30,7 +30,10 @@ with lib; {
         font = {
           normal = { family = "FuraCode Nerd Font Mono"; };
           size = 12;
-          glyph_offset = { x = 0; y = -1; };
+          glyph_offset = {
+            x = 0;
+            y = -1;
+          };
           use_thin_strokes = false;
         };
 
