@@ -6,57 +6,59 @@ with lib; {
     programs.termite = {
       allowBold = true;
       audibleBell = false;
-      backgroundColor = "#2D2D2D";
+      backgroundColor = "rgba(40, 44, 52)";
       clickableUrl = true;
       colorsExtra = ''
+        # OneDark
+        # 16 color space
         # Black, Gray, Silver, White
-        color0  = #2d2d2d
-        color8  = #747369
-        color7  = #d3d0c8
-        color15 = #f2f0ec
+        color0  = #282c34
+        color8  = #545862
+        color7  = #abb2bf
+        color15 = #c8ccd4
 
         # Red
-        color1  = #f2777a
-        color9  = #f2777a
+        color1  = #e06c75
+        color9  = #e06c75
 
         # Green
-        color2  = #99cc99
-        color10 = #99cc99
+        color2  = #98c379
+        color10 = #98c379
 
         # Yellow
-        color3  = #ffcc66
-        color11 = #ffcc66
+        color3  = #e5c07b
+        color11 = #e5c07b
 
         # Blue
-        color4  = #6699cc
-        color12 = #6699cc
+        color4  = #61afef
+        color12 = #61afef
 
         # Purple
-        color5  = #cc99cc
-        color13 = #cc99cc
+        color5  = #c678dd
+        color13 = #c678dd
 
         # Teal
-        color6  = #66cccc
-        color14 = #66cccc
+        color6  = #56b6c2
+        color14 = #56b6c2
 
         # Extra colors
-        color16 = #f99157
-        color17 = #d27b53
-        color18 = #393939
-        color19 = #515151
-        color20 = #a09f93
-        color21 = #e8e6df
+        color16 = #d19a66
+        color17 = #be5046
+        color18 = #353b45
+        color19 = #3e4451
+        color20 = #565c64
+        color21 = #b6bdca
       '';
       cursorBlink = "system";
-      cursorColor = "#e8e6df";
-      cursorForegroundColor = "#2d2d2d";
+      cursorColor = "#b6bdca";
+      cursorForegroundColor = "#282c34";
       cursorShape = "block";
       dynamicTitle = false;
       enable = true;
       filterUnmatchedUrls = true;
       font = "Fira Code 10";
-      foregroundBoldColor = "#e8e6df";
-      foregroundColor = "#d3d0c8";
+      foregroundBoldColor = "#b6bdca";
+      foregroundColor = "#abb2bf";
       fullscreen = true;
       hintsActiveBackgroundColor = "#3f3f3f";
       hintsActiveForegroundColor = "#e68080";
