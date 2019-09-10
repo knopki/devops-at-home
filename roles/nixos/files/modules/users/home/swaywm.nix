@@ -71,22 +71,22 @@ in {
       set $rightR Cyrillic_de
 
       ### Common colors
-      set $color00 #2d2d2d
-      set $color01 #393939
-      set $color02 #515151
-      set $color03 #747369
-      set $color04 #a09f93
-      set $color05 #d3d0c8
-      set $color06 #e8e6df
-      set $color07 #f2f0ec
-      set $color08 #f2777a
-      set $color09 #f99157
-      set $color0A #ffcc66
-      set $color0B #99cc99
-      set $color0C #66cccc
-      set $color0D #6699cc
-      set $color0E #cc99cc
-      set $color0F #d27b53
+      set $base00 #282c34
+      set $base01 #353b45
+      set $base02 #3e4451
+      set $base03 #545862
+      set $base04 #565c64
+      set $base05 #abb2bf
+      set $base06 #b6bdca
+      set $base07 #c8ccd4
+      set $base08 #e06c75
+      set $base09 #d19a66
+      set $base0A #e5c07b
+      set $base0B #98c379
+      set $base0C #56b6c2
+      set $base0D #61afef
+      set $base0E #c678dd
+      set $base0F #be5046
 
       # Wallpaper (default)
       set $wallpaper ${defaultWallpaper}
@@ -143,11 +143,12 @@ in {
       font pango:Noto Sans 12
 
       # class                 border  backgr. text    indicat child
-      client.focused          $color05 $color05 $color00 $color05 $color05
-      client.focused_inactive $color01 $color01 $color05 $color03 $color01
-      client.unfocused        $color01 $color00 $color05 $color01 $color01
-      client.urgent           $color08 $color08 $color00 $color08 $color08
-
+      client.focused          $base05 $base0D $base00 $base0D $base0D
+      client.focused_inactive $base01 $base01 $base05 $base03 $base01
+      client.unfocused        $base01 $base00 $base05 $base01 $base01
+      client.urgent           $base08 $base08 $base00 $base08 $base08
+      client.placeholder      $base00 $base00 $base05 $base00 $base00
+      client.background       $base07
 
       default_border pixel 1
       default_floating_border pixel 1
@@ -459,16 +460,16 @@ in {
         strip_workspace_numbers yes
 
         colors {
-          statusline $color04
-          background $color00
-          separator $color01
-          # focused_background
-          # focused_statusline
-          focused_workspace   $color05 $color05 $color00
-          active_workspace    $color05 $color03 $color00
-          inactive_workspace  $color03 $color01 $color05
-          urgent_workspace    $color08 $color08 $color00
-          binding_mode        $color00 $color0A $color00
+          background $base00
+          separator  $base01
+          statusline $base04
+
+          # State             Border  BG      Text
+          focused_workspace   $base05 $base0D $base00
+          active_workspace    $base05 $base03 $base00
+          inactive_workspace  $base03 $base01 $base05
+          urgent_workspace    $base08 $base08 $base00
+          binding_mode        $base00 $base0A $base00
         }
       }
     '';
@@ -507,9 +508,9 @@ in {
       general {
         interval = 5
         colors = true
-        color_good = '#ebdbb2'
-        color_degraded = '#fabd2f'
-        color_bad = '#fb4934'
+        color_good = "#98c379"
+        color_bad = "#e06c75"
+        color_degraded = "#e5c07b"
       }
 
       order += 'frame music'
@@ -680,6 +681,33 @@ in {
       }
     '';
 
+    #
+    # mako
+    #
+    home.file."${config.xdg.configHome}/mako/config".text = ''
+      font=pango:Noto Sans 10
+      markup=1
+
+      ## Base16 OneDark
+      # Author: Lalit Magant (http://github.com/tilal6991)
+      #
+      # You can use these variables anywhere in the mako configuration file.
+
+      background-color=#3e4451
+      text-color=#abb2bf
+      border-color=#abb2bf
+
+      [urgency=low]
+      background-color=#353b45
+      text-color=#545862
+      border-color=#abb2bf
+
+      [urgency=high]
+      background-color=#e06c75
+      text-color=#b6bdca
+      border-color=#abb2bf
+    '';
+
     services.gnome-keyring = {
       enable = true;
       components = [ "pkcs11" "secrets" "ssh" ];
@@ -706,7 +734,8 @@ in {
         };
         Service = {
           Type = "simple";
-          ExecStart = "${pkgs.mako}/bin/mako --font 'pango:Noto Sans 10' --markup 1";
+          ExecStart =
+            "${pkgs.mako}/bin/mako";
         };
         Install = { WantedBy = [ "sway-session.target" ]; };
       };
