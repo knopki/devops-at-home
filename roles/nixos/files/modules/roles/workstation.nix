@@ -54,6 +54,8 @@ with lib;
       gcc
       gopass
       hdparm
+      keybase
+      keybase-gui
       lm_sensors
       mosh
       ngrep
@@ -92,6 +94,8 @@ with lib;
         locate = pkgs.mlocate;
         pruneBindMounts = true;
       };
+      kbfs.enable = true;
+      keybase.enable = true;
       trezord.enable = true;
       upower.enable = true;
     };
