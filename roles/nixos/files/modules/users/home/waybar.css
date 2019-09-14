@@ -1,0 +1,208 @@
+/*
+*
+* Base16 OneDark
+* Author: Lalit Magant (http://github.com/tilal6991)
+*
+*/
+
+@define-color base00 #282c34;
+@define-color base01 #353b45;
+@define-color base02 #3e4451;
+@define-color base03 #545862;
+@define-color base04 #565c64;
+@define-color base05 #abb2bf;
+@define-color base06 #b6bdca;
+@define-color base07 #c8ccd4;
+@define-color base08 #e06c75;
+@define-color base09 #d19a66;
+@define-color base0A #e5c07b;
+@define-color base0B #98c379;
+@define-color base0C #56b6c2;
+@define-color base0D #61afef;
+@define-color base0E #c678dd;
+@define-color base0F #be5046;
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Noto Sans, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: @base00;
+  border-bottom: 3px solid @base02;
+  color: @base07;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/*
+ * sway/window
+ */
+window#waybar.empty {
+  background-color: transparent;
+  border: none;
+}
+
+/*
+ * sway/workspace
+ */
+#workspaces button {
+  padding: 0 5px;
+  background-color: @base01;
+  color: @base07;
+  border-bottom: 3px solid transparent;
+}
+
+#workspaces button:hover {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: inherit;
+  border-bottom: 3px solid @base07;
+}
+
+#workspaces button.focused {
+  background-color: @base04;
+  border-bottom: 3px solid @base07;
+}
+
+#workspaces button.urgent {
+  background-color: @base08;
+}
+
+/*
+ * sway/mode
+ */
+#mode {
+  background-color: @base01;
+  color: @base07;
+  border-bottom: 3px solid @base07;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor {
+  padding: 0 10px;
+  margin: 0 4px;
+}
+
+#clock {
+  background-color: @base04;
+  color: @base07;
+}
+
+#battery {
+  background-color: @base07;
+  color: @base00;
+}
+
+#battery.charging {
+  color: @base02;
+  background-color: @base0B;
+}
+
+@keyframes blink {
+  to {
+    background-color: @base07;
+    color: @base00;
+  }
+}
+
+#battery.critical:not(.charging) {
+  background-color: @base08;
+  color: @base07;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+label:focus {
+  background-color: @base00;
+}
+
+#cpu,
+#temperature {
+  background-color: @base0B;
+  color: @base00;
+}
+
+#cpu.critical,
+#temperature.critical {
+  background-color: @base08;
+  color: @base07;
+}
+
+#cpu.critical,
+#temperature.critical,
+#memory.critical {
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#memory {
+  background-color: @base0A;
+  color: @base00;
+}
+
+#memory.critical {
+  background-color: @base08;
+  color: @base00;
+}
+
+#backlight {
+  background-color: @base0C;
+  color: @base00;
+}
+
+#network {
+  background-color: @base0D;
+  color: @base00;
+}
+
+#network.disconnected {
+  background-color: @base08;
+}
+
+#pulseaudio {
+  background-color: #f1c40f;
+  color: @base00;
+}
+
+#pulseaudio.muted {
+  background-color: @base07;
+  color: @base02;
+}
+
+#tray {
+  background-color: @base0D;
+  color: @base00;
+}
+
+#idle_inhibitor {
+  background-color: @base02;
+  color: @base07;
+}
+
+#idle_inhibitor.activated {
+  background-color: @base07;
+  color: @base02;
+}

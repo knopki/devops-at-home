@@ -40,6 +40,7 @@ in {
           telepresence = pkgs.callPackage ../../pkgs/telepresence.nix { };
           trapd00r-ls-colors =
             pkgs.callPackage ../../pkgs/trapd00r-ls-colors.nix { };
+          waybar = super.unstable.waybar.override { pulseSupport = true; };
           wf-recorder = super.unstable.wf-recorder;
           wl-clipboard = super.unstable.wl-clipboard;
         })

@@ -3,7 +3,6 @@ with lib;
 let
   defaultWallpaper =
     "${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png";
-  i3statusDir = "${config.xdg.configHome}/i3status";
   screenShotDir = "$(xdg-user-dir PICTURES)/screenshots";
   screenshotPath = ''${screenShotDir}/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png'';
   swayDir = "${config.xdg.configHome}/sway";
@@ -22,7 +21,6 @@ let
   pactlBin = "${pkgs.pulseaudio}/bin/pactl";
   pkillBin = "${pkgs.procps}/bin/pkill";
   playerctlBin = "${pkgs.playerctl}/bin/playerctl";
-  py3statusBin = "${pkgs.python36Packages.py3status}/bin/py3status";
   slurpBin = "${pkgs.slurp}/bin/slurp";
   sshaddBin = "${pkgs.openssh}/bin/ssh-add";
   swayidleBin = "${pkgs.swayidle}/bin/swayidle";
@@ -39,13 +37,13 @@ in {
       gopass
       grim
       i3
-      i3status
-      iw # required by i3status
+      libappindicator-gtk3
       libnotify
       mako
+      networkmanagerapplet
       playerctl
-      python36Packages.py3status
       slurp
+      waybar
       wf-recorder
       wl-clipboard
     ];
@@ -96,7 +94,7 @@ in {
     '';
 
     home.file."${swayDir}/config.d/10-systemd".text = ''
-      exec "${systemctlBin} --user import-environment; ${systemctlBin} --user start sway-session.target"
+      exec "${systemctlBin} --user import-environment HOME I3SOCK PATH SSH_AUTH_SOCK SWAYSOCK USER WAYLAND_DISPLAY; ${systemctlBin} --user start sway-session.target"
     '';
 
     home.file."${swayDir}/config.d/10-outputs".text = ''
@@ -402,23 +400,19 @@ in {
     '';
 
     home.file."${swayDir}/config.d/70-backlight".text = ''
-      bindsym --locked XF86MonBrightnessUp   exec ${lightBin} -A 3 && \
-        ${notifySendBin} 'Brightness' $(light) --expire-time 200
-      bindsym --locked XF86MonBrightnessDown exec ${lightBin} -U 3 && \
-        ${notifySendBin} 'Brightness' $(light) --expire-time 200
+      bindsym --locked XF86MonBrightnessUp   exec ${lightBin} -A 3
+      bindsym --locked XF86MonBrightnessDown exec ${lightBin} -U 3
     '';
 
     home.file."${swayDir}/config.d/70-volume".text = ''
       bindsym --locked XF86AudioMute exec --no-startup-id sh -c \
-        "for s in \$(${pactlBin} list sinks short | cut -f1); do ${pactlBin} set-sink-mute \$s toggle; done" && ${pkillBin} -USR1 py3status
+        "for s in \$(${pactlBin} list sinks short | cut -f1); do ${pactlBin} set-sink-mute \$s toggle; done"
       bindsym --locked XF86AudioLowerVolume exec --no-startup-id \
-        ${pactlBin} set-sink-volume $(${pactlBin} list sinks short | head -n 1 | cut -f1) -0.99% && \
-       ${pkillBin} -USR1 py3status
+        ${pactlBin} set-sink-volume $(${pactlBin} list sinks short | head -n 1 | cut -f1) -0.99%
       bindsym --locked XF86AudioRaiseVolume exec --no-startup-id \
-        ${pactlBin} set-sink-volume $(${pactlBin} list sinks short | head -n 1 | cut -f1) +0.99% && \
-       ${pkillBin} -USR1 py3status
+        ${pactlBin} set-sink-volume $(${pactlBin} list sinks short | head -n 1 | cut -f1) +0.99%
       bindsym --locked XF86AudioMicMute exec --no-startup-id sh -c \
-        "for s in \$(${pactlBin} list sources short | cut -f1); do ${pactlBin} set-source-mute \$s toggle; done" &&${pkillBin} -USR1 py3status
+        "for s in \$(${pactlBin} list sources short | cut -f1); do ${pactlBin} set-source-mute \$s toggle; done"
     '';
 
     home.file."${swayDir}/config.d/70-playerctl".text = ''
@@ -449,31 +443,6 @@ in {
       bindsym $mod+Shift+Cyrillic_ze exec $passmenuOTP
     '';
 
-    home.file."${swayDir}/config.d/99-bar".text = ''
-      bar {
-        status_command ${py3statusBin} -b -s -i "${config.xdg.configHome}/i3status/py3status"
-        position top
-        font pango:Noto Sans 11
-        separator_symbol "| "
-        wrap_scroll no
-        workspace_buttons yes
-        strip_workspace_numbers yes
-
-        colors {
-          background $base00
-          separator  $base01
-          statusline $base04
-
-          # State             Border  BG      Text
-          focused_workspace   $base05 $base0D $base00
-          active_workspace    $base05 $base03 $base00
-          inactive_workspace  $base03 $base01 $base05
-          urgent_workspace    $base08 $base08 $base00
-          binding_mode        $base00 $base0A $base00
-        }
-      }
-    '';
-
     home.file."${swayDir}/config.d/99-exit-menu".text = ''
       set $mode_system System: (l) lock, (c) reload config, (e) exit, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
       mode "$mode_system" {
@@ -498,188 +467,142 @@ in {
     '';
 
     #
-    # i3status
+    # waybar
     #
-    home.file."${i3statusDir}/config".text = ''
-      py3status {
-        storage = '${config.xdg.cacheHome}/py3status_cache.data'
-      }
+    home.file."${config.xdg.configHome}/waybar/config".text = builtins.toJSON ({
+      modules-left = [ "sway/workspaces" "sway/mode" ];
+      "sway/workspaces" = {
+        disable-scroll = true;
+        format = "{name}: {icon}";
+        format-icons = {
+          # "1" = "";
+          # "2" = "";
+          # "3" = "";
+          # "4" = "";
+          # "5" = "";
+          "urgent" = "";
+          "focused" = "";
+          "default" = "";
+        };
+      };
+      "sway/mode" = { format = ''<span style="italic">{}</span>''; };
 
-      general {
-        interval = 5
-        colors = true
-        color_good = "#98c379"
-        color_bad = "#e06c75"
-        color_degraded = "#e5c07b"
-      }
+      modules-center = [ "sway/window" ];
+      "sway/window" = { max-length = 100; };
 
-      order += 'frame music'
-      frame music {
-        format = '{output}{button}'
-        format_separator = ' '
-        format_button_closed = '♪'
-        open = False
-        mpris {
-          format = '{state} [{artist} - ][{title}] {previous}{toggle}{next}'
-          format_none = '''
-        }
-      }
+      modules-right = [
+        "tray"
+        "idle_inhibitor"
+        "cpu"
+        "temperature"
+        "memory"
+        "network"
+        "pulseaudio"
+        "clock"
+      ];
+      idle_inhibitor = {
+        format = "{icon}";
+        format-icons = {
+          activated = "";
+          deactivated = "";
+        };
+      };
+      cpu = {
+        states = { critical = 75; };
+        format = "{usage}% ";
+        tooltip = false;
+      };
+      memory = {
+        format = "{}% ";
+        states = { critical = 90; };
+      };
 
-      order += 'frame bitcoin'
-      frame bitcoin {
-        format = '{output}{button}'
-        format_separator = ' '
-        format_button_closed = ''
-        open = False
-        coin_market {
-          format_coin = ' ''${price_usd:.0f} {percent_change_24h}%'
-        }
-      }
+      temperature = {
+        format = "{temperatureC}°C ";
+        critical-threshold = 80;
+      } // (if (nixosConfig.local.hardware.machine == "alienware-15r2") then {
+        thermal-zone = 1;
+      } else
+        { });
 
-      order += 'group system'
-      group system {
-        button_next = 1
-        button_toggle = 0
-        click_mode = 'button'
-        format_button_open = '↻'
-        format = '{output}{button}'
+      battery = {
+        states = {
+          "awesome" = 90;
+          "good" = 80;
+          "warning" = 30;
+          "critical" = 15;
+        };
+        format = "{capacity}% {icon}";
+        format-icons = [ "" "" "" "" "" ];
+        format-charging = "{capacity}% ";
+        format-plugged = "{capacity}% ";
+        format-alt = "{time} {icon}";
+        format-awesome = "";
+      };
+      network = {
+        format-wifi = "{essid} ({signalStrength}%) ";
+        tooltip-format-wifi = "{essid} ({signalStrength}%) ";
+        format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
+        format-linked = "{ifname} (No IP) ";
+        format-disconnected = "Disconnected ⚠";
+        format-alt = " {bandwidthUpBits}↑ {bandwidthDownBits}↓";
+        tooltip-format = "{ifname}: {ipaddr}/{cidr}";
+      };
+      pulseaudio = {
+        format = "{volume}% {icon} {format_source}";
+        format-bluetooth = "{volume}% {icon} {format_source}";
+        format-bluetooth-muted = " {icon} {format_source}";
+        format-muted = " {format_source}";
+        format-source = "{volume}% ";
+        format-source-muted = "";
+        format-icons = {
+          headphones = "";
+          handsfree = "";
+          headset = "";
+          default = [ "" "" "" ];
+        };
+        on-click = "pavucontrol";
+        scroll-step = 1.0e-2;
+      };
+      backlight = {
+        format = "{percent}% {icon}";
+        format-icons = [ "" "" ];
+      };
+      clock = {
+        format-alt = " {:%a, %d. %b  %H:%M}";
+        tooltip = false;
+      };
+    } // (if (nixosConfig.local.hardware.machine == "alienware-15r2") then {
+      modules-right = [
+        "tray"
+        "idle_inhibitor"
+        "cpu"
+        "temperature"
+        "memory"
+        "battery"
+        "network"
+        "pulseaudio"
+        "backlight"
+        "clock"
+      ];
+    } else if (nixosConfig.local.hardware.machine == "thinkpad-T430s") then {
+      modules-right = [
+        "tray"
+        "idle_inhibitor"
+        "cpu"
+        "temperature"
+        "memory"
+        "battery"
+        "network"
+        "pulseaudio"
+        "backlight"
+        "clock"
+      ];
+    } else
+      { }));
 
-        frame cpu {
-          format = '{output}'
-          sysdata cpu_temp {
-            format = ' {cpu_temp:.0f}{temp_unit}'
-            thresholds = [(50, 'good'), (70, 'degraded'), (90, 'bad')]
-          }
-
-          sysdata {
-            format = '[\?min_length=4 {cpu_usage:.0f}%][\?min_length=4 {mem_used_percent:.0f}%]'
-          }
-        }
-
-        frame net {
-          format = '{output}'
-          ${
-        (if nixosConfig.networking.hostName == "alien" then ''
-          wifi {
-            format = ' {icon} {ssid}| down'
-            bitrate_bad = 0
-            bitrate_degraded = 0
-          }
-        '' else
-          "")
-          }
-
-          net_rate {
-            format = '{down}↓ {up}↑'
-            format_value = '[\?min_length=6 {value:.1f}{unit:.1s}]'
-            thresholds = [(1048576, 'bad'), (1024, 'degraded'), (0, 'good')]
-          }
-
-          whatismyip {
-            colors = false
-            format = '{ip} {country_iso}'
-            expected = { 'country_eu': true }
-            button_refresh = 1
-            button_toggle = 99
-          }
-        }
-
-        frame disks {
-          format = '{output}'
-          ${
-        (if nixosConfig.networking.hostName == "alien" then ''
-          diskdata root {
-            disk = '/dev/dm-4'
-            format = ' {free}'
-            format_space = '[\?min_length=5 {value:.1f}G]'
-            separator = False
-            thresholds = {'free': [(1, 'bad'), (5, 'degraded'), (10, 'good')]}
-          }
-
-          diskdata home {
-            disk = '/dev/mapper/sata--vg-home'
-            format = '{free}'
-            format_space = '[\?min_length=5 {value:.1f}G]'
-            thresholds = {'free': [(1, 'bad'), (10, 'degraded'), (20, 'good')]}
-          }
-        '' else
-          "")
-          }
-
-          ${
-        (if nixosConfig.networking.hostName == "knopa" then ''
-          diskdata root {
-            disk = '/dev/mapper/fedora-root'
-            format = ' {free}'
-            format_space = '[\?min_length=5 {value:.1f}G]'
-            separator = False
-            thresholds = {'free': [(1, 'bad'), (5, 'degraded'), (10, 'good')]}
-          }
-
-          diskdata home {
-            disk = '/dev/mapper/fedora-home'
-            format = '{free}'
-            format_space = '[\?min_length=5 {value:.1f}G]'
-            thresholds = {'free': [(1, 'bad'), (10, 'degraded'), (20, 'good')]}
-          }
-        '' else
-          "")
-          }
-
-          diskdata io {
-            format = '{total}'
-            format_rate = '[\?min_length=8 {value:.1f}{unit:.1s}↕]'
-          }
-        }
-      }
-
-      order += 'volume_status out'
-      volume_status out {
-        command = 'pactl'
-        channel = 'Master'
-        format = ': {percentage}'
-        format_muted = ': ✘ '
-        volume_delta = 1
-        separator = False
-        cache_timeout = 1
-        interval = 1
-      }
-
-      order += 'volume_status mic'
-      volume_status mic {
-        command = 'pactl'
-        channel = 'Capture'
-        format = '😮: {percentage}'
-        format_muted = '😶: ✘ '
-        volume_delta = 1
-        is_input = True
-        cache_timeout = 1
-        interval = 1
-      }
-
-      ${(if nixosConfig.local.hardware.machine == "alienware-15r2"
-      || nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
-        order += 'battery_level'
-        battery_level {
-          blocks = ""
-          charging_character = ""
-          format = "{icon}"
-          format_notify_charging = 'Charging ({percent}%)'
-          format_notify_discharging = 'Time ramaining: {time_remaining}'
-          hide_seconds = True
-          hide_when_full = True
-          measurement_mode = 'sys'
-          notify_low_level = True
-          notification = True
-        }
-      '' else
-        "")}
-
-      order += 'clock'
-      clock {
-        format_time = " %d/%m {icon} %H:%M:%S"
-      }
-    '';
+    home.file."${config.xdg.configHome}/waybar/style.css".text =
+      builtins.readFile ./waybar.css;
 
     #
     # mako
@@ -734,8 +657,7 @@ in {
         };
         Service = {
           Type = "simple";
-          ExecStart =
-            "${pkgs.mako}/bin/mako";
+          ExecStart = "${pkgs.mako}/bin/mako";
         };
         Install = { WantedBy = [ "sway-session.target" ]; };
       };
@@ -755,6 +677,20 @@ in {
                     resume '${swaymsgBin} "output * dpms on"' \
               before-sleep '${swaylockCmd} -f'
           '';
+        };
+        Install = { WantedBy = [ "sway-session.target" ]; };
+      };
+      waybar = {
+        Unit = {
+          Description =
+            "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
+          Documentation = "man:waybar(1)";
+          PartOf = "graphical-session.target";
+        };
+        Service = {
+          Type = "dbus";
+          BusName = "fr.arouillard.waybar";
+          ExecStart = "${pkgs.waybar}/bin/waybar";
         };
         Install = { WantedBy = [ "sway-session.target" ]; };
       };
