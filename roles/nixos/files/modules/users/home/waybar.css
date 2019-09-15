@@ -92,7 +92,7 @@ window#waybar.empty {
 #backlight,
 #network,
 #pulseaudio,
-#custom-media,
+#custom-ipcountry,
 #tray,
 #mode,
 #idle_inhibitor {
@@ -143,14 +143,16 @@ label:focus {
 }
 
 #cpu.critical,
-#temperature.critical {
+#temperature.critical,
+#custom-ipcountry.RU {
   background-color: @base08;
   color: @base07;
 }
 
 #cpu.critical,
 #temperature.critical,
-#memory.critical {
+#memory.critical,
+#custom-ipcountry.RU {
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -170,6 +172,11 @@ label:focus {
 
 #backlight {
   background-color: @base0C;
+  color: @base00;
+}
+
+#custom-ipcountry {
+  background-color: @base0D;
   color: @base00;
 }
 

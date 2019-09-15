@@ -469,6 +469,12 @@ in {
     #
     # waybar
     #
+    home.file."${config.xdg.configHome}/waybar/ipcountry.sh".text = ''
+      #!/usr/bin/env bash
+      CODE=$(curl -s http://ifconfig.co/country-iso)
+      echo "{ \"class\": \"$CODE\", \"text\": \"$CODE\" }"
+    '';
+
     home.file."${config.xdg.configHome}/waybar/config".text = builtins.toJSON ({
       modules-left = [ "sway/workspaces" "sway/mode" ];
       "sway/workspaces" = {
@@ -496,6 +502,7 @@ in {
         "cpu"
         "temperature"
         "memory"
+        "custom/ipcountry"
         "network"
         "pulseaudio"
         "clock"
@@ -539,6 +546,12 @@ in {
         format-alt = "{time} {icon}";
         format-awesome = "";
       };
+      "custom/ipcountry" = {
+        exec = "bash ${config.xdg.configHome}/waybar/ipcountry.sh";
+        return-type = "json";
+        interval = 60;
+        tooltip = false;
+      };
       network = {
         format-wifi = "{essid} ({signalStrength}%) ";
         tooltip-format-wifi = "{essid} ({signalStrength}%) ";
@@ -580,6 +593,7 @@ in {
         "temperature"
         "memory"
         "battery"
+        "custom/ipcountry"
         "network"
         "pulseaudio"
         "backlight"
@@ -593,6 +607,7 @@ in {
         "temperature"
         "memory"
         "battery"
+        "custom/ipcountry"
         "network"
         "pulseaudio"
         "backlight"
