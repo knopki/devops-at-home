@@ -87,6 +87,7 @@ in {
           fish.enable = true;
           gnome.enable = isWorkstation;
           jsdev.enable = isWorkstation;
+          neovim.enable = true;
           nixdev.enable = isWorkstation;
           qt.enable = isWorkstation;
           swaywm.enable = isWorkstation;

@@ -16,6 +16,7 @@
     ./htop.nix
     ./jsdev.nix
     ./kitty.nix
+    ./neovim.nix
     ./nixdev.nix
     ./qt.nix
     ./readline.nix
