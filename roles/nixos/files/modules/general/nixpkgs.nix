@@ -37,6 +37,7 @@ in {
           fish-theme-pure = pkgs.callPackage ../../pkgs/fish-theme-pure.nix { };
           kube-score = pkgs.callPackage ../../pkgs/kube-score { };
           nixfmt = import (fetchFromGitHub versions.nixfmt) { };
+          pulumi = pkgs.callPackage ../../pkgs/pulumi.nix { };
           telepresence = pkgs.callPackage ../../pkgs/telepresence.nix { };
           trapd00r-ls-colors =
             pkgs.callPackage ../../pkgs/trapd00r-ls-colors.nix { };

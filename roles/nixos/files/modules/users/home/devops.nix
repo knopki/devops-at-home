@@ -37,6 +37,7 @@ with lib; {
       nmap-graphical
       openssh
       pstree
+      pulumi
       remmina
       ripgrep
       rsync
