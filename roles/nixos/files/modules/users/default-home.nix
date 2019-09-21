@@ -30,17 +30,11 @@ in {
       readline.enable = true;
       ssh.enable = true;
       wget.enable = true;
-      xdgUserDirs = {
-        enable = isWorkstation;
-        desktop = "desktop";
-        documents = "docs";
-        download = "downloads";
-        music = "music";
-        pictures = "pics";
-        publicshare = "public";
-        templates = "templates";
-        videos = "videos";
-      };
+    };
+    xdg = {
+      enable = true;
+      configFile."user-dirs.locale".text = "en_US";
+      userDirs.enable = mkDefault isWorkstation;
     };
   };
 }

@@ -107,6 +107,16 @@ in {
           XKB_DEFAULT_LAYOUT = "us,ru";
           XKB_DEFAULT_OPTIONS = "grp:win_space_toggle";
         };
+        xdg.userDirs = {
+          desktop = "${selfHM.home.homeDirectory}/desktop";
+          documents = "${selfHM.home.homeDirectory}/docs";
+          download = "${selfHM.home.homeDirectory}/downloads";
+          music = "${selfHM.home.homeDirectory}/music";
+          pictures = "${selfHM.home.homeDirectory}/pics";
+          publishShare = "${selfHM.home.homeDirectory}/public";
+          templates = "${selfHM.home.homeDirectory}/templates";
+          videos = "${selfHM.home.homeDirectory}/videos";
+        };
       };
       isAdmin = true;
       isNormalUser = true;
