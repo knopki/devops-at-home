@@ -18,7 +18,7 @@ with lib; {
           local version="$(< $(< ''${path}/.git/HEAD))"
         fi
 
-        local cache=".direnv/cache-${"version:-unknown"}"
+        local cache=".direnv/cache-''${"version:-unknown"}"
 
         local update_drv=0
         if [[ ! -e "$cache" ]] || \

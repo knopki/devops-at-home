@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 with builtins; {
-  imports = [ ./modules ];
+  imports = [ ../modules ];
 
   boot = {
     initrd = {

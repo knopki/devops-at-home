@@ -3,27 +3,53 @@
 Configuration management of the my personal machines, my dotfiles, my other somethings. Because why not.
 
 Target platforms: NixOS, Fedora CoreOS (legacy), Fedora Project Silverblue (legacy).
-Set-up method: incredibly over-engineered Ansible orchestration.
 
-Some legacy configuration is stored in Ansbile, but The Plan is:
-- nix expressions are stored in `nixos` ansible role
-- `ansible` just copy secrets and expressions to the target machine
-- `ansible` execute `nixos-rebuild switch`
-
-Not great, not terrible. And already works for my workstations.
-
-
-## Prerequirements
+## Requirements
 
 - `git`
-- `ansible` ^2.6
-- `pass`/`gopass`
+- `direnv`
+- `nix` (good luck if not on NixOS)
+- `pass`
 
-## Installation
+All other dependencies will be installed by `nix-shell`.
 
-```bash
-$ git clone git@github.com:/knopki/password-store ~/.password-store
-$ git clone git@github.com:/knopki/devops-at-home ~/dev/knopki/devops-at-home
-$ cd ~/dev/knopki/devops-at-home/ansible
-$ ansible-playbook playbooks/main.yml [ -l some_hosts ] [ -t some_tags ]
+## How to use
+
+Deployment is biased now: `Ansible` for legacy systems and `Morph` for NixOS.
+
+### Ansible
+
+You can deploy to the non-NixOS machines with something like:
+
+```shell
+cd ansible
+ansible-playbook
+```
+
+That's also deploys secrets to the NixOS machines.
+
+### NixOS
+
+You can build like:
+
+```shell
+morph build nix/deploy.nix --on="*alien*"
+```
+
+You can build, deploy and activate like:
+
+```shell
+morph deploy nix/deploy.nix --on="*panzer*" switch
+```
+
+#### Manual apply
+
+If something goes wrong or for development.
+
+Copy configuration from the `nix` folder to the target machine.
+
+Apply target configuration:
+
+```shell
+sudo nixos-rebuild switch -I "nixos-config=$PWD/nix/config/alien.1984.run.nix"
 ```

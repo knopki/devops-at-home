@@ -29,7 +29,7 @@ in {
         "wireshark"
       ];
       group = "${username}";
-      hashedPassword = readFile "/etc/nixos/secrets/sk_password";
+      passwordFile = "/etc/nixos/secrets/sk_password";
       home = "/home/${username}";
       home-config = {
         home.file = {
@@ -120,8 +120,7 @@ in {
       };
       isAdmin = true;
       isNormalUser = true;
-      openssh.authorizedKeys.keyFiles =
-        mkDefault [ "/etc/nixos/secrets/sk_id_rsa.pub" ];
+      openssh.authorizedKeys.keyFiles = mkDefault [ ./sk_id_rsa.pub ];
 
       setupUser = true;
       shell = pkgs.fish;

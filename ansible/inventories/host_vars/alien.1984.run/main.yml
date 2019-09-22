@@ -10,7 +10,5 @@ nixos_secrets:
     content: "{{ lookup('passwordstore','devices/alien.1984.run/root')|password_hash('sha512', 65534|random(seed=inventory_hostname)|string) }}"
   - name: sk_password
     content: "{{ lookup('passwordstore','devices/alien.1984.run/sk')|password_hash('sha512', 65534|random(seed=inventory_hostname)|string) }}"
-  - name: sk_id_rsa.pub
-    content: "{{ lookup('passwordstore','keys/ssh_knopki subkey=public') }}"
   - name: azire_wg_priv
     content: "{{ lookup('passwordstore','devices/alien.1984.run/azire_wg_priv') }}"

@@ -1,3 +1,3 @@
 ---
-- include: channels.yml
+# - include: channels.yml
 - include: config.yml

@@ -23,6 +23,12 @@
     "rev": "6fe816f95860e33523b79c2c768d229b546379b3",
     "sha256": "0s1b3nwlxlw7wakm7z4d6bh9dxwjyh1mf776v916w1gjiiccld7l"
   },
+  "morph": {
+    "owner": "DBCDK",
+    "repo": "morph",
+    "rev": "v1.3.1",
+    "sha256": "0nwl9n5b0lnil96573wa3hyr3vyvfiwvmpkla3pmwkpmriac4xrg"
+  },
   "nixfmt": {
     "owner": "serokell",
     "repo": "nixfmt",

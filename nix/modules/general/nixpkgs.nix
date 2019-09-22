@@ -37,7 +37,6 @@ in {
           fish-theme-pure = pkgs.callPackage ../../pkgs/fish-theme-pure.nix { };
           kube-score = pkgs.callPackage ../../pkgs/kube-score { };
           neovim-gtk = pkgs.callPackage ../../pkgs/neovim-gtk.nix { };
-          nixfmt = import (fetchFromGitHub versions.nixfmt) { };
           pulumi = pkgs.callPackage ../../pkgs/pulumi.nix { };
           telepresence = pkgs.callPackage ../../pkgs/telepresence.nix { };
           trapd00r-ls-colors =
@@ -51,7 +50,8 @@ in {
     };
 
     nix.nixPath = [
-      "nixpkgs=${nixpkgsSrcStable}:nixos-config=/etc/nixos/configuration.nix"
+      "nixpkgs=${nixpkgsSrcStable}"
+      "nixos-config=/etc/nixos/configuration.nix"
     ];
   };
 }

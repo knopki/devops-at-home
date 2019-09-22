@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with builtins; {
   imports =
-    [ ./modules <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
+    [ ../modules <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
 
   boot = {
     extraModprobeConfig = ''
