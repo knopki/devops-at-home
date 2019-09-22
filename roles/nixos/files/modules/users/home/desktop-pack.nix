@@ -11,6 +11,8 @@ with lib; {
       gimp
       krita
       libreoffice
+      neovim-gtk
+      neovim-qt
       mpv
       pavucontrol
       picard

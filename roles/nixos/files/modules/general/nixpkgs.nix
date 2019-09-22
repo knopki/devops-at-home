@@ -36,6 +36,7 @@ in {
             pkgs.callPackage ../../pkgs/fish-kubectl-completions.nix { };
           fish-theme-pure = pkgs.callPackage ../../pkgs/fish-theme-pure.nix { };
           kube-score = pkgs.callPackage ../../pkgs/kube-score { };
+          neovim-gtk = pkgs.callPackage ../../pkgs/neovim-gtk.nix { };
           nixfmt = import (fetchFromGitHub versions.nixfmt) { };
           pulumi = pkgs.callPackage ../../pkgs/pulumi.nix { };
           telepresence = pkgs.callPackage ../../pkgs/telepresence.nix { };
