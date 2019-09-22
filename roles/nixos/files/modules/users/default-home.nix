@@ -11,6 +11,7 @@ in {
     local = {
       curl.enable = true;
       desktop-pack.enable = isWorkstation;
+      direnv.enable = true;
       editorconfig = true;
       env.default = true;
       fish = {

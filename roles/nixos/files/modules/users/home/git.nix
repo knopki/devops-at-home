@@ -63,7 +63,15 @@ with lib; {
           helper = "!${pkgs.gopass}/bin/gopass git-credential $@";
         };
       };
-      ignores = [ "._*" ".DS_Store" "*.pyc" "Desktop.ini" "Thumbs.db" ];
+      ignores = [
+        "._*"
+        ".direnv"
+        ".DS_Store"
+        ".vscode"
+        "*.pyc"
+        "Desktop.ini"
+        "Thumbs.db"
+      ];
       lfs = {
         enable = true;
         skipSmudge = true;

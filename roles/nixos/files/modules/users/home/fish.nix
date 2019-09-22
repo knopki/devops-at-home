@@ -92,6 +92,10 @@ in {
       };
 
       local.fzf.enable = true;
+      local.direnv.enable = true;
+      local.fish.interactiveShellInit."99-direnv" = ''
+        ${pkgs.direnv}/bin/direnv hook fish | source
+      '';
     }
 
     #

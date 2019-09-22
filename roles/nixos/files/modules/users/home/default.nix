@@ -6,6 +6,7 @@
     ./curl.nix
     ./desktop-pack.nix
     ./devops.nix
+    ./direnv.nix
     ./editorconfig.nix
     ./env.nix
     ./firefox.nix
