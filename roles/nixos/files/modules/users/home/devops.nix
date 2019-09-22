@@ -17,12 +17,12 @@ with lib; {
     };
 
     home.packages = with pkgs; [
-      ansible
       bat
       curl
       docker-machine-kvm2
       gnupg
       google-cloud-sdk
+      graphviz
       htop
       jq
       keepassxc
@@ -37,7 +37,6 @@ with lib; {
       nmap-graphical
       openssh
       pstree
-      pulumi
       remmina
       ripgrep
       rsync
