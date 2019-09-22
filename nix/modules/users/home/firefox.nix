@@ -41,7 +41,7 @@ with lib; {
 
       enableAdobeFlash = true;
 
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [ ];
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [];
     };
   };
 }

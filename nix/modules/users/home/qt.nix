@@ -4,7 +4,7 @@ with lib; {
 
   config = mkIf config.local.qt.enable {
     home.file = {
-      "${config.xdg.configHome}/qt5ct/qt5ct.conf".text = generators.toINI { } {
+      "${config.xdg.configHome}/qt5ct/qt5ct.conf".text = generators.toINI {} {
         "Appearance" = {
           custom_palette = false;
           icon_theme = "Adwaita";

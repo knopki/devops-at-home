@@ -23,12 +23,14 @@ with builtins; {
 
       kernelModules = [ "dm_thin_pool" ]; # hack to boot on thin pool
 
-      luks.devices = [{
-        name = "luks-ssd";
-        device = "/dev/sdb2";
-        preLVM = true;
-        allowDiscards = true;
-      }];
+      luks.devices = [
+        {
+          name = "luks-ssd";
+          device = "/dev/sdb2";
+          preLVM = true;
+          allowDiscards = true;
+        }
+      ];
 
       preLVMCommands = ''
         mkdir -p /etc/lvm
@@ -122,5 +124,5 @@ with builtins; {
     };
   };
 
-  swapDevices = [{ device = "/dev/mapper/panzer--vg-swap"; }];
+  swapDevices = [ { device = "/dev/mapper/panzer--vg-swap"; } ];
 }

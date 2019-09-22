@@ -7,7 +7,8 @@ let
   isWorkstation = config.local.roles.workstation.enable;
   pathNpmPart =
     if selfHM.local.jsdev.enable then ":${selfHM.xdg.dataHome}/npm/bin" else "";
-in {
+in
+{
   config = mkIf (elem "sk" config.local.users.setupUsers) {
     users.groups = {
       "${username}" = {

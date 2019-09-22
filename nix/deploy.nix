@@ -1,8 +1,9 @@
 let
-  fetchFromGitHub = (import <nixpkgs> { }).fetchFromGitHub;
+  fetchFromGitHub = (import <nixpkgs> {}).fetchFromGitHub;
   versions = builtins.fromJSON (builtins.readFile ./pkgs/versions.json);
-  pkgs = import (fetchFromGitHub versions.nixpkgs-stable) { };
-in {
+  pkgs = import (fetchFromGitHub versions.nixpkgs-stable) {};
+in
+{
   network = {
     inherit pkgs;
     description = "all my nixos hosts";

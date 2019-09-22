@@ -4,11 +4,12 @@ with lib;
 let
   cfg = config.local.users;
   user = name:
-    attrs@{ setupUser ? false, ... }:
+  attrs@{ setupUser ? false, ... }:
     attrs // {
       inherit setupUser;
     };
-in {
+in
+{
   imports = [ ./default-home.nix ./root.nix ./sk.nix ];
 
   options.local.home-manager.config = mkOption {
@@ -26,7 +27,7 @@ in {
       merge = const (map (x: x.value));
       check = x: isAttrs x || isFunction x;
     };
-    default = { };
+    default = {};
     example = ''
       {
         local.home-manager.config =
@@ -44,63 +45,72 @@ in {
       internal = true;
       visible = false;
       type = with types; listOf str;
-      default = [ ];
+      default = [];
     };
 
     setupUsers = mkOption {
       description = "Users to setup";
       type = with types; listOf str;
-      default = [ ];
+      default = [];
     };
 
     users = mkOption {
       description = "Users with sane defaults";
       type = with types; loaOf attrs;
       apply = mapAttrs user;
-      default = { };
+      default = {};
     };
   };
 
   options.users.users = mkOption {
     type = with types;
-      loaOf (submodule ({ name, config, ... }: {
-        options = {
-          setupUser = mkEnableOption "Setup user";
-          extraGroups = mkOption {
-            apply = groups:
-              if (config.setupUser && config.uid != 0) then
-                cfg.defaultGroups ++ groups
-              else
-                groups;
-          };
-          isAdmin = mkEnableOption "sudo access";
-          home-config = mkOption {
-            description =
-              "Extra home manager configuration to be defined inline";
-            type = types.attrs;
-            default = { };
-          };
-        };
-        config = { extraGroups = if config.isAdmin then [ "wheel" ] else [ ]; };
-      }));
+      loaOf (
+        submodule (
+          { name, config, ... }: {
+            options = {
+              setupUser = mkEnableOption "Setup user";
+              extraGroups = mkOption {
+                apply = groups:
+                  if (config.setupUser && config.uid != 0) then
+                    cfg.defaultGroups ++ groups
+                  else
+                    groups;
+              };
+              isAdmin = mkEnableOption "sudo access";
+              home-config = mkOption {
+                description =
+                  "Extra home manager configuration to be defined inline";
+                type = types.attrs;
+                default = {};
+              };
+            };
+            config = { extraGroups = if config.isAdmin then [ "wheel" ] else []; };
+          }
+        )
+      );
   };
 
   config = let
     nixosConfig = config;
     makeHM = name: _user:
-      let user = config.users.users.${name};
-      in ({ config, options, pkgs, ... }:
-      recursiveUpdate {
-        _module.args = {
-          inherit nixosConfig user;
-          username = name;
-        };
+      let
+        user = config.users.users.${name};
+      in
+        (
+          { config, options, pkgs, ... }:
+            recursiveUpdate {
+              _module.args = {
+                inherit nixosConfig user;
+                username = name;
+              };
 
-        imports = nixosConfig.local.home-manager.config ++ [ ./home ];
-      } user.home-config);
+              imports = nixosConfig.local.home-manager.config ++ [ ./home ];
+            } user.home-config
+        );
     hmUsers = filterAttrs (name: { setupUser, ... }: setupUser)
       config.local.users.users;
-    in {
+  in
+    {
       home-manager.useUserPackages = mkDefault true;
       home-manager.users = mapAttrs makeHM hmUsers;
       local.users.defaultGroups =

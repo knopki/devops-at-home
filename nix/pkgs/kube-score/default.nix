@@ -7,8 +7,10 @@ buildGoPackage rec {
 
   goPackagePath = "github.com/zegl/kube-score";
 
-  buildFlagsArray = let t = "${goPackagePath}/pkg/commands";
-    in ''
+  buildFlagsArray = let
+    t = "${goPackagePath}/pkg/commands";
+  in
+    ''
       -ldflags=
         -s -X ${t}.kubeScoreVersion=${version}
            -X ${t}.gitCommit=${rev}
@@ -31,7 +33,7 @@ buildGoPackage rec {
     '';
     homepage = "https://github.com/zegl/kube-score";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 
   goDeps = ./deps.nix;

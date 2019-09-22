@@ -9,7 +9,7 @@ with lib; {
       ".tmux-powerlinerc".text = ''
         # Default configuration file for tmux-powerline.
         # Modeline {
-        #	 vi: foldmarker={,} foldmethod=marker foldlevel=0 tabstop=4 filetype=sh
+        #   vi: foldmarker={,} foldmethod=marker foldlevel=0 tabstop=4 filetype=sh
         # }
 
         # General {
@@ -228,7 +228,7 @@ with lib; {
             set-option -g status-right "#(${pkgs.tmuxPlugins.tmux-powerline}/share/tmux-plugins/tmux-powerline/powerline.sh right)"
                       set-window-option -g window-status-current-format "#I:#W "
                       set-window-option -g window-status-format "#I:#W "
-                    '';
+          '';
         }
       ];
       terminal = "screen-256color";

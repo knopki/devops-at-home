@@ -9,7 +9,7 @@ with builtins; {
       options i8k force=1
       options i915 enable_fbc=1 enable_guc=3 enable_psr=1
     '';
-    extraModulePackages = [ ];
+    extraModulePackages = [];
     initrd = {
       availableKernelModules =
         [ "ahci" "nvme" "rtsx_pci_sdmmc" "sd_mod" "usb_storage" "xhci_pci" ];
@@ -118,5 +118,5 @@ with builtins; {
     };
   };
 
-  swapDevices = [{ device = "/dev/mapper/nvme--vg-swap"; }];
+  swapDevices = [ { device = "/dev/mapper/nvme--vg-swap"; } ];
 }

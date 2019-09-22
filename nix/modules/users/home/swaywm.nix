@@ -28,7 +28,8 @@ let
   swaylockCmd = "${swaylockBin} -i ${defaultWallpaper} --scaling=fill";
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
-in {
+in
+{
   options.local.swaywm.enable = mkEnableOption "setup sway, bar, etc";
 
   config = mkIf config.local.swaywm.enable {
@@ -99,23 +100,31 @@ in {
 
     home.file."${swayDir}/config.d/10-outputs".text = ''
       # You can get the names of your outputs by running: swaymsg -t get_outputs
-      ${(if nixosConfig.local.hardware.machine == "kvm" then ''
+      ${(
+      if nixosConfig.local.hardware.machine == "kvm" then ''
         output Virtual-1    resolution 1920x1080 position 0,0
       '' else
-        "")}
-      ${(if nixosConfig.local.hardware.machine == "alienware-15r2" then ''
+        ""
+    )}
+      ${(
+      if nixosConfig.local.hardware.machine == "alienware-15r2" then ''
         output eDP-1    resolution 1920x1080 position 0,0
       '' else
-        "")}
-      ${(if nixosConfig.networking.hostName == "knopa" then ''
+        ""
+    )}
+      ${(
+      if nixosConfig.networking.hostName == "knopa" then ''
         output DP-1    resolution 1920x1080 position 0,0
         output HDMI-A-1 resolution 1920x1080 position 1920,0
       '' else
-        "")}
-      ${(if nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
+        ""
+    )}
+      ${(
+      if nixosConfig.local.hardware.machine == "thinkpad-T430s" then ''
         output eDP-1   resolution 1600x900 position 0,0
       '' else
-        "")}
+        ""
+    )}
 
       # Default wallpaper
       output * bg $wallpaper fill
@@ -315,7 +324,8 @@ in {
       set $ws9 9
       set $ws10 10
 
-      ${(if nixosConfig.networking.hostName == "knopa" then ''
+      ${(
+      if nixosConfig.networking.hostName == "knopa" then ''
         # assign workspaces to outputs
         set $leftDisplay DP-1
         set $rightDisplay HDMI-A-1
@@ -330,7 +340,8 @@ in {
         workspace $ws9 output $rightDisplay
         workspace $ws10 output $rightDisplay
       '' else
-        "")}
+        ""
+    )}
 
       # switch to workspace
       bindsym $mod+1 workspace $ws1
@@ -475,146 +486,152 @@ in {
       echo "{ \"class\": \"$CODE\", \"text\": \"$CODE\" }"
     '';
 
-    home.file."${config.xdg.configHome}/waybar/config".text = builtins.toJSON ({
-      modules-left = [ "sway/workspaces" "sway/mode" ];
-      "sway/workspaces" = {
-        disable-scroll = true;
-        format = "{name}: {icon}";
-        format-icons = {
-          # "1" = "";
-          # "2" = "";
-          # "3" = "";
-          # "4" = "";
-          # "5" = "";
-          "urgent" = "";
-          "focused" = "";
-          "default" = "";
+    home.file."${config.xdg.configHome}/waybar/config".text = builtins.toJSON (
+      {
+        modules-left = [ "sway/workspaces" "sway/mode" ];
+        "sway/workspaces" = {
+          disable-scroll = true;
+          format = "{name}: {icon}";
+          format-icons = {
+            # "1" = "";
+            # "2" = "";
+            # "3" = "";
+            # "4" = "";
+            # "5" = "";
+            "urgent" = "";
+            "focused" = "";
+            "default" = "";
+          };
         };
-      };
-      "sway/mode" = { format = ''<span style="italic">{}</span>''; };
+        "sway/mode" = { format = ''<span style="italic">{}</span>''; };
 
-      modules-center = [ "sway/window" ];
-      "sway/window" = { max-length = 100; };
+        modules-center = [ "sway/window" ];
+        "sway/window" = { max-length = 100; };
 
-      modules-right = [
-        "tray"
-        "idle_inhibitor"
-        "cpu"
-        "temperature"
-        "memory"
-        "custom/ipcountry"
-        "network"
-        "pulseaudio"
-        "clock"
-      ];
-      idle_inhibitor = {
-        format = "{icon}";
-        format-icons = {
-          activated = "";
-          deactivated = "";
+        modules-right = [
+          "tray"
+          "idle_inhibitor"
+          "cpu"
+          "temperature"
+          "memory"
+          "custom/ipcountry"
+          "network"
+          "pulseaudio"
+          "clock"
+        ];
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
         };
-      };
-      cpu = {
-        states = { critical = 75; };
-        format = "{usage}% ";
-        tooltip = false;
-      };
-      memory = {
-        format = "{}% ";
-        states = { critical = 90; };
-      };
-
-      temperature = {
-        format = "{temperatureC}°C ";
-        critical-threshold = 80;
-      } // (if (nixosConfig.local.hardware.machine == "alienware-15r2") then {
-        thermal-zone = 1;
-      } else
-        { });
-
-      battery = {
-        states = {
-          "awesome" = 90;
-          "good" = 80;
-          "warning" = 30;
-          "critical" = 15;
+        cpu = {
+          states = { critical = 75; };
+          format = "{usage}% ";
+          tooltip = false;
         };
-        format = "{capacity}% {icon}";
-        format-icons = [ "" "" "" "" "" ];
-        format-charging = "{capacity}% ";
-        format-plugged = "{capacity}% ";
-        format-alt = "{time} {icon}";
-        format-awesome = "";
-      };
-      "custom/ipcountry" = {
-        exec = "bash ${config.xdg.configHome}/waybar/ipcountry.sh";
-        return-type = "json";
-        interval = 60;
-        tooltip = false;
-      };
-      network = {
-        format-wifi = "{essid} ({signalStrength}%) ";
-        tooltip-format-wifi = "{essid} ({signalStrength}%) ";
-        format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
-        format-linked = "{ifname} (No IP) ";
-        format-disconnected = "Disconnected ⚠";
-        format-alt = " {bandwidthUpBits}↑ {bandwidthDownBits}↓";
-        tooltip-format = "{ifname}: {ipaddr}/{cidr}";
-      };
-      pulseaudio = {
-        format = "{volume}% {icon} {format_source}";
-        format-bluetooth = "{volume}% {icon} {format_source}";
-        format-bluetooth-muted = " {icon} {format_source}";
-        format-muted = " {format_source}";
-        format-source = "{volume}% ";
-        format-source-muted = "";
-        format-icons = {
-          headphones = "";
-          handsfree = "";
-          headset = "";
-          default = [ "" "" "" ];
+        memory = {
+          format = "{}% ";
+          states = { critical = 90; };
         };
-        on-click = "pavucontrol";
-        scroll-step = 1.0e-2;
-      };
-      backlight = {
-        format = "{percent}% {icon}";
-        format-icons = [ "" "" ];
-      };
-      clock = {
-        format-alt = " {:%a, %d. %b  %H:%M}";
-        tooltip = false;
-      };
-    } // (if (nixosConfig.local.hardware.machine == "alienware-15r2") then {
-      modules-right = [
-        "tray"
-        "idle_inhibitor"
-        "cpu"
-        "temperature"
-        "memory"
-        "battery"
-        "custom/ipcountry"
-        "network"
-        "pulseaudio"
-        "backlight"
-        "clock"
-      ];
-    } else if (nixosConfig.local.hardware.machine == "thinkpad-T430s") then {
-      modules-right = [
-        "tray"
-        "idle_inhibitor"
-        "cpu"
-        "temperature"
-        "memory"
-        "battery"
-        "custom/ipcountry"
-        "network"
-        "pulseaudio"
-        "backlight"
-        "clock"
-      ];
-    } else
-      { }));
+
+        temperature = {
+          format = "{temperatureC}°C ";
+          critical-threshold = 80;
+        } // (
+          if (nixosConfig.local.hardware.machine == "alienware-15r2") then {
+            thermal-zone = 1;
+          } else
+            {}
+        );
+
+        battery = {
+          states = {
+            "awesome" = 90;
+            "good" = 80;
+            "warning" = 30;
+            "critical" = 15;
+          };
+          format = "{capacity}% {icon}";
+          format-icons = [ "" "" "" "" "" ];
+          format-charging = "{capacity}% ";
+          format-plugged = "{capacity}% ";
+          format-alt = "{time} {icon}";
+          format-awesome = "";
+        };
+        "custom/ipcountry" = {
+          exec = "bash ${config.xdg.configHome}/waybar/ipcountry.sh";
+          return-type = "json";
+          interval = 60;
+          tooltip = false;
+        };
+        network = {
+          format-wifi = "{essid} ({signalStrength}%) ";
+          tooltip-format-wifi = "{essid} ({signalStrength}%) ";
+          format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
+          format-linked = "{ifname} (No IP) ";
+          format-disconnected = "Disconnected ⚠";
+          format-alt = " {bandwidthUpBits}↑ {bandwidthDownBits}↓";
+          tooltip-format = "{ifname}: {ipaddr}/{cidr}";
+        };
+        pulseaudio = {
+          format = "{volume}% {icon} {format_source}";
+          format-bluetooth = "{volume}% {icon} {format_source}";
+          format-bluetooth-muted = " {icon} {format_source}";
+          format-muted = " {format_source}";
+          format-source = "{volume}% ";
+          format-source-muted = "";
+          format-icons = {
+            headphones = "";
+            handsfree = "";
+            headset = "";
+            default = [ "" "" "" ];
+          };
+          on-click = "pavucontrol";
+          scroll-step = 0.001;
+        };
+        backlight = {
+          format = "{percent}% {icon}";
+          format-icons = [ "" "" ];
+        };
+        clock = {
+          format-alt = " {:%a, %d. %b  %H:%M}";
+          tooltip = false;
+        };
+      } // (
+        if (nixosConfig.local.hardware.machine == "alienware-15r2") then {
+          modules-right = [
+            "tray"
+            "idle_inhibitor"
+            "cpu"
+            "temperature"
+            "memory"
+            "battery"
+            "custom/ipcountry"
+            "network"
+            "pulseaudio"
+            "backlight"
+            "clock"
+          ];
+        } else if (nixosConfig.local.hardware.machine == "thinkpad-T430s") then {
+          modules-right = [
+            "tray"
+            "idle_inhibitor"
+            "cpu"
+            "temperature"
+            "memory"
+            "battery"
+            "custom/ipcountry"
+            "network"
+            "pulseaudio"
+            "backlight"
+            "clock"
+          ];
+        } else
+          {}
+      )
+    );
 
     home.file."${config.xdg.configHome}/waybar/style.css".text =
       builtins.readFile ./waybar.css;

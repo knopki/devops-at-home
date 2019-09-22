@@ -17,7 +17,8 @@ let
   color0D = "#61afef";
   color0E = "#c678dd";
   color0F = "#be5046";
-in {
+in
+{
   options.local.fzf = { enable = mkEnableOption "enable fzf for user"; };
 
   config = mkIf config.local.fzf.enable {

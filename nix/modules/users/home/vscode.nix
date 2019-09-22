@@ -21,7 +21,7 @@ with lib; {
               path = "services.xod.io";
             }
           ];
-          settings = { };
+          settings = {};
           extensions = {
             recommendations = [
               "bibhasdn.unique-lines"

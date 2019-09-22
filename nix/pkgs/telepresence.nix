@@ -1,20 +1,36 @@
-{ lib, python3Packages, fetchgit, fetchFromGitHub, makeWrapper, git, sshfs-fuse, torsocks, sshuttle, conntrack-tools, openssh, coreutils, iptables, bash
+{ lib
+, python3Packages
+, fetchgit
+, fetchFromGitHub
+, makeWrapper
+, git
+, sshfs-fuse
+, torsocks
+, sshuttle
+, conntrack-tools
+, openssh
+, coreutils
+, iptables
+, bash
 }:
 
 let
-  sshuttle-telepresence = lib.overrideDerivation sshuttle (p: {
-    src = fetchgit {
-      url = "https://github.com/datawire/sshuttle.git";
-      rev = "32226ff14d98d58ccad2a699e10cdfa5d86d6269";
-      sha256 = "1q20lnljndwcpgqv2qrf1k0lbvxppxf98a4g5r9zd566znhcdhx3";
-    };
+  sshuttle-telepresence = lib.overrideDerivation sshuttle (
+    p: {
+      src = fetchgit {
+        url = "https://github.com/datawire/sshuttle.git";
+        rev = "32226ff14d98d58ccad2a699e10cdfa5d86d6269";
+        sha256 = "1q20lnljndwcpgqv2qrf1k0lbvxppxf98a4g5r9zd566znhcdhx3";
+      };
 
-    nativeBuildInputs = p.nativeBuildInputs ++ [ git ];
+      nativeBuildInputs = p.nativeBuildInputs ++ [ git ];
 
-    postPatch = "rm sshuttle/tests/client/test_methods_nat.py";
-    postInstall = "mv $out/bin/sshuttle $out/bin/sshuttle-telepresence";
-  });
-in python3Packages.buildPythonPackage rec {
+      postPatch = "rm sshuttle/tests/client/test_methods_nat.py";
+      postInstall = "mv $out/bin/sshuttle $out/bin/sshuttle-telepresence";
+    }
+  );
+in
+python3Packages.buildPythonPackage rec {
   pname = "telepresence";
   version = "0.101";
 
@@ -30,17 +46,17 @@ in python3Packages.buildPythonPackage rec {
   postInstall = ''
     wrapProgram $out/bin/telepresence \
       --prefix PATH : ${
-      lib.makeBinPath [
-        sshfs-fuse
-        torsocks
-        conntrack-tools
-        sshuttle-telepresence
-        openssh
-        coreutils
-        iptables
-        bash
-      ]
-      }
+  lib.makeBinPath [
+    sshfs-fuse
+    torsocks
+    conntrack-tools
+    sshuttle-telepresence
+    openssh
+    coreutils
+    iptables
+    bash
+  ]
+  }
   '';
 
   doCheck = false;

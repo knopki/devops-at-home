@@ -9,7 +9,7 @@ with lib; {
         default = "azire-vpn";
       };
       ips = mkOption {
-        default = [ ];
+        default = [];
         type = with types; listOf str;
       };
       privateKeyFile = mkOption {
@@ -47,12 +47,14 @@ with lib; {
           ip -6 rule del not fwmark 0xca6c table 51820
           ip -6 rule del table main suppress_prefixlength 0
         '';
-        peers = [{
-          allowedIPs = [ "0.0.0.0/0" "::/0" ];
-          endpoint = config.local.services.azire-vpn.endpoint;
-          publicKey = config.local.services.azire-vpn.publicKey;
-          persistentKeepalive = 25;
-        }];
+        peers = [
+          {
+            allowedIPs = [ "0.0.0.0/0" "::/0" ];
+            endpoint = config.local.services.azire-vpn.endpoint;
+            publicKey = config.local.services.azire-vpn.publicKey;
+            persistentKeepalive = 25;
+          }
+        ];
       };
     };
   };
