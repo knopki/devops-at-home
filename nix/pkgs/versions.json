@@ -32,8 +32,8 @@
   "nixfmt": {
     "owner": "serokell",
     "repo": "nixfmt",
-    "rev": "v0.2.0",
-    "sha256": "03w7fh9bjhy0ysglky56mb2bmbyrhvk7gqy7x5hjidp48vm5yb8c"
+    "rev": "v0.3.0",
+    "sha256": "1agzz8v6lpxjr1arfb6q00r1yk4nwyh8l3sd8zmdhvh2zckip6j9"
   },
   "nixpkgs-stable": {
     "owner": "NixOS",
