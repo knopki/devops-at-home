@@ -8,8 +8,10 @@ let
         unstable = import (fetchFromGitHub versions.nixpkgs-unstable) {
           config.allowUnfree = true;
         };
+      })
+      (self: super: {
         morph = pkgs.callPackage "${fetchFromGitHub versions.morph}/nix-packaging" { };
-        nixfmt = import (fetchFromGitHub versions.nixfmt) { };
+        nixpkgs-fmt = super.unstable.nixpkgs-fmt;
         pulumi = pkgs.callPackage ./nix/pkgs/pulumi.nix { };
       })
     ];
@@ -20,7 +22,7 @@ in pkgs.mkShell {
     bashInteractive
     morph
     nix-prefetch-git
-    nixfmt
+    nixpkgs-fmt
     nodejs
     openssh
     pulumi
