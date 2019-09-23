@@ -5,6 +5,8 @@ let
   versions = builtins.fromJSON (builtins.readFile ../../pkgs/versions.json);
   homeManager = fetchFromGitHub versions.home-manager;
   nixpkgsSrcStable = fetchFromGitHub versions.nixpkgs-stable;
+  rebuild-throw = pkgs.writeText "rebuild-throw.nix"
+    ''throw "I'm sorry Dave, I'm afraid I can't do that... Please deploy this host with morph or specify NIX_PATH with nixos-config."'';
 in
 {
   imports = [ "${homeManager}/nixos" ];
@@ -56,7 +58,9 @@ in
 
     nix.nixPath = [
       "nixpkgs=${nixpkgsSrcStable}"
-      "nixos-config=/etc/nixos/configuration.nix"
+      "nixos-config=${rebuild-throw}"
     ];
+
+    environment.etc."nixos/configuration.nix".source = rebuild-throw;
   };
 }
