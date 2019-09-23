@@ -7,42 +7,12 @@
     mode: "{{ item.mode }}"
     state: directory
   with_items:
-    - path: /etc/nixos/lib
-      owner: root
-      group: root
-      mode: "0750"
-    - path: /etc/nixos/modules
-      owner: root
-      group: root
-      mode: "0750"
-    - path: /etc/nixos/pkgs
-      owner: root
-      group: root
-      mode: "0750"
     - path: /etc/nixos/secrets
       owner: root
       group: root
       mode: "0755"
   notify:
     - nixos-rebuild
-
-# - name: Push configuration libs
-#   synchronize:
-#     src: "{{ item.src }}"
-#     dest: "{{ item.dest }}"
-#     owner: no
-#     group: no
-#     perms: no
-#     delete: yes
-#   with_items:
-#     - src: lib
-#       dest: /etc/nixos
-#     - src: modules
-#       dest: /etc/nixos
-#     - src: pkgs
-#       dest: /etc/nixos
-#   notify:
-#     - nixos-rebuild
 
 - name: Push secrets
   copy:
@@ -57,12 +27,3 @@
   notify:
     - nixos-rebuild
 
-# - name: Copy configuration
-#   copy:
-#     src: "config/{{ inventory_hostname }}.nix"
-#     dest: /etc/nixos/configuration.nix
-#     owner: root
-#     group: root
-#     mode: 0644
-#   notify:
-#     - nixos-rebuild
