@@ -16,6 +16,7 @@ let
           morph = pkgs.callPackage "${fetchFromGitHub versions.morph}/nix-packaging" {};
           nixpkgs-fmt = super.unstable.nixpkgs-fmt;
           pulumi = pkgs.callPackage ./nix/pkgs/pulumi.nix {};
+          shfmt = super.unstable.shfmt;
         }
       )
     ];
@@ -31,6 +32,8 @@ pkgs.mkShell {
     nodejs
     openssh
     pulumi
+    shellcheck
+    shfmt
     yarn
   ];
 }
