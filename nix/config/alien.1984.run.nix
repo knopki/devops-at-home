@@ -14,7 +14,7 @@ with builtins; {
       availableKernelModules =
         [ "ahci" "nvme" "rtsx_pci_sdmmc" "sd_mod" "usb_storage" "xhci_pci" ];
 
-      kernelModules = [ "kvm-intel" ];
+      kernelModules = [ "dm-snapshot" ];
 
       luks.devices = [
         {
@@ -31,6 +31,8 @@ with builtins; {
         }
       ];
     };
+
+    kernelModules = [ "kvm-intel" ];
 
     kernelParams = [
       "quiet"

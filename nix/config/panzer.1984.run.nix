@@ -21,7 +21,7 @@ with builtins; {
         copy_bin_and_libs ${pkgs.thin-provisioning-tools}/bin/thin_check
       ''; # hack to boot on thin pool
 
-      kernelModules = [ "dm_thin_pool" ]; # hack to boot on thin pool
+      kernelModules = [ "dm_thin_pool" "dm-snapshot" ]; # hack to boot on thin pool
 
       luks.devices = [
         {
