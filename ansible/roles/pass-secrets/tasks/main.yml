@@ -1,0 +1,19 @@
+---
+- name: Create directories
+  file:
+    path: "{{ pass_secrets_destination }}"
+    owner: root
+    group: root
+    mode: "0755"
+    state: directory
+
+- name: Push secrets
+  copy:
+    content: "{{ item.content }}"
+    dest: "{{ pass_secrets_destination }}/{{ item.name }}"
+    owner: "{{ item.owner|default('root') }}"
+    group: "{{ item.owner|default('root') }}"
+    mode: "{{ item.owner|default('0640') }}"
+  no_log: yes
+  with_items:
+    - "{{ pass_secrets }}"

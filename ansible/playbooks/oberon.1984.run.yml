@@ -1,7 +1,0 @@
----
-- hosts: oberon.1984.run
-  any_errors_fatal: true
-  become: true
-  roles:
-    - role: nixos
-      tags: nixos

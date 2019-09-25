@@ -2,7 +2,7 @@
 with lib; {
   config = mkIf (elem "root" config.local.users.setupUsers) {
     local.users.users.root = {
-      passwordFile = "/etc/nixos/secrets/root_password";
+      passwordFile = "/var/secrets/root_password";
       home-config = {
         local.fish.enable = true;
         xdg.userDirs.enable = false;

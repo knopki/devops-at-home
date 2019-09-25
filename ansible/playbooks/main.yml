@@ -1,6 +1,10 @@
 ---
-- import_playbook: alien.1984.run.yml
 - import_playbook: do-fra1.1984.run.yml
 - import_playbook: dotfiles.yml
-- import_playbook: oberon.1984.run.yml
-- import_playbook: panzer.1984.run.yml
+
+- hosts: nixos
+  any_errors_fatal: true
+  become: true
+  roles:
+    - role: pass-secrets
+      tags: secrets

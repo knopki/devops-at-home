@@ -1,4 +1,0 @@
----
-nixos_channels_add: {}
-nixos_channels_remove: []
-nixos_secrets: []

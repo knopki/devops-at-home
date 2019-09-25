@@ -14,7 +14,7 @@ with lib; {
       };
       privateKeyFile = mkOption {
         type = with types; nullOr str;
-        default = "/etc/nixos/secrets/azire_wg_priv";
+        default = "/var/secrets/azire_wg_priv";
       };
       endpoint = mkOption {
         default = "193.180.164.58:51820"; # se1.wg.azirevpn.net

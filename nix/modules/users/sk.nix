@@ -30,7 +30,7 @@ in
         "wireshark"
       ];
       group = "${username}";
-      passwordFile = "/etc/nixos/secrets/sk_password";
+      passwordFile = "/var/secrets/sk_password";
       home = "/home/${username}";
       home-config = {
         home.file = {
