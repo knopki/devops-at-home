@@ -11,8 +11,8 @@
       owner: root
       group: root
       mode: "0755"
-  notify:
-    - nixos-rebuild
+  # notify:
+  #   - nixos-rebuild
 
 - name: Push secrets
   copy:
@@ -21,9 +21,9 @@
     owner: "{{ item.owner|default('root') }}"
     group: "{{ item.owner|default('root') }}"
     mode: "{{ item.owner|default('0640') }}"
-  no_log: yes
+  # no_log: yes
   with_items:
     - "{{ nixos_secrets }}"
-  notify:
-    - nixos-rebuild
+  # notify:
+  #   - nixos-rebuild
 
