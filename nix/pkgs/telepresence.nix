@@ -38,7 +38,7 @@ python3Packages.buildPythonPackage rec {
     owner = "datawire";
     repo = "telepresence";
     rev = version;
-    sha256 = "0nx80phnpn9phyqip9k9lmvnln0axkh3102vnwpsvwwfcxgvl7wb";
+    sha256 = "1rxq22vcrw29682g7pdcwcjyifcg61z8y4my1di7yw731aldk274";
   };
 
   buildInputs = [ makeWrapper ];
