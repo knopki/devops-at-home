@@ -1,5 +1,0 @@
-qt5ct: "{{
-  qt5ct_default|d([]) +
-  qt5ct_group|d([]) +
-  qt5ct_host|d([])
-}}"
