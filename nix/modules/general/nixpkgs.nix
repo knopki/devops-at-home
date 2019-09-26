@@ -25,10 +25,6 @@ in
       overlays = [
         (
           self: super: {
-            nixpkgs-with-kustomize-1 =
-              import (fetchFromGitHub versions.nixpkgs-kustomize-1) {
-                config.allowUnfree = true;
-              };
             nur = import (fetchFromGitHub versions.nur) { inherit super; };
             unstable = import (fetchFromGitHub versions.nixpkgs-unstable) {
               config.allowUnfree = true;
@@ -41,9 +37,7 @@ in
             fish-kubectl-completions =
               super.callPackage ../../pkgs/fish-kubectl-completions.nix {};
             fish-theme-pure = super.callPackage ../../pkgs/fish-theme-pure.nix {};
-            kube-score = super.callPackage ../../pkgs/kube-score {};
             neovim-gtk = super.callPackage ../../pkgs/neovim-gtk.nix {};
-            telepresence = super.callPackage ../../pkgs/telepresence.nix {};
             trapd00r-ls-colors =
               super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
             waybar = super.unstable.waybar.override { pulseSupport = true; };

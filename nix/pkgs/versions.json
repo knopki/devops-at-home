@@ -41,12 +41,6 @@
     "rev": "d484f2b7fc0834a068e8ace851faa449a03963f5",
     "sha256": "0jk93ikryi2hqc30l2n5i4vlgmklrlzb8cf7b3sg1q3k70q344jn"
   },
-  "nixpkgs-kustomize-1": {
-    "owner": "NixOS",
-    "repo": "nixpkgs-channels",
-    "rev": "2d5908f89bab59c2c4f88fbfc900dfff9baa55f0",
-    "sha256": "04igl9i8x7bglwyc0fkn8fy7vcnx0f5wf2h66s818y5ywg37l020"
-  },
   "nixpkgs-master": {
     "owner": "NixOS",
     "repo": "nixpkgs",

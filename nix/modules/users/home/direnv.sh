@@ -8,11 +8,13 @@ use_nix() {
     version="$(<"$path"/.version-suffix)"
   elif [ -f "${path}/.git" ]; then
     version="$(<"$(<"${path}/.git/HEAD")")"
+  elif [ -f "${path}/.version" ]; then
+    version="$(<"$path"/.version)"
   fi
 
   local cache=".direnv/cache-${version:-unknown}"
 
-  local update_drv=0 # ffsdf
+  local update_drv=0
   if [[ ! -e "$cache" ]] ||
     [[ "$HOME/.direnvrc" -nt "$cache" ]] ||
     [[ .envrc -nt "$cache" ]] ||

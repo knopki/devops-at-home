@@ -26,14 +26,12 @@ with lib; {
       htop
       jq
       keepassxc
-      kube-score
       kubectl
       kubernetes-helm
       minikube
       mosh
       nix-du
       nix-prefetch-git
-      nixpkgs-with-kustomize-1.kustomize
       nmap-graphical
       openssh
       pstree
@@ -42,7 +40,6 @@ with lib; {
       rsync
       shfmt
       sysstat
-      telepresence
       wget
     ];
 

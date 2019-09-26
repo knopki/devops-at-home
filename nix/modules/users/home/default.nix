@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./alacritty.nix
+    ./amperka-dev
     ./cachedir.nix
     ./chromium.nix
     ./curl.nix

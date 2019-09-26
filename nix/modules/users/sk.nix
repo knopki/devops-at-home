@@ -51,6 +51,7 @@ in
 
         local = {
           alacritty.enable = isWorkstation;
+          amperka-dev.enable = any (x: x == config.networking.hostName) [ "alien" "oberon" ];
           cachedirs = mkIf isWorkstation [
             ".kube/cache"
             ".kube/http-cache"
