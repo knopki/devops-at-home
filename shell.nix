@@ -13,14 +13,21 @@ let
       )
       (
         self: super: {
-          morph = pkgs.callPackage "${fetchFromGitHub versions.morph}/nix-packaging" {};
+          morph = super.callPackage "${fetchFromGitHub versions.morph}/nix-packaging" {};
           nixpkgs-fmt = super.unstable.nixpkgs-fmt;
-          pulumi = pkgs.callPackage ./nix/pkgs/pulumi.nix {};
+          pulumi-bin = super.unstable.pulumi-bin.overrideAttrs (old: rec {
+            version = "1.1.0";
+            src = super.fetchurl {
+              url = "https://get.pulumi.com/releases/sdk/pulumi-v${version}-linux-x64.tar.gz";
+              sha256 = "1r498pxsjdj9mhdzh9vh4nw8fcjxfga44xlg43b0yakkgrp7c224";
+            };
+          });
           shfmt = super.unstable.shfmt;
         }
       )
     ];
   };
+
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
@@ -31,7 +38,7 @@ pkgs.mkShell {
     nixpkgs-fmt
     nodejs
     openssh
-    pulumi
+    pulumi-bin
     shellcheck
     shfmt
     yarn

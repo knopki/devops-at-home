@@ -47,6 +47,12 @@
     "rev": "2d5908f89bab59c2c4f88fbfc900dfff9baa55f0",
     "sha256": "04igl9i8x7bglwyc0fkn8fy7vcnx0f5wf2h66s818y5ywg37l020"
   },
+  "nixpkgs-master": {
+    "owner": "NixOS",
+    "repo": "nixpkgs",
+    "rev": "29b0879e7c44c52232a369db3cfed82b0c9746fa",
+    "sha256": "0jk93ikryi2hqc30l2n5i4vlgmklrlzb8cf7b3sg1q3k70q344jn"
+  },
   "nixpkgs-wayland": {
     "owner": "colemickens",
     "repo": "nixpkgs-wayland",

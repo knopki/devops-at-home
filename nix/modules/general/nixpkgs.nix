@@ -37,16 +37,15 @@ in
         )
         (
           self: super: {
-            fira-code-nerd = pkgs.callPackage ../../pkgs/fira-code-nerd.nix {};
+            fira-code-nerd = super.callPackage ../../pkgs/fira-code-nerd.nix {};
             fish-kubectl-completions =
-              pkgs.callPackage ../../pkgs/fish-kubectl-completions.nix {};
-            fish-theme-pure = pkgs.callPackage ../../pkgs/fish-theme-pure.nix {};
-            kube-score = pkgs.callPackage ../../pkgs/kube-score {};
-            neovim-gtk = pkgs.callPackage ../../pkgs/neovim-gtk.nix {};
-            pulumi = pkgs.callPackage ../../pkgs/pulumi.nix {};
-            telepresence = pkgs.callPackage ../../pkgs/telepresence.nix {};
+              super.callPackage ../../pkgs/fish-kubectl-completions.nix {};
+            fish-theme-pure = super.callPackage ../../pkgs/fish-theme-pure.nix {};
+            kube-score = super.callPackage ../../pkgs/kube-score {};
+            neovim-gtk = super.callPackage ../../pkgs/neovim-gtk.nix {};
+            telepresence = super.callPackage ../../pkgs/telepresence.nix {};
             trapd00r-ls-colors =
-              pkgs.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
+              super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
             waybar = super.unstable.waybar.override { pulseSupport = true; };
             wf-recorder = super.unstable.wf-recorder;
             wl-clipboard = super.unstable.wl-clipboard;
