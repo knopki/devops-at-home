@@ -113,7 +113,7 @@ in
         ""
     )}
       ${(
-      if nixosConfig.networking.hostName == "knopa" then ''
+      if nixosConfig.networking.hostName == "oberon" then ''
         output DP-1    resolution 1920x1080 position 0,0
         output HDMI-A-1 resolution 1920x1080 position 1920,0
       '' else
@@ -325,7 +325,7 @@ in
       set $ws10 10
 
       ${(
-      if nixosConfig.networking.hostName == "knopa" then ''
+      if nixosConfig.networking.hostName == "oberon" then ''
         # assign workspaces to outputs
         set $leftDisplay DP-1
         set $rightDisplay HDMI-A-1
