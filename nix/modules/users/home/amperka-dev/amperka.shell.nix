@@ -23,10 +23,10 @@ let
           kube-score = super.callPackage "${fetchFromGitHub versions.devops-at-home}/nix/pkgs/kube-score" {};
           pulumi-bin = super.pulumi-bin.overrideAttrs (
             old: rec {
-              version = "1.1.0";
+              version = "1.2.0";
               src = super.fetchurl {
                 url = "https://get.pulumi.com/releases/sdk/pulumi-v${version}-linux-x64.tar.gz";
-                sha256 = "1r498pxsjdj9mhdzh9vh4nw8fcjxfga44xlg43b0yakkgrp7c224";
+                sha256 = "1hcnx19p06pjbr8hbv9qcwfsip6jxkzpca6sqa5m98d325alfx50";
               };
             }
           );
