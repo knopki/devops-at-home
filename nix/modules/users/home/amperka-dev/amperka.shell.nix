@@ -30,6 +30,17 @@ let
               };
             }
           );
+          pulumi-resource-gcp = super.pulumi-bin.overrideAttrs (
+            old: rec {
+              version = "1.2.0";
+              pname = "pulumi-resource-gcp";
+              src = super.fetchurl {
+                url = "https://api.pulumi.com/releases/plugins/pulumi-resource-gcp-v${version}-linux-amd64.tar.gz";
+                sha256 = "1971q8wcfk75w684i42fq6ingn9x29q5bdyfcjgqlywjn76c4mwi";
+              };
+              setSourceRoot = "sourceRoot=`pwd`";
+            }
+          );
         }
       )
     ];
@@ -37,7 +48,6 @@ let
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    bashInteractive
     curl
     direnv
     google-cloud-sdk
@@ -46,14 +56,15 @@ pkgs.mkShell {
     kubectl
     nodejs
     openssh
-    patch
     php
     php73Packages.composer
     pulumi-bin
+    pulumi-resource-gcp
     python37Packages.pip
     python37Packages.virtualenv
     python3Full
     rsync
+    stdenv
     yarn
   ];
 }
