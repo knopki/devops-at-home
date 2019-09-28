@@ -21,7 +21,6 @@ with lib; {
       tdesktop
       tor-browser-bundle-bin
       transmission-gtk
-      wine
       xdg_utils
       youtube-dl
     ];

@@ -42,6 +42,7 @@ in
               super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
             waybar = super.unstable.waybar.override { pulseSupport = true; };
             wf-recorder = super.unstable.wf-recorder;
+            winbox = super.callPackage ../../pkgs/winbox.nix {};
             wl-clipboard = super.unstable.wl-clipboard;
           }
         )

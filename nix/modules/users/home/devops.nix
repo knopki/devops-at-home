@@ -41,6 +41,7 @@ with lib; {
       shfmt
       sysstat
       wget
+      winbox
     ];
 
     local.editorconfig = true;
