@@ -32,20 +32,20 @@
   "nixpkgs-stable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "021d733ea3f87b8c9232020b4e606d08eaca160b",
-    "sha256": "13600nzrakvg2hsfg5yr7x0jp9m762nvjyddf07q60d3m7vx9jxy"
+    "rev": "6420e2649fa9e267481fb78e602022dab9d1dcd1",
+    "sha256": "1z3hx7gp8nxk3fspi8vik3j9zxpajj3s7nxvjvx3b5igndxwbp74"
   },
   "nixpkgs-unstable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "d484f2b7fc0834a068e8ace851faa449a03963f5",
-    "sha256": "0jk93ikryi2hqc30l2n5i4vlgmklrlzb8cf7b3sg1q3k70q344jn"
+    "rev": "2436c27541b2f52deea3a4c1691216a02152e729",
+    "sha256": "0p98dwy3rbvdp6np596sfqnwlra11pif3rbdh02pwdyjmdvkmbvd"
   },
   "nixpkgs-master": {
     "owner": "NixOS",
     "repo": "nixpkgs",
-    "rev": "29b0879e7c44c52232a369db3cfed82b0c9746fa",
-    "sha256": "0jk93ikryi2hqc30l2n5i4vlgmklrlzb8cf7b3sg1q3k70q344jn"
+    "rev": "96466a57a98cc54689bfe4f420f9ff25610ee67b",
+    "sha256": "0jsgx7wz95ks7g07rha3h6gcdd7wmvyw4znmq396vn5ylwx132fi"
   },
   "nixpkgs-wayland": {
     "owner": "colemickens",
