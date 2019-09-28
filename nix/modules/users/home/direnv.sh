@@ -23,7 +23,7 @@ use_nix() {
     [ -d .direnv ] || mkdir .direnv
     # shellcheck disable=SC2154
     nix-shell --show-trace --pure "$@" --run "\"$direnv\" dump bash" >"$cache"
-    update_drv=true
+    update_drv=1
   else
     log_status using cached derivation
   fi
