@@ -14,6 +14,7 @@ let
   gopassBin = "${pkgs.gopass}/bin/gopass";
   grimBin = "${pkgs.grim}/bin/grim";
   i3dmenuBin = "${pkgs.i3}/bin/i3-dmenu-desktop";
+  jqBin = "${pkgs.jq}/bin/jq";
   lightBin = "${pkgs.light}/bin/light";
   makoctlBin = "${pkgs.mako}/bin/makoctl";
   mkdirBin = "${pkgs.coreutils}/bin/mkdir";
@@ -25,9 +26,33 @@ let
   sshaddBin = "${pkgs.openssh}/bin/ssh-add";
   swayidleBin = "${pkgs.swayidle}/bin/swayidle";
   swaylockBin = "${pkgs.swaylock}/bin/swaylock";
-  swaylockCmd = "${swaylockBin} -i ${defaultWallpaper} --scaling=fill";
+  swaylockCmd = "${swayLockWrapper}/bin/swayLockWrapper";
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
+
+
+  swayLockWrapper = pkgs.writeShellScriptBin "swayLockWrapper" ''
+    trap cleanup 0 1 2 3 6
+
+    dir=/tmp/swaylock_$USER
+    mkdir -p "$dir"
+    chmod 0700 "$dir"
+
+    function cleanup() {
+      rm -rf "$dir"
+    }
+
+    lock=""
+    image="''${dir}/image-$$.png"
+    for line in $(${swaymsgBin} -t get_outputs | ${jqBin} -r '.[] .name'); do
+      ${grimBin} -o "$line" "$image$line"
+      ${pkgs.graphicsmagick-imagemagick-compat}/bin/convert "$image$line" -scale 25% -blur 0x3 -scale 400% -fill black -colorize 10% "$image$line-blur.png"
+      lock="$lock -i $line:$image$line-blur.png"
+    done
+
+    ${swaymsgBin} "input * xkb_layout us"
+    ${swaylockBin} -f $lock
+  '';
 in
 {
   options.local.swaywm.enable = mkEnableOption "setup sway, bar, etc";
@@ -38,12 +63,15 @@ in
       gopass
       grim
       i3
+      graphicsmagick-imagemagick-compat
+      jq
       libappindicator-gtk3
       libnotify
       mako
       networkmanagerapplet
       playerctl
       slurp
+      swayLockWrapper
       waybar
       wf-recorder
       wl-clipboard
@@ -704,10 +732,10 @@ in
           Environment = "PATH=${pkgs.bash}/bin";
           ExecStart = ''
             ${swayidleBin} -w \
-              timeout 600  '${swaylockCmd} -f' \
+              timeout 600  '${swaylockCmd}' \
               timeout 1200 '${swaymsgBin} "output * dpms off"' \
                     resume '${swaymsgBin} "output * dpms on"' \
-              before-sleep '${swaylockCmd} -f'
+              before-sleep '${swaylockCmd}'
           '';
         };
         Install = { WantedBy = [ "sway-session.target" ]; };
