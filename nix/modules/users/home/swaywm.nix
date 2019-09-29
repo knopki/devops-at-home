@@ -35,11 +35,11 @@ let
     trap cleanup 0 1 2 3 6
 
     dir=/tmp/swaylock_$USER
-    mkdir -p "$dir"
-    chmod 0700 "$dir"
+    ${pkgs.coreutils}/bin/mkdir -p "$dir"
+    ${pkgs.coreutils}/bin/chmod 0700 "$dir"
 
     function cleanup() {
-      rm -rf "$dir"
+      ${pkgs.coreutils}/bin/rm -rf "$dir"
     }
 
     lock=""
@@ -59,6 +59,7 @@ in
 
   config = mkIf config.local.swaywm.enable {
     home.packages = with pkgs; [
+      coreutils
       fzf
       gopass
       grim
