@@ -41,6 +41,17 @@ let
               setSourceRoot = "sourceRoot=`pwd`";
             }
           );
+          pulumi-resource-mysql = super.pulumi-bin.overrideAttrs (
+            old: rec {
+              version = "0.18.11";
+              pname = "pulumi-resource-mysql";
+              src = super.fetchurl {
+                url = "https://api.pulumi.com/releases/plugins/pulumi-resource-mysql-v${version}-linux-amd64.tar.gz";
+                sha256 = "15banzs2hkssn34ywn5037sxrcglky5aiqzzyyy9w7ldsvff1mq3";
+              };
+              setSourceRoot = "sourceRoot=`pwd`";
+            }
+          );
         }
       )
     ];
@@ -48,18 +59,21 @@ let
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
+    cloud-sql-proxy
     curl
     direnv
     google-cloud-sdk
     jq
     kube-score
     kubectl
+    mysql57
     nodejs
     openssh
     php
     php73Packages.composer
     pulumi-bin
     pulumi-resource-gcp
+    pulumi-resource-mysql
     python37Packages.pip
     python37Packages.virtualenv
     python3Full
