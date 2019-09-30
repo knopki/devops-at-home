@@ -8,18 +8,6 @@ let
     fi
     export GOOGLE_CREDENTIALS=$(cat $GOOGLE_APPLICATION_CREDENTIALS)
   '';
-  gloudEnvAliasing = ''
-    export GOOGLE_CLOUD_KEYFILE_JSON=$GOOGLE_CREDENTIALS
-    export GCLOUD_KEYFILE_JSON=$GOOGLE_CREDENTIALS
-    export CLOUDSDK_COMPUTE_REGION=$GOOGLE_REGION
-    export GCLOUD_ZONE=$GOOGLE_ZONE
-    export CLOUDSDK_COMPUTE_ZONE=$GOOGLE_ZONE
-    export GOOGLE_COMPUTE_ZONE=$GOOGLE_ZONE
-    export GOOGLE_CLOUD_PROJECT=$GOOGLE_PROJECT
-    export GCLOUD_PROJECT=$GOOGLE_PROJECT
-    export CLOUDSDK_CORE_PROJECT=$GOOGLE_PROJECT
-    export GOOGLE_PROJECT_ID=$GOOGLE_PROJECT
-  '';
 
   amperkaEnvRC = ''
     use nix
@@ -30,8 +18,6 @@ let
     export GOOGLE_ZONE="europe-west1-b"
     export GOOGLE_PROJECT="amperka-hq"
     export PULUMI_CONFIG_PASSPHRASE=$(pass amperka-hq/pulumi_config_passphrase)
-
-    ${gloudEnvAliasing}
   '';
   xodioEnvRC = ''
     use nix
@@ -41,8 +27,6 @@ let
     export GOOGLE_REGION="US"
     export GOOGLE_ZONE="us-central1-a"
     export GOOGLE_PROJECT="xodio-146312"
-
-    ${gloudEnvAliasing}
   '';
   homePath = config.home.homeDirectory;
 in
