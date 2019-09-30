@@ -93,7 +93,6 @@ in
           nixdev.enable = isWorkstation;
           qt.enable = isWorkstation;
           swaywm.enable = isWorkstation;
-          tmux.enable = isWorkstation;
         };
         programs.git = {
           signing = {

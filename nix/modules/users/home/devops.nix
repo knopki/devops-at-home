@@ -29,7 +29,6 @@ with lib; {
       kubectl
       kubernetes-helm
       minikube
-      mosh
       nix-du
       nix-prefetch-git
       nmap-graphical

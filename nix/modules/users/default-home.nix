@@ -32,6 +32,7 @@ in
       htop.enable = true;
       readline.enable = true;
       ssh.enable = true;
+      tmux.enable = true;
       wget.enable = true;
     };
     xdg = {

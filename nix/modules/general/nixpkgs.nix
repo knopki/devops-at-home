@@ -46,7 +46,6 @@ in
             wl-clipboard = super.unstable.wl-clipboard;
           }
         )
-        (import ../../pkgs/tmux-plugins.nix)
       ];
     };
 
