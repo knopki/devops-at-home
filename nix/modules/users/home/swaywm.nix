@@ -50,7 +50,6 @@ let
       lock="$lock -i $line:$image$line-blur.png"
     done
 
-    ${swaymsgBin} "input * xkb_layout us"
     ${swaylockBin} -f $lock
   '';
 in
