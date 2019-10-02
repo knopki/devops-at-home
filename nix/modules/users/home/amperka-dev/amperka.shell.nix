@@ -52,6 +52,17 @@ let
               setSourceRoot = "sourceRoot=`pwd`";
             }
           );
+          pulumi-resource-kubernetes = super.pulumi-bin.overrideAttrs (
+            old: rec {
+              version = "1.1.0";
+              pname = "pulumi-resource-kubernetes";
+              src = super.fetchurl {
+                url = "https://api.pulumi.com/releases/plugins/pulumi-resource-kubernetes-v${version}-linux-amd64.tar.gz";
+                sha256 = "0rczcfmwwscxm423lq81x4pgfcqg4jmairzjcbd3p6acqd72452j";
+              };
+              setSourceRoot = "sourceRoot=`pwd`";
+            }
+          );
         }
       )
     ];
@@ -73,6 +84,7 @@ pkgs.mkShell {
     php73Packages.composer
     pulumi-bin
     pulumi-resource-gcp
+    pulumi-resource-kubernetes
     pulumi-resource-mysql
     python37Packages.pip
     python37Packages.virtualenv
