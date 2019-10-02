@@ -74,7 +74,6 @@ let
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    bashInteractive
     curl
     direnv
     google-cloud-sdk
@@ -84,9 +83,11 @@ pkgs.mkShell {
     kubernetes-helm
     kustomize
     nodejs
-    openssh
-    telepresence
+    nodePackages.node-gyp
+    python2Full
     rsync
+    stdenv
+    telepresence
     yarn
   ];
 }
