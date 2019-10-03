@@ -43,11 +43,11 @@ let
           );
           pulumi-resource-mysql = super.pulumi-bin.overrideAttrs (
             old: rec {
-              version = "0.18.11";
+              version = "1.0.0";
               pname = "pulumi-resource-mysql";
               src = super.fetchurl {
                 url = "https://api.pulumi.com/releases/plugins/pulumi-resource-mysql-v${version}-linux-amd64.tar.gz";
-                sha256 = "15banzs2hkssn34ywn5037sxrcglky5aiqzzyyy9w7ldsvff1mq3";
+                sha256 = "0nh6rzd7rih5srkn7cb3lq79bsxbnk9zamdpyxvrqivngsxw8k9c";
               };
               setSourceRoot = "sourceRoot=`pwd`";
             }
