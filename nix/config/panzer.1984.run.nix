@@ -5,7 +5,10 @@ with builtins; {
   boot = {
     initrd = {
       availableKernelModules = [
+        "aes_x86_64"
+        "aesni_intel"
         "ahci"
+        "cryptd"
         "dm_multipath"
         "dm_persistent_data"
         "ehci_pci"

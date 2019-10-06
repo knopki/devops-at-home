@@ -10,7 +10,16 @@ with builtins; {
     extraModulePackages = [];
     initrd = {
       availableKernelModules =
-        [ "ahci" "sd_mod" "usb_storage" "xhci_pci" "usbhid" ];
+        [
+          "aes_x86_64"
+          "aesni_intel"
+          "ahci"
+          "cryptd"
+          "sd_mod"
+          "usb_storage"
+          "usbhid"
+          "xhci_pci"
+        ];
 
       kernelModules = [ "dm-snapshot" ];
 
