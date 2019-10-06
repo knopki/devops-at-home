@@ -24,6 +24,11 @@ in
     deployment = { healthChecks = { cmd = desktopHealthChecks; }; };
   };
 
+  "root@z.jupiter.1984.run" = { config, ... }: {
+    imports = [ ./config/jupiter.1984.run.nix ];
+    deployment = { healthChecks = { cmd = desktopHealthChecks; }; };
+  };
+
   "root@z.oberon.1984.run" = { config, ... }: {
     imports = [ ./config/oberon.1984.run.nix ];
     deployment = { healthChecks = { cmd = desktopHealthChecks; }; };
