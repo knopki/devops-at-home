@@ -7,7 +7,7 @@ with lib;
 
   config = {
     nix = mkIf config.local.general.nix.enable {
-      # autoOptimiseStore = true;
+      autoOptimiseStore = true;
       daemonIONiceLevel = 7;
       daemonNiceLevel = 10;
       distributedBuilds = true;
@@ -16,7 +16,7 @@ with lib;
       extraOptions = ''
         gc-keep-outputs = true
         gc-keep-derivations = true
-        tarball-ttl = ${toString (60 * 60 * 96)}
+        tarball-ttl = ${toString (60 * 60 * 24 * 14)}
       '';
 
       gc = {
@@ -45,7 +45,6 @@ with lib;
     systemd.timers = {
       nix-gc.timerConfig.Persistent = true;
       nix-optimise.timerConfig.Persistent = true;
-      nixos-upgrade.timerConfig.Persistent = true;
     };
   };
 }
