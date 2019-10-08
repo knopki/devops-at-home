@@ -34,10 +34,18 @@ in
 
       kernelModules = [ "dm-snapshot" ];
 
-      luks.devices = [
-        (luksCommon // { name = "luks-nvme"; device = "/dev/disk/by-uuid/b7bb1cfc-414b-4806-b7b3-ff80df7a48d5"; })
-        (luksCommon // { name = "luks-sata"; device = "/dev/disk/by-uuid/c594a74b-464d-49eb-a2de-70d08b75c328"; })
-      ];
+      luks.devices = {
+        "luks-nvme" = (
+          luksCommon // {
+            device = "/dev/disk/by-uuid/b7bb1cfc-414b-4806-b7b3-ff80df7a48d5";
+          }
+        );
+        "luks-sata" = (
+          luksCommon // {
+            device = "/dev/disk/by-uuid/c594a74b-464d-49eb-a2de-70d08b75c328";
+          }
+        );
+      };
     };
 
     kernelParams = [

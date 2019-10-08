@@ -27,14 +27,12 @@ in
 
       kernelModules = [ "dm_thin_pool" "dm-snapshot" ]; # hack to boot on thin pool
 
-      luks.devices = [
-        {
-          name = "luks-ssd";
-          device = "/dev/sdb2";
-          preLVM = true;
-          allowDiscards = true;
-        }
-      ];
+      luks.devices."luks-ssd" = {
+        name = "luks-ssd";
+        device = "/dev/sdb2";
+        preLVM = true;
+        allowDiscards = true;
+      };
 
       preLVMCommands = ''
         mkdir -p /etc/lvm

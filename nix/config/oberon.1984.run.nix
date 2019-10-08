@@ -24,18 +24,16 @@ in
 
       kernelModules = [ "dm-snapshot" ];
 
-      luks.devices = [
-        {
-          name = "luks-sata";
-          device = "/dev/disk/by-uuid/d3600e29-69a8-4aeb-a604-e34ac1f0e954";
-          preLVM = true;
-          allowDiscards = true;
-          keyFile = "/dev/disk/by-id/usb-General_USB_Flash_Disk_04QEWH3O9LW8DPIK-0:0";
-          keyFileOffset = 24;
-          keyFileSize = 4096;
-          fallbackToPassword = true;
-        }
-      ];
+      luks.devices."luks-sata" = {
+        name = "luks-sata";
+        device = "/dev/disk/by-uuid/d3600e29-69a8-4aeb-a604-e34ac1f0e954";
+        preLVM = true;
+        allowDiscards = true;
+        keyFile = "/dev/disk/by-id/usb-General_USB_Flash_Disk_04QEWH3O9LW8DPIK-0:0";
+        keyFileOffset = 24;
+        keyFileSize = 4096;
+        fallbackToPassword = true;
+      };
     };
 
     kernelParams = [ "resume=${swapDevice}" ];

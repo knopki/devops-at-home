@@ -7,7 +7,7 @@ with lib;
 
   config.hardware.cpu.intel.updateMicrocode = mkDefault config.local.hardware.intel;
   config.boot.initrd.availableKernelModules = mkIf (
-    !config.local.hardware.vmGuest && length config.boot.initrd.luks.devices > 0 && config.local.hardware.intel
+    !config.local.hardware.vmGuest && length (attrNames config.boot.initrd.luks.devices) > 0 && config.local.hardware.intel
   ) [
     "aes_x86_64"
     "aesni_intel"

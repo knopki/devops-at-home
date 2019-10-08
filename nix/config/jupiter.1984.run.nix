@@ -1,5 +1,16 @@
 { config, lib, pkgs, ... }:
-with builtins; {
+with builtins;
+let
+  luksCommon = {
+    preLVM = true;
+    allowDiscards = true;
+    keyFile = "/dev/disk/by-id/usb-USB_Flash_Disk_CCYYMMDDHHmmSSU1QI0L-0:0";
+    keyFileOffset = 16;
+    keyFileSize = 4096;
+    fallbackToPassword = true;
+  };
+in
+{
   imports =
     [ ../modules <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
 
@@ -16,18 +27,13 @@ with builtins; {
       ];
       kernelModules = [ "dm-snapshot" ];
 
-      luks.devices = [
-        {
-          name = "luks-ssd";
-          device = "/dev/disk/by-uuid/5c68ca95-33d9-476e-8864-15d163f39de3";
-          preLVM = true;
-          allowDiscards = true;
-          keyFile = "/dev/disk/by-id/usb-USB_Flash_Disk_CCYYMMDDHHmmSSU1QI0L-0:0";
-          keyFileOffset = 16;
-          keyFileSize = 4096;
-          fallbackToPassword = true;
-        }
-      ];
+      luks.devices = {
+        "luks-ssd" = (
+          luksCommon // {
+            device = "/dev/disk/by-uuid/5c68ca95-33d9-476e-8864-15d163f39de3";
+          }
+        );
+      };
     };
 
     kernelParams = [];
