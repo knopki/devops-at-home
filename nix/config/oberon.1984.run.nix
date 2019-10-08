@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }:
-with builtins; {
+with builtins;
+let
+  swapDevice = "/dev/disk/by-uuid/3eef3ff7-958f-474a-ac90-ae6d16b349ee";
+in
+{
   imports =
     [ ../modules <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
 
@@ -11,10 +15,7 @@ with builtins; {
     initrd = {
       availableKernelModules =
         [
-          "aes_x86_64"
-          "aesni_intel"
           "ahci"
-          "cryptd"
           "sd_mod"
           "usb_storage"
           "usbhid"
@@ -37,14 +38,7 @@ with builtins; {
       ];
     };
 
-    kernelModules = [ "kvm-intel" ];
-
-    kernelParams = [
-      "quiet"
-      "splash"
-      "resume=/dev/disk/by-uuid/3eef3ff7-958f-474a-ac90-ae6d16b349ee"
-      "nohz_full=1-7"
-    ];
+    kernelParams = [ "resume=${swapDevice}" ];
 
     loader = {
       efi.canTouchEfiVariables = true;
@@ -83,12 +77,10 @@ with builtins; {
 
   hardware = {
     bluetooth.enable = true;
-    cpu.intel.updateMicrocode = true;
     opengl.driSupport32Bit = true;
   };
 
   local = {
-    hardware.machine = "generic";
     roles.workstation.enable = true;
     services.azire-vpn = {
       enabled = true;
@@ -114,5 +106,5 @@ with builtins; {
     };
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/3eef3ff7-958f-474a-ac90-ae6d16b349ee"; } ];
+  swapDevices = [ { device = swapDevice; } ];
 }

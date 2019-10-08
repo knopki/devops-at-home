@@ -1,14 +1,15 @@
 { config, lib, pkgs, ... }:
-with builtins; {
+with builtins;
+let
+  swapDevice = "/dev/mapper/panzer--vg-swap";
+in
+{
   imports = [ ../modules ];
 
   boot = {
     initrd = {
       availableKernelModules = [
-        "aes_x86_64"
-        "aesni_intel"
         "ahci"
-        "cryptd"
         "dm_multipath"
         "dm_persistent_data"
         "ehci_pci"
@@ -41,9 +42,9 @@ with builtins; {
       ''; # hack to boot on thin pool
     };
 
-    kernelModules = [ "dm_thin_pool" "kvm-intel" ];
+    kernelModules = [ "dm_thin_pool" ];
 
-    kernelParams = [ "quiet" "splash" "resume=/dev/mapper/panzer--vg-swap" ];
+    kernelParams = [ "resume=${swapDevice}" ];
 
     loader = {
       efi.canTouchEfiVariables = true;
@@ -88,11 +89,11 @@ with builtins; {
 
   hardware = {
     bluetooth.enable = true;
-    cpu.intel.updateMicrocode = true;
     opengl.driSupport32Bit = true;
   };
 
   local = {
+    hardware.intel = true;
     hardware.machine = "thinkpad-T430s";
     roles.workstation.enable = true;
     users.setupUsers = [ "sk" ];
@@ -127,5 +128,5 @@ with builtins; {
     };
   };
 
-  swapDevices = [ { device = "/dev/mapper/panzer--vg-swap"; } ];
+  swapDevices = [ { device = swapDevice; } ];
 }

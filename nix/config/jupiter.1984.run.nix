@@ -7,10 +7,7 @@ with builtins; {
     extraModulePackages = [];
     initrd = {
       availableKernelModules = [
-        "aes_x86_64"
-        "aesni_intel"
         "ahci"
-        "cryptd"
         "ehci_pci"
         "sd_mod"
         "usb_storage"
@@ -33,11 +30,7 @@ with builtins; {
       ];
     };
 
-    kernelModules = [ "kvm-intel" ];
-
-    kernelParams = [
-      "nohz_full=1-7"
-    ];
+    kernelParams = [];
 
     loader = {
       efi.canTouchEfiVariables = true;
@@ -69,12 +62,8 @@ with builtins; {
     };
   };
 
-  hardware = {
-    cpu.intel.updateMicrocode = true;
-  };
-
   local = {
-    hardware.machine = "generic";
+    hardware.intel = true;
     roles.essential.enable = true;
     users.setupUsers = [ "sk" ];
   };

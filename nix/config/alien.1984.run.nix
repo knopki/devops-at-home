@@ -9,6 +9,7 @@ let
     keyFileSize = 4096;
     fallbackToPassword = true;
   };
+  swapDevice = "/dev/disk/by-uuid/4e383ae0-75f6-406a-a83d-1d9b07eff4cc";
 in
 {
   imports =
@@ -23,10 +24,7 @@ in
     extraModulePackages = [];
     initrd = {
       availableKernelModules = [
-        "aes_x86_64"
-        "aesni_intel"
         "ahci"
-        "cryptd"
         "nvme"
         "rtsx_pci_sdmmc"
         "sd_mod"
@@ -42,14 +40,9 @@ in
       ];
     };
 
-    kernelModules = [ "kvm-intel" ];
-
     kernelParams = [
-      "quiet"
-      "splash"
-      "resume=/dev/disk/by-uuid/4e383ae0-75f6-406a-a83d-1d9b07eff4cc"
+      "resume=${swapDevice}"
       "acpiphp.disable=1"
-      "nohz_full=1-7"
       "pcie_aspm.policy=powersave"
     ];
 
@@ -86,7 +79,6 @@ in
 
   hardware = {
     bluetooth.enable = true;
-    cpu.intel.updateMicrocode = true;
     opengl.driSupport32Bit = true;
   };
 
@@ -130,5 +122,5 @@ in
     };
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/4e383ae0-75f6-406a-a83d-1d9b07eff4cc"; } ];
+  swapDevices = [ { device = swapDevice; } ];
 }

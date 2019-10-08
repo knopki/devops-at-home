@@ -1,1 +1,10 @@
-{ ... }: { imports = [ ./machine.nix ./scanning.nix ./sound.nix ]; }
+{ ... }: {
+  imports = [
+    ./intel.nix
+    ./machine.nix
+    ./scanning.nix
+    ./sound.nix
+    ./ssd.nix
+    ./vmGuest.nix
+  ];
+}

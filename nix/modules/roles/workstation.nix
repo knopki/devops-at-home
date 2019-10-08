@@ -44,8 +44,11 @@ with lib;
       };
     };
 
-    boot.kernel.sysctl = { "fs.inotify.max_user_watches" = 524288; };
-    boot.tmpOnTmpfs = true;
+    boot = {
+      kernel.sysctl = { "fs.inotify.max_user_watches" = 524288; };
+      kernelParams = [ "quiet" "splash" "nohz_full=1-7" ];
+      tmpOnTmpfs = true;
+    };
 
     environment.systemPackages = with pkgs; [
       borgbackup
