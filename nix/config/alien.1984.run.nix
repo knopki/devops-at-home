@@ -1,5 +1,16 @@
 { config, lib, pkgs, ... }:
-with builtins; {
+with builtins;
+let
+  luksCommon = {
+    preLVM = true;
+    allowDiscards = true;
+    keyFile = "/dev/disk/by-id/usb-USB_Flash_Disk_CCYYMMDDHHmmSS71FZGI-0:0";
+    keyFileOffset = 4;
+    keyFileSize = 4096;
+    fallbackToPassword = true;
+  };
+in
+{
   imports =
     [ ../modules <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
 
@@ -26,18 +37,8 @@ with builtins; {
       kernelModules = [ "dm-snapshot" ];
 
       luks.devices = [
-        {
-          name = "luks-nvme";
-          device = "/dev/nvme0n1p2";
-          preLVM = true;
-          allowDiscards = true;
-        }
-        {
-          name = "luks-sata";
-          device = "/dev/sda1";
-          preLVM = true;
-          allowDiscards = true;
-        }
+        (luksCommon // { name = "luks-nvme"; device = "/dev/disk/by-uuid/b7bb1cfc-414b-4806-b7b3-ff80df7a48d5"; })
+        (luksCommon // { name = "luks-sata"; device = "/dev/disk/by-uuid/c594a74b-464d-49eb-a2de-70d08b75c328"; })
       ];
     };
 
@@ -46,7 +47,7 @@ with builtins; {
     kernelParams = [
       "quiet"
       "splash"
-      "resume=/dev/mapper/nvme--vg-swap"
+      "resume=/dev/disk/by-uuid/4e383ae0-75f6-406a-a83d-1d9b07eff4cc"
       "acpiphp.disable=1"
       "nohz_full=1-7"
       "pcie_aspm.policy=powersave"
@@ -129,5 +130,5 @@ with builtins; {
     };
   };
 
-  swapDevices = [ { device = "/dev/mapper/nvme--vg-swap"; } ];
+  swapDevices = [ { device = "/dev/disk/by-uuid/4e383ae0-75f6-406a-a83d-1d9b07eff4cc"; } ];
 }

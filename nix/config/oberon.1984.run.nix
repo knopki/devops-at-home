@@ -26,9 +26,13 @@ with builtins; {
       luks.devices = [
         {
           name = "luks-sata";
-          device = "/dev/sda2";
+          device = "/dev/disk/by-uuid/d3600e29-69a8-4aeb-a604-e34ac1f0e954";
           preLVM = true;
           allowDiscards = true;
+          keyFile = "/dev/disk/by-id/usb-General_USB_Flash_Disk_04QEWH3O9LW8DPIK-0:0";
+          keyFileOffset = 12;
+          keyFileSize = 4096;
+          fallbackToPassword = true;
         }
       ];
     };
@@ -38,7 +42,7 @@ with builtins; {
     kernelParams = [
       "quiet"
       "splash"
-      "resume=/dev/mapper/oberon-swap"
+      "resume=/dev/disk/by-uuid/3eef3ff7-958f-474a-ac90-ae6d16b349ee"
       "nohz_full=1-7"
     ];
 
@@ -58,12 +62,12 @@ with builtins; {
 
   fileSystems = {
     "/" = {
-      device = "/dev/mapper/oberon-root";
+      device = "/dev/disk/by-uuid/7d0ea5b4-22ce-4727-9781-78a98f781ca6";
       fsType = "ext4";
       options = [ "relatime" ];
     };
     "/home" = {
-      device = "/dev/mapper/oberon-home";
+      device = "/dev/disk/by-uuid/e67c2655-2738-40d5-a566-1756654225d9";
       fsType = "ext4";
       options = [ "relatime" ];
     };
@@ -110,5 +114,5 @@ with builtins; {
     };
   };
 
-  swapDevices = [ { device = "/dev/mapper/oberon-swap"; } ];
+  swapDevices = [ { device = "/dev/disk/by-uuid/3eef3ff7-958f-474a-ac90-ae6d16b349ee"; } ];
 }

@@ -25,8 +25,8 @@ with builtins; {
           device = "/dev/disk/by-uuid/5c68ca95-33d9-476e-8864-15d163f39de3";
           preLVM = true;
           allowDiscards = true;
-          keyFile = "/dev/disk/by-uuid/B2A6-FA02";
-          keyFileOffset = 3149824;
+          keyFile = "/dev/disk/by-id/usb-USB_Flash_Disk_CCYYMMDDHHmmSSU1QI0L-0:0";
+          keyFileOffset = 8;
           keyFileSize = 4096;
           fallbackToPassword = true;
         }
@@ -101,7 +101,7 @@ with builtins; {
   swapDevices =
     [ { device = "/dev/disk/by-uuid/dc4b1587-1124-46bd-91c8-fdde50f8b610"; } ];
 
-  system.activationScripts.backupIFI = {
+  system.activationScripts.backupEFI = {
     text = "${pkgs.rsync}/bin/rsync -azu --delete -h /boot/ /boot.bak";
     deps = [];
   };
