@@ -5,8 +5,8 @@ let
     preLVM = true;
     allowDiscards = true;
     keyFile = "/dev/disk/by-id/usb-USB_Flash_Disk_CCYYMMDDHHmmSS71FZGI-0:0";
-    keyFileOffset = 8;
-    keyFileSize = 4096;
+    keyFileOffset = 512 * 8;
+    keyFileSize = 512 * 8;
     fallbackToPassword = true;
   };
   swapDevice = "/dev/disk/by-uuid/4e383ae0-75f6-406a-a83d-1d9b07eff4cc";

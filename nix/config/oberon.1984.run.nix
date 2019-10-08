@@ -30,8 +30,8 @@ in
         preLVM = true;
         allowDiscards = true;
         keyFile = "/dev/disk/by-id/usb-General_USB_Flash_Disk_04QEWH3O9LW8DPIK-0:0";
-        keyFileOffset = 24;
-        keyFileSize = 4096;
+        keyFileOffset = 512 * 24;
+        keyFileSize = 512 * 8;
         fallbackToPassword = true;
       };
     };
