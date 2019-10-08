@@ -23,7 +23,7 @@ with builtins; {
           preLVM = true;
           allowDiscards = true;
           keyFile = "/dev/disk/by-id/usb-USB_Flash_Disk_CCYYMMDDHHmmSSU1QI0L-0:0";
-          keyFileOffset = 8;
+          keyFileOffset = 16;
           keyFileSize = 4096;
           fallbackToPassword = true;
         }

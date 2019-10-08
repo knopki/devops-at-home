@@ -5,7 +5,7 @@ let
     preLVM = true;
     allowDiscards = true;
     keyFile = "/dev/disk/by-id/usb-USB_Flash_Disk_CCYYMMDDHHmmSS71FZGI-0:0";
-    keyFileOffset = 4;
+    keyFileOffset = 8;
     keyFileSize = 4096;
     fallbackToPassword = true;
   };
