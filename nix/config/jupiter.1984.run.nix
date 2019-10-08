@@ -33,6 +33,11 @@ in
             device = "/dev/disk/by-uuid/5c68ca95-33d9-476e-8864-15d163f39de3";
           }
         );
+        "luks-data" = (
+          luksCommon // {
+            device = "/dev/disk/by-uuid/92179717-e72f-4d79-ad5e-f29e3d81de10";
+          }
+        );
       };
     };
 
