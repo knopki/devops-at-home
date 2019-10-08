@@ -9,14 +9,8 @@ with lib;
   };
 
   config.local.hardware.machine = mkDefault "generic";
-  config.local.hardware.intel = any (x: x == config.local.hardware.machine) [
+  config.local.hardware.intel = mkDefault (any (x: x == config.local.hardware.machine) [
     "alienware-15r2"
     "thinkpad-T430s"
-  ];
-  config.local.hardware.vmGuest = !(
-    any (x: x == config.local.hardware.machine) [
-      "alienware-15r2"
-      "thinkpad-T430s"
-    ]
-  );
+  ]);
 }
