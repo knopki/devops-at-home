@@ -91,6 +91,10 @@ in
   nix.maxJobs = lib.mkDefault 4;
 
   services = {
+    apcupsd = {
+      enable = true;
+      configText = "UPSCABLE usb\nUPSTYPE usb\nBATTERYLEVEL 30\nMINUTES 10";
+    };
     fstrim.enable = true;
     zerotierone = {
       enable = true;
