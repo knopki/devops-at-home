@@ -73,6 +73,7 @@ pkgs.mkShell {
     cloud-sql-proxy
     curl
     direnv
+    docker-compose
     google-cloud-sdk
     jq
     kube-score
