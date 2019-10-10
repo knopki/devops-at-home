@@ -103,7 +103,7 @@ in
   };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/dc4b1587-1124-46bd-91c8-fdde50f8b610"; } ];
+    [ { device = "/dev/mapper/VG1-swap"; } ];
 
   system.activationScripts.backupEFI = {
     text = "${pkgs.rsync}/bin/rsync -azu --delete -h /boot/ /boot.bak";

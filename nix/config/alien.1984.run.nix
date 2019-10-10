@@ -9,7 +9,7 @@ let
     keyFileSize = 512 * 8;
     fallbackToPassword = true;
   };
-  swapDevice = "/dev/disk/by-uuid/4e383ae0-75f6-406a-a83d-1d9b07eff4cc";
+  swapDevice = "/dev/mapper/nvme--vg-swap";
 in
 {
   imports =

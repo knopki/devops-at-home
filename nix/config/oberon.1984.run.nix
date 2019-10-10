@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with builtins;
 let
-  swapDevice = "/dev/disk/by-uuid/3eef3ff7-958f-474a-ac90-ae6d16b349ee";
+  swapDevice = "/dev/mapper/oberon-swap";
 in
 {
   imports =
