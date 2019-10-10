@@ -24,10 +24,10 @@
     "sha256": "08mga3jg1f3zsspx0hlgywlabwq07qp5qk1lgjz8rawj62zmqqrf"
   },
   "morph": {
-    "owner": "DBCDK",
+    "owner": "delroth",
     "repo": "morph",
-    "rev": "v1.3.1",
-    "sha256": "0nwl9n5b0lnil96573wa3hyr3vyvfiwvmpkla3pmwkpmriac4xrg"
+    "rev": "949c3eaa50805921c77381a4e248c1f2db1be449",
+    "sha256": "0rcls8vv4a0hld0ryw7z6qgvpqz16rhf5dzagcsrib0s85b800gf"
   },
   "nixpkgs-stable": {
     "owner": "NixOS",
