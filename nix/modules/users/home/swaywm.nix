@@ -218,6 +218,9 @@ in
       bindsym $mod+Shift+q               kill
       bindsym $mod+Shift+Cyrillic_shorti kill
 
+      # lock screen
+      bindsym $mod+Escape           exec ${swaylockCmd}
+
       # Drag floating windows by holding down $mod and left mouse button.
       # Resize them with right mouse button + $mod.
       # Despite the name, also works for non-floating windows.
@@ -485,7 +488,6 @@ in
     home.file."${swayDir}/config.d/99-exit-menu".text = ''
       set $mode_system System: (l) lock, (c) reload config, (e) exit, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
       mode "$mode_system" {
-          bindsym l exec --no-startup-id ${swaylockCmd}, mode "default"
           bindsym c reload
           bindsym e exit
           bindsym s exec --no-startup-id ${systemctlBin} suspend -i, mode "default"
