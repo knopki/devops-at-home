@@ -23,20 +23,20 @@ let
           kube-score = super.callPackage "${fetchFromGitHub versions.devops-at-home}/nix/pkgs/kube-score" {};
           pulumi-bin = super.pulumi-bin.overrideAttrs (
             old: rec {
-              version = "1.2.0";
+              version = "1.3.1";
               src = super.fetchurl {
                 url = "https://get.pulumi.com/releases/sdk/pulumi-v${version}-linux-x64.tar.gz";
-                sha256 = "1hcnx19p06pjbr8hbv9qcwfsip6jxkzpca6sqa5m98d325alfx50";
+                sha256 = "1sqy0sm084cxqxnwlnqp566sdpy31l8ciyni6fridd0y5hqnp3ga";
               };
             }
           );
           pulumi-resource-gcp = super.pulumi-bin.overrideAttrs (
             old: rec {
-              version = "1.2.0";
+              version = "1.3.0";
               pname = "pulumi-resource-gcp";
               src = super.fetchurl {
                 url = "https://api.pulumi.com/releases/plugins/pulumi-resource-gcp-v${version}-linux-amd64.tar.gz";
-                sha256 = "1971q8wcfk75w684i42fq6ingn9x29q5bdyfcjgqlywjn76c4mwi";
+                sha256 = "04l086a8ab72w5d7l59xl49lcwjq05n1fkhx1pxm5x7l5zw1id6y";
               };
               setSourceRoot = "sourceRoot=`pwd`";
             }
