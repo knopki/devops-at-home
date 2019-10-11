@@ -13,7 +13,7 @@ with lib;
       sway = {
         enable = true;
         extraPackages = with pkgs; [
-          gnome3.seahorse
+          swaybg
           swayidle
           swaylock
           xwayland
@@ -34,7 +34,7 @@ with lib;
 
     services = {
       dbus.packages = with pkgs; [ gnome3.dconf ];
-      gnome3.gnome-keyring.enable = true;
+      gnome3.core-os-services.enable = true;
       xserver.displayManager.extraSessionFilePackages = [ pkgs.sway ];
     };
   };

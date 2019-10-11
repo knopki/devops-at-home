@@ -53,7 +53,7 @@ with lib; {
       extensions = with pkgs;
         [
           vscode-extensions.bbenoist.Nix
-          unstable.vscode-extensions.ms-python.python
+          vscode-extensions.ms-python.python
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "vscode-ansible";

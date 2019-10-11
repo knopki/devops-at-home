@@ -1,11 +1,12 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 with lib;
-with import <nixpkgs> {};
 let
+  sysPkgs = import <nixpkgs> {};
+  fetchFromGitHub = sysPkgs.fetchFromGitHub;
   versions = builtins.fromJSON (builtins.readFile ../../pkgs/versions.json);
   homeManager = fetchFromGitHub versions.home-manager;
   nixpkgsSrcStable = fetchFromGitHub versions.nixpkgs-stable;
-  rebuild-throw = pkgs.writeText "rebuild-throw.nix"
+  rebuild-throw = sysPkgs.writeText "rebuild-throw.nix"
     ''throw "I'm sorry Dave, I'm afraid I can't do that... Please deploy this host with morph or specify NIX_PATH with nixos-config."'';
 in
 {
@@ -40,10 +41,8 @@ in
             neovim-gtk = super.callPackage ../../pkgs/neovim-gtk.nix {};
             trapd00r-ls-colors =
               super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
-            waybar = super.unstable.waybar.override { pulseSupport = true; };
-            wf-recorder = super.unstable.wf-recorder;
+            waybar = super.waybar.override { pulseSupport = true; };
             winbox = super.callPackage ../../pkgs/winbox.nix {};
-            wl-clipboard = super.unstable.wl-clipboard;
           }
         )
       ];

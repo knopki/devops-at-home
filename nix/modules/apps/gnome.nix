@@ -6,19 +6,22 @@ with lib;
   options = { local.apps.gnome.enable = mkEnableOption "Enable Gnome"; };
 
   config = mkIf config.local.apps.gnome.enable {
-    environment.gnome3.excludePackages = with pkgs; [
+    environment.gnome3.excludePackages = with pkgs.gnome3; [
       epiphany
-      gnome3.accerciser
-      gnome3.evolution
-      gnome3.gnome-documents
-      gnome3.gnome-logs
-      gnome3.gnome-maps
-      gnome3.gnome-music
-      gnome3.gnome-nettool
-      gnome3.gnome-photos
-      gnome3.gnome-software
-      gnome3.gnome-todo
-      gnome3.totem
+      geary
+      gnome-calendar
+      gnome-characters
+      gnome-clocks
+      gnome-contacts
+      gnome-logs
+      gnome-maps
+      gnome-music
+      gnome-photos
+      gnome-screenshot
+      gnome-software
+      gnome-weather
+      totem
+      yelp
     ];
 
     environment.systemPackages = with pkgs; [
@@ -26,12 +29,17 @@ with lib;
       pinentry_gnome
     ];
 
+    local.hardware.sound.enable = true;
+
     programs = { dconf.enable = true; };
 
     services = {
-      accounts-daemon.enable = true;
       dbus.packages = with pkgs; [ gnome3.dconf ];
-      gnome3.gnome-keyring.enable = true;
+      gnome3 = {
+        core-os-services.enable = true;
+        core-shell.enable = true;
+        core-utilities.enable = true;
+      };
       xserver = { desktopManager.gnome3.enable = true; };
     };
   };

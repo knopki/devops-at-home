@@ -57,6 +57,7 @@ with lib;
       rsync
       sysstat
       tree
+      unrar
       unzip
       usbutils
       wget

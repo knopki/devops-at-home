@@ -25,7 +25,6 @@ with lib;
 
       hardware = {
         scanning.enable = true;
-        sound.enable = true;
       };
 
       roles = {
@@ -100,7 +99,6 @@ with lib;
       kbfs.enable = true;
       keybase.enable = true;
       trezord.enable = true;
-      upower.enable = true;
     };
   };
 }

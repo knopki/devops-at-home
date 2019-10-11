@@ -2,11 +2,11 @@ let
   fetchFromGitHub = (import <nixpkgs> {}).fetchFromGitHub;
   versions = {
     nixpkgs-stable = {
-      # NixOS 19.09 @ 2019-09-26
+      # NixOS 19.09 @ 2019-10-11
       owner = "NixOS";
       repo = "nixpkgs-channels";
-      rev = "e34ac949d1b9847bfe09d90fdcaf2f92859a11dd";
-      sha256 = "1yf9kw57d64g4153gd58bxnakhlyi9blk06gw169h37z186nsyxh";
+      rev = "9bbad4c6254513fa62684da57886c4f988a92092";
+      sha256 = "00dhkkmar3ynfkx9x0h7hzjpcqvwsfmgz3j0xj80156kbw7zq4bb";
     };
     devops-at-home = {
       # knopki/devops-at-home @ 2019-09-26

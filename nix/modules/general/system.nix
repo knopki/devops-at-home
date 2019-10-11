@@ -32,7 +32,7 @@ with lib;
 
     system = {
       copySystemConfiguration = true;
-      stateVersion = "19.03";
+      stateVersion = "19.09";
     };
   };
 }

@@ -14,15 +14,14 @@ let
       (
         self: super: {
           morph = super.callPackage "${fetchFromGitHub versions.morph}/nix-packaging" {};
-          nixpkgs-fmt = super.unstable.nixpkgs-fmt;
-          pulumi-bin = super.unstable.pulumi-bin.overrideAttrs (old: rec {
+          pulumi-bin = super.pulumi-bin.overrideAttrs (old: rec {
             version = "1.2.0";
             src = super.fetchurl {
               url = "https://get.pulumi.com/releases/sdk/pulumi-v${version}-linux-x64.tar.gz";
               sha256 = "1hcnx19p06pjbr8hbv9qcwfsip6jxkzpca6sqa5m98d325alfx50";
             };
           });
-          pulumi-resource-gcp = super.unstable.pulumi-bin.overrideAttrs (old: rec {
+          pulumi-resource-gcp = super.pulumi-bin.overrideAttrs (old: rec {
             version = "1.2.0";
             pname = "pulumi-resource-gcp";
             src = super.fetchurl {
@@ -31,7 +30,6 @@ let
             };
             setSourceRoot = "sourceRoot=`pwd`";
           });
-          shfmt = super.unstable.shfmt;
         }
       )
     ];

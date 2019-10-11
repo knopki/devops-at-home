@@ -6,13 +6,13 @@ with lib; {
     home.packages = with pkgs; [
       anki
       blender
+      chromaprint
       darktable
       feh
       gimp
       krita
       libreoffice
       neovim-gtk
-      neovim-qt
       mpv
       pavucontrol
       picard

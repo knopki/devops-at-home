@@ -13,24 +13,15 @@ with lib;
         fira-code-nerd
         font-awesome_4
         noto-fonts
-        noto-fonts-emoji
       ];
       fontconfig = {
         enable = true;
         defaultFonts = {
-          monospace = [
-            "Noto Color Emoji"
-            "EmojiOne Color"
-            "Noto Emoji"
-            "Noto Sans Mono"
-          ];
-          sansSerif =
-            [ "Noto Color Emoji" "EmojiOne Color" "Noto Emoji" "Noto Sans" ];
-          serif =
-            [ "Noto Color Emoji" "EmojiOne Color" "Noto Emoji" "Noto Serif" ];
+          emoji = [ "Noto Color Emoji" "EmojiOne Color" ];
+          monospace = [ "Noto Sans Mono" ];
+          sansSerif = [ "Noto Sans" ];
+          serif = [ "Noto Serif" ];
         };
-        penultimate.enable = true;
-        ultimate.enable = true;
         localConf = ''
           <?xml version="1.0" ?>
           <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
@@ -47,7 +38,6 @@ with lib;
           </fontconfig>
         '';
       };
-      enableDefaultFonts = true;
     };
   };
 }
