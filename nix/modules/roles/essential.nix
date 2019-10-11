@@ -44,6 +44,7 @@ with lib;
       gnupg
       htop
       jq
+      lm_sensors
       lsof
       neovim
       nnn

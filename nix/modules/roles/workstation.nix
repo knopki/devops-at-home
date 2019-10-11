@@ -58,7 +58,6 @@ with lib;
       hdparm
       keybase
       keybase-gui
-      lm_sensors
       mosh
       ngrep
       nmap
