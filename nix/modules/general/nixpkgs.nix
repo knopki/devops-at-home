@@ -4,13 +4,13 @@ let
   sysPkgs = import <nixpkgs> {};
   fetchFromGitHub = sysPkgs.fetchFromGitHub;
   versions = builtins.fromJSON (builtins.readFile ../../pkgs/versions.json);
-  homeManager = fetchFromGitHub versions.home-manager;
   nixpkgsSrcStable = fetchFromGitHub versions.nixpkgs-stable;
+  nur-no-pkgs = import (fetchFromGitHub versions.nur) {};
   rebuild-throw = sysPkgs.writeText "rebuild-throw.nix"
     ''throw "I'm sorry Dave, I'm afraid I can't do that... Please deploy this host with morph or specify NIX_PATH with nixos-config."'';
 in
 {
-  imports = [ "${homeManager}/nixos" ];
+  imports = [ nur-no-pkgs.repos.rycee.modules.home-manager ];
 
   options = { local.general.nixpkgs.enable = mkEnableOption "Nixpkgs"; };
 

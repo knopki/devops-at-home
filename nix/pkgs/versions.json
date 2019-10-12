@@ -1,10 +1,4 @@
 {
-  "home-manager": {
-    "owner": "rycee",
-    "repo": "home-manager",
-    "rev": "f856c78a4a220f44b64ce5045f228cbb9d4d9f31",
-    "sha256": "0jdrfcz600jbfas7i5vrfic9h3j4k3w589d65sp4y1x01xjhlb7q"
-  },
   "fish-kubectl-completions": {
     "owner": "evanlucas",
     "repo": "fish-kubectl-completions",
@@ -56,8 +50,8 @@
   "nur": {
     "owner": "nix-community",
     "repo": "NUR",
-    "rev": "237051900cf105de46b5a0d6f607b80365eabb94",
-    "sha256": "14q4vw044pc2k9i4zk9s1vqq974wf6r3zb3cg86d2dwk0m3rczsx"
+    "rev": "3e672c58de88f86295b76713a2614020aa5284ed",
+    "sha256": "1hlz0as3xl88187sjm3xqn3yv0mzj70pia5b79h54qpb3l8l41m0"
   },
   "tmux-colors-solarized": {
     "owner": "seebi",
