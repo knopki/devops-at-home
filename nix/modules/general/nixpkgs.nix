@@ -17,6 +17,12 @@ in
   config = mkIf config.local.general.nixpkgs.enable {
     nixpkgs = {
       config.allowUnfree = true;
+      config.packageOverrides = pkgs: {
+        nur = import (fetchFromGitHub versions.nur) { inherit pkgs; };
+        unstable = import (fetchFromGitHub versions.nixpkgs-unstable) {
+          inherit config;
+        };
+      };
 
       pkgs = import "${nixpkgsSrcStable}" {
         config = config.nixpkgs.config;
@@ -26,19 +32,10 @@ in
       overlays = [
         (
           self: super: {
-            nur = import (fetchFromGitHub versions.nur) { inherit super; };
-            unstable = import (fetchFromGitHub versions.nixpkgs-unstable) {
-              config.allowUnfree = true;
-            };
-          }
-        )
-        (
-          self: super: {
             fira-code-nerd = super.callPackage ../../pkgs/fira-code-nerd.nix {};
             fish-kubectl-completions =
               super.callPackage ../../pkgs/fish-kubectl-completions.nix {};
             fish-theme-pure = super.callPackage ../../pkgs/fish-theme-pure.nix {};
-            neovim-gtk = super.callPackage ../../pkgs/neovim-gtk.nix {};
             trapd00r-ls-colors =
               super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
             waybar = super.waybar.override { pulseSupport = true; };
