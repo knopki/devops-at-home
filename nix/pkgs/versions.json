@@ -52,17 +52,5 @@
     "repo": "NUR",
     "rev": "3e672c58de88f86295b76713a2614020aa5284ed",
     "sha256": "1hlz0as3xl88187sjm3xqn3yv0mzj70pia5b79h54qpb3l8l41m0"
-  },
-  "tmux-colors-solarized": {
-    "owner": "seebi",
-    "repo": "tmux-colors-solarized",
-    "rev": "e5e7b4f1af37f8f3fc81ca17eadee5ae5d82cd09",
-    "sha256": "1l3i82abzi4b395cgdsjg7lcfaq15kyyhijwvrgchzxi95z3hl4x"
-  },
-  "tmux-powerline": {
-    "owner": "erikw",
-    "repo": "tmux-powerline",
-    "rev": "V1.1",
-    "sha256": "0zv8f6nmf0x1x59v1jdv7j97cbb78gaqbx4fx5r0i2pd94w5jxps"
   }
 }
