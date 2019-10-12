@@ -10,7 +10,7 @@ with lib;
       enableFontDir = true;
       fonts = with pkgs; [
         emojione
-        fira-code-nerd
+        nur.repos.mic92.fira-code-nerdfonts
         font-awesome_4
         noto-fonts
       ];

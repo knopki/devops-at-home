@@ -32,7 +32,6 @@ in
       overlays = [
         (
           self: super: {
-            fira-code-nerd = super.callPackage ../../pkgs/fira-code-nerd.nix {};
             fish-kubectl-completions =
               super.callPackage ../../pkgs/fish-kubectl-completions.nix {};
             fish-theme-pure = super.callPackage ../../pkgs/fish-theme-pure.nix {};
