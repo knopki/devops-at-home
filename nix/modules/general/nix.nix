@@ -17,6 +17,8 @@ with lib;
         gc-keep-outputs = true
         gc-keep-derivations = true
         tarball-ttl = ${toString (60 * 60 * 24 * 14)}
+        min-free = ${toString (1024 * 1024 * 1024)}
+        max-free = ${toString (10 * 1024 * 1024 * 1024)}
       '';
 
       gc = {
