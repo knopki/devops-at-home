@@ -26,14 +26,14 @@
   "nixpkgs-stable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "9bbad4c6254513fa62684da57886c4f988a92092",
-    "sha256": "00dhkkmar3ynfkx9x0h7hzjpcqvwsfmgz3j0xj80156kbw7zq4bb"
+    "rev": "dbad7c7d59f12e81032bc3100e3d9fa44b6d4e70",
+    "sha256": "1pjhslnhz4gngbclyr39x4xaicrc1sz2xy8bsrvlr3cl5qrbki2b"
   },
   "nixpkgs-unstable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "07d4df5962625285bcc09b057b40001bfa32340d",
-    "sha256": "0xl54j7dgazcamxdvn5f4b4j1bqmb85882ly2dwsnncilz0vfnqy"
+    "rev": "b943338ea582aeb9b0a406d7fb75f3f62bc16a9d",
+    "sha256": "06azqwqg1x4xyr9cw75d465rbwla9cjjynjvd8r4bls5zgvvkcjy"
   },
   "nixpkgs-master": {
     "owner": "NixOS",
