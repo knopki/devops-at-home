@@ -2,8 +2,8 @@
   "fish-kubectl-completions": {
     "owner": "evanlucas",
     "repo": "fish-kubectl-completions",
-    "rev": "4647e9eb8b52e1bc2df4b2872ae01f6555625f57",
-    "sha256": "05p9vnqm5cybfafj67g866vlr9kscfrmahyr9zwp9br4vlm603zh"
+    "rev": "dbcd150a1c7b4b96da8c63b654de43bf8271c2f1",
+    "sha256": "15f7nn96n3pg2c92dm71lynmy8d8ijqzihjkbvfkx5sc7nvcmf5j"
   },
   "fish-theme-pure": {
     "owner": "rafaelrinaldi",
