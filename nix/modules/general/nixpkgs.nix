@@ -20,7 +20,7 @@ in
       config.packageOverrides = pkgs: {
         nur = import (fetchFromGitHub versions.nur) { inherit pkgs; };
         unstable = import (fetchFromGitHub versions.nixpkgs-unstable) {
-          inherit config;
+          config.allowUnfree = true;
         };
       };
 
@@ -35,6 +35,10 @@ in
             fish-kubectl-completions =
               super.callPackage ../../pkgs/fish-kubectl-completions.nix {};
             fish-theme-pure = super.callPackage ../../pkgs/fish-theme-pure.nix {};
+            gnvim = super.unstable.gnvim;
+            localVimPlugins = super.callPackage ../../pkgs/vimPlugins.nix {};
+            neovim-gtk = super.nur.repos.n1kolasM.neovim-gtk;
+            neovim-unwrapped = super.unstable.neovim-unwrapped;
             trapd00r-ls-colors =
               super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
             waybar = super.waybar.override { pulseSupport = true; };

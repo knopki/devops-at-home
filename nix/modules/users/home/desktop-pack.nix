@@ -12,7 +12,8 @@ with lib; {
       gimp
       krita
       libreoffice
-      nur.repos.n1kolasM.neovim-gtk
+      neovim-gtk
+      gnvim
       mpv
       pavucontrol
       picard

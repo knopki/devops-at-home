@@ -3,32 +3,35 @@ with lib; {
   options.local.neovim = { enable = mkEnableOption "enable neovim for user"; };
 
   config = mkIf config.local.neovim.enable {
+    home.packages = with pkgs; [ ripgrep ];
+    local.fzf.enable = true;
+
     #
     # Reference:
     # https://github.com/rycee/home-manager/blob/master/modules/programs/neovim.nix
     #
-
     programs.neovim = {
       enable = true;
       viAlias = true;
       vimAlias = true;
 
       plugins = with pkgs.vimPlugins; [
-        # UI
-        nerdtree
         vim-airline
+        vim-airline-themes
+        vim-one
+        indentLine
+        fzf-vim
+        nerdtree
+        vim-startify
 
-        # Language support
+        vim-orgmode
         vim-polyglot
+        pkgs.localVimPlugins.vim-bbye
+        # pkgs.localVimPlugins.xolox-vim-misc
+        # pkgs.localVimPlugins.vim-session
       ];
 
-      extraConfig = ''
-        " Put $ at the boundary of current replace
-        :set cpoptions+=$
-
-        let g:airline_powerline_fonts = 1
-      '';
-
+      extraConfig = readFile ./neovim.vim;
     };
   };
 }
