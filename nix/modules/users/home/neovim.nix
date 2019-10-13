@@ -23,12 +23,12 @@ with lib; {
         fzf-vim
         nerdtree
         vim-startify
+        pkgs.localVimPlugins.vim-bbye
+        context_filetype-vim # dep of caw-vim
+        caw-vim
 
         vim-orgmode
         vim-polyglot
-        pkgs.localVimPlugins.vim-bbye
-        # pkgs.localVimPlugins.xolox-vim-misc
-        # pkgs.localVimPlugins.vim-session
       ];
 
       extraConfig = readFile ./neovim.vim;
