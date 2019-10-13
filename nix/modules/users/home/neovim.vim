@@ -243,7 +243,7 @@ nmap <leader>fh :History:<CR>
 nmap <leader>frg :Rg!<Space>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fbc :BCommits<CR>
-" TODO: snips
+nnoremap <leader>fs :Snippets<CR>
 
 
 " session management
@@ -306,10 +306,13 @@ let g:startify_custom_header = []
 let g:startify_skip_list = ['COMMIT_MSG', '/nit/store/*']
 
 
-
-
-
-
+" -------------------------------------
+" ultisnips
+" -------------------------------------
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
 
 
 

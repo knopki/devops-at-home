@@ -29,6 +29,8 @@ with lib; {
         vim-fugitive
         vim-rhubarb
         vim-gitgutter
+        ultisnips
+        vim-snippets
 
         vim-orgmode
         vim-polyglot
