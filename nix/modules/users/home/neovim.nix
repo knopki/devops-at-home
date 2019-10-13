@@ -27,6 +27,7 @@ with lib; {
         context_filetype-vim # dep of caw-vim
         caw-vim
         vim-fugitive
+        vim-rhubarb
         vim-gitgutter
 
         vim-orgmode
