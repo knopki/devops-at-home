@@ -237,12 +237,12 @@ nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 
 "" fzf
 nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fgf :GFiles?!<CR>
+nnoremap <leader>fgf :GFiles!?<CR>
 nnoremap <leader>fb :Buffers<CR>
 nmap <leader>fh :History:<CR>
 nmap <leader>frg :Rg!<Space>
 nnoremap <leader>fc :Commits<CR>
-nnoremap <leader>fbc :BCommits<CR>
+nnoremap <leader>fC :BCommits<CR>
 nnoremap <leader>fs :Snippets<CR>
 
 
@@ -336,10 +336,10 @@ xmap ia <Plug>SidewaysArgumentTextobjI
 
 
 "" nvim 0.4.2+ gui-only initializer
-function! s:ui_enter()
-  if get(v:event, "chan") == 1
-    " do your gui setup
-  endif
-endfunction
+" function! s:ui_enter()
+"   if get(v:event, "chan") == 1
+"     " do your gui setup
+"   endif
+" endfunction
 
-au UIEnter * call s:ui_enter()
+" au UIEnter * call s:ui_enter()
