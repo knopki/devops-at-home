@@ -26,6 +26,7 @@ with lib; {
         pkgs.localVimPlugins.vim-bbye
         context_filetype-vim # dep of caw-vim
         caw-vim
+        vim-fugitive
 
         vim-orgmode
         vim-polyglot

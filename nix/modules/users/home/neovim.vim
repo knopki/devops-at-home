@@ -79,6 +79,10 @@ let g:airline_extensions = ['branch', 'tabline']
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 
+if exists("*fugitive#statusline")
+  set statusline+=%{fugitive#statusline()}
+endif
+
 
 " **********************************************************************
 " Abbreviations
@@ -237,14 +241,26 @@ nnoremap <leader>fgf :GFiles?!<CR>
 nnoremap <leader>fb :Buffers<CR>
 nmap <leader>fh :History:<CR>
 nmap <leader>frg :Rg!<Space>
+nnoremap <leader>fc :Commits<CR>
+nnoremap <leader>fbc :BCommits<CR>
 " TODO: snips
-" TODO: Commits
+
 
 " session management
 nnoremap <leader>so :SLoad<CR>
 nnoremap <leader>ss :SSave!<CR>
 nnoremap <leader>sd :SDelete<CR>
 nnoremap <leader>sc :SClose<CR>
+
+"" Git
+noremap <Leader>ga :Gwrite<CR>
+noremap <Leader>gc :Gcommit<CR>
+noremap <Leader>gsh :Gpush<CR>
+noremap <Leader>gll :Gpull<CR>
+noremap <Leader>gs :Gstatus<CR>
+noremap <Leader>gb :Gblame<CR>
+noremap <Leader>gd :Gvdiff<CR>
+noremap <Leader>gr :Gremove<CR>
 
 
 " **********************************************************************
