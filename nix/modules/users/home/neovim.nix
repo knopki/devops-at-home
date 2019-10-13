@@ -31,6 +31,7 @@ with lib; {
         vim-gitgutter
         ultisnips
         vim-snippets
+        pkgs.localVimPlugins.vim-sideways
 
         vim-orgmode
         vim-polyglot
