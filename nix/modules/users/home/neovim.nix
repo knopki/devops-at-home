@@ -32,6 +32,7 @@ with lib; {
         ultisnips
         vim-snippets
         pkgs.localVimPlugins.vim-sideways
+        vim-surround
 
         vim-orgmode
         vim-polyglot
