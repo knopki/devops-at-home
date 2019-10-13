@@ -288,11 +288,6 @@ let g:startify_fortune_use_unicode = 1
 let g:startify_session_sort = 0
 let g:startify_custom_header = []
 let g:startify_skip_list = ['COMMIT_MSG', '/nit/store/*']
-autocmd VimEnter * if !argc()
-\ |   Startify
-\ |   NERDTree
-\ |   wincmd w
-\ | endif
 
 
 
