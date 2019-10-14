@@ -236,14 +236,16 @@ cmap w!! w !sudo tee > /dev/null %
 nnoremap <silent> <leader>n :NERDTreeToggle<cr>
 
 "" fzf
-nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fgf :GFiles!?<CR>
-nnoremap <leader>fb :Buffers<CR>
-nmap <leader>fh :History:<CR>
-nmap <leader>frg :Rg!<Space>
-nnoremap <leader>fc :Commits<CR>
-nnoremap <leader>fC :BCommits<CR>
-nnoremap <leader>fs :Snippets<CR>
+nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>fgf :GFiles!?<CR>
+nnoremap <silent> <leader>fb :Buffers<CR>
+nmap     <silent> <leader>fh :History:<CR>
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+nnoremap <silent> <Leader>RG :Rg <C-R><C-A><CR>
+xnoremap <silent> <Leader>rg y:Rg <C-R>"<CR>
+nnoremap <silent> <leader>fc :Commits<CR>
+nnoremap <silent> <leader>fC :BCommits<CR>
+nnoremap <silent> <leader>fs :Snippets<CR>
 
 
 " session management
@@ -279,10 +281,37 @@ let g:NERDTreeShowBookmarks = 1
 " -------------------------------------
 " fzf.vim
 " -------------------------------------
-" set wildmode=list:longest,list:full
 autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+autocmd  FileType fzf set noshowmode noruler nonu
+
+" floating windows
+if has('nvim') && exists('&winblend') && &termguicolors
+  set winblend=10
+
+  hi NormalFloat guibg=None
+
+  if stridx($FZF_DEFAULT_OPTS, '--border') == -1
+    let $FZF_DEFAULT_OPTS .= ' --border --margin=0,2'
+  endif
+
+  function! FloatingFZF()
+    let width = float2nr(&columns * 0.9)
+    let height = float2nr(&lines * 0.6)
+    let opts = { 'relative': 'editor',
+              \ 'row': (&lines - height) / 2,
+              \ 'col': (&columns - width) / 2,
+              \ 'width': width,
+              \ 'height': height }
+
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+  endfunction
+
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+endif
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
 if executable('rg')
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Rg
@@ -333,13 +362,16 @@ xmap ia <Plug>SidewaysArgumentTextobjI
 
 
 
+" **********************************************************************
+" GUI-only hacks
+" **********************************************************************
+if has('nvim')
+  " nvim 0.4.2+ gui-only initializer
+  function! s:ui_enter()
+    if get(v:event, "chan") == 1
+      let $FZF_DEFAULT_OPTS .= ' --inline-info'
+    endif
+  endfunction
 
-
-"" nvim 0.4.2+ gui-only initializer
-" function! s:ui_enter()
-"   if get(v:event, "chan") == 1
-"     " do your gui setup
-"   endif
-" endfunction
-
-" au UIEnter * call s:ui_enter()
+  au UIEnter * call s:ui_enter()
+endif
