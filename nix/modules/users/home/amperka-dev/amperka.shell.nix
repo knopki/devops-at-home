@@ -88,6 +88,7 @@ pkgs.mkShell {
     pulumi-resource-kubernetes
     pulumi-resource-mysql
     python37Packages.pip
+    python37Packages.setuptools
     python37Packages.virtualenv
     python3Full
     rsync
