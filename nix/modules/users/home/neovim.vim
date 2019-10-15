@@ -369,6 +369,9 @@ if has('nvim')
   " nvim 0.4.2+ gui-only initializer
   function! s:ui_enter()
     if get(v:event, "chan") == 1
+      " disable neovim-gtk's tabline
+      call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
+      " additional info on gui
       let $FZF_DEFAULT_OPTS .= ' --inline-info'
     endif
   endfunction
