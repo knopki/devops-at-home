@@ -24,8 +24,8 @@ with lib; {
         nerdtree
         vim-startify
         pkgs.localVimPlugins.vim-bbye
-        context_filetype-vim # dep of caw-vim
-        caw-vim
+        context_filetype-vim
+        nerdcommenter
         vim-fugitive
         vim-rhubarb
         vim-gitgutter
