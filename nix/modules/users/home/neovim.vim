@@ -152,15 +152,9 @@ augroup filetype
 augroup end
 
 " Custom settings for file types
-augroup filetype
-  au! FileType viml set expandtab sw=2 sts=2
-  au! FileType cpp set sw=4 sts=4
-  au! FileType html set sw=2 sts=2
-  au! FileType javascript set sw=2 sts=2
-  au! FileType json set sw=2 sts=2
-  au! FileType yaml set sw=2 sts=2
-  au! FileType php set expandtab sw=4 sts=8
-augroup end
+"augroup filetype
+  "au! FileType cpp set sw=4 sts=4
+"augroup end
 
 
 " **********************************************************************
@@ -400,6 +394,12 @@ fu! NERDCommenter_after()
     let g:ft = ''
   endif
 endfu
+
+
+" -------------------------------------
+" .editorconfig support
+" -------------------------------------
+let g:EditorConfig_exclude_patterns = ['fugitive://.\*', 'scp://.\*']
 
 
 " **********************************************************************

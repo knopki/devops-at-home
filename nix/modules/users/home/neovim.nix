@@ -33,6 +33,7 @@ with lib; {
         vim-snippets
         pkgs.localVimPlugins.vim-sideways
         vim-surround
+        editorconfig-vim
 
         vim-orgmode
         vim-polyglot

@@ -22,6 +22,10 @@ with lib; {
               indent_style = "space";
               indent_size = 2;
             };
+            "*.php" = {
+              indent_style = "tab";
+              tab_width = 4;
+            };
           }
         )
       ];
