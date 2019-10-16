@@ -352,6 +352,9 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_session_sort = 1
 let g:startify_custom_header = []
 let g:startify_skip_list = ['COMMIT_MSG', '/nit/store/*']
+function! StartifyEntryFormat()
+  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
 
 
 " -------------------------------------

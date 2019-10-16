@@ -21,6 +21,7 @@ with lib; {
         vim-airline-themes
         vim-one
         indentLine
+        vim-devicons
 
         # fuzzt search everything
         fzf-vim
