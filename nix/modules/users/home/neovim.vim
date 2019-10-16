@@ -184,6 +184,7 @@ nnoremap <leader>. :lcd %:p:h<cr>
 
 " terminal emulation
 nnoremap <silent> <leader>sh :terminal<cr>
+tnoremap <Esc> <C-\><C-n>
 
 "" Opens an edit command with the path of the currently edited file filled in
 noremap <leader>e :e <C-R>=expand("%:p:h") . "/" <cr>
