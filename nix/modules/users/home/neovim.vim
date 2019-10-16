@@ -171,6 +171,10 @@ augroup end
 let mapleader = " "
 nmap <bslash> <space> " compat
 
+" More natural behavior on auto-wrapped lines
+nnoremap j gj
+nnoremap k gk
+
 "" Split
 noremap <leader>h :<C-u>split<cr>
 noremap <leader>v :<C-u>vsplit<cr>
