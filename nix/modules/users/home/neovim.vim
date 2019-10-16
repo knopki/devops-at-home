@@ -47,6 +47,9 @@ set linebreak     " Break on word boundaries
 set cpoptions+=$  " Put $ at the boundary of current replace
 set title         " Set window title
 
+" cross
+set cursorcolumn
+
 let no_buffers_menu=1
 
 " Theme
@@ -371,6 +374,11 @@ let g:context_filetype#filetypes.svelte =
 " -------------------------------------
 " NERDCommenter
 " -------------------------------------
+let g:NERDDefaultAlign = 'left'
+let g:NERDSpaceDelims = 1
+let g:NERDCommentEmpryLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
 let g:ft = ''
 fu! NERDCommenter_before()
   if (&ft == 'html') || (&ft == 'svelte') || (&ft == 'vue')
