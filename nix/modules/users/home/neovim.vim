@@ -270,6 +270,14 @@ noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gd :Gvdiff<CR>
 noremap <Leader>gr :Gremove<CR>
 
+"" Arguments movement and objects
+nnoremap <leader>< :SidewaysLeft<CR>
+nnoremap <leader>> :SidewaysRight<CR>
+omap aa <Plug>SidewaysArgumentTextobjA
+xmap aa <Plug>SidewaysArgumentTextobjA
+omap ia <Plug>SidewaysArgumentTextobjI
+xmap ia <Plug>SidewaysArgumentTextobjI
+
 
 " **********************************************************************
 " Custom configs
@@ -350,15 +358,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 let g:UltiSnipsEditSplit="vertical"
 
 
-" -------------------------------------
-" Arguments movement and objects
-" -------------------------------------
-nnoremap <leader>< :SidewaysLeft<CR>
-nnoremap <leader>> :SidewaysRight<CR>
-omap aa <Plug>SidewaysArgumentTextobjA
-xmap aa <Plug>SidewaysArgumentTextobjA
-omap ia <Plug>SidewaysArgumentTextobjI
-xmap ia <Plug>SidewaysArgumentTextobjI
 
 
 " -------------------------------------
