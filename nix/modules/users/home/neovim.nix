@@ -48,6 +48,9 @@ with lib; {
         context_filetype-vim # context-aware filetype for nerdcommenter
         nerdcommenter
 
+        # load envrc
+        direnv-vim
+
         ultisnips
         vim-snippets
         pkgs.localVimPlugins.vim-sideways
