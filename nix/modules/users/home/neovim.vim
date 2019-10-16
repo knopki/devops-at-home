@@ -215,8 +215,9 @@ nnoremap <silent> <S-t> :tabnew<CR>
 noremap <leader>q :bp<cr>
 noremap <leader>w :bn<cr>
 
-"" Close buffer
-noremap <leader>d :Bdelete<cr>
+"" Close buffer with or without window
+noremap <leader>d :bdelete<cr>
+noremap <leader>D :Bdelete<cr>
 
 "" Clean search (highlight)
 nnoremap <silent> <leader>h :noh<cr>
