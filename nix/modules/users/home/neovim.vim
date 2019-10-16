@@ -35,6 +35,8 @@ set iminsert=0 " default insert - english
 set imsearch=0 " default search - english
 set spelllang=ru_yo,en_us
 
+" wildmode style
+set wildmode=longest:full,full
 set wildignore+=*/tmp/*,.git,*.o,*.obj,*.so,*.swp,*.zip,*.pyc,__pycache__,*.db,*.sqlite
 
 
