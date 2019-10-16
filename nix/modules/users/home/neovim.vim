@@ -79,6 +79,9 @@ let g:indentLine_faster = 1
 if $TERM =~ '256color'
   let g:airline_powerline_fonts = 1
 endif
+if exists('g:GtkGuiLoaded')
+  let g:airline_powerline_fonts = 1
+endif
 let g:airline_theme='one'
 let g:airline_highlighting_cache = 1
 let g:airline_skip_empty_sections = 1
