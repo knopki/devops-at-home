@@ -44,6 +44,8 @@ set wildignore+=*/tmp/*,.git,*.o,*.obj,*.so,*.swp,*.zip,*.pyc,__pycache__,*.db,*
 syntax on
 set number        " Show line numbers
 set linebreak     " Break on word boundaries
+set breakindent   " Indent wrapped lines
+set showbreak=↪   " Visually prepend wrapped lines with symbol
 set cpoptions+=$  " Put $ at the boundary of current replace
 set title         " Set window title
 
