@@ -278,6 +278,8 @@ xmap aa <Plug>SidewaysArgumentTextobjA
 omap ia <Plug>SidewaysArgumentTextobjI
 xmap ia <Plug>SidewaysArgumentTextobjI
 
+"" Undo tree
+nnoremap <leader>ut :UndotreeToggle<CR>
 
 " **********************************************************************
 " Custom configs
@@ -356,8 +358,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 let g:UltiSnipsEditSplit="vertical"
-
-
 
 
 " -------------------------------------

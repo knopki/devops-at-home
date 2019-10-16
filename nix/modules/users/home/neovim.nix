@@ -41,6 +41,9 @@ with lib; {
         # support .editorconfig
         editorconfig-vim
 
+        # undo tree vizualizer
+        undotree
+
         # commenting
         context_filetype-vim # context-aware filetype for nerdcommenter
         nerdcommenter
