@@ -107,10 +107,10 @@ cnoreabbrev Q q
 cnoreabbrev Qall qall
 
 
-"*****************************************************************************
-"" Commands
-"*****************************************************************************
-" remove trailing whitespaces
+" **********************************************************************
+" Commands
+" **********************************************************************
+"" remove trailing whitespaces
 command! FixWhitespace :%s/\s\+$//e
 
 
@@ -215,9 +215,8 @@ nnoremap <silent> <S-t> :tabnew<CR>
 noremap <leader>q :bp<cr>
 noremap <leader>w :bn<cr>
 
-"" Close buffer without window and with
+"" Close buffer
 noremap <leader>d :Bdelete<cr>
-noremap <leader>D :bdelete<cr>
 
 "" Clean search (highlight)
 nnoremap <silent> <leader>h :noh<cr>
