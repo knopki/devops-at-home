@@ -202,9 +202,11 @@ if has('unnamedplus')
   set clipboard=unnamed,unnamedplus
 endif
 
-" noremap YY "+y<cr>
-" noremap <leader>p "+gP<cr>
-" noremap XX "+x<cr>
+" Copy whole buffer into clipboard
+nnoremap YY m'gg"+yG''
+
+" Copy current buffer's full fs path to clipboard
+noremap <silent> <leader>yp :let @+=expand("%:p")<cr>
 
 "" Tabs
 nnoremap <Tab> gt
