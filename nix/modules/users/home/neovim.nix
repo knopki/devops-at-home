@@ -16,24 +16,39 @@ with lib; {
       vimAlias = true;
 
       plugins = with pkgs.vimPlugins; [
+        # visual
         vim-airline
         vim-airline-themes
         vim-one
         indentLine
+
+        # fuzzt search everything
         fzf-vim
+        # filemanager
         nerdtree
+
+        # session management and more
         vim-startify
+
+        # don't close window with buffer
         pkgs.localVimPlugins.vim-bbye
-        context_filetype-vim
-        nerdcommenter
+
+        # git stuff
         vim-fugitive
-        vim-rhubarb
+        vim-rhubarb # open file on github
         vim-gitgutter
+
+        # support .editorconfig
+        editorconfig-vim
+
+        # commenting
+        context_filetype-vim # context-aware filetype for nerdcommenter
+        nerdcommenter
+
         ultisnips
         vim-snippets
         pkgs.localVimPlugins.vim-sideways
         vim-surround
-        editorconfig-vim
 
         vim-orgmode
         vim-polyglot
