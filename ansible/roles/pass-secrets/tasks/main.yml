@@ -12,8 +12,8 @@
     content: "{{ item.content }}"
     dest: "{{ pass_secrets_destination }}/{{ item.name }}"
     owner: "{{ item.owner|default('root') }}"
-    group: "{{ item.owner|default('root') }}"
-    mode: "{{ item.owner|default('0640') }}"
-  no_log: yes
+    group: "{{ item.group|default('root') }}"
+    mode: "{{ item.mode|default('0640') }}"
+  # no_log: yes
   with_items:
     - "{{ pass_secrets }}"
