@@ -26,20 +26,20 @@
   "nixpkgs-stable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "dbad7c7d59f12e81032bc3100e3d9fa44b6d4e70",
-    "sha256": "1pjhslnhz4gngbclyr39x4xaicrc1sz2xy8bsrvlr3cl5qrbki2b"
+    "rev": "8bf142e001b6876b021c8ee90c2c7cec385fe8e9",
+    "sha256": "1z8id8ix24ds9i7cm8g33v54j7xbhcpwzw50wlq00alj00xrq307"
   },
   "nixpkgs-unstable": {
     "owner": "NixOS",
     "repo": "nixpkgs-channels",
-    "rev": "b943338ea582aeb9b0a406d7fb75f3f62bc16a9d",
-    "sha256": "06azqwqg1x4xyr9cw75d465rbwla9cjjynjvd8r4bls5zgvvkcjy"
+    "rev": "1c40ee6fc44f7eb474c69ea070a43247a1a2c83c",
+    "sha256": "0xvgx4zsz8jk125xriq7jfp59px8aa0c5idbk25ydh2ly7zmb2df"
   },
   "nixpkgs-master": {
     "owner": "NixOS",
     "repo": "nixpkgs",
-    "rev": "9ae60cff0c2036c7289b4804f29f9837b497631d",
-    "sha256": "1l0y32g4qdhx8cyvawh823ahjpj5v4frm8sci0rpawbfad7nqvx1"
+    "rev": "f35f0880f2cdbc8c1bc81492811251f120d7a9bc",
+    "sha256": "16ggjvcp2q5pfwxdrnma1b4bc05y4p3j5gxhb7f8gjbal1ndfk91"
   },
   "nixpkgs-wayland": {
     "owner": "colemickens",
@@ -50,7 +50,7 @@
   "nur": {
     "owner": "nix-community",
     "repo": "NUR",
-    "rev": "3e672c58de88f86295b76713a2614020aa5284ed",
-    "sha256": "1hlz0as3xl88187sjm3xqn3yv0mzj70pia5b79h54qpb3l8l41m0"
+    "rev": "1f6a8c94a346f4ae51088801740640f8c5b5b966",
+    "sha256": "1iyay841z50hgqakgl4v3lsb99c731ij2pdi324fpdgw8vvjjmqz"
   }
 }
