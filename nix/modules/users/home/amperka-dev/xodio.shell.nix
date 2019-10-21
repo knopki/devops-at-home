@@ -5,8 +5,8 @@ let
       # NixOS 19.09 @ 2019-10-11
       owner = "NixOS";
       repo = "nixpkgs-channels";
-      rev = "9bbad4c6254513fa62684da57886c4f988a92092";
-      sha256 = "00dhkkmar3ynfkx9x0h7hzjpcqvwsfmgz3j0xj80156kbw7zq4bb";
+      rev = "8bf142e001b6876b021c8ee90c2c7cec385fe8e9";
+      sha256 = "1z8id8ix24ds9i7cm8g33v54j7xbhcpwzw50wlq00alj00xrq307";
     };
     devops-at-home = {
       # knopki/devops-at-home @ 2019-09-26
