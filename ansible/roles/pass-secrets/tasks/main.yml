@@ -14,6 +14,6 @@
     owner: "{{ item.owner|default('root') }}"
     group: "{{ item.group|default('root') }}"
     mode: "{{ item.mode|default('0640') }}"
-  # no_log: yes
+  no_log: yes
   with_items:
     - "{{ pass_secrets }}"
