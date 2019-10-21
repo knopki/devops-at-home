@@ -2,11 +2,18 @@ let
   fetchFromGitHub = (import <nixpkgs> {}).fetchFromGitHub;
   versions = {
     nixpkgs-stable = {
-      # NixOS 19.09 @ 2019-10-11
+      # NixOS 19.09 @ 2019-10-21
       owner = "NixOS";
       repo = "nixpkgs-channels";
       rev = "8bf142e001b6876b021c8ee90c2c7cec385fe8e9";
       sha256 = "1z8id8ix24ds9i7cm8g33v54j7xbhcpwzw50wlq00alj00xrq307";
+    };
+    nixpkgs-unstable = {
+      # NixOS unstable @ 2019-10-21
+      owner = "NixOS";
+      repo = "nixpkgs-channels";
+      rev = "1c40ee6fc44f7eb474c69ea070a43247a1a2c83c";
+      sha256 = "0xvgx4zsz8jk125xriq7jfp59px8aa0c5idbk25ydh2ly7zmb2df";
     };
     devops-at-home = {
       # knopki/devops-at-home @ 2019-09-26
@@ -26,47 +33,14 @@ let
     overlays = [
       (
         self: super: {
+          unstable = import (fetchFromGitHub versions.nixpkgs-unstable) {};
+        }
+      )
+      (
+        self: super: {
           kube-score = super.callPackage "${fetchFromGitHub versions.devops-at-home}/nix/pkgs/kube-score" {};
           kustomize = (import (fetchFromGitHub versions.nixpkgs-kustomize-1) {}).kustomize;
-          telepresence = super.telepresence.overrideAttrs (
-            old: rec {
-              version = "0.101";
-              src = fetchFromGitHub {
-                owner = "datawire";
-                repo = "telepresence";
-                rev = version;
-                sha256 = "1rxq22vcrw29682g7pdcwcjyifcg61z8y4my1di7yw731aldk274";
-              };
-              sshuttle-telepresence = super.sshuttle.overrideDerivation (
-                p: {
-                  src = super.fetchgit {
-                    url = "https://github.com/datawire/sshuttle.git";
-                    rev = "32226ff14d98d58ccad2a699e10cdfa5d86d6269";
-                    sha256 = "1q20lnljndwcpgqv2qrf1k0lbvxppxf98a4g5r9zd566znhcdhx3";
-                  };
-
-                  nativeBuildInputs = p.nativeBuildInputs ++ [ super.git ];
-
-                  postPatch = "rm sshuttle/tests/client/test_methods_nat.py";
-                  postInstall = "mv $out/bin/sshuttle $out/bin/sshuttle-telepresence";
-                }
-              );
-
-              postInstall = ''
-                wrapProgram $out/bin/telepresence \
-                  --prefix PATH : ${pkgs.lib.makeBinPath [
-                super.sshfs-fuse
-                super.torsocks
-                super.conntrack-tools
-                sshuttle-telepresence
-                super.openssh
-                super.coreutils
-                super.iptables
-                super.bash
-              ]}
-              '';
-            }
-          );
+          telepresence = super.unstable.telepresence;
         }
       )
     ];
