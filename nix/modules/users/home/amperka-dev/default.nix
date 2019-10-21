@@ -27,6 +27,8 @@ let
     export GOOGLE_REGION="US"
     export GOOGLE_ZONE="us-central1-a"
     export GOOGLE_PROJECT="xodio-146312"
+
+    layout go
   '';
   homePath = config.home.homeDirectory;
 in

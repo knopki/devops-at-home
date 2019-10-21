@@ -49,8 +49,10 @@ in
 pkgs.mkShell {
   buildInputs = with pkgs; [
     curl
+    dep
     direnv
     docker-compose
+    go
     google-cloud-sdk
     jq
     kube-score
