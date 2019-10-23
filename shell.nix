@@ -22,6 +22,8 @@ in
 pkgs.mkShell {
   buildInputs = with pkgs; [
     ansible
+    ansible-lint
+    gitAndTools.pre-commit
     morph
     niv
     nix-prefetch-git
