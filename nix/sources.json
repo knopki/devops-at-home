@@ -1,0 +1,181 @@
+{
+    "LS_COLORS": {
+        "branch": "master",
+        "description": "A collection of LS_COLORS definitions; needs your contribution!",
+        "homepage": "",
+        "owner": "trapd00r",
+        "repo": "LS_COLORS",
+        "rev": "332d7a18696057e21f5acd9bb885acffbe798bd4",
+        "sha256": "08mga3jg1f3zsspx0hlgywlabwq07qp5qk1lgjz8rawj62zmqqrf",
+        "type": "builtin-tarball",
+        "url": "https://github.com/trapd00r/LS_COLORS/archive/332d7a18696057e21f5acd9bb885acffbe798bd4.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "332d7a18696057e21f5acd9bb885acffbe798bd4"
+    },
+    "devops-at-home": {
+        "branch": "master",
+        "description": "Configuration management of my personal machines, because why not",
+        "homepage": "",
+        "owner": "knopki",
+        "repo": "devops-at-home",
+        "rev": "22d058967cf3eca28a94cf1d0863060e0d1272a9",
+        "sha256": "07461cy3qmlwn566ip7f62ygcmzkl6mck85i9qipm0mh86vxs9f3",
+        "type": "tarball",
+        "url": "https://github.com/knopki/devops-at-home/archive/22d058967cf3eca28a94cf1d0863060e0d1272a9.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "fish-kubectl-completions": {
+        "branch": "master",
+        "description": "kubectl completions for fish shell",
+        "homepage": "",
+        "owner": "evanlucas",
+        "repo": "fish-kubectl-completions",
+        "rev": "dbcd150a1c7b4b96da8c63b654de43bf8271c2f1",
+        "sha256": "15f7nn96n3pg2c92dm71lynmy8d8ijqzihjkbvfkx5sc7nvcmf5j",
+        "type": "builtin-tarball",
+        "url": "https://github.com/evanlucas/fish-kubectl-completions/archive/dbcd150a1c7b4b96da8c63b654de43bf8271c2f1.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "dbcd150a1c7b4b96da8c63b654de43bf8271c2f1"
+    },
+    "fish-theme-pure": {
+        "branch": "master",
+        "description": "Port of the `pure` ZSH prompt to Fish 🐟",
+        "homepage": "",
+        "owner": "rafaelrinaldi",
+        "repo": "pure",
+        "rev": "339a7b2ba1f0fc767f1d4b6a8ade2b6255ef1923",
+        "sha256": "1ki1wh2lcdpbnsa2msl5w2fi7gi5l725vj01b4s3dc69761q49xn",
+        "type": "builtin-tarball",
+        "url": "https://github.com/rafaelrinaldi/pure/archive/339a7b2ba1f0fc767f1d4b6a8ade2b6255ef1923.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "v2.1.8"
+    },
+    "morph": {
+        "branch": "master",
+        "description": "NixOS deployment tool",
+        "homepage": null,
+        "owner": "delroth",
+        "repo": "morph",
+        "rev": "949c3eaa50805921c77381a4e248c1f2db1be449",
+        "sha256": "0rcls8vv4a0hld0ryw7z6qgvpqz16rhf5dzagcsrib0s85b800gf",
+        "type": "builtin-tarball",
+        "url": "https://github.com/delroth/morph/archive/949c3eaa50805921c77381a4e248c1f2db1be449.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "949c3eaa50805921c77381a4e248c1f2db1be449"
+    },
+    "niv": {
+        "branch": "master",
+        "description": "Easy dependency management for Nix projects",
+        "homepage": "https://github.com/nmattia/niv",
+        "owner": "nmattia",
+        "repo": "niv",
+        "rev": "1dd094156b249586b66c16200ecfd365c7428dc0",
+        "sha256": "1b2vjnn8iac5iiqszjc2v1s1ygh0yri998c0k3s4x4kn0dsqik21",
+        "type": "builtin-tarball",
+        "url": "https://github.com/nmattia/niv/archive/1dd094156b249586b66c16200ecfd365c7428dc0.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "nixos-19.09",
+        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "80b42e630b23052d9525840a9742100a2ceaaa8f",
+        "sha256": "0243qiivxl3z51biy4f5y5cy81x5bki5dazl9wqwgnmd373gpmxy",
+        "type": "builtin-tarball",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/80b42e630b23052d9525840a9742100a2ceaaa8f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-kustomize-1": {
+        "branch": "nixos-unstable",
+        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "f35f0880f2cdbc8c1bc81492811251f120d7a9bc",
+        "sha256": "16ggjvcp2q5pfwxdrnma1b4bc05y4p3j5gxhb7f8gjbal1ndfk91",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/f35f0880f2cdbc8c1bc81492811251f120d7a9bc.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "2d5908f89bab59c2c4f88fbfc900dfff9baa55f0"
+    },
+    "nixpkgs-master": {
+        "branch": "master",
+        "description": "Nix Packages collection",
+        "homepage": null,
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3017d3295ed920ab39d8953970529538cca3cd0f",
+        "sha256": "1w2r9z5lmpj4j320anvy75k51i7kqhw8n2qf8rbni0fxv66my1n5",
+        "type": "builtin-tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/3017d3295ed920ab39d8953970529538cca3cd0f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-unstable": {
+        "branch": "nixos-unstable",
+        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "f35f0880f2cdbc8c1bc81492811251f120d7a9bc",
+        "sha256": "16ggjvcp2q5pfwxdrnma1b4bc05y4p3j5gxhb7f8gjbal1ndfk91",
+        "type": "builtin-tarball",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/f35f0880f2cdbc8c1bc81492811251f120d7a9bc.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-wayland": {
+        "branch": "master",
+        "description": "nixpkgs-wayland is an overlay for sway and other wlroots-related Wayland tools",
+        "homepage": "",
+        "owner": "colemickens",
+        "repo": "nixpkgs-wayland",
+        "rev": "afc347f53c02446f2a24a3c282ccf272bdd16e23",
+        "sha256": "0kpzh9qdd3xgvnqzyivm3wjxmnz6m4mx6ay0npwngg81inkw7s4j",
+        "type": "builtin-tarball",
+        "url": "https://github.com/colemickens/nixpkgs-wayland/archive/afc347f53c02446f2a24a3c282ccf272bdd16e23.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "446a2538c29fa256808c9b5c8069385c520c695f"
+    },
+    "nur": {
+        "branch": "master",
+        "description": "Nix User Repository: User contributed nix packages [maintainer=@Mic92]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "9fdf3bef147827446860ba50a32a97c0cc6c448c",
+        "sha256": "018hyvza860x2yvcziy396c475qyhbq1l3712s2yscqnx6lhifjf",
+        "type": "builtin-tarball",
+        "url": "https://github.com/nix-community/NUR/archive/9fdf3bef147827446860ba50a32a97c0cc6c448c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "1f6a8c94a346f4ae51088801740640f8c5b5b966"
+    },
+    "pulumi-bin": {
+        "sha256": "1sqy0sm084cxqxnwlnqp566sdpy31l8ciyni6fridd0y5hqnp3ga",
+        "type": "file",
+        "url": "https://get.pulumi.com/releases/sdk/pulumi-v1.3.1-linux-x64.tar.gz",
+        "url_template": "https://get.pulumi.com/releases/sdk/pulumi-v<version>-linux-x64.tar.gz",
+        "version": "1.3.1"
+    },
+    "pulumi-resource-gcp-bin": {
+        "sha256": "04l086a8ab72w5d7l59xl49lcwjq05n1fkhx1pxm5x7l5zw1id6y",
+        "type": "file",
+        "url": "https://api.pulumi.com/releases/plugins/pulumi-resource-gcp-v1.3.0-linux-amd64.tar.gz",
+        "url_template": "https://api.pulumi.com/releases/plugins/pulumi-resource-gcp-v<version>-linux-amd64.tar.gz",
+        "version": "1.3.0"
+    },
+    "pulumi-resource-kubernetes-bin": {
+        "sha256": "0rczcfmwwscxm423lq81x4pgfcqg4jmairzjcbd3p6acqd72452j",
+        "type": "file",
+        "url": "https://api.pulumi.com/releases/plugins/pulumi-resource-kubernetes-v1.1.0-linux-amd64.tar.gz",
+        "url_template": "https://api.pulumi.com/releases/plugins/pulumi-resource-kubernetes-v<version>-linux-amd64.tar.gz",
+        "version": "1.1.0"
+    },
+    "pulumi-resource-mysql-bin": {
+        "sha256": "0nh6rzd7rih5srkn7cb3lq79bsxbnk9zamdpyxvrqivngsxw8k9c",
+        "type": "file",
+        "url": "https://api.pulumi.com/releases/plugins/pulumi-resource-mysql-v1.0.0-linux-amd64.tar.gz",
+        "url_template": "https://api.pulumi.com/releases/plugins/pulumi-resource-mysql-v<version>-linux-amd64.tar.gz",
+        "version": "1.0.0"
+    }
+}

@@ -1,16 +1,12 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
-  sysPkgs = import <nixpkgs> {};
-  fetchFromGitHub = sysPkgs.fetchFromGitHub;
-  versions = builtins.fromJSON (builtins.readFile ../../pkgs/versions.json);
-  nixpkgsSrcStable = fetchFromGitHub versions.nixpkgs-stable;
-  nur-no-pkgs = import (fetchFromGitHub versions.nur) {};
-  rebuild-throw = sysPkgs.writeText "rebuild-throw.nix"
+  sources = import ../../sources.nix;
+  rebuild-throw = pkgs.writeText "rebuild-throw.nix"
     ''throw "I'm sorry Dave, I'm afraid I can't do that... Please deploy this host with morph or specify NIX_PATH with nixos-config."'';
 in
 {
-  imports = [ nur-no-pkgs.repos.rycee.modules.home-manager ];
+  imports = [ (import sources.nur {}).repos.rycee.modules.home-manager ];
 
   options = { local.general.nixpkgs.enable = mkEnableOption "Nixpkgs"; };
 
@@ -18,13 +14,13 @@ in
     nixpkgs = {
       config.allowUnfree = true;
       config.packageOverrides = pkgs: {
-        nur = import (fetchFromGitHub versions.nur) { inherit pkgs; };
-        unstable = import (fetchFromGitHub versions.nixpkgs-unstable) {
+        nur = import sources.nur { inherit pkgs; };
+        unstable = import sources.nixpkgs-unstable {
           config.allowUnfree = true;
         };
       };
 
-      pkgs = import "${nixpkgsSrcStable}" {
+      pkgs = import sources.nixpkgs {
         config = config.nixpkgs.config;
         overlays = config.nixpkgs.overlays;
       };
@@ -48,10 +44,13 @@ in
       ];
     };
 
-    nix.nixPath = [
-      "nixpkgs=${nixpkgsSrcStable}"
-      "nixos-config=${rebuild-throw}"
-    ];
+    nix.nixPath = mkDefault (
+      mkBefore [
+        "${sources.nixpkgs}"
+        "nixpkgs=${sources.nixpkgs}"
+        "nixos-config=${rebuild-throw}"
+      ]
+    );
 
     environment.etc."nixos/configuration.nix".source = rebuild-throw;
   };

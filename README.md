@@ -42,6 +42,12 @@ You can build, deploy and activate like:
 morph deploy nix/deploy.nix --on="*panzer*" switch
 ```
 
+#### Update dependencies
+
+```shell
+niv update <package_in_sources_json>
+```
+
 #### Manual apply
 
 If something goes wrong or for development.

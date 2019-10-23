@@ -70,6 +70,7 @@ with lib;
 
     programs = {
       bash.enableCompletion = true;
+      command-not-found.enable = false;
       iftop.enable = true;
       iotop.enable = true;
       mosh.enable = true;
