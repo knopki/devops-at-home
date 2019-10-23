@@ -53,5 +53,7 @@ in
     );
 
     environment.etc."nixos/configuration.nix".source = rebuild-throw;
+
+    system.nixos.versionSuffix = mkDefault "";
   };
 }
