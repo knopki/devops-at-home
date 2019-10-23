@@ -10,20 +10,14 @@ let
           pulumi-bin = super.pulumi-bin.overrideAttrs (
             old: rec {
               version = sources.pulumi-bin.version;
-              src = super.fetchurl {
-                url = sources.pulumi-bin.url;
-                sha256 = sources.pulumi-bin.sha256;
-              };
+              src = sources.pulumi-bin;
             }
           );
           pulumi-resource-gcp-bin = super.pulumi-bin.overrideAttrs (
             old: {
               version = sources.pulumi-resource-gcp-bin.version;
               pname = "pulumi-resource-gcp-bin";
-              src = super.fetchurl {
-                url = sources.pulumi-resource-gcp-bin.url;
-                sha256 = sources.pulumi-resource-gcp-bin.sha256;
-              };
+              src = sources.pulumi-resource-gcp-bin;
               setSourceRoot = "sourceRoot=`pwd`";
             }
           );
@@ -31,10 +25,7 @@ let
             old: {
               version = sources.pulumi-resource-mysql-bin.version;
               pname = "pulumi-resource-mysql-bin";
-              src = super.fetchurl {
-                url = sources.pulumi-resource-mysql-bin.url;
-                sha256 = sources.pulumi-resource-mysql-bin.sha256;
-              };
+              src = sources.pulumi-resource-mysql-bin;
               setSourceRoot = "sourceRoot=`pwd`";
             }
           );
@@ -42,10 +33,7 @@ let
             old: rec {
               version = sources.pulumi-resource-kubernetes-bin.version;
               pname = "pulumi-resource-kubernetes-bin";
-              src = super.fetchurl {
-                url = sources.pulumi-resource-kubernetes-bin.url;
-                sha256 = sources.pulumi-resource-kubernetes-bin.sha256;
-              };
+              src = sources.pulumi-resource-kubernetes-bin;
               setSourceRoot = "sourceRoot=`pwd`";
             }
           );

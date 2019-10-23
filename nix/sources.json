@@ -177,5 +177,31 @@
         "url": "https://api.pulumi.com/releases/plugins/pulumi-resource-mysql-v1.0.0-linux-amd64.tar.gz",
         "url_template": "https://api.pulumi.com/releases/plugins/pulumi-resource-mysql-v<version>-linux-amd64.tar.gz",
         "version": "1.0.0"
+    },
+    "vim-bbye": {
+        "branch": "master",
+        "description": "Delete buffers and close files in Vim without closing your windows or messing up your layout. Like Bclose.vim, but rewritten and well maintained.",
+        "homepage": "http://www.vim.org/scripts/script.php?script_id=4664",
+        "owner": "moll",
+        "repo": "vim-bbye",
+        "rev": "25ef93ac5a87526111f43e5110675032dbcacf56",
+        "sha256": "0dlifpbd05fcgndpkgb31ww8p90pwdbizmgkkq00qkmvzm1ik4y4",
+        "type": "tarball",
+        "url": "https://github.com/moll/vim-bbye/archive/25ef93ac5a87526111f43e5110675032dbcacf56.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "v1.0.1"
+    },
+    "vim-sideways": {
+        "branch": "master",
+        "description": "A Vim plugin to move function arguments (and other delimited-by-something items) left and right.",
+        "homepage": "http://www.vim.org/scripts/script.php?script_id=4171",
+        "owner": "AndrewRadev",
+        "repo": "sideways.vim",
+        "rev": "17c03c59913f76bbdede07b8f9d4a1f163d9b2f2",
+        "sha256": "1f1s5i8rrgvz1rpyy7lnhrid05ps9fnqryyqpz2nfq0aggws93sr",
+        "type": "tarball",
+        "url": "https://github.com/AndrewRadev/sideways.vim/archive/17c03c59913f76bbdede07b8f9d4a1f163d9b2f2.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "v0.3.0"
     }
 }

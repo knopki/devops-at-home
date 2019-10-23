@@ -1,14 +1,12 @@
 { stdenv, fetchFromGitHub }:
-
+let
+  sources = import ../sources.nix;
+in
 stdenv.mkDerivation rec {
   name = "fish-theme-pure-${version}";
-  version = "2.1.8";
-
-  src = fetchFromGitHub
-    (builtins.fromJSON (builtins.readFile ./versions.json)).fish-theme-pure;
-
+  version = sources.fish-theme-pure.version;
+  src = sources.fish-theme-pure;
   dontBuild = true;
-
   installPhase = ''
     mkdir -p $out/share/fish
     cp -r functions $out/share/fish/vendor_functions.d
