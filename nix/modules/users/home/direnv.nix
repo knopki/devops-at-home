@@ -6,6 +6,6 @@ with lib; {
 
   config = mkIf config.local.direnv.enable {
     home.packages = with pkgs; [ direnv ];
-    home.file.".direnvrc".text = readFile ./direnv.sh;
+    home.file.".direnvrc".source = pkgs.nix-direnvrc;
   };
 }

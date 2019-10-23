@@ -35,6 +35,7 @@ in
             localVimPlugins = super.callPackage ../../pkgs/vimPlugins.nix {};
             neovim-gtk = super.nur.repos.n1kolasM.neovim-gtk;
             neovim-unwrapped = super.unstable.neovim-unwrapped;
+            nix-direnvrc = "${sources.nix-direnv}/direnvrc";
             trapd00r-ls-colors =
               super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
             waybar = super.waybar.override { pulseSupport = true; };

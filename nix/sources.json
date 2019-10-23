@@ -75,6 +75,18 @@
         "url": "https://github.com/nmattia/niv/archive/1dd094156b249586b66c16200ecfd365c7428dc0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nix-direnv": {
+        "branch": "master",
+        "description": "A fast, persistent use_nix implementation for direnv [maintainer=@Mic92] ",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "nix-direnv",
+        "rev": "f9889758694bdfe11251ac475d78a93804dbd93c",
+        "sha256": "16mpc6lidmn6annyl4skdixzx7syvwdj9c5la0sidg57l8kh1rqd",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/nix-direnv/archive/f9889758694bdfe11251ac475d78a93804dbd93c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs": {
         "branch": "nixos-19.09",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
