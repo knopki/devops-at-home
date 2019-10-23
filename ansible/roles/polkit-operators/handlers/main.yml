@@ -1,3 +1,0 @@
----
-- name: restart polkit
-  systemd: name=polkit state=restarted

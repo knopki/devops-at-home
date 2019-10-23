@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  remote_user: root
-  roles:
-    - role: ansible-role-user
-      user_list:
-        - name: test

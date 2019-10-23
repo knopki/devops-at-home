@@ -1,6 +1,0 @@
----
-- name: Deploy .config/dircolors
-  copy:
-    src: dircolors
-    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/dircolors"
-  tags: shell, dircolors

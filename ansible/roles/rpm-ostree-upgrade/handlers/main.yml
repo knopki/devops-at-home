@@ -1,3 +1,0 @@
----
-- name: rpm-ostreed restart
-  service: name=rpm-ostreed state=restarted

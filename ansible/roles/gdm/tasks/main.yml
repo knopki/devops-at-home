@@ -1,9 +1,0 @@
----
-- name: Set /etc/gdm/custom.conf
-  ini_file:
-    path: /etc/gdm/custom.conf
-    section: "{{ item.section }}"
-    option: "{{ item.option }}"
-    value: "{{ item.value }}"
-  with_items: "{{ gdm_custom }}"
-  tags: gdm

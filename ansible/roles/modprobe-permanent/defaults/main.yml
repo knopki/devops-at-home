@@ -1,6 +1,0 @@
----
-modprobe_permanent: "{{
-  modprobe_permanent_default|d([]) +
-  modprobe_permanent_group|d([]) +
-  modprobe_permanent_host|d([])
-}}"

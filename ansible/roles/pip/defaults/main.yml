@@ -1,6 +1,0 @@
----
-pip: "{{
-  pip_default|d([]) +
-  pip_group|d([]) +
-  pip_host|d([])
-}}"

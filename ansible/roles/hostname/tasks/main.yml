@@ -1,5 +1,0 @@
----
-- name: Set hostname
-  hostname:
-    name: "{{ hostname|default(inventory_hostname) }}"
-  tags: hostname

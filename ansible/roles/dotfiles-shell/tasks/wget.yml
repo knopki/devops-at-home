@@ -1,6 +1,0 @@
----
-- name: Deploy .wgetrc
-  copy:
-    src: .wgetrc
-    dest: "{{ lookup('env','HOME') }}/.wgetrc"
-  tags: shell, wget

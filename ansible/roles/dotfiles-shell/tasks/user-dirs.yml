@@ -1,9 +1,0 @@
----
-- name: Deploy user-dirs configuration
-  copy:
-    src: "user-dirs/{{ item }}"
-    dest: "{{ lookup('env','XDG_CONFIG_HOME') }}/user-dirs.{{ item }}"
-  with_items:
-    - dirs
-    - locale
-  tags: shell, user-dirs

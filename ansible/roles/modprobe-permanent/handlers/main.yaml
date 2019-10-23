@@ -1,4 +1,0 @@
----
-- name: update initramfs
-  command: dracut -f
-  tags: modprobe_permanent

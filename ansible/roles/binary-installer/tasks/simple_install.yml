@@ -1,9 +1,0 @@
----
-- name: Download simple binaries
-  get_url:
-    url: "{{ binary.url }}"
-    dest: "{{ binary.dest }}"
-    checksum: "{{ binary.checksum }}"
-    owner: root
-    mode: 0755
-  tags: binary-installer

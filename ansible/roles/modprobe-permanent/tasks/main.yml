@@ -1,9 +1,0 @@
----
-- name: Create /etc/modprobe.d files
-  tags: modprobe_permanent
-  template:
-    src: config.j2
-    dest: "/etc/modprobe.d/{{ item.name }}.conf"
-  with_items: "{{ modprobe_permanent }}"
-  notify:
-    - update initramfs

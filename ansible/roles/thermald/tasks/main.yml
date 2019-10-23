@@ -1,8 +1,0 @@
----
-# This is role stub
-- name: Enable thermald service
-  systemd:
-    name: thermald
-    state: started
-    enabled: yes
-  tags: thermald

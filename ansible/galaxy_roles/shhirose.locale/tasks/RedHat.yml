@@ -1,8 +1,0 @@
----
-- name: Check setting locale
-  shell: echo $LANG
-  register: current_locale
-  changed_when: current_locale.stdout != shhirose_locale_locale 
-  notify: Change locale for RedHat
-  when: ansible_distribution_major_version|int >=7
-

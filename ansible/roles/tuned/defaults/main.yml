@@ -1,4 +1,0 @@
----
-tuned_profile: desktop
-tuned_second_profile: "{{ tuned_profile }}"
-tuned_battery_profile_switch: no

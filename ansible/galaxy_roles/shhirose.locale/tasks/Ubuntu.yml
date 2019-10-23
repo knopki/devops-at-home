@@ -1,6 +1,0 @@
----
-- name: Check setting locale
-  shell: grep "LANG={{ shhirose_locale_locale }}" /etc/default/locale | wc -l
-  register: same_locale_count
-  changed_when: same_locale_count.stdout|int == 0
-  notify: Change locale for Ubuntu

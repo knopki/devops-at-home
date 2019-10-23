@@ -1,6 +1,0 @@
----
-sysctl_host_parameters:
-  - name: 'net.ipv4.ip_forward'
-    value: '1'
-    comment: Enable forwarding
-    state: present

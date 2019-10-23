@@ -1,7 +1,4 @@
 ---
-- import_playbook: do-fra1.1984.run.yml
-- import_playbook: dotfiles.yml
-
 - hosts: nixos
   any_errors_fatal: true
   become: true

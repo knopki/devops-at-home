@@ -1,6 +1,0 @@
----
-firewalld_default_zone: public
-firewalld_default_services:
-  - dhcpv6-client
-  - mdns
-  - ssh

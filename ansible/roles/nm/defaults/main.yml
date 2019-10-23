@@ -1,5 +1,0 @@
-nm_conf: "{{
-  nm_conf_default|d([]) +
-  nm_conf_group|d([]) +
-  nm_conf_host|d([])
-}}"

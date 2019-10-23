@@ -1,0 +1,18 @@
+---
+ansible_user: root
+ansible_host: z.jupiter.1984.run
+ansible_python_interpreter: /usr/bin/env python3
+pass_secrets:
+  - name: root_password
+    content: "{{ lookup('passwordstore','devices/jupiter.1984.run/root')|password_hash('sha512', 65534|random(seed=inventory_hostname)|string) }}"
+  - name: sk_password
+    content: "{{ lookup('passwordstore','devices/jupiter.1984.run/sk')|password_hash('sha512', 65534|random(seed=inventory_hostname)|string) }}"
+  - name: nextcloud_admin_pass
+    content: "{{ lookup('passwordstore','devices/jupiter.1984.run/nextcloud_admin_pass') }}"
+    owner: nextcloud
+  - name: nextcloud_db_pass
+    content: "{{ lookup('passwordstore','devices/jupiter.1984.run/nextcloud') }}"
+    owner: nextcloud
+  - name: nextcloud_db_pass_pg
+    content: "{{ lookup('passwordstore','devices/jupiter.1984.run/nextcloud') }}"
+    owner: postgres

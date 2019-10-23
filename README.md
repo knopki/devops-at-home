@@ -17,16 +17,6 @@ All other dependencies will be installed by `nix-shell`.
 
 Deployment is biased now: `Ansible` for legacy systems and `Morph` for NixOS.
 
-### Ansible
-
-You can deploy to the non-NixOS machines with something like:
-
-```shell
-cd ansible
-ansible-playbook
-```
-
-That's also deploys secrets to the NixOS machines.
 
 ### NixOS
 
@@ -59,3 +49,13 @@ Apply target configuration:
 ```shell
 sudo nixos-rebuild switch -I "nixos-config=$PWD/nix/config/alien.1984.run.nix"
 ```
+### Ansible
+
+You can deploy to the non-NixOS machines with something like:
+
+```shell
+cd ansible
+ansible-playbook playbooks/main.yml
+```
+
+Actually, almost all configuration removed (nix ftw), used only to deploy secrets.

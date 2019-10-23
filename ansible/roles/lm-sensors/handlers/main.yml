@@ -1,6 +1,0 @@
----
-- name: reload lm_sensors
-  systemd:
-    name: lm_sensors.service
-    state: restarted
-  when: lm_sensors_service

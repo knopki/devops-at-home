@@ -1,6 +1,0 @@
----
-binaries: "{{
-    binaries_default|d([]) +
-    binaries_group|d([]) +
-    binaries_host|d([])
-  }}"
