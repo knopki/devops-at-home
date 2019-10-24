@@ -163,11 +163,11 @@
         "version": "1f6a8c94a346f4ae51088801740640f8c5b5b966"
     },
     "pulumi-bin": {
-        "sha256": "1sqy0sm084cxqxnwlnqp566sdpy31l8ciyni6fridd0y5hqnp3ga",
+        "sha256": "1scs2msmg6ba91ri9al3299xnq8gq63clbqq1n03karf6ys2jnvi",
         "type": "file",
-        "url": "https://get.pulumi.com/releases/sdk/pulumi-v1.3.1-linux-x64.tar.gz",
+        "url": "https://get.pulumi.com/releases/sdk/pulumi-v1.3.4-linux-x64.tar.gz",
         "url_template": "https://get.pulumi.com/releases/sdk/pulumi-v<version>-linux-x64.tar.gz",
-        "version": "1.3.1"
+        "version": "1.3.4"
     },
     "pulumi-resource-gcp-bin": {
         "sha256": "04l086a8ab72w5d7l59xl49lcwjq05n1fkhx1pxm5x7l5zw1id6y",
@@ -177,11 +177,11 @@
         "version": "1.3.0"
     },
     "pulumi-resource-kubernetes-bin": {
-        "sha256": "0rczcfmwwscxm423lq81x4pgfcqg4jmairzjcbd3p6acqd72452j",
+        "sha256": "0m7fajy3cy1agsz787ak548khwj8rwahs1ibaswqfyyw092iyzb9",
         "type": "file",
-        "url": "https://api.pulumi.com/releases/plugins/pulumi-resource-kubernetes-v1.1.0-linux-amd64.tar.gz",
+        "url": "https://api.pulumi.com/releases/plugins/pulumi-resource-kubernetes-v1.2.3-linux-amd64.tar.gz",
         "url_template": "https://api.pulumi.com/releases/plugins/pulumi-resource-kubernetes-v<version>-linux-amd64.tar.gz",
-        "version": "1.1.0"
+        "version": "1.2.3"
     },
     "pulumi-resource-mysql-bin": {
         "sha256": "0nh6rzd7rih5srkn7cb3lq79bsxbnk9zamdpyxvrqivngsxw8k9c",
