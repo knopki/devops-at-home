@@ -37,6 +37,7 @@ with lib;
     environment.systemPackages = with pkgs; [
       bat
       bind
+      binutils
       cachix
       curl
       file
