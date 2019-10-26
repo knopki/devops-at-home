@@ -99,6 +99,18 @@
         "url": "https://github.com/NixOS/nixpkgs-channels/archive/f6dac8083874408fe287525007d3da9decd9bf44.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nixpkgs-fmt": {
+        "branch": "v0.6.0",
+        "description": "Nix code formatter for nixpkgs [maintainer=@zimbatm]",
+        "homepage": "https://nix-community.github.io/nixpkgs-fmt/",
+        "owner": "nix-community",
+        "repo": "nixpkgs-fmt",
+        "rev": "e36492b8f6ec954d95e5cc8958e72be425402f17",
+        "sha256": "18kvsgl3kpla33dp1nbpd1kdgndfqcmlwwpjls55fp4mlczf8lcx",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/nixpkgs-fmt/archive/e36492b8f6ec954d95e5cc8958e72be425402f17.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs-kustomize-1": {
         "branch": "nixos-unstable",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
