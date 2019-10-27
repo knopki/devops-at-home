@@ -18,6 +18,8 @@ in
         unstable = import sources.nixpkgs-unstable {
           config.allowUnfree = true;
         };
+        # nur-knopki = import sources.nur-knopki { inherit pkgs; };
+        nur-knopki = import ../../../../nixexprs { inherit pkgs; };
       };
 
       pkgs = import sources.nixpkgs {
@@ -39,7 +41,7 @@ in
             trapd00r-ls-colors =
               super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
             waybar = super.waybar.override { pulseSupport = true; };
-            winbox = super.callPackage ../../pkgs/winbox.nix {};
+            winbox = super.nur-knopki.winbox-bin;
           }
         )
       ];

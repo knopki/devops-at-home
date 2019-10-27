@@ -173,6 +173,18 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
         "version": "1f6a8c94a346f4ae51088801740640f8c5b5b966"
     },
+    "nur-knopki": {
+        "branch": "master",
+        "description": "A collection of packages and modules for Nix, NixOS, and home-manager.",
+        "homepage": "",
+        "owner": "knopki",
+        "repo": "nixexprs",
+        "rev": "f85489727a9a7e75b7737ad6e9489e225889b1b7",
+        "sha256": "16zb2rqnmgk96lq6cyxlyzzllpr4hkdw6zp7df7xrbi2ygz7zhv8",
+        "type": "tarball",
+        "url": "https://github.com/knopki/nixexprs/archive/f85489727a9a7e75b7737ad6e9489e225889b1b7.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "pulumi-bin": {
         "sha256": "1scs2msmg6ba91ri9al3299xnq8gq63clbqq1n03karf6ys2jnvi",
         "type": "file",
