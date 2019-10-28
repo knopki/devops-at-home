@@ -12,9 +12,9 @@ let
       (
         self: super: with super.lib; {
           # until 20.03 try to use unstable or upstream version
-          niv = if (hasAttrByPath [ "unstable" "niv" ] super) then super.unstable.niv else (import sources.niv {}).niv;
+          niv = if (hasPrefix "0.2." super.haskellPackages.niv.version) then super.haskellPackages.niv else if (hasAttrByPath [ "unstable" "haskellPackages" "niv" ] pkgs) then super.unstable.haskellPackages.niv else (import sources.niv {}).niv;
           # until 20.03 try to use unstable or upstream version
-          nixpkgs-fmt = if (hasAttrByPath [ "unstable" "nixpkgs-fmt" ] super) then super.unstable.nixpkgs-fmt else (import sources.nixpkgs-fmt {});
+          nixpkgs-fmt = if (hasPrefix "0.6." super.nixpkgs-fmt.version) then super.nixfmt-pkgs else if (hasAttrByPath [ "unstable" "nixpkgs-fmt" ] pkgs) then super.unstable.nixpkgs-fmt else (import sources.nixpkgs-fmt {});
           morph = super.callPackage "${sources.morph}/nix-packaging" {};
         }
       )
