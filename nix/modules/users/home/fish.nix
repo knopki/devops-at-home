@@ -218,8 +218,7 @@ in
           home.file."${fishCfgDir}/conf.d/activate_pure_theme.fish".text = ''
             function activate_pure_theme --description 'Activate Pure theme'
               set fish_function_path ${pkgs.fish-theme-pure}/share/fish/vendor_functions.d $fish_function_path
-              set fish_function_path ${pkgs.fish-theme-pure} $fish_function_path
-              source ${pkgs.fish-theme-pure}/conf.d/pure.fish
+              source ${pkgs.fish-theme-pure}/share/fish/vendor_conf.d/pure.fish
               set pure_separate_prompt_on_error true
             end
           '';

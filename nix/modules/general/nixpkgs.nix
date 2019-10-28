@@ -18,8 +18,8 @@ in
         unstable = import sources.nixpkgs-unstable {
           config.allowUnfree = true;
         };
-        # nur-knopki = import sources.nur-knopki { inherit pkgs; };
-        nur-knopki = import ../../../../nixexprs { inherit pkgs; };
+        nur-knopki = import sources.nur-knopki { inherit pkgs; };
+        # nur-knopki = import ../../../../nixexprs { inherit pkgs; };
       };
 
       pkgs = import sources.nixpkgs {
@@ -30,9 +30,8 @@ in
       overlays = [
         (
           self: super: {
-            fish-kubectl-completions =
-              super.callPackage ../../pkgs/fish-kubectl-completions.nix {};
-            fish-theme-pure = super.callPackage ../../pkgs/fish-theme-pure.nix {};
+            fish-kubectl-completions = super.nur-knopki.fishPlugins.completions.kubectl;
+            fish-theme-pure = super.nur-knopki.fishPlugins.pure;
             gnvim = super.unstable.gnvim;
             localVimPlugins = super.callPackage ../../pkgs/vimPlugins.nix {};
             neovim-gtk = super.nur.repos.n1kolasM.neovim-gtk;
