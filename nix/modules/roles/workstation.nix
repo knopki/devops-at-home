@@ -8,6 +8,8 @@ with lib;
   };
 
   config = mkIf config.local.roles.workstation.enable {
+    knopki.nix.gcKeep = true;
+
     local = {
       apps = {
         gnome.enable = true;

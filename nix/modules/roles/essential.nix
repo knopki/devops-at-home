@@ -11,7 +11,6 @@ with lib;
 
       general = {
         i18n.enable = true;
-        nix.enable = true;
         nixpkgs.enable = true;
         security.enable = true;
         system.enable = true;
@@ -69,6 +68,11 @@ with lib;
 
     home-manager.useUserPackages = true;
 
+    knopki.nix = {
+      enable = true;
+      nixPathFreeze = true;
+    };
+
     programs = {
       bash.enableCompletion = true;
       command-not-found.enable = false;
@@ -82,5 +86,6 @@ with lib;
     time.timeZone = "Europe/Moscow";
 
     services.dbus.socketActivated = true;
+    system.nixos.versionSuffix = mkDefault "";
   };
 }

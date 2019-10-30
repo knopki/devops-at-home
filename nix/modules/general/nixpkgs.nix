@@ -2,11 +2,18 @@
 with lib;
 let
   sources = import ../../sources.nix;
-  rebuild-throw = pkgs.writeText "rebuild-throw.nix"
-    ''throw "I'm sorry Dave, I'm afraid I can't do that... Please deploy this host with morph or specify NIX_PATH with nixos-config."'';
+  nur-no-pkgs = import sources.nur {
+    repoOverrides = {
+      knopki = import sources.nur-knopki {};
+      # knopki = import ../../../../nixexprs { };
+    };
+  };
 in
 {
-  imports = [ (import sources.nur {}).repos.rycee.modules.home-manager ];
+  imports = [
+    nur-no-pkgs.repos.knopki.modules.nix
+    nur-no-pkgs.repos.rycee.modules.home-manager
+  ];
 
   options = { local.general.nixpkgs.enable = mkEnableOption "Nixpkgs"; };
 
@@ -14,12 +21,16 @@ in
     nixpkgs = {
       config.allowUnfree = true;
       config.packageOverrides = pkgs: {
-        nur = import sources.nur { inherit pkgs; };
+        nur = import sources.nur {
+          inherit pkgs;
+          repoOverrides = {
+            knopki = import sources.nur-knopki { inherit pkgs; };
+            # knopki = import ../../../../nixexprs { inherit pkgs; };
+          };
+        };
         unstable = import sources.nixpkgs-unstable {
           config.allowUnfree = true;
         };
-        nur-knopki = import sources.nur-knopki { inherit pkgs; };
-        # nur-knopki = import ../../../../nixexprs { inherit pkgs; };
       };
 
       pkgs = import sources.nixpkgs {
@@ -30,8 +41,8 @@ in
       overlays = [
         (
           self: super: {
-            fish-kubectl-completions = super.nur-knopki.fishPlugins.completions.kubectl;
-            fish-theme-pure = super.nur-knopki.fishPlugins.pure;
+            fish-kubectl-completions = super.nur.repos.knopki.fishPlugins.completions.kubectl;
+            fish-theme-pure = super.nur.repos.knopki.fishPlugins.pure;
             gnvim = super.unstable.gnvim;
             localVimPlugins = super.callPackage ../../pkgs/vimPlugins.nix {};
             neovim-gtk = super.nur.repos.n1kolasM.neovim-gtk;
@@ -40,22 +51,10 @@ in
             trapd00r-ls-colors =
               super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
             waybar = super.waybar.override { pulseSupport = true; };
-            winbox = super.nur-knopki.winbox-bin;
+            winbox = super.nur.repos.knopki.winbox-bin;
           }
         )
       ];
     };
-
-    nix.nixPath = mkDefault (
-      mkBefore [
-        "${sources.nixpkgs}"
-        "nixpkgs=${sources.nixpkgs}"
-        "nixos-config=${rebuild-throw}"
-      ]
-    );
-
-    environment.etc."nixos/configuration.nix".source = rebuild-throw;
-
-    system.nixos.versionSuffix = mkDefault "";
   };
 }

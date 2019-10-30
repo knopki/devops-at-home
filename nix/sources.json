@@ -153,10 +153,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "6b320caac062897da4798474de72d9958d0f4128",
-        "sha256": "19m433ksz6smrwr1ygk93bq0kqd9x0b5c9nivpz6lgsii7cbshwg",
+        "rev": "ad3d61a46fca80edbcbb41ed97308f7c0d3b3aaf",
+        "sha256": "156fv1cnlsd4zgld77xscflir4azbgxpglw3xvn7zq6vcj76hcwc",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/6b320caac062897da4798474de72d9958d0f4128.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/ad3d61a46fca80edbcbb41ed97308f7c0d3b3aaf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pulumi-bin": {
