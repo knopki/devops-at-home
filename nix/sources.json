@@ -1,17 +1,4 @@
 {
-    "LS_COLORS": {
-        "branch": "master",
-        "description": "A collection of LS_COLORS definitions; needs your contribution!",
-        "homepage": "",
-        "owner": "trapd00r",
-        "repo": "LS_COLORS",
-        "rev": "332d7a18696057e21f5acd9bb885acffbe798bd4",
-        "sha256": "08mga3jg1f3zsspx0hlgywlabwq07qp5qk1lgjz8rawj62zmqqrf",
-        "type": "builtin-tarball",
-        "url": "https://github.com/trapd00r/LS_COLORS/archive/332d7a18696057e21f5acd9bb885acffbe798bd4.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
-        "version": "332d7a18696057e21f5acd9bb885acffbe798bd4"
-    },
     "devops-at-home": {
         "branch": "master",
         "description": "Configuration management of my personal machines, because why not",
@@ -153,10 +140,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "004ceb3c97b53725371054170dcfaedb47f9f90e",
-        "sha256": "0v2y968lsvdv5wfkraf86gv9ym752hspbp3f2f38ndqz1qllisda",
+        "rev": "54d36f01f5b58b7a2b708436344946eef772f8ed",
+        "sha256": "0xb7788q5cv4a9zxpi442frvns5rmi2i0vgkq7zs888jacwz3ai3",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/004ceb3c97b53725371054170dcfaedb47f9f90e.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/54d36f01f5b58b7a2b708436344946eef772f8ed.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pulumi-bin": {

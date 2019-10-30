@@ -48,8 +48,7 @@ in
             neovim-gtk = super.nur.repos.n1kolasM.neovim-gtk;
             neovim-unwrapped = super.unstable.neovim-unwrapped;
             nix-direnvrc = "${sources.nix-direnv}/direnvrc";
-            trapd00r-ls-colors =
-              super.callPackage ../../pkgs/trapd00r-ls-colors.nix {};
+            trapd00r-ls-colors = super.nur.repos.knopki.lsColors;
             waybar = super.waybar.override { pulseSupport = true; };
             winbox = super.nur.repos.knopki.winbox-bin;
           }
