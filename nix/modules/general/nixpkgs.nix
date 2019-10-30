@@ -44,7 +44,7 @@ in
             fish-kubectl-completions = super.nur.repos.knopki.fishPlugins.completions.kubectl;
             fish-theme-pure = super.nur.repos.knopki.fishPlugins.pure;
             gnvim = super.unstable.gnvim;
-            localVimPlugins = super.callPackage ../../pkgs/vimPlugins.nix {};
+            localVimPlugins = super.nur.repos.knopki.vimPlugins;
             neovim-gtk = super.nur.repos.n1kolasM.neovim-gtk;
             neovim-unwrapped = super.unstable.neovim-unwrapped;
             nix-direnvrc = "${sources.nix-direnv}/direnvrc";
