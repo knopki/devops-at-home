@@ -18,7 +18,7 @@ let
       (
         self: super: {
           kube-score = super.nur.repos.knopki.kube-score;
-          kustomize = (import sources.nixpkgs-kustomize-1 {}).kustomize;
+          kustomize = super.nur.repos.knopki.kustomize1;
           telepresence = super.unstable.telepresence;
         }
       )

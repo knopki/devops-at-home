@@ -16,7 +16,6 @@ let
       )
       (
         self: super: {
-          kube-score = super.nur.repos.knopki.kube-score;
           pulumi-bin = super.pulumi-bin.overrideAttrs (
             old: rec {
               version = sources.pulumi-bin.version;
@@ -60,7 +59,6 @@ pkgs.mkShell {
     docker-compose
     google-cloud-sdk
     jq
-    kube-score
     kubectl
     mysql57
     nodejs

@@ -72,18 +72,6 @@
         "url": "https://github.com/nix-community/nixpkgs-fmt/archive/e36492b8f6ec954d95e5cc8958e72be425402f17.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nixpkgs-kustomize-1": {
-        "branch": "nixos-unstable",
-        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
-        "homepage": "https://github.com/NixOS/nixpkgs",
-        "owner": "NixOS",
-        "repo": "nixpkgs-channels",
-        "rev": "2d5908f89bab59c2c4f88fbfc900dfff9baa55f0",
-        "sha256": "04igl9i8x7bglwyc0fkn8fy7vcnx0f5wf2h66s818y5ywg37l020",
-        "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs-channels/archive/2d5908f89bab59c2c4f88fbfc900dfff9baa55f0.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nixpkgs-master": {
         "branch": "master",
         "description": "Nix Packages collection",
@@ -127,10 +115,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "1c2cc8b0ed8d16819b6163f0d994f3f1feb53706",
-        "sha256": "1j9zhlncv241ln6rbnwj1q1siss0igdccxg0x45h6vaw3hwc8mcn",
+        "rev": "c51598faa9c72a1425211555d6e0b2cf3872ffa0",
+        "sha256": "0qmljw88416gxgx7zqnskikkfvsfxjl1q4hpkhvij2pj0473kx6v",
         "type": "builtin-tarball",
-        "url": "https://github.com/nix-community/NUR/archive/1c2cc8b0ed8d16819b6163f0d994f3f1feb53706.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/c51598faa9c72a1425211555d6e0b2cf3872ffa0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
         "version": "1f6a8c94a346f4ae51088801740640f8c5b5b966"
     },
@@ -140,10 +128,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "be6319307e3fe301bfe2b3d3f9b11f6576f972e6",
-        "sha256": "1ak264lac75ak6n334r95iid4q837d8xm43lr4rp6mfbk27zd9kh",
+        "rev": "8f256baf44d4dc853015f99d2f5976834dcf2215",
+        "sha256": "1a32svah5171lhq0r8w3gf9lf7iw0p8g7c7wrzdiihp4asr03gml",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/be6319307e3fe301bfe2b3d3f9b11f6576f972e6.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/8f256baf44d4dc853015f99d2f5976834dcf2215.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pulumi-bin": {
