@@ -4,10 +4,20 @@ let
   # end
   pkgs = import sources.nixpkgs {
     overlays = [
-      (self: super: { unstable = import sources.nixpkgs-unstable {}; })
       (
         self: super: {
-          kube-score = super.callPackage "${sources.devops-at-home}/nix/pkgs/kube-score" {};
+          unstable = import sources.nixpkgs-unstable {};
+          nur = import sources.nur {
+            inherit pkgs;
+            repoOverrides = {
+              knopki = import sources.nur-knopki { inherit pkgs; };
+            };
+          };
+        }
+      )
+      (
+        self: super: {
+          kube-score = super.nur.repos.knopki.kube-score;
           kustomize = (import sources.nixpkgs-kustomize-1 {}).kustomize;
           telepresence = super.unstable.telepresence;
         }

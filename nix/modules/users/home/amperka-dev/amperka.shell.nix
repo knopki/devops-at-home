@@ -6,7 +6,17 @@ let
     overlays = [
       (
         self: super: {
-          kube-score = super.callPackage "${sources.devops-at-home}/nix/pkgs/kube-score" {};
+          nur = import sources.nur {
+            inherit pkgs;
+            repoOverrides = {
+              knopki = import sources.nur-knopki { inherit pkgs; };
+            };
+          };
+        }
+      )
+      (
+        self: super: {
+          kube-score = super.nur.repos.knopki.kube-score;
           pulumi-bin = super.pulumi-bin.overrideAttrs (
             old: rec {
               version = sources.pulumi-bin.version;
