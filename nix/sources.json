@@ -115,10 +115,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "c51598faa9c72a1425211555d6e0b2cf3872ffa0",
-        "sha256": "0qmljw88416gxgx7zqnskikkfvsfxjl1q4hpkhvij2pj0473kx6v",
+        "rev": "fffc175f86f6a6a38c504e1cb4bc88e7e8305870",
+        "sha256": "0a781q0z4zj9l76zfrafz0ghsri2078azhbr6x3718vl94csdq7i",
         "type": "builtin-tarball",
-        "url": "https://github.com/nix-community/NUR/archive/c51598faa9c72a1425211555d6e0b2cf3872ffa0.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/fffc175f86f6a6a38c504e1cb4bc88e7e8305870.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
         "version": "1f6a8c94a346f4ae51088801740640f8c5b5b966"
     },
@@ -128,10 +128,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "8f256baf44d4dc853015f99d2f5976834dcf2215",
-        "sha256": "1a32svah5171lhq0r8w3gf9lf7iw0p8g7c7wrzdiihp4asr03gml",
+        "rev": "4fc838202f93d39be6616c7d931e143a7bbcdfa2",
+        "sha256": "1m15xdim91lazbaq454j0nad2azsbz0iqw7435nfjdp3kqqcsx7p",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/8f256baf44d4dc853015f99d2f5976834dcf2215.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/4fc838202f93d39be6616c7d931e143a7bbcdfa2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pulumi-bin": {
