@@ -1,16 +1,4 @@
 {
-    "devops-at-home": {
-        "branch": "master",
-        "description": "Configuration management of my personal machines, because why not",
-        "homepage": "",
-        "owner": "knopki",
-        "repo": "devops-at-home",
-        "rev": "a7a1f4d4507a5be53af39791ce213b9e002f5b62",
-        "sha256": "16nvsmix30fd39mrd3ga8vnvijn93pm2r9rccm4liydbslm45dkv",
-        "type": "tarball",
-        "url": "https://github.com/knopki/devops-at-home/archive/a7a1f4d4507a5be53af39791ce213b9e002f5b62.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "morph": {
         "branch": "master",
         "description": "NixOS deployment tool",
