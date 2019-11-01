@@ -23,18 +23,6 @@
         "url": "https://github.com/NixOS/nixpkgs-channels/archive/c75de8bc12cc7e713206199e5ca30b224e295041.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nixpkgs-fmt": {
-        "branch": "v0.6.0",
-        "description": "Nix code formatter for nixpkgs [maintainer=@zimbatm]",
-        "homepage": "https://nix-community.github.io/nixpkgs-fmt/",
-        "owner": "nix-community",
-        "repo": "nixpkgs-fmt",
-        "rev": "e36492b8f6ec954d95e5cc8958e72be425402f17",
-        "sha256": "18kvsgl3kpla33dp1nbpd1kdgndfqcmlwwpjls55fp4mlczf8lcx",
-        "type": "tarball",
-        "url": "https://github.com/nix-community/nixpkgs-fmt/archive/e36492b8f6ec954d95e5cc8958e72be425402f17.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nixpkgs-master": {
         "branch": "master",
         "description": "Nix Packages collection",
@@ -91,10 +79,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "64a1a2c86eb358add2b9ccd2d8739f8ab24da9d5",
-        "sha256": "1idnwvq89h36mkfrf0ligkmg618hqa1jxiayxgy7ys0vjdnp4vrj",
+        "rev": "7bccb364f9c8a33522d49a33186acf58dffe8806",
+        "sha256": "1m08mpbg60ar0rkd6f9b10bzaa9g5jr4y576n6nmgq9y5b6gk5wl",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/64a1a2c86eb358add2b9ccd2d8739f8ab24da9d5.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/7bccb364f9c8a33522d49a33186acf58dffe8806.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pulumi-bin": {
