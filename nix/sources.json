@@ -1,17 +1,4 @@
 {
-    "morph": {
-        "branch": "master",
-        "description": "NixOS deployment tool",
-        "homepage": null,
-        "owner": "delroth",
-        "repo": "morph",
-        "rev": "949c3eaa50805921c77381a4e248c1f2db1be449",
-        "sha256": "0rcls8vv4a0hld0ryw7z6qgvpqz16rhf5dzagcsrib0s85b800gf",
-        "type": "builtin-tarball",
-        "url": "https://github.com/delroth/morph/archive/949c3eaa50805921c77381a4e248c1f2db1be449.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
-        "version": "949c3eaa50805921c77381a4e248c1f2db1be449"
-    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",
@@ -116,10 +103,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "4fc838202f93d39be6616c7d931e143a7bbcdfa2",
-        "sha256": "1m15xdim91lazbaq454j0nad2azsbz0iqw7435nfjdp3kqqcsx7p",
+        "rev": "827538a88082cf469ffd64d74e7cbe8405d98d17",
+        "sha256": "12y2id9g5iaiq2ps1796n8pxjbkazfrrqq9m0za698qnaj975lmq",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/4fc838202f93d39be6616c7d931e143a7bbcdfa2.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/827538a88082cf469ffd64d74e7cbe8405d98d17.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pulumi-bin": {
