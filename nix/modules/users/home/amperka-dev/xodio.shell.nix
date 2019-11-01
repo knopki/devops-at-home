@@ -2,6 +2,9 @@ let
   # inject "sources = ..." under this line
   include = 1;
   # end
+  nur-no-pkgs = import sources.nur {
+    repoOverrides = { knopki = import sources.nur-knopki; };
+  };
   pkgs = import sources.nixpkgs {
     overlays = [
       (

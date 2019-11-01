@@ -1,16 +1,4 @@
 {
-    "niv": {
-        "branch": "master",
-        "description": "Easy dependency management for Nix projects",
-        "homepage": "https://github.com/nmattia/niv",
-        "owner": "nmattia",
-        "repo": "niv",
-        "rev": "1dd094156b249586b66c16200ecfd365c7428dc0",
-        "sha256": "1b2vjnn8iac5iiqszjc2v1s1ygh0yri998c0k3s4x4kn0dsqik21",
-        "type": "builtin-tarball",
-        "url": "https://github.com/nmattia/niv/archive/1dd094156b249586b66c16200ecfd365c7428dc0.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nix-direnv": {
         "branch": "master",
         "description": "A fast, persistent use_nix implementation for direnv [maintainer=@Mic92] ",
@@ -103,10 +91,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "827538a88082cf469ffd64d74e7cbe8405d98d17",
-        "sha256": "12y2id9g5iaiq2ps1796n8pxjbkazfrrqq9m0za698qnaj975lmq",
+        "rev": "64a1a2c86eb358add2b9ccd2d8739f8ab24da9d5",
+        "sha256": "1idnwvq89h36mkfrf0ligkmg618hqa1jxiayxgy7ys0vjdnp4vrj",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/827538a88082cf469ffd64d74e7cbe8405d98d17.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/64a1a2c86eb358add2b9ccd2d8739f8ab24da9d5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pulumi-bin": {
