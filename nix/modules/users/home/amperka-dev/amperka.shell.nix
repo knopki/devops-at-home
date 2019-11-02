@@ -3,7 +3,7 @@ let
   include = 1;
   # end
   nur-no-pkgs = import sources.nur {
-    repoOverrides = { knopki = import sources.nur-knopki; };
+    repoOverrides = { knopki = import sources.nur-knopki {}; };
   };
   pkgs = import sources.nixpkgs {
     overlays = [
@@ -17,6 +17,7 @@ let
           };
         }
       )
+      nur-no-pkgs.repos.knopki.overlays.telepresence
       (
         self: super: {
           pulumi-bin = super.pulumi-bin.overrideAttrs (
@@ -78,6 +79,7 @@ pkgs.mkShell {
     python3Full
     rsync
     stdenv
+    telepresence
     yarn
   ];
 }
