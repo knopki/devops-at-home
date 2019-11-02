@@ -17,41 +17,8 @@ let
           };
         }
       )
+      nur-no-pkgs.repos.knopki.overlays.pulumi
       nur-no-pkgs.repos.knopki.overlays.telepresence
-      (
-        self: super: {
-          pulumi-bin = super.pulumi-bin.overrideAttrs (
-            old: rec {
-              version = sources.pulumi-bin.version;
-              src = sources.pulumi-bin;
-            }
-          );
-          pulumi-resource-gcp-bin = super.pulumi-bin.overrideAttrs (
-            old: {
-              version = sources.pulumi-resource-gcp-bin.version;
-              pname = "pulumi-resource-gcp-bin";
-              src = sources.pulumi-resource-gcp-bin;
-              setSourceRoot = "sourceRoot=`pwd`";
-            }
-          );
-          pulumi-resource-mysql-bin = super.pulumi-bin.overrideAttrs (
-            old: {
-              version = sources.pulumi-resource-mysql-bin.version;
-              pname = "pulumi-resource-mysql-bin";
-              src = sources.pulumi-resource-mysql-bin;
-              setSourceRoot = "sourceRoot=`pwd`";
-            }
-          );
-          pulumi-resource-kubernetes-bin = super.pulumi-bin.overrideAttrs (
-            old: rec {
-              version = sources.pulumi-resource-kubernetes-bin.version;
-              pname = "pulumi-resource-kubernetes-bin";
-              src = sources.pulumi-resource-kubernetes-bin;
-              setSourceRoot = "sourceRoot=`pwd`";
-            }
-          );
-        }
-      )
     ];
   };
 in

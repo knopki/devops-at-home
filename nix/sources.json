@@ -79,38 +79,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "70624de3406889c1e1c495aaa4c73e4a672dffa7",
-        "sha256": "081cz0z1hdjp5kchskd3lbcwlk8mmxy066wavl3dmhf6qiipjx6l",
+        "rev": "667e19790ce7bc81882c59e1b410c11f1ee1a8fc",
+        "sha256": "0vfhrvadmxzfj6pp30zjnr117afjxdp98dg61b16lwn3n9cr2sbr",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/70624de3406889c1e1c495aaa4c73e4a672dffa7.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/667e19790ce7bc81882c59e1b410c11f1ee1a8fc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "pulumi-bin": {
-        "sha256": "1scs2msmg6ba91ri9al3299xnq8gq63clbqq1n03karf6ys2jnvi",
-        "type": "file",
-        "url": "https://get.pulumi.com/releases/sdk/pulumi-v1.3.4-linux-x64.tar.gz",
-        "url_template": "https://get.pulumi.com/releases/sdk/pulumi-v<version>-linux-x64.tar.gz",
-        "version": "1.3.4"
-    },
-    "pulumi-resource-gcp-bin": {
-        "sha256": "04l086a8ab72w5d7l59xl49lcwjq05n1fkhx1pxm5x7l5zw1id6y",
-        "type": "file",
-        "url": "https://api.pulumi.com/releases/plugins/pulumi-resource-gcp-v1.3.0-linux-amd64.tar.gz",
-        "url_template": "https://api.pulumi.com/releases/plugins/pulumi-resource-gcp-v<version>-linux-amd64.tar.gz",
-        "version": "1.3.0"
-    },
-    "pulumi-resource-kubernetes-bin": {
-        "sha256": "0m7fajy3cy1agsz787ak548khwj8rwahs1ibaswqfyyw092iyzb9",
-        "type": "file",
-        "url": "https://api.pulumi.com/releases/plugins/pulumi-resource-kubernetes-v1.2.3-linux-amd64.tar.gz",
-        "url_template": "https://api.pulumi.com/releases/plugins/pulumi-resource-kubernetes-v<version>-linux-amd64.tar.gz",
-        "version": "1.2.3"
-    },
-    "pulumi-resource-mysql-bin": {
-        "sha256": "0nh6rzd7rih5srkn7cb3lq79bsxbnk9zamdpyxvrqivngsxw8k9c",
-        "type": "file",
-        "url": "https://api.pulumi.com/releases/plugins/pulumi-resource-mysql-v1.0.0-linux-amd64.tar.gz",
-        "url_template": "https://api.pulumi.com/releases/plugins/pulumi-resource-mysql-v<version>-linux-amd64.tar.gz",
-        "version": "1.0.0"
     }
 }
