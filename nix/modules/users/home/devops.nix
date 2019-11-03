@@ -40,7 +40,7 @@ with lib; {
       shfmt
       sysstat
       wget
-      winbox
+      winbox-bin
     ];
 
     local.editorconfig = true;

@@ -1,16 +1,4 @@
 {
-    "nix-direnv": {
-        "branch": "master",
-        "description": "A fast, persistent use_nix implementation for direnv [maintainer=@Mic92] ",
-        "homepage": "",
-        "owner": "nix-community",
-        "repo": "nix-direnv",
-        "rev": "f9889758694bdfe11251ac475d78a93804dbd93c",
-        "sha256": "16mpc6lidmn6annyl4skdixzx7syvwdj9c5la0sidg57l8kh1rqd",
-        "type": "tarball",
-        "url": "https://github.com/nix-community/nix-direnv/archive/f9889758694bdfe11251ac475d78a93804dbd93c.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nixpkgs": {
         "branch": "nixos-19.09",
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
@@ -79,10 +67,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "667e19790ce7bc81882c59e1b410c11f1ee1a8fc",
-        "sha256": "0vfhrvadmxzfj6pp30zjnr117afjxdp98dg61b16lwn3n9cr2sbr",
+        "rev": "9fe7fcc14b7ba7ae67fe96c11ddef93c2e476cce",
+        "sha256": "0lx4zpiklqbafvylfwmmfvbh4jmibqx44yf0mc9mpyzg7hxmwk51",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/667e19790ce7bc81882c59e1b410c11f1ee1a8fc.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/9fe7fcc14b7ba7ae67fe96c11ddef93c2e476cce.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

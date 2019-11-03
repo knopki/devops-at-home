@@ -63,7 +63,7 @@ in
   config = mkIf config.local.fish.enable (
     mkMerge [
       {
-        home.packages = with pkgs; [ fish ];
+        home.packages = with pkgs; [ fish fishPlugins.completions.kubectl ];
 
         programs.fish = {
           enable = true;
@@ -215,10 +215,11 @@ in
       # colorize man pages
       (
         mkIf config.local.fish.pureTheme {
+          home.packages = with pkgs.fishPlugins; [ pure ];
           home.file."${fishCfgDir}/conf.d/activate_pure_theme.fish".text = ''
             function activate_pure_theme --description 'Activate Pure theme'
-              set fish_function_path ${pkgs.fish-theme-pure}/share/fish/vendor_functions.d $fish_function_path
-              source ${pkgs.fish-theme-pure}/share/fish/vendor_conf.d/pure.fish
+              set fish_function_path ${pkgs.fishPlugins.pure}/share/fish/vendor_functions.d $fish_function_path
+              source ${pkgs.fishPlugins.pure}/share/fish/vendor_conf.d/pure.fish
               set pure_separate_prompt_on_error true
             end
           '';
@@ -230,10 +231,10 @@ in
       # cool LS_COLORS
       (
         mkIf config.local.fish.lsColors {
-          home.packages = with pkgs; [ coreutils trapd00r-ls-colors ];
+          home.packages = with pkgs; [ coreutils lsColors ];
           home.file."${fishCfgDir}/conf.d/activate_ls_colors.fish".text = ''
             function activate_ls_colors --description 'Activate LS_COLORS'
-              eval (${pkgs.coreutils}/bin/dircolors -c ${pkgs.trapd00r-ls-colors}/LS_COLORS)
+              eval (${pkgs.coreutils}/bin/dircolors -c ${pkgs.lsColors}/LS_COLORS)
             end
           '';
           local.fish.interactiveShellInit."50-ls-colors" =

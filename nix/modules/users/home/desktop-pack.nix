@@ -13,7 +13,6 @@ with lib; {
       krita
       libreoffice
       neovim-gtk
-      gnvim
       mpv
       pavucontrol
       picard

@@ -20,18 +20,6 @@ in
   config = mkIf config.local.general.nixpkgs.enable {
     nixpkgs = {
       config.allowUnfree = true;
-      config.packageOverrides = pkgs: {
-        nur = import sources.nur {
-          inherit pkgs;
-          repoOverrides = {
-            knopki = import sources.nur-knopki { inherit pkgs; };
-            # knopki = import ../../../../nixexprs { inherit pkgs; };
-          };
-        };
-        unstable = import sources.nixpkgs-unstable {
-          config.allowUnfree = true;
-        };
-      };
 
       pkgs = import sources.nixpkgs {
         config = config.nixpkgs.config;
@@ -41,16 +29,26 @@ in
       overlays = [
         (
           self: super: {
-            fish-kubectl-completions = super.nur.repos.knopki.fishPlugins.completions.kubectl;
-            fish-theme-pure = super.nur.repos.knopki.fishPlugins.pure;
-            gnvim = super.unstable.gnvim;
-            localVimPlugins = super.nur.repos.knopki.vimPlugins;
+            nur = import sources.nur {
+              inherit pkgs;
+              repoOverrides = {
+                knopki = import sources.nur-knopki { inherit pkgs; };
+                # knopki = import ../../../../nixexprs { inherit pkgs; };
+              };
+            };
+            unstable = import sources.nixpkgs-unstable { config.allowUnfree = true; };
+          }
+        )
+        nur-no-pkgs.repos.knopki.overlays.fishPlugins
+        nur-no-pkgs.repos.knopki.overlays.lsColors
+        nur-no-pkgs.repos.knopki.overlays.nix-direnv
+        nur-no-pkgs.repos.knopki.overlays.vimPlugins
+        nur-no-pkgs.repos.knopki.overlays.waybar
+        nur-no-pkgs.repos.knopki.overlays.winbox
+        (
+          self: super: {
             neovim-gtk = super.nur.repos.n1kolasM.neovim-gtk;
             neovim-unwrapped = super.unstable.neovim-unwrapped;
-            nix-direnvrc = "${sources.nix-direnv}/direnvrc";
-            trapd00r-ls-colors = super.nur.repos.knopki.lsColors;
-            waybar = super.waybar.override { pulseSupport = true; };
-            winbox = super.nur.repos.knopki.winbox-bin;
           }
         )
       ];

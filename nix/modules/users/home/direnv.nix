@@ -5,7 +5,10 @@ with lib; {
   };
 
   config = mkIf config.local.direnv.enable {
-    home.packages = with pkgs; [ direnv ];
-    home.file.".direnvrc".source = pkgs.nix-direnvrc;
+    home.packages = with pkgs; [ direnv nix-direnv ];
+    home.file.".direnvrc".text = ''
+      #!/usr/bin/env bash
+      source "${pkgs.nix-direnv}/direnvrc"
+    '';
   };
 }

@@ -54,7 +54,6 @@ with lib;
     environment.systemPackages = with pkgs; [
       borgbackup
       fd
-      fish-kubectl-completions
       gcc
       gopass
       hdparm

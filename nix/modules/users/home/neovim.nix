@@ -32,7 +32,7 @@ with lib; {
         vim-startify
 
         # don't close window with buffer
-        pkgs.localVimPlugins.vim-bbye
+        vim-bbye
 
         # git stuff
         vim-fugitive
@@ -54,7 +54,7 @@ with lib; {
 
         ultisnips
         vim-snippets
-        pkgs.localVimPlugins.vim-sideways
+        vim-sideways
         vim-surround
 
         vim-orgmode
