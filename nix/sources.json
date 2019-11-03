@@ -67,10 +67,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "9fe7fcc14b7ba7ae67fe96c11ddef93c2e476cce",
-        "sha256": "0lx4zpiklqbafvylfwmmfvbh4jmibqx44yf0mc9mpyzg7hxmwk51",
+        "rev": "1c9f6d16bb3c587fe3366c245a379f57e034af8a",
+        "sha256": "1h3w09rpl3l94z0wfl6rqg4ackh0g6xz47zyw8vf7y961ij8bjai",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/9fe7fcc14b7ba7ae67fe96c11ddef93c2e476cce.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/1c9f6d16bb3c587fe3366c245a379f57e034af8a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

@@ -41,13 +41,13 @@ in
         )
         nur-no-pkgs.repos.knopki.overlays.fishPlugins
         nur-no-pkgs.repos.knopki.overlays.lsColors
+        nur-no-pkgs.repos.knopki.overlays.neovim-gtk
         nur-no-pkgs.repos.knopki.overlays.nix-direnv
         nur-no-pkgs.repos.knopki.overlays.vimPlugins
         nur-no-pkgs.repos.knopki.overlays.waybar
         nur-no-pkgs.repos.knopki.overlays.winbox
         (
           self: super: {
-            neovim-gtk = super.nur.repos.n1kolasM.neovim-gtk;
             neovim-unwrapped = super.unstable.neovim-unwrapped;
           }
         )
