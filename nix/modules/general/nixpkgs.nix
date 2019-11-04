@@ -39,13 +39,7 @@ in
             unstable = import sources.nixpkgs-unstable { config.allowUnfree = true; };
           }
         )
-        nur-no-pkgs.repos.knopki.overlays.fishPlugins
-        nur-no-pkgs.repos.knopki.overlays.lsColors
-        nur-no-pkgs.repos.knopki.overlays.neovim-gtk
-        nur-no-pkgs.repos.knopki.overlays.nix-direnv
-        nur-no-pkgs.repos.knopki.overlays.vimPlugins
-        nur-no-pkgs.repos.knopki.overlays.waybar
-        nur-no-pkgs.repos.knopki.overlays.winbox
+        nur-no-pkgs.repos.knopki.overlays.allOverlays
         (
           self: super: {
             neovim-unwrapped = super.unstable.neovim-unwrapped;
