@@ -17,6 +17,7 @@ let
           };
         }
       )
+      nur-no-pkgs.repos.knopki.overlays.nodePackages
       nur-no-pkgs.repos.knopki.overlays.telepresence
     ];
   };
@@ -34,6 +35,7 @@ pkgs.mkShell {
     kubernetes-helm
     nodejs
     nodePackages.node-gyp
+    nodePackages.yarn-deduplicate
     nur.repos.knopki.kube-score
     nur.repos.knopki.kustomize1
     python2Full

@@ -17,6 +17,7 @@ let
           };
         }
       )
+      nur-no-pkgs.repos.knopki.overlays.nodePackages
       nur-no-pkgs.repos.knopki.overlays.pulumi
       nur-no-pkgs.repos.knopki.overlays.telepresence
     ];
@@ -33,6 +34,7 @@ pkgs.mkShell {
     kubectl
     mysql57
     nodejs
+    nodePackages.yarn-deduplicate
     openssh
     php
     php73Packages.composer

@@ -29,10 +29,10 @@
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
         "repo": "nixpkgs-channels",
-        "rev": "471869c9185fb610e67940a701eb13b1cfb335a4",
-        "sha256": "1klbclz8n4b9k1kfwv806bqdavld1mg32l1vxsmnrqzr6zck1c54",
+        "rev": "7827d3f4497ed722fedca57fd4d5ca1a65c38256",
+        "sha256": "1ixjkb2ksri83iyhvl4a7hrfnb8zd3ps5jmirgaa7b617jn31cg6",
         "type": "builtin-tarball",
-        "url": "https://github.com/NixOS/nixpkgs-channels/archive/471869c9185fb610e67940a701eb13b1cfb335a4.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/7827d3f4497ed722fedca57fd4d5ca1a65c38256.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-wayland": {
@@ -54,10 +54,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "a6a2ae1c951c8cbe883a881adf79bebe23d78e97",
-        "sha256": "1w2slv4pqvw0mxgjv2ypgrigqgf39lc2zgba7jx8ckdyqx4p3nvs",
+        "rev": "e9aa5558c5dce966bd1bffc278fb75e4d580769b",
+        "sha256": "07xblwx1ww6pk7sagd95px2p58vd93jljv6ghvmg6f0k8qgl4lkp",
         "type": "builtin-tarball",
-        "url": "https://github.com/nix-community/NUR/archive/a6a2ae1c951c8cbe883a881adf79bebe23d78e97.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/e9aa5558c5dce966bd1bffc278fb75e4d580769b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
         "version": "1f6a8c94a346f4ae51088801740640f8c5b5b966"
     },
@@ -67,10 +67,10 @@
         "homepage": "",
         "owner": "knopki",
         "repo": "nixexprs",
-        "rev": "c0895491363380c4ed331490ee93e3a08a808f08",
-        "sha256": "18mk8dfl0b1f55qh5wwjxi7yv6h8gqqv447mi4xcc559lvzfxsg9",
+        "rev": "76c9a30d5adb79430253f3e7eab9223c6393d6b3",
+        "sha256": "034xjsydws2b4p0rv37yv78xliikdabmqqs1ap6l1ni2r3gayalq",
         "type": "tarball",
-        "url": "https://github.com/knopki/nixexprs/archive/c0895491363380c4ed331490ee93e3a08a808f08.tar.gz",
+        "url": "https://github.com/knopki/nixexprs/archive/76c9a30d5adb79430253f3e7eab9223c6393d6b3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
