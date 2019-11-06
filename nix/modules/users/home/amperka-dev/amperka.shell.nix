@@ -42,7 +42,11 @@ pkgs.mkShell {
     pulumi-resource-gcp-bin
     pulumi-resource-kubernetes-bin
     pulumi-resource-mysql-bin
+    python37Packages.autopep8
+    python37Packages.black
     python37Packages.pip
+    python37Packages.pycodestyle
+    python37Packages.pylint
     python37Packages.setuptools
     python37Packages.virtualenv
     python3Full
