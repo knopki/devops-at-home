@@ -233,6 +233,7 @@ with lib; {
         "javascript.updateImportsOnFileMove.enabled" = "never";
         "javascript.validate.enable" = false;
         "prettier.trailingComma" = "es5";
+        "python.formatting.provider" = "black";
         "typescript.disableAutomaticTypeAcquisition" = false;
         "update.mode" = "none";
         "vsicons.dontShowNewVersionMessage" = true;
