@@ -11,7 +11,6 @@ let
 in
 {
   imports = [
-    nur-no-pkgs.repos.knopki.modules.nix
     nur-no-pkgs.repos.knopki.modules.profiles
     nur-no-pkgs.repos.rycee.modules.home-manager
   ];
@@ -33,8 +32,8 @@ in
             nur = import sources.nur {
               inherit pkgs;
               repoOverrides = {
-                # knopki = import sources.nur-knopki { inherit pkgs; };
-                knopki = import ../../../../nixexprs { inherit pkgs; };
+                knopki = import sources.nur-knopki { inherit pkgs; };
+                # knopki = import ../../../../nixexprs { inherit pkgs; };
               };
             };
             unstable = import sources.nixpkgs-unstable { config.allowUnfree = true; };

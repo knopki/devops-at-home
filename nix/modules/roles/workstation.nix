@@ -8,7 +8,11 @@ with lib;
   };
 
   config = mkIf config.local.roles.workstation.enable {
-    knopki.nix.gcKeep = true;
+    knopki = {
+      nix.gcKeep = true;
+      system.latestKernel = true;
+      system.makeLinuxFastAgain = true;
+    };
 
     local = {
       apps = {
@@ -19,11 +23,6 @@ with lib;
 
       general = {
         fonts.enable = true;
-        system = {
-          enable = true;
-          latestKernel = true;
-          makeLinuxFastAgain = true;
-        };
       };
 
       hardware = {
