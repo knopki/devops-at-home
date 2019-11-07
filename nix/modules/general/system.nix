@@ -29,10 +29,5 @@ with lib;
         "mitigations=off"
       ];
     };
-
-    system = {
-      copySystemConfiguration = true;
-      stateVersion = "19.09";
-    };
   };
 }

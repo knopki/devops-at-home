@@ -12,6 +12,7 @@ in
 {
   imports = [
     nur-no-pkgs.repos.knopki.modules.nix
+    nur-no-pkgs.repos.knopki.modules.profiles
     nur-no-pkgs.repos.rycee.modules.home-manager
   ];
 

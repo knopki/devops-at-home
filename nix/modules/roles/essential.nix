@@ -6,86 +6,23 @@ with lib;
   options = { local.roles.essential.enable = mkEnableOption "Essential Role"; };
 
   config = mkIf config.local.roles.essential.enable {
+    knopki.profiles.essential.enable = true;
+
     local = {
-      apps = { fish.enable = true; };
-
       general = {
-        i18n.enable = true;
         nixpkgs.enable = true;
-        security.enable = true;
-        system.enable = true;
-      };
-
-      services = {
-        timesyncd.enable = true;
-        ssh.enable = true;
       };
 
       users.setupUsers = [ "root" ];
     };
 
-    boot.kernel.sysctl = {
-      "kernel.panic_on_oops" = 1;
-      "kernel.panic" = 20;
-      "net.ipv4.ip_nonlocal_bind" = 1;
-      "net.ipv6.ip_nonlocal_bind" = 1;
-      "vm.panic_on_oom" = 1;
-    };
-
-    # common packages on all machines
-    environment.systemPackages = with pkgs; [
-      bat
-      bind
-      binutils
-      cachix
-      curl
-      file
-      gitAndTools.gitFull
-      gnupg
-      htop
-      jq
-      lm_sensors
-      lsof
-      neovim
-      nnn
-      pciutils
-      pinentry
-      pinentry_ncurses
-      pstree
-      python3 # required by ansible
-      ranger
-      ripgrep
-      rsync
-      sysstat
-      tree
-      unrar
-      unzip
-      usbutils
-      wget
-    ];
-
-    hardware.enableRedistributableFirmware = true;
-
     home-manager.useUserPackages = true;
-
-    knopki.nix = {
-      enable = true;
-      nixPathFreeze = true;
-    };
-
-    programs = {
-      bash.enableCompletion = true;
-      command-not-found.enable = false;
-      iftop.enable = true;
-      iotop.enable = true;
-      mosh.enable = true;
-      mtr.enable = true;
-      tmux.enable = true;
-    };
 
     time.timeZone = "Europe/Moscow";
 
-    services.dbus.socketActivated = true;
-    system.nixos.versionSuffix = mkDefault "";
+    system = {
+      nixos.versionSuffix = mkDefault "";
+      stateVersion = "19.09";
+    };
   };
 }
