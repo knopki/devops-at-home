@@ -13,30 +13,11 @@ with lib;
     };
 
     local = {
-      apps = {
-        gnome.enable = true;
-        swaywm.enable = true;
-        # xserver.enable = true;
-      };
-
-      general = {
-        fonts.enable = true;
-      };
-
       roles = {
         # "inherit" from `essential` role
         essential.enable = true;
       };
-
-      virtualisation = {
-        docker.enable = true;
-        libvirtd.enable = true;
-      };
     };
-
-    environment.systemPackages = with pkgs; [
-      qt5ct # TODO: remove/configure
-    ];
 
     services = {
       earlyoom = {

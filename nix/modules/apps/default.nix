@@ -1,3 +1,3 @@
 { pkgs, ... }: {
-  imports = [ ./gnome.nix ./swaywm.nix ./xserver.nix ];
+  imports = [ ./xserver.nix ];
 }
