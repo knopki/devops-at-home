@@ -10,8 +10,7 @@ with lib;
   config = mkIf config.local.roles.workstation.enable {
     knopki = {
       nix.gcKeep = true;
-      system.latestKernel = true;
-      system.makeLinuxFastAgain = true;
+      system.optimizeForWorkstation = true;
     };
 
     local = {
@@ -35,7 +34,6 @@ with lib;
       };
 
       services = {
-        earlyoom.enable = true;
         printing.enable = true;
       };
 
@@ -43,12 +41,6 @@ with lib;
         docker.enable = true;
         libvirtd.enable = true;
       };
-    };
-
-    boot = {
-      kernel.sysctl = { "fs.inotify.max_user_watches" = 524288; };
-      kernelParams = [ "quiet" "splash" "nohz_full=1-7" ];
-      tmpOnTmpfs = true;
     };
 
     environment.systemPackages = with pkgs; [
@@ -88,6 +80,10 @@ with lib;
     };
 
     services = {
+      earlyoom = {
+        enable = true;
+        notificationsCommand = "sudo -u sk DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus /etc/profiles/per-user/sk/bin/notify-send";
+      };
       flatpak.enable = true;
       fwupd.enable = true;
       locate = {
