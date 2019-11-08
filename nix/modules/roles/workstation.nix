@@ -9,8 +9,7 @@ with lib;
 
   config = mkIf config.local.roles.workstation.enable {
     knopki = {
-      nix.gcKeep = true;
-      system.optimizeForWorkstation = true;
+      profiles.workstation.enable = true;
     };
 
     local = {
@@ -24,17 +23,9 @@ with lib;
         fonts.enable = true;
       };
 
-      hardware = {
-        scanning.enable = true;
-      };
-
       roles = {
         # "inherit" from `essential` role
         essential.enable = true;
-      };
-
-      services = {
-        printing.enable = true;
       };
 
       virtualisation = {
@@ -44,57 +35,13 @@ with lib;
     };
 
     environment.systemPackages = with pkgs; [
-      borgbackup
-      fd
-      gcc
-      gopass
-      hdparm
-      keybase
-      keybase-gui
-      mosh
-      ngrep
-      nmap
-      p7zip
-      pass
-      pass-otp
-      powertop
-      qt5.qtwayland
-      qt5ct
+      qt5ct # TODO: remove/configure
     ];
-
-    hardware = { opengl.enable = true; };
-
-    networking = {
-      firewall = {
-        enable = true;
-        rejectPackets = true;
-      };
-      networkmanager.enable = true;
-      usePredictableInterfaceNames = true;
-    };
-
-    programs = {
-      adb.enable = true;
-      npm.enable = true;
-      ssh.startAgent = true;
-    };
 
     services = {
       earlyoom = {
-        enable = true;
         notificationsCommand = "sudo -u sk DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus /etc/profiles/per-user/sk/bin/notify-send";
       };
-      flatpak.enable = true;
-      fwupd.enable = true;
-      locate = {
-        enable = true;
-        localuser = null;
-        locate = pkgs.mlocate;
-        pruneBindMounts = true;
-      };
-      kbfs.enable = true;
-      keybase.enable = true;
-      trezord.enable = true;
     };
   };
 }

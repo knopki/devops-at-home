@@ -42,6 +42,13 @@ in
           '';
         };
 
+        home.packages = with pkgs; [
+          gopass
+          keybase
+          keybase-gui
+          pass
+        ];
+
         home.sessionVariables = {
           BROWSER = "firefox";
           PATH =
