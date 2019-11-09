@@ -42,12 +42,14 @@ in
           '';
         };
 
-        home.packages = with pkgs; [
-          gopass
-          keybase
-          keybase-gui
-          pass
-        ];
+        home.packages = with pkgs; (
+          [] ++ (
+            optionals isWorkstation [
+              keybase
+              keybase-gui
+            ]
+          )
+        );
 
         home.sessionVariables = {
           BROWSER = "firefox";
