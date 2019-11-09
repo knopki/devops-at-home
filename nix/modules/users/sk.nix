@@ -140,7 +140,7 @@ in
     system.activationScripts = {
       linger-sk = ''
         #!/usr/bin/env sh
-        ${pkgs.systemd}/bin/loginctl enable-linger ${username}
+        ${pkgs.systemd}/bin/loginctl enable-linger ${username} || true
       '';
     };
   };
