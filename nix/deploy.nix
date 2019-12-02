@@ -10,10 +10,14 @@ let
       description = "Check Home Manager activation for sk user";
     }
   ];
-  apcupsdHC = [
+  jupiterHC = [
     {
       cmd = [ "systemctl" "is-active" "--quiet" "apcupsd.service" ];
       description = "Check apcupsd service";
+    }
+    {
+      cmd = [ "systemctl" "is-active" "--quiet" "hd-idle.service" ];
+      description = "Check hd-idle service";
     }
   ];
 in
@@ -31,7 +35,7 @@ in
   "root@z.jupiter.1984.run" = { config, ... }: {
     imports = [ ./config/jupiter.1984.run.nix ];
     deployment = {
-      healthChecks = { cmd = hmHC ++ apcupsdHC; };
+      healthChecks = { cmd = hmHC ++ jupiterHC; };
     };
   };
 
