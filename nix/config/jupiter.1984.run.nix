@@ -57,6 +57,8 @@ in
     '';
   };
 
+  environment.systemPackages = with pkgs; [ hd-idle ];
+
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/fe6d8424-96e3-44a4-b939-37d89bfa401d";
@@ -108,5 +110,14 @@ in
   system.activationScripts.backupEFI = {
     text = "${pkgs.rsync}/bin/rsync -azu --delete -h /boot/ /boot.bak";
     deps = [];
+  };
+
+  systemd.services.hd-idle = {
+    description = "HD spin down daemon";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "forking";
+      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdc -i 600 -a /dev/sdd -i 600 -a /dev/sde -i 600 -a /dev/sdf -i 600 -a /dev/sdg -i 600 -a /dev/sdh -i 600";
+    };
   };
 }
