@@ -186,6 +186,17 @@ in
                   # Only set it if it isn't to allow override by setting to 0
                   set -q fish_term24bit; or set -g fish_term24bit 1
               end
+
+              # emacs tramp case
+              if test "$TERM" = "dumb"
+                function fish_prompt
+                  echo "\$ "
+                end
+
+                function fish_right_prompt; end
+                function fish_greeting; end
+                function fish_title; end
+              end
             end
           '';
           local.fish.interactiveShellInit."00-fix-term" =
