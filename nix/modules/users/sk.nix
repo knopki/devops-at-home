@@ -22,6 +22,7 @@ in
       description = "Sergey Korolev";
       extraGroups = [
         "adbusers"
+        "dialout"
         "disk"
         "docker"
         "libvirtd"
