@@ -16,7 +16,7 @@ let
     export GOOGLE_REGION="EU"
     export GOOGLE_ZONE="europe-west1-b"
     export GOOGLE_PROJECT="amperka-hq"
-    export PULUMI_CONFIG_PASSPHRASE=$(pass amperka-hq/pulumi_config_passphrase)
+    export PULUMI_CONFIG_PASSPHRASE=$(gopass amperka-hq/pulumi_config_passphrase)
   '';
   xodioEnvRC = ''
     use nix
