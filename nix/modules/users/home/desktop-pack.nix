@@ -6,7 +6,6 @@ with lib; {
     home.packages = with pkgs; [
       anki
       blender
-      chromaprint
       darktable
       feh
       gimp
