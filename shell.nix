@@ -1,5 +1,6 @@
 { sources ? import ./nix/sources.nix }:
 let
+  unstable = import sources.nixpkgs-unstable {};
   nur-no-pkgs = import sources.nur {
     repoOverrides = {
       knopki = import sources.nur-knopki {};
@@ -8,9 +9,12 @@ let
   };
   pkgs = import sources.nixpkgs {
     overlays = [
-      nur-no-pkgs.repos.knopki.overlays.morph
-      nur-no-pkgs.repos.knopki.overlays.niv
-      nur-no-pkgs.repos.knopki.overlays.nixpkgs-fmt
+      (
+        self: super: {
+          morph = unstable.morph;
+          nixpkgs-fmt = unstable.nixpkgs-fmt;
+        }
+      )
     ];
   };
 in
@@ -18,9 +22,10 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     ansible
     ansible-lint
+    direnv
     gitAndTools.pre-commit
+    haskellPackages.niv
     morph
-    niv
     nix-prefetch-git
     nixpkgs-fmt
     openssh
