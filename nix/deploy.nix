@@ -29,7 +29,10 @@ in
 
   "root@z.alien.1984.run" = { config, ... }: {
     imports = [ ./config/alien.1984.run.nix ];
-    deployment = { healthChecks = { cmd = hmHC; }; };
+    deployment = {
+      healthChecks = { cmd = hmHC; };
+      substituteOnDestination = true;
+    };
   };
 
   "root@z.jupiter.1984.run" = { config, ... }: {
@@ -41,11 +44,17 @@ in
 
   "root@z.oberon.1984.run" = { config, ... }: {
     imports = [ ./config/oberon.1984.run.nix ];
-    deployment = { healthChecks = { cmd = hmHC; }; };
+    deployment = {
+      healthChecks = { cmd = hmHC; };
+      substituteOnDestination = true;
+    };
   };
 
   "root@z.panzer.1984.run" = { config, ... }: {
     imports = [ ./config/panzer.1984.run.nix ];
-    deployment = { healthChecks = { cmd = hmHC; }; };
+    deployment = {
+      healthChecks = { cmd = hmHC; };
+      substituteOnDestination = true;
+    };
   };
 }
