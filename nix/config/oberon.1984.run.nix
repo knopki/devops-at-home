@@ -4,8 +4,7 @@ let
   swapDevice = "/dev/mapper/oberon-swap";
 in
 {
-  imports =
-    [ ../modules <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
+  imports = [ ../modules ];
 
   boot = {
     extraModprobeConfig = ''
@@ -91,6 +90,7 @@ in
     hostId = "a8b4f00d";
     hostName = "oberon";
     search = [ "1984.run" ];
+    hosts = { "192.168.39.80" = [ "auth.xod.loc" "pm.xod.loc" "releases.xod.loc" "xod.loc" ]; };
   };
 
   nix.maxJobs = lib.mkDefault 4;

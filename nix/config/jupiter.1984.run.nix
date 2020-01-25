@@ -11,8 +11,7 @@ let
   };
 in
 {
-  imports =
-    [ ../modules <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
+  imports = [ ../modules ];
 
   boot = {
     extraModulePackages = [];
@@ -73,11 +72,25 @@ in
       device = "/dev/disk/by-uuid/C69C-9B91";
       fsType = "vfat";
     };
+    "/var/lib/nextcloud" = {
+      device = "/dev/disk/by-uuid/3de12227-9b50-4f7f-a980-6071f4054980";
+      fsType = "ext4";
+      options = [ "relatime" ];
+    };
+    "/var/lib/postgresql" = {
+      device = "/dev/disk/by-uuid/f8a2c031-7b02-4617-8a4d-e6f3cc6c50bc";
+      fsType = "ext4";
+      options = [ "relatime" ];
+    };
   };
 
   local = {
     hardware.intel = true;
     roles.essential.enable = true;
+    # roles.nextcloud = {
+    #   hostName = "z.jupiter.1984.run";
+    #   enable = true;
+    # };
     users.setupUsers = [ "sk" ];
   };
 
@@ -98,6 +111,9 @@ in
       configText = "UPSCABLE usb\nUPSTYPE usb\nBATTERYLEVEL 30\nMINUTES 10";
     };
     fstrim.enable = true;
+    # postgresql = {
+    #   package = pkgs.postgresql_11;
+    # };
     zerotierone = {
       enable = true;
       joinNetworks = [ "1c33c1ced08df9ac" ];
@@ -120,4 +136,6 @@ in
       ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdc -i 600 -a /dev/sdd -i 600 -a /dev/sde -i 600 -a /dev/sdf -i 600 -a /dev/sdg -i 600 -a /dev/sdh -i 600";
     };
   };
+
+  # systemd.services.postgresql.environment.PGSETUP_INITDB_OPTIONS = "-k";
 }

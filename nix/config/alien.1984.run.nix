@@ -12,8 +12,7 @@ let
   swapDevice = "/dev/mapper/nvme--vg-swap";
 in
 {
-  imports =
-    [ ../modules <nixpkgs/nixos/modules/installer/scan/not-detected.nix> ];
+  imports = [ ../modules ];
 
   boot = {
     extraModprobeConfig = ''
