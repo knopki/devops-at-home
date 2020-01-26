@@ -43,6 +43,7 @@ in
         (
           self: super: {
             neovim-unwrapped = super.unstable.neovim-unwrapped;
+            hunspellDicts = super.unstable.hunspellDicts;
           }
         )
       ];
