@@ -10,6 +10,7 @@
     ./direnv.nix
     ./editorconfig.nix
     ./env.nix
+    ./emacs
     ./firefox.nix
     ./fish.nix
     ./fzf.nix

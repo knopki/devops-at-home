@@ -95,6 +95,7 @@ in
           chromium.enable = isWorkstation;
           devops.enable = isWorkstation;
           env.graphics = isWorkstation;
+          emacs.enable = isWorkstation;
           firefox.enable = isWorkstation;
           fish.enable = true;
           gnome.enable = isWorkstation;
