@@ -1,4 +1,4 @@
 { ... }: {
   imports =
-    [ ./apps ./general ./hardware ./roles ./services ./users ];
+    [ ./apps ./general ./hardware ./roles ./users ];
 }
