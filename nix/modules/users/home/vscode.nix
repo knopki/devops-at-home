@@ -53,7 +53,6 @@ with lib; {
       extensions = with pkgs;
         [
           vscode-extensions.bbenoist.Nix
-          vscode-extensions.ms-python.python
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "vscode-ansible";
@@ -122,12 +121,6 @@ with lib; {
             sha256 = "1an9dlkicj1s0ffy9l9jdvzpcdl0slvln9k05rd6l8g42ri9fp49";
           }
           {
-            name = "viml";
-            publisher = "dunstontc";
-            version = "0.1.7";
-            sha256 = "0r2dpd07lj8icpbl1nvgk08y6s73bzwv6njpj7m4fcapwjjvhb7l";
-          }
-          {
             name = "flow-for-vscode";
             publisher = "flowtype";
             version = "1.3.0";
@@ -146,22 +139,10 @@ with lib; {
             sha256 = "09lgc1fjdrgzw6n72w833kyfk7m0008lmd17r0vljcd572igfhhc";
           }
           {
-            name = "Go";
-            publisher = "ms-vscode";
-            version = "0.11.4";
-            sha256 = "0h0z4kgm0d2milbmna2j0saic3yq5p07l18dflyqwvm9zvjx9x5f";
-          }
-          {
             name = "jinjahtml";
             publisher = "samuelcolvin";
             version = "0.10.5";
             sha256 = "1mv2zkp09dgqdvvr42mwajm0cninqqw2g2adi5b5ki63niv5xx2y";
-          }
-          {
-            name = "rust";
-            publisher = "rust-lang";
-            version = "0.6.1";
-            sha256 = "0f66z6b374nvnrn7802dg0xz9f8wq6sjw3sb9ca533gn5jd7n297";
           }
           {
             name = "EditorConfig";
@@ -233,7 +214,6 @@ with lib; {
         "javascript.updateImportsOnFileMove.enabled" = "never";
         "javascript.validate.enable" = false;
         "prettier.trailingComma" = "es5";
-        "python.formatting.provider" = "black";
         "typescript.disableAutomaticTypeAcquisition" = false;
         "update.mode" = "none";
         "vsicons.dontShowNewVersionMessage" = true;
