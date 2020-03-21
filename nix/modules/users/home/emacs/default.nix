@@ -23,6 +23,7 @@ with lib; {
       python37Packages.pyls-mypy
       python37Packages.python-language-server
       ripgrep
+      texlive.combined.scheme-medium
     ];
 
     programs.emacs = {
