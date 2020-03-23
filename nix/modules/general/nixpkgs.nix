@@ -30,6 +30,7 @@ in
       overlays = [
         (
           self: super: {
+            emacsOverlay = import sources.emacs-overlay self super;
             nur = import sources.nur {
               inherit pkgs;
               repoOverrides = {

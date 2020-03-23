@@ -1,5 +1,9 @@
 { config, lib, pkgs, user, ... }:
-with lib; {
+with lib;
+let
+  eopkgs = pkgs.emacsOverlay.emacsPackagesFor pkgs.emacs;
+in
+{
   options.local.emacs = { enable = mkEnableOption "enable emacs for user"; };
 
   config = mkIf config.local.emacs.enable {
@@ -28,90 +32,107 @@ with lib; {
 
     programs.emacs = {
       enable = true;
-      extraPackages = epkgs: (
-        with epkgs.melpaStablePackages; []
-      ) ++ (
-        with epkgs.melpaPackages; [
+      extraPackages = epkgs: with epkgs; [
+        aggressive-indent
+        all-the-icons
+        all-the-icons-dired
+        all-the-icons-ibuffer
+        all-the-icons-ivy-rich
+        avy
+        benchmark-init
+        bind-key # required by use-package
+        browse-at-remote
+        company
+        company-box
+        # company-lsp
+        company-prescient
+        counsel
+        counsel-projectile
+        dap-mode
+        diff-hl
+        diminish # required by use-package
+        direnv
+        doom-modeline
+        doom-themes
+        evil
+        evil-collection
+        evil-commentary
+        evil-goggles
+        evil-magit
+        evil-org
+        evil-surround
+        flycheck
+        flyspell-correct-ivy
+        general
+        git-timemachine
+        gitattributes-mode
+        gitconfig-mode
+        gitignore-mode
+        gnu-elpa-keyring-update
+        helpful
+        hide-mode-line
+        hl-todo
+        ibuffer-projectile
+        ivy
+        ivy-prescient
+        ivy-rich
+        ivy-yasnippet
+        json-mode # needed by nix-mode
+        live-py-mode
+        lsp-ivy
+        lsp-mode
+        lsp-treemacs
+        lsp-ui
+        magit
+        magit-todos
+        minions
+        nix-mode
+        no-littering
+        org-bullets
+        org-fancy-priorities
+        org-plus-contrib
+        persistent-scratch
+        prescient
+        projectile
+        python-black
+        reverse-im
+        ripgrep
+        solaire-mode
+        toc-org
+        treemacs
+        undo-tree
+        use-package
+        which-key
+        yasnippet
+        yasnippet-snippets
+      ];
+      overrides = self: super: rec {
+        inherit (self.melpaPackages)
           aggressive-indent
           all-the-icons
-          all-the-icons-dired
-          avy
-          benchmark-init
-          bind-key # required by use-package
-          browse-at-remote
-          company
-          company-box
-          company-lsp
-          company-prescient
-          counsel
-          counsel-projectile
-          dap-mode
-          dashboard
-          diff-hl
-          diminish # required by use-package
-          direnv
-          doom-modeline
           doom-themes
-          evil
-          evil-commentary
-          evil-collection
-          evil-goggles
           evil-magit
-          evil-org
-          evil-surround
           flycheck
-          flyspell-correct-ivy
-          general
-          gitattributes-mode
-          gitconfig-mode
-          gitignore-mode
-          git-timemachine
-          helpful
-          hide-mode-line
-          hl-todo
-          ibuffer-projectile
-          ivy
-          ivy-prescient
-          ivy-rich
-          ivy-yasnippet
-          json-mode # needed by nix-mode
-          nix-mode
-          no-littering
-          live-py-mode
-          lsp-ivy
-          lsp-mode
-          lsp-treemacs
-          lsp-ui
           magit
-          magit-todos
-          minions
           org-bullets
-          org-fancy-priorities
-          org-sticky-header
-          persistent-scratch
-          prescient
-          projectile
-          python-black
-          reverse-im
-          ripgrep
-          solaire-mode
           toc-org
-          treemacs
           use-package
-          which-key
-          yasnippet
+          ;
+        inherit (eopkgs.melpaStablePackages)
+          all-the-icons-ibuffer
+          all-the-icons-ivy-rich
+          lsp-ui
+          projectile
+          ;
+        inherit (eopkgs.melpaPackages)
+          evil-collection
+          doom-modeline
+          lsp-mode
+          reverse-im
           yasnippet-snippets
-        ]
-      ) ++ (
-        with epkgs.elpaPackages; [
-          gnu-elpa-keyring-update
-          undo-tree
-        ]
-      ) ++ (
-        with epkgs.orgPackages; [
-          org-plus-contrib
-        ]
-      );
+          ;
+        inherit (eopkgs.elpaPackages) undo-tree;
+      };
     };
   };
 }
