@@ -112,7 +112,6 @@ in
           all-the-icons
           doom-themes
           evil-magit
-          flycheck
           magit
           org-bullets
           toc-org
@@ -125,8 +124,9 @@ in
           projectile
           ;
         inherit (eopkgs.melpaPackages)
-          evil-collection
           doom-modeline
+          evil-collection
+          flycheck
           lsp-mode
           reverse-im
           yasnippet-snippets
