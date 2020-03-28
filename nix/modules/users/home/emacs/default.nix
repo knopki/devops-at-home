@@ -28,6 +28,7 @@ in
       python37Packages.python-language-server
       ripgrep
       texlive.combined.scheme-medium
+      wakatime
     ];
 
     programs.emacs = {
@@ -102,6 +103,7 @@ in
         treemacs
         undo-tree
         use-package
+        wakatime-mode
         which-key
         yasnippet
         yasnippet-snippets
