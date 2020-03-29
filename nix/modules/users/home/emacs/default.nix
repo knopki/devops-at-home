@@ -90,6 +90,7 @@ in
         nix-mode
         no-littering
         org-bullets
+        org-download
         org-fancy-priorities
         org-plus-contrib
         persistent-scratch
@@ -130,6 +131,7 @@ in
           evil-collection
           flycheck
           lsp-mode
+          org-download
           reverse-im
           yasnippet-snippets
           ;
