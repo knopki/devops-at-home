@@ -92,6 +92,7 @@ in
         org-bullets
         org-download
         org-fancy-priorities
+        org-journal
         org-plus-contrib
         persistent-scratch
         prescient
