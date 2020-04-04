@@ -90,6 +90,7 @@ in
         nix-mode
         no-littering
         org-bullets
+        org-cliplink
         org-download
         org-fancy-priorities
         org-journal
