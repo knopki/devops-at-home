@@ -101,6 +101,7 @@ in
         python-black
         reverse-im
         ripgrep
+        russian-holidays
         solaire-mode
         toc-org
         treemacs
