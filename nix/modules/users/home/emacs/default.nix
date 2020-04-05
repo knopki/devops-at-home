@@ -89,12 +89,12 @@ in
         minions
         nix-mode
         no-littering
-        org-bullets
         org-cliplink
         org-download
         org-fancy-priorities
         org-journal
         org-plus-contrib
+        org-superstar
         persistent-scratch
         prescient
         projectile
@@ -119,7 +119,6 @@ in
           doom-themes
           evil-magit
           magit
-          org-bullets
           toc-org
           use-package
           ;
@@ -127,6 +126,7 @@ in
           all-the-icons-ibuffer
           all-the-icons-ivy-rich
           lsp-ui
+          org-superstar
           projectile
           ;
         inherit (eopkgs.melpaPackages)
