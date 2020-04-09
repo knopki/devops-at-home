@@ -69,7 +69,6 @@ in
         gitattributes-mode
         gitconfig-mode
         gitignore-mode
-        gnu-elpa-keyring-update
         helpful
         hide-mode-line
         hl-todo
