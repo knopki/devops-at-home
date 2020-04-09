@@ -86,6 +86,7 @@ in
         magit
         magit-todos
         minions
+        mixed-pitch
         nix-mode
         no-littering
         org-cliplink
