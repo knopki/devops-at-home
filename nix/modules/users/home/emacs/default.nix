@@ -2,6 +2,20 @@
 with lib;
 let
   eopkgs = pkgs.emacsOverlay.emacsPackagesFor pkgs.emacs;
+  depsFonts = with pkgs; [
+    emacs-all-the-icons-fonts
+    fira-code-symbols
+    nur.repos.mic92.fira-code-nerdfonts
+    source-sans-pro
+  ];
+  depsPythonDev = with pkgs; [
+    python37Packages.flake8
+    python37Packages.pyflakes
+    python37Packages.pylint
+    python37Packages.pyls-black
+    python37Packages.pyls-mypy
+    python37Packages.python-language-server
+  ];
 in
 {
   options.local.emacs = { enable = mkEnableOption "enable emacs for user"; };
@@ -16,20 +30,13 @@ in
     };
 
     home.packages = with pkgs; [
-      emacs-all-the-icons-fonts
       hunspell
       hunspellDicts.en-us-large
       hunspellDicts.ru-ru
-      python37Packages.flake8
-      python37Packages.pyflakes
-      python37Packages.pylint
-      python37Packages.pyls-black
-      python37Packages.pyls-mypy
-      python37Packages.python-language-server
       ripgrep
       texlive.combined.scheme-medium
       wakatime
-    ];
+    ] ++ depsFonts ++ depsPythonDev;
 
     programs.emacs = {
       enable = true;
@@ -62,6 +69,7 @@ in
         evil-magit
         evil-org
         evil-surround
+        fira-code-mode
         flycheck
         flyspell-correct-ivy
         general
@@ -132,6 +140,7 @@ in
         inherit (eopkgs.melpaPackages)
           doom-modeline
           evil-collection
+          fira-code-mode
           flycheck
           lsp-mode
           org-download
