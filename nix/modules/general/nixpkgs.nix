@@ -39,6 +39,7 @@ in
               };
             };
             unstable = import sources.nixpkgs-unstable { config.allowUnfree = true; };
+            master = import sources.nixpkgs-master { config.allowUnfree = true; };
           }
         )
         nur-no-pkgs.repos.knopki.overlays.allOverlays
@@ -46,6 +47,9 @@ in
           self: super: {
             neovim-unwrapped = super.unstable.neovim-unwrapped;
             hunspellDicts = super.unstable.hunspellDicts;
+            nerdfonts = super.master.nerdfonts.override {
+              fonts = [ "FiraCode" ];
+            };
           }
         )
       ];

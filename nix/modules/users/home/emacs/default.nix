@@ -5,7 +5,7 @@ let
   depsFonts = with pkgs; [
     emacs-all-the-icons-fonts
     fira-code-symbols
-    nur.repos.mic92.fira-code-nerdfonts
+    nerdfonts
     source-sans-pro
   ];
   depsPythonDev = with pkgs; [

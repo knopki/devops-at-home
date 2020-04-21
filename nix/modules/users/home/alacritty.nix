@@ -28,7 +28,7 @@ with lib; {
 
         # Font configuration
         font = {
-          normal = { family = "FuraCode Nerd Font Mono"; };
+          normal = { family = "FiraCode Nerd Font Mono"; };
           size = 12;
           glyph_offset = {
             x = 0;

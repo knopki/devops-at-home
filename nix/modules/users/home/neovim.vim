@@ -57,7 +57,7 @@ set cursorcolumn
 let no_buffers_menu=1
 
 " Theme
-set gfn=FuraCode\ Nerd\ Font\ Mono\ 12
+set gfn=FiraCode\ Nerd\ Font\ Mono\ 12
 if has("termguicolors")
   set termguicolors
 endif

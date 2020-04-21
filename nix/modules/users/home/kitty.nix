@@ -7,7 +7,7 @@ with lib; {
 
     home.file = {
       "${config.xdg.configHome}/kitty/kitty.conf".text = ''
-        font_family FuraCode Nerd Font Mono
+        font_family FiraCode Nerd Font Mono
         font_size 12.0
 
         scrollback_lines 10000
