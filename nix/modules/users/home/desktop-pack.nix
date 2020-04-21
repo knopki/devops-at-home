@@ -17,6 +17,7 @@ with lib; {
       picard
       playerctl
       skypeforlinux
+      spotify
       tdesktop
       tor-browser-bundle-bin
       transmission-gtk
