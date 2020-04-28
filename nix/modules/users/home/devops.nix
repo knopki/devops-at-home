@@ -19,6 +19,7 @@ with lib; {
     home.packages = with pkgs; [
       bat
       curl
+      dive
       docker-machine-kvm2
       gnupg
       google-cloud-sdk
