@@ -22,6 +22,13 @@ in
 
   config = mkIf config.local.emacs.enable {
     home.file = {
+      ".emacs".source = "${pkgs.chemacs}/.emacs";
+      ".emacs-profiles.el".text = ''
+        (("default" . ((user-emacs-directory . "~/.emacs.d.doom")
+                       (env . (("DOOMDIR" . "~/.doom.d")))))
+        ("old" . ((user-emacs-directory . "~/.emacs.d.old"))))
+      '';
+
       # HACK: support virtualenv and nix shells
       ".pylintrc".text = ''
         [MASTER]
@@ -30,12 +37,86 @@ in
     };
 
     home.packages = with pkgs; [
+      fd
+      ripgrep
+
+      # cc
+      ccls
+      irony-server
+      rtags
+
+      # csharp
+      dotnet-sdk
+      omnisharp-roslyn
+
+      # docker mode
+      docker
+      docker-compose
+      docker-machine
+      unstable.nodePackages.dockerfile-language-server-nodejs
+
+      # editorconfig
+      python37Packages.editorconfig
+
+      # erlang
+      erlang
+
+      # flyspell
       hunspell
       hunspellDicts.en-us-large
       hunspellDicts.ru-ru
-      ripgrep
+
+      # go
+      master.gopls
+      gocode
+      gomodifytags
+      gotests
+
+      # latex
+      # FIXME: unstable.texlab
       texlive.combined.scheme-medium
+
+      # javascript
+      nodejs
+      nodePackages.typescript-language-server
+
+      # markdown
+      python37Packages.grip
+      mdl
+      pandoc
+      proselint
+
+      # nix-mode
+      nixfmt
+      nixpkgs-fmt
+
+      # org
+      gnuplot
+
+      # php
+      php
+      php73Packages.php-cs-fixer
+
+      # rust
+      cargo
+      unstable.clippy
+      rls
+      rustc
+      rustfmt
+
+      # sh
+      bashdb
+      nodePackages.bash-language-server
+      shellcheck
+
+      # wakatime-mode
       wakatime
+
+      # web
+      nodePackages.js-beautify
+
+      # yaml
+      master.nodePackages.yaml-language-server
     ] ++ depsFonts ++ depsPythonDev;
 
     programs.emacs = {
@@ -69,6 +150,7 @@ in
         evil-magit
         evil-org
         evil-surround
+        gcmh
         fira-code-mode
         flycheck
         flyspell-correct-ivy
@@ -79,6 +161,7 @@ in
         gitignore-mode
         helpful
         hide-mode-line
+        highlight-numbers
         hl-todo
         ibuffer-projectile
         ivy
@@ -107,6 +190,7 @@ in
         prescient
         projectile
         python-black
+        rainbow-delimiters
         reverse-im
         ripgrep
         russian-holidays
@@ -115,6 +199,7 @@ in
         treemacs
         undo-tree
         use-package
+        vterm
         wakatime-mode
         which-key
         yasnippet

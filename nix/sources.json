@@ -1,4 +1,16 @@
 {
+    "chemacs": {
+        "branch": "master",
+        "description": "Emacs profile switcher",
+        "homepage": "",
+        "owner": "plexus",
+        "repo": "chemacs",
+        "rev": "e9ec6565f509daddba40576f9558eae721735012",
+        "sha256": "0gyhk49phvs6s2fpr4qa59swbfng4fcvncfki7rvm73n55f2z19c",
+        "type": "tarball",
+        "url": "https://github.com/plexus/chemacs/archive/e9ec6565f509daddba40576f9558eae721735012.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "emacs-overlay": {
         "branch": "master",
         "description": "Bleeding edge emacs overlay [maintainer=@adisbladis] ",
@@ -31,10 +43,10 @@
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "22a3bf9fb9edad917fb6cd1066d58b5e426ee975",
-        "sha256": "089hqg2r2ar5piw9q5z3iv0qbmfjc4rl5wkx9z16aqnlras72zsa",
+        "rev": "b80bd001e2abceac052c3a1fb68551021388383a",
+        "sha256": "1zc98yk7imzvfqn21fzni00w3kijmz6kspw49xb0l3mjj1pg6lyq",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/22a3bf9fb9edad917fb6cd1066d58b5e426ee975.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/b80bd001e2abceac052c3a1fb68551021388383a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-unstable": {

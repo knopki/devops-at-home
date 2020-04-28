@@ -45,6 +45,7 @@ in
         nur-no-pkgs.repos.knopki.overlays.allOverlays
         (
           self: super: {
+            chemacs = sources.chemacs;
             neovim-unwrapped = super.unstable.neovim-unwrapped;
             hunspellDicts = super.unstable.hunspellDicts;
             nerdfonts = super.master.nerdfonts.override {
