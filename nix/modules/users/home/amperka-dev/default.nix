@@ -31,11 +31,10 @@ let
   '';
 
   sourcesNix = ../../../../sources.nix;
-  sourcesJsonPath = pkgs.writeText "sources.json" (readFile ../../../../sources.json);
+  sourcesJsonPath =
+    pkgs.writeText "sources.json" (readFile ../../../../sources.json);
   # inject json path to sources.nix
-  sourcesNixStr = replaceStrings
-    [ "./sources.json" ]
-    [ "${sourcesJsonPath}" ]
+  sourcesNixStr = replaceStrings [ "./sources.json" ] [ "${sourcesJsonPath}" ]
     (readFile sourcesNix);
   sourcesNixPath = pkgs.writeText "sources.nix" sourcesNixStr;
   sourcesTargetDir = ".cache/nix-sources";
@@ -43,15 +42,11 @@ let
   # prepend shells with sources.nix import
   preludeStr = "sources = import ${sourcesNixPath};";
 
-  amperkaShellStr = replaceStrings
-    [ "include = 1;" ]
-    [ preludeStr ]
+  amperkaShellStr = replaceStrings [ "include = 1;" ] [ preludeStr ]
     (readFile ./amperka.shell.nix);
   amperkaShellPath = pkgs.writeText "amperka.shell.nix" amperkaShellStr;
 
-  xodioShellStr = replaceStrings
-    [ "include = 1;" ]
-    [ preludeStr ]
+  xodioShellStr = replaceStrings [ "include = 1;" ] [ preludeStr ]
     (readFile ./xodio.shell.nix);
   xodioShellPath = pkgs.writeText "xodio.shell.nix" xodioShellStr;
 in

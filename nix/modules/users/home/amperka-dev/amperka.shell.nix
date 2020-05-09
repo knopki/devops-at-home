@@ -18,7 +18,6 @@ let
         }
       )
       nur-no-pkgs.repos.knopki.overlays.nodePackages
-      nur-no-pkgs.repos.knopki.overlays.pulumi
       nur-no-pkgs.repos.knopki.overlays.telepresence
     ];
   };
@@ -38,10 +37,6 @@ pkgs.mkShell {
     openssh
     php
     php73Packages.composer
-    pulumi-bin
-    pulumi-resource-gcp-bin
-    pulumi-resource-kubernetes-bin
-    pulumi-resource-mysql-bin
     python37Packages.autopep8
     python37Packages.black
     python37Packages.pip
