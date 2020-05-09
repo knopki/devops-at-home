@@ -5,7 +5,7 @@ let
   depsFonts = with pkgs; [
     emacs-all-the-icons-fonts
     fira-code-symbols
-    nerdfonts
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
     source-sans-pro
   ];
   depsPythonDev = with pkgs; [
