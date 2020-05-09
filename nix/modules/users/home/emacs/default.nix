@@ -78,7 +78,9 @@ in
 
       # javascript
       nodejs
+      nodePackages.typescript
       nodePackages.typescript-language-server
+      nodePackages.prettier
 
       # markdown
       python37Packages.grip
