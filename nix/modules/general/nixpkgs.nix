@@ -38,7 +38,8 @@ in
                 # knopki = import ../../../../nixexprs { inherit pkgs; };
               };
             };
-            unstable = import sources.nixpkgs-unstable { config.allowUnfree = true; };
+            unstable =
+              import sources.nixpkgs-unstable { config.allowUnfree = true; };
             master = import sources.nixpkgs-master { config.allowUnfree = true; };
           }
         )
@@ -48,9 +49,7 @@ in
             chemacs = sources.chemacs;
             neovim-unwrapped = super.unstable.neovim-unwrapped;
             hunspellDicts = super.unstable.hunspellDicts;
-            nerdfonts = super.master.nerdfonts.override {
-              fonts = [ "FiraCode" ];
-            };
+            nerdfonts = super.unstable.nerdfonts;
           }
         )
       ];
