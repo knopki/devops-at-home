@@ -5,7 +5,7 @@ let
   nur-no-pkgs = import sources.nur {
     repoOverrides = {
       knopki = import sources.nur-knopki {};
-      # knopki = import ../../../../nixexprs { };
+      # knopki = import ../../../../nixexprs {};
     };
   };
 in
@@ -47,7 +47,6 @@ in
         (
           self: super: {
             chemacs = sources.chemacs;
-            neovim-unwrapped = super.unstable.neovim-unwrapped;
             hunspellDicts = super.unstable.hunspellDicts;
             nerdfonts = super.unstable.nerdfonts;
           }

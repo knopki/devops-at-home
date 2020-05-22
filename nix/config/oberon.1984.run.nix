@@ -13,13 +13,7 @@ in
     extraModulePackages = [];
     initrd = {
       availableKernelModules =
-        [
-          "ahci"
-          "sd_mod"
-          "usb_storage"
-          "usbhid"
-          "xhci_pci"
-        ];
+        [ "ahci" "sd_mod" "usb_storage" "usbhid" "xhci_pci" ];
 
       kernelModules = [ "dm-snapshot" ];
 
@@ -28,7 +22,8 @@ in
         device = "/dev/disk/by-uuid/d3600e29-69a8-4aeb-a604-e34ac1f0e954";
         preLVM = true;
         allowDiscards = true;
-        keyFile = "/dev/disk/by-id/usb-General_USB_Flash_Disk_04QEWH3O9LW8DPIK-0:0";
+        keyFile =
+          "/dev/disk/by-id/usb-General_USB_Flash_Disk_04QEWH3O9LW8DPIK-0:0";
         keyFileOffset = 512 * 24;
         keyFileSize = 512 * 8;
         fallbackToPassword = true;
@@ -72,9 +67,7 @@ in
     };
   };
 
-  hardware = {
-    opengl.driSupport32Bit = true;
-  };
+  hardware = { opengl.driSupport32Bit = true; };
 
   knopki = {
     services.azire-vpn = {
@@ -94,7 +87,10 @@ in
     hostId = "a8b4f00d";
     hostName = "oberon";
     search = [ "1984.run" ];
-    hosts = { "192.168.39.80" = [ "auth.xod.loc" "pm.xod.loc" "releases.xod.loc" "xod.loc" ]; };
+    hosts = {
+      "192.168.39.80" =
+        [ "auth.xod.loc" "pm.xod.loc" "releases.xod.loc" "xod.loc" ];
+    };
   };
 
   nix.maxJobs = lib.mkDefault 4;
@@ -108,4 +104,6 @@ in
   };
 
   swapDevices = [ { device = swapDevice; } ];
+
+  system.stateVersion = "19.09";
 }

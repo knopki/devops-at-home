@@ -1,22 +1,12 @@
 { sources ? import ./nix/sources.nix }:
 let
-  unstable = import sources.nixpkgs-unstable {};
   nur-no-pkgs = import sources.nur {
     repoOverrides = {
       knopki = import sources.nur-knopki {};
       # knopki = import ../nixexprs {};
     };
   };
-  pkgs = import sources.nixpkgs {
-    overlays = [
-      (
-        self: super: {
-          morph = unstable.morph;
-          nixpkgs-fmt = unstable.nixpkgs-fmt;
-        }
-      )
-    ];
-  };
+  pkgs = import sources.nixpkgs {};
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [

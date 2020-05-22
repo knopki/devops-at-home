@@ -73,7 +73,7 @@ in
       gotests
 
       # latex
-      # FIXME: unstable.texlab
+      texlab
       texlive.combined.scheme-medium
 
       # javascript
@@ -89,7 +89,6 @@ in
       proselint
 
       # nix-mode
-      nixfmt
       nixpkgs-fmt
 
       # org

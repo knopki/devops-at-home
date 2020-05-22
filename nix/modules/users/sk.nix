@@ -34,15 +34,6 @@ in
       passwordFile = "/var/secrets/sk_password";
       home = "/home/${username}";
       home-config = {
-        home.file = {
-          ".gnupg/gpg.conf".text = ''
-            default-key 58A58B6FD38C6B66
-
-            keyserver  hkp://pool.sks-keyservers.net
-            use-agent
-          '';
-        };
-
         home.packages = with pkgs; (
           [] ++ (
             optionals isWorkstation [
@@ -113,6 +104,13 @@ in
           userEmail = "korolev.srg@gmail.com";
           userName = "Sergey Korolev";
         };
+        programs.gpg = {
+          enable = true;
+          settings = {
+            default-key = "58A58B6FD38C6B66";
+            keyserver = "hkp://pool.sks-keyservers.net";
+          };
+        };
         systemd.user.sessionVariables = {
           PASSWORD_STORE_ENABLE_EXTENSIONS = "true";
           PATH = "${selfHM.home.sessionVariables.PATH}";
@@ -125,7 +123,7 @@ in
           download = "${selfHM.home.homeDirectory}/downloads";
           music = "${selfHM.home.homeDirectory}/music";
           pictures = "${selfHM.home.homeDirectory}/pics";
-          publishShare = "${selfHM.home.homeDirectory}/public";
+          publicShare = "${selfHM.home.homeDirectory}/public";
           templates = "${selfHM.home.homeDirectory}/templates";
           videos = "${selfHM.home.homeDirectory}/videos";
         };

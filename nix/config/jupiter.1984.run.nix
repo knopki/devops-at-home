@@ -16,14 +16,7 @@ in
   boot = {
     extraModulePackages = [];
     initrd = {
-      availableKernelModules = [
-        "ahci"
-        "ehci_pci"
-        "sd_mod"
-        "usb_storage"
-        "usbhid"
-        "xhci_pci"
-      ];
+      availableKernelModules = [ "ahci" "ehci_pci" "sd_mod" "usb_storage" "usbhid" "xhci_pci" ];
       kernelModules = [ "dm-snapshot" ];
 
       luks.devices = {
@@ -108,7 +101,11 @@ in
   services = {
     apcupsd = {
       enable = true;
-      configText = "UPSCABLE usb\nUPSTYPE usb\nBATTERYLEVEL 30\nMINUTES 10";
+      configText = ''
+        UPSCABLE usb
+        UPSTYPE usb
+        BATTERYLEVEL 30
+        MINUTES 10'';
     };
     fstrim.enable = true;
     # postgresql = {
@@ -120,8 +117,7 @@ in
     };
   };
 
-  swapDevices =
-    [ { device = "/dev/mapper/VG1-swap"; } ];
+  swapDevices = [ { device = "/dev/mapper/VG1-swap"; } ];
 
   system.activationScripts.backupEFI = {
     text = "${pkgs.rsync}/bin/rsync -azu --delete -h /boot/ /boot.bak";
@@ -133,9 +129,10 @@ in
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "forking";
-      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdc -i 600 -a /dev/sdd -i 600 -a /dev/sde -i 600 -a /dev/sdf -i 600 -a /dev/sdg -i 600 -a /dev/sdh -i 600";
+      ExecStart =
+        "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdc -i 600 -a /dev/sdd -i 600 -a /dev/sde -i 600 -a /dev/sdf -i 600 -a /dev/sdg -i 600 -a /dev/sdh -i 600";
     };
   };
 
-  # systemd.services.postgresql.environment.PGSETUP_INITDB_OPTIONS = "-k";
+  system.stateVersion = "19.09";
 }

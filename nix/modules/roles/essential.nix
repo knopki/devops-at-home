@@ -9,9 +9,7 @@ with lib;
     knopki.profiles.essential.enable = true;
 
     local = {
-      general = {
-        nixpkgs.enable = true;
-      };
+      general = { nixpkgs.enable = true; };
 
       users.setupUsers = [ "root" ];
     };
@@ -20,9 +18,6 @@ with lib;
 
     time.timeZone = "Europe/Moscow";
 
-    system = {
-      nixos.versionSuffix = mkDefault "";
-      stateVersion = "19.09";
-    };
+    system = { nixos.versionSuffix = mkDefault ""; };
   };
 }

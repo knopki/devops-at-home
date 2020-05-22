@@ -86,6 +86,15 @@ in
 
   hardware = {
     opengl.driSupport32Bit = true;
+    # NOTE: track https://github.com/NixOS/nixpkgs/pull/86094
+    #nvidia = {
+    #  modesetting.enable = true;
+    #  optimus_prime = {
+    #    enable = true;
+    #    intelBusId = "PCI:0:2:0";
+    #    nvidiaBusId = "PCI:1:0:0";
+    #  };
+    #};
   };
 
   knopki = {
@@ -126,6 +135,10 @@ in
         WOL_DISABLE=Y
       '';
     };
+    xserver = {
+      displayManager.gdm.nvidiaWayland = true;
+      videoDrivers = [ "modesetting" "intel" ];
+    };
     zerotierone = {
       enable = true;
       joinNetworks = [ "1c33c1ced08df9ac" "0cccb752f7043dce" ];
@@ -133,4 +146,6 @@ in
   };
 
   swapDevices = [ { device = swapDevice; } ];
+
+  system.stateVersion = "19.09";
 }

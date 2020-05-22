@@ -12,7 +12,7 @@ in
         cfg.download
         cfg.music
         cfg.pictures
-        cfg.publishShare
+        cfg.publicShare
         cfg.templates
         cfg.videos
       ]

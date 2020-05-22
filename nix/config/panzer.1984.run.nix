@@ -25,7 +25,8 @@ in
         copy_bin_and_libs ${pkgs.thin-provisioning-tools}/bin/thin_check
       ''; # hack to boot on thin pool
 
-      kernelModules = [ "dm_thin_pool" "dm-snapshot" ]; # hack to boot on thin pool
+      kernelModules =
+        [ "dm_thin_pool" "dm-snapshot" ]; # hack to boot on thin pool
 
       luks.devices."luks-ssd" = {
         name = "luks-ssd";
@@ -85,9 +86,7 @@ in
     };
   };
 
-  hardware = {
-    opengl.driSupport32Bit = true;
-  };
+  hardware = { opengl.driSupport32Bit = true; };
 
   local = {
     hardware.intel = true;
@@ -126,4 +125,6 @@ in
   };
 
   swapDevices = [ { device = swapDevice; } ];
+
+  system.stateVersion = "19.09";
 }
