@@ -74,7 +74,6 @@ with lib; {
       # GDK_BACKEND = "wayland";
       GTK_RC_FILES = "${config.xdg.configHome}/gtk-1.0/gtkrc";
       GTK2_RC_FILES = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-      XDG_CURRENT_DESKTOP = "Unity";
     };
   };
 }

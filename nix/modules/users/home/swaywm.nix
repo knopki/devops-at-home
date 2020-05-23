@@ -693,11 +693,6 @@ in
       border-color=#abb2bf
     '';
 
-    services.gnome-keyring = {
-      enable = true;
-      components = [ "pkcs11" "secrets" "ssh" ];
-    };
-
     systemd.user.targets = {
       sway-session = {
         Unit = {
