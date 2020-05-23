@@ -503,10 +503,6 @@ in
       bindsym $mod+Shift+Cyrillic_u mode "$mode_system"
     '';
 
-    home.file."${swayDir}/config.d/99-unlock-ssh".text = ''
-      exec --no-startup-id sh -c "echo | ${sshaddBin}"
-    '';
-
     #
     # waybar
     #
