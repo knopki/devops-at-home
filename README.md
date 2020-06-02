@@ -1,61 +1,39 @@
-# DevOps@home
+# devops@home
 
-Configuration management of the my personal machines, my dotfiles, my other somethings. Because why not.
+Configuration management of the my personal machines, my dotfiles,
+my other somethings. Because why not.
 
-Target platforms: NixOS, Fedora CoreOS (legacy), Fedora Project Silverblue (legacy).
+## Setup
 
-## Requirements
+Requirements:
 
-- `git`
-- `direnv`
-- `nix` (good luck if not on NixOS)
-- `pass`
+- `nix` (`pkgs.nixFlakes`)
+- `direnv` && `nix-direnv`
 
-All other dependencies will be installed by `nix-shell`.
+`direnv allow` and everything is ready.
 
-## How to use
+## Usage
 
-Deployment is biased now: `Ansible` for legacy systems and `Morph` for NixOS.
+Check configuration:
 
-
-### NixOS
-
-You can build like:
-
-```shell
-morph build nix/deploy.nix --on="*alien*"
+```sh
+nix flake check
 ```
 
-You can build, deploy and activate like:
+Switch to configuration:
 
-```shell
-morph deploy nix/deploy.nix --on="*panzer*" switch
+```sh
+nixos-rebuild switch --flake .#hostname
 ```
 
-#### Update dependencies
+Build an ISO:
 
-```shell
-niv update <package_in_sources_json>
+```sh
+nix build -v .#nixosConfigurations.iso.config.system.build.isoImage
 ```
 
-#### Manual apply
+Open shell with package:
 
-If something goes wrong or for development.
-
-Copy configuration from the `nix` folder to the target machine.
-
-Apply target configuration:
-
-```shell
-sudo nixos-rebuild switch -I "nixos-config=$PWD/nix/config/alien.1984.run.nix"
+```sh
+nix shell .#packages.x86_64-linux.winbox
 ```
-### Ansible
-
-You can deploy to the non-NixOS machines with something like:
-
-```shell
-cd ansible
-ansible-playbook playbooks/main.yml
-```
-
-Actually, almost all configuration removed (nix ftw), used only to deploy secrets.

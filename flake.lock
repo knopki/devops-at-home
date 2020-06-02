@@ -1,0 +1,116 @@
+{
+  "nodes": {
+    "chemacs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1588617099,
+        "narHash": "sha256-i99kfSjgKVyFE9h1g5Vfu7Go/zCQbdp+SQ8Nbe3jkmY=",
+        "owner": "plexus",
+        "repo": "chemacs",
+        "rev": "233bb7fb4d176f81fe4e7dccbb7f1cba793010e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "plexus",
+        "repo": "chemacs",
+        "type": "github"
+      }
+    },
+    "emacs-overlay": {
+      "locked": {
+        "lastModified": 1597624671,
+        "narHash": "sha256-LwJSvc1Q06ui4a9yorrNStK9FmaBljWkQW/rSW/CFTE=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "2f775d893614aa78d4e478f6b133be12b4b86a33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
+    "home": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1591751635,
+        "narHash": "sha256-KgGtyFlkI/fsp+j8VEgJ/ynY9B91aX35Xp04HlDLRTo=",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "b3fee796fcd5531693d9b84ece76ad6836bb1cfa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rycee",
+        "ref": "bqv-flakes",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1597353046,
+        "narHash": "sha256-+DAotmZ/GKaknMo0KvodsWAYxFgEFvUwMNM3wnX20F0=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "984c72f65312c82be2d20b82345b22c99e0508f0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1597600001,
+        "narHash": "sha256-YDZ7K4EFc6vCGbp0PZQkM+kxiN2aOn37pQE3rJWDN4s=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f8a10a771937e310017cf812214fc3ea60c080f2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-20.03",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1597596130,
+        "narHash": "sha256-CnRN6vIcPm5O+Piw9Nw+n9CFrvtXUc18Az7B6NqVgWM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "16fc531784ac226fb268cc59ad573d2746c109c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "chemacs": "chemacs",
+        "emacs-overlay": "emacs-overlay",
+        "home": "home",
+        "nixos-hardware": "nixos-hardware",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

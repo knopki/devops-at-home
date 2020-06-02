@@ -1,29 +1,6 @@
-{ sources ? import ./nix/sources.nix }:
-let
-  nur-no-pkgs = import sources.nur {
-    repoOverrides = {
-      knopki = import sources.nur-knopki {};
-      # knopki = import ../nixexprs {};
-    };
-  };
-  pkgs = import sources.nixpkgs {};
-in
+{ pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
-  buildInputs = with pkgs; [
-    ansible
-    ansible-lint
-    direnv
-    gitAndTools.pre-commit
-    haskellPackages.niv
-    morph
-    nix-prefetch-git
-    nixFlakes
-    nixpkgs-fmt
-    openssh
-    shellcheck
-    shfmt
-    stdenv
-  ];
+  nativeBuildInputs = with pkgs; [ nixFlakes ];
 
   NIX_CONF_DIR = let
     current = pkgs.lib.optionalString (builtins.pathExists /etc/nix/nix.conf)
