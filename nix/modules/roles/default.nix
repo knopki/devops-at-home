@@ -1,1 +1,1 @@
-{ ... }: { imports = [ ./essential.nix ./nextcloud.nix ./workstation.nix ]; }
+{ ... }: { imports = [ ./essential.nix ./workstation.nix ]; }
