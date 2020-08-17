@@ -1,0 +1,27 @@
+[
+  ./alacritty.nix
+  ./cachedir.nix
+  ./chromium.nix
+  ./curl.nix
+  ./direnv.nix
+  ./emacs
+  ./env.nix
+  ./fish.nix
+  ./firefox.nix
+  ./fzf.nix
+  ./git.nix
+  ./gnome.nix
+  ./htop.nix
+  ./meta.nix
+  ./minikube.nix
+  ./neovim
+  ./npmrc.nix
+  ./readline.nix
+  ./ssh.nix
+  ./swaywm
+  ./tmux.nix
+  ./vscode.nix
+  ./wget.nix
+  ./qt.nix
+  ./xdg.nix
+]
