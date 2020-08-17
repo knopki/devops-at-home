@@ -34,13 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nur-knopki = {
-    #   type = "github";
-    #   owner = "knopki";
-    #   repo = "nixexprs";
-    #   flake = false;
-    # };
-
     emacs-overlay = {
       type = "github";
       owner = "nix-community";
