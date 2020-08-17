@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
-  nativeBuildInputs = with pkgs; [ nixFlakes ];
+  nativeBuildInputs = with pkgs; [ ansible git git-crypt nixFlakes pass ];
 
   NIX_CONF_DIR = let
     current = pkgs.lib.optionalString (builtins.pathExists /etc/nix/nix.conf)
