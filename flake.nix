@@ -48,7 +48,7 @@
     };
   };
 
-  outputs = inputs@{ self, home, nixpkgs, nixpkgs-unstable, nixos-hardware, emacs-overlay, chemacs, ... }:
+  outputs = inputs@{ self, home, nixpkgs, nixpkgs-unstable, nixos-hardware, emacs-overlay, ... }:
     let
       inherit (builtins) attrNames attrValues baseNameOf elem filter listToAttrs readDir;
       inherit (nixpkgs.lib) genAttrs filterAttrs hasSuffix removeSuffix;
@@ -67,9 +67,6 @@
 
       outerOverlays = {
         emacsOverlay = emacs-overlay.overlay;
-        chemacs = final: prev: {
-          inherit chemacs;
-        };
       };
     in
       {
