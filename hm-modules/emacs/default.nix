@@ -1,32 +1,12 @@
 { config, lib, pkgs, ... }:
 with lib;
-let
-  eopkgs = pkgs.emacsPackagesFor pkgs.emacs;
-  depsFonts = with pkgs; [
-    emacs-all-the-icons-fonts
-    fira-code-symbols
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    source-sans-pro
-  ];
-  depsPythonDev = with pkgs; [
-    python37Packages.flake8
-    python37Packages.pyflakes
-    python37Packages.pylint
-    python37Packages.pyls-black
-    python37Packages.pyls-mypy
-    python37Packages.python-language-server
-  ];
-in
 {
-  options.knopki.emacs = { enable = mkEnableOption "enable emacs for user"; };
+  options.knopki.emacs = { enable = mkEnableOption "enable doom emacs for user"; };
 
   config = mkIf config.knopki.emacs.enable {
     home.file = {
-      ".emacs".source = "${pkgs.chemacs}/.emacs";
-      ".emacs-profiles.el".text = ''
-        (("default" . ((user-emacs-directory . "~/.emacs.d.doom")
-                       (env . (("DOOMDIR" . "~/.doom.d")))))
-        ("old" . ((user-emacs-directory . "~/.emacs.d.old"))))
+      ".emacs.d/init.el".text = ''
+        (load "default.el")
       '';
 
       # HACK: support virtualenv and nix shells
@@ -39,6 +19,12 @@ in
     home.packages = with pkgs; [
       fd
       ripgrep
+
+      # fonts etc
+      emacs-all-the-icons-fonts
+      fira-code-symbols
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      source-sans-pro
 
       # cc
       ccls
@@ -101,6 +87,14 @@ in
       # plantuml
       plantuml
 
+      # python
+      python37Packages.flake8
+      python37Packages.pyflakes
+      python37Packages.pylint
+      python37Packages.pyls-black
+      python37Packages.pyls-mypy
+      python37Packages.python-language-server
+
       # rust
       cargo
       clippy
@@ -121,123 +115,11 @@ in
 
       # yaml
       yaml-language-server
-    ] ++ depsFonts ++ depsPythonDev;
+    ];
 
     programs.emacs = {
       enable = true;
-      extraPackages = epkgs: with epkgs; [
-        aggressive-indent
-        all-the-icons
-        all-the-icons-dired
-        all-the-icons-ibuffer
-        all-the-icons-ivy-rich
-        avy
-        benchmark-init
-        bind-key # required by use-package
-        browse-at-remote
-        company
-        company-box
-        # company-lsp
-        company-prescient
-        counsel
-        counsel-projectile
-        dap-mode
-        diff-hl
-        diminish # required by use-package
-        direnv
-        doom-modeline
-        doom-themes
-        evil
-        evil-collection
-        evil-commentary
-        evil-goggles
-        evil-magit
-        evil-org
-        evil-surround
-        gcmh
-        fira-code-mode
-        flycheck
-        flyspell-correct-ivy
-        general
-        git-timemachine
-        gitattributes-mode
-        gitconfig-mode
-        gitignore-mode
-        helpful
-        hide-mode-line
-        highlight-numbers
-        hl-todo
-        ibuffer-projectile
-        ivy
-        ivy-prescient
-        ivy-rich
-        ivy-yasnippet
-        json-mode # needed by nix-mode
-        live-py-mode
-        lsp-ivy
-        lsp-mode
-        lsp-treemacs
-        lsp-ui
-        magit
-        magit-todos
-        minions
-        mixed-pitch
-        nix-mode
-        no-littering
-        org-cliplink
-        org-download
-        org-fancy-priorities
-        org-journal
-        org-plus-contrib
-        org-superstar
-        persistent-scratch
-        prescient
-        projectile
-        python-black
-        rainbow-delimiters
-        reverse-im
-        ripgrep
-        russian-holidays
-        solaire-mode
-        toc-org
-        treemacs
-        undo-tree
-        use-package
-        vterm
-        wakatime-mode
-        which-key
-        yasnippet
-        yasnippet-snippets
-      ];
-      overrides = self: super: rec {
-        inherit (self.melpaPackages)
-          aggressive-indent
-          all-the-icons
-          doom-themes
-          evil-magit
-          magit
-          toc-org
-          use-package
-          ;
-        inherit (eopkgs.melpaStablePackages)
-          all-the-icons-ibuffer
-          all-the-icons-ivy-rich
-          lsp-ui
-          org-superstar
-          projectile
-          ;
-        inherit (eopkgs.melpaPackages)
-          doom-modeline
-          evil-collection
-          fira-code-mode
-          flycheck
-          lsp-mode
-          org-download
-          reverse-im
-          yasnippet-snippets
-          ;
-        inherit (eopkgs.elpaPackages) undo-tree;
-      };
+      package = pkgs.doom-emacs;
     };
   };
 }

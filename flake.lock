@@ -1,41 +1,8 @@
 {
   "nodes": {
-    "chemacs": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1588617099,
-        "narHash": "sha256-i99kfSjgKVyFE9h1g5Vfu7Go/zCQbdp+SQ8Nbe3jkmY=",
-        "owner": "plexus",
-        "repo": "chemacs",
-        "rev": "233bb7fb4d176f81fe4e7dccbb7f1cba793010e6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "plexus",
-        "repo": "chemacs",
-        "type": "github"
-      }
-    },
-    "emacs-overlay": {
-      "locked": {
-        "lastModified": 1597624671,
-        "narHash": "sha256-LwJSvc1Q06ui4a9yorrNStK9FmaBljWkQW/rSW/CFTE=",
-        "owner": "nix-community",
-        "repo": "emacs-overlay",
-        "rev": "2f775d893614aa78d4e478f6b133be12b4b86a33",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "emacs-overlay",
-        "type": "github"
-      }
-    },
     "home": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1591751635,
@@ -49,6 +16,22 @@
         "owner": "rycee",
         "ref": "bqv-flakes",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nix-doom-emacs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1597510486,
+        "narHash": "sha256-sszIFwSLtdVhXKbxg5bIXBt8Rm4gkYJYZQjDoyCyBZs=",
+        "owner": "vlaci",
+        "repo": "nix-doom-emacs",
+        "rev": "edea767bd1a5cf2bbf00760f6070ecf1c2490ebc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vlaci",
+        "repo": "nix-doom-emacs",
         "type": "github"
       }
     },
@@ -102,9 +85,8 @@
     },
     "root": {
       "inputs": {
-        "chemacs": "chemacs",
-        "emacs-overlay": "emacs-overlay",
         "home": "home",
+        "nix-doom-emacs": "nix-doom-emacs",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable"

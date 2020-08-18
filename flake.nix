@@ -34,21 +34,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay = {
+    nix-doom-emacs = {
       type = "github";
-      owner = "nix-community";
-      repo = "emacs-overlay";
-    };
-
-    chemacs = {
-      type = "github";
-      owner = "plexus";
-      repo = "chemacs";
+      owner = "vlaci";
+      repo = "nix-doom-emacs";
       flake = false;
     };
   };
 
-  outputs = inputs@{ self, home, nixpkgs, nixpkgs-unstable, nixos-hardware, emacs-overlay, ... }:
+  outputs = inputs@{ self, home, nixpkgs, nixpkgs-unstable, nixos-hardware, ... }:
     let
       inherit (builtins) attrNames attrValues baseNameOf elem filter listToAttrs readDir;
       inherit (nixpkgs.lib) genAttrs filterAttrs hasSuffix removeSuffix;
@@ -65,9 +59,7 @@
           }
       );
 
-      outerOverlays = {
-        emacsOverlay = emacs-overlay.overlay;
-      };
+      outerOverlays = { };
     in
       {
         nixosConfigurations = let
@@ -86,7 +78,7 @@
 
         packages = forAllSystems (
           system: filterAttrs (n: v: elem system v.meta.platforms) {
-            inherit (nixpkgsFor.${system}) winbox winbox-bin;
+            inherit (nixpkgsFor.${system}) doom-emacs winbox winbox-bin;
           }
         );
 
