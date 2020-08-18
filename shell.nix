@@ -12,4 +12,8 @@ pkgs.mkShell {
     '';
   in
     "${nixConf}/opt";
+
+  shellHook = ''
+    mkdir -p secrets
+  '';
 }

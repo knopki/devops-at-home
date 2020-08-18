@@ -46,8 +46,19 @@
     let
       inherit (builtins) attrNames attrValues baseNameOf elem filter listToAttrs readDir;
       inherit (nixpkgs.lib) genAttrs filterAttrs hasSuffix removeSuffix;
-      systems = [ "x86_64-linux" "i686-linux" "x86_64-darwin" "aarch64-linux" ];
+      systems = [
+        "aarch64-linux"
+        "i686-linux"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
       forAllSystems = f: genAttrs systems (system: f system);
+      prepModules = map (
+        path: {
+          name = removeSuffix ".nix" (baseNameOf path);
+          value = import path;
+        }
+      );
 
       # Memoize nixpkgs for different platforms for efficiency.
       nixpkgsFor = forAllSystems (
@@ -83,53 +94,29 @@
         );
 
         nixosModules = let
-          prep = map (
-            path: {
-              name = removeSuffix ".nix" (baseNameOf path);
-              value = import path;
-            }
-          );
           # binary cache
           cachix = import ./cachix.nix;
           cachixAttrs = { inherit cachix; };
 
           # modules
           moduleList = import ./modules/list.nix;
-          modulesAttrs = listToAttrs (prep moduleList);
+          modulesAttrs = listToAttrs (prepModules moduleList);
           hmModuleList = import ./hm-modules/list.nix;
-          hmModulesAttrs = { home-manager = listToAttrs (prep hmModuleList); };
+          hmModulesAttrs = { home-manager = listToAttrs (prepModules hmModuleList); };
 
           # profiles
           profileList = import ./profiles/list.nix;
-          profilesAttrs = { profiles = listToAttrs (prep profileList); };
+          profilesAttrs = { profiles = listToAttrs (prepModules profileList); };
         in
           cachixAttrs // modulesAttrs // hmModulesAttrs // profilesAttrs;
 
         checks.x86_64-linux = self.packages.x86_64-linux // {
           alien = self.nixosConfigurations.alien.config.system.build.toplevel;
-          iso = self.nixosConfigurations.iso.config.system.build.isoImage;
+          # iso = self.nixosConfigurations.iso.config.system.build.isoImage;
         };
 
         devShell = forAllSystems (
-          system:
-            with nixpkgsFor.${system};
-            pkgs.mkShell {
-              NIX_CONF_DIR = let
-                current = pkgs.lib.optionalString (builtins.pathExists /etc/nix/nix.conf)
-                  (builtins.readFile /etc/nix/nix.conf);
-                nixConf = pkgs.writeTextDir "opt/nix.conf" ''
-                  ${current}
-                  experimental-features = nix-command flakes ca-references
-                '';
-              in
-                "${nixConf}/opt";
-
-              nativeBuildInputs = with pkgs; [ ansible git git-crypt nixFlakes pass ];
-
-              shellHook = ''
-                mkdir -p secrets
-              '';
-            }
+          system: import ./shell.nix { pkgs = nixpkgsFor.${system}; }
         );
       };
 }
