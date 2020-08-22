@@ -13,7 +13,7 @@ let
       specialArgs.usr = { inherit utils; };
 
       modules = let
-        inherit (home.nixosModules) home-manager;
+        # inherit (home.nixosModules) home-manager;
 
         core = ../profiles/core.nix;
 
@@ -44,7 +44,7 @@ let
           attrValues (removeAttrs self.nixosModules [ "profiles" "home-manager" ]);
 
       in
-        flakeModules ++ [ core global local home-manager ];
+        flakeModules ++ [ core global local "${home}/nixos" ];
     };
 
   hosts = recImportHosts { dir = ./.; _import = mkHost; };

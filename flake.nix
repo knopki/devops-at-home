@@ -30,8 +30,9 @@
       type = "github";
       owner = "rycee";
       repo = "home-manager";
-      ref = "bqv-flakes";
+      ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
+      flake = false;
     };
 
     nix-doom-emacs = {
