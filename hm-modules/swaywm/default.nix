@@ -77,6 +77,8 @@ in
       wl-clipboard
     ];
 
+    home.sessionVariables.XDG_CURRENT_DESKTOP = "sway";
+
     knopki.alacritty.enable = true;
 
     #

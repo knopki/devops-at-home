@@ -247,4 +247,10 @@ in
       liveRestore = mkDefault true;
     };
   };
+
+  xdg.portal = {
+    enable = true;
+    gtkUsePortal = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  };
 }
