@@ -54,6 +54,8 @@ let
   '';
 in
 {
+  imports = [ ./waybar.nix ];
+
   options.knopki.swaywm.enable = mkEnableOption "setup sway, bar, etc";
 
   config = mkIf config.knopki.swaywm.enable {
@@ -70,7 +72,6 @@ in
       playerctl
       slurp
       swayLockWrapper
-      waybar
       wf-recorder
       wl-clipboard
     ];
@@ -503,165 +504,6 @@ in
       bindsym $mod+Shift+Cyrillic_u mode "$mode_system"
     '';
 
-    #
-    # waybar
-    #
-    home.file."${config.xdg.configHome}/waybar/ipcountry.sh".text = ''
-      #!/usr/bin/env bash
-      CODE=$(curl -s http://ifconfig.co/country-iso)
-      echo "{ \"class\": \"$CODE\", \"text\": \"$CODE\" }"
-    '';
-
-    home.file."${config.xdg.configHome}/waybar/config".text = builtins.toJSON (
-      {
-        modules-left = [ "sway/workspaces" "sway/mode" ];
-        "sway/workspaces" = {
-          disable-scroll = true;
-          format = "{name}: {icon}";
-          format-icons = {
-            # "1" = "";
-            # "2" = "";
-            # "3" = "";
-            # "4" = "";
-            # "5" = "";
-            "urgent" = "";
-            "focused" = "";
-            "default" = "";
-          };
-        };
-        "sway/mode" = { format = ''<span style="italic">{}</span>''; };
-
-        modules-center = [ "sway/window" ];
-        "sway/window" = { max-length = 100; };
-
-        modules-right = [
-          "tray"
-          "idle_inhibitor"
-          "cpu"
-          "temperature"
-          "memory"
-          "custom/ipcountry"
-          "network"
-          "pulseaudio"
-          "clock"
-        ];
-        idle_inhibitor = {
-          format = "{icon}";
-          format-icons = {
-            activated = "";
-            deactivated = "";
-          };
-        };
-        cpu = {
-          states = { critical = 75; };
-          format = "{usage}% ";
-          tooltip = false;
-        };
-        memory = {
-          format = "{}% ";
-          states = { critical = 90; };
-        };
-
-        temperature = {
-          format = "{temperatureC}°C ";
-          critical-threshold = 80;
-        } // (
-          if (config.meta.machine == "alien") then {
-            thermal-zone = 1;
-          } else
-            {}
-        );
-
-        battery = {
-          states = {
-            "awesome" = 90;
-            "good" = 80;
-            "warning" = 30;
-            "critical" = 15;
-          };
-          format = "{capacity}% {icon}";
-          format-icons = [ "" "" "" "" "" ];
-          format-charging = "{capacity}% ";
-          format-plugged = "{capacity}% ";
-          format-alt = "{time} {icon}";
-          format-awesome = "";
-        };
-        "custom/ipcountry" = {
-          exec = "bash ${config.xdg.configHome}/waybar/ipcountry.sh";
-          return-type = "json";
-          interval = 60;
-          tooltip = false;
-        };
-        network = {
-          format-wifi = "{essid} ({signalStrength}%) ";
-          tooltip-format-wifi = "{essid} ({signalStrength}%) ";
-          format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
-          format-linked = "{ifname} (No IP) ";
-          format-disconnected = "Disconnected ⚠";
-          format-alt = " {bandwidthUpBits}↑ {bandwidthDownBits}↓";
-          tooltip-format = "{ifname}: {ipaddr}/{cidr}";
-        };
-        pulseaudio = {
-          format = "{volume}% {icon} {format_source}";
-          format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = " {icon} {format_source}";
-          format-muted = " {format_source}";
-          format-source = "{volume}% ";
-          format-source-muted = "";
-          format-icons = {
-            headphones = "";
-            handsfree = "";
-            headset = "";
-            default = [ "" "" "" ];
-          };
-          on-click = "pavucontrol";
-          scroll-step = 0.001;
-        };
-        backlight = {
-          format = "{percent}% {icon}";
-          format-icons = [ "" "" ];
-        };
-        clock = {
-          format = " {:%a, %d. %b  %H:%M}";
-          tooltip = false;
-        };
-      } // (
-        if (config.meta.machine == "alien") then {
-          modules-right = [
-            "tray"
-            "idle_inhibitor"
-            "cpu"
-            "temperature"
-            "memory"
-            "battery"
-            "custom/ipcountry"
-            "network"
-            "pulseaudio"
-            "backlight"
-            "clock"
-          ];
-        } else if (config.meta.machine == "t430s") then {
-          modules-right = [
-            "tray"
-            "idle_inhibitor"
-            "cpu"
-            "temperature"
-            "memory"
-            "battery"
-            "custom/ipcountry"
-            "network"
-            "pulseaudio"
-            "backlight"
-            "clock"
-          ];
-        } else
-          {}
-      )
-    );
-
-    home.file."${config.xdg.configHome}/waybar/style.css".text =
-      builtins.readFile ./waybar.css;
-
     programs.mako = {
       enable = true;
       sort = "-priority";
@@ -713,20 +555,6 @@ in
                     resume '${swaymsgBin} "output * dpms on"' \
               before-sleep '${swaylockCmd}'
           '';
-        };
-        Install = { WantedBy = [ "sway-session.target" ]; };
-      };
-      waybar = {
-        Unit = {
-          Description =
-            "Highly customizable Wayland bar for Sway and Wlroots based compositors.";
-          Documentation = "man:waybar(1)";
-          PartOf = "graphical-session.target";
-        };
-        Service = {
-          Type = "dbus";
-          BusName = "fr.arouillard.waybar";
-          ExecStart = "${pkgs.waybar}/bin/waybar";
         };
         Install = { WantedBy = [ "sway-session.target" ]; };
       };
