@@ -54,7 +54,7 @@ let
   '';
 in
 {
-  imports = [ ./waybar.nix ];
+  imports = [ ./mako.nix ./waybar.nix ];
 
   options.knopki.swaywm.enable = mkEnableOption "setup sway, bar, etc";
 
@@ -504,16 +504,6 @@ in
       bindsym $mod+Shift+Cyrillic_u mode "$mode_system"
     '';
 
-    programs.mako = {
-      enable = true;
-      sort = "-priority";
-      font = "pango:Noto Sans 10";
-      ## Base16 OneDark / Author: Lalit Magant (http://github.com/tilal6991)
-      backgroundColor = "#3e4451";
-      textColor = "#abb2bf";
-      borderColor = "#abb2bf";
-    };
-
     systemd.user.targets = {
       sway-session = {
         Unit = {
@@ -527,18 +517,6 @@ in
     };
 
     systemd.user.services = {
-      mako = {
-        Unit = {
-          Description = "A lightweight Wayland notification daemon";
-          Documentation = "man:mako(1)";
-          PartOf = "graphical-session.target";
-        };
-        Service = {
-          Type = "simple";
-          ExecStart = "${pkgs.mako}/bin/mako";
-        };
-        Install = { WantedBy = [ "sway-session.target" ]; };
-      };
       swayidle = {
         Unit = {
           Description = "Idle manager for Wayland";
