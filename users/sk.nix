@@ -100,6 +100,7 @@ in
       minikube.enable = isWorkstation;
       neovim.enable = true;
       npmrc.enable = isWorkstation;
+      password-store.enable = isWorkstation;
       readline.enable = true;
       ssh.enable = true;
       swaywm.enable = isWorkstation;
@@ -111,13 +112,11 @@ in
     };
     programs.git = {
       signing = {
-        key = "58A58B6FD38C6B66";
+        key = selfHM.programs.gpg.settings.default-key;
         signByDefault = true;
       };
       userEmail = "korolev.srg@gmail.com";
       userName = "Sergey Korolev";
-      extraConfig.credential.helper =
-        mkIf isWorkstation "!${pkgs.gopass}/bin/gopass git-credential $@";
     };
     programs.gpg = {
       enable = true;

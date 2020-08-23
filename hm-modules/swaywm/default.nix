@@ -60,7 +60,6 @@ in
     home.packages = with pkgs; [
       coreutils
       fzf
-      gopass
       grim
       i3
       graphicsmagick-imagemagick-compat

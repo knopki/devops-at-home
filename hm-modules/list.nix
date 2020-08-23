@@ -16,6 +16,7 @@
   ./minikube.nix
   ./neovim
   ./npmrc.nix
+  ./password-store.nix
   ./qt.nix
   ./readline.nix
   ./ssh.nix
