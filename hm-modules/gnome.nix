@@ -1,7 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 {
-  options.knopki.gnome.enable = mkEnableOption "setup gnome";
+  options.knopki.gnome = {
+    enable = mkEnableOption "setup gnome";
+    mime = mkEnableOption "gnome file associations";
+  };
 
   config = mkIf config.knopki.gnome.enable {
     home.packages = with pkgs; [ gnome3.rhythmbox ];
@@ -67,6 +70,42 @@ with lib;
       # GDK_BACKEND = "wayland";
       GTK_RC_FILES = "${config.xdg.configHome}/gtk-1.0/gtkrc";
       GTK2_RC_FILES = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+    };
+
+    xdg.mimeApps = mkIf config.knopki.gnome.mime {
+      enable = true;
+      defaultApplications = (
+        listToAttrs (
+          map (x: nameValuePair x "eog.desktop") [
+            "image/bmp"
+            "image/gif"
+            "image/jpeg"
+            "image/jpg"
+            "image/pjpeg"
+            "image/png"
+            "image/svg+xml"
+            "image/svg+xml-compressed"
+            "image/tiff"
+            "image/vnd.wap.wbmp"
+            "image/x-bmp"
+            "image/x-gray"
+            "image/x-icb"
+            "image/x-icns"
+            "image/x-ico"
+            "image/x-pcx"
+            "image/x-png"
+            "image/x-portable-anymap"
+            "image/x-portable-bitmap"
+            "image/x-portable-graymap"
+            "image/x-portable-pixmap"
+            "image/x-xbitmap"
+            "image/x-xpixmap"
+          ]
+        )
+      ) // {
+        "application/pdf" = "org.gnome.Evince.desktop";
+        "x-scheme-handler/mailto" = "org.gnome.Geary.desktop";
+      };
     };
   };
 }

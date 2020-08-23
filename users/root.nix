@@ -14,7 +14,6 @@ in
     meta.tags = getAttrs [ "isWorkstation" ] config.meta.tags;
     knopki = {
       curl.enable = true;
-      env.default = true;
       fish.enable = true;
       git.enable = true;
       htop.enable = true;

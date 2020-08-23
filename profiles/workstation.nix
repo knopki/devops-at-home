@@ -14,7 +14,6 @@ in
   environment = {
     gnome3.excludePackages = with pkgs.gnome3; [
       epiphany
-      geary
       gnome-calendar
       gnome-characters
       gnome-clocks

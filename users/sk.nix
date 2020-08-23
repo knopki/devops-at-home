@@ -84,13 +84,18 @@ in
       direnv.enable = true;
       emacs.enable = isWorkstation;
       env = {
-        default = true;
         graphics = isWorkstation;
       };
       fish.enable = true;
-      firefox.enable = isWorkstation;
+      firefox = {
+        enable = isWorkstation;
+        mime = isWorkstation;
+      };
       git.enable = true;
-      gnome.enable = isWorkstation;
+      gnome = {
+        enable = isWorkstation;
+        mime = isWorkstation;
+      };
       htop.enable = true;
       minikube.enable = isWorkstation;
       neovim.enable = true;
@@ -100,6 +105,7 @@ in
       swaywm.enable = isWorkstation;
       tmux.enable = true;
       vscode.enable = isWorkstation;
+      wine.enable = isWorkstation;
       wget.enable = true;
       qt.enable = isWorkstation;
     };
@@ -124,6 +130,7 @@ in
     xdg = {
       enable = true;
       configFile."user-dirs.locale".text = "en_US";
+      configFile."mimeapps.list".force = true;
       userDirs = {
         enable = isWorkstation;
         desktop = "${selfHM.home.homeDirectory}/desktop";

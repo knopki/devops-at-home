@@ -6,8 +6,8 @@
   ./direnv.nix
   ./emacs
   ./env.nix
-  ./fish.nix
   ./firefox.nix
+  ./fish.nix
   ./fzf.nix
   ./git.nix
   ./gnome.nix
@@ -16,12 +16,13 @@
   ./minikube.nix
   ./neovim
   ./npmrc.nix
+  ./qt.nix
   ./readline.nix
   ./ssh.nix
   ./swaywm
   ./tmux.nix
   ./vscode.nix
   ./wget.nix
-  ./qt.nix
+  ./wine.nix
   ./xdg.nix
 ]

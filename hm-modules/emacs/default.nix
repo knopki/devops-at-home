@@ -117,6 +117,11 @@ with lib;
       yaml-language-server
     ];
 
+    home.sessionVariables = {
+      EDITOR = "emacsclient -t";
+      VISUAL = "emacsclient -c";
+    };
+
     programs.emacs = {
       enable = true;
       package = pkgs.doom-emacs;
@@ -125,6 +130,40 @@ with lib;
     services.emacs = {
       enable = true;
       client.enable = true;
+    };
+
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = (
+        listToAttrs (
+          map (x: nameValuePair x "emacsclient.desktop") [
+            "application/javascript"
+            "application/json"
+            "application/markdown"
+            "application/x-php"
+            "application/x-shellscript"
+            "application/x-yaml"
+            "application/xml"
+            "text/english"
+            "text/plain"
+            "text/vnd.qt.linguist" # typescript
+            "text/x-c"
+            "text/x-c++"
+            "text/x-c++hdr"
+            "text/x-c++src"
+            "text/x-chdr"
+            "text/x-csrc"
+            "text/x-java"
+            "text/x-makefile"
+            "text/x-moc"
+            "text/x-pascal"
+            "text/x-patch"
+            "text/x-python"
+            "text/x-tcl"
+            "text/x-tex"
+          ]
+        )
+      );
     };
   };
 }
