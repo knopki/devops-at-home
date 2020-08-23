@@ -153,12 +153,9 @@
 ;;;; Theme and Fonts
 
 ;; Setup fonts.
-(let ((default-font (font-spec :family "FiraCode Nerd Font Mono" :size 16))
-      (v-p-font (font-spec :family "Source Sans Pro")))
-  (if (find-font default-font) (setq doom-font default-font)
-    (warn "%s font not found!" default-font))
-  (if (find-font v-p-font) (setq doom-variable-pitch-font v-p-font)
-    (warn "%s font not found!" v-p-font)))
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 16)
+      doom-variable-pitch-font (font-spec :family "Source Sans Pro"))
+
 
 ;; Choose theme.
 (setq doom-theme 'doom-one)

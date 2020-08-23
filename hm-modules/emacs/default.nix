@@ -121,5 +121,10 @@ with lib;
       enable = true;
       package = pkgs.doom-emacs;
     };
+
+    services.emacs = {
+      enable = true;
+      client.enable = true;
+    };
   };
 }
