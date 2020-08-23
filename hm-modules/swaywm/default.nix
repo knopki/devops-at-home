@@ -66,7 +66,6 @@ in
       jq
       libappindicator-gtk3
       libnotify
-      mako
       networkmanagerapplet
       playerctl
       slurp
@@ -663,32 +662,15 @@ in
     home.file."${config.xdg.configHome}/waybar/style.css".text =
       builtins.readFile ./waybar.css;
 
-    #
-    # mako
-    #
-    home.file."${config.xdg.configHome}/mako/config".text = ''
-      font=pango:Noto Sans 10
-      markup=1
-
-      ## Base16 OneDark
-      # Author: Lalit Magant (http://github.com/tilal6991)
-      #
-      # You can use these variables anywhere in the mako configuration file.
-
-      background-color=#3e4451
-      text-color=#abb2bf
-      border-color=#abb2bf
-
-      [urgency=low]
-      background-color=#353b45
-      text-color=#545862
-      border-color=#abb2bf
-
-      [urgency=high]
-      background-color=#e06c75
-      text-color=#b6bdca
-      border-color=#abb2bf
-    '';
+    programs.mako = {
+      enable = true;
+      sort = "-priority";
+      font = "pango:Noto Sans 10";
+      ## Base16 OneDark / Author: Lalit Magant (http://github.com/tilal6991)
+      backgroundColor = "#3e4451";
+      textColor = "#abb2bf";
+      borderColor = "#abb2bf";
+    };
 
     systemd.user.targets = {
       sway-session = {
