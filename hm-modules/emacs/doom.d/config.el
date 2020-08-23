@@ -304,9 +304,6 @@
 
 ;; Prefer nixpkgs-fmt from shell nix
 (setq nix-nixfmt-bin "nixpkgs-fmt")
-(when (featurep! :editor format)
-  (ignore-errors (set-formatter! 'nixfmt nix-nixfmt-bin :modes '(nix-mode))))
-
 
 ;;;; Org
 
