@@ -136,6 +136,11 @@ in
         videos = "${selfHM.home.homeDirectory}/videos";
       };
     };
+
+    systemd.user.tmpfiles.rules = [
+      "e ${selfHM.xdg.userDirs.download} - - - 30d"
+      "e ${selfHM.xdg.userDirs.download}/*.torrent - - - 1d"
+    ];
   };
 
   system.activationScripts = {
