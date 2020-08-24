@@ -6,13 +6,13 @@ with lib;
   knopki = {
     bash.enable = true;
     curl.enable = true;
+    dircolors.enable = true;
     fish = {
       enable = true;
       colorizeMan = true;
       defaultFuncs = true;
       fixTerm = true;
       loadProfile = true;
-      lsColors = true;
       pureTheme = true;
       interactiveShellInit."99-binds" = ''
         bind --user \cw backward-kill-word # Ctrl-W

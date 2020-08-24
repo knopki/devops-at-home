@@ -17,7 +17,6 @@ in
     fixTerm = mkEnableOption "fix $TERM in fish";
     colorizeMan = mkEnableOption "fix $TERM in fish";
     pureTheme = mkEnableOption "enable Pure fish theme";
-    lsColors = mkEnableOption "enable cool LS_COLORS";
 
     shellInit = mkOption {
       default = {};
@@ -66,6 +65,7 @@ in
         home.packages = with pkgs; [ fish fishPlugins.completions.kubectl ];
 
         programs = {
+          dircolors.enableFishIntegration = true;
           direnv.enableFishIntegration = true;
           fish = {
             enable = true;
@@ -240,20 +240,6 @@ in
           '';
           knopki.fish.interactiveShellInit."50-pure-theme" =
             "activate_pure_theme # Pure theme";
-        }
-      )
-
-      # cool LS_COLORS
-      (
-        mkIf config.knopki.fish.lsColors {
-          home.packages = with pkgs; [ coreutils lsColors ];
-          home.file."${fishCfgDir}/conf.d/activate_ls_colors.fish".text = ''
-            function activate_ls_colors --description 'Activate LS_COLORS'
-              eval (${pkgs.coreutils}/bin/dircolors -c ${pkgs.lsColors}/LS_COLORS)
-            end
-          '';
-          knopki.fish.interactiveShellInit."50-ls-colors" =
-            "activate_ls_colors # LS_COLORS";
         }
       )
     ]

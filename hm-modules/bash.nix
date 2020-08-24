@@ -10,6 +10,7 @@ with lib;
     programs = {
       bash.enable = true;
       fzf.enableBashIntegration = true;
+      dircolors.enableBashIntegration = true;
       direnv.enableBashIntegration = true;
     };
   };
