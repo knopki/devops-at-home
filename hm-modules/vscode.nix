@@ -6,16 +6,9 @@ with lib;
   config = mkIf config.knopki.vscode.enable {
     programs.vscode = {
       enable = true;
+      # HINT: <nixpkgs>/pkgs/misc/vscode-extensions/update_installed_exts.sh
       extensions = with pkgs;
-        [
-          vscode-extensions.bbenoist.Nix
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "vscode-ansible";
-            publisher = "vscoss";
-            version = "0.5.2";
-            sha256 = "0r1aqfc969354j8b1k9xsg682fynbk4xjp196f3yknlwj66jnpwx";
-          }
+        pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "bracket-pair-colorizer";
             publisher = "CoenraadS";
@@ -23,10 +16,40 @@ with lib;
             sha256 = "0r3bfp8kvhf9zpbiil7acx7zain26grk133f0r0syxqgml12i652";
           }
           {
-            name = "gitlens";
-            publisher = "eamodio";
-            version = "9.9.3";
-            sha256 = "04rns3bwc9cav5rdk5bjm6m0lzjqpm9x99539bhk319l83ksffyv";
+            name = "vscode-eslint";
+            publisher = "dbaeumer";
+            version = "2.1.8";
+            sha256 = "18yw1c2yylwbvg5cfqfw8h1r2nk9vlixh0im2px8lr7lw0airl28";
+          }
+          {
+            name = "prettier-vscode";
+            publisher = "esbenp";
+            version = "5.1.3";
+            sha256 = "03i66vxvlyb3msg7b8jy9x7fpxyph0kcgr9gpwrzbqj5s7vc32sr";
+          }
+          {
+            name = "vscode-firefox-debug";
+            publisher = "firefox-devtools";
+            version = "2.9.1";
+            sha256 = "1xr1z96kd2lcamklc0x4sv0if8n78cr0ara5lmc7bh5afy0h085g";
+          }
+          {
+            name = "flow-for-vscode";
+            publisher = "flowtype";
+            version = "1.5.0";
+            sha256 = "0firvhcnd4mvb19r51pw4q6fadsnb8l0hdfin292s4kvcjkqcdc5";
+          }
+          {
+            name = "vscode-kubernetes-tools";
+            publisher = "ms-kubernetes-tools";
+            version = "1.2.1";
+            sha256 = "071p27xcq77vbpnmb83pjsnng7h97q4gai0k6qgwg3ygv086hpf4";
+          }
+          {
+            name = "vetur";
+            publisher = "octref";
+            version = "0.26.1";
+            sha256 = "0vd2hr2vzjm9b82zhl0b49vxsz6gq3nnh5v80y4hbbd9qk17yxv5";
           }
           {
             name = "indent-rainbow";
@@ -35,106 +58,40 @@ with lib;
             sha256 = "1xnsdwrcx24vlbpd2igjaqlk3ck5d6jzcfmxaisrgk7sac1aa81p";
           }
           {
-            name = "vscode-kubernetes-tools";
-            publisher = "ms-kubernetes-tools";
-            version = "1.0.2";
-            sha256 = "1xf96llx8nn69bpdl4px7ql7skzyajqk8fljp9z87pcs41qfa8a3";
-          }
-          {
-            name = "vscode-todo-highlight";
-            publisher = "wayou";
-            version = "1.0.4";
-            sha256 = "0s925rb668spv602x6g7sld2cs5ayiq7273963v9prvgsr0drlrr";
-          }
-          {
-            name = "unique-lines";
-            publisher = "bibhasdn";
-            version = "1.0.0";
-            sha256 = "1x0lkdvc0247bms200nn2z5m7qaq9lg96ppbgk6lg3mgmxknjijv";
-          }
-          {
-            name = "vscode-icons";
-            publisher = "vscode-icons-team";
-            version = "9.2.0";
-            sha256 = "0cyyhfm18nbgnp17ixqf3b4v658afxi56xl6rgh0zq411pb36zf8";
-          }
-          {
             name = "vscode-yaml";
             publisher = "redhat";
-            version = "0.4.1";
-            sha256 = "01qh61x4hgsqb6l5rcq60w87g8hm0mv9d5gkcdhjdikgqjxfsx6z";
+            version = "0.10.0";
+            sha256 = "13ff3syl22z810adz0hwimfcyl6irycmw8f3nlscaq5w2fnk8znq";
           }
           {
-            name = "vscode-eslint";
-            publisher = "dbaeumer";
-            version = "1.9.0";
-            sha256 = "1lr25v236cz8kbgbgqj6izh3f4nwp9cxygpa0zzfvfrg8gg0x49w";
+            name = "vscode-stylelint";
+            publisher = "stylelint";
+            version = "0.85.0";
+            sha256 = "14nb3rr128kl7n1c70bbmi1v127dlj64qi37qz300fkdzgpl88mn";
           }
           {
-            name = "prettier-vscode";
-            publisher = "esbenp";
-            version = "1.9.0";
-            sha256 = "1an9dlkicj1s0ffy9l9jdvzpcdl0slvln9k05rd6l8g42ri9fp49";
-          }
-          {
-            name = "flow-for-vscode";
-            publisher = "flowtype";
-            version = "1.3.0";
-            sha256 = "177vvhmkzxsk5crpsl77f4j4v2g2gb6jkn0vcf8ag5bbwqzd9bmm";
-          }
-          {
-            name = "shell-format";
-            publisher = "foxundermoon";
-            version = "6.1.1";
-            sha256 = "00znldmhy7ns56jv4fm490hdkaxfabq953pbyn6r0z6kj42rg7wz";
-          }
-          {
-            name = "vscode-styled-components";
-            publisher = "jpoissonnier";
-            version = "0.0.26";
-            sha256 = "09lgc1fjdrgzw6n72w833kyfk7m0008lmd17r0vljcd572igfhhc";
-          }
-          {
-            name = "jinjahtml";
-            publisher = "samuelcolvin";
-            version = "0.10.5";
-            sha256 = "1mv2zkp09dgqdvvr42mwajm0cninqqw2g2adi5b5ki63niv5xx2y";
-          }
-          {
-            name = "EditorConfig";
-            publisher = "EditorConfig";
-            version = "0.13.0";
-            sha256 = "1dy7rf9w1mvk65fmxbvhbi5pf6cw2lwi07yhafq9x20c36g6dwyz";
-          }
-          {
-            name = "vscode-typescript-tslint-plugin";
-            publisher = "ms-vscode";
-            version = "1.2.2";
-            sha256 = "1n2yv37ljaadp84iipv7czzs32dbs4q2vmb98l3z0aan5w2g8x3z";
+            name = "svelte-vscode";
+            publisher = "svelte";
+            version = "101.9.3";
+            sha256 = "10hdawdm5hwjpxr8lp7bh1b1pfkwmhmwj100rmqdjgdryq6fb4fb";
           }
           {
             name = "vscodeintellicode";
             publisher = "VisualStudioExptTeam";
-            version = "1.1.9";
-            sha256 = "00x203w2pacs68svccmbsq3hb7gyin2zblb1abyvqw0nxba5kzww";
+            version = "1.2.10";
+            sha256 = "1l980w4r18613hzwvqgnzm9csi72r9ngyzl94p39rllpiqy7xrhi";
           }
           {
-            name = "vetur";
-            publisher = "octref";
-            version = "0.22.2";
-            sha256 = "1746fdpbk2kb3hc3ygkszpkaxpm4sm6p8xpl5gw96jk2hdg8zx9b";
-          }
-          {
-            name = "stylelint";
-            publisher = "shinnn";
-            version = "0.51.0";
-            sha256 = "0qxa6jcfjl9vkx06shxjpa8k99ysvar3i0pzqdnc4aizjcayn3i4";
+            name = "vscode-icons";
+            publisher = "vscode-icons-team";
+            version = "10.2.0";
+            sha256 = "13s5jrlj2czwh01bi4dds03hd9hpqk1gs9h0gja0g15d0j4kh39c";
           }
           {
             name = "material-theme";
             publisher = "zhuangtongfa";
-            version = "2.27.1";
-            sha256 = "01kxcl5j8r2j6y244yvybxyva8m48lv8xdhqf1n5y186p43mr5ny";
+            version = "3.8.5";
+            sha256 = "1fdhykyddzghzs8j701q04lb2rhfrr0sbz0ib0js0shj8v31n8aa";
           }
         ];
 
