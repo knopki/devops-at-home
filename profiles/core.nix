@@ -20,7 +20,6 @@ in
   # merged with `requiredPackages' from
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/config/system-path.nix
   environment.systemPackages = with pkgs; [
-    bat
     bind
     binutils
     curl
@@ -30,7 +29,6 @@ in
     gnupg
     hdparm
     htop
-    jq
     lm_sensors
     lsof
     neovim

@@ -28,6 +28,7 @@ with lib;
   };
 
   programs = {
+    bat.enable = true;
     jq.enable = true;
     lesspipe.enable = true;
   };
