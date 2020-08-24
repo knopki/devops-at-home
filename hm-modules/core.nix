@@ -4,6 +4,7 @@ with lib;
   imports = import ./list.nix;
 
   knopki = {
+    bash.enable = true;
     fish = {
       colorizeMan = true;
       defaultFuncs = true;
