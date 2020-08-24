@@ -3,8 +3,6 @@ with lib; {
   options.knopki.ssh.enable = mkEnableOption "ssh default config";
 
   config = mkIf config.knopki.ssh.enable {
-    home.packages = with pkgs; [ openssh ];
-
     programs.ssh = {
       enable = true;
       compression = true;
