@@ -504,6 +504,8 @@ in
       bindsym $mod+Shift+Cyrillic_u mode "$mode_system"
     '';
 
+    programs.jq.enable = true;
+
     systemd.user.targets = {
       sway-session = {
         Unit = {

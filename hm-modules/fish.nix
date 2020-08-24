@@ -65,32 +65,36 @@ in
       {
         home.packages = with pkgs; [ fish fishPlugins.completions.kubectl ];
 
-        programs.fish = {
-          enable = true;
-          shellInit =
-            concatStringsSep "\n" (attrValues config.knopki.fish.shellInit);
-          loginShellInit =
-            concatStringsSep "\n" (attrValues config.knopki.fish.loginShellInit);
-          interactiveShellInit = concatStringsSep "\n"
-            (attrValues config.knopki.fish.interactiveShellInit);
-          promptInit =
-            concatStringsSep "\n" (attrValues config.knopki.fish.promptInit);
-          shellAbbrs = {
-            gco = "git checkout";
-            gst = "git status";
-            o = "xdg-open";
+        programs = {
+          direnv.enableFishIntegration = true;
+          fish = {
+            enable = true;
+            shellInit =
+              concatStringsSep "\n" (attrValues config.knopki.fish.shellInit);
+            loginShellInit =
+              concatStringsSep "\n" (attrValues config.knopki.fish.loginShellInit);
+            interactiveShellInit = concatStringsSep "\n"
+              (attrValues config.knopki.fish.interactiveShellInit);
+            promptInit =
+              concatStringsSep "\n" (attrValues config.knopki.fish.promptInit);
+            shellAbbrs = {
+              gco = "git checkout";
+              gst = "git status";
+              o = "xdg-open";
+            };
+            shellAliases = {
+              e = "$EDITOR";
+              fzf = "fzf-tmux -m";
+              grep = "grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
+              myip = "curl ifconfig.co";
+              rsync-copy = "rsync -avz --progress -h";
+              rsync-move = "rsync -avz --progress -h --remove-source-files";
+              rsync-synchronize = "rsync -avzu --delete --progress -h";
+              rsync-update = "rsync -avzu --progress -h";
+              se = "sudo -E $EDITOR";
+            };
           };
-          shellAliases = {
-            e = "$EDITOR";
-            fzf = "fzf-tmux -m";
-            grep = "grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
-            myip = "curl ifconfig.co";
-            rsync-copy = "rsync -avz --progress -h";
-            rsync-move = "rsync -avz --progress -h --remove-source-files";
-            rsync-synchronize = "rsync -avzu --delete --progress -h";
-            rsync-update = "rsync -avzu --progress -h";
-            se = "sudo -E $EDITOR";
-          };
+          fzf.enableFishIntegration = true;
         };
 
         knopki.fzf.enable = true;

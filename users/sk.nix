@@ -80,36 +80,29 @@ in
         "downloads"
       ];
       chromium.enable = isWorkstation;
-      curl.enable = true;
       direnv.enable = true;
       emacs.enable = isWorkstation;
       env = {
         graphics = isWorkstation;
       };
-      fish.enable = true;
       firefox = {
         enable = isWorkstation;
         mime = isWorkstation;
       };
-      git.enable = true;
       gnome = {
         enable = isWorkstation;
         mime = isWorkstation;
       };
-      htop.enable = true;
       minikube.enable = isWorkstation;
       neovim.enable = true;
       npmrc.enable = isWorkstation;
       password-store.enable = isWorkstation;
-      readline.enable = true;
-      ssh.enable = true;
       swaywm.enable = isWorkstation;
-      tmux.enable = true;
       vscode.enable = isWorkstation;
       wine.enable = isWorkstation;
-      wget.enable = true;
       qt.enable = isWorkstation;
     };
+    programs.feh.enable = isWorkstation;
     programs.git = {
       signing = {
         key = selfHM.programs.gpg.settings.default-key;

@@ -7,8 +7,7 @@ with lib; {
   config = mkIf config.knopki.direnv.enable {
     programs.direnv = {
       enable = true;
-      enableFishIntegration = true;
-      # use `enableNixDirenvIntegration` when it landed
+      enableNixDirenvIntegration = true;
       stdlib = ''
         use_flake() {
           mkdir -p $(direnv_layout_dir)
@@ -16,8 +15,6 @@ with lib; {
           watch_file flake.lock
           eval "$(nix print-dev-env --profile "$(direnv_layout_dir)/flake-profile")"
         }
-
-        source ${pkgs.nix-direnv}/share/nix-direnv/direnvrc
       '';
     };
   };

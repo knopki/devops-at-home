@@ -22,8 +22,6 @@ in
   options.knopki.fzf = { enable = mkEnableOption "enable fzf for user"; };
 
   config = mkIf config.knopki.fzf.enable {
-    home.packages = with pkgs; [ fd fzf ];
-
     programs.fzf = {
       enable = true;
       defaultOptions = [

@@ -40,7 +40,6 @@ in
       cachix
       darktable
       dive
-      feh
       gimp
       gnome3.dconf-editor
       gnupg

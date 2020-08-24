@@ -88,6 +88,7 @@ with lib;
       plantuml
 
       # python
+      python
       python37Packages.flake8
       python37Packages.pyflakes
       python37Packages.pylint

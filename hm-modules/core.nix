@@ -5,7 +5,9 @@ with lib;
 
   knopki = {
     bash.enable = true;
+    curl.enable = true;
     fish = {
+      enable = true;
       colorizeMan = true;
       defaultFuncs = true;
       fixTerm = true;
@@ -17,7 +19,16 @@ with lib;
         bind --user \e\[3\;5~ kill-word  # Ctrl-Delete
       '';
     };
+    git.enable = true;
+    htop.enable = true;
+    readline.enable = true;
+    ssh.enable = true;
+    tmux.enable = true;
+    wget.enable = true;
   };
 
-  programs.lesspipe.enable = true;
+  programs = {
+    jq.enable = true;
+    lesspipe.enable = true;
+  };
 }

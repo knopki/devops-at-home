@@ -12,15 +12,5 @@ in
 
   home-manager.users = usr.utils.mkHM { inherit username config; } {
     meta.tags = getAttrs [ "isWorkstation" ] config.meta.tags;
-    knopki = {
-      curl.enable = true;
-      fish.enable = true;
-      git.enable = true;
-      htop.enable = true;
-      readline.enable = true;
-      ssh.enable = true;
-      tmux.enable = true;
-      wget.enable = true;
-    };
   };
 }
