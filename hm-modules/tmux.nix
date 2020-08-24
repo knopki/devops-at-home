@@ -42,11 +42,8 @@ with lib; {
         set-option -g status-bg colour235 #base02
         set-option -g status-fg colour136 #yellow
         set-option -g status-attr default
-        set-window-option -g window-status-fg colour244 #base0
-        set-window-option -g window-status-bg default
-
-        set-window-option -g window-status-current-fg colour166 #orange
-        set-window-option -g window-status-current-bg default
+        set-window-option -g window-status-style "fg=colour244,bg=default"
+        set-window-option -g window-status-current-style "fg=colour166,bg=default"
 
         set-option -g pane-border-fg colour235 #base02
         set-option -g pane-active-border-fg colour240 #base01
