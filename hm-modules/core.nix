@@ -17,4 +17,6 @@ with lib;
       '';
     };
   };
+
+  programs.lesspipe.enable = true;
 }
