@@ -9,9 +9,6 @@ with lib;
     knopki.fzf.enable = true;
     programs = {
       bash.enable = true;
-      fzf.enableBashIntegration = true;
-      dircolors.enableBashIntegration = true;
-      direnv.enableBashIntegration = true;
     };
   };
 }
