@@ -11,6 +11,7 @@ in
   gopls = nixpkgs.gopls;
   hunspellDicts = nixpkgs.hunspellDicts;
   nerdfonts = nixpkgs.nerdfonts;
+  pyright = nixpkgs.nodePackages.pyright;
   xdg-desktop-portal-wlr = nixpkgs.xdg-desktop-portal-wlr;
   yaml-language-server = nixpkgs.nodePackages.yaml-language-server;
 }

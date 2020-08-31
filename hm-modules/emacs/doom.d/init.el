@@ -16,8 +16,8 @@
        :lang
        (cc +lsp) (csharp +lsp) data emacs-lisp erlang (go +lsp)
        (javascript +lsp) json (latex +lsp +fold) lua (markdown +grip) nix
-       (org +dragndrop +gnuplot +pretty) php plantuml rest (rust +lsp)
-       (sh +fish +lsp) web (yaml +lsp)
+       (org +dragndrop +gnuplot +pretty) php plantuml (python +lsp +pyright)
+       rest (rust +lsp) (sh +fish +lsp) web (yaml +lsp)
        :mail
        :app
        :config (default +bindings +smartparens))

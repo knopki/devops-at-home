@@ -89,12 +89,7 @@ with lib;
 
       # python
       python
-      python37Packages.flake8
-      python37Packages.pyflakes
-      python37Packages.pylint
-      python37Packages.pyls-black
-      python37Packages.pyls-mypy
-      python37Packages.python-language-server
+      pyright
 
       # rust
       cargo
