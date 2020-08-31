@@ -22,6 +22,7 @@
   ./qt.nix
   ./readline.nix
   ./ssh.nix
+  ./starship.nix
   ./swaywm
   ./tmux.nix
   ./vscode.nix

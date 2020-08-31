@@ -98,6 +98,7 @@ in
       npmrc.enable = isWorkstation;
       password-store.enable = isWorkstation;
       swaywm.enable = isWorkstation;
+      starship.enable = true;
       vscode.enable = isWorkstation;
       wine.enable = isWorkstation;
       qt.enable = isWorkstation;
