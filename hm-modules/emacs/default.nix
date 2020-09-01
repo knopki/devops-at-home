@@ -114,7 +114,7 @@ with lib;
     ];
 
     home.sessionVariables = {
-      EDITOR = "emacsclient -t";
+      EDITOR = "emacs -nw";
       VISUAL = "emacsclient -c";
     };
 

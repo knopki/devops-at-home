@@ -41,9 +41,9 @@ with lib;
           gco = "git checkout";
           gst = "git status";
           o = "xdg-open";
+          e = mkIf config.programs.emacs.enable "emacs -nq";
         };
         shellAliases = {
-          e = "$EDITOR";
           fzf = "fzf-tmux -m";
           grep = "grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
           myip = "curl ifconfig.co";
