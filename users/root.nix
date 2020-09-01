@@ -1,7 +1,6 @@
 { config, lib, pkgs, self, username ? "root", usr, ... }:
 let
   inherit (lib) getAttrs;
-  isWorkstation = config.meta.tags.isWorkstation;
   sshKeys = import ../secrets/ssh_keys.nix;
 in
 {
@@ -13,8 +12,5 @@ in
 
   home-manager.users = usr.utils.mkHM { inherit username config; } {
     meta.tags = getAttrs [ "isWorkstation" ] config.meta.tags;
-    knopki = {
-      starship.enable = isWorkstation;
-    };
   };
 }
