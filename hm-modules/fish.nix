@@ -33,6 +33,7 @@ with lib;
 
           # keybindings
           bind --user \e\[3\;5~ kill-word  # Ctrl-Delete
+          fish_vi_key_bindings
 
           # add fish man pages
           set -xg MANPATH "${pkgs.fish}/share/fish/man:$MANPATH"
