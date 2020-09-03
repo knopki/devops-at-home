@@ -1,5 +1,13 @@
 { config, lib, pkgs, ... }:
 with lib;
+let
+  base16-shell = pkgs.fetchFromGitHub {
+    owner = "chriskempson";
+    repo = "base16-shell";
+    rev = "ce8e1e540367ea83cc3e01eec7b2a11783b3f9e1";
+    sha256 = "sha256-OMhC6paqEOQUnxyb33u0kfKpy8plLSRgp8X8T8w0Q/o=";
+  };
+in
 {
   options.knopki.fish.enable = mkEnableOption "enable fish shell for user";
 
@@ -37,6 +45,9 @@ with lib;
 
           # add fish man pages
           set -xg MANPATH "${pkgs.fish}/share/fish/man:$MANPATH"
+
+          # base16 one dark theme
+          sh ${base16-shell}/scripts/base16-onedark.sh
         '';
         shellAbbrs = {
           gco = "git checkout";
