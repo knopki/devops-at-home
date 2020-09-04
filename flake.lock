@@ -3,11 +3,11 @@
     "home": {
       "flake": false,
       "locked": {
-        "lastModified": 1598718123,
-        "narHash": "sha256-11UAJTLn+F9tP24eDz5mE5A/TKwQeYzLQhdmy2fXwYs=",
+        "lastModified": 1599242479,
+        "narHash": "sha256-hqI+F1S8gW5OJ+DitXl6F/5f/A7RvnmZJAcR7BDndtQ=",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "4fe5afa7557e1f135b02ca9adef7c592852adccb",
+        "rev": "41b1af808f1de69c31f3fd164d5274154ee782e4",
         "type": "github"
       },
       "original": {
@@ -51,11 +51,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1598766647,
-        "narHash": "sha256-XNV/+zaayMO+QtqXMgUCq4wXkm1kvd2+nnQIVT2fc7w=",
+        "lastModified": 1599197033,
+        "narHash": "sha256-VCq/HKEUxZdebo4rtYT1/Wwhz1AKpcOJKcgevPQLmL4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "925ae0dee63cf2c59533a6258340812e5643428a",
+        "rev": "5607e74b1dd2c9bf19fcb35ddf5ee68b3228f67c",
         "type": "github"
       },
       "original": {
