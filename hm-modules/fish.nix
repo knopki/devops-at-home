@@ -35,13 +35,24 @@ in
             };
           }
         ];
+        functions = {
+          fish_hybrid_key_bindings = {
+            description = "Vi-style bindings that inherit emacs-style bindings in all modes";
+            body = ''
+              for mode in default insert visual
+                  fish_default_key_bindings -M $mode
+              end
+              fish_vi_key_bindings --no-erase
+              bind --user \e\[3\;5~ kill-word  # Ctrl-Delete
+            '';
+          };
+        };
         interactiveShellInit = ''
           # init foreign env
           set -p fish_function_path ${pkgs.fish-foreign-env}/share/fish-foreign-env/functions
 
           # keybindings
-          bind --user \e\[3\;5~ kill-word  # Ctrl-Delete
-          fish_vi_key_bindings
+          set -g fish_key_bindings fish_hybrid_key_bindings
 
           # add fish man pages
           set -xg MANPATH "${pkgs.fish}/share/fish/man:$MANPATH"
