@@ -261,13 +261,13 @@ in
           Type = "simple";
           ExecStart = ''
             ${swayidleBin} -w \
-              timeout 600 '${pkgs.systemd}/bin/loginctl lock-session' \
+              timeout 600  '${swaylockCmd} --grace 2 --fade-in 2' \
               timeout 1200 '${swaymsgBin} "output * dpms off"' \
-              before-sleep '${playerctlBin} pause; \
-                            ${pactlBin} set-sink-mute @DEFAULT_SINK@ 1; \
+              resume       '${swaymsgBin} "output * dpms on"' \
+              before-sleep '${playerctlBin} pause -a || true && \
+                            ${pactlBin} set-sink-mute @DEFAULT_SINK@ 1 && \
                             ${swaylockCmd}' \
-              after-resume '${swaymsgBin} "output * dpms on"' \
-              lock '${swaylockCmd} --grace 2 --fade-in 2' \
+              lock         '${swaylockCmd} --fade-in 2' \
               idlehint 600
           '';
           Restart = "on-failure";
