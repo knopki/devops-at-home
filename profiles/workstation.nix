@@ -29,10 +29,6 @@ in
       yelp
     ];
 
-    sessionVariables = {
-      XDF_CURRENT_DESKTOP = mkIf isGnome "GNOME:Unity";
-    };
-
     systemPackages = with pkgs; [
       anki
       blender
@@ -65,8 +61,6 @@ in
       playerctl
       postman
       powertop
-      qt5.qtwayland
-      qt5ct
       remmina
       shfmt
       skypeforlinux
@@ -83,9 +77,9 @@ in
   };
 
   fonts = {
-    enableFontDir = true;
+    enableDefaultFonts = true;
     fonts = with pkgs; [
-      emojione
+      corefonts
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       fira-code-symbols
       font-awesome_4
@@ -93,7 +87,7 @@ in
     ];
     fontconfig = {
       defaultFonts = {
-        emoji = [ "Noto Color Emoji" "EmojiOne Color" ];
+        emoji = [ "Noto Color Emoji" ];
         monospace = [ "Noto Sans Mono" ];
         sansSerif = [ "Noto Sans" ];
         serif = [ "Noto Serif" ];
@@ -102,14 +96,80 @@ in
         <?xml version="1.0" ?>
         <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
         <fontconfig>
-          <!-- there we fix huge icons -->
-          <match target="scan">
-            <test name="family">
+          <!-- This adds Noto Color Emoji as a final fallback font for the default font families. -->
+          <match>
+            <test name="family"><string>sans-serif</string></test>
+            <edit name="family" mode="prepend" binding="weak">
               <string>Noto Color Emoji</string>
-            </test>
-            <edit name="scalable" mode="assign">
-              <bool>false</bool>
             </edit>
+          </match>
+
+          <match>
+            <test name="family"><string>serif</string></test>
+            <edit name="family" mode="prepend" binding="weak">
+              <string>Noto Color Emoji</string>
+            </edit>
+          </match>
+
+          <!-- Use Noto Color Emoji when other popular fonts are being specifically requested. -->
+          <match target="pattern">
+              <test qual="any" name="family"><string>Apple Color Emoji</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>Segoe UI Emoji</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>Segoe UI Symbol</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>Android Emoji</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>Twitter Color Emoji</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>Twemoji</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>Twemoji Mozilla</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>TwemojiMozilla</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>EmojiTwo</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>Emoji Two</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>EmojiSymbols</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
+          </match>
+
+          <match target="pattern">
+              <test qual="any" name="family"><string>Symbola</string></test>
+              <edit name="family" mode="assign" binding="same"><string>Noto Color Emoji</string></edit>
           </match>
         </fontconfig>
       '';
@@ -152,39 +212,41 @@ in
   programs = {
     adb.enable = true;
     dconf.enable = true;
+    geary.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-      pinentryFlavor = mkIf config.services.gnome3.gnome-keyring.enable "gnome3";
     };
     light.enable = true;
     sway = {
       enable = true;
       extraOptions = [ "--my-next-gpu-wont-be-nvidia" ];
       extraPackages = with pkgs; [
-        alacritty
-        dex
-        swaybg
+        qt5.qtwayland # enable Qt5 Wayland support
+        swaybg # set wallpaper (very simple)
         swayidle
         swaylock
-        waypipe
-        wdisplays
         xwayland
       ];
       extraSessionCommands = ''
-        export SDL_VIDEODRIVER=wayland
+        export XDG_CURRENT_DESKTOP=sway
         export XDG_SESSION_TYPE=wayland
+        export SDL_VIDEODRIVER=wayland
         # needs qt5.qtwayland in systemPackages
-        export QT_QPA_PLATFORM=wayland
+        export QT_QPA_PLATFORM=wayland-egl
         export QT_QPA_PLATFORMTHEME=qt5ct
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:
         export _JAVA_AWT_WM_NONREPARENTING=1
+        export MOZ_ENABLE_WAYLAND=1
       '';
       wrapperFeatures.gtk = true;
     };
+    qt5ct.enable = true;
   };
+
+  security.protectKernelImage = false;
 
   services = {
     avahi = {

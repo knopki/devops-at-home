@@ -82,9 +82,6 @@ in
       chromium.enable = isWorkstation;
       direnv.enable = true;
       emacs.enable = isWorkstation;
-      env = {
-        graphics = isWorkstation;
-      };
       firefox = {
         enable = isWorkstation;
         mime = isWorkstation;

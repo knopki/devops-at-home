@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
+  waybarReloadCmd = ''
+    echo "Reloading mako"
+    XDG_RUNTIME_DIR=/run/user/$UID $DRY_RUN_CMD systemctl --user restart waybar
+  '';
   waybar-ipcountry = pkgs.writeScript "waybar-ipcountry" ''
     #!/usr/bin/env bash
     CODE=$(curl -s http://ifconfig.co/country-iso)
@@ -9,14 +13,17 @@ let
 in
 {
   config = mkIf config.knopki.swaywm.enable {
+    home.packages = with pkgs; [
+      libappindicator-gtk3 # tray icons support
+    ];
     programs.waybar = {
       enable = true;
       package = pkgs.waybar.override { pulseSupport = true; };
       settings = [
         (
           {
-            modules-left = [ "sway/workspaces" "sway/mode" ];
-            modules-center = [ "sway/window" ];
+            modules-left = [ "sway/workspaces" "sway/mode" "sway/window" ];
+            modules-center = [];
             modules-right = [
               "tray"
               "idle_inhibitor"
@@ -160,5 +167,10 @@ in
       systemd.enable = true;
       style = builtins.readFile ./waybar.css;
     };
+
+    xdg.configFile."waybar/config".onChange =
+      mkIf config.programs.waybar.systemd.enable waybarReloadCmd;
+    xdg.configFile."waybar/style.css".onChange =
+      mkIf config.programs.waybar.systemd.enable waybarReloadCmd;
   };
 }

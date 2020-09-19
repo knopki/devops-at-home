@@ -1,4 +1,4 @@
-{ config, nixosConfig, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   isWorkstation = config.meta.tags.isWorkstation;
@@ -26,4 +26,19 @@ in
     jq.enable = true;
     lesspipe.enable = true;
   };
+
+  # compat with wayland sessions
+  systemd.user.sessionVariables = filterAttrs
+    (
+      k: v: builtins.elem k [
+        "LC_MONETARY"
+        "LC_TIME"
+        "PASSWORD_STORE_DIR"
+        "PASSWORD_STORE_KEY"
+        "SSH_AUTH_SOCK"
+        "XDG_CACHE_HOME"
+        "XDG_CONFIG_HOME"
+        "XDG_DATA_HOME"
+      ]
+    ) config.home.sessionVariables;
 }

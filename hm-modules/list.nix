@@ -7,7 +7,6 @@
   ./dircolors.nix
   ./direnv.nix
   ./emacs
-  ./env.nix
   ./firefox.nix
   ./fish.nix
   ./fzf.nix

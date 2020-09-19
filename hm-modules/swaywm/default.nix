@@ -1,521 +1,252 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
+  theme = {
+    base00 = "#282c34";
+    base01 = "#353b45";
+    base02 = "#3e4451";
+    base03 = "#545862";
+    base04 = "#565c64";
+    base05 = "#abb2bf";
+    base06 = "#b6bdca";
+    base07 = "#c8ccd4";
+    base08 = "#e06c75";
+    base09 = "#d19a66";
+    base0A = "#e5c07b";
+    base0B = "#98c379";
+    base0C = "#56b6c2";
+    base0D = "#61afef";
+    base0E = "#c678dd";
+    base0F = "#be5046";
+  };
   defaultWallpaper =
     "${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png";
-  screenShotDir = "$(xdg-user-dir PICTURES)/screenshots";
-  screenshotPath = ''${screenShotDir}/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png'';
-  swayDir = "${config.xdg.configHome}/sway";
 
   # binary paths
   alacrittyBin = "${pkgs.alacritty}/bin/alacritty";
-  bashBin = "${pkgs.bashInteractive}/bin/bash";
-  fzfBin = "${pkgs.fzf}/bin/fzf";
-  gopassBin = "${pkgs.gopass}/bin/gopass";
-  grimBin = "${pkgs.grim}/bin/grim";
-  i3dmenuBin = "${pkgs.i3}/bin/i3-dmenu-desktop";
-  jqBin = "${pkgs.jq}/bin/jq";
   lightBin = "${pkgs.light}/bin/light";
   makoctlBin = "${pkgs.mako}/bin/makoctl";
-  mkdirBin = "${pkgs.coreutils}/bin/mkdir";
   notifySendBin = "${pkgs.libnotify}/bin/notify-send";
   pactlBin = "${pkgs.pulseaudio}/bin/pactl";
-  pkillBin = "${pkgs.procps}/bin/pkill";
   playerctlBin = "${pkgs.playerctl}/bin/playerctl";
-  slurpBin = "${pkgs.slurp}/bin/slurp";
-  sshaddBin = "${pkgs.openssh}/bin/ssh-add";
-  swayidleBin = "${pkgs.swayidle}/bin/swayidle";
-  swaylockBin = "${pkgs.swaylock}/bin/swaylock";
-  swaylockCmd = "${swayLockWrapper}/bin/swayLockWrapper";
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
+  swaylockCmd = "${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --effect-vignette 0.5:0.5 --effect-pixelate 24";
+  swayidleBin = "${pkgs.swayidle}/bin/swayidle";
 
+  rofiAppMenuCmd = "${pkgs.rofi}/bin/rofi -modi 'run,drun' -show-icons -theme-str 'element-icon { size: 2.3ch;}'";
 
-  swayLockWrapper = pkgs.writeShellScriptBin "swayLockWrapper" ''
-    trap cleanup 0 1 2 3 6
-
-    dir=/tmp/swaylock_$USER
-    ${pkgs.coreutils}/bin/mkdir -p "$dir"
-    ${pkgs.coreutils}/bin/chmod 0700 "$dir"
-
-    function cleanup() {
-      ${pkgs.coreutils}/bin/rm -rf "$dir"
-    }
-
-    lock=""
-    image="''${dir}/image-$$.png"
-    for line in $(${swaymsgBin} -t get_outputs | ${jqBin} -r '.[] .name'); do
-      ${grimBin} -o "$line" "$image$line"
-      ${pkgs.graphicsmagick-imagemagick-compat}/bin/convert "$image$line" -scale 25% -blur 0x3 -scale 400% -fill black -colorize 10% "$image$line-blur.png"
-      lock="$lock -i $line:$image$line-blur.png"
-    done
-
-    ${swaylockBin} -f $lock
-  '';
+  modifier = config.wayland.windowManager.sway.config.modifier;
+  mkExecFlashNotify = msg: "exec ${notifySendBin} '${msg}' --expire-time 500";
 in
 {
-  imports = [ ./mako.nix ./waybar.nix ];
+  imports = [ ./mako.nix ./rofi.nix ./waybar.nix ];
 
   options.knopki.swaywm.enable = mkEnableOption "setup sway, bar, etc";
 
   config = mkIf config.knopki.swaywm.enable {
     home.packages = with pkgs; [
-      coreutils
-      fzf
-      grim
-      i3
-      graphicsmagick-imagemagick-compat
-      jq
-      libappindicator-gtk3
-      libnotify
-      networkmanagerapplet
-      playerctl
-      slurp
-      swayLockWrapper
-      wf-recorder
-      wl-clipboard
+      libnotify # notify-send support
+      networkmanager_dmenu # connect to some connection
+      networkmanagerapplet # GUT network setting
+      swaylock-effects # use this instead of swaylock
+      waypipe # run and and stream remote wayland app over ssh
+      wdisplays # GUI outputs management
+      wf-recorder # record video from display
+      wl-clipboard # manipulate wayland clipboard 
     ];
-
-    home.sessionVariables.XDG_CURRENT_DESKTOP = "sway";
 
     knopki.alacritty.enable = true;
 
-    #
-    # SwayWM configuration
-    #
-    home.file."${swayDir}/config".text = ''
-      ### Variables
-      # Logo key. Use Mod1 for Alt.
-      set $mod Mod4
-
-      # Home row direction keys, like vim
-      set $left   h
-      set $leftR  Cyrillic_er
-      set $down   j
-      set $downR  Cyrillic_o
-      set $up     k
-      set $upR    Cyrillic_el
-      set $right  l
-      set $rightR Cyrillic_de
-
-      ### Common colors
-      set $base00 #282c34
-      set $base01 #353b45
-      set $base02 #3e4451
-      set $base03 #545862
-      set $base04 #565c64
-      set $base05 #abb2bf
-      set $base06 #b6bdca
-      set $base07 #c8ccd4
-      set $base08 #e06c75
-      set $base09 #d19a66
-      set $base0A #e5c07b
-      set $base0B #98c379
-      set $base0C #56b6c2
-      set $base0D #61afef
-      set $base0E #c678dd
-      set $base0F #be5046
-
-      # Wallpaper (default)
-      set $wallpaper ${defaultWallpaper}
-
-      # Include other config parts
-      include ${swayDir}/config.d/*
-    '';
-
-    home.file."${swayDir}/config.d/10-systemd".text = ''
-      exec "${systemctlBin} --user import-environment HOME I3SOCK PATH SSH_AUTH_SOCK SWAYSOCK USER WAYLAND_DISPLAY; ${systemctlBin} --user start sway-session.target"
-    '';
-
-    home.file."${swayDir}/config.d/10-outputs".text = ''
-      # You can get the names of your outputs by running: swaymsg -t get_outputs
-      ${(
-      if config.meta.tags.isKVMGuest then ''
-        output Virtual-1    resolution 1920x1080 position 0,0
-      '' else
-        ""
-    )}
-      ${(
-      if config.meta.machine == "alien" then ''
-        output eDP-1    resolution 1920x1080 position 0,0
-      '' else
-        ""
-    )}
-      ${(
-      if config.meta.machine == "oberon" then ''
-        output DP-1    resolution 1920x1080 position 0,0
-        output HDMI-A-1 resolution 1920x1080 position 1920,0
-      '' else
-        ""
-    )}
-      ${(
-      if config.meta.machine == "t430s" then ''
-        output eDP-1   resolution 1600x900 position 0,0
-      '' else
-        ""
-    )}
-
-      # Default wallpaper
-      output * bg $wallpaper fill
-    '';
-
-    home.file."${swayDir}/config.d/10-inputs".text = ''
-      # man 5 sway-input
-      # swaymsg -t get_inputs
-
-      input * {
-        xkb_layout "us,ru"
-        xkb_options "grp:win_space_toggle"
-
-        dwt enabled
-        tap enabled
-        natural_scroll disabled
-        middle_emulation enabled
-      }
-    '';
-
-    home.file."${swayDir}/config.d/20-appearance".text = ''
-      # Font for window titles.
-      font pango:Noto Sans 12
-
-      # class                 border  backgr. text    indicat child
-      client.focused          $base05 $base0D $base00 $base0D $base0D
-      client.focused_inactive $base01 $base01 $base05 $base03 $base01
-      client.unfocused        $base01 $base00 $base05 $base01 $base01
-      client.urgent           $base08 $base08 $base00 $base08 $base08
-      client.placeholder      $base00 $base00 $base05 $base00 $base00
-      client.background       $base07
-
-      default_border pixel 1
-      default_floating_border pixel 1
-
-      gaps outer 0
-      gaps inner 6
-      smart_gaps on
-      smart_borders no_gaps
-      hide_edge_borders smart
-
-      # app decoration styling
-      for_window [title="^.*Mozilla\ Firefox$"] border none
-      for_window [title="^.*Visual\ Studio\ Code$"] border none
-      for_window [title="Calculator"] border none
-      for_window [title="Image Viewer"] border none
-      for_window [app_id=nautilus] border none
-      for_window [app_id=eog] border none
-      for_window [app_id=evince] border none
-      for_window [app_id=gnome-boxes] border none
-      for_window [app_id=gnome-calculator] border none
-      for_window [app_id=gnome-control-center] border none
-      for_window [app_id=gnome-disks] border none
-      for_window [app_id=gnome-calculator] border none
-      for_window [app_id=gnome-software] border none
-      for_window [app_id=gnome-system-monitor] border none
-      for_window [app_id=gnome-text-editor] border none
-      for_window [app_id=gnome-tweaks] border none
-    '';
-
-    home.file."${swayDir}/config.d/50-basic-key-bindings".text = ''
-      # kill focused window
-      bindsym $mod+Shift+q               kill
-      bindsym $mod+Shift+Cyrillic_shorti kill
-
-      # lock screen
-      bindsym $mod+Escape           exec ${swaylockCmd}
-
-      # Drag floating windows by holding down $mod and left mouse button.
-      # Resize them with right mouse button + $mod.
-      # Despite the name, also works for non-floating windows.
-      # Change normal to inverse to use left mouse button for resizing and right
-      # mouse button for dragging.
-      floating_modifier $mod normal
-    '';
-
-    home.file."${swayDir}/config.d/50-moving-key-bindings".text = ''
-      # Move your focus around
-      bindsym $mod+$left   focus left
-      bindsym $mod+$leftR  focus left
-      bindsym $mod+$down   focus down
-      bindsym $mod+$downR  focus down
-      bindsym $mod+$up     focus up
-      bindsym $mod+$upR    focus up
-      bindsym $mod+$right  focus right
-      bindsym $mod+$rightR focus right
-      # or use $mod+[up|down|left|right]
-      bindsym $mod+Left  focus left
-      bindsym $mod+Down  focus down
-      bindsym $mod+Up    focus up
-      bindsym $mod+Right focus right
-
-      # _move_ the focused window with the same, but add Shift
-      bindsym $mod+Shift+$left   move left
-      bindsym $mod+Shift+$leftR  move left
-      bindsym $mod+Shift+$down   move down
-      bindsym $mod+Shift+$downR  move down
-      bindsym $mod+Shift+$up     move up
-      bindsym $mod+Shift+$upR    move up
-      bindsym $mod+Shift+$right  move right
-      bindsym $mod+Shift+$rightR move right
-      # ditto, with arrow keys
-      bindsym $mod+Shift+Left  move left
-      bindsym $mod+Shift+Down  move down
-      bindsym $mod+Shift+Up    move up
-      bindsym $mod+Shift+Right move right
-    '';
-
-    home.file."${swayDir}/config.d/50-layout-key-bindings".text = ''
-      # You can "split" the current object of your focus with
-      # $mod+b or $mod+v, for horizontal and vertical splits
-      # respectively.
-      bindsym $mod+b               splith;exec ${notifySendBin} 'tile horizontally' --expire-time 500
-      bindsym $mod+Cyrillic_i      splith;exec ${notifySendBin} 'tile horizontally' --expire-time 500
-      bindsym $mod+v               splitv;exec ${notifySendBin} 'tile vertically' --expire-time 500
-      bindsym $mod+Cyrillic_em     splitv;exec ${notifySendBin} 'tile vertically' --expire-time 500
-      bindsym $mod+q               split toggle
-      bindsym $mod+Cyrillic_shorti split toggle
-
-      # Switch the current container between different layout styles
-      bindsym $mod+s             layout stacking
-      bindsym $mod+Cyrillic_yeru layout stacking
-      bindsym $mod+w             layout tabbed
-      bindsym $mod+Cyrillic_tse  layout tabbed
-      bindsym $mod+e             layout toggle split
-      bindsym $mod+Cyrillic_u    layout toggle split
-
-      # Make the current focus fullscreen
-      bindsym $mod+f          fullscreen
-      bindsym $mod+Cyrillic_a fullscreen
-
-      # Toggle the current focus between tiling and floating mode
-      bindsym $mod+Shift+space floating toggle
-
-      # Swap focus between the tiling area and the floating area
-      bindsym $mod+Ctrl+space focus mode_toggle
-
-      # move focus to the parent container
-      bindsym $mod+a           focus parent
-      bindsym $mod+Cyrillic_ef focus parent
-    '';
-
-    home.file."${swayDir}/config.d/50-resizing-key-bindings".text = ''
-      mode "resize" {
-          # left will shrink the containers width
-          # right will grow the containers width
-          # up will shrink the containers height
-          # down will grow the containers height
-          bindsym $left   resize shrink width 10 px or 10 ppt
-          bindsym $leftR  resize shrink width 10 px or 10 ppt
-          bindsym $down   resize grow height 10 px or 10 ppt
-          bindsym $downR  resize grow height 10 px or 10 ppt
-          bindsym $up     resize shrink height 10 px or 10 ppt
-          bindsym $upR    resize shrink height 10 px or 10 ppt
-          bindsym $right  resize grow width 10 px or 10 ppt
-          bindsym $rightR resize grow width 10 px or 10 ppt
-
-          # ditto, with arrow keys
-          bindsym Left  resize shrink width 10 px or 10 ppt
-          bindsym Down  resize grow height 10 px or 10 ppt
-          bindsym Up    resize shrink height 10 px or 10 ppt
-          bindsym Right resize grow width 10 px or 10 ppt
-
-          # return to default mode
-          bindsym Return mode "default"
-          bindsym Escape mode "default"
-      }
-      bindsym $mod+r           mode "resize"
-      bindsym $mod+Cyrillic_ka mode "resize"
-    '';
-
-    home.file."${swayDir}/config.d/50-scratchpad".text = ''
-      # Sway has a "scratchpad", which is a bag of holding for windows.
-      # You can send windows there and get them back later.
-
-      # Move the currently focused window to the scratchpad
-      bindsym $mod+Shift+minus move scratchpad
-
-      # Show the next scratchpad window or hide the focused scratchpad window.
-      # If there are multiple scratchpad windows, this command cycles through them.
-      bindsym $mod+minus scratchpad show
-
-      # bind program to scratchpad
-      for_window [title="Telegram"] move scratchpad
-      exec --no-startup-id ${pkgs.tdesktop}/bin/telegram-desktop
-    '';
-
-    home.file."${swayDir}/config.d/50-workspaces".text = ''
-      #
-      # Workspaces:
-      #
-      set $ws1 1
-      set $ws2 2
-      set $ws3 3
-      set $ws4 4
-      set $ws5 5
-      set $ws6 6
-      set $ws7 7
-      set $ws8 8
-      set $ws9 9
-      set $ws10 10
-
-      ${(
-      if config.meta.machine == "oberon" then ''
-        # assign workspaces to outputs
-        set $leftDisplay DP-1
-        set $rightDisplay HDMI-A-1
-        workspace $ws1 output $leftDisplay
-        workspace $ws2 output $leftDisplay
-        workspace $ws3 output $leftDisplay
-        workspace $ws4 output $leftDisplay
-        workspace $ws5 output $leftDisplay
-        workspace $ws6 output $rightDisplay
-        workspace $ws7 output $rightDisplay
-        workspace $ws8 output $rightDisplay
-        workspace $ws9 output $rightDisplay
-        workspace $ws10 output $rightDisplay
-      '' else
-        ""
-    )}
-
-      # switch to workspace
-      bindsym $mod+1 workspace $ws1
-      bindsym $mod+2 workspace $ws2
-      bindsym $mod+3 workspace $ws3
-      bindsym $mod+4 workspace $ws4
-      bindsym $mod+5 workspace $ws5
-      bindsym $mod+6 workspace $ws6
-      bindsym $mod+7 workspace $ws7
-      bindsym $mod+8 workspace $ws8
-      bindsym $mod+9 workspace $ws9
-      bindsym $mod+0 workspace $ws10
-
-      # move focused container to workspace
-      bindsym $mod+Shift+1 move container to workspace $ws1
-      bindsym $mod+Shift+2 move container to workspace $ws2
-      bindsym $mod+Shift+3 move container to workspace $ws3
-      bindsym $mod+Shift+4 move container to workspace $ws4
-      bindsym $mod+Shift+5 move container to workspace $ws5
-      bindsym $mod+Shift+6 move container to workspace $ws6
-      bindsym $mod+Shift+7 move container to workspace $ws7
-      bindsym $mod+Shift+8 move container to workspace $ws8
-      bindsym $mod+Shift+9 move container to workspace $ws9
-      bindsym $mod+Shift+0 move container to workspace $ws10
-
-      # navigate workspaces next / previous
-      bindsym $mod+Ctrl+Right workspace next
-      bindsym $mod+Ctrl+Left  workspace prev
-
-      # move workspace to next display
-      bindsym $mod+m                 move workspace to output left
-      bindsym $mod+Cyrillic_softsign move workspace to output left
-      bindsym $mod+comma             move workspace to output right
-      bindsym $mod+Cyrillic_be       move workspace to output right
-    '';
-
-    home.file."${swayDir}/config.d/50-autolayout".text = ''
-      # set floating (nontiling) for special apps
-      # for_window [class="Gnome-control-center" instance="gnome-control-center"] floating enable
-
-      # auto fullscreen
-      for_window [title="Media viewer"] fullscreen enable
-    '';
-
-    home.file."${swayDir}/config.d/60-terminal".text = ''
-      # Your preferred terminal emulator
-      set $term ${alacrittyBin}
-
-      # start a terminal
-      bindsym $mod+Return      exec $term
-      bindsym $mod+Ctrl+Return exec $term
-    '';
-
-    home.file."${swayDir}/config.d/70-launcher".text = ''
-      # Your preferred application launcher
-      set $menu ${alacrittyBin} --class=launcher -e ${i3dmenuBin} --dmenu="${fzfBin} --prompt='Run: ' --cycle --print-query | tail -n1"
-      for_window [app_id="^launcher$"] floating enable, resize set width 649 px height 300 px
-
-      # start your launcher
-      bindsym $mod+d           exec $menu
-      bindsym $mod+Cyrillic_ve exec $menu
-    '';
-
-    home.file."${swayDir}/config.d/70-mako".text = ''
-      bindsym $mod+n exec ${makoctlBin} dismiss
-      bindsym $mod+Shift+n exec ${makoctlBin} dismiss --all
-    '';
-
-    home.file."${swayDir}/config.d/70-backlight".text = ''
-      bindsym --locked XF86MonBrightnessUp   exec ${lightBin} -A 3
-      bindsym --locked XF86MonBrightnessDown exec ${lightBin} -U 3
-    '';
-
-    home.file."${swayDir}/config.d/70-volume".text = ''
-      bindsym --locked XF86AudioMute exec --no-startup-id sh -c \
-        "for s in \$(${pactlBin} list sinks short | cut -f1); do ${pactlBin} set-sink-mute \$s toggle; done"
-      bindsym --locked XF86AudioLowerVolume exec --no-startup-id \
-        ${pactlBin} set-sink-volume $(${pactlBin} list sinks short | head -n 1 | cut -f1) -0.99%
-      bindsym --locked XF86AudioRaiseVolume exec --no-startup-id \
-        ${pactlBin} set-sink-volume $(${pactlBin} list sinks short | head -n 1 | cut -f1) +0.99%
-      bindsym --locked XF86AudioMicMute exec --no-startup-id sh -c \
-        "for s in \$(${pactlBin} list sources short | cut -f1); do ${pactlBin} set-source-mute \$s toggle; done"
-    '';
-
-    home.file."${swayDir}/config.d/70-playerctl".text = ''
-      bindsym --locked XF86AudioPlay exec ${playerctlBin} play
-      bindsym --locked XF86AudioPause exec ${playerctlBin} pause
-      bindsym --locked XF86AudioNext exec ${playerctlBin} next
-      bindsym --locked XF86AudioPrev exec ${playerctlBin} previous
-    '';
-
-    home.file."${swayDir}/config.d/70-screenshots".text = ''
-      # make target directory
-      exec --no-startup-id ${mkdirBin} -p ${screenShotDir}
-      # just make screenshot
-      bindsym $mod+Print exec ${grimBin} "${screenshotPath}"
-      # make screenshot of the screen area
-      bindsym $mod+Shift+Print exec ${slurpBin} | ${grimBin} -g - ${screenshotPath}
-    '';
-
-    home.file."${swayDir}/config.d/70-passmenu".text = ''
-      set $passmenu ${alacrittyBin} --class=passmenu -e ${bashBin} -c "${gopassBin} find . | ${fzfBin} --print-query | tail -n1 | xargs -r ${swaymsgBin} -t command exec -- ${gopassBin} show -c"
-      set $passmenuOTP ${alacrittyBin} --class=passmenu -e ${bashBin} -c "${gopassBin} find . | ${fzfBin} --print-query | tail -n1 | xargs -r ${swaymsgBin} -t command exec -- ${gopassBin} otp -c"
-
-      for_window [app_id="^passmenu$"] floating enable, resize set width 649 px height 300 px
-
-      bindsym $mod+p                 exec $passmenu
-      bindsym $mod+Cyrillic_ze       exec $passmenu
-      bindsym $mod+Shift+p           exec $passmenuOTP
-      bindsym $mod+Shift+Cyrillic_ze exec $passmenuOTP
-    '';
-
-    home.file."${swayDir}/config.d/99-exit-menu".text = ''
-      set $mode_system System: (l) lock, (c) reload config, (e) exit, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
-      mode "$mode_system" {
-          bindsym c reload
-          bindsym e exit
-          bindsym s exec --no-startup-id ${systemctlBin} suspend -i, mode "default"
-          bindsym r exec --no-startup-id ${systemctlBin} reboot -i, mode "default"
-          bindsym Shift+s exec --no-startup-id ${systemctlBin} poweroff -i, mode "default"
-          bindsym Shift+r exec --no-startup-id ${systemctlBin} reboot -i --firmware-setup, mode "default"
-
-          # return to default mode
-          bindsym Return mode "default"
-          bindsym Escape mode "default"
-      }
-      bindsym $mod+Shift+e          mode "$mode_system"
-      bindsym $mod+Shift+Cyrillic_u mode "$mode_system"
-    '';
-
-    programs.jq.enable = true;
-
-    systemd.user.targets = {
-      sway-session = {
-        Unit = {
-          Description = "sway compositor session";
-          Documentation = "man:systemd.special(7)";
-          BindsTo = "graphical-session.target";
-          Wants = "graphical-session-pre.target";
-          After = "graphical-session-pre.target";
+    wayland.windowManager.sway = {
+      enable = true;
+      package = null; # use system
+      config = {
+        fonts = [ "Noto Sans 12" ];
+        window = {
+          hideEdgeBorders = "smart";
+          commands = [
+            {
+              command = "resize set width 649 px height 300 px";
+              criteria = { app_id = "^passmenu$"; };
+            }
+            {
+              command = "move scratchpad, resize set width 1250 px height 1045 px";
+              criteria = { app_id = "telegramdesktop"; title = "^Telegram"; };
+            }
+            {
+              command = "fullscreen enable";
+              criteria = { app_id = "telegramdesktop"; title = "^Media"; };
+            }
+          ];
         };
+        floating = {
+          criteria = [
+            { "app_id" = "^passmenu$"; }
+          ];
+        };
+        focus = {
+          # TODO: make PR to upstream
+          # mouseWarping = "container";
+        };
+        assigns = {};
+        workspaceAutoBackAndForth = true;
+        modifier = "Mod4";
+        colors = {
+          background = theme.base07;
+          focused = {
+            border = theme.base05;
+            background = theme.base0D;
+            text = theme.base00;
+            indicator = theme.base0D;
+            childBorder = theme.base0D;
+          };
+          focusedInactive = {
+            border = theme.base01;
+            background = theme.base01;
+            text = theme.base05;
+            indicator = theme.base03;
+            childBorder = theme.base01;
+          };
+          unfocused = {
+            border = theme.base01;
+            background = theme.base00;
+            text = theme.base05;
+            indicator = theme.base01;
+            childBorder = theme.base01;
+          };
+          urgent = {
+            border = theme.base08;
+            background = theme.base08;
+            text = theme.base00;
+            indicator = theme.base08;
+            childBorder = theme.base08;
+          };
+          placeholder = {
+            border = theme.base00;
+            background = theme.base00;
+            text = theme.base05;
+            indicator = theme.base00;
+            childBorder = theme.base00;
+          };
+        };
+        bars = [];
+        startup = [
+          # set SSH_AUTH_SOCK for systemd services
+          {
+            command = "${systemctlBin} --user set-environment SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)";
+            always = true;
+          }
+          {
+            command = "${systemctlBin} --user import-environment HOME I3SOCK PATH SWAYSOCK USER WAYLAND_DISPLAY; ${systemctlBin} --user start sway-session.target";
+          }
+          {
+            command = "${pkgs.sway-scripts}/bin/import-gsettings gtk-theme:gtk-theme-name icon-theme:gtk-icon-theme-name cursor-theme:gtk-cursor-theme-name";
+            always = true;
+          }
+          { command = "${pkgs.dex}/bin/dex -ae Sway"; }
+          { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
+        ];
+        gaps = {
+          inner = 6;
+          outer = 0;
+          smartGaps = true;
+          smartBorders = "no_gaps";
+        };
+        menu = "${rofiAppMenuCmd} -show drun";
+        terminal = alacrittyBin;
+        keybindings = mkOptionDefault {
+          # remove conflicting defaults
+          "${modifier}+space" = mkAfter null;
+
+          "${modifier}+b" = "splith;${mkExecFlashNotify "tile horizontally"}";
+          "${modifier}+v" = "splitv;${mkExecFlashNotify "tile vertically"}";
+          "${modifier}+q" = "split toggle";
+
+          "${modifier}+0" = "workspace number 10";
+          "${modifier}+shift+0" = "move container to workspace number 10";
+          "${modifier}+comma" = "move workspace to output left";
+          "${modifier}+period" = "move workspace to output right";
+
+          "${modifier}+shift+f" = "focus mode_toggle";
+
+          "${modifier}+shift+d" = "exec ${rofiAppMenuCmd} -show run";
+
+          "Mod1+Tab" = "exec ${pkgs.sway-scripts}/bin/rofi-window-switcher";
+
+          "${modifier}+n" = "exec ${makoctlBin} dismiss";
+          "${modifier}+Shift+n" = "exec ${makoctlBin} dismiss --all";
+
+          "--locked XF86MonBrightnessUp" = "exec ${lightBin} -A 3";
+          "--locked XF86MonBrightnessDown" = "exec ${lightBin} -U 3";
+
+          "--locked XF86AudioLowerVolume" = "exec ${pactlBin} set-sink-volume @DEFAULT_SINK@ -0.99%";
+          "--locked XF86AudioRaiseVolume" = "exec ${pactlBin} set-sink-volume @DEFAULT_SINK@ +0.99%";
+          "XF86AudioMicMute" = "exec ${pactlBin} set-source-mute @DEFAULT_SOURCE@ toggle";
+          "XF86AudioMute" = "exec ${pactlBin} set-sink-mute @DEFAULT_SINK@ toggle";
+
+          "XF86AudioPlay" = "exec ${playerctlBin} play";
+          "XF86AudioPause" = "exec ${playerctlBin} pause";
+          "XF86AudioNext" = "exec ${playerctlBin} next";
+          "XF86AudioPrev" = "exec ${playerctlBin} previous";
+
+          "${modifier}+p" = "exec ${pkgs.sway-scripts}/bin/rofi-pass";
+          "Print" = "exec ${pkgs.sway-scripts}/bin/rofi-screenshot-menu \"${config.xdg.userDirs.pictures}/screenshots\"";
+          "${modifier}+o" = "exec ${pkgs.rofi}/bin/rofi -modi emoji -show emoji";
+          "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/rofi-system-menu";
+          "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort > /dev/null";
+        };
+        bindkeysToCode = true;
+        input = {
+          "*" = {
+            "xkb_layout" = "us,ru";
+            "xkb_options" = "grp:win_space_toggle";
+            "dwt" = "enabled";
+            "tap" = "enabled";
+            "natural_scroll" = "disabled";
+            "middle_emulation" = "enabled";
+          };
+        };
+        output = {
+          "*" = { bg = "${defaultWallpaper} fill"; };
+        } // optionalAttrs config.meta.tags.isKVMGuest {
+          "Virtual-1" = { resolution = "1920x1080"; position = "0,0"; };
+        } // optionalAttrs (config.meta.machine == "alien") {
+          "eDP-1" = { resolution = "1920x1080"; position = "0,0"; };
+        } // optionalAttrs (config.meta.machine == "oberon") {
+          "DP-1" = { resolution = "1920x1080"; position = "0,0"; };
+          "HDMI-A-1" = { resolution = "1920x1080"; position = "1920,0"; };
+        } // optionalAttrs (config.meta.machine == "t430s") {
+          "eDP-1" = { resolution = "1600x900"; position = "0,0"; };
+        };
+        modes = mkOptionDefault {};
       };
+      extraConfig = ''
+        # hide cursor on idle
+        seat * hide_cursor 8000
+
+        # Include other config parts
+        include ${config.xdg.configHome}/sway/config.d/*
+      '';
+    };
+
+    xdg.configFile."sway/config.d/oberon.conf" = mkIf (config.meta.machine == "oberon") {
+      text = let
+        leftDisplay = "DP-1";
+        rightDisplay = "HDMI-A-1";
+      in
+        ''
+          workspace 1 output ${leftDisplay}
+          workspace 2 output ${leftDisplay}
+          workspace 3 output ${leftDisplay}
+          workspace 4 output ${leftDisplay}
+          workspace 5 output ${leftDisplay}
+          workspace 6 output ${rightDisplay}
+          workspace 7 output ${rightDisplay}
+          workspace 8 output ${rightDisplay}
+          workspace 9 output ${rightDisplay}
+          workspace 10 output ${rightDisplay}
+        '';
     };
 
     systemd.user.services = {
@@ -524,19 +255,55 @@ in
           Description = "Idle manager for Wayland";
           Documentation = "man:swayidle(1)";
           PartOf = "graphical-session.target";
+          StartLimitIntervalSec = "0";
         };
         Service = {
           Type = "simple";
-          Environment = "PATH=${pkgs.bash}/bin";
           ExecStart = ''
             ${swayidleBin} -w \
-              timeout 600  '${swaylockCmd}' \
+              timeout 600 '${pkgs.systemd}/bin/loginctl lock-session' \
               timeout 1200 '${swaymsgBin} "output * dpms off"' \
-                    resume '${swaymsgBin} "output * dpms on"' \
-              before-sleep '${swaylockCmd}'
+              before-sleep '${playerctlBin} pause; \
+                            ${pactlBin} set-sink-mute @DEFAULT_SINK@ 1; \
+                            ${swaylockCmd}' \
+              after-resume '${swaymsgBin} "output * dpms on"' \
+              lock '${swaylockCmd} --grace 2 --fade-in 2' \
+              idlehint 600
           '';
+          Restart = "on-failure";
+          RestartSec = "1";
         };
         Install = { WantedBy = [ "sway-session.target" ]; };
+      };
+      sway-inactive-windows-transparency = {
+        Unit = {
+          Description = "Set opacity of onfocused windows in SwayWM";
+          PartOf = "graphical-session.target";
+          StartLimitIntervalSec = "0";
+        };
+        Service = {
+          Type = "simple";
+          ExecStart = ''
+            ${pkgs.sway-inactive-windows-transparency}/bin/inactive-windows-transparency.py -o 0.9
+          '';
+          Restart = "on-failure";
+          RestartSec = "1";
+        };
+        Install = { WantedBy = [ "sway-session.target" ]; };
+      };
+    };
+
+    xdg.configFile = {
+      "networkmanager-dmenu/config.ini".text = generators.toINI {} {
+        dmenu = {
+          dmenu_command = "${pkgs.rofi}/bin/rofi";
+          pinentry = "${pkgs.pinentry-gnome}/bin/pinentry-gnome3";
+          rofi_highlight = "True";
+          wifi_chars = "▂▄▆█";
+          list_saved = "True";
+        };
+        dmenu_passphrase = { rofi_obscure = "True"; };
+        editor = { terminal = alacrittyBin; gui_if_available = "True"; };
       };
     };
   };

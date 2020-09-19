@@ -64,7 +64,7 @@ in
           gco = "git checkout";
           gst = "git status";
           o = "xdg-open";
-          e = mkIf config.programs.emacs.enable "emacs -nq";
+          e = mkIf config.programs.emacs.enable "emacs -nw";
         };
         shellAliases = {
           fzf = "fzf-tmux -m";

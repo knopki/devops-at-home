@@ -90,7 +90,7 @@
 
         packages = forAllSystems (
           system: filterAttrs (n: v: elem system v.meta.platforms) {
-            inherit (nixpkgsFor.${system}) doom-emacs winbox winbox-bin;
+            inherit (nixpkgsFor.${system}) sway-scripts winbox winbox-bin;
           }
         );
 

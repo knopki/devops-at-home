@@ -130,6 +130,13 @@ in
 
   services = {
     fstrim.enable = true;
+    logind = {
+      lidSwitch = "suspend-then-hibernate";
+      lidSwitchExternalPower = "suspend";
+      extraConfig = ''
+        InhibitDelayMaxSec=10
+      '';
+    };
     tlp = {
       enable = true;
       extraConfig = ''
@@ -156,4 +163,8 @@ in
   swapDevices = [ { device = swapDevice; } ];
 
   system.stateVersion = "19.09";
+
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=6h
+  '';
 }

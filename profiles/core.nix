@@ -110,7 +110,7 @@ in
       });
     '';
 
-    protectKernelImage = true;
+    protectKernelImage = mkDefault true;
 
     sudo.extraConfig = ''
       Defaults timestamp_type=global,timestamp_timeout=600
