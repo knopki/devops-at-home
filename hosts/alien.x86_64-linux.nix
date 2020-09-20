@@ -150,6 +150,20 @@ in
         WOL_DISABLE=Y
       '';
     };
+    udev = {
+      extraHwdb = ''
+        # Alienware 15 R2 laptops
+        evdev:atkbd:dmi:bvn*:bvr*:bd*:svnAlienware*:pnAlienware15R2:pvr*
+          KEYBOARD_KEY_ba=switchvideomode # Fn+F8 CRT/LCD
+          KEYBOARD_KEY_69=kbdillumtoggle  # Fn+F12 Alien FX
+          KEYBOARD_KEY_91=f13             # left column X
+          KEYBOARD_KEY_92=f14             # left column 1
+          KEYBOARD_KEY_93=f15             # left column 2
+          KEYBOARD_KEY_94=f16             # left column 3
+          KEYBOARD_KEY_95=f17             # left column 4
+          KEYBOARD_KEY_96=f18             # left column 5
+      '';
+    };
     xserver = {
       displayManager.gdm.nvidiaWayland = true;
       videoDrivers = [ "modesetting" "intel" ];
