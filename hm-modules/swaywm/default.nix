@@ -146,56 +146,62 @@ in
         };
         menu = "${rofiAppMenuCmd} -show drun";
         terminal = alacrittyBin;
-        keybindings = mkOptionDefault {
-          # remove conflicting defaults
-          "${modifier}+space" = mkAfter null;
+        keybindings = mkOptionDefault (
+          {
+            # remove conflicting defaults
+            "${modifier}+space" = mkAfter null;
 
-          "${modifier}+b" = "splith;${mkExecFlashNotify "tile horizontally"}";
-          "${modifier}+v" = "splitv;${mkExecFlashNotify "tile vertically"}";
-          "${modifier}+q" = "split toggle";
+            "${modifier}+b" = "splith;${mkExecFlashNotify "tile horizontally"}";
+            "${modifier}+v" = "splitv;${mkExecFlashNotify "tile vertically"}";
+            "${modifier}+q" = "split toggle";
 
-          "${modifier}+0" = "workspace number 10";
-          "${modifier}+shift+0" = "move container to workspace number 10";
-          "${modifier}+comma" = "move workspace to output left";
-          "${modifier}+period" = "move workspace to output right";
+            "${modifier}+0" = "workspace number 10";
+            "${modifier}+shift+0" = "move container to workspace number 10";
+            "${modifier}+comma" = "move workspace to output left";
+            "${modifier}+period" = "move workspace to output right";
 
-          "${modifier}+shift+f" = "focus mode_toggle";
+            "${modifier}+shift+f" = "focus mode_toggle";
 
-          "${modifier}+shift+d" = "exec ${rofiAppMenuCmd} -show run";
+            "${modifier}+shift+d" = "exec ${rofiAppMenuCmd} -show run";
 
-          "Mod1+Tab" = "exec ${pkgs.sway-scripts}/bin/rofi-window-switcher";
+            "Mod1+Tab" = "exec ${pkgs.sway-scripts}/bin/rofi-window-switcher";
 
-          "${modifier}+n" = "exec ${makoctlBin} dismiss";
-          "${modifier}+Shift+n" = "exec ${makoctlBin} dismiss --all";
+            "${modifier}+n" = "exec ${makoctlBin} dismiss";
+            "${modifier}+Shift+n" = "exec ${makoctlBin} dismiss --all";
 
-          "--locked XF86MonBrightnessUp" = "exec ${lightBin} -A 3";
-          "--locked XF86MonBrightnessDown" = "exec ${lightBin} -U 3";
+            "XF86MonBrightnessUp" = "exec ${lightBin} -A 3";
+            "XF86MonBrightnessDown" = "exec ${lightBin} -U 3";
 
-          "--locked XF86AudioLowerVolume" = "exec ${pactlBin} set-sink-volume @DEFAULT_SINK@ -0.99%";
-          "--locked XF86AudioRaiseVolume" = "exec ${pactlBin} set-sink-volume @DEFAULT_SINK@ +0.99%";
-          "XF86AudioMicMute" = "exec ${pactlBin} set-source-mute @DEFAULT_SOURCE@ toggle";
-          "XF86AudioMute" = "exec ${pactlBin} set-sink-mute @DEFAULT_SINK@ toggle";
+            "--locked XF86AudioLowerVolume" = "exec ${pactlBin} set-sink-volume @DEFAULT_SINK@ -0.99%";
+            "--locked XF86AudioRaiseVolume" = "exec ${pactlBin} set-sink-volume @DEFAULT_SINK@ +0.99%";
+            "--locked XF86AudioMicMute" = "exec ${pactlBin} set-source-mute @DEFAULT_SOURCE@ toggle";
+            "--locked XF86AudioMute" = "exec ${pactlBin} set-sink-mute @DEFAULT_SINK@ toggle";
+            "--locked XF86AudioPlay" = "exec ${playerctlBin} play-pause";
+            "--locked XF86AudioNext" = "exec ${playerctlBin} next";
+            "--locked XF86AudioPrev" = "exec ${playerctlBin} previous";
 
-          "XF86AudioPlay" = "exec ${playerctlBin} play";
-          "XF86AudioPause" = "exec ${playerctlBin} pause";
-          "XF86AudioNext" = "exec ${playerctlBin} next";
-          "XF86AudioPrev" = "exec ${playerctlBin} previous";
-
-          "${modifier}+p" = "exec ${pkgs.sway-scripts}/bin/rofi-pass";
-          "Print" = "exec ${pkgs.sway-scripts}/bin/rofi-screenshot-menu \"${config.xdg.userDirs.pictures}/screenshots\"";
-          "${modifier}+o" = "exec ${pkgs.rofi}/bin/rofi -modi emoji -show emoji";
-          "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/rofi-system-menu";
-          "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort > /dev/null";
-        };
+            "Print" = "exec ${pkgs.sway-scripts}/bin/rofi-screenshot-menu \"${config.xdg.userDirs.pictures}/screenshots\"";
+            "XF86Display" = "exec ${pkgs.wdisplays}/bin/wdisplays";
+            "${modifier}+p" = "exec ${pkgs.sway-scripts}/bin/rofi-pass";
+            "${modifier}+o" = "exec ${pkgs.rofi}/bin/rofi -modi emoji -show emoji";
+            "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/rofi-system-menu";
+            "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort > /dev/null";
+          } // optionalAttrs (config.meta.machine == "alien") {
+            "XF86TouchpadToggle" = "input type:touchpad events toggle enabled disabled";
+            # More Alienware keys: XF86KbdLightOnOff, XF86KbdLightOnOff, XF86Tools, XF86Launch5-9
+          }
+        );
         bindkeysToCode = true;
         input = {
-          "*" = {
-            "xkb_layout" = "us,ru";
-            "xkb_options" = "grp:win_space_toggle";
-            "dwt" = "enabled";
-            "tap" = "enabled";
-            "natural_scroll" = "disabled";
-            "middle_emulation" = "enabled";
+          "type:keyboard" = {
+            xkb_layout = "us,ru";
+            xkb_options = "grp:win_space_toggle";
+          };
+          "type:touchpad" = {
+            tap = "enabled";
+            dwt = "enabled";
+            middle_emulation = "enabled";
+            natural_scroll = "enabled";
           };
         };
         output = {

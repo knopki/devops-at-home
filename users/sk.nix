@@ -112,10 +112,6 @@ in
       enable = true;
       settings.default-key = "58A58B6FD38C6B66";
     };
-    systemd.user.sessionVariables = {
-      XKB_DEFAULT_LAYOUT = "us,ru";
-      XKB_DEFAULT_OPTIONS = "grp:win_space_toggle";
-    };
     xdg = {
       enable = true;
       configFile."user-dirs.locale".text = "en_US";
