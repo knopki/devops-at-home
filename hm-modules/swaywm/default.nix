@@ -67,10 +67,6 @@ in
           hideEdgeBorders = "smart";
           commands = [
             {
-              command = "resize set width 649 px height 300 px";
-              criteria = { app_id = "^passmenu$"; };
-            }
-            {
               command = "move scratchpad, resize set width 1250 px height 1045 px";
               criteria = { app_id = "telegramdesktop"; title = "^Telegram"; };
             }
@@ -81,14 +77,9 @@ in
           ];
         };
         floating = {
-          criteria = [
-            { "app_id" = "^passmenu$"; }
-          ];
+          criteria = [];
         };
-        focus = {
-          # TODO: make PR to upstream
-          # mouseWarping = "container";
-        };
+        focus = {};
         assigns = {};
         workspaceAutoBackAndForth = true;
         modifier = "Mod4";
