@@ -32,7 +32,6 @@ let
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
   swaylockCmd = "${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --effect-vignette 0.5:0.5 --effect-pixelate 24";
-  swayidleBin = "${pkgs.swayidle}/bin/swayidle";
 
   rofiAppMenuCmd = "${pkgs.rofi}/bin/rofi -modi 'run,drun' -show-icons -theme-str 'element-icon { size: 2.3ch;}'";
 
@@ -257,15 +256,13 @@ in
         Service = {
           Type = "simple";
           ExecStart = ''
-            ${swayidleBin} -w \
+            ${pkgs.swayidle}/bin/swayidle -w \
               timeout 600  '${swaylockCmd} --grace 2 --fade-in 2' \
-              timeout 1200 '${swaymsgBin} "output * dpms off"' \
               resume       '${swaymsgBin} "output * dpms on"' \
               before-sleep '${playerctlBin} pause -a || true && \
-                            ${pactlBin} set-sink-mute @DEFAULT_SINK@ 1 && \
+                            ${pactlBin} set-sink-mute @DEFAULT_SINK@ 1 || true && \
                             ${swaylockCmd}' \
-              lock         '${swaylockCmd} --fade-in 2' \
-              idlehint 600
+              lock         '${swaylockCmd} --fade-in 2'
           '';
           Restart = "on-failure";
           RestartSec = "1";
