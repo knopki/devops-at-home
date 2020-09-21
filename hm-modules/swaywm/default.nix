@@ -136,6 +136,7 @@ in
           }
           { command = "${pkgs.dex}/bin/dex -ae Sway"; }
           { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
+          { command = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"; }
         ];
         gaps = {
           inner = 6;
