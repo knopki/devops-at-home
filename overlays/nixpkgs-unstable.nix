@@ -44,4 +44,5 @@ in
   swaylock-effects = nixpkgs.swaylock-effects;
   xdg-desktop-portal-wlr = nixpkgs.xdg-desktop-portal-wlr;
   yaml-language-server = nixpkgs.nodePackages.yaml-language-server;
+  formats = nixpkgs.formats;
 }
