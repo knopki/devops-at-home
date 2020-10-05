@@ -20,19 +20,17 @@
       type = "github";
       owner = "NixOS";
       repo = "nixos-hardware";
-      flake = false;
     };
 
     # Provides a basic system for managing a user environment
     # using the Nix package manager together with the Nix
-    # libraries found in Nixpkgs: https://github.com/rycee/home-manager
+    # libraries found in Nixpkgs: https://github.com/nix-community/home-manager
     home = {
       type = "github";
-      owner = "rycee";
+      owner = "nix-community";
       repo = "home-manager";
       ref = "master";
       inputs.nixpkgs.follows = "nixpkgs";
-      flake = false;
     };
 
     nix-doom-emacs = {
