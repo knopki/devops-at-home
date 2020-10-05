@@ -1,7 +1,7 @@
 ;;; init.el -*- lexical-binding: t; -*-
 ;;; $DOOMDIR/init.el
 (doom! :input
-       :completion (company +childframe) (ivy +fuzzy +prescient +icons)
+       :completion (company) (ivy +fuzzy +prescient +icons)
        :ui
        doom doom-dashboard doom-quit hl-todo modeline ophints (popup +defaults)
        (pretty-code +fira) treemacs vc-gutter vi-tilde-fringe
