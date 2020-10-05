@@ -7,7 +7,7 @@
        (pretty-code +fira) treemacs vc-gutter vi-tilde-fringe
        (window-select +switch-window) workspaces
        :editor
-       (evil +everywhere) file-templates fold (format +onsave) snippets
+       (evil +everywhere) file-templates fold format snippets
        :emacs (dired +icons) electric (ibuffer +icons) undo vc
        :term vterm
        :checkers syntax (spell +hunspell)
