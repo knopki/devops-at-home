@@ -13,7 +13,6 @@
   ./git.nix
   ./gnome.nix
   ./htop.nix
-  ./meta.nix
   ./minikube.nix
   ./neovim
   ./npmrc.nix

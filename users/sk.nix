@@ -1,4 +1,4 @@
-{ config, lib, pkgs, self, username ? "sk", usr, ... }:
+{ config, lib, pkgs, self, username ? "sk", ... }:
 with lib;
 let
   sshKeys = import ../secrets/ssh_keys.nix;
@@ -38,7 +38,9 @@ in
     uid = 1000;
   };
 
-  home-manager.users = usr.utils.mkHM { inherit username config; } {
+  home-manager.users."${username}" = {
+    imports = [ ../hm-modules/core.nix ];
+
     home.language.monetary = "ru_RU.UTF-8";
     home.language.time = "ru_RU.UTF-8";
     home.sessionVariables = {

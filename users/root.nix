@@ -1,4 +1,4 @@
-{ config, lib, pkgs, self, username ? "root", usr, ... }:
+{ config, lib, pkgs, self, username ? "root", ... }:
 let
   inherit (lib) getAttrs;
   sshKeys = import ../secrets/ssh_keys.nix;
@@ -10,7 +10,7 @@ in
     shell = pkgs.fish;
   };
 
-  home-manager.users = usr.utils.mkHM { inherit username config; } {
-    meta.tags = getAttrs [ "isWorkstation" ] config.meta.tags;
+  home-manager.users."${username}" = {
+    imports = [ ../hm-modules/core.nix ];
   };
 }

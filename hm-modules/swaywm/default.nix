@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixosConfig, ... }:
 with lib;
 let
   theme = {
@@ -186,7 +186,7 @@ in
             "${modifier}+o" = "exec ${pkgs.rofi}/bin/rofi -modi emoji -show emoji";
             "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/rofi-system-menu";
             "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort > /dev/null";
-          } // optionalAttrs (config.meta.machine == "alien") {
+          } // optionalAttrs (nixosConfig.meta.machine == "alien") {
             "XF86TouchpadToggle" = "input type:touchpad events toggle enabled disabled";
             # More Alienware keys: XF86KbdLightOnOff, XF86KbdLightOnOff, XF86Tools, XF86Launch5-9
           }
@@ -206,14 +206,14 @@ in
         };
         output = {
           "*" = { bg = "${defaultWallpaper} fill"; };
-        } // optionalAttrs config.meta.tags.isKVMGuest {
+        } // optionalAttrs nixosConfig.meta.tags.isKVMGuest {
           "Virtual-1" = { resolution = "1920x1080"; position = "0,0"; };
-        } // optionalAttrs (config.meta.machine == "alien") {
+        } // optionalAttrs (nixosConfig.meta.machine == "alien") {
           "eDP-1" = { resolution = "1920x1080"; position = "0,0"; };
-        } // optionalAttrs (config.meta.machine == "oberon") {
+        } // optionalAttrs (nixosConfig.meta.machine == "oberon") {
           "DP-1" = { resolution = "1920x1080"; position = "0,0"; };
           "HDMI-A-1" = { resolution = "1920x1080"; position = "1920,0"; };
-        } // optionalAttrs (config.meta.machine == "t430s") {
+        } // optionalAttrs (nixosConfig.meta.machine == "t430s") {
           "eDP-1" = { resolution = "1600x900"; position = "0,0"; };
         };
         modes = mkOptionDefault {};
@@ -227,7 +227,7 @@ in
       '';
     };
 
-    xdg.configFile."sway/config.d/oberon.conf" = mkIf (config.meta.machine == "oberon") {
+    xdg.configFile."sway/config.d/oberon.conf" = mkIf (nixosConfig.meta.machine == "oberon") {
       text = let
         leftDisplay = "DP-1";
         rightDisplay = "HDMI-A-1";

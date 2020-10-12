@@ -1,10 +1,14 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixosConfig, ... }:
 with lib;
 let
-  isWorkstation = config.meta.tags.isWorkstation;
+  isWorkstation = nixosConfig.meta.tags.isWorkstation;
 in
 {
   imports = import ./list.nix;
+
+  home = {
+    stateVersion = mkDefault nixosConfig.system.stateVersion;
+  };
 
   knopki = {
     bash.enable = true;

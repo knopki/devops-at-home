@@ -23,18 +23,4 @@ rec {
         else nameValuePair ("") (null)
 
     ) (readDir dir);
-
-  mkHM = { username, config }: configuration: let
-    defaultConfiguration = {
-      _module.args = {
-        nixosConfig = config;
-      };
-      home.stateVersion = lib.mkDefault config.system.stateVersion;
-      imports = [ ../hm-modules/core.nix ];
-    };
-    finalConfiguration = {
-      "${username}" = { ... }: defaultConfiguration // configuration;
-    };
-  in
-    finalConfiguration;
 }

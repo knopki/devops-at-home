@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixosConfig, ... }:
 with lib;
 let
   waybarReloadCmd = ''
@@ -56,7 +56,7 @@ in
                 format = "{temperatureC}°C ";
                 critical-threshold = 80;
               } // (
-                if (config.meta.machine == "alien") then {
+                if (nixosConfig.meta.machine == "alien") then {
                   thermal-zone = 1;
                 } else
                   {}
@@ -132,7 +132,7 @@ in
               "sway/window" = { max-length = 100; };
             };
           } // (
-            if (config.meta.machine == "alien") then {
+            if (nixosConfig.meta.machine == "alien") then {
               modules-right = [
                 "tray"
                 "idle_inhibitor"
@@ -146,7 +146,7 @@ in
                 "backlight"
                 "clock"
               ];
-            } else if (config.meta.machine == "t430s") then {
+            } else if (nixosConfig.meta.machine == "t430s") then {
               modules-right = [
                 "tray"
                 "idle_inhibitor"

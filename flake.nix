@@ -29,7 +29,7 @@
       type = "github";
       owner = "nix-community";
       repo = "home-manager";
-      ref = "master";
+      ref = "release-20.09";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -10,16 +10,15 @@ let
     lib.nixosSystem {
       inherit system;
 
-      specialArgs.usr = { inherit utils; };
+      specialArgs = {
+        inherit inputs;
+        usr = { inherit utils; };
+      };
 
       modules = let
-        # inherit (home.nixosModules) home-manager;
-
         core = ../profiles/core.nix;
 
         global = {
-          # system.configurationRevision = self.rev
-          #   or (throw "Cannot deploy from an unclean source tree!");
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
@@ -35,6 +34,10 @@ let
             ];
 
           nixpkgs = { pkgs = nixpkgsFor.${system}; };
+
+          # system.configurationRevision = self.rev
+          #   or (throw "Cannot deploy from an unclean source tree!");
+          system.configurationRevision = lib.mkIf (self ? rev) self.rev;
         };
 
         local = import "${toString ./.}/${name}.${system}.nix";
@@ -44,7 +47,7 @@ let
           attrValues (removeAttrs self.nixosModules [ "profiles" "home-manager" ]);
 
       in
-        flakeModules ++ [ core global local "${home}/nixos" ];
+        flakeModules ++ [ core global local home.nixosModules.home-manager ];
     };
 
   hosts = recImportHosts { dir = ./.; _import = mkHost; };
