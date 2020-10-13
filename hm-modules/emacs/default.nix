@@ -68,6 +68,9 @@ with lib;
       nodePackages.typescript-language-server
       nodePackages.prettier
 
+      # json
+      vscode-json-language-server-bin
+
       # markdown
       python37Packages.grip
       mdl
@@ -115,7 +118,7 @@ with lib;
 
     home.sessionVariables = {
       EDITOR = "emacs -nw";
-      VISUAL = "emacsclient -c";
+      VISUAL = "emacsclient -a='emacs -nw' -c";
     };
 
     programs.emacs = {
