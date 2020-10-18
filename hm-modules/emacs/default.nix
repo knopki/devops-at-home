@@ -123,7 +123,10 @@ with lib;
 
     programs.emacs = {
       enable = true;
-      package = pkgs.doom-emacs;
+      package = pkgs.doom-emacs.override {
+        # https://github.com/vlaci/nix-doom-emacs/issues/62#issuecomment-711092166
+        doomPrivateDir = builtins.path { path = ./doom.d; };
+      };
     };
 
     services.emacs = {
