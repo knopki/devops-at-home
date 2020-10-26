@@ -1,16 +1,7 @@
-;;; $DOOMDIR/config.el --- Doom Emacs private config -*- lexical-binding: t; -*-
+;;; packages.el -- Doom Emacs private config -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
 
-;; TODO: Flyckeck Proselint - org-mode false positives
-;; TODO: grammar checking
-;; TODO: calendar
-;; TODO: emoji font
-;; TODO: workspaces -> just desktop mode?
-;; TODO: https://github.com/hlissner/doom-emacs/blob/develop/docs/faq.org#why-is-scrolling-slow-in-emacsdoom
-;; FIXME: Undo-Fu-Session discarding undo data: file length mismatch
-;; FIXME: evil ex completion not ivy
-;; TODO: nix mode formatter
-;; TODO: flyspell save word
-;; TODO: https://github.com/emacs-evil/evil/issues/1273
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -65,10 +56,10 @@
       ;; Selecting item <first|>last wraps around.
       company-selection-wrap-around t)
 
-(map! (:when (featurep! :completion company)
-       (:after company
-        :map company-mode-map
-        :i [C-return] #'company-complete-selection)))
+(map! :when (featurep! :completion company)
+      :after company
+      :map company-mode-map
+      :i [C-return] #'company-complete-selection)
 
 
 ;;;; Ivy
@@ -359,26 +350,6 @@
       org-agenda-skip-scheduled-if-deadline-is-shown t
       org-agenda-include-diary t)
 
-;; TODO: capture template
-;; (setq  org-capture-templates
-;;        '(("t" "Capture TODO" entry
-;;           (file "capture.org")
-;;           "* TODO  %?\nSCHEDULED: %t\n:PROPERTIES:\n:CREATED: %U\n:END:")
-;;          ("n" "Capture NOTE" entry
-;;           (file "capture.org")
-;;           "* NOTE  %?\n:PROPERTIES:\n:CREATED: %U\n:END:")
-;;          ("j" "Journal entry" entry
-;;           (function org-journal-find-location)
-;;           "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
-;;          ("J" "Journal TODO entry" entry
-;;           (function org-journal-find-location)
-;;           "* TODO  %?\nSCHEDULED: %t\n:PROPERTIES:\n:CREATED: %U\n:END:")))
-
-
-;; TODO: journal
-;; TODO: roam
-;; TODO: face height in minibuffer
-;; TODO: some missing keys and functions
 
 ;; Expire old entries
 (use-package! org-expiry
@@ -395,17 +366,6 @@
   (org-expiry-inactive-timestamps t "Create created/expired timestamps inactive")
   :config
   (org-expiry-insinuate))
-
-;; Displays org priorities as custom strings
-;; TODO: use pretty symbols instead
-;; (use-package! org-fancy-priorities
-;;   :hook (org-mode . (org-fancy-priorities-mode))
-;;   :custom
-;;   (org-fancy-priorities-list
-;;    (if (char-displayable-p ?⚡)
-;;        '("⚡" "⬆" "⬇" "☕")
-;;      '("HI" "MID" "LOW" "OPT"))))
-
 
 ;;;; PlantUML
 (after! plantuml-mode
@@ -431,5 +391,7 @@
     :config
     (appendq! holiday-local-holidays russian-holidays)))
 
-
+;;; Local Variables:
+;;; byte-compile-warnings: (not free-vars unresolved)
+;;; End:
 ;;; config.el ends here
