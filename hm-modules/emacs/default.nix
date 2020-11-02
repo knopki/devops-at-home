@@ -1,5 +1,26 @@
 { config, lib, pkgs, ... }:
 with lib;
+let
+  emacsPkg = pkgs.doom-emacs.override {
+    # https://github.com/vlaci/nix-doom-emacs/issues/62#issuecomment-711092166
+    doomPrivateDir = builtins.path { path = ./doom.d; };
+  };
+  orgProtoClientDesktopItem = pkgs.writeTextDir "share/applications/org-protocol.desktop"
+    (
+      generators.toINI {} {
+        "Desktop Entry" = {
+          Type = "Application";
+          Exec = "${emacsPkg}/bin/emacsclient -c %u";
+          Terminal = false;
+          Name = "Org Protocol";
+          Icon = "emacs";
+          MimeType = "x-scheme-handler/org-protocol;";
+          Categories = "Utility;TextEditor;";
+          StartupWMClass = "Emacs";
+        };
+      }
+    );
+in
 {
   options.knopki.emacs = { enable = mkEnableOption "enable doom emacs for user"; };
 
@@ -17,8 +38,16 @@ with lib;
     };
 
     home.packages = with pkgs; [
-      fd
-      ripgrep
+      # doom dependencies
+      git
+      (ripgrep.override { withPCRE2 = true; })
+      gnutls # for TLS connectivity
+
+      # optional dependencies
+      fd # faster projectile indexing
+      imagemagick # for image-dired
+      pinentry_emacs # in-emacs gnupg prompts
+      zstd # for undo-fu-session/undo-tree compression
 
       # fonts etc
       emacs-all-the-icons-fonts
@@ -26,93 +55,101 @@ with lib;
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       source-sans-pro
 
-      # cc
+      ## modules dependencies
+      # :checkers spell
+      hunspell
+      hunspellDicts.en-us-large
+      hunspellDicts.ru-ru
+
+      # :checkers grammar
+      languagetool
+
+      # :tools editorconfig
+      editorconfig-core-c
+
+      # :tools lookup & :lang org +roam
+      sqlite
+
+      # :lang cc
       ccls
       irony-server
       rtags
 
-      # csharp
+      # :lang csharp
       dotnet-sdk
       omnisharp-roslyn
 
-      # docker mode
+      # :tools docker
       docker
       docker-compose
       docker-machine
       dockerfile-language-server-nodejs
 
-      # editorconfig
-      python37Packages.editorconfig
-
-      # erlang
+      # :lang erlang
       erlang
 
-      # flyspell
-      hunspell
-      hunspellDicts.en-us-large
-      hunspellDicts.ru-ru
-
-      # go
+      # :lang go
       gopls
       gocode
       gomodifytags
       gotests
 
-      # latex
-      texlab
+      # :lang latex & :lang org (latex previews)
       texlive.combined.scheme-medium
 
-      # javascript
+      # :lang javascript
       nodejs
       nodePackages.typescript
       nodePackages.typescript-language-server
       nodePackages.prettier
 
-      # json
+      # :lang json
       vscode-json-language-server-bin
 
-      # markdown
+      # :lang markdown
       python37Packages.grip
       mdl
       pandoc
       proselint
 
-      # nix-mode
+      # :lang nix
       nixpkgs-fmt
 
-      # org
+      # :lang org
       gnuplot
+      grimshot
+      orgProtoClientDesktopItem
 
-      # php
+      # :lang php
       php
       php73Packages.php-cs-fixer
 
-      # plantuml
+      # :plang plantuml
       plantuml
 
-      # python
+      # :lang python
       python
       pyright
 
-      # rust
+      # :lang rust
       cargo
       clippy
       rls
       rustc
       rustfmt
 
-      # sh
+      # :lang sh
       bashdb
       nodePackages.bash-language-server
       shellcheck
 
-      # wakatime-mode
+      # :tools wakatime-mode
       wakatime
 
-      # web
+      # :lang web
       nodePackages.js-beautify
 
-      # yaml
+      # lang: yaml
       yaml-language-server
     ];
 
@@ -123,10 +160,7 @@ with lib;
 
     programs.emacs = {
       enable = true;
-      package = pkgs.doom-emacs.override {
-        # https://github.com/vlaci/nix-doom-emacs/issues/62#issuecomment-711092166
-        doomPrivateDir = builtins.path { path = ./doom.d; };
-      };
+      package = emacsPkg;
     };
 
     services.emacs = {
@@ -165,7 +199,9 @@ with lib;
             "text/x-tex"
           ]
         )
-      );
+      ) // {
+        "x-scheme-handler/org-protocol" = "org-protocol.desktop";
+      };
     };
   };
 }

@@ -174,7 +174,6 @@
 
 (after! mixed-pitch
   (pushnew! mixed-pitch-fixed-pitch-faces
-            'font-lock-comment-face
             'markdown-code-face
             'markdown-comment-face
             'markdown-footnote-marker-face
@@ -189,8 +188,6 @@
             'markdown-pre-face
             'org-checkbox-statistics-done
             'org-checkbox-statistics-todo
-            'org-date
-            'org-done
             'org-drawer
             'org-hide
             'org-indent
@@ -198,15 +195,10 @@
             'org-link
             'org-list-checkbox
             'org-list-dt
-            'org-property-value
-            'org-ref-cite-face
             'org-scheduled-custom
             'org-scheduled-custom-braket
-            'org-special-keyword
             'org-superstar-header-bullet
-            'org-superstar-leading
-            'org-tag
-            'org-todo))
+            'org-superstar-leading))
 
 ;;; Editor
 ;;;; Default
@@ -255,7 +247,7 @@
 ;;;; Spell
 
 (when (featurep! :checkers spell)
-  ;; Disable кошка spellchecking auto run in some modes.
+  ;; Disable spellchecking auto run in some modes.
   (remove-hook! '(org-mode-hook markdown-mode-hook) #'flyspell-mode)
 
   ;; Improve Emacs flyspell responsiveness using idle timers.
@@ -267,6 +259,9 @@
     (setq ispell-dictionary "en_US,ru_RU")
     (ispell-set-spellchecker-params)
     (ispell-hunspell-add-multi-dic "en_US,ru_RU")))
+
+;;;; Grammar
+(setq langtool-bin "languagetool-commandline")
 
 
 ;;;; Syntax
@@ -289,83 +284,11 @@
 ;;; Languages
 ;;;; Nix
 
-
 ;; Prefer nixpkgs-fmt from shell nix
 (setq nix-nixfmt-bin "nixpkgs-fmt")
 
 ;;;; Org
-
-;; Larger heading sizes
-(after! org
-  (set-face-attribute 'org-document-title nil :height 1.5)
-  (set-face-attribute 'org-level-1 nil :height 1.4)
-  (set-face-attribute 'org-level-2 nil :height 1.3)
-  (set-face-attribute 'org-level-3 nil :height 1.2)
-  (set-face-attribute 'org-level-4 nil :height 1.1))
-
-;; Hooks and timers
-(after! org
-  (add-hook! 'org-mode-hook
-    (defun my-org-mode-hook ()
-      (setq display-line-numbers nil)
-      (mixed-pitch-mode t)))
-
-  ;; Autosave (no sure is it worth it)
-  (run-with-idle-timer 300 t 'org-save-all-org-buffers)
-
-  ;; Auto save on archiving
-  (add-hook! 'org-archive-hook #'org-save-all-org-buffers))
-
-
-(setq org-directory "~/org/"
-      org-archive-location (concat org-directory "/archive/%s_archive::datetree/")
-      org-modules '(org-checklist org-habit)
-      org-log-done 'time
-      org-log-redeadline 'time
-      org-log-reschedule 'time
-      org-log-into-drawer t
-      org-catch-invisible-edits 'smart
-      org-pretty-entities t
-      org-enforce-todo-checkbox-dependencies t
-      org-extend-today-until 5
-      org-ellipsis "⤵"
-      org-startup-with-inline-images t
-      org-startup-truncated nil
-      org-refile-use-cache t
-      org-goto-interface 'outline-path-completion
-      org-download-screenshot-method "slurp | grim -g - %s"
-      org-superstar-special-todo-items t)
-
-;; Priorities
-(setq org-lowest-priority ?D
-      org-priority-faces '((?A . error)
-                           (?B . warning)
-                           (?C . success)
-                           (?D . normal)))
-
-;; Agenda
-(setq org-agenda-text-search-extra-files '('agenda-archives)
-      org-agenda-span 14
-      org-agenda-skip-deadline-prewarning-if-scheduled t
-      org-agenda-skip-scheduled-if-deadline-is-shown t
-      org-agenda-include-diary t)
-
-
-;; Expire old entries
-(use-package! org-expiry
-  :after org
-  :commands (org-expiry-insinuate
-             org-expiry-deinsinuate
-             org-expiry-insert-created
-             org-expiry-insert-expiry
-             org-expiry-add-keyword
-             org-expiry-archive-subtree
-             org-expiry-process-entry
-             org-expiry-process-entries)
-  :custom
-  (org-expiry-inactive-timestamps t "Create created/expired timestamps inactive")
-  :config
-  (org-expiry-insinuate))
+(load (concat doom-private-dir "org-config.el"))
 
 ;;;; PlantUML
 (after! plantuml-mode

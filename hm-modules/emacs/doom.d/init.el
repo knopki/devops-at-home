@@ -19,6 +19,7 @@
        vi-tilde-fringe
        (window-select +switch-window)
        workspaces
+       zen
        :editor
        (evil +everywhere)
        file-templates
@@ -36,6 +37,7 @@
        :checkers
        syntax
        (spell +hunspell)
+       grammar
        :tools
        ansible
        debugger
@@ -66,7 +68,7 @@
        lua
        (markdown +grip)
        nix
-       (org +dragndrop +gnuplot +pretty)
+       (org +dragndrop +gnuplot +pretty +roam)
        php
        plantuml
        (python +lsp +pyright)
