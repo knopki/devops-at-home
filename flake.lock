@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "doom-emacs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1604265938,
+        "narHash": "sha256-1BPhxYTkjnvAwQL4QyHxNIgXGIYP2K8/aRJjJ8yog84=",
+        "owner": "hlissner",
+        "repo": "doom-emacs",
+        "rev": "fcdd238291f0831ccc0de5badf73dd68c0c9e61f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hlissner",
+        "repo": "doom-emacs",
+        "type": "github"
+      }
+    },
     "home": {
       "inputs": {
         "nixpkgs": [
@@ -86,6 +102,7 @@
     },
     "root": {
       "inputs": {
+        "doom-emacs": "doom-emacs",
         "home": "home",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos-hardware": "nixos-hardware",

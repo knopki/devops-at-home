@@ -32,6 +32,9 @@ let
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
   swaylockCmd = "${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --effect-vignette 0.5:0.5 --effect-pixelate 24";
+  orgCaptureBin = "${pkgs.doom-org-capture.override {
+    emacsPkg = config.programs.emacs.package;
+  }}/bin/doom-org-capture";
 
   rofiAppMenuCmd = "${pkgs.rofi}/bin/rofi -modi 'run,drun' -show-icons -theme-str 'element-icon { size: 2.3ch;}'";
 
@@ -52,7 +55,7 @@ in
       waypipe # run and and stream remote wayland app over ssh
       wdisplays # GUI outputs management
       wf-recorder # record video from display
-      wl-clipboard # manipulate wayland clipboard 
+      wl-clipboard # manipulate wayland clipboard
     ];
 
     knopki.alacritty.enable = true;
@@ -183,9 +186,10 @@ in
             "Print" = "exec ${pkgs.sway-scripts}/bin/rofi-screenshot-menu \"${config.xdg.userDirs.pictures}/screenshots\"";
             "XF86Display" = "exec ${pkgs.wdisplays}/bin/wdisplays";
             "${modifier}+p" = "exec ${pkgs.sway-scripts}/bin/rofi-pass";
-            "${modifier}+o" = "exec ${pkgs.rofi}/bin/rofi -modi emoji -show emoji";
+            "${modifier}+m" = "exec ${pkgs.rofi}/bin/rofi -modi emoji -show emoji";
             "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/rofi-system-menu";
             "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort > /dev/null";
+            "${modifier}+o" = "mode org-capture";
           } // optionalAttrs (nixosConfig.meta.machine == "alien") {
             "XF86TouchpadToggle" = "input type:touchpad events toggle enabled disabled";
             # More Alienware keys: XF86KbdLightOnOff, XF86KbdLightOnOff, XF86Tools, XF86Launch5-9
@@ -216,7 +220,13 @@ in
         } // optionalAttrs (nixosConfig.meta.machine == "t430s") {
           "eDP-1" = { resolution = "1600x900"; position = "0,0"; };
         };
-        modes = mkOptionDefault {};
+        modes = mkOptionDefault {
+          org-capture = {
+            t = "exec ${pkgs.wl-clipboard}/bin/wl-paste | ${orgCaptureBin} -k t, mode default";
+            n = "exec ${pkgs.wl-clipboard}/bin/wl-paste | ${orgCaptureBin} -k n, mode default";
+            Escape = "mode default";
+          };
+        };
       };
       extraConfig = ''
         # hide cursor on idle

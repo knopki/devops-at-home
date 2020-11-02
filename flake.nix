@@ -33,6 +33,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    doom-emacs = {
+      type = "github";
+      owner = "hlissner";
+      repo = "doom-emacs";
+      flake = false;
+    };
+
     nix-doom-emacs = {
       type = "github";
       owner = "vlaci";

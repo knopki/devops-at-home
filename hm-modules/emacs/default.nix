@@ -38,6 +38,8 @@ in
     };
 
     home.packages = with pkgs; [
+      (doom-org-capture.override { inherit emacsPkg; })
+
       # doom dependencies
       git
       (ripgrep.override { withPCRE2 = true; })
