@@ -3,7 +3,7 @@
 ;;; Code:
 (doom! :input
        :completion
-       company
+       (company +childframe)
        (ivy +fuzzy +prescient +icons)
        :ui
        doom
