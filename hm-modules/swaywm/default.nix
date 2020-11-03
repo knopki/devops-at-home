@@ -127,7 +127,7 @@ in
         startup = [
           # set SSH_AUTH_SOCK for systemd services
           {
-            command = "${systemctlBin} --user set-environment SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)";
+            command = "${systemctlBin} --user set-environment SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket) GSM_SKIP_SSH_AGENT_WORKAROUND=1";
             always = true;
           }
           {
