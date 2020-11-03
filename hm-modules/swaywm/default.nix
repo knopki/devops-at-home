@@ -289,7 +289,7 @@ in
         Service = {
           Type = "simple";
           ExecStart = ''
-            ${pkgs.sway-inactive-windows-transparency}/bin/inactive-windows-transparency.py -o 0.9
+            ${pkgs.sway-contrib.inactive-windows-transparency}/bin/inactive-windows-transparency.py -o 0.9
           '';
           Restart = "on-failure";
           RestartSec = "1";

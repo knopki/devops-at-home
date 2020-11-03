@@ -47,6 +47,7 @@ in
       kubectl
       kubernetes-helm
       libreoffice
+      mindustry
       mpv
       nix-du
       nix-index

@@ -47,8 +47,6 @@ in
       TERMINAL = "alacritty";
       PATH = "${selfHM.home.homeDirectory}/.local/bin:${selfHM.xdg.dataHome}/npm/bin:\${PATH}";
     };
-    meta.tags = getAttrs [ "isKVMGuest" "isWorkstation" ] config.meta.tags;
-    meta.machine = config.meta.machine;
     knopki = {
       alacritty.enable = isWorkstation;
       cachedirs = mkIf isWorkstation [

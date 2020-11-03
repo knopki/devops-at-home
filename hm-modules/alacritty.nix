@@ -20,6 +20,7 @@ with lib; {
         };
 
         window = {
+          dynamic_title = true;
           scrolling = {
             history = 10000;
             auto_scroll = false;
@@ -84,15 +85,13 @@ with lib; {
           ];
         };
 
-        visual_bell = {
+        bell = {
           animation = "EaseOutExpo";
           duration = 100;
           color = "0x4a5263";
         };
 
         background_opacity = 0.9;
-
-        dynamic_title = true;
 
         # key_bindings = { };
       };

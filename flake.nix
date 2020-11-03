@@ -6,7 +6,7 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "nixos-20.03";
+      ref = "nixos-20.09";
     };
 
     nixpkgs-unstable = {

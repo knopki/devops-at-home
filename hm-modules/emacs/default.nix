@@ -85,7 +85,7 @@ in
       docker
       docker-compose
       docker-machine
-      dockerfile-language-server-nodejs
+      nodePackages.dockerfile-language-server-nodejs
 
       # :lang erlang
       erlang
@@ -106,7 +106,7 @@ in
       nodePackages.prettier
 
       # :lang json
-      vscode-json-language-server-bin
+      nodePackages.vscode-json-languageserver-bin
 
       # :lang markdown
       python37Packages.grip
@@ -119,7 +119,7 @@ in
 
       # :lang org
       gnuplot
-      grimshot
+      sway-contrib.grimshot
       orgProtoClientDesktopItem
 
       # :lang php
@@ -131,7 +131,7 @@ in
 
       # :lang python
       python
-      pyright
+      nodePackages.pyright
 
       # :lang rust
       cargo
@@ -152,7 +152,7 @@ in
       nodePackages.js-beautify
 
       # lang: yaml
-      yaml-language-server
+      nodePackages.yaml-language-server
     ];
 
     home.sessionVariables = {

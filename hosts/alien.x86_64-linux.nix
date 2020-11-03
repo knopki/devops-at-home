@@ -10,6 +10,13 @@ let
     fallbackToPassword = true;
   };
   swapDevice = "/dev/mapper/nvme--vg-swap";
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec -a "$0" "$@"
+  '';
 in
 {
   imports = [
@@ -24,7 +31,7 @@ in
       options i8k force=1
       options i915 enable_fbc=1 enable_guc=3 enable_psr=1
     '';
-    extraModulePackages = [];
+    extraModulePackages = [ ];
     initrd = {
       availableKernelModules = [
         "ahci"
@@ -76,6 +83,7 @@ in
       }
     '';
   };
+  environment.systemPackages = with pkgs; [ nvidia-offload ];
 
   fileSystems = {
     "/" = {
@@ -95,16 +103,29 @@ in
   };
 
   hardware = {
-    opengl.driSupport32Bit = true;
-    # NOTE: track https://github.com/NixOS/nixpkgs/pull/86094
-    #nvidia = {
-    #  modesetting.enable = true;
-    #  optimus_prime = {
-    #    enable = true;
-    #    intelBusId = "PCI:0:2:0";
-    #    nvidiaBusId = "PCI:1:0:0";
-    #  };
-    #};
+    opengl = {
+      enable = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        libva
+        vaapiIntel
+      ];
+    };
+    nvidia = {
+      modesetting.enable = true;
+      prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+        # sync.enable = true;
+        offload.enable = true;
+      };
+      powerManagement.enable = true;
+    };
   };
 
 
@@ -139,16 +160,16 @@ in
     };
     tlp = {
       enable = true;
-      extraConfig = ''
-        TLP_DEFAULT_MODE=BAT
-        CPU_HWP_ON_BAT=balance_power
-        CPU_SCALING_GOVERNOR_ON_BAT=powersave
-        DISK_IOSCHED="noop cfq"
-        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth wwan"
-        DEVICES_TO_DISABLE_ON_LAN_CONNECT="wifi wwan"
-        DEVICES_TO_ENABLE_ON_LAN_DISCONNECT="wifi wwan"
-        WOL_DISABLE=Y
-      '';
+      settings = {
+        TLP_DEFAULT_MODE = "BAT";
+        CPU_HWP_ON_BAT = "balance_power";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+        DISK_IOSCHED = "noop cfq";
+        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = "bluetooth wwan";
+        DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi wwan";
+        DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi wwan";
+        WOL_DISABLE = "Y";
+      };
     };
     udev = {
       extraHwdb = ''
@@ -166,7 +187,7 @@ in
     };
     xserver = {
       displayManager.gdm.nvidiaWayland = true;
-      videoDrivers = [ "modesetting" "intel" ];
+      videoDrivers = [ "nvidia" ];
     };
     zerotierone = {
       enable = true;
@@ -174,9 +195,9 @@ in
     };
   };
 
-  swapDevices = [ { device = swapDevice; } ];
+  swapDevices = [{ device = swapDevice; }];
 
-  system.stateVersion = "19.09";
+  system.stateVersion = "20.09";
 
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=6h

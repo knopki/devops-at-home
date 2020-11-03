@@ -11,13 +11,13 @@ let
       gnused
       graphicsmagick-imagemagick-compat
       grim
-      grimshot
       jq
       libnotify
       procps
       rofi
       rofi-systemd
       slurp
+      sway-contrib.grimshot
       sway-unwrapped
       systemd
       wl-clipboard
