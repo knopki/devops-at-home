@@ -36,7 +36,6 @@ in
     ++ (optionals cfg.optimizeForWorkstation [ "quiet" "splash" "nohz_full=1-7" ]);
 
     tmpOnTmpfs = mkIf cfg.optimizeForWorkstation (mkDefault true);
-    latestKernel = mkIf cfg.optimizeForWorkstation (mkDefault true);
     disableSecurityMitigations = mkIf cfg.optimizeForWorkstation (mkDefault true);
     nonLocalBinds = mkIf cfg.optimizeForWorkstation (mkDefault true);
     rebootOnPanicOrOOM = mkIf cfg.optimizeForWorkstation (mkDefault true);
