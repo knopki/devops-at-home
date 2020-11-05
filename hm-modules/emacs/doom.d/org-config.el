@@ -49,7 +49,7 @@ Customized by TITLE and DATE-FORMAT."
   `((org-agenda-overriding-header ,TITLE)
     (org-agenda-prefix-format
      (concat
-      "%20c %?11(or (knopki/org-agenda-prefix-format-s (point) \""
+      " %-15 c%12(or (knopki/org-agenda-prefix-format-s (point) \""
       ,DATE-FORMAT
       "\") \"\") "))
     (org-agenda-sorting-strategy-selected '(time-up priority-down category-keep))
@@ -147,9 +147,9 @@ Customized by TITLE and DATE-FORMAT."
         `(("t" "Personal todo" entry
            (file+headline +org-capture-todo-file "Inbox")
            ,(concat "* TODO %?\n"
-                   ":PROPERTIES:\n:CREATED: %U\n:END:\n"
-                   "%i\n"
-                   "%a")
+                    ":PROPERTIES:\n:CREATED: %U\n:END:\n"
+                    "%i\n"
+                    "%a")
            :jump-to-captured t)
           ("n" "Personal notes" entry
            (file+headline +org-capture-notes-file "Inbox")
@@ -236,11 +236,12 @@ Customized by TITLE and DATE-FORMAT."
                      (org-agenda-remove-tags t)
                      (org-agenda-use-time-grid nil)
                      (org-agenda-overriding-header "")
-                     (org-agenda-prefix-format "%20c %?11 t%?12 s")
+                     (org-agenda-prefix-format " %-15 c%?12 t%?18 s")
                      (org-agenda-deadline-leaders '("" "In %2dd:" "%2dd ago:"))
                      (org-agenda-scheduled-leaders '("" "%2dd ago:"))
                      (org-super-agenda-groups
-                      '((:order 1 :habit t)
+                      '((:order 5 :log t)
+                        (:order 1 :habit t)
                         (:name ""
                          :order 0
                          :scheduled today
@@ -255,8 +256,7 @@ Customized by TITLE and DATE-FORMAT."
                         (:name "Birthdays & holidays"
                          :order 4
                          :category "birthdays"
-                         :category "holidays")
-                        (:order 5 :log t)))))
+                         :category "holidays")))))
 
             ;; Started
             (org-ql-block '(todo "STRT") ((org-ql-block-header "Started")))
@@ -280,6 +280,9 @@ Customized by TITLE and DATE-FORMAT."
             ;; Quick Tasks
             (org-ql-block '(and (todo)
                                 (property "Effort")
+                                (not (scheduled))
+                                (or (not (deadline))
+                                    (deadline auto))
                                 (>= 30
                                     (org-duration-to-minutes
                                      (org-entry-get (point) "Effort"))))
@@ -295,24 +298,24 @@ Customized by TITLE and DATE-FORMAT."
                           ((org-ql-block-header "Refile")))
 
             ;; This Week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%GW%V" "++1w")
+            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w")
                   ,(knopki/org-agenda-command-date-range-opts "This Week" "%a, %d"))
 
             ;; Next Week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%GW%V" "++1w" "++1w")
+            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w" "++1w")
                   ,(knopki/org-agenda-command-date-range-opts "Next Week" "%a, %d"))))
 
           ("r" . "Review")
           ("rw" "Week Review"
            (
             ;; prev week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%GW%V" "++1w" "--1w")
+            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w" "--1w")
                   ,(knopki/org-agenda-command-date-range-opts "Previous Week" "%a, %d"))
             ;; this week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%GW%V" "++1w")
+            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w")
                   ,(knopki/org-agenda-command-date-range-opts "This Week" "%a, %d"))
             ;; next week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%GW%V" "++1w" "++1w")
+            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w" "++1w")
                   ,(knopki/org-agenda-command-date-range-opts "Next Week" "%a, %d"))))
 
           ("rm" "Month Review"
