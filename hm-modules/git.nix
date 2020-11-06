@@ -21,6 +21,9 @@ with lib; {
           decorate = "short";
           abbrevCommit = "true";
         };
+        pull = {
+          rebase = "true";
+        };
         push = {
           default = "current";
           followTags = "true";
