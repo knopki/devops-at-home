@@ -1,5 +1,7 @@
-{ config, lib, pkgs, username ? "nixos", ... }:
+{ config, lib, pkgs, ... }@args:
+with lib;
 let
+  username = attrByPath ["username"] "nixos" args;
   sshKeys = import ../secrets/ssh_keys.nix;
 in
 {

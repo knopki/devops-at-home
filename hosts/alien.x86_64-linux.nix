@@ -21,8 +21,8 @@ in
 {
   imports = [
     ../profiles/workstation.nix
-    (import ../users/root.nix args)
-    (import ../users/sk.nix args)
+    ../users/root.nix
+    ../users/sk.nix
   ];
 
   boot = {

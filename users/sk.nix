@@ -1,6 +1,7 @@
-{ config, lib, pkgs, self, username ? "sk", ... }:
+{ config, lib, pkgs, self, ... }@args:
 with lib;
 let
+  username = attrByPath ["username"] "sk" args;
   sshKeys = import ../secrets/ssh_keys.nix;
   isWorkstation = config.meta.tags.isWorkstation;
   selfHM = config.home-manager.users."${username}";

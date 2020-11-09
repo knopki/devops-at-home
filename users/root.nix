@@ -1,6 +1,7 @@
-{ config, lib, pkgs, self, username ? "root", ... }:
+{ config, lib, pkgs, self, ... }@args:
+with lib;
 let
-  inherit (lib) getAttrs;
+  username = attrByPath ["username"] "root" args;
   sshKeys = import ../secrets/ssh_keys.nix;
 in
 {

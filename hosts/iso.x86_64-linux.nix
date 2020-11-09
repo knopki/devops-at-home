@@ -2,8 +2,8 @@
 {
   imports = [
     "${modulesPath}/installer/cd-dvd/iso-image.nix"
-    (import ../users/root.nix args)
-    (import ../users/nixos.nix args)
+    ../users/root.nix
+    ../users/nixos.nix
   ];
 
   isoImage.makeEfiBootable = true;
