@@ -2,36 +2,11 @@
   description = "Configuration management of the my personal machines, my dotfiles, my other somethings.";
 
   inputs = {
-    nixpkgs = {
-      type = "github";
-      owner = "NixOS";
-      repo = "nixpkgs";
-      ref = "nixos-20.09";
-    };
-
-    nixpkgs-unstable = {
-      type = "github";
-      owner = "NixOS";
-      repo = "nixpkgs";
-      ref = "nixos-unstable";
-    };
-
-    nixos-hardware = {
-      type = "github";
-      owner = "NixOS";
-      repo = "nixos-hardware";
-    };
-
-    # Provides a basic system for managing a user environment
-    # using the Nix package manager together with the Nix
-    # libraries found in Nixpkgs: https://github.com/nix-community/home-manager
-    home = {
-      type = "github";
-      owner = "nix-community";
-      repo = "home-manager";
-      ref = "release-20.09";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    home.url = "github:nix-community/home-manager/release-20.09";
+    home.inputs.nixpkgs.follows = "nixpkgs";
 
     doom-emacs = {
       type = "github";
