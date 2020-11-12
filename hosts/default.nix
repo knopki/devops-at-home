@@ -1,7 +1,8 @@
 inputs@{ home, nixpkgs, nixpkgsFor, self, ... }:
 let
-  inherit (builtins) attrValues length removeAttrs;
+  inherit (builtins) attrNames attrValues elem length mapAttrs removeAttrs;
   inherit (nixpkgs) lib;
+  inherit (nixpkgs.lib) filterAttrs mkMerge traceVal;
 
   utils = import ../lib/utils.nix { inherit lib; };
   inherit (utils) recImportHosts;
@@ -11,7 +12,6 @@ let
       inherit system;
 
       specialArgs = {
-        inherit inputs;
         usr = { inherit utils; };
       };
 
@@ -19,19 +19,21 @@ let
         core = ../profiles/core.nix;
 
         global = {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-          };
           networking.hostName = name;
-          nix.nixPath = let
-            rebuild-throw = nixpkgsFor.${system}.writeText "rebuild-throw.nix"
-              ''throw "I'm sorry Dave, I'm afraid I can't do that... Please, use flakes."'';
-          in
-            [
-              "nixpkgs=${nixpkgs}"
-              "nixos-config=${rebuild-throw}"
-            ];
+
+          # add all flake inputs as flake registries
+          nix.registry =
+            let
+              ignoredInputNames = [ "self" "nixpkgsFor" ];
+              safeInputNames = attrNames
+                (filterAttrs (k: v: !elem k ignoredInputNames) inputs);
+              registryOpts = mkMerge (map
+                (name: {
+                  "${name}".flake = inputs."${name}";
+                })
+                safeInputNames);
+            in
+            registryOpts // { devops-at-home.flake = inputs.self; };
 
           nixpkgs = { pkgs = nixpkgsFor.${system}; };
 

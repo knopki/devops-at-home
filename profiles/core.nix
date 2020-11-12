@@ -1,11 +1,7 @@
 # this profile is always applied
 { config, lib, pkgs, ... }:
-let
-  inherit (lib) fileContents mkAfter mkBefore mkDefault;
-in
+with lib;
 {
-  imports = [];
-
   boot = {
     rebootOnPanicOrOOM = true;
     tmpOnTmpfs = true;
@@ -48,6 +44,11 @@ in
 
   hardware.enableRedistributableFirmware = mkDefault true;
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
+
   i18n = {
     defaultLocale = mkDefault "en_US.UTF-8";
     supportedLocales = mkDefault [ "en_US.UTF-8/UTF-8" "ru_RU.UTF-8/UTF-8" ];
@@ -63,9 +64,10 @@ in
   nix = {
     allowedUsers = [ "@wheel" ];
     autoOptimiseStore = mkDefault true;
-    extraOptions = let
-      gcMinFree = 10 * 1024 * 1024 * 1024;
-    in
+    extraOptions =
+      let
+        gcMinFree = 10 * 1024 * 1024 * 1024;
+      in
       mkBefore ''
         # flakes support
         experimental-features = nix-command flakes ca-references
@@ -82,6 +84,15 @@ in
       dates = mkDefault "weekly";
       options = mkDefault "--delete-older-then 30d";
     };
+    nixPath =
+      let
+        rebuild-throw = pkgs.writeText "rebuild-throw.nix"
+          ''throw "I'm sorry Dave, I'm afraid I can't do that... Please, use flakes."'';
+      in
+      [
+        "nixpkgs=${config.nix.registry.nixpkgs.flake}"
+        "nixos-config=${rebuild-throw}"
+      ];
     optimise.automatic = mkDefault true;
     package = pkgs.nixFlakes;
     trustedUsers = [ "root" "@wheel" ];
