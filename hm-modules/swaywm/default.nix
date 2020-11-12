@@ -32,9 +32,6 @@ let
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
   swaylockCmd = "${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --effect-vignette 0.5:0.5 --effect-pixelate 24";
-  orgCaptureBin = "${pkgs.doom-org-capture.override {
-    emacsPkg = config.programs.emacs.package;
-  }}/bin/doom-org-capture";
 
   rofiAppMenuCmd = "${pkgs.rofi}/bin/rofi -modi 'run,drun' -show-icons -theme-str 'element-icon { size: 2.3ch;}'";
 
@@ -79,10 +76,10 @@ in
           ];
         };
         floating = {
-          criteria = [];
+          criteria = [ ];
         };
-        focus = {};
-        assigns = {};
+        focus = { };
+        assigns = { };
         workspaceAutoBackAndForth = true;
         modifier = "Mod4";
         colors = {
@@ -123,7 +120,7 @@ in
             childBorder = theme.base00;
           };
         };
-        bars = [];
+        bars = [ ];
         startup = [
           # set SSH_AUTH_SOCK for systemd services
           {
@@ -189,7 +186,7 @@ in
             "${modifier}+m" = "exec ${pkgs.rofi}/bin/rofi -modi emoji -show emoji";
             "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/rofi-system-menu";
             "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort > /dev/null";
-            "${modifier}+o" = "mode org-capture";
+            "${modifier}+o" = mkIf config.knopki.emacs.org-capture.enable "mode org-capture";
           } // optionalAttrs (nixosConfig.meta.machine == "alien") {
             "XF86TouchpadToggle" = "input type:touchpad events toggle enabled disabled";
             # More Alienware keys: XF86KbdLightOnOff, XF86KbdLightOnOff, XF86Tools, XF86Launch5-9
@@ -221,11 +218,16 @@ in
           "eDP-1" = { resolution = "1600x900"; position = "0,0"; };
         };
         modes = mkOptionDefault {
-          org-capture = {
-            t = "exec ${pkgs.wl-clipboard}/bin/wl-paste | ${orgCaptureBin} -k t, mode default";
-            n = "exec ${pkgs.wl-clipboard}/bin/wl-paste | ${orgCaptureBin} -k n, mode default";
-            Escape = "mode default";
-          };
+          org-capture =
+            let
+              wlPasteBin = "${pkgs.wl-clipboard}/bin/wl-paste";
+              orgCaptureBin = "${config.knopki.emacs.org-capture.package}/bin/doom-org-capture";
+            in
+            mkIf config.knopki.emacs.org-capture.enable {
+              t = "exec ${wlPasteBin} | ${orgCaptureBin} -k t, mode default";
+              n = "exec ${wlPasteBin} | ${orgCaptureBin} -k n, mode default";
+              Escape = "mode default";
+            };
         };
       };
       extraConfig = ''
@@ -238,10 +240,11 @@ in
     };
 
     xdg.configFile."sway/config.d/oberon.conf" = mkIf (nixosConfig.meta.machine == "oberon") {
-      text = let
-        leftDisplay = "DP-1";
-        rightDisplay = "HDMI-A-1";
-      in
+      text =
+        let
+          leftDisplay = "DP-1";
+          rightDisplay = "HDMI-A-1";
+        in
         ''
           workspace 1 output ${leftDisplay}
           workspace 2 output ${leftDisplay}
@@ -299,7 +302,7 @@ in
     };
 
     xdg.configFile = {
-      "networkmanager-dmenu/config.ini".text = generators.toINI {} {
+      "networkmanager-dmenu/config.ini".text = generators.toINI { } {
         dmenu = {
           dmenu_command = "${pkgs.rofi}/bin/rofi";
           pinentry = "${pkgs.pinentry-gnome}/bin/pinentry-gnome3";

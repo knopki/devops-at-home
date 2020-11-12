@@ -1,16 +1,28 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixosConfig, ... }:
 with lib;
 let
-  emacsPkg = pkgs.doom-emacs.override {
-    # https://github.com/vlaci/nix-doom-emacs/issues/62#issuecomment-711092166
-    doomPrivateDir = builtins.path { path = ./doom.d; };
-  };
+  nixDoomFlake = nixosConfig.nix.registry.nix-doom-emacs.flake;
+  doom-org-capture = pkgs.callPackage
+    (
+      { stdenv, lib, makeWrapper, pkgs, ... }:
+      stdenv.mkDerivation rec {
+        name = "doom-org-capture";
+        src = nixDoomFlake.inputs.doom-emacs;
+        nativeBuildInputs = [ makeWrapper ];
+        installPhase = ''
+          install -Dm0755 $src/bin/org-capture $out/bin/$name
+          wrapProgram $out/bin/$name \
+            --set PATH "${config.programs.emacs.package}/bin:${pkgs.coreutils}/bin"
+        '';
+      }
+    )
+    { };
   orgProtoClientDesktopItem = pkgs.writeTextDir "share/applications/org-protocol.desktop"
     (
-      generators.toINI {} {
+      generators.toINI { } {
         "Desktop Entry" = {
           Type = "Application";
-          Exec = "${emacsPkg}/bin/emacsclient -c %u";
+          Exec = "${config.programs.emacs.package}/bin/emacsclient -c %u";
           Terminal = false;
           Name = "Org Protocol";
           Icon = "emacs";
@@ -22,14 +34,22 @@ let
     );
 in
 {
-  options.knopki.emacs = { enable = mkEnableOption "enable doom emacs for user"; };
+  imports = [ nixDoomFlake.hmModule ];
+
+  options.knopki.emacs = {
+    enable = mkEnableOption "enable doom emacs for user";
+    org-capture = {
+      enable = mkEnableOption "enable org-capture script";
+      package = mkOption {
+        description = "org-capture package";
+        type = with types; package;
+        default = doom-org-capture;
+      };
+    };
+  };
 
   config = mkIf config.knopki.emacs.enable {
     home.file = {
-      ".emacs.d/init.el".text = ''
-        (load "default.el")
-      '';
-
       # HACK: support virtualenv and nix shells
       ".pylintrc".text = ''
         [MASTER]
@@ -38,8 +58,6 @@ in
     };
 
     home.packages = with pkgs; [
-      (doom-org-capture.override { inherit emacsPkg; })
-
       # doom dependencies
       git
       (ripgrep.override { withPCRE2 = true; })
@@ -52,7 +70,6 @@ in
       zstd # for undo-fu-session/undo-tree compression
 
       # fonts etc
-      emacs-all-the-icons-fonts
       fira-code-symbols
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       source-sans-pro
@@ -153,16 +170,18 @@ in
 
       # lang: yaml
       nodePackages.yaml-language-server
-    ];
+    ] ++ optionals config.knopki.emacs.org-capture.enable [ doom-org-capture ];
 
     home.sessionVariables = {
       EDITOR = "emacs -nw";
       VISUAL = "emacsclient -a='emacs -nw' -c";
     };
 
-    programs.emacs = {
+    knopki.emacs.org-capture.enable = true;
+
+    programs.doom-emacs = {
       enable = true;
-      package = emacsPkg;
+      doomPrivateDir = ./doom.d;
     };
 
     services.emacs = {

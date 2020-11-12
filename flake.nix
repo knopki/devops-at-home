@@ -7,23 +7,10 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home.url = "github:nix-community/home-manager/release-20.09";
     home.inputs.nixpkgs.follows = "nixpkgs";
-
-    doom-emacs = {
-      type = "github";
-      owner = "hlissner";
-      repo = "doom-emacs";
-      flake = false;
-    };
-
-    nix-doom-emacs = {
-      type = "github";
-      owner = "vlaci";
-      repo = "nix-doom-emacs";
-      flake = false;
-    };
+    nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
   };
 
-  outputs = inputs@{ self, home, nixpkgs, nixpkgs-unstable, nixos-hardware, ... }:
+  outputs = inputs@{ self, nixpkgs, ... }:
     let
       inherit (builtins) attrNames attrValues baseNameOf elem filter listToAttrs readDir;
       inherit (nixpkgs.lib) genAttrs filterAttrs hasSuffix removeSuffix;
