@@ -262,7 +262,10 @@ Customized by TITLE and DATE-FORMAT."
             (org-ql-block '(todo "STRT") ((org-ql-block-header "Started")))
 
             ;; Next Actions
-            (org-ql-block '(and (todo "NEXT") (not (scheduled)))
+            (org-ql-block '(and (todo "NEXT")
+                                (not (scheduled))
+                                (or (not (deadline))
+                                    (deadline auto)))
                           ((org-ql-block-header "Next Actions")))
 
             ;; Waiting
