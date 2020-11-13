@@ -6,7 +6,6 @@ with lib;
   };
 
   config = mkIf config.knopki.bash.enable {
-    knopki.fzf.enable = true;
     programs = {
       bash.enable = true;
     };

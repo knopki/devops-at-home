@@ -1,17 +1,20 @@
 { config, lib, pkgs, ... }@args:
 with lib;
 let
-  username = attrByPath ["username"] "nixos" args;
+  cfg = config.knopki.users.nixos;
   sshKeys = import ../secrets/ssh_keys.nix;
 in
 {
-  users.users."${username}" = {
-    uid = 1000;
+  knopki.users.nixos = {
+    username = mkDefault "nixos";
+    uid = mkDefault 1000;
+  };
+
+  users.users."${cfg.username}" = mkIf cfg.enable {
     password = "nixos";
     description = "default";
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    shell = pkgs.fish;
     openssh.authorizedKeys.keys = [ sshKeys.sk ];
   };
 }

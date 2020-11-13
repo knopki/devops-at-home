@@ -1,17 +1,14 @@
-{ config, lib, pkgs, self, ... }@args:
+{ config, lib, pkgs, ... }@args:
 with lib;
 let
-  username = attrByPath ["username"] "root" args;
+  cfg = config.knopki.users.root;
   sshKeys = import ../secrets/ssh_keys.nix;
 in
 {
-  users.users."${username}" = {
+  knopki.users.root = { };
+
+  users.users."${cfg.username}" = mkIf cfg.enable {
     openssh.authorizedKeys.keys = [ sshKeys.sk ];
     passwordFile = "/var/secrets/root_password";
-    shell = pkgs.fish;
-  };
-
-  home-manager.users."${username}" = {
-    imports = [ ../hm-modules/core.nix ];
   };
 }

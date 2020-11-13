@@ -19,6 +19,8 @@ let
         core = ../profiles/core.nix;
 
         global = {
+          imports = import ../users/list.nix;
+
           networking.hostName = name;
 
           # add all flake inputs as flake registries

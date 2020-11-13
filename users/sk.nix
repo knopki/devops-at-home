@@ -1,18 +1,20 @@
-{ config, lib, pkgs, self, ... }@args:
+{ config, lib, pkgs, ... }@args:
 with lib;
 let
-  username = attrByPath ["username"] "sk" args;
+  cfg = config.knopki.users.sk;
   sshKeys = import ../secrets/ssh_keys.nix;
   isWorkstation = config.meta.tags.isWorkstation;
-  selfHM = config.home-manager.users."${username}";
+  selfHM = config.home-manager.users."${cfg.username}";
 in
 {
-  users.groups."${username}" = {
-    name = username;
-    gid = 1000;
+  knopki.users.sk = {
+    username = mkDefault "sk";
+    uid = mkDefault 1000;
+    gid = mkDefault 1000;
+    linger.enable = mkDefault true;
   };
 
-  users.users."${username}" = {
+  users.users."${cfg.username}" = mkIf cfg.enable {
     description = "Sergey Korolev";
     extraGroups = [
       "adbusers"
@@ -31,17 +33,12 @@ in
       "wheel"
       "wireshark"
     ];
-    group = username;
     isNormalUser = true;
     openssh.authorizedKeys.keys = [ sshKeys.sk ];
     passwordFile = "/var/secrets/sk_password";
-    shell = pkgs.fish;
-    uid = 1000;
   };
 
-  home-manager.users."${username}" = {
-    imports = [ ../hm-modules/core.nix ];
-
+  home-manager.users."${cfg.username}" = mkIf cfg.enable {
     home.language.monetary = "ru_RU.UTF-8";
     home.language.time = "ru_RU.UTF-8";
     home.sessionVariables = {
@@ -135,12 +132,5 @@ in
       "e ${selfHM.xdg.userDirs.download}/*.torrent - - - 1d"
       "e ${selfHM.xdg.userDirs.pictures}/screenshots - - - 30d"
     ];
-  };
-
-  system.activationScripts = {
-    linger-sk = ''
-      #!/usr/bin/env sh
-      ${pkgs.systemd}/bin/loginctl enable-linger ${username} || true
-    '';
   };
 }
