@@ -219,11 +219,9 @@ Customized by TITLE and DATE-FORMAT."
         org-agenda-default-appointment-duration 60))
 
 (use-package! org-super-agenda
+  :defer t
   :after org-agenda
   :init
-  ;; don't break evil on org-super-agenda headings
-  ;; see https://github.com/alphapapa/org-super-agenda/issues/50
-  (setq org-super-agenda-header-map nil)
   (setq org-agenda-custom-commands
         `(("p" "Planner"
            (
@@ -344,6 +342,9 @@ Customized by TITLE and DATE-FORMAT."
                   ,(knopki/org-agenda-command-date-range-opts "Next Year" "%Y-%m-%d"))
             ))))
   :config
+  ;; don't break evil on org-super-agenda headings
+  ;; see https://github.com/alphapapa/org-super-agenda/issues/50
+  (setq org-super-agenda-header-map nil)
   (org-super-agenda-mode))
 
 
@@ -353,6 +354,7 @@ Customized by TITLE and DATE-FORMAT."
 
 ;;; Expire old entries
 (use-package! org-expiry
+  :defer t
   :after org
   :commands (org-expiry-insinuate
              org-expiry-deinsinuate
