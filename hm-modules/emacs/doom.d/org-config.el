@@ -85,9 +85,7 @@ Customized by TITLE and DATE-FORMAT."
 
 ;;; Paths
 (after! org
-  (setq org-archive-location (concat org-directory "archive/%s_archive::datetree/")
-        org-roam-directory (concat org-directory "notes/")
-        org-roam-db-location (concat doom-cache-dir "org-roam.db")))
+  (setq org-archive-location (concat org-directory "/archive/%s_archive::datetree/")))
 
 ;;; Trivial configuration
 (after! org
