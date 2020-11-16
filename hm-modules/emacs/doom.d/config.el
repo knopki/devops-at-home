@@ -272,6 +272,11 @@
             shell-mode eshell-mode term-mode vterm-mode))
 
 ;;; Tools
+;;;; LSP
+
+(after! lsp-mode
+  (add-to-list 'lsp-file-watch-ignored "/nix/store"))
+
 ;;;; Wakatime
 
 ;; WakaTime measures coding time for programmers using open-source plugins for
@@ -296,6 +301,10 @@
   (setq plantuml-default-exec-mode 'executable
         plantuml-output-type "png")
   (set-popup-rule! "^\\*PLANTUML" :select t :height 40))
+
+;;;; Python
+(after! lsp-pyright
+  (setq lsp-pyright-multi-root nil))
 
 ;;; App
 ;;;; Calendar
