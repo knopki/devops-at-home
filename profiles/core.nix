@@ -152,6 +152,8 @@ with lib;
     timesyncd.servers = mkDefault [ "time.cloudflare.com" ];
   };
 
+  systemd.services.nix-daemon.serviceConfig.LimitSTACKSoft = "infinity";
+
   systemd.timers = {
     nix-gc.timerConfig.Persistent = mkDefault true;
     nix-optimise.timerConfig.Persistent = mkDefault true;

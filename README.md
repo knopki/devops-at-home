@@ -38,13 +38,27 @@ Open shell with package:
 nix shell .#packages.x86_64-linux.winbox
 ```
 
+Update inputs:
+
+``` sh
+nix flake update --update-input nixpkgs
+```
+
+Special case for updating Doom Emacs:
+
+``` sh
+nix flake update --update-input nix-doom-emacs
+hm-modules/emacs/update.py
+git add hm-modules/emacs/pinned.json
+```
+
 ### Show Me What You Got
 
 ```
 ├───checks
 │   └───x86_64-linux
-│       ├───alien: derivation 'nixos-system-alien-20.03.20200816.f8a10a7'
-│       ├───doom-emacs: derivation 'emacs-with-packages-26.3'
+│       ├───alien: derivation 'nixos-system-alien-20.09.20201114.29e9c10'
+│       ├───sway-scripts: derivation 'sway-scripts'
 │       ├───winbox: derivation 'winbox-bin-3.20'
 │       └───winbox-bin: derivation 'winbox-bin-3.20'
 ├───devShell
@@ -61,20 +75,21 @@ nix shell .#packages.x86_64-linux.winbox
 │   ├───cachix: NixOS module
 │   ├───home-manager: NixOS module
 │   ├───meta: NixOS module
-│   └───profiles: NixOS module
+│   ├───profiles: NixOS module
+│   └───users: NixOS module
 ├───overlay: Nixpkgs overlay
 ├───overlays: unknown
 └───packages
     ├───aarch64-linux
-    │   └───doom-emacs: package 'emacs-with-packages-26.3'
+    │   └───sway-scripts: package 'sway-scripts'
     ├───i686-linux
-    │   ├───doom-emacs: package 'emacs-with-packages-26.3'
+    │   ├───sway-scripts: package 'sway-scripts'
     │   ├───winbox: package 'winbox-bin-3.20'
     │   └───winbox-bin: package 'winbox-bin-3.20'
     ├───x86_64-darwin
-    │   └───doom-emacs: package 'emacs-with-packages-26.3'
+    │   └───sway-scripts: package 'sway-scripts'
     └───x86_64-linux
-        ├───doom-emacs: package 'emacs-with-packages-26.3'
+        ├───sway-scripts: package 'sway-scripts'
         ├───winbox: package 'winbox-bin-3.20'
         └───winbox-bin: package 'winbox-bin-3.20'
 ```

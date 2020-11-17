@@ -2,36 +2,9 @@
 with lib;
 let
   nixDoomFlake = nixosConfig.nix.registry.nix-doom-emacs.flake;
-  doom-org-capture = pkgs.callPackage
-    (
-      { stdenv, lib, makeWrapper, pkgs, ... }:
-      stdenv.mkDerivation rec {
-        name = "doom-org-capture";
-        src = nixDoomFlake.inputs.doom-emacs;
-        nativeBuildInputs = [ makeWrapper ];
-        installPhase = ''
-          install -Dm0755 $src/bin/org-capture $out/bin/$name
-          wrapProgram $out/bin/$name \
-            --set PATH "${config.programs.emacs.package}/bin:${pkgs.coreutils}/bin"
-        '';
-      }
-    )
-    { };
-  orgProtoClientDesktopItem = pkgs.writeTextDir "share/applications/org-protocol.desktop"
-    (
-      generators.toINI { } {
-        "Desktop Entry" = {
-          Type = "Application";
-          Exec = "${config.programs.emacs.package}/bin/emacsclient -c %u";
-          Terminal = false;
-          Name = "Org Protocol";
-          Icon = "emacs";
-          MimeType = "x-scheme-handler/org-protocol;";
-          Categories = "Utility;TextEditor;";
-          StartupWMClass = "Emacs";
-        };
-      }
-    );
+  p = import ./packages.nix {
+    inherit config lib pkgs nixDoomFlake;
+  };
 in
 {
   imports = [ nixDoomFlake.hmModule ];
@@ -43,7 +16,7 @@ in
       package = mkOption {
         description = "org-capture package";
         type = with types; package;
-        default = doom-org-capture;
+        default = p.doom-org-capture;
       };
     };
   };
@@ -137,7 +110,7 @@ in
       # :lang org
       gnuplot
       sway-contrib.grimshot
-      orgProtoClientDesktopItem
+      p.orgProtoClientDesktopItem
 
       # :lang php
       php
@@ -170,7 +143,7 @@ in
 
       # lang: yaml
       nodePackages.yaml-language-server
-    ] ++ optionals config.knopki.emacs.org-capture.enable [ doom-org-capture ];
+    ] ++ optionals config.knopki.emacs.org-capture.enable [ p.doom-org-capture ];
 
     home.sessionVariables = {
       EDITOR = "emacs -nw";
@@ -180,6 +153,7 @@ in
     knopki.emacs.org-capture.enable = true;
 
     programs.doom-emacs = {
+      inherit (p) emacsPackagesOverlay;
       enable = true;
       doomPrivateDir = ./doom.d;
     };
