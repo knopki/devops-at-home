@@ -77,6 +77,8 @@
        (sh +fish +lsp)
        web
        (yaml +lsp)
+       :os
+       (tty +osc)
        :mail
        :app
        :config
