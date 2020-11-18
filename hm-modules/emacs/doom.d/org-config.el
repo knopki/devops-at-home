@@ -89,8 +89,7 @@ Customized by TITLE and DATE-FORMAT."
 
 ;;; Trivial configuration
 (after! org
-  (setq org-modules '(org-checklist org-habit)
-        org-startup-folded 'content
+  (setq org-startup-folded 'content
         org-log-done 'time
         org-log-redeadline 'time
         org-log-reschedule 'time
@@ -104,7 +103,9 @@ Customized by TITLE and DATE-FORMAT."
         org-refile-use-cache t
         org-superstar-special-todo-items t
         org-global-properties
-        '(("Effort_ALL". "0 0:10 0:20 0:30 1:00 2:00 3:00 4:00 6:00 8:00"))))
+        '(("Effort_ALL". "0 0:10 0:20 0:30 1:00 2:00 3:00 4:00 6:00 8:00")))
+  (add-to-list 'org-modules 'org-habit)
+  (add-to-list 'org-modules 'org-checklist))
 
 ;;; Keywords
 (after! org
