@@ -275,6 +275,8 @@
 ;;;; LSP
 
 (after! lsp-mode
+  (setq lsp-idle-delay 1.0
+        lsp-file-watch-threshold 10000)
   (add-to-list 'lsp-file-watch-ignored "/nix/store"))
 
 ;;;; Wakatime
@@ -304,7 +306,8 @@
 
 ;;;; Python
 (after! lsp-pyright
-  (setq lsp-pyright-multi-root nil))
+  (setq lsp-pyright-multi-root nil)
+  (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.venv\\'"))
 
 ;;; App
 ;;;; Calendar
