@@ -63,7 +63,27 @@ let
         { }
         otherPkgs;
 
-      fixes = { cmake-mode = straightBuild { pname = "cmake-mode"; }; };
+      fixes = rec {
+        cmake-mode = straightBuild { pname = "cmake-mode"; };
+        org-mode = prev.melpaBuild rec {
+          pname = "org-mode";
+          version = "9.5";
+          src = sources."${pname}";
+          recipe = pkgs.writeText "recipe" ''
+            (${pname} :fetcher github :repo "emacs-straight/org-mode"
+            :files ("*.el" "lisp/*.el" "contrib/lisp/*.el" "etc"))
+          '';
+          preBuild = ''
+            cat > org-version.el <<EOF
+            (fset 'org-release (lambda () "${version}"))
+            (fset 'org-git-version #'ignore)
+            (provide 'org-version)
+            EOF
+          '';
+        };
+        org-with-contrib = org-mode;
+        org = org-mode;
+      };
 
       overlays = doomMelpaEmacsOverlay // nixDoomEmacsOverrides // othersOverlay // fixes;
     in
