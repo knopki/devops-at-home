@@ -10,10 +10,10 @@
        doom-dashboard
        doom-quit
        hl-todo
+       (ligatures +fira +extra)
        modeline
        ophints
        (popup +defaults)
-       (pretty-code +fira)
        treemacs
        vc-gutter
        vi-tilde-fringe
