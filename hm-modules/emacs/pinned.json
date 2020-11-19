@@ -1000,6 +1000,14 @@
     "origin": "melpa"
   },
   {
+    "name": "eshell-syntax-highlighting",
+    "fetcher": "github",
+    "repo": "akreisher/eshell-syntax-highlighting",
+    "rev": "6cc32ee59d79d965e40269c764d90aa898252f0a",
+    "sha256": "09yjiamz3gvpchhzf424419q4gx7wybm2bcm5j2bw688qswd9rrc",
+    "origin": "melpa"
+  },
+  {
     "name": "eshell-up",
     "fetcher": "github",
     "repo": "peterwvj/eshell-up",
