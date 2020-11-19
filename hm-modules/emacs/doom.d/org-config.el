@@ -75,7 +75,8 @@ Customized by TITLE and DATE-FORMAT."
   (add-hook! 'org-mode-hook
     (defun my-org-mode-hook ()
       (setq display-line-numbers nil)
-      (mixed-pitch-mode t)))
+      (mixed-pitch-mode t)
+      (org-expiry-insinuate)))
 
   ;; Autosave (no sure is it worth it)
   (run-with-idle-timer 300 t 'org-save-all-org-buffers)
@@ -220,7 +221,6 @@ Customized by TITLE and DATE-FORMAT."
         org-agenda-default-appointment-duration 60))
 
 (use-package! org-super-agenda
-  :defer t
   :after org-agenda
   :init
   (setq org-agenda-custom-commands
@@ -355,8 +355,6 @@ Customized by TITLE and DATE-FORMAT."
 
 ;;; Expire old entries
 (use-package! org-expiry
-  :defer t
-  :after org
   :commands (org-expiry-insinuate
              org-expiry-deinsinuate
              org-expiry-insert-created
@@ -365,11 +363,8 @@ Customized by TITLE and DATE-FORMAT."
              org-expiry-archive-subtree
              org-expiry-process-entry
              org-expiry-process-entries)
-  :custom
-  (org-expiry-inactive-timestamps t "Create created/expired timestamps inactive")
   :config
-  (org-expiry-insinuate))
-
+  (setq org-expiry-inactive-timestamps t))
 
 (provide 'org-config)
 ;;; Local Variables:
