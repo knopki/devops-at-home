@@ -27,4 +27,5 @@
   ./wget.nix
   ./wine.nix
   ./xdg.nix
+  ./zathura.nix
 ]

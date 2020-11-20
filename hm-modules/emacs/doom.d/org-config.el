@@ -104,7 +104,12 @@ Customized by TITLE and DATE-FORMAT."
         org-refile-use-cache t
         org-superstar-special-todo-items t
         org-global-properties
-        '(("Effort_ALL". "0 0:10 0:20 0:30 1:00 2:00 3:00 4:00 6:00 8:00")))
+        '(("Effort_ALL". "0 0:10 0:20 0:30 1:00 2:00 3:00 4:00 6:00 8:00"))
+        org-file-apps '((auto-mode . emacs)
+                        ("\\.pdf::\\([0-9]+\\)?\\'" . "zathura %s -P %1")
+                        ("\\.pdf\\'" . "zathura %s")
+                        ("html" . default)
+                        (directory . emacs)))
   (add-to-list 'org-modules 'org-habit)
   (add-to-list 'org-modules 'org-checklist))
 

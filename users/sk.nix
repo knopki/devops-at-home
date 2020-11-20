@@ -114,6 +114,12 @@ in
       enable = true;
       configFile."user-dirs.locale".text = "en_US";
       configFile."mimeapps.list".force = true;
+      mimeApps = {
+        defaultApplications = {
+          "application/epub+zip" = [ "org.pwmt.zathura.desktop" ];
+          "application/pdf" = [ "org.pwmt.zathura.desktop" "org.gnome.Evince.desktop" ];
+        };
+      };
       userDirs = {
         enable = isWorkstation;
         desktop = "${selfHM.home.homeDirectory}/desktop";

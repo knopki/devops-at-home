@@ -103,7 +103,6 @@ with lib;
           ]
         )
       ) // {
-        "application/pdf" = "org.gnome.Evince.desktop";
         "x-scheme-handler/mailto" = "org.gnome.Geary.desktop";
       };
     };

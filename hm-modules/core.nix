@@ -23,6 +23,7 @@ in
     ssh.enable = true;
     tmux.enable = true;
     wget.enable = true;
+    zathura.enable = isWorkstation;
   };
 
   programs = {

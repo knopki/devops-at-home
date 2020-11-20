@@ -150,7 +150,10 @@ in
       VISUAL = "emacsclient -a='emacs -nw' -c";
     };
 
-    knopki.emacs.org-capture.enable = true;
+    knopki = {
+      emacs.org-capture.enable = true;
+      zathura.enable = true;
+    };
 
     programs.doom-emacs = {
       inherit (p) emacsPackagesOverlay;
