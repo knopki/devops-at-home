@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
+with lib;
 let
-  inherit (lib) mkBefore mkDefault mkIf;
   isGnome = config.services.xserver.desktopManager.gnome3.enable || config.programs.sway.enable;
 in
 {
-  imports = [];
+  imports = [ ];
 
   boot = {
     optimizeForWorkstation = true;
@@ -186,7 +186,7 @@ in
 
     sane = {
       enable = mkDefault true;
-      extraBackends = [];
+      extraBackends = [ ];
     };
   };
 
@@ -194,10 +194,15 @@ in
 
   networking = {
     firewall = {
-      interfaces.docker0 = {
-        allowedUDPPortRanges = [ { from = 1; to = 65535; } ];
-        allowedTCPPortRanges = [ { from = 1; to = 65535; } ];
-      };
+      interfaces =
+        let
+          # trust at least local docker interfaces
+          trustInterfaces = [ "docker0" "br_xod_default" ];
+          allowedAllPortRanges = genAttrs
+            [ "allowedUDPPortRanges" "allowedTCPPortRanges" ]
+            (name: [{ from = 1; to = 65535; }]);
+        in
+          (genAttrs trustInterfaces (name: allowedAllPortRanges));
     };
     networkmanager.enable = true;
   };
