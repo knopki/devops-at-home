@@ -85,8 +85,13 @@ Customized by TITLE and DATE-FORMAT."
   (add-hook! 'org-archive-hook #'org-save-all-org-buffers))
 
 ;;; Paths
-(after! org
-  (setq org-archive-location (concat org-directory "/archive/%s_archive::datetree/")))
+(setq! org-directory "~/org/"
+       org-archive-location (concat org-directory "archive/%s_archive::datetree/")
+       org-roam-directory (concat org-directory "roam/")
+       reftex-default-bibliography '("~/library/refs.bib")
+       bibtex-completion-library-path "~/library"
+       bibtex-completion-bibliography '("~/library/refs.bib")
+       bibtex-completion-notes-path (concat org-roam-directory "refs"))
 
 ;;; Trivial configuration
 (after! org
@@ -370,6 +375,73 @@ Customized by TITLE and DATE-FORMAT."
              org-expiry-process-entries)
   :config
   (setq org-expiry-inactive-timestamps t))
+
+;;; org-roam
+(after! org-roam
+  (setq org-roam-capture-templates
+        `(("d" "default" plain #'org-roam-capture--get-point
+           "%?"
+           ;; :file-name "%<%Y%m%d%H%M%S>-${slug}"
+           :file-name "${slug}"
+           :head ,(concat
+                   "#+TITLE: ${title}\n"
+                   "- tags :: \n"
+                   "- keywords :: ${keywords}\n\n")
+           :unnarrowed t))))
+
+;;; Bibtex and org-roam integration
+(setq +knopki/ref-template
+      (concat
+       "${title}\n"
+       "#+ROAM_KEY: ${=key=}\n"
+       "#+ROAM_TAGS: references ${keywords}\n"
+       "- tags :: \n"
+       "- keywords :: ${keywords}\n"
+       "- source :: ${url}\n\n"
+       "* ${title}\n"
+       "  :PROPERTIES:\n"
+       "  :CUSTOM_ID: ${=key=}\n"
+       "  :URL: ${url}\n"
+       "  :AUTHOR: ${author-or-editor}\n"
+       "  :END:\n\n"))
+
+(after! bibtex-completion
+  (add-to-list 'ivy-re-builders-alist '(ivy-bibtex . ivy--regex-plus))
+  (setq bibtex-completion-pdf-extension '(".pdf" ".djvu" ".epub" ".html")
+        bibtex-completion-bibliography reftex-default-bibliography)
+  (setq bibtex-completion-pdf-open-function 'org-open-file
+        bibtex-completion-notes-template-multiple-files +knopki/ref-template))
+
+(use-package! org-ref
+  :after (org-roam bibtex-completion)
+  :config
+  (require 'org-ref-ivy)
+  ;; same paths
+  (setq org-ref-pdf-directory bibtex-completion-library-path
+        org-ref-notes-directory bibtex-completion-notes-path
+        org-ref-default-bibliography bibtex-completion-bibliography)
+  (setq org-ref-prefer-bracket-links t
+        org-ref-get-pdf-filename-function #'org-ref-get-pdf-filename-helm-bibtex
+        org-ref-open-pdf-function 'org-ref-open-pdf-at-point))
+
+(use-package! org-roam-bibtex
+  :after org-roam
+  :hook (org-roam-mode . org-roam-bibtex-mode)
+  :commands (orb-insert orb-note-actions)
+  :config
+  (require 'orb-ivy)
+  (setq orb-insert-frontend 'ivy-bibtex
+        orb-note-actions-frontend 'ivy
+        orb-preformat-keywords
+        '("=key=" "title" "url" "file" "author-or-editor" "keywords")
+        orb-templates
+        `(("r" "ref" plain #'org-roam-capture--get-point
+           "%?"
+           :file-name "refs/${=key=}"
+           :head ,(concat "#+TITLE: " +knopki/ref-template)
+           :unnarrowed t
+           :immediate-finish t))))
+
 
 (provide 'org-config)
 ;;; Local Variables:

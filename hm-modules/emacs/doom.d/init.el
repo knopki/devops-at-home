@@ -40,6 +40,7 @@
        grammar
        :tools
        ansible
+       biblio
        debugger
        direnv
        (docker +lsp)
@@ -51,7 +52,6 @@
        magit
        make
        pass
-       pdf
        rgb
        tmux
        upload

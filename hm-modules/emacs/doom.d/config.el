@@ -295,7 +295,7 @@
 (setq nix-nixfmt-bin "nixpkgs-fmt")
 
 ;;;; Org
-(load (concat doom-private-dir "org-config.el"))
+(load! "org-config.el")
 
 ;;;; PlantUML
 (after! plantuml-mode

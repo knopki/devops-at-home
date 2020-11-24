@@ -8,6 +8,10 @@
 (package! russian-holidays :pin "b285a30f29d85c48e3ea4eb93972d34a090c167b")
 (package! wakatime-mode :pin "7626678315918bdbb81ede68149f20a7d97a928f")
 
+;; from https://github.com/hlissner/doom-emacs/pull/2888
+(package! org-ref :pin "2a91b6f67dc3116b0b688c1242ce67d90d833326")
+(package! org-roam-bibtex :pin "7c08a8928967a683666dbc1850e41537ab1fa01a")
+
 ;;; Local Variables:
 ;;; byte-compile-warnings: (not free-vars unresolved)
 ;;; End:
