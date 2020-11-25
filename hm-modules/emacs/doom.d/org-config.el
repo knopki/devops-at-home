@@ -113,6 +113,7 @@ Customized by TITLE and DATE-FORMAT."
         org-file-apps '((auto-mode . emacs)
                         ("\\.pdf::\\([0-9]+\\)?\\'" . "zathura %s -P %1")
                         ("\\.pdf\\'" . "zathura %s")
+                        ("epub" . "zathura %s")
                         ("html" . default)
                         (directory . emacs)))
   (add-to-list 'org-modules 'org-habit)
@@ -393,7 +394,7 @@ Customized by TITLE and DATE-FORMAT."
 (setq +knopki/ref-template
       (concat
        "${title}\n"
-       "#+ROAM_KEY: ${=key=}\n"
+       "#+ROAM_KEY: cite:${=key=}\n"
        "#+ROAM_TAGS: references ${keywords}\n"
        "- tags :: \n"
        "- keywords :: ${keywords}\n"
@@ -420,8 +421,7 @@ Customized by TITLE and DATE-FORMAT."
   (setq org-ref-pdf-directory bibtex-completion-library-path
         org-ref-notes-directory bibtex-completion-notes-path
         org-ref-default-bibliography bibtex-completion-bibliography)
-  (setq org-ref-prefer-bracket-links t
-        org-ref-get-pdf-filename-function #'org-ref-get-pdf-filename-helm-bibtex
+  (setq org-ref-get-pdf-filename-function #'org-ref-get-pdf-filename-helm-bibtex
         org-ref-open-pdf-function 'org-ref-open-pdf-at-point))
 
 (use-package! org-roam-bibtex
@@ -433,10 +433,9 @@ Customized by TITLE and DATE-FORMAT."
   (setq orb-insert-frontend 'ivy-bibtex
         orb-note-actions-frontend 'ivy
         orb-preformat-keywords
-        '("=key=" "title" "url" "file" "author-or-editor" "keywords")
+        '("=key=" "title" "url" "author-or-editor" "keywords")
         orb-templates
-        `(("r" "ref" plain #'org-roam-capture--get-point
-           "%?"
+        `(("r" "ref" plain #'org-roam-capture--get-point "%?"
            :file-name "refs/${=key=}"
            :head ,(concat "#+TITLE: " +knopki/ref-template)
            :unnarrowed t
