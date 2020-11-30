@@ -12,6 +12,7 @@ let
       inherit system;
 
       specialArgs = {
+        inherit inputs;
         usr = { inherit utils; };
       };
 

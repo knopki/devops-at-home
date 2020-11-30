@@ -1,6 +1,7 @@
-{ modulesPath, lib, pkgs, self, utils, ... }@args:
+{ modulesPath, lib, pkgs, self, inputs, ... }@args:
 with lib;
 let
+  hwModules = inputs.nixos-hardware.nixosModules;
   luksCommon = {
     preLVM = true;
     allowDiscards = true;
@@ -10,16 +11,13 @@ let
     fallbackToPassword = true;
   };
   swapDevice = "/dev/mapper/nvme--vg-swap";
-  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-    export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec -a "$0" "$@"
-  '';
 in
 {
   imports = [
+    hwModules.common-cpu-intel
+    hwModules.common-gpu-nvidia
+    hwModules.common-pc-laptop
+    hwModules.common-pc-ssd
     ../profiles/workstation.nix
   ];
 
@@ -81,7 +79,6 @@ in
       }
     '';
   };
-  environment.systemPackages = with pkgs; [ nvidia-offload ];
 
   fileSystems = {
     "/" = {
@@ -101,17 +98,15 @@ in
   };
 
   hardware = {
+    cpu.intel.updateMicrocode = true;
     opengl = {
       enable = true;
       driSupport32Bit = true;
-      extraPackages = with pkgs; [
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
       extraPackages32 = with pkgs.pkgsi686Linux; [
         libva
+        libvdpau-va-gl
         vaapiIntel
+        vaapiVdpau
       ];
     };
     nvidia = {
@@ -119,8 +114,6 @@ in
       prime = {
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
-        # sync.enable = true;
-        offload.enable = true;
       };
       powerManagement.enable = true;
     };
@@ -152,7 +145,6 @@ in
   nix.maxJobs = lib.mkDefault 8;
 
   services = {
-    fstrim.enable = true;
     logind = {
       lidSwitch = "suspend-then-hibernate";
       lidSwitchExternalPower = "suspend";
@@ -160,17 +152,30 @@ in
         InhibitDelayMaxSec=10
       '';
     };
+
+    # broken: stuck at 800MHz
+    thermald.enable = false;
+
     tlp = {
-      enable = true;
       settings = {
-        TLP_DEFAULT_MODE = "BAT";
-        CPU_HWP_ON_BAT = "balance_power";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        DISK_IOSCHED = "noop cfq";
-        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = "bluetooth wwan";
-        DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi wwan";
-        DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi wwan";
+        TLP_ENABLE = "1";
+        SOUND_POWER_SAVE_ON_BAT = "0";
+        DISK_IOSCHED = "mq-deadline mq-deadline";
+        INTEL_GPU_MIN_FREQ_ON_AC = "600";
+        INTEL_GPU_MIN_FREQ_ON_BAT = "350";
+        INTEL_GPU_MAX_FREQ_ON_AC = "1050";
+        INTEL_GPU_MAX_FREQ_ON_BAT = "1050";
+        INTEL_GPU_BOOST_FREQ_ON_AC = "1050";
+        INTEL_GPU_BOOST_FREQ_ON_BAT = "1050";
         WOL_DISABLE = "Y";
+        CPU_BOOST_ON_AC = "1";
+        CPU_BOOST_ON_BAT = "0";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+        DEVICES_TO_ENABLE_ON_STARTUP="wwan";
+        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = "bluetooth";
+        DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi";
+        DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi";
       };
     };
     udev = {
@@ -187,9 +192,17 @@ in
           KEYBOARD_KEY_96=f18             # left column 5
       '';
     };
+    # broken after bios upgraded 1.7.0 -> 1.11.0
+    # undervolt = {
+    #   enable = true;
+    #   verbose = true;
+    #   temp = 90;
+    #   useTimer = true;
+    #   coreOffset = -175;
+    #   uncoreOffset = -???;
+    # };
     xserver = {
       displayManager.gdm.nvidiaWayland = true;
-      videoDrivers = [ "nvidia" ];
     };
     zerotierone = {
       enable = true;

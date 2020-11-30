@@ -57,7 +57,7 @@ in
                 critical-threshold = 80;
               } // (
                 if (nixosConfig.meta.machine == "alien") then {
-                  thermal-zone = 1;
+                  hwmon-path = "/sys/class/hwmon/hwmon0/temp1_input";
                 } else
                   {}
               );

@@ -294,7 +294,6 @@ in
       };
       layout = "us,ru";
       libinput = {
-        enable = true;
         sendEventsMode = "disabled-on-external-mouse";
         middleEmulation = false;
         naturalScrolling = true;
