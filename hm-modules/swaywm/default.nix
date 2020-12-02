@@ -48,6 +48,7 @@ in
       libnotify # notify-send support
       networkmanager_dmenu # connect to some connection
       networkmanagerapplet # GUT network setting
+      slurp # select screen area for wf-recorder or grim
       swaylock-effects # use this instead of swaylock
       waypipe # run and and stream remote wayland app over ssh
       wdisplays # GUI outputs management
