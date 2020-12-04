@@ -121,12 +121,6 @@ in
 
 
   knopki = {
-    services.azire-vpn = {
-      enabled = true;
-      ips = [ "10.10.1.112/19" "2a03:8600:1001:4000::171/64" ];
-      publicKey = "T28Qn5VFzT4wiwEPd7DscwcP3Rsmq23QcnjH1N5G/wc=";
-      endpoint = "se1.wg.azirevpn.net:51820";
-    };
     users = {
       root.enable = true;
       sk.enable = true;

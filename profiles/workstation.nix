@@ -194,6 +194,7 @@ in
 
   networking = {
     firewall = {
+      checkReversePath = mkDefault "loose";
       interfaces =
         let
           # trust at least local docker interfaces
@@ -202,9 +203,14 @@ in
             [ "allowedUDPPortRanges" "allowedTCPPortRanges" ]
             (name: [{ from = 1; to = 65535; }]);
         in
-          (genAttrs trustInterfaces (name: allowedAllPortRanges));
+        (genAttrs trustInterfaces (name: allowedAllPortRanges));
     };
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      dns = "systemd-resolved";
+    };
+    useNetworkd = true;
+    wireguard.enable = true;
   };
 
   nix = {
@@ -284,6 +290,7 @@ in
       enable = true;
       drivers = with pkgs; [ cups-kyocera gutenprint ];
     };
+    resolved.enable = true;
     trezord.enable = true;
     xserver = {
       enable = true;
