@@ -46,7 +46,6 @@ in
   config = mkIf config.knopki.swaywm.enable {
     home.packages = with pkgs; [
       libnotify # notify-send support
-      networkmanager_dmenu # connect to some connection
       networkmanagerapplet # GUT network setting
       slurp # select screen area for wf-recorder or grim
       swaylock-effects # use this instead of swaylock
@@ -299,20 +298,6 @@ in
           RestartSec = "1";
         };
         Install = { WantedBy = [ "sway-session.target" ]; };
-      };
-    };
-
-    xdg.configFile = {
-      "networkmanager-dmenu/config.ini".text = generators.toINI { } {
-        dmenu = {
-          dmenu_command = "${pkgs.rofi}/bin/rofi";
-          pinentry = "${pkgs.pinentry-gnome}/bin/pinentry-gnome3";
-          rofi_highlight = "True";
-          wifi_chars = "▂▄▆█";
-          list_saved = "True";
-        };
-        dmenu_passphrase = { rofi_obscure = "True"; };
-        editor = { terminal = alacrittyBin; gui_if_available = "True"; };
       };
     };
   };

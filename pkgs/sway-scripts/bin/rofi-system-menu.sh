@@ -17,7 +17,6 @@ readonly OPTIONS=(
 	"<u>Lock</u> screen"
 	"<u>Reload</u> Sway config"
 	"<u>Kill</u> process"
-	"<u>Network</u> menu"
 	"Manage <u>services</u>"
 	"<u>Suspend</u> (RAM)"
 	"<u>Hibernate</u> (HDD)"
@@ -41,7 +40,6 @@ case "$SELECTION" in
 'lock') swaymsg exec loginctl lock-session ;;
 'reboot') systemctl reboot -i ;;
 'reload') swaymsg reload ;;
-'network') swaymsg exec networkmanager_dmenu ;;
 'shutdown') systemctl poweroff -i ;;
 'suspend') systemctl suspend -i ;;
 'hibernate') systemctl hibernate -i ;;
