@@ -132,6 +132,20 @@ in
   networking = {
     hostId = "ff0b9d65";
     hostName = "alien";
+    hosts = {
+      "127.0.0.84" = [
+        "adminer.xod.loc"
+        "api.xod.loc"
+        "auth.xod.loc"
+        "compile.xod.loc"
+        "mail.xod.loc"
+        "mqtt.xod.loc"
+        "pm.xod.loc"
+        "releases.xod.loc"
+        "swagger-ui.xod.loc"
+        "xod.loc"
+      ];
+    };
     search = [ "1984.run" ];
     firewall.allowedTCPPorts = [ 8080 ];
   };
