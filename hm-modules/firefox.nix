@@ -38,7 +38,7 @@ with lib;
             "privacy.resistFingerprinting" = true;
             "privacy.trackingprotection.cryptomining.enabled" = true;
             "privacy.trackingprotection.fingerprinting.enabled" = true;
-            # "extensions.pocket.enabled" = false;
+            "extensions.pocket.enabled" = false;
           };
         };
       };
