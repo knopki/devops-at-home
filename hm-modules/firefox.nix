@@ -42,8 +42,6 @@ with lib;
           };
         };
       };
-
-      enableAdobeFlash = true;
     };
 
     xdg.mimeApps = mkIf config.knopki.firefox.mime {
