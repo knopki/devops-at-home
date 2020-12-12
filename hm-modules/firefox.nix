@@ -3,7 +3,6 @@ with lib;
 {
   options.knopki.firefox = {
     enable = mkEnableOption "firefox configuration";
-    mime = mkEnableOption "associate firefox with file types and schemas";
   };
 
   config = mkIf config.knopki.firefox.enable {
@@ -42,25 +41,6 @@ with lib;
           };
         };
       };
-    };
-
-    xdg.mimeApps = mkIf config.knopki.firefox.mime {
-      enable = true;
-      defaultApplications = listToAttrs (
-        map (x: nameValuePair x "firefox.desktop") [
-          "application/x-extension-htm"
-          "application/x-extension-html"
-          "application/x-extension-shtml"
-          "application/x-extension-xht"
-          "application/x-extension-xhtml"
-          "application/xhtml+xml"
-          "application/xml"
-          "text/html"
-          "x-scheme-handler/ftp"
-          "x-scheme-handler/http"
-          "x-scheme-handler/https"
-        ]
-      );
     };
   };
 }

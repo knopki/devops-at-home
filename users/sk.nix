@@ -80,14 +80,8 @@ in
       chromium.enable = isWorkstation;
       direnv.enable = true;
       emacs.enable = isWorkstation;
-      firefox = {
-        enable = isWorkstation;
-        mime = isWorkstation;
-      };
-      gnome = {
-        enable = isWorkstation;
-        mime = isWorkstation;
-      };
+      firefox.enable = isWorkstation;
+      gnome.enable = isWorkstation;
       minikube.enable = isWorkstation;
       neovim.enable = true;
       npmrc.enable = isWorkstation;
@@ -118,7 +112,44 @@ in
         defaultApplications = {
           "application/epub+zip" = [ "org.pwmt.zathura.desktop" ];
           "application/pdf" = [ "org.pwmt.zathura.desktop" "org.gnome.Evince.desktop" ];
-        };
+          "x-scheme-handler/mailto" = "org.gnome.Geary.desktop";
+        } // (listToAttrs (map (x: nameValuePair x [ "org.gnome.eog.desktop" ]) [
+          "image/bmp"
+          "image/gif"
+          "image/jpeg"
+          "image/jpg"
+          "image/pjpeg"
+          "image/png"
+          "image/svg+xml"
+          "image/svg+xml-compressed"
+          "image/tiff"
+          "image/vnd.wap.wbmp"
+          "image/x-bmp"
+          "image/x-gray"
+          "image/x-icb"
+          "image/x-icns"
+          "image/x-ico"
+          "image/x-pcx"
+          "image/x-png"
+          "image/x-portable-anymap"
+          "image/x-portable-bitmap"
+          "image/x-portable-graymap"
+          "image/x-portable-pixmap"
+          "image/x-xbitmap"
+          "image/x-xpixmap"
+        ])) // (listToAttrs (map (x: nameValuePair x "firefox.desktop") [
+          "application/x-extension-htm"
+          "application/x-extension-html"
+          "application/x-extension-shtml"
+          "application/x-extension-xht"
+          "application/x-extension-xhtml"
+          "application/xhtml+xml"
+          "application/xml"
+          "text/html"
+          "x-scheme-handler/ftp"
+          "x-scheme-handler/http"
+          "x-scheme-handler/https"
+        ]));
       };
       userDirs = {
         enable = isWorkstation;

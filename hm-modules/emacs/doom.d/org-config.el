@@ -110,12 +110,17 @@ Customized by TITLE and DATE-FORMAT."
         org-superstar-special-todo-items t
         org-global-properties
         '(("Effort_ALL". "0 0:10 0:20 0:30 1:00 2:00 3:00 4:00 6:00 8:00"))
-        org-file-apps '((auto-mode . emacs)
-                        ("\\.pdf::\\([0-9]+\\)?\\'" . "zathura %s -P %1")
+        org-file-apps '(("\\.pdf::\\([0-9]+\\)?\\'" . "zathura %s -P %1")
                         ("\\.pdf\\'" . "zathura %s")
                         ("epub" . "zathura %s")
                         ("html" . default)
-                        (directory . emacs)))
+                        ("png" . "imv %s")
+                        ("jpg" . "imv %s")
+                        ("jpeg" . "imv %s")
+                        ("gif" . "imv %s")
+                        (directory . emacs)
+                        (remote . emacs)
+                        (auto-mode . emacs)))
   (add-to-list 'org-modules 'org-habit)
   (add-to-list 'org-modules 'org-checklist))
 
