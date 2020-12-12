@@ -5,6 +5,7 @@ let
   pinnedPackagesAttr = foldr (a: b: b // { "${a.name}" = a; }) { } pinnedPackages;
   pkgAliases = [
     { pname = "evil-org-mode"; ename = "evil-org"; }
+    { pname = "reveal.js"; ename = "revealjs"; }
   ];
 
   mkPkgSrc = pkg: ({ src = null; } // (optionalAttrs (pkg.fetcher == "git") {

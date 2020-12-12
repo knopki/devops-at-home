@@ -68,7 +68,7 @@
        lua
        (markdown +grip)
        nix
-       (org +dragndrop +gnuplot +pretty +roam)
+       (org +dragndrop +gnuplot +present +pretty +roam)
        php
        plantuml
        (python +lsp +pyright)
