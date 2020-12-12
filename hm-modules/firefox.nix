@@ -18,11 +18,9 @@ with lib;
             "browser.safebrowsing.allowOverride" = false;
             "browser.safebrowsing.blockedURIs.enabled" = false;
             "browser.safebrowsing.downloads.enabled" = false;
-            "browser.safebrowsing.downloads.remote.block_dangerous_host" =
-              false;
             "browser.safebrowsing.downloads.remote.block_dangerous" = false;
-            "browser.safebrowsing.downloads.remote.block_potentially_unwanted" =
-              false;
+            "browser.safebrowsing.downloads.remote.block_dangerous_host" = false;
+            "browser.safebrowsing.downloads.remote.block_potentially_unwanted" = false;
             "browser.safebrowsing.downloads.remote.block_uncommon" = false;
             "browser.safebrowsing.downloads.remote.enabled" = false;
             "browser.safebrowsing.malware.enabled" = false;
@@ -31,13 +29,13 @@ with lib;
             "browser.search.region" = "RU";
             "browser.search.suggest.enabled" = true;
             "browser.startup.page" = 3;
+            "extensions.pocket.enabled" = false;
             "media.peerconnection.enabled" = false;
             "network.security.esni.enabled" = true;
             "network.trr.mode" = 2; # prefer DNS-over-HTTPS
             "privacy.resistFingerprinting" = true;
             "privacy.trackingprotection.cryptomining.enabled" = true;
             "privacy.trackingprotection.fingerprinting.enabled" = true;
-            "extensions.pocket.enabled" = false;
           };
         };
       };
