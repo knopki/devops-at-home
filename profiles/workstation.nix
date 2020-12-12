@@ -31,6 +31,7 @@ in
 
     systemPackages = with pkgs; [
       anki
+      asciinema
       blender
       borgbackup
       cachix
