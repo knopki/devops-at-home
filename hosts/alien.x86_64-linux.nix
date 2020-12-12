@@ -180,7 +180,7 @@ in
         CPU_BOOST_ON_BAT = "0";
         CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
         CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-        DEVICES_TO_ENABLE_ON_STARTUP="wwan";
+        DEVICES_TO_ENABLE_ON_STARTUP = "wwan";
         DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = "bluetooth";
         DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi";
         DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi";
