@@ -326,6 +326,10 @@
     :config
     (appendq! holiday-local-holidays russian-holidays)))
 
+;;; Safe local variables
+(setq safe-local-variable-values '((lsp-clients-flow-server . nil)
+                                   (lsp-yaml-format-enable . nil)))
+
 ;;; Local Variables:
 ;;; byte-compile-warnings: (not free-vars unresolved)
 ;;; End:
