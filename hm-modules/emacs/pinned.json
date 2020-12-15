@@ -2867,8 +2867,8 @@
     "name": "org-ql",
     "fetcher": "github",
     "repo": "alphapapa/org-ql",
-    "rev": "00800556907408ee11a23de3a4982061d08d3b85",
-    "sha256": "08xax4fp9rzi8iimkyw2gvp2rd0lgb2f83qrhhnhnc1kgpkdl6y1",
+    "rev": "3924b023e0f1e8fa93cfa79bdd71f9f0c0fb4679",
+    "sha256": "14nsy2dbln3m5bpqzyfqycn18sb3qh407hjbkk1l0x2nqs3lrkqn",
     "origin": "melpa"
   },
   {
@@ -2883,8 +2883,8 @@
     "name": "org-ref",
     "fetcher": "github",
     "repo": "jkitchin/org-ref",
-    "rev": "2a91b6f67dc3116b0b688c1242ce67d90d833326",
-    "sha256": "13169wjklras47hyazdyqnnib9hbfsw7v63dvdv8i4gp0f1ja5ih",
+    "rev": "120509c38929cc25d814e9a42092c44cb34ec34e",
+    "sha256": "0l1il3dh4rcw5ylia2ywszmj6fpdfbvmr496scsdw4w0skrjpljw",
     "origin": "melpa"
   },
   {
@@ -2915,8 +2915,8 @@
     "name": "org-super-agenda",
     "fetcher": "github",
     "repo": "alphapapa/org-super-agenda",
-    "rev": "3264255989021b8563ea42b5d26acbc2a024f14d",
-    "sha256": "0mgf027qhl2iqzqjjb0b7svzpq1kzalnn06zg9sbl93bd07alamc",
+    "rev": "857783ecd3dbe35c72b4eca046e0a5dc64041fdf",
+    "sha256": "10l9h2n09cql4ih7nc0ma3ghdsq9l5v9xlj1lg7kq67icdwjlsvy",
     "origin": "melpa"
   },
   {
