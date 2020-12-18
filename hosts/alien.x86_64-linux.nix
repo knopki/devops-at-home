@@ -142,6 +142,7 @@ in
         "mqtt.xod.loc"
         "pm.xod.loc"
         "releases.xod.loc"
+        "rethinkdb.xod.loc"
         "swagger-ui.xod.loc"
         "xod.loc"
       ];
