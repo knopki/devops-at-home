@@ -691,8 +691,8 @@
     "name": "dap-mode",
     "fetcher": "github",
     "repo": "emacs-lsp/dap-mode",
-    "rev": "e582ff90c104703ed65c1f3174d4c4690e9cf1fd",
-    "sha256": "05rcpxg982amzk8abrrhzig2ax6rwm2bj1xvy29r8imvpayfm14f",
+    "rev": "041db8eb7f0ceb9477ffff1730b5940814001158",
+    "sha256": "0cjr2dhqh8k76il9iiajszr7vra1phhksf0zw946chg7sa12chh1",
     "origin": "melpa"
   },
   {
@@ -1579,8 +1579,8 @@
     "name": "forge",
     "fetcher": "github",
     "repo": "magit/forge",
-    "rev": "844aa6d52792dd56a14f1759312c96a3de9b988e",
-    "sha256": "1jw62dx8iwql0qk76n6w0iw0ni6v1xrn4r9crhymngdi39ir5sfw",
+    "rev": "953764d2bb57b6bbaec4a2048722050fd15732db",
+    "sha256": "1hyy7114dgpnfvcj1n3l48l0zygx4ch0808l4lb43rihcpamhj49",
     "origin": "melpa"
   },
   {
@@ -1659,8 +1659,8 @@
     "name": "git-commit",
     "fetcher": "github",
     "repo": "magit/magit",
-    "rev": "2fb3bf782ccf5652b98f8de989f014749473eacf",
-    "sha256": "0whcbl550jsgykxg6h7i515j1zw7yk19l6hgz43628kaqg73f76s",
+    "rev": "acfe22ab60a56c61aae3ca6d4f2b7b826fe3b071",
+    "sha256": "1189wk0a3hzad4cqxr18gjla059nay3ja590v5mdrfrvv2fzmv7m",
     "origin": "melpa"
   },
   {
@@ -2219,8 +2219,8 @@
     "name": "js2-mode",
     "fetcher": "github",
     "repo": "mooz/js2-mode",
-    "rev": "ffb70990c1a4d4616034cb810b4ce36953aecb47",
-    "sha256": "1c9nchiq8n80qq2dqmcwmg2cpc6p5gwri26l885qxbc9vw201m4r",
+    "rev": "f7816bdd3e8e84ed1d64b6a13c9ba488363b7e91",
+    "sha256": "05j8m9bdljzscbl343aqqfcjxgvshrlygzqhd2wi8089mby7f59y",
     "origin": "melpa"
   },
   {
@@ -2395,8 +2395,8 @@
     "name": "lsp-mode",
     "fetcher": "github",
     "repo": "emacs-lsp/lsp-mode",
-    "rev": "e1c42412eac0d742196efe64a82699326e72b391",
-    "sha256": "0p0skmcimjvfnbkngzw9g3bnn5p5gzv5gbxjqiq3zy9ply9yz1wf",
+    "rev": "61443f32531d1e94026c379319c99f21414ee3e7",
+    "sha256": "05ic8xdvq1gpx4m1nlbhq6wfmqb77grx0swy6djjbazi0fl7nfqr",
     "origin": "melpa"
   },
   {
@@ -2427,8 +2427,8 @@
     "name": "lsp-ui",
     "fetcher": "github",
     "repo": "emacs-lsp/lsp-ui",
-    "rev": "b1693d610c4d2c44305eba2719e8d4097fdcdcb8",
-    "sha256": "0irb1xcifacv5736yiv0ifnmw1fmhpwzhb0xcg9ksfa6xhvl8fq9",
+    "rev": "49bc5134c15d92b866c389c16e8e551a9285961a",
+    "sha256": "0if4rkpym0zp44m4hrw24yzg6wzrpz7nvvgqq2s1limjjsw1rzk1",
     "origin": "melpa"
   },
   {
@@ -2451,8 +2451,8 @@
     "name": "magit",
     "fetcher": "github",
     "repo": "magit/magit",
-    "rev": "2e0c697188ca728c240b5aa677f4a5e853692b6e",
-    "sha256": "0p65rkb84196qf5p27cxp9cf01vhmkfv37xf02r64dj3acdfg240",
+    "rev": "acfe22ab60a56c61aae3ca6d4f2b7b826fe3b071",
+    "sha256": "1189wk0a3hzad4cqxr18gjla059nay3ja590v5mdrfrvv2fzmv7m",
     "origin": "melpa"
   },
   {
@@ -3499,8 +3499,8 @@
     "name": "rustic",
     "fetcher": "github",
     "repo": "brotzeit/rustic",
-    "rev": "91ad5db27b86bb2ba6f3019b764d0f45ec93f484",
-    "sha256": "02d6kn7lj1ql6yycvprzdicxb0n6ilb2xbc2qq9q7yn1ibyfymdj",
+    "rev": "f7d5ac0c930ae435421f3f5bc827e8c61ce73662",
+    "sha256": "0bi9xcqm1rzn1l12n5m7pcwb27707xrxg4nhn37y6zcx22dhlp05",
     "origin": "melpa"
   },
   {
