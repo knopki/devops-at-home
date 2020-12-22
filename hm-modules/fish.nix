@@ -19,10 +19,10 @@ in
           {
             name = "colored_man_pages.fish";
             src = pkgs.fetchFromGitHub {
-              owner = "patrickf3139";
+              owner = "PatrickF1";
               repo = "colored_man_pages.fish";
-              rev = "b3048412273117c801ed9ae3bb253f3b6df63a8b";
-              sha256 = "sha256-OkaizgqK1YMt5KfsTsiw2YnaSYqZtUP712Kk8fUD4mM=";
+              rev = "b0e89f8d028388643dec59c6bc349b1e611da9bf";
+              sha256 = "sha256-2LadTaxk+KvSEmsEXHjO0d6maTfFeOv7ew4/8HnDo3w=";
             };
           }
           {
@@ -30,8 +30,8 @@ in
             src = pkgs.fetchFromGitHub {
               owner = "evanlucas";
               repo = "fish-kubectl-completions";
-              rev = "dadbc6e8d32652e0e5c49a42cdb38c0a667b3dfb";
-              sha256 = "sha256-iE9sfZayRrFB2r9ywSAWHqmIWDxBhSD34p0dgZvh1Qs=";
+              rev = "da5fa3c0dc254d37eb4b8e73a86d07c7bcebe637";
+              sha256 = "sha256-7pR5/aQCkHct9lBx3u3nHmCAuo/V7XN1lC+ZvlRnNCo=";
             };
           }
         ];
@@ -54,8 +54,8 @@ in
           # keybindings
           set -g fish_key_bindings fish_hybrid_key_bindings
 
-          # add fish man pages
-          set -xg MANPATH "${pkgs.fish}/share/fish/man:$MANPATH"
+          # disable greeting
+          set -u fish_greeting ""
 
           # base16 one dark theme
           sh ${base16-shell}/scripts/base16-onedark.sh
