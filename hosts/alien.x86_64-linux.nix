@@ -140,6 +140,7 @@ in
         "compile.xod.loc"
         "mail.xod.loc"
         "mqtt.xod.loc"
+        "neo4j.xod.loc"
         "pm.xod.loc"
         "releases.xod.loc"
         "rethinkdb.xod.loc"
