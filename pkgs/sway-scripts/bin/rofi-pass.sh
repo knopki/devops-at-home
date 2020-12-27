@@ -36,15 +36,15 @@ case "$choice" in
 	echo -en "$content" |
 		head -n 1 |
 		awk 'BEGIN{ORS=""} {print; exit}' |
-		wl-copy -o
+		wl-copy
 	;;
 "<b>multiline</b>")
-	echo -en "$content" | wl-copy -o
+	echo -en "$content" | wl-copy
 	;;
 "<b>OTP</b>")
 	pass otp "$name" |
 		awk 'BEGIN{ORS=""} {print; exit}' |
-		wl-copy -o
+		wl-copy
 	;;
 *)
 	value=$(echo -en "$content" |
@@ -53,7 +53,7 @@ case "$choice" in
 	if [ "$choice" = "url" ]; then
 		xdg-open "$value"
 	else
-		echo -en "$value" | wl-copy -o
+		echo -en "$value" | wl-copy
 	fi
 	;;
 esac
