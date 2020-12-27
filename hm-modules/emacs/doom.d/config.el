@@ -46,6 +46,11 @@
       ;; Don't clobber symlinks.
       backup-by-copying t)
 
+;;;; Recenf
+(after! recentf
+  (recentf-load-list)
+  (run-at-time nil (* 60 60) #'recentf-save-list)) ; every 60 mins
+
 ;;; Completion
 ;;;; Company
 
