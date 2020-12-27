@@ -191,7 +191,7 @@ in
             "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/rofi-system-menu";
             "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort > /dev/null";
             "${modifier}+o" = mkIf config.knopki.emacs.org-capture.enable "mode org-capture";
-            "${modifier}+h" = "exec ${pkgs.clipman}/bin/clipman pick -t rofi";
+            "${modifier}+Shift+c" = "exec ${pkgs.clipman}/bin/clipman pick -t rofi";
           } // optionalAttrs (nixosConfig.meta.machine == "alien") {
             "XF86TouchpadToggle" = "input type:touchpad events toggle enabled disabled";
             # More Alienware keys: XF86KbdLightOnOff, XF86KbdLightOnOff, XF86Tools, XF86Launch5-9
