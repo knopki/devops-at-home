@@ -45,6 +45,7 @@ in
 
   config = mkIf config.knopki.swaywm.enable {
     home.packages = with pkgs; [
+      clipman # clipboard manager
       libnotify # notify-send support
       networkmanagerapplet # GUT network setting
       slurp # select screen area for wf-recorder or grim
@@ -131,6 +132,9 @@ in
             command = "${systemctlBin} --user import-environment HOME I3SOCK PATH SWAYSOCK USER WAYLAND_DISPLAY; ${systemctlBin} --user start sway-session.target";
           }
           {
+            command = "${pkgs.wl-clipboard}/bin/wl-paste -t text --watch ${pkgs.clipman}/bin/clipman store -P";
+          }
+          {
             command = "${pkgs.sway-scripts}/bin/import-gsettings gtk-theme:gtk-theme-name icon-theme:gtk-icon-theme-name cursor-theme:gtk-cursor-theme-name";
             always = true;
           }
@@ -187,6 +191,7 @@ in
             "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/rofi-system-menu";
             "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort > /dev/null";
             "${modifier}+o" = mkIf config.knopki.emacs.org-capture.enable "mode org-capture";
+            "${modifier}+h" = "exec ${pkgs.clipman}/bin/clipman pick -t rofi";
           } // optionalAttrs (nixosConfig.meta.machine == "alien") {
             "XF86TouchpadToggle" = "input type:touchpad events toggle enabled disabled";
             # More Alienware keys: XF86KbdLightOnOff, XF86KbdLightOnOff, XF86Tools, XF86Launch5-9
