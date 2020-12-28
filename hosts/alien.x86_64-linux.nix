@@ -144,6 +144,7 @@ in
         "pm.xod.loc"
         "releases.xod.loc"
         "rethinkdb.xod.loc"
+        "s3.xod.loc"
         "swagger-ui.xod.loc"
         "xod.loc"
       ];
