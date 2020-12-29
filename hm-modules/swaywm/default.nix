@@ -135,8 +135,6 @@ in
             command = "${pkgs.wl-clipboard}/bin/wl-paste -t text --watch ${pkgs.clipman}/bin/clipman store -P";
           }
           {
-            command = "${pkgs.sway-scripts}/bin/import-gsettings gtk-theme:gtk-theme-name icon-theme:gtk-icon-theme-name cursor-theme:gtk-cursor-theme-name";
-            always = true;
           }
           { command = "${pkgs.dex}/bin/dex -ae Sway"; }
           { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
