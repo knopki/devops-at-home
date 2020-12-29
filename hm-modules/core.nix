@@ -36,14 +36,27 @@ in
   systemd.user.sessionVariables = filterAttrs
     (
       k: v: builtins.elem k [
+        "EDITOR"
+        "GIO_EXTRA_MODULES"
+        "GTK_USE_PORTAL"
+        "LANG"
         "LC_MONETARY"
         "LC_TIME"
+        "NAUTILUS_EXTENSION_DIR"
+        "NIX_GSETTINGS_OVERRIDES_DIR"
         "PASSWORD_STORE_DIR"
         "PASSWORD_STORE_KEY"
+        "QT_QPA_PLATFORMTHEME"
+        "SSH_ASKPASS"
         "SSH_AUTH_SOCK"
+        "VISUAL"
+        "XCURSOR_PATH"
         "XDG_CACHE_HOME"
+        "XDG_CONFIG_DIRS"
         "XDG_CONFIG_HOME"
+        "XDG_DATA_DIRS"
         "XDG_DATA_HOME"
+        "XDG_DESKTOP_PORTAL_DIR"
       ]
-    ) config.home.sessionVariables;
+    ) (nixosConfig.environment.variables // config.home.sessionVariables);
 }

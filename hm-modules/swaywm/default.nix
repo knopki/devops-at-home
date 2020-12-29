@@ -47,7 +47,6 @@ in
     home.packages = with pkgs; [
       clipman # clipboard manager
       libnotify # notify-send support
-      networkmanagerapplet # GUT network setting
       slurp # select screen area for wf-recorder or grim
       swaylock-effects # use this instead of swaylock
       waypipe # run and and stream remote wayland app over ssh
@@ -61,6 +60,7 @@ in
     wayland.windowManager.sway = {
       enable = true;
       package = null; # use system
+      wrapperFeatures.gtk = true;
       config = {
         fonts = [ "Noto Sans 12" ];
         window = {
@@ -129,16 +129,13 @@ in
             always = true;
           }
           {
-            command = "${systemctlBin} --user import-environment HOME I3SOCK PATH SWAYSOCK USER WAYLAND_DISPLAY; ${systemctlBin} --user start sway-session.target";
+            command = "${pkgs.gnome3.gnome-settings-daemon}/libexec/gsd-xsettings";
           }
           {
             command = "${pkgs.wl-clipboard}/bin/wl-paste -t text --watch ${pkgs.clipman}/bin/clipman store -P";
           }
-          {
-          }
           { command = "${pkgs.dex}/bin/dex -ae Sway"; }
           { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
-          { command = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"; }
         ];
         gaps = {
           inner = 6;
@@ -236,9 +233,6 @@ in
       extraConfig = ''
         # hide cursor on idle
         seat * hide_cursor 8000
-
-        # Include other config parts
-        include ${config.xdg.configHome}/sway/config.d/*
       '';
     };
 
@@ -263,6 +257,7 @@ in
     };
 
     systemd.user.services = {
+      # lock screen on idle
       swayidle = {
         Unit = {
           Description = "Idle manager for Wayland";
@@ -286,6 +281,8 @@ in
         };
         Install = { WantedBy = [ "sway-session.target" ]; };
       };
+
+      # change opacity of unfocused windows
       sway-inactive-windows-transparency = {
         Unit = {
           Description = "Set opacity of onfocused windows in SwayWM";
@@ -303,5 +300,9 @@ in
         Install = { WantedBy = [ "sway-session.target" ]; };
       };
     };
+
+    # Network Manager applet with appindicator in tray
+    services.network-manager-applet.enable = true;
+    xsession.preferStatusNotifierItems = true;
   };
 }

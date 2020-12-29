@@ -247,12 +247,12 @@ in
         export SDL_VIDEODRIVER=wayland
         # needs qt5.qtwayland in systemPackages
         export QT_QPA_PLATFORM=wayland-egl
-        export QT_QPA_PLATFORMTHEME=qt5ct
         export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         # Fix for some Java AWT applications (e.g. Android Studio),
         # use this if they aren't displayed properly:
         export _JAVA_AWT_WM_NONREPARENTING=1
         export MOZ_ENABLE_WAYLAND=1
+        export MOZ_DBUS_REMOTE=1
       '';
       wrapperFeatures.gtk = true;
     };
@@ -324,6 +324,6 @@ in
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
   };
 }
