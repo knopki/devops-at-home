@@ -166,7 +166,6 @@ in
 
     systemd.user.tmpfiles.rules = [
       "e ${selfHM.xdg.userDirs.download} - - - 30d"
-      "e ${selfHM.xdg.userDirs.download}/*.torrent - - - 1d"
       "e ${selfHM.xdg.userDirs.pictures}/screenshots - - - 30d"
     ];
   };
