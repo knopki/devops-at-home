@@ -164,7 +164,7 @@ in
     };
 
     systemd.user.sessionVariables = {
-      TERMINAL = "alacritty";
+      TERMINAL = "alacritty -e";
     };
     systemd.user.tmpfiles.rules = [
       "e ${selfHM.xdg.userDirs.download} - - - 30d"

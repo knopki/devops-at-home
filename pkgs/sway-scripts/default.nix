@@ -1,6 +1,29 @@
 { stdenv, pkgs, lib, wrapGAppsHook, makeWrapper, ... }:
 with lib;
 let
+  wofi-systemd = pkgs.rofi-systemd.overrideAttrs (o: rec {
+    wrapperPath = with stdenv.lib; makeBinPath (with pkgs; [
+      coreutils
+      gawk
+      jq
+      wofi
+      systemd
+      utillinux
+    ]);
+    buildInputs = [ makeWrapper ];
+
+    installPhase = ''
+      mkdir -p $out/bin
+      cp -a rofi-systemd $out/bin/wofi-systemd
+    '';
+
+    fixupPhase = ''
+      patchShebangs $out/bin
+      sed -i -E "s/rofi -dmenu/wofi -d/g" $out/bin/wofi-systemd
+      sed -i -E "s/ROFI_SYSTEMD_TERM/TERMINAL/g" $out/bin/wofi-systemd
+      wrapProgram $out/bin/wofi-systemd --prefix PATH : "${wrapperPath}"
+    '';
+  });
   internalPath = stdenv.lib.makeBinPath (
     with pkgs; [
       (pass.withExtensions (ext: with ext; [ pass-otp ]))
@@ -13,14 +36,15 @@ let
       grim
       jq
       libnotify
+      nodePackages.emoj
       procps
-      rofi
-      rofi-systemd
       slurp
       sway-contrib.grimshot
       sway-unwrapped
       systemd
       wl-clipboard
+      wofi
+      wofi-systemd
       xdg_utils
     ]
   );

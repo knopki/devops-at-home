@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 IFS="
 "
-
+: "${XDG_CACHE_HOME:=~/.cache}"
+CACHE=$XDG_CACHE_HOME/wofi-pass
 : {PASSWORD_STORE_DIR:-~/.password-store}
 
 # choose file
 readonly name=$(
 	find -L "$PASSWORD_STORE_DIR" -iname '*.gpg' -printf '%P\n' |
 		sed 's/\.gpg$//' |
-		rofi -p "pass" -no-auto-select -dmenu -i "$@"
+		wofi -k $CACHE -p "pass" -d -i "$@"
 )
 [ -n "${name:-}" ] || exit
 
@@ -28,7 +29,7 @@ for field in $fields; do
 	if [ "$field" != "otpauth" ]; then choices+="${field}\n"; fi
 done
 
-readonly choice=$(echo -en "$choices" | rofi -i -dmenu -markup-rows -p "what to copy")
+readonly choice=$(echo -en "$choices" | wofi -k /dev/null -i -d -m -p "what to copy")
 
 # do
 case "$choice" in

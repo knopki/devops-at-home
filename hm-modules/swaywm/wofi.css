@@ -1,0 +1,30 @@
+/* base16-wofi (https://sr.ht/~knezi/base16-wofi)
+ * Base16 wofi template by knezi
+ * OneDark scheme by Lalit Magant (http://github.com/tilal6991) */
+
+window {
+  background-color: #282c34;
+  color: #abb2bf;
+}
+
+#entry:nth-child(odd) {
+  background-color: #282c34;
+}
+
+#entry:nth-child(even) {
+  background-color: #353b45;
+}
+
+#entry:selected {
+  background-color: #3e4451;
+}
+
+#input {
+  background-color: #353b45;
+  color: #565c64;
+  border-color: #3e4451;
+}
+
+#input:focus {
+  border-color: #e5c07b;
+}

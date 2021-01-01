@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=""
+: "${XDG_CACHE_HOME:=~/.cache}"
+CACHE=$XDG_CACHE_HOME/wofi-screenshot-menu
 
 if [ $# = 0 ]; then
 	echo "Usage: $(basename $0) directory"
@@ -34,7 +36,7 @@ readonly OPTIONS=(
 
 readonly SELECTION=$(
 	printf "%s\n" "${OPTIONS[@]}" |
-		rofi -i -dmenu -markup-rows -p "Screenshot" |
+		wofi -k $CACHE -i -d -m -p "Screenshot" |
 		grep -o "<u>.*</u>" | sed 's/\(<u>\|<\/u>\)//g' |
 		tr '[:upper:]' '[:lower:]'
 )

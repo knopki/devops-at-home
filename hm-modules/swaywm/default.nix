@@ -32,14 +32,13 @@ let
   swaymsgBin = "${pkgs.sway}/bin/swaymsg";
   systemctlBin = "${pkgs.systemd}/bin/systemctl";
   swaylockCmd = "${pkgs.swaylock-effects}/bin/swaylock -f --screenshots --clock --effect-vignette 0.5:0.5 --effect-pixelate 24";
-
-  rofiAppMenuCmd = "${pkgs.rofi}/bin/rofi -modi 'run,drun' -show-icons -theme-str 'element-icon { size: 2.3ch;}'";
+  wofiBin = "${config.knopki.wofi.package}/bin/wofi";
 
   modifier = config.wayland.windowManager.sway.config.modifier;
   mkExecFlashNotify = msg: "exec ${notifySendBin} '${msg}' --expire-time 500";
 in
 {
-  imports = [ ./mako.nix ./rofi.nix ./waybar.nix ];
+  imports = [ ./mako.nix ./waybar.nix ];
 
   options.knopki.swaywm.enable = mkEnableOption "setup sway, bar, etc";
 
@@ -73,6 +72,10 @@ in
             {
               command = "fullscreen enable";
               criteria = { app_id = "telegramdesktop"; title = "^Media"; };
+            }
+            {
+              command = "floating enable, resize set width 850 px heigth 500 px";
+              criteria = { app_id = "qalculate-gtk"; };
             }
           ];
         };
@@ -143,7 +146,7 @@ in
           smartGaps = true;
           smartBorders = "no_gaps";
         };
-        menu = "${rofiAppMenuCmd} -show drun";
+        menu = "${wofiBin} -S drun";
         terminal = alacrittyBin;
         keybindings = mkOptionDefault (
           {
@@ -161,9 +164,9 @@ in
 
             "${modifier}+shift+f" = "focus mode_toggle";
 
-            "${modifier}+shift+d" = "exec ${rofiAppMenuCmd} -show run";
+            "${modifier}+shift+d" = "exec ${wofiBin} -S run";
 
-            "Mod1+Tab" = "exec ${pkgs.sway-scripts}/bin/rofi-window-switcher";
+            "Mod1+Tab" = "exec ${pkgs.sway-scripts}/bin/wofi-window-switcher";
 
             "${modifier}+n" = "exec ${makoctlBin} dismiss";
             "${modifier}+Shift+n" = "exec ${makoctlBin} dismiss --all";
@@ -179,14 +182,14 @@ in
             "--locked XF86AudioNext" = "exec ${playerctlBin} next";
             "--locked XF86AudioPrev" = "exec ${playerctlBin} previous";
 
-            "Print" = "exec ${pkgs.sway-scripts}/bin/rofi-screenshot-menu \"${config.xdg.userDirs.pictures}/screenshots\"";
+            "Print" = "exec ${pkgs.sway-scripts}/bin/wofi-screenshot-menu \"${config.xdg.userDirs.pictures}/screenshots\"";
             "XF86Display" = "exec ${pkgs.wdisplays}/bin/wdisplays";
-            "${modifier}+p" = "exec ${pkgs.sway-scripts}/bin/rofi-pass";
-            "${modifier}+m" = "exec ${pkgs.rofi}/bin/rofi -modi emoji -show emoji";
-            "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/rofi-system-menu";
-            "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort > /dev/null";
+            "${modifier}+p" = "exec ${pkgs.sway-scripts}/bin/wofi-pass";
+            "${modifier}+m" = "exec ${pkgs.sway-scripts}/bin/wofi-emoj";
+            "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/wofi-system-menu";
+            "${modifier}+c" = "exec ${pkgs.qalculate-gtk}/bin/qalculate-gtk";
             "${modifier}+o" = mkIf config.knopki.emacs.org-capture.enable "mode org-capture";
-            "${modifier}+Shift+c" = "exec ${pkgs.clipman}/bin/clipman pick -t rofi";
+            "${modifier}+Shift+c" = "exec ${pkgs.clipman}/bin/clipman pick -t CUSTOM -T '${wofiBin} -i -d -p Clipboard'";
           } // optionalAttrs (nixosConfig.meta.machine == "alien") {
             "XF86TouchpadToggle" = "input type:touchpad events toggle enabled disabled";
             # More Alienware keys: XF86KbdLightOnOff, XF86KbdLightOnOff, XF86Tools, XF86Launch5-9
@@ -304,5 +307,20 @@ in
     # Network Manager applet with appindicator in tray
     services.network-manager-applet.enable = true;
     xsession.preferStatusNotifierItems = true;
+
+    # Wofi
+    knopki.wofi = {
+      enable = true;
+      width = "40%";
+      term = mkIf config.knopki.alacritty.enable
+        "${config.programs.alacritty.package}/bin/alacritty -e";
+      allow_images = true;
+      allow_markup = true;
+      parse_search = true;
+      no_actions = true;
+      key_up = "Alt_L-k";
+      key_down = "Alt_L-j";
+      stylesheet = builtins.readFile ./wofi.css;
+    };
   };
 }

@@ -69,6 +69,7 @@ in
       spotify
       tdesktop
       tor-browser-bundle-bin
+      qalculate-gtk
       transmission-gtk
       virtmanager
       winbox-bin

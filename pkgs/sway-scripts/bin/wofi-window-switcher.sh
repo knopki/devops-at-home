@@ -22,7 +22,7 @@ end
 | ((.id | tostring) + "\t "
 # remove markup and index from workspace name, replace scratch with "[S]"
 + (.w | gsub("^[^:]*:|<[^>]*>"; "") | sub("__i3_scratch"; "[S]"))
-+ "\t " +  .name)' | rofi -i -dmenu -p "Focus a window" | {
++ "\t " +  .name)' | wofi -k /dev/null -i -d -p "Focus a window" | {
 	read -r id _
 	swaymsg -q "[con_id=$id]" focus
 }

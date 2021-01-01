@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=""
+: "${XDG_CACHE_HOME:=~/.cache}"
+CACHE=$XDG_CACHE_HOME/wofi-system-menu
 
 function killmenu() {
-	local selection=$(ps -ef | sed 1d | rofi -i -dmenu -p "Kill")
+	local selection=$(ps -ef | sed 1d | wofi -k $CACHE-kill -i -d -p "Kill")
 	[[ -z "$selection" ]] && exit
 
 	pid=$(awk '{print $2}' <<<"$selection" | tr '\n' ' ')
@@ -30,7 +32,7 @@ readonly OPTIONS=(
 
 readonly SELECTION=$(
 	printf "%s\n" "${OPTIONS[@]}" |
-		rofi -i -dmenu -markup-rows -p "System action" |
+		wofi -k $CACHE -i -d -m -p "System action" |
 		grep -o "<u>.*</u>" | sed 's/\(<u>\|<\/u>\)//g' |
 		tr '[:upper:]' '[:lower:]'
 )
@@ -46,7 +48,7 @@ case "$SELECTION" in
 'hybrid sleep') systemctl hybrid-sleep -i ;;
 'suspend then hibernate') systemctl suspend-then-hibernate -i ;;
 'uefi') systemctl reboot -i --firmware-setup ;;
-'services') rofi-systemd ;;
+'services') wofi-systemd ;;
 'kill') killmenu ;;
 *) exit 0 ;;
 esac

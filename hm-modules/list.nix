@@ -26,6 +26,7 @@
   ./vscode.nix
   ./wget.nix
   ./wine.nix
+  ./wofi.nix
   ./xdg.nix
   ./zathura.nix
 ]
