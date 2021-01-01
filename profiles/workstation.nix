@@ -64,6 +64,7 @@ in
       postman
       powertop
       remmina
+      rmlint
       shfmt
       skypeforlinux
       spotify
