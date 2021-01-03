@@ -39,6 +39,8 @@ in
   };
 
   home-manager.users."${cfg.username}" = mkIf cfg.enable {
+    theme.enable = true;
+    theme.preset = "dracula";
     home.language.monetary = "ru_RU.UTF-8";
     home.language.time = "ru_RU.UTF-8";
     home.sessionVariables = {

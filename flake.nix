@@ -8,6 +8,10 @@
     home.url = "github:nix-community/home-manager/release-20.09";
     home.inputs.nixpkgs.follows = "nixpkgs";
     nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
+    base16-default-schemes.flake = false;
+    base16-default-schemes.url = "github:chriskempson/base16-default-schemes";
+    base16-dracula-scheme.flake = false;
+    base16-dracula-scheme.url = "github:dracula/base16-dracula-scheme";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:

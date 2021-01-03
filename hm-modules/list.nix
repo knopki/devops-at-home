@@ -22,6 +22,7 @@
   ./ssh.nix
   ./starship.nix
   ./swaywm
+  ./theme
   ./tmux.nix
   ./vscode.nix
   ./wget.nix

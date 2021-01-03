@@ -1,5 +1,37 @@
 {
   "nodes": {
+    "base16-default-schemes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1559992488,
+        "narHash": "sha256-pwJCHPaHhvkkjIxQhMUm9FA5jZJSrMhu+ciA3A/dsME=",
+        "owner": "chriskempson",
+        "repo": "base16-default-schemes",
+        "rev": "daf674291964321cd8c92644f9bbdbf3e7c0e8b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "repo": "base16-default-schemes",
+        "type": "github"
+      }
+    },
+    "base16-dracula-scheme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1577071917,
+        "narHash": "sha256-dU23Bps3cAuvBboq2UA9tvRANV7IAy4GJXiEobnqWaE=",
+        "owner": "dracula",
+        "repo": "base16-dracula-scheme",
+        "rev": "970c1b5bbb99cd99595ab4ace1a0ba4af9695774",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "base16-dracula-scheme",
+        "type": "github"
+      }
+    },
     "doom-emacs": {
       "flake": false,
       "locked": {
@@ -345,6 +377,8 @@
     },
     "root": {
       "inputs": {
+        "base16-default-schemes": "base16-default-schemes",
+        "base16-dracula-scheme": "base16-dracula-scheme",
         "home": "home",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos-hardware": "nixos-hardware",
