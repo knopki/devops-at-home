@@ -9,6 +9,7 @@ in
     ./base16.nix
     ./bat.nix
     ./doom-emacs.nix
+    ./fzf.nix
     ./gnome-terminal.nix
   ];
 
