@@ -152,10 +152,6 @@
 (setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 16)
       doom-variable-pitch-font (font-spec :family "Source Sans Pro"))
 
-
-;; Choose theme.
-(setq doom-theme 'doom-one)
-
 ;; Visual bell in the modeline.
 (after! doom-themes (doom-themes-visual-bell-config))
 

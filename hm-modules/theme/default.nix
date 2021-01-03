@@ -8,6 +8,7 @@ in
     ./alacritty.nix
     ./base16.nix
     ./bat.nix
+    ./doom-emacs.nix
     ./gnome-terminal.nix
   ];
 
