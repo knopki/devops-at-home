@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "base16-textmate": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1539002895,
+        "narHash": "sha256-uU4YUCW4gS0WNL0mjWvd6hc0vWj5y34T7Ana3LD1IMA=",
+        "owner": "chriskempson",
+        "repo": "base16-textmate",
+        "rev": "1d9e52afb74e03f5a2fdc53d9327428fe00c70c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "repo": "base16-textmate",
+        "type": "github"
+      }
+    },
     "doom-emacs": {
       "flake": false,
       "locked": {
@@ -379,6 +395,7 @@
       "inputs": {
         "base16-default-schemes": "base16-default-schemes",
         "base16-dracula-scheme": "base16-dracula-scheme",
+        "base16-textmate": "base16-textmate",
         "home": "home",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos-hardware": "nixos-hardware",

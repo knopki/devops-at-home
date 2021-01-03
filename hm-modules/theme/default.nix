@@ -7,6 +7,7 @@ in
   imports = [
     ./alacritty.nix
     ./base16.nix
+    ./bat.nix
   ];
 
   options.theme = {

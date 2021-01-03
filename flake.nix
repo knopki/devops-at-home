@@ -12,6 +12,8 @@
     base16-default-schemes.url = "github:chriskempson/base16-default-schemes";
     base16-dracula-scheme.flake = false;
     base16-dracula-scheme.url = "github:dracula/base16-dracula-scheme";
+    base16-textmate.flake = false;
+    base16-textmate.url = "github:chriskempson/base16-textmate";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:
