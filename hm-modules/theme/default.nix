@@ -8,6 +8,7 @@ in
     ./alacritty.nix
     ./base16.nix
     ./bat.nix
+    ./gnome-terminal.nix
   ];
 
   options.theme = {
