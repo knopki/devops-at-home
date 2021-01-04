@@ -11,6 +11,7 @@ in
     ./doom-emacs.nix
     ./fzf.nix
     ./gnome-terminal.nix
+    ./zathura.nix
   ];
 
   options.theme = {

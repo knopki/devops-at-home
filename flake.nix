@@ -14,6 +14,8 @@
     base16-dracula-scheme.url = "github:dracula/base16-dracula-scheme";
     base16-textmate.flake = false;
     base16-textmate.url = "github:chriskempson/base16-textmate";
+    dracula-zathura.flake = false;
+    dracula-zathura.url = "github:dracula/zathura";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:

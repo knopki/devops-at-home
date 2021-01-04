@@ -81,6 +81,22 @@
         "type": "github"
       }
     },
+    "dracula-zathura": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1600660354,
+        "narHash": "sha256-JRtMW7scZs1J1vVl65Ekla3XwjMniMSPlfjQ065L1vY=",
+        "owner": "dracula",
+        "repo": "zathura",
+        "rev": "f74476393105b7c45d2496385a3f5994d312ae1e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "zathura",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "flake": false,
       "locked": {
@@ -396,6 +412,7 @@
         "base16-default-schemes": "base16-default-schemes",
         "base16-dracula-scheme": "base16-dracula-scheme",
         "base16-textmate": "base16-textmate",
+        "dracula-zathura": "dracula-zathura",
         "home": "home",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos-hardware": "nixos-hardware",
