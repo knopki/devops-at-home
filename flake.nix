@@ -8,12 +8,16 @@
     home.url = "github:nix-community/home-manager/release-20.09";
     home.inputs.nixpkgs.follows = "nixpkgs";
     nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
+
+    # themes
     base16-default-schemes.flake = false;
     base16-default-schemes.url = "github:chriskempson/base16-default-schemes";
     base16-dracula-scheme.flake = false;
     base16-dracula-scheme.url = "github:dracula/base16-dracula-scheme";
     base16-textmate.flake = false;
     base16-textmate.url = "github:chriskempson/base16-textmate";
+    dracula-alacritty.flake = false;
+    dracula-alacritty.url = "github:dracula/alacritty";
     dracula-zathura.flake = false;
     dracula-zathura.url = "github:dracula/zathura";
   };

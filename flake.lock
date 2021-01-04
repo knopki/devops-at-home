@@ -81,6 +81,22 @@
         "type": "github"
       }
     },
+    "dracula-alacritty": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1605182576,
+        "narHash": "sha256-Y6XswAzoloxwAAgmCcvV1YWqXUUN7m5OAltwrd8h3gM=",
+        "owner": "dracula",
+        "repo": "alacritty",
+        "rev": "ac24c3f2cda51bbaaff70ade34d4ae3fec75bb82",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "alacritty",
+        "type": "github"
+      }
+    },
     "dracula-zathura": {
       "flake": false,
       "locked": {
@@ -412,6 +428,7 @@
         "base16-default-schemes": "base16-default-schemes",
         "base16-dracula-scheme": "base16-dracula-scheme",
         "base16-textmate": "base16-textmate",
+        "dracula-alacritty": "dracula-alacritty",
         "dracula-zathura": "dracula-zathura",
         "home": "home",
         "nix-doom-emacs": "nix-doom-emacs",
