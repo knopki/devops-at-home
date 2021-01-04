@@ -97,6 +97,7 @@ in
     home.packages = [ cfg.package ];
 
     xdg.configFile."wofi/config".text = concatStringsSep "\n" [
+      cfg.extraConfig
       (
         let
           opts = filterAttrs (n: v: v != null) {
@@ -114,7 +115,6 @@ in
         in
         (generators.toKeyValue { } strOpts)
       )
-      cfg.extraConfig
     ];
 
     xdg.configFile."wofi/style.css".text = cfg.stylesheet;

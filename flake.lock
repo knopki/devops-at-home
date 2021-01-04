@@ -97,6 +97,22 @@
         "type": "github"
       }
     },
+    "dracula-wofi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1603455500,
+        "narHash": "sha256-ra3Nbrk8ozYiqESFxYH0XRyn7bUakJKjIwk3jsZZBq8=",
+        "owner": "dracula",
+        "repo": "wofi",
+        "rev": "1f7d1b68b664901e937029025c14c7f68263f0d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "wofi",
+        "type": "github"
+      }
+    },
     "dracula-zathura": {
       "flake": false,
       "locked": {
@@ -429,6 +445,7 @@
         "base16-dracula-scheme": "base16-dracula-scheme",
         "base16-textmate": "base16-textmate",
         "dracula-alacritty": "dracula-alacritty",
+        "dracula-wofi": "dracula-wofi",
         "dracula-zathura": "dracula-zathura",
         "home": "home",
         "nix-doom-emacs": "nix-doom-emacs",

@@ -18,6 +18,8 @@
     base16-textmate.url = "github:chriskempson/base16-textmate";
     dracula-alacritty.flake = false;
     dracula-alacritty.url = "github:dracula/alacritty";
+    dracula-wofi.flake = false;
+    dracula-wofi.url = "github:dracula/wofi";
     dracula-zathura.flake = false;
     dracula-zathura.url = "github:dracula/zathura";
   };
