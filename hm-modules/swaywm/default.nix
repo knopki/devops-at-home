@@ -1,24 +1,6 @@
 { config, lib, pkgs, nixosConfig, ... }:
 with lib;
 let
-  theme = {
-    base00 = "#282c34";
-    base01 = "#353b45";
-    base02 = "#3e4451";
-    base03 = "#545862";
-    base04 = "#565c64";
-    base05 = "#abb2bf";
-    base06 = "#b6bdca";
-    base07 = "#c8ccd4";
-    base08 = "#e06c75";
-    base09 = "#d19a66";
-    base0A = "#e5c07b";
-    base0B = "#98c379";
-    base0C = "#56b6c2";
-    base0D = "#61afef";
-    base0E = "#c678dd";
-    base0F = "#be5046";
-  };
   defaultWallpaper =
     "${pkgs.nixos-artwork.wallpapers.simple-dark-gray}/share/artwork/gnome/nix-wallpaper-simple-dark-gray.png";
 
@@ -86,44 +68,6 @@ in
         assigns = { };
         workspaceAutoBackAndForth = true;
         modifier = "Mod4";
-        colors = {
-          background = theme.base07;
-          focused = {
-            border = theme.base05;
-            background = theme.base0D;
-            text = theme.base00;
-            indicator = theme.base0D;
-            childBorder = theme.base0D;
-          };
-          focusedInactive = {
-            border = theme.base01;
-            background = theme.base01;
-            text = theme.base05;
-            indicator = theme.base03;
-            childBorder = theme.base01;
-          };
-          unfocused = {
-            border = theme.base01;
-            background = theme.base00;
-            text = theme.base05;
-            indicator = theme.base01;
-            childBorder = theme.base01;
-          };
-          urgent = {
-            border = theme.base08;
-            background = theme.base08;
-            text = theme.base00;
-            indicator = theme.base08;
-            childBorder = theme.base08;
-          };
-          placeholder = {
-            border = theme.base00;
-            background = theme.base00;
-            text = theme.base05;
-            indicator = theme.base00;
-            childBorder = theme.base00;
-          };
-        };
         bars = [ ];
         startup = [
           # set SSH_AUTH_SOCK for systemd services
