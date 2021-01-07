@@ -64,6 +64,22 @@
         "type": "github"
       }
     },
+    "base16-tmux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1556738879,
+        "narHash": "sha256-3dNcTBfQ50scnouP2Q2tboFdZEToxHoMipzrATGevLo=",
+        "owner": "mattdavis90",
+        "repo": "base16-tmux",
+        "rev": "b1d1aa6401afd0a36d76489509122b0bfaacf417",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattdavis90",
+        "repo": "base16-tmux",
+        "type": "github"
+      }
+    },
     "doom-emacs": {
       "flake": false,
       "locked": {
@@ -509,6 +525,7 @@
         "base16-dracula-scheme": "base16-dracula-scheme",
         "base16-shell": "base16-shell",
         "base16-textmate": "base16-textmate",
+        "base16-tmux": "base16-tmux",
         "dracula-alacritty": "dracula-alacritty",
         "dracula-fish": "dracula-fish",
         "dracula-wofi": "dracula-wofi",

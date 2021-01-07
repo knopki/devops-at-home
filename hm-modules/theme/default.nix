@@ -14,6 +14,7 @@ in
     ./mako.nix
     ./shell.nix
     ./swaywm.nix
+    ./tmux.nix
     ./wofi.nix
     ./zathura.nix
   ];
