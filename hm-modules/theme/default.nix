@@ -12,6 +12,7 @@ in
     ./fzf.nix
     ./gnome-terminal.nix
     ./mako.nix
+    ./shell.nix
     ./swaywm.nix
     ./wofi.nix
     ./zathura.nix

@@ -56,9 +56,6 @@ in
 
           # disable greeting
           set -u fish_greeting ""
-
-          # base16 one dark theme
-          sh ${base16-shell}/scripts/base16-onedark.sh
         '';
         shellAbbrs = {
           gco = "git checkout";

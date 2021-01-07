@@ -14,10 +14,14 @@
     base16-default-schemes.url = "github:chriskempson/base16-default-schemes";
     base16-dracula-scheme.flake = false;
     base16-dracula-scheme.url = "github:dracula/base16-dracula-scheme";
+    base16-shell.flake = false;
+    base16-shell.url = "github:chriskempson/base16-shell";
     base16-textmate.flake = false;
     base16-textmate.url = "github:chriskempson/base16-textmate";
     dracula-alacritty.flake = false;
     dracula-alacritty.url = "github:dracula/alacritty";
+    dracula-fish.flake = false;
+    dracula-fish.url = "github:dracula/fish";
     dracula-wofi.flake = false;
     dracula-wofi.url = "github:dracula/wofi";
     dracula-zathura.flake = false;

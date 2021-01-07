@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "base16-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1560619632,
+        "narHash": "sha256-OMhC6paqEOQUnxyb33u0kfKpy8plLSRgp8X8T8w0Q/o=",
+        "owner": "chriskempson",
+        "repo": "base16-shell",
+        "rev": "ce8e1e540367ea83cc3e01eec7b2a11783b3f9e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "repo": "base16-shell",
+        "type": "github"
+      }
+    },
     "base16-textmate": {
       "flake": false,
       "locked": {
@@ -94,6 +110,22 @@
       "original": {
         "owner": "dracula",
         "repo": "alacritty",
+        "type": "github"
+      }
+    },
+    "dracula-fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1605552002,
+        "narHash": "sha256-X/020fcfv/ybaj2m8ZZ490G+cQGQZz4MBUNsveQrQZc=",
+        "owner": "dracula",
+        "repo": "fish",
+        "rev": "d02c735217976c1bb6d10841a838f100f3a5075c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "fish",
         "type": "github"
       }
     },
@@ -443,8 +475,10 @@
       "inputs": {
         "base16-default-schemes": "base16-default-schemes",
         "base16-dracula-scheme": "base16-dracula-scheme",
+        "base16-shell": "base16-shell",
         "base16-textmate": "base16-textmate",
         "dracula-alacritty": "dracula-alacritty",
+        "dracula-fish": "dracula-fish",
         "dracula-wofi": "dracula-wofi",
         "dracula-zathura": "dracula-zathura",
         "home": "home",
