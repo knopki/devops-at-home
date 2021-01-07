@@ -20,6 +20,8 @@
     base16-textmate.url = "github:chriskempson/base16-textmate";
     base16-tmux.flake = false;
     base16-tmux.url = "github:mattdavis90/base16-tmux";
+    base16-waybar.flake = false;
+    base16-waybar.url = "github:mnussbaum/base16-waybar";
     dracula-alacritty.flake = false;
     dracula-alacritty.url = "github:dracula/alacritty";
     dracula-fish.flake = false;

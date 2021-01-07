@@ -15,6 +15,7 @@ in
     ./shell.nix
     ./swaywm.nix
     ./tmux.nix
+    ./waybar.nix
     ./wofi.nix
     ./zathura.nix
   ];
