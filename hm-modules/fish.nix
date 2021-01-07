@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixosConfig, ... }:
 with lib;
 let
   base16-shell = pkgs.fetchFromGitHub {
@@ -18,21 +18,11 @@ in
         plugins = [
           {
             name = "colored_man_pages.fish";
-            src = pkgs.fetchFromGitHub {
-              owner = "PatrickF1";
-              repo = "colored_man_pages.fish";
-              rev = "b0e89f8d028388643dec59c6bc349b1e611da9bf";
-              sha256 = "sha256-2LadTaxk+KvSEmsEXHjO0d6maTfFeOv7ew4/8HnDo3w=";
-            };
+            src = nixosConfig.nix.registry.fish-colored-man-pages.flake.outPath;
           }
           {
             name = "fish-kubectl-completions";
-            src = pkgs.fetchFromGitHub {
-              owner = "evanlucas";
-              repo = "fish-kubectl-completions";
-              rev = "da5fa3c0dc254d37eb4b8e73a86d07c7bcebe637";
-              sha256 = "sha256-7pR5/aQCkHct9lBx3u3nHmCAuo/V7XN1lC+ZvlRnNCo=";
-            };
+            src = nixosConfig.nix.registry.fish-kubectl-completions.flake.outPath;
           }
         ];
         functions = {

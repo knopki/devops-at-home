@@ -26,6 +26,12 @@
     dracula-wofi.url = "github:dracula/wofi";
     dracula-zathura.flake = false;
     dracula-zathura.url = "github:dracula/zathura";
+
+    # fish plugins
+    fish-colored-man-pages.flake = false;
+    fish-colored-man-pages.url = "github:PatrickF1/colored_man_pages.fish";
+    fish-kubectl-completions.flake = false;
+    fish-kubectl-completions.url = "github:evanlucas/fish-kubectl-completions";
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:

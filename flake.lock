@@ -257,6 +257,38 @@
         "type": "github"
       }
     },
+    "fish-colored-man-pages": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1605726840,
+        "narHash": "sha256-2LadTaxk+KvSEmsEXHjO0d6maTfFeOv7ew4/8HnDo3w=",
+        "owner": "PatrickF1",
+        "repo": "colored_man_pages.fish",
+        "rev": "b0e89f8d028388643dec59c6bc349b1e611da9bf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PatrickF1",
+        "repo": "colored_man_pages.fish",
+        "type": "github"
+      }
+    },
+    "fish-kubectl-completions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1604972537,
+        "narHash": "sha256-7pR5/aQCkHct9lBx3u3nHmCAuo/V7XN1lC+ZvlRnNCo=",
+        "owner": "evanlucas",
+        "repo": "fish-kubectl-completions",
+        "rev": "da5fa3c0dc254d37eb4b8e73a86d07c7bcebe637",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanlucas",
+        "repo": "fish-kubectl-completions",
+        "type": "github"
+      }
+    },
     "home": {
       "inputs": {
         "nixpkgs": [
@@ -481,6 +513,8 @@
         "dracula-fish": "dracula-fish",
         "dracula-wofi": "dracula-wofi",
         "dracula-zathura": "dracula-zathura",
+        "fish-colored-man-pages": "fish-colored-man-pages",
+        "fish-kubectl-completions": "fish-kubectl-completions",
         "home": "home",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos-hardware": "nixos-hardware",
