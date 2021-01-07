@@ -19,7 +19,6 @@ readonly OPTIONS=(
 	"<u>Lock</u> screen"
 	"<u>Reload</u> Sway config"
 	"<u>Kill</u> process"
-	"Manage <u>services</u>"
 	"<u>Suspend</u> (RAM)"
 	"<u>Hibernate</u> (HDD)"
 	"<u>Hybrid Sleep</u> (RAM and HDD)"
@@ -48,7 +47,6 @@ case "$SELECTION" in
 'hybrid sleep') systemctl hybrid-sleep -i ;;
 'suspend then hibernate') systemctl suspend-then-hibernate -i ;;
 'uefi') systemctl reboot -i --firmware-setup ;;
-'services') wofi-systemd ;;
 'kill') killmenu ;;
 *) exit 0 ;;
 esac
