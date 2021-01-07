@@ -9,5 +9,4 @@ let
     { inherit (prev) config system; };
 in
 {
-  pass = prev.pass.override { waylandSupport = true; };
 }
