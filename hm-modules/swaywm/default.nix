@@ -48,7 +48,7 @@ in
           hideEdgeBorders = "smart";
           commands = [
             {
-              command = "move scratchpad, resize set width 1250 px height 1045 px";
+              command = "move scratchpad, resize set width 1250 px height 1045 px, border pixel 2";
               criteria = { app_id = "telegramdesktop"; title = "^Telegram"; };
             }
             {
