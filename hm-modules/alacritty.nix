@@ -11,14 +11,6 @@ with lib; {
       # Reference:
       # https://raw.githubusercontent.com/jwilm/alacritty/master/alacritty.yml
       settings = {
-        env = {
-          # This value is used to set the `$TERM` environment variable for
-          # each instance of Alacritty. If it is not present, alacritty will
-          # check the local terminfo database and use `alacritty` if it is
-          # available, otherwise `xterm-256color` is used.
-          TERM = "xterm-256color";
-        };
-
         window = {
           dynamic_title = true;
           scrolling = {

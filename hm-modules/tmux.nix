@@ -34,10 +34,12 @@ with lib; {
 
         # show hostname
         set -g status-right ' #(hostname -s) '
+
+        # fix alacritty 24 color
+        set -ga terminal-overrides ",alacritty:Tc"
       '';
       newSession = true;
       plugins = with pkgs.tmuxPlugins; [ pain-control sensible yank ];
-      terminal = "screen-256color";
     };
   };
 }
