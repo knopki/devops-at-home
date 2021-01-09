@@ -30,6 +30,8 @@
     dracula-wofi.url = "github:dracula/wofi";
     dracula-zathura.flake = false;
     dracula-zathura.url = "github:dracula/zathura";
+    ls-colors.flake = false;
+    ls-colors.url = "github:trapd00r/LS_COLORS";
 
     # fish plugins
     fish-colored-man-pages.flake = false;

@@ -342,6 +342,22 @@
         "type": "github"
       }
     },
+    "ls-colors": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1609339936,
+        "narHash": "sha256-6DnZgWXlQ1+focJGvhlVvgo97owDCj5w2zydF2ZiV8Q=",
+        "owner": "trapd00r",
+        "repo": "LS_COLORS",
+        "rev": "e91cc9cc69f6c4780f03b121bc633569742de7cd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "trapd00r",
+        "repo": "LS_COLORS",
+        "type": "github"
+      }
+    },
     "nix-doom-emacs": {
       "inputs": {
         "doom-emacs": "doom-emacs",
@@ -550,6 +566,7 @@
         "fish-colored-man-pages": "fish-colored-man-pages",
         "fish-kubectl-completions": "fish-kubectl-completions",
         "home": "home",
+        "ls-colors": "ls-colors",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

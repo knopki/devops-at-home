@@ -12,6 +12,7 @@ in
     ./fzf.nix
     ./gnome-terminal.nix
     ./gtk.nix
+    ./ls-colors.nix
     ./mako.nix
     ./shell.nix
     ./swaywm.nix

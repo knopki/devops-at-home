@@ -4,7 +4,6 @@
   ./cachedir.nix
   ./chromium.nix
   ./curl.nix
-  ./dircolors.nix
   ./direnv.nix
   ./emacs
   ./firefox.nix
