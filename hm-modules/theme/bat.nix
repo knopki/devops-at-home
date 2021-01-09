@@ -15,10 +15,14 @@ in
 
   config = mkIf (cfg.enable && cfg.components.bat.enable) (mkMerge [
     (mkIf (!elem cfg.preset [ "dracula" ]) {
-      programs.bat = {
-        config.theme = mkDefault "HmBase16";
-        themes.HmBase16 = builtins.readFile themeFile;
-      };
+      programs.bat =
+        let
+          themeName = "Base16 ${cfg.base16.name}";
+        in
+        {
+          config.theme = mkDefault themeName;
+          themes."${themeName}" = builtins.readFile themeFile;
+        };
       xdg.configFile."bat/themes/HmBase16.tmTheme".onChange =
         "${pkgs.bat}/bin/bat cache --build";
     })

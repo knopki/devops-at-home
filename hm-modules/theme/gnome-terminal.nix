@@ -10,7 +10,7 @@ in
     programs.gnome-terminal = {
       themeVariant = cfg.base16.kind;
       profile."ea538469-ab30-4a5c-8874-5eca6ab1f081" = with cfg.base16.colors; {
-        visibleName = mkDefault "Home Manager - Base16";
+        visibleName = mkDefault "Home Manager - Base16 ${cfg.base16.name}";
         colors = {
           backgroundColor = mkDefault "#${base00.hex.rgb}";
           foregroundColor = mkDefault "#${base05.hex.rgb}";

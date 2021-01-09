@@ -85,8 +85,13 @@ let
       "${nixosConfig.nix.registry.base16-default-schemes.flake.outPath}/default-dark.yaml";
 in
 {
-  # @author Robert Helgesson
   options.theme.base16 = {
+    name = mkOption {
+      type = types.str;
+      default = if (cfg.preset != null) then cfg.preset else "default";
+    };
+
+    # @author Robert Helgesson
     kind = mkOption {
       type = types.enum [ "dark" "light" ];
       example = "dark";
@@ -104,6 +109,7 @@ in
       '';
     };
 
+    # @author Robert Helgesson
     colors =
       let
         mkHexColorOption = mkOption {

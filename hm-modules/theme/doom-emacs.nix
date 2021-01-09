@@ -3,6 +3,8 @@ with lib;
 let
   cfg = config.theme;
   base16colors = with cfg.base16.colors; ''
+    (defvar base16-theme-name "${cfg.base16.name}")
+    (defvar base16-theme-kind "${cfg.base16.kind}")
     (defvar base16-colors
       '(:base00 "#${base00.hex.rgb}"
         :base01 "#${base01.hex.rgb}"
