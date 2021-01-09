@@ -16,9 +16,6 @@ with lib; {
           };
         };
         "* !localhost" = {
-          sendEnv = [
-            "TERM=xterm-256color"
-          ];
           extraOptions = {
             ControlMaster = "auto";
             ControlPersist = "2h";
