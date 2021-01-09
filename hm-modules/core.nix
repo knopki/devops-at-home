@@ -13,7 +13,6 @@ in
   knopki = {
     bash.enable = true;
     curl.enable = true;
-    dircolors.enable = true;
     fish.enable = true;
     git.enable = true;
     htop.enable = true;
