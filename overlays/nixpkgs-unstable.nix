@@ -9,4 +9,6 @@ let
     { inherit (prev) config system; };
 in
 {
+  dracula-theme = nixpkgs.dracula-theme;
+  materia-theme = nixpkgs.materia-theme;
 }

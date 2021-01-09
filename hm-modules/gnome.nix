@@ -34,10 +34,7 @@ with lib;
         "org/gnome/desktop/interface" = {
           clock-show-date = true;
           show-battery-percentage = true;
-          font-name = config.gtk.gtk3.extraConfig.gtk-font-name;
-          gtk-theme = config.gtk.gtk3.extraConfig.gtk-theme-name;
           cursor-theme = config.gtk.gtk3.extraConfig.gtk-cursor-theme-name;
-          icon-theme = config.gtk.gtk3.extraConfig.gtk-icon-theme-name;
         };
 
         "org/gnome/desktop/peripherals/touchpad" = { natural-scroll = false; };
@@ -54,14 +51,8 @@ with lib;
 
     gtk = {
       enable = true;
-      font.name = "Sans Serif 10";
       gtk3.extraConfig = {
-        gtk-font-name = config.gtk.font.name;
-        gtk-theme-name = "Adwaita-dark";
         gtk-cursor-theme-name = "Adwaita";
-        gtk-icon-theme-name = "Adwaita";
-        gtk-fallback-icon-theme = "hicolor";
-        gtk-application-prefer-dark-theme = 0;
         gtk-button-images = 1;
         gtk-enable-primary-paste = 1;
         gtk-menu-images = 1;
