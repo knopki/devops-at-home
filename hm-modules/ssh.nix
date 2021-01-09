@@ -10,27 +10,28 @@ with lib; {
       controlPersist = "2h";
       matchBlocks = {
         "localhost" = {
+          compression = false;
           extraOptions = {
-            Compression = "no";
             ControlMaster = "no";
           };
         };
         "* !localhost" = {
+          sendEnv = [
+            "TERM=xterm-256color"
+          ];
           extraOptions = {
             ControlMaster = "auto";
             ControlPersist = "2h";
           };
         };
         "*" = {
+          serverAliveCountMax = 10;
           extraOptions = {
             TCPKeepAlive = "yes";
-            ServerAliveCountMax = "10";
           };
         };
         "*.onion" = {
-          extraOptions = {
-            ProxyCommand = "socat - SOCKS4A:localhost:%h:%p,socksport=9050";
-          };
+          proxyCommand = "socat - SOCKS4A:localhost:%h:%p,socksport=9050";
         };
       };
       forwardAgent = true;
