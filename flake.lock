@@ -80,6 +80,22 @@
         "type": "github"
       }
     },
+    "base16-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1559893574,
+        "narHash": "sha256-6FsT87qcl9GBxgxrPx2bPULIMA/O8TRxHaN49qMM4uM=",
+        "owner": "chriskempson",
+        "repo": "base16-vim",
+        "rev": "6191622d5806d4448fa2285047936bdcee57a098",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "repo": "base16-vim",
+        "type": "github"
+      }
+    },
     "base16-waybar": {
       "flake": false,
       "locked": {
@@ -558,6 +574,7 @@
         "base16-shell": "base16-shell",
         "base16-textmate": "base16-textmate",
         "base16-tmux": "base16-tmux",
+        "base16-vim": "base16-vim",
         "base16-waybar": "base16-waybar",
         "dracula-alacritty": "dracula-alacritty",
         "dracula-fish": "dracula-fish",

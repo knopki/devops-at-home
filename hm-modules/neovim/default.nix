@@ -22,31 +22,11 @@ with lib;
         {
           plugin = vim-airline;
           config = ''
-            if $TERM =~ '256color'
-              let g:airline_powerline_fonts = 1
-            endif
-            if exists('g:GtkGuiLoaded')
-              let g:airline_powerline_fonts = 1
-            endif
-            let g:airline_theme='one'
             let g:airline_highlighting_cache = 1
             let g:airline_skip_empty_sections = 1
             let g:airline_extensions = ['branch', 'tabline']
             let g:airline#extensions#branch#enabled = 1
             let g:airline#extensions#tabline#enabled = 1
-          '';
-        }
-        vim-airline-themes
-        {
-          plugin = vim-one;
-          config = ''
-            if (empty($TMUX))
-              if (has("termguicolors"))
-                set termguicolors
-              endif
-            endif
-            let g:one_allow_italics = 1
-            colorscheme one
           '';
         }
         {

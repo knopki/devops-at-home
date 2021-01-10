@@ -51,9 +51,6 @@ set showbreak=↪   " Visually prepend wrapped lines with symbol
 set cpoptions+=$  " Put $ at the boundary of current replace
 set title         " Set window title
 
-" cross
-set cursorcolumn
-
 let no_buffers_menu=1
 
 " Theme

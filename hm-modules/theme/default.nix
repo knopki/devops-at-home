@@ -14,6 +14,7 @@ in
     ./gtk.nix
     ./ls-colors.nix
     ./mako.nix
+    ./neovim.nix
     ./shell.nix
     ./swaywm.nix
     ./tmux.nix
