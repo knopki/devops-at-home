@@ -18,14 +18,14 @@ with lib;
           {
             name = "vscode-eslint";
             publisher = "dbaeumer";
-            version = "2.1.8";
-            sha256 = "18yw1c2yylwbvg5cfqfw8h1r2nk9vlixh0im2px8lr7lw0airl28";
+            version = "2.1.14";
+            sha256 = "113w2iis4zi4z3sqc3vd2apyrh52hbh2gvmxjr5yvjpmrsksclbd";
           }
           {
             name = "prettier-vscode";
             publisher = "esbenp";
-            version = "5.1.3";
-            sha256 = "03i66vxvlyb3msg7b8jy9x7fpxyph0kcgr9gpwrzbqj5s7vc32sr";
+            version = "5.8.0";
+            sha256 = "0h7wc4pffyq1i8vpj4a5az02g2x04y7y1chilmcfmzg2w42xpby7";
           }
           {
             name = "vscode-firefox-debug";
@@ -48,20 +48,20 @@ with lib;
           {
             name = "vetur";
             publisher = "octref";
-            version = "0.26.1";
-            sha256 = "0vd2hr2vzjm9b82zhl0b49vxsz6gq3nnh5v80y4hbbd9qk17yxv5";
+            version = "0.31.3";
+            sha256 = "02fhmmi08335ky4v5ayf4ra0gzrkrpjghrjpd77bxjikjh98wkdz";
           }
           {
             name = "indent-rainbow";
             publisher = "oderwat";
-            version = "7.4.0";
-            sha256 = "1xnsdwrcx24vlbpd2igjaqlk3ck5d6jzcfmxaisrgk7sac1aa81p";
+            version = "7.5.0";
+            sha256 = "0zm1m46gm4hl56y9555h3rg8xznygmxb5qlq9yl5wxdjsjcia4qk";
           }
           {
             name = "vscode-yaml";
             publisher = "redhat";
-            version = "0.10.0";
-            sha256 = "13ff3syl22z810adz0hwimfcyl6irycmw8f3nlscaq5w2fnk8znq";
+            version = "0.13.0";
+            sha256 = "046kdk73a5xbrwq16ff0l64271c6q6ygjvxaph58z29gyiszfkig";
           }
           {
             name = "vscode-stylelint";
@@ -72,20 +72,14 @@ with lib;
           {
             name = "svelte-vscode";
             publisher = "svelte";
-            version = "101.9.3";
-            sha256 = "10hdawdm5hwjpxr8lp7bh1b1pfkwmhmwj100rmqdjgdryq6fb4fb";
-          }
-          {
-            name = "vscodeintellicode";
-            publisher = "VisualStudioExptTeam";
-            version = "1.2.10";
-            sha256 = "1l980w4r18613hzwvqgnzm9csi72r9ngyzl94p39rllpiqy7xrhi";
+            version = "103.0.0";
+            sha256 = "0bkcylg9v5v9y1ckhzmz04mwk7irmv0man2c0s68ysh8abxlbyaa";
           }
           {
             name = "vscode-icons";
             publisher = "vscode-icons-team";
-            version = "10.2.0";
-            sha256 = "13s5jrlj2czwh01bi4dds03hd9hpqk1gs9h0gja0g15d0j4kh39c";
+            version = "11.1.0";
+            sha256 = "1xrz9f0nckx29wxpmlj1dqqiaal3002xwgzz5p9iss119sxgpwrx";
           }
         ];
 
