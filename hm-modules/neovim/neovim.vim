@@ -53,9 +53,6 @@ set title         " Set window title
 
 let no_buffers_menu=1
 
-" Theme
-set gfn=FiraCode\ Nerd\ Font\ Mono\ 12
-
 if $COLORTERM == 'truecolor'
   set t_Co=256
   set t_8f=^[[38;2;%lu;%lu;%lum

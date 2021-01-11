@@ -7,7 +7,6 @@ with lib;
       sort = "+time";
       maxVisible = 10;
       layer = "overlay";
-      font = "pango:Noto Sans 10";
       borderRadius = 5;
     };
 

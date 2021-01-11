@@ -7,6 +7,10 @@ in
   options.theme.components.zathura.enable = mkEnableOption "Apply theme to Zathura" // { default = cfg.enable; };
 
   config = mkIf (cfg.enable && cfg.components.zathura.enable) (mkMerge [
+    {
+      programs.zathura.options.font = "${cfg.fonts.regular.family} ${toString cfg.fonts.regular.size}";
+    }
+
     (mkIf (!elem cfg.preset [ "dracula" ]) {
       programs.zathura = {
         options = with cfg.base16.colors; {

@@ -7,6 +7,15 @@ in
   options.theme.components.alacritty.enable = mkEnableOption "Apply theme to Alactritty" // { default = cfg.enable; };
 
   config = mkIf (cfg.enable && cfg.components.alacritty.enable) (mkMerge [
+    {
+      programs.alacritty.settings = {
+        font = {
+          normal = { family = cfg.fonts.monospace.family; };
+          size = cfg.fonts.monospace.size;
+        };
+      };
+    }
+
     (mkIf (!elem cfg.preset [ "dracula" ]) {
       programs.alacritty.settings = {
         colors = with cfg.base16.colors; {

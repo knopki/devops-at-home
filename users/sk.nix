@@ -39,15 +39,26 @@ in
   };
 
   home-manager.users."${cfg.username}" = mkIf cfg.enable {
-    theme.enable = true;
-    theme.preset = "dracula";
+    theme = {
+      enable = true;
+      preset = "dracula";
+      fonts = {
+        monospace = {
+          family = "FiraCode Nerd Font Mono";
+          size = 12;
+          packages = with pkgs; [
+            (nerdfonts.override { fonts = [ "FiraCode" ]; })
+            fira-code-symbols
+          ];
+        };
+      };
+    };
     home.language.monetary = "ru_RU.UTF-8";
     home.language.time = "ru_RU.UTF-8";
     home.sessionVariables = {
       PATH = "${selfHM.home.homeDirectory}/.local/bin:${selfHM.xdg.dataHome}/npm/bin:\${PATH}";
     };
     knopki = {
-      alacritty.enable = isWorkstation;
       cachedirs = mkIf isWorkstation [
         "${selfHM.xdg.cacheHome}"
         "${selfHM.xdg.configHome}/Code"
@@ -92,18 +103,26 @@ in
       wine.enable = isWorkstation;
       qt.enable = isWorkstation;
     };
-    programs.feh.enable = isWorkstation;
-    programs.git = {
-      signing = {
-        key = selfHM.programs.gpg.settings.default-key;
-        signByDefault = true;
+    programs = {
+      alacritty = {
+        enable = isWorkstation;
+        settings = {
+          background_opacity = 0.9;
+        };
       };
-      userEmail = "korolev.srg@gmail.com";
-      userName = "Sergey Korolev";
-    };
-    programs.gpg = {
-      enable = true;
-      settings.default-key = "58A58B6FD38C6B66";
+      feh.enable = isWorkstation;
+      git = {
+        signing = {
+          key = selfHM.programs.gpg.settings.default-key;
+          signByDefault = true;
+        };
+        userEmail = "korolev.srg@gmail.com";
+        userName = "Sergey Korolev";
+      };
+      gpg = {
+        enable = true;
+        settings.default-key = "58A58B6FD38C6B66";
+      };
     };
     xdg = {
       enable = true;

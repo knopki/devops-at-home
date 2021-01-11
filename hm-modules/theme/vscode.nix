@@ -7,6 +7,14 @@ in
   options.theme.components.vscode.enable = mkEnableOption "Apply theme to VS Code" // { default = cfg.enable; };
 
   config = mkIf (cfg.enable && cfg.components.vscode.enable) (mkMerge [
+    {
+      programs.vscode.userSettings = {
+        "editor.fontFamily" = "'${cfg.fonts.monospace.family}',monospace";
+        "editor.fontLigatures" = true;
+        "editor.fontSize" = cfg.fonts.monospace.size + 2;
+      };
+    }
+
     (mkIf (cfg.preset == "dracula") {
       programs.vscode = {
         extensions = with pkgs; pkgs.vscode-utils.extensionsFromVscodeMarketplace [

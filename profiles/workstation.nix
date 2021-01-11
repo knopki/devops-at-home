@@ -84,8 +84,6 @@ in
     enableDefaultFonts = true;
     fonts = with pkgs; [
       corefonts
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
-      fira-code-symbols
       font-awesome_4
       noto-fonts
     ];

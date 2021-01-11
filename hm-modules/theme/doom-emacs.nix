@@ -32,6 +32,10 @@ in
     programs.doom-emacs.extraConfig = mkBefore ''
       ${base16colors}
 
+      (setq doom-font (font-spec :family "${cfg.fonts.monospace.family}"
+                                 :size ${toString (cfg.fonts.monospace.size + 4)})
+            doom-variable-pitch-font (font-spec :family "${cfg.fonts.document.family}"))
+
       ${optionalString (cfg.preset == "dracula") "(setq doom-theme 'doom-dracula)"}
     '';
   };

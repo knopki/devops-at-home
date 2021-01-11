@@ -11,6 +11,7 @@ in
       backgroundColor = mkDefault "#${base00.hex.rgb}";
       textColor = mkDefault "#${base05.hex.rgb}";
       borderColor = mkDefault "#${base0D.hex.rgb}";
+      font = "pango:${cfg.fonts.regular.family} ${toString cfg.fonts.regular.size}";
     };
 
 

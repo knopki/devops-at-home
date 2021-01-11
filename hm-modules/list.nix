@@ -1,5 +1,4 @@
 [
-  ./alacritty.nix
   ./bash.nix
   ./cachedir.nix
   ./chromium.nix

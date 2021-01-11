@@ -43,11 +43,6 @@ in
       pinentry_emacs # in-emacs gnupg prompts
       zstd # for undo-fu-session/undo-tree compression
 
-      # fonts etc
-      fira-code-symbols
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
-      source-sans-pro
-
       ## modules dependencies
       # :checkers spell
       hunspell

@@ -10,6 +10,9 @@ let
          ++ ["s/{{scheme-slug}}/${cfg.base16.name}/;"])
     }' ${template} > $out
   '';
+  gfn = ''
+    set gfn=${escape [ " " ] cfg.fonts.monospace.family}\ ${toString cfg.fonts.monospace.size}
+  '';
 in
 {
   options.theme.components.neovim.enable = mkEnableOption "Apply theme to Neovim" // { default = cfg.enable; };
@@ -27,6 +30,7 @@ in
             ''
               colorscheme base16-${cfg.base16.name}
             ''
+            gfn
           ];
         }
       ];
@@ -41,6 +45,8 @@ in
             let g:dracula_colorterm = 1
             let g:airline_theme='dracula'
             au VimEnter * colorscheme dracula
+
+            ${gfn}
           '';
         }
       ];

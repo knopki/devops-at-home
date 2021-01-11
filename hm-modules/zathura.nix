@@ -8,7 +8,6 @@ with lib;
       enable = true;
       options = {
         selection-clipboard = "clipboard";
-        font = "Noto Sans 10";
       };
     };
 

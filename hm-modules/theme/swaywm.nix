@@ -7,6 +7,12 @@ in
   options.theme.components.swaywm.enable = mkEnableOption "Apply theme to SwayWM" // { default = cfg.enable; };
 
   config = mkIf (cfg.enable && cfg.components.swaywm.enable) (mkMerge [
+    {
+      wayland.windowManager.sway.config.fonts = [
+        "${cfg.fonts.regular.family} ${toString cfg.fonts.regular.size}"
+      ];
+    }
+
     (mkIf (!elem cfg.preset [ "dracula" ]) {
       wayland.windowManager.sway.config.colors = with cfg.base16.colors; {
         background = mkDefault "#${base07.hex.rgb}";

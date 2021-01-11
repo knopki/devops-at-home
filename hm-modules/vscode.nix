@@ -85,9 +85,6 @@ with lib;
 
       userSettings = {
         "debug.inlineValues" = true;
-        "editor.fontFamily" = "'FiraCode Nerd Font',monospace";
-        "editor.fontLigatures" = true;
-        "editor.fontSize" = 14;
         "editor.minimap.enabled" = false;
         "editor.minimap.renderCharacters" = false;
         "editor.multiCursorModifier" = "alt";

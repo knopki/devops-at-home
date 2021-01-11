@@ -36,14 +36,13 @@ in
       wl-clipboard # manipulate wayland clipboard
     ];
 
-    knopki.alacritty.enable = true;
+    programs.alacritty.enable = true;
 
     wayland.windowManager.sway = {
       enable = true;
       package = null; # use system
       wrapperFeatures.gtk = true;
       config = {
-        fonts = [ "Noto Sans 12" ];
         window = {
           hideEdgeBorders = "smart";
           commands = [
@@ -256,7 +255,7 @@ in
     knopki.wofi = {
       enable = true;
       width = "40%";
-      term = mkIf config.knopki.alacritty.enable
+      term = mkIf config.programs.alacritty.enable
         "${config.programs.alacritty.package}/bin/alacritty -e";
       allow_images = true;
       allow_markup = true;

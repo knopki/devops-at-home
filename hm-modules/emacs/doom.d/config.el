@@ -146,12 +146,6 @@
           (gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-lblue))))
 
 
-;;;; Theme and Fonts
-
-;; Setup fonts.
-(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 16)
-      doom-variable-pitch-font (font-spec :family "Source Sans Pro"))
-
 ;; Visual bell in the modeline.
 (after! doom-themes (doom-themes-visual-bell-config))
 
