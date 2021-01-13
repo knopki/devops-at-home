@@ -137,6 +137,8 @@ in
         "adminer.xod.loc"
         "api.xod.loc"
         "auth.xod.loc"
+        "billing-db.xod.loc"
+        "billing.xod.loc"
         "compile.xod.loc"
         "mail.xod.loc"
         "mqtt.xod.loc"
