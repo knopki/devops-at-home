@@ -55,8 +55,8 @@ in
   config = mkIf (cfg.enable && cfg.components.gtk.enable) (mkMerge [
     {
       dconf.settings."org/gnome/desktop/interface" = {
-        document-font-name = config.gtk.gtk3.extraConfig.gtk-document-font-name;
-        monospace-font-name = config.gtk.gtk3.extraConfig.gtk-monospace-font-name;
+        document-font-name = mkDefault "${cfg.fonts.document.family} ${toString cfg.fonts.document.size}";
+        monospace-font-name = mkDefault "${cfg.fonts.monospace.family} ${toString cfg.fonts.monospace.size}";
       };
       gtk = {
         font = {
@@ -68,8 +68,6 @@ in
             if (cfg.base16.kind == "dark") then 1 else 0
           );
           gtk-fallback-icon-theme = mkDefault "hicolor";
-          gtk-document-font-name = mkDefault "${cfg.fonts.document.family} ${toString cfg.fonts.document.size}";
-          gtk-monospace-font-name = mkDefault "${cfg.fonts.monospace.family} ${toString cfg.fonts.monospace.size}";
         };
       };
     }
