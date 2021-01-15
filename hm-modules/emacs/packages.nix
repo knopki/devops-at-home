@@ -65,6 +65,9 @@ let
         otherPkgs;
 
       fixes = rec {
+        all-the-icons = prev.all-the-icons.overrideAttrs (o: {
+          buildInputs = o.buildInputs ++ [ prev.memoize ];
+        });
         cmake-mode = straightBuild { pname = "cmake-mode"; };
         org-mode = prev.melpaBuild rec {
           pname = "org-mode";
