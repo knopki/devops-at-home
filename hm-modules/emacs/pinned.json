@@ -1067,8 +1067,8 @@
     "name": "evil-collection",
     "fetcher": "github",
     "repo": "emacs-evil/evil-collection",
-    "rev": "e7be9f53a05c81ef9e89c2f053ba62048e6afd69",
-    "sha256": "0vgc0x4q46l8h62nmgbyzhhhd80lbakkmvyzjsaq3ivs11hwcjf6",
+    "rev": "ffbf149f0e09d8c2068f9f5098255555d7983696",
+    "sha256": "1q2mc22mxnkksv6yxjrp80yw1qmvngidv4zzfv16jc4vz54y2s25",
     "origin": "melpa"
   },
   {
