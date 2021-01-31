@@ -1,6 +1,5 @@
 [
   ./bash.nix
-  ./cachedir.nix
   ./chromium.nix
   ./curl.nix
   ./direnv.nix
@@ -11,6 +10,7 @@
   ./git.nix
   ./gnome.nix
   ./htop.nix
+  ./kopia.nix
   ./minikube.nix
   ./neovim
   ./npmrc.nix

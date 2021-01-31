@@ -33,7 +33,6 @@ in
       anki
       asciinema
       blender
-      borgbackup
       cachix
       darktable
       dive

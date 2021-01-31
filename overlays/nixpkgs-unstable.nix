@@ -10,5 +10,6 @@ let
 in
 {
   dracula-theme = nixpkgs.dracula-theme;
+  kopia = nixpkgs.kopia;
   materia-theme = nixpkgs.materia-theme;
 }

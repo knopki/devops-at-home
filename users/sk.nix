@@ -5,6 +5,56 @@ let
   sshKeys = import ../secrets/ssh_keys.nix;
   isWorkstation = config.meta.tags.isWorkstation;
   selfHM = config.home-manager.users."${cfg.username}";
+  kopiaJobs = {
+    halfhour = {
+      timer = {
+        OnCalendar = "*:0/30";
+        RandomizedDelaySec = "3m";
+      };
+      snapshots = [
+        "${selfHM.home.homeDirectory}/dev"
+        "${selfHM.home.homeDirectory}/org"
+      ];
+    };
+    daily = {
+      timer = {
+        OnCalendar = "weekly";
+        RandomizedDelaySec = "3h";
+      };
+      snapshots = [
+        "${selfHM.home.homeDirectory}/.gnupg"
+        "${selfHM.home.homeDirectory}/.wakatime.cfg"
+        "${selfHM.home.homeDirectory}/.wakatime.db"
+        "${selfHM.home.homeDirectory}/library"
+        "${selfHM.home.homeDirectory}/trash"
+        "${selfHM.xdg.dataHome}/fish/fish_history"
+        selfHM.xdg.userDirs.desktop
+        selfHM.xdg.userDirs.documents
+        selfHM.xdg.userDirs.pictures
+      ];
+    };
+    weekly = {
+      timer = {
+        OnCalendar = "weekly";
+        RandomizedDelaySec = "12h";
+      };
+      snapshots = [
+        "${selfHM.home.homeDirectory}/.kube/config"
+        "${selfHM.xdg.configHome}/MusicBrainz"
+        "${selfHM.xdg.configHome}/cachix"
+        "${selfHM.xdg.configHome}/darktable"
+        "${selfHM.xdg.configHome}/dconf/user"
+        "${selfHM.xdg.configHome}/gcloud"
+        "${selfHM.xdg.configHome}/remmina"
+        "${selfHM.xdg.configHome}/teamviewer"
+        "${selfHM.xdg.dataHome}/Anki2"
+        "${selfHM.xdg.dataHome}/keyrings"
+        "${selfHM.xdg.dataHome}/password-store"
+        selfHM.xdg.userDirs.music
+      ];
+    };
+
+  };
 in
 {
   knopki.users.sk = {
@@ -59,36 +109,6 @@ in
       PATH = "${selfHM.home.homeDirectory}/.local/bin:${selfHM.xdg.dataHome}/npm/bin:\${PATH}";
     };
     knopki = {
-      cachedirs = mkIf isWorkstation [
-        "${selfHM.xdg.cacheHome}"
-        "${selfHM.xdg.configHome}/Code"
-        "${selfHM.xdg.configHome}/Marvin"
-        "${selfHM.xdg.configHome}/Postman"
-        "${selfHM.xdg.configHome}/chromium"
-        "${selfHM.xdg.configHome}/epiphany/gsb-threats.db-journalnfig"
-        "${selfHM.xdg.configHome}/gcloud/logs"
-        "${selfHM.xdg.configHome}/simpleos"
-        "${selfHM.xdg.configHome}/skypeforlinux"
-        "${selfHM.xdg.configHome}/transmission/resume"
-        "${selfHM.xdg.dataHome}/Anki"
-        "${selfHM.xdg.dataHome}/TelegramDesktop"
-        "${selfHM.xdg.dataHome}/Trash"
-        "${selfHM.xdg.dataHome}/containers"
-        "${selfHM.xdg.dataHome}/fish/generated_completions"
-        "${selfHM.xdg.dataHome}/flatpak"
-        "${selfHM.xdg.dataHome}/gvfs-metadata"
-        "${selfHM.xdg.dataHome}/npm"
-        "${selfHM.xdg.dataHome}/tmux"
-        "${selfHM.xdg.dataHome}/tracker/data"
-        "${selfHM.xdg.dataHome}/vim"
-        ".kube/cache"
-        ".kube/http-cache"
-        ".minikube"
-        ".mozilla/firefox/Crash Reports"
-        ".node-gyp"
-        ".vscode"
-        "downloads"
-      ];
       chromium.enable = isWorkstation;
       direnv.enable = true;
       emacs.enable = isWorkstation;
@@ -123,6 +143,7 @@ in
         enable = true;
         settings.default-key = "58A58B6FD38C6B66";
       };
+      kopia = { enable = true; jobs = kopiaJobs; };
     };
     xdg = {
       enable = true;
