@@ -143,7 +143,7 @@ in
         enable = true;
         settings.default-key = "58A58B6FD38C6B66";
       };
-      kopia = { enable = true; jobs = kopiaJobs; };
+      kopia = mkIf (config.networking.hostName == "alien") { enable = true; jobs = kopiaJobs; };
     };
     xdg = {
       enable = true;
