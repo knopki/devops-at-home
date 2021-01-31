@@ -42,7 +42,6 @@ in
       google-cloud-sdk
       graphviz
       keepassxc
-      keybase-gui
       krita
       kubectl
       kubernetes-helm
@@ -290,7 +289,6 @@ in
       locate = pkgs.mlocate;
       pruneBindMounts = true;
     };
-    keybase.enable = true;
     printing = {
       enable = true;
       drivers = with pkgs; [ cups-kyocera gutenprint ];
