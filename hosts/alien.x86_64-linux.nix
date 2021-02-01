@@ -1,4 +1,4 @@
-{ modulesPath, lib, pkgs, self, inputs, ... }@args:
+{ config, modulesPath, lib, pkgs, self, inputs, ... }@args:
 with lib;
 let
   hwModules = inputs.nixos-hardware.nixosModules;
@@ -11,6 +11,7 @@ let
     fallbackToPassword = true;
   };
   swapDevice = "/dev/mapper/nvme--vg-swap";
+  defaultSopsFile = { format = "yaml"; sopsFile = ./alien/secrets/secrets.yaml; };
 in
 {
   imports = [
@@ -223,6 +224,10 @@ in
     };
   };
 
+  sops.secrets = {
+    alien-root-user-password = defaultSopsFile // { key = "root-user-password"; };
+  };
+
   swapDevices = [{ device = swapDevice; }];
 
   system.stateVersion = "20.09";
@@ -230,4 +235,6 @@ in
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=6h
   '';
+
+  users.users.root.passwordFile = config.sops.secrets.alien-root-user-password.path;
 }

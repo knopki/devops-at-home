@@ -2,9 +2,9 @@
 with lib;
 let
   cfg = config.knopki.users.sk;
-  sshKeys = import ../secrets/ssh_keys.nix;
   isWorkstation = config.meta.tags.isWorkstation;
   selfHM = config.home-manager.users."${cfg.username}";
+  defaultSopsFile = { format = "yaml"; sopsFile = ./secrets/secrets.yaml; };
   kopiaJobs = {
     halfhour = {
       timer = {
@@ -64,9 +64,11 @@ in
     linger.enable = mkDefault true;
   };
 
+  sops.secrets.sk-user-password = defaultSopsFile;
+
   users.users."${cfg.username}" = mkIf cfg.enable {
     description = "Sergey Korolev";
-    extraGroups = [
+    extraGroups = with config.users.groups; [
       "adbusers"
       "audio"
       "dialout"
@@ -82,10 +84,11 @@ in
       "video"
       "wheel"
       "wireshark"
+      keys.name
     ];
     isNormalUser = true;
-    openssh.authorizedKeys.keys = [ sshKeys.sk ];
-    passwordFile = "/var/secrets/sk_password";
+    openssh.authorizedKeys.keyFiles = [ ./secrets/id_rsa.pub ];
+    passwordFile = mkDefault config.sops.secrets.sk-user-password.path;
   };
 
   home-manager.users."${cfg.username}" = mkIf cfg.enable {

@@ -2,7 +2,6 @@
 with lib;
 let
   cfg = config.knopki.users.nixos;
-  sshKeys = import ../secrets/ssh_keys.nix;
 in
 {
   knopki.users.nixos = {
@@ -15,6 +14,6 @@ in
     description = "default";
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [ sshKeys.sk ];
+    openssh.authorizedKeys.keyFiles = [ ./sk/secrets/id_rsa.pub ];
   };
 }

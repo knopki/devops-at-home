@@ -1,16 +1,23 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {}, sops-nix ? import <sops-nix> {} }:
 let
   myPython = pkgs.python3.withPackages (ps: with ps; [ pyparsing ]);
 in
 pkgs.mkShell {
+  sopsPGPKeyDirs = [
+    "./secrets/keys/hosts"
+    "./secrets/keys/users"
+  ];
+
   nativeBuildInputs = with pkgs; [
-    ansible
-    git
-    git-crypt
-    nixFlakes
     (pass.withExtensions (ext: with ext; [ pass-otp ]))
+    ansible
     black
+    git
     myPython
+    nixFlakes
+    sops
+    sops-nix.ssh-to-pgp
+    sops-nix.sops-pgp-hook
   ];
 
   NIX_CONF_DIR = let
@@ -26,8 +33,4 @@ pkgs.mkShell {
       '';
   in
     "${nixConf}/opt";
-
-  shellHook = ''
-    mkdir -p secrets
-  '';
 }

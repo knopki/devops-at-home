@@ -7,6 +7,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home.url = "github:nix-community/home-manager/release-20.09";
     home.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
 
     # themes
@@ -42,7 +44,7 @@
     fish-kubectl-completions.url = "github:evanlucas/fish-kubectl-completions";
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }:
+  outputs = inputs@{ self, nixpkgs, sops-nix, ... }:
     let
       inherit (builtins) attrNames attrValues baseNameOf elem filter listToAttrs readDir;
       inherit (nixpkgs.lib) genAttrs filterAttrs hasSuffix removeSuffix;
@@ -63,37 +65,40 @@
       # Memoize nixpkgs for different platforms for efficiency.
       nixpkgsFor = forAllSystems (
         system:
-          import nixpkgs {
-            inherit system;
-            config = { allowUnfree = true; };
-            overlays = attrValues self.overlays;
-          }
+        import nixpkgs {
+          inherit system;
+          config = { allowUnfree = true; };
+          overlays = attrValues self.overlays;
+        }
       );
 
       outerOverlays = { };
     in
-      {
-        nixosConfigurations = let
+    {
+      nixosConfigurations =
+        let
           configs = import ./hosts (inputs // { inherit nixpkgsFor; });
         in
-          configs;
+        configs;
 
-        overlay = import ./pkgs;
+      overlay = import ./pkgs;
 
-        overlays = let
+      overlays =
+        let
           filenames = filter (hasSuffix ".nix") (attrNames (readDir ./overlays));
           names = map (removeSuffix ".nix") filenames;
           overlays = genAttrs names (name: import (./overlays + "/${name}.nix"));
         in
-          outerOverlays // overlays;
+        outerOverlays // overlays;
 
-        packages = forAllSystems (
-          system: filterAttrs (n: v: elem system v.meta.platforms) {
-            inherit (nixpkgsFor.${system}) sway-scripts winbox winbox-bin;
-          }
-        );
+      packages = forAllSystems (
+        system: filterAttrs (n: v: elem system v.meta.platforms) {
+          inherit (nixpkgsFor.${system}) sway-scripts winbox winbox-bin;
+        }
+      );
 
-        nixosModules = let
+      nixosModules =
+        let
           # binary cache
           cachix = import ./cachix.nix;
           cachixAttrs = { inherit cachix; };
@@ -108,15 +113,18 @@
           profileList = import ./profiles/list.nix;
           profilesAttrs = { profiles = listToAttrs (prepModules profileList); };
         in
-          cachixAttrs // modulesAttrs // hmModulesAttrs // profilesAttrs;
+        cachixAttrs // modulesAttrs // hmModulesAttrs // profilesAttrs;
 
-        checks.x86_64-linux = self.packages.x86_64-linux // {
-          alien = self.nixosConfigurations.alien.config.system.build.toplevel;
-          # iso = self.nixosConfigurations.iso.config.system.build.isoImage;
-        };
-
-        devShell = forAllSystems (
-          system: import ./shell.nix { pkgs = nixpkgsFor.${system}; }
-        );
+      checks.x86_64-linux = self.packages.x86_64-linux // {
+        alien = self.nixosConfigurations.alien.config.system.build.toplevel;
+        # iso = self.nixosConfigurations.iso.config.system.build.isoImage;
       };
+
+      devShell = forAllSystems (
+        system: import ./shell.nix {
+          pkgs = nixpkgsFor.${system};
+          sops-nix = import sops-nix { pkgs = nixpkgsFor.${system}; };
+        }
+      );
+    };
 }

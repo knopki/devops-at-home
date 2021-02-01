@@ -153,6 +153,8 @@ with lib;
     timesyncd.servers = mkDefault [ "time.cloudflare.com" ];
   };
 
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+
   systemd.services.nix-daemon.serviceConfig.LimitSTACKSoft = "infinity";
 
   systemd.timers = {
