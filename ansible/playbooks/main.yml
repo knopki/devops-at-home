@@ -1,7 +1,0 @@
----
-- hosts: nixos
-  any_errors_fatal: true
-  become: true
-  roles:
-    - role: pass-secrets
-      tags: secrets

@@ -57,7 +57,7 @@ git add hm-modules/emacs/pinned.json
 ```
 ├───checks
 │   └───x86_64-linux
-│       ├───alien: derivation 'nixos-system-alien-20.09.20201114.29e9c10'
+│       ├───alien: derivation 'nixos-system-alien-20.09.20210123.fe08be6'
 │       ├───sway-scripts: derivation 'sway-scripts'
 │       ├───winbox: derivation 'winbox-bin-3.20'
 │       └───winbox-bin: derivation 'winbox-bin-3.20'
@@ -70,7 +70,6 @@ git add hm-modules/emacs/pinned.json
 │   ├───alien: NixOS configuration
 │   └───iso: NixOS configuration
 ├───nixosModules
-│   ├───azire-vpn: NixOS module
 │   ├───boot: NixOS module
 │   ├───cachix: NixOS module
 │   ├───home-manager: NixOS module
