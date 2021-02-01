@@ -225,7 +225,10 @@ in
   };
 
   sops.secrets = {
-    alien-root-user-password = defaultSopsFile // { key = "root-user-password"; };
+    alien-root-user-password = defaultSopsFile // {
+      key = "root-user-password";
+      path = "/var/secrets/root-user-password";
+    };
   };
 
   swapDevices = [{ device = swapDevice; }];

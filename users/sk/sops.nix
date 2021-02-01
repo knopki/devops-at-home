@@ -9,7 +9,11 @@ let
     owner = config.knopki.users.sk.username;
   };
 
-  sysSecs = genAttrs [ "sk-user-password" ] (_: defaultSopsFile);
+  sysSecs = {
+    sk-user-password = defaultSopsFile // {
+      path = "/var/secrets/sk-user-password";
+    };
+  };
   usrSecs = genAttrs [
     "kopia-knopki-repo-password-file"
     "kopia-repository-config"
