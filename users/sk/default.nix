@@ -5,56 +5,6 @@ let
   isWorkstation = config.meta.tags.isWorkstation;
   selfHM = config.home-manager.users."${cfg.username}";
   defaultSopsFile = { format = "yaml"; sopsFile = ./secrets/secrets.yaml; };
-  kopiaJobs = {
-    halfhour = {
-      timer = {
-        OnCalendar = "*:0/30";
-        RandomizedDelaySec = "3m";
-      };
-      snapshots = [
-        "${selfHM.home.homeDirectory}/dev"
-        "${selfHM.home.homeDirectory}/org"
-      ];
-    };
-    daily = {
-      timer = {
-        OnCalendar = "weekly";
-        RandomizedDelaySec = "3h";
-      };
-      snapshots = [
-        "${selfHM.home.homeDirectory}/.gnupg"
-        "${selfHM.home.homeDirectory}/.wakatime.cfg"
-        "${selfHM.home.homeDirectory}/.wakatime.db"
-        "${selfHM.home.homeDirectory}/library"
-        "${selfHM.home.homeDirectory}/trash"
-        "${selfHM.xdg.dataHome}/fish/fish_history"
-        selfHM.xdg.userDirs.desktop
-        selfHM.xdg.userDirs.documents
-        selfHM.xdg.userDirs.pictures
-      ];
-    };
-    weekly = {
-      timer = {
-        OnCalendar = "weekly";
-        RandomizedDelaySec = "12h";
-      };
-      snapshots = [
-        "${selfHM.home.homeDirectory}/.kube/config"
-        "${selfHM.xdg.configHome}/MusicBrainz"
-        "${selfHM.xdg.configHome}/cachix"
-        "${selfHM.xdg.configHome}/darktable"
-        "${selfHM.xdg.configHome}/dconf/user"
-        "${selfHM.xdg.configHome}/gcloud"
-        "${selfHM.xdg.configHome}/remmina"
-        "${selfHM.xdg.configHome}/teamviewer"
-        "${selfHM.xdg.dataHome}/Anki2"
-        "${selfHM.xdg.dataHome}/keyrings"
-        "${selfHM.xdg.dataHome}/password-store"
-        selfHM.xdg.userDirs.music
-      ];
-    };
-
-  };
 in
 {
   knopki.users.sk = {
@@ -92,6 +42,7 @@ in
   };
 
   home-manager.users."${cfg.username}" = mkIf cfg.enable {
+    imports = [ ./kopia.nix ];
     theme = {
       enable = true;
       preset = "dracula";
@@ -146,7 +97,6 @@ in
         enable = true;
         settings.default-key = "58A58B6FD38C6B66";
       };
-      kopia = mkIf (config.networking.hostName == "alien") { enable = true; jobs = kopiaJobs; };
     };
     xdg = {
       enable = true;
