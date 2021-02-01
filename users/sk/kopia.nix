@@ -1,6 +1,19 @@
 { config, lib, pkgs, nixosConfig, ... }:
 with lib;
 {
+  home.activation.kopiaSettings =
+    let
+      lsCmd = "$DRY_RUN_CMD ${pkgs.coreutils}/bin/ln $VERBOSE_ARG -sf";
+      secrets = nixosConfig.sops.secrets;
+      dst = "${config.xdg.configHome}/kopia";
+    in
+    hm.dag.entryAfter [ "writeBoundary" ] ''
+      ${lsCmd} "${secrets.kopia-repository-config.path}" \
+        "${dst}/repository.config"
+      ${lsCmd} "${secrets.kopia-knopki-repo-password-file.path}" \
+        "${dst}/repository.config.kopia-password"
+    '';
+
   programs.kopia = mkIf (nixosConfig.networking.hostName == "alien") {
     enable = true;
     jobs = {

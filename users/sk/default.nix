@@ -4,17 +4,15 @@ let
   cfg = config.knopki.users.sk;
   isWorkstation = config.meta.tags.isWorkstation;
   selfHM = config.home-manager.users."${cfg.username}";
-  defaultSopsFile = { format = "yaml"; sopsFile = ./secrets/secrets.yaml; };
 in
 {
+  imports = [ ./sops.nix ];
   knopki.users.sk = {
     username = mkDefault "sk";
     uid = mkDefault 1000;
     gid = mkDefault 1000;
     linger.enable = mkDefault true;
   };
-
-  sops.secrets.sk-user-password = defaultSopsFile;
 
   users.users."${cfg.username}" = mkIf cfg.enable {
     description = "Sergey Korolev";
