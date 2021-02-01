@@ -18,3 +18,4 @@ creation_rules:
       - pgp:
           - *sk
           - *alien
+  - path_regex: .*
