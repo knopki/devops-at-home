@@ -29,10 +29,15 @@ in
 
     systemd.user.services = mapAttrs'
       (name: value: nameValuePair "kopia-${name}" {
-        Unit = { Description = "Kopia sync - ${name}"; };
+        Unit = {
+          Description = "Kopia sync - ${name}";
+          StartLimitIntervalSec = "0";
+        };
         Service = {
           CPUSchedulingPolicy = "idle";
           IOSchedulingClass = "idle";
+          Restart = "on-failure";
+          RestartSec = "1m";
           Type = "oneshot";
           ExecStart = ''
             ${pkgs.kopia}/bin/kopia snap create ${concatStringsSep " " value.snapshots}
