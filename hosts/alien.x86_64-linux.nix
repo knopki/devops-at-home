@@ -141,6 +141,7 @@ in
         "billing-db.xod.loc"
         "billing.xod.loc"
         "compile.xod.loc"
+        "compiler.xod.loc"
         "mail.xod.loc"
         "mqtt.xod.loc"
         "neo4j.xod.loc"
