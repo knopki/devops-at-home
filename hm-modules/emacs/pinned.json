@@ -51,8 +51,8 @@
     "name": "all-the-icons",
     "fetcher": "github",
     "repo": "domtronn/all-the-icons.el",
-    "rev": "9aa16ae198073fe839a0abfa9a7d3a9dc85ef5f9",
-    "sha256": "1ll69hb7108fcklyagkvgxkr96nh9sp06kkr73kz92j4cljsahc6",
+    "rev": "5fa728399bd6233a82bbfd4f7cb203a1d7ede708",
+    "sha256": "12hhjqrnlqwwnj44i74q35ywvs29ba91qrq0f80xv4dx70q8wvvy",
     "origin": "melpa"
   },
   {
@@ -83,8 +83,8 @@
     "name": "anaconda-mode",
     "fetcher": "github",
     "repo": "pythonic-emacs/anaconda-mode",
-    "rev": "39b1cf88c8c459901630d248d6135d8644075648",
-    "sha256": "0nwrs6cw2dpl522rrdhzrka4fkcw4f2grxlz0mjwwlaxafd2zc3y",
+    "rev": "b1875a5d0ec9885c1c42558c126b93ee6bcedaa6",
+    "sha256": "0inl7a4iw0shks47inxkbczbk1g24n1x982dips0j6m1v68hgah1",
     "origin": "melpa"
   },
   {
@@ -203,8 +203,8 @@
     "name": "better-jumper",
     "fetcher": "github",
     "repo": "gilbertw1/better-jumper",
-    "rev": "5ef53fcee4e74f397c8d275679e5596b52582b57",
-    "sha256": "0662xcjpsmxb1mwjz062v9pp17mw40aza9pgv4vbh6l5ar323wjq",
+    "rev": "411ecdf6e7a3e1b4ced7605070d2309e5fc46556",
+    "sha256": "03jgfrpjlvn7fkv9grcqayphz2bjjkfh4rd6k1s7vmdpd3hm0xpb",
     "origin": "melpa"
   },
   {
@@ -587,8 +587,8 @@
     "name": "conda",
     "fetcher": "github",
     "repo": "necaris/conda.el",
-    "rev": "9f7eea16e9ad3eb34fe3d1cbd9d6162b8046c2f8",
-    "sha256": "1151bk1fx8y8yql1sg9qqagxcbq57rz85gwnx0z2acfpljb2i7r7",
+    "rev": "dce431b25f5a13af58cc7cacfa7968b5a888609c",
+    "sha256": "1q4hnb42kp73ida37cgrrwi5dxl8vjdl1ibj8l51h47l2rlcrn09",
     "origin": "melpa"
   },
   {
@@ -675,8 +675,8 @@
     "name": "cython-mode",
     "fetcher": "github",
     "repo": "cython/cython",
-    "rev": "21b4e533747507c4dad5e6908df1f157dff4de89",
-    "sha256": "028qiaj6ywmc6llp8hw6y5l2b4x8vpl7x921500ipc4l1ffrcd35",
+    "rev": "17e03b8658a07b6d6da49300b39b57ed9c59ddb1",
+    "sha256": "0ly03ahjrrk5192i48a90rqhpnb8wwzbl3rgf8s3iysnxf0z1nzq",
     "origin": "melpa"
   },
   {
@@ -1067,8 +1067,8 @@
     "name": "evil-collection",
     "fetcher": "github",
     "repo": "emacs-evil/evil-collection",
-    "rev": "ffbf149f0e09d8c2068f9f5098255555d7983696",
-    "sha256": "1q2mc22mxnkksv6yxjrp80yw1qmvngidv4zzfv16jc4vz54y2s25",
+    "rev": "e6824e2ad2f2ee7ddccf6f54db655a4cd37a13dc",
+    "sha256": "04n87ihs73pjd20al0pi1y4k779s08cm0vaz21g9qw3l280f5wwd",
     "origin": "melpa"
   },
   {
@@ -2403,16 +2403,16 @@
     "name": "lsp-pyright",
     "fetcher": "github",
     "repo": "emacs-lsp/lsp-pyright",
-    "rev": "d9e7d3cf1bdc8ee0395c8df4408b05ee3ba9c22a",
-    "sha256": "092ivkhyhqwyzf94k8bjzykzx28lazyipi8ghz4lbkc57wwmjx39",
+    "rev": "71ff088ac4c93b0edd012f305a3dfd1602c5d21e",
+    "sha256": "03fgw10fq1s98xrmfzg8y9xv14yig3lgjc44x7mvlc5awsmv5lxa",
     "origin": "melpa"
   },
   {
     "name": "lsp-python-ms",
     "fetcher": "github",
     "repo": "emacs-lsp/lsp-python-ms",
-    "rev": "c4ebc7a11398733055a1dc07f9cffacd04d1c2dc",
-    "sha256": "0sdvqnk598gdzjrzrgwqg2m8fzs9dpbbzsp70hqnrkp14x9jklmi",
+    "rev": "5470ada6cde6e68fe6ce13ff1146c89c3bae0cc8",
+    "sha256": "1m9nwnwyabbl7gxkyf43mvi76i6qnkqbpy7f5hvx84674pcjnh06",
     "origin": "melpa"
   },
   {
@@ -3139,8 +3139,8 @@
     "name": "pipenv",
     "fetcher": "github",
     "repo": "pwalsh/pipenv.el",
-    "rev": "b730bb509e8b60af9f5ab1f1e6c3458d1d95d789",
-    "sha256": "0f2lihzzw9v91adx9v89crbsph4zjj0qrlb3a8fikbhd6jy8xpb8",
+    "rev": "f516a1a8677a6a1ce9683056e9f77b1e785e8431",
+    "sha256": "0ksjshvv8vnx2v91bfykajjnlcc5i0by0lrg0a34f8f3zjyaqcab",
     "origin": "melpa"
   },
   {
@@ -3211,8 +3211,8 @@
     "name": "projectile",
     "fetcher": "github",
     "repo": "bbatsov/projectile",
-    "rev": "c31bd41c0b9d6fba8837ebfd3a31dec0b3cd73c6",
-    "sha256": "10pibv07mb3mwmz6r2kmd7xdz5rly7hfbxvhmxd536zbr2s9rr1j",
+    "rev": "fd5994762a90c2311e8aa40c37373f24e1743a55",
+    "sha256": "1vlry2pa45v0l3g0lrhi6sp24cf8i0s76nz1pm92iwgk6hpdz560",
     "origin": "melpa"
   },
   {
@@ -3291,16 +3291,16 @@
     "name": "python-pytest",
     "fetcher": "github",
     "repo": "wbolster/emacs-python-pytest",
-    "rev": "4a1c4c8915c12e540d41aae1d4e326a2362da541",
-    "sha256": "11hzh86mmi4hwiwnq1nfn6lizjk3pghi8j4m4cgam2zikapxq0wi",
+    "rev": "3fadf1f8bc363d57c54eedd1bf98e6d9db9f0a62",
+    "sha256": "0ij72rjf3qnsbg3zripxyx3lwzliplm24pfrg867dr6lxczkxwv2",
     "origin": "melpa"
   },
   {
     "name": "pyvenv",
     "fetcher": "github",
     "repo": "jorgenschaefer/pyvenv",
-    "rev": "0bf4b87068e9040fc99afa85af1992247dd7aacd",
-    "sha256": "10dcigv25bs115d3m5nibvh1sxg99ni32cy5pyz616f2wz1zbph4",
+    "rev": "9b3678bc29192d2dba64df90fbdb17393ef8d877",
+    "sha256": "1pxinj6gc0mga0sl7y5ys3xsy94c33cbgahw418c36lhj8xxx21n",
     "origin": "melpa"
   },
   {
@@ -3616,14 +3616,6 @@
     "origin": "melpa"
   },
   {
-    "name": "so-long",
-    "fetcher": "github",
-    "repo": "hlissner/emacs-so-long",
-    "rev": "ed666b0716f60e8988c455804de24b55919e71ca",
-    "sha256": "0bc6nrdrvj422g15zqn00vs7ga9bq5c3hdg7ml1kls8rxp6bk1n4",
-    "origin": null
-  },
-  {
     "name": "solaire-mode",
     "fetcher": "github",
     "repo": "hlissner/emacs-solaire-mode",
@@ -3851,8 +3843,8 @@
     "name": "use-package",
     "fetcher": "github",
     "repo": "jwiegley/use-package",
-    "rev": "365c73d2618dd0040a32c2601c5456ab5495b812",
-    "sha256": "10c0rmi5axypx0xy3fib739rjnakl32spwcirzxz1p5r0x9gya4a",
+    "rev": "317137b07687f16ea97a2493b0a6768c9df381a0",
+    "sha256": "0fm4clbgybhg29na8yiqm88m902kql77ab4r21whvdl7yfkrjj6x",
     "origin": "melpa"
   },
   {
@@ -3891,8 +3883,8 @@
     "name": "vterm",
     "fetcher": "github",
     "repo": "akermu/emacs-libvterm",
-    "rev": "101ff86d4d1c7ff8ca954ba59f666fd36f789aae",
-    "sha256": "075gpd07s9rj136xwcangyclqpq5pkvl0jkv9l8b3kxfxllkqgpy",
+    "rev": "fb12d7f49e2da121d9b17ed583d269166e0da087",
+    "sha256": "1izdw4x9g08qxjs6c5yvpmc3x8wlbc1affzhwkkykjvwxxip2h8v",
     "origin": "melpa"
   },
   {
@@ -3931,8 +3923,8 @@
     "name": "which-key",
     "fetcher": "github",
     "repo": "justbur/emacs-which-key",
-    "rev": "428aedfce0157920814fbb2ae5d00b4aea89df88",
-    "sha256": "116c3krgi7iyv708jwzqjz72wf1j1aczgv5cvkdscrn7zgpyvm8c",
+    "rev": "c0608e812a8d1bc7aefeacdfaeb56a7272eabf44",
+    "sha256": "1g07i6hyv9glhk6xq1z9vn81vi2f0byy7dp3rg4gw22sm6f6d1al",
     "origin": "melpa"
   },
   {

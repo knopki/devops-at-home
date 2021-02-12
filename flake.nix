@@ -9,7 +9,7 @@
     home.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
+    nix-doom-emacs.url = "github:vlaci/nix-doom-emacs/develop";
     nix-doom-emacs.inputs.nixpkgs.follows = "nixpkgs";
 
     # themes
