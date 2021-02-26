@@ -10,6 +10,7 @@
   ./git.nix
   ./gnome.nix
   ./htop.nix
+  ./imv.nix
   ./kopia.nix
   ./minikube.nix
   ./neovim

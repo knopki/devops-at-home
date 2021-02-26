@@ -27,6 +27,7 @@ in
 
   programs = {
     bat.enable = true;
+    imv.enable = isWorkstation;
     jq.enable = true;
     lesspipe.enable = true;
   };

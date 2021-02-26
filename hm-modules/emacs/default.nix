@@ -39,7 +39,6 @@ in
       # optional dependencies
       fd # faster projectile indexing
       imagemagick # for image-dired
-      imv # feh alternative
       pinentry_emacs # in-emacs gnupg prompts
       zstd # for undo-fu-session/undo-tree compression
 
@@ -156,6 +155,8 @@ in
       enable = true;
       doomPrivateDir = ./doom.d;
     };
+
+    programs.imv.enable = true;
 
     services.emacs = {
       enable = true;
