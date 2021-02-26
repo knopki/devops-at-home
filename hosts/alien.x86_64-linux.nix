@@ -143,6 +143,7 @@ in
         "compile.xod.loc"
         "compiler.xod.loc"
         "mail.xod.loc"
+        "main-db.xod.loc"
         "mqtt.xod.loc"
         "neo4j.xod.loc"
         "pm.xod.loc"
