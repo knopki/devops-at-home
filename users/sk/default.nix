@@ -82,7 +82,6 @@ in
           background_opacity = 0.9;
         };
       };
-      feh.enable = isWorkstation;
       git = {
         signing = {
           key = selfHM.programs.gpg.settings.default-key;
@@ -95,10 +94,13 @@ in
         enable = true;
         settings.default-key = "58A58B6FD38C6B66";
       };
-      imv.settings = {
-        binds = {
-          "<Shift+Left>" = "prev 10";
-          "<Shift+Right>" = "next 10";
+      imv = {
+        enable = isWorkstation;
+        settings = {
+          binds = {
+            "<Shift+Left>" = "prev 10";
+            "<Shift+Right>" = "next 10";
+          };
         };
       };
     };
