@@ -57,7 +57,6 @@
        upload
        :lang
        (cc +lsp)
-       (csharp +lsp)
        data
        emacs-lisp
        erlang
@@ -65,7 +64,6 @@
        (javascript +lsp)
        (json +lsp)
        (latex +lsp +fold)
-       lua
        (markdown +grip)
        nix
        (org +dragndrop +gnuplot +present +pretty +roam)
