@@ -81,7 +81,7 @@ in
             enabledUsers);
         enableActions = map (x: "touch ${lingerDirPath}/${x}") (getLingerUsernames true);
         disableActions = map (x: "rm -f ${lingerDirPath}/${x}") (getLingerUsernames false);
-        updateLingering = pkgs.writers.writeBash "update-lingering" ''
+        updateLingering = ''
           mkdir -p ${lingerDirPath}
           ${concatStringsSep "\n" enableActions}
           ${concatStringsSep "\n" disableActions}
