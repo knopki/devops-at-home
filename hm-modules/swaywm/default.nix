@@ -65,7 +65,6 @@ in
         };
         focus = { };
         assigns = { };
-        workspaceAutoBackAndForth = true;
         modifier = "Mod4";
         bars = [ ];
         startup = [
