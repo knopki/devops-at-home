@@ -270,7 +270,12 @@ in
       nssmdns = true;
     };
     dbus.packages = with pkgs; [ gnome3.dconf ];
-    earlyoom.enable = true;
+    earlyoom = {
+      enable = true;
+      enableDebugInfo = true;
+      enableNotifications = true;
+      freeSwapThreshold = 50;
+    };
     flatpak.enable = true;
     fwupd.enable = true;
     gnome3 = {
@@ -309,6 +314,17 @@ in
         naturalScrolling = true;
       };
       xkbOptions = "grp:caps_toggle,grp_led:caps";
+    };
+  };
+
+  systemd.user.services = {
+    systembus-notify = {
+      enable = true;
+      description = "Show desktop notifications for earlyoom";
+      script = "${pkgs.systembus-notify}/bin/systembus-notify -q";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
     };
   };
 
