@@ -17,10 +17,6 @@ in
         enable = true;
         plugins = [
           {
-            name = "colored_man_pages.fish";
-            src = nixosConfig.nix.registry.fish-colored-man-pages.flake.outPath;
-          }
-          {
             name = "fish-kubectl-completions";
             src = nixosConfig.nix.registry.fish-kubectl-completions.flake.outPath;
           }

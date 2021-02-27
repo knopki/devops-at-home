@@ -305,22 +305,6 @@
         "type": "github"
       }
     },
-    "fish-colored-man-pages": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1613411729,
-        "narHash": "sha256-iFF1jy0oWqCLJuTFr1CFRXYq2z3jqh5hkkqeF4aisiU=",
-        "owner": "PatrickF1",
-        "repo": "colored_man_pages.fish",
-        "rev": "54e2fa16d7742b595aadd53c50bb43cf49f8299f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "PatrickF1",
-        "repo": "colored_man_pages.fish",
-        "type": "github"
-      }
-    },
     "fish-kubectl-completions": {
       "flake": false,
       "locked": {
@@ -600,7 +584,6 @@
         "dracula-fish": "dracula-fish",
         "dracula-wofi": "dracula-wofi",
         "dracula-zathura": "dracula-zathura",
-        "fish-colored-man-pages": "fish-colored-man-pages",
         "fish-kubectl-completions": "fish-kubectl-completions",
         "home": "home",
         "ls-colors": "ls-colors",

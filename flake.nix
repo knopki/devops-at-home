@@ -39,8 +39,6 @@
     ls-colors.url = "github:trapd00r/LS_COLORS";
 
     # fish plugins
-    fish-colored-man-pages.flake = false;
-    fish-colored-man-pages.url = "github:PatrickF1/colored_man_pages.fish";
     fish-kubectl-completions.flake = false;
     fish-kubectl-completions.url = "github:evanlucas/fish-kubectl-completions";
   };
