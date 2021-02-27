@@ -29,5 +29,6 @@ in
     bat.enable = true;
     jq.enable = true;
     lesspipe.enable = true;
+    man.generateCaches = isWorkstation;
   };
 }
