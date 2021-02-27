@@ -10,7 +10,10 @@ with lib;
         character.symbol = "➜";
         conda.disabled = true;
         crystal.disabled = true;
-        direcrory.fish_style_pwd_dir_length = 1;
+        direcrory = {
+          truncation_length = 2;
+          fish_style_pwd_dir_length = 2;
+        };
         elixir.disabled = true;
         elm.disabled = true;
         nim.disabled = true;
