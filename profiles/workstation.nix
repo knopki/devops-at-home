@@ -334,7 +334,7 @@ in
       autoPrune.dates = mkDefault "weekly";
       autoPrune.enable = mkDefault true;
       enable = mkDefault true;
-      enableOnBoot = mkDefault true;
+      enableOnBoot = mkDefault false;
       liveRestore = mkDefault true;
     };
   };
