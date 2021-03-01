@@ -66,7 +66,6 @@ in
       emacs.enable = isWorkstation;
       firefox.enable = isWorkstation;
       gnome.enable = isWorkstation;
-      minikube.enable = isWorkstation;
       neovim.enable = true;
       npmrc.enable = isWorkstation;
       password-store.enable = isWorkstation;

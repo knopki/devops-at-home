@@ -12,7 +12,6 @@
   ./htop.nix
   ./imv.nix
   ./kopia.nix
-  ./minikube.nix
   ./neovim
   ./npmrc.nix
   ./password-store.nix
