@@ -2,64 +2,290 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun knopki/org-get-timestamp-time (POM &optional INHERIT)
-  "Get the timestmap from POM and format it for org-schedule.
-If INHERIT is not-nil, then also check higher levels of the hierarchy"
-  (let ((time (org-entry-get POM "TIMESTAMP" INHERIT)))
-    (when time
-      (org-time-string-to-time time))))
+;;; org-ql queries
+;;;; calendar queries
+;;;;; weeks
+(defun knopki/make-weeks-range (TS WEEKS)
+  "Create datetime range from first monday before TS and WEEKS long."
+  (let* ((start (->> TS
+                     (ts-adjust 'day (- (ts-dow (ts-adjust 'day -1 TS))))
+                     (ts-apply :hour 0 :minute 0 :second 0)))
+         (end (ts-adjust 'day (* 7 WEEKS) 'second -1 start)))
+    (cons start end)))
 
-(defun knopki/org-agenda-prefix-format-s (POINT FORMAT)
-  "Get some timestamp from POINT and FORMAT it."
-  (let ((time (or (org-get-scheduled-time POINT)
-                  (org-get-deadline-time POINT)
-                  (knopki/org-get-timestamp-time POINT))))
-    (when time (format-time-string FORMAT time))))
+(defun knopki/org-ql-week (TITLE BUFFER-FILES DAYS-ADJUST WEEKS)
+  "Show items from BUFFER-FILES with TITLE. Start from DAYS-ADJUST from now and WEEKS long."
+  (-let* ((ts (ts-adjust 'day DAYS-ADJUST (ts-now)))
+          ((beg . end) (knopki/make-weeks-range ts WEEKS))
+          (org-super-agenda-date-format "%A, %e %B %Y"))
+    (org-ql-search BUFFER-FILES
+      `(ts-active :from ,beg :to ,end)
+      :title TITLE
+      :sort '(date priority todo)
+      :super-groups '((:discard (:habit t))
+                      (:auto-planning t)))))
 
-(defun knopki/org-agenda-tags-limit-dates (START REL)
-  "Org agenda date range query from START till REL."
-  `(let* ((ts-start (org-read-date nil nil ,START))
-          (ts-end (org-read-date nil nil ,REL nil (org-read-date nil t ts-start))))
-     (concat (format "+DEADLINE>=\"<%s>\"" ts-start)
-             (format "+DEADLINE<\"<%s>\"" ts-end)
-             "|"
-             (format "+SCHEDULED>=\"<%s>\"" ts-start)
-             (format "+SCHEDULED<\"<%s>\"" ts-end)
-             "|"
-             (format "+CLOSED>=\"<%s>\"" ts-start)
-             (format "+CLOSED<\"<%s>\"" ts-end)
-             "|"
-             (format "+TIMESTAMP>=\"<%s>\"" ts-start)
-             (format "+TIMESTAMP<\"<%s>\"" ts-end))))
+(defun knopki/org-ql-prev-week ()
+  "Show items with an active timestamp during the previous calendar week."
+  (interactive)
+  (knopki/org-ql-week "Previous Week" (org-agenda-files t t) -7 1))
 
-(defmacro knopki/org-agenda-tags-limit-dates-macro
-    (START-FORMAT END &optional START-OFFSET)
-  "Org agenda date range query aligned to calendar.
-Start at START-FORMAT with optional START-OFFSET till END."
-  `(let ((start
-          (if ,START-OFFSET
-              (org-read-date nil nil ,START-OFFSET nil
-                             (org-read-date nil t (format-time-string ,START-FORMAT)))
-            (format-time-string ,START-FORMAT))))
-     (knopki/org-agenda-tags-limit-dates start ,END)))
+(defun knopki/org-ql-this-week ()
+  "Show items with an active timestamp during the this calendar week."
+  (interactive)
+  (knopki/org-ql-week "Current Week" (org-agenda-files t t) 0 1))
 
-(defun knopki/org-agenda-command-date-range-opts (TITLE DATE-FORMAT)
-  "Agenda options for date range block.
-Customized by TITLE and DATE-FORMAT."
-  `((org-agenda-overriding-header ,TITLE)
-    (org-agenda-prefix-format
-     (concat
-      " %-15 c%12(or (knopki/org-agenda-prefix-format-s (point) \""
-      ,DATE-FORMAT
-      "\") \"\") "))
-    (org-agenda-sorting-strategy-selected '(time-up priority-down category-keep))
-    ;; TODO: https://github.com/alphapapa/org-super-agenda/pull/167
-    (org-super-agenda-retain-sorting t)
-    (org-super-agenda-groups
-     '((:discard(:habit t))
-       (:order 10 :todo "DONE" :todo "KILL" :log 'closed :name "Closed")
-       (:order 1 :scheduled t :date t :name "Scheduled")
-       (:order 2 :deadline t :name "Deadlines")))))
+(defun knopki/org-ql-next-week ()
+  "Show items with an active timestamp during the next calendar week."
+  (interactive)
+  (knopki/org-ql-week "Next Week" (org-agenda-files) 7 1))
+
+(defun knopki/org-ql-3-weeks ()
+  "Show items with an active timestamp during the three calendar weeks."
+  (interactive)
+  (knopki/org-ql-week "Three Weeks" (org-agenda-files t t) -7 3))
+
+;;;;; months
+(defun knopki/make-months-range (TS MONTHS)
+  "Create datetime range from first day of month before TS and MONTHS long."
+  (let* ((start (ts-apply :day 1 :hour 0 :minute 0 :second 0 TS))
+         (end (ts-adjust 'month MONTHS 'second -1 start)))
+    (cons start end)))
+
+(defun knopki/org-ql-month (TITLE BUFFER-FILES MONTHS-ADJUST MONTHS)
+  "Show items from BUFFER-FILES with TITLE. Start from MONTHS-ADJUST from now and MONTHS long."
+  (-let* ((ts (ts-adjust 'month MONTHS-ADJUST (ts-now)))
+          ((beg . end) (knopki/make-months-range ts MONTHS))
+          (org-super-agenda-date-format "%e %B %Y"))
+    (org-ql-search BUFFER-FILES
+      `(ts-active :from ,beg :to ,end)
+      :title TITLE
+      :sort '(date priority todo)
+      :super-groups '((:discard (:habit t))
+                      (:auto-planning t)))))
+
+(defun knopki/org-ql-prev-month ()
+  "Show items with an active timestamp during the previous calendar month."
+  (interactive)
+  (knopki/org-ql-month "Previous Month" (org-agenda-files t t) -1 1))
+
+(defun knopki/org-ql-this-month ()
+  "Show items with an active timestamp during the current calendar month."
+  (interactive)
+  (knopki/org-ql-month "Current Month" (org-agenda-files t t) 0 1))
+
+(defun knopki/org-ql-next-month ()
+  "Show items with an active timestamp during the next calendar month."
+  (interactive)
+  (knopki/org-ql-month "Next Month" (org-agenda-files) 1 1))
+
+;;;;; years
+(defun knopki/make-years-range (TS YEARS)
+  "Create datetime range from first day of the year before TS and YEARS long."
+  (let* ((start (ts-apply :month 0 :day 1 :hour 0 :minute 0 :second 0 TS))
+         (end (ts-adjust 'year YEARS 'second -1 start)))
+    (cons start end)))
+
+(defun knopki/org-ql-year (TITLE BUFFER-FILES YEARS-ADJUST YEARS)
+  "Show items from BUFFER-FILES with TITLE. Start from YEARS-ADJUST from now and YEARS long."
+  (-let* ((ts (ts-adjust 'year YEARS-ADJUST (ts-now)))
+          ((beg . end) (knopki/make-years-range ts YEARS))
+          (org-super-agenda-date-format "W%W %B"))
+    (org-ql-search BUFFER-FILES
+      `(ts-active :from ,beg :to ,end)
+      :title TITLE
+      :sort '(date priority todo)
+      :super-groups '((:discard (:habit t))
+                      (:auto-planning t)))))
+
+(defun knopki/org-ql-prev-year ()
+  "Show items with an active timestamp during the previous calendar year."
+  (interactive)
+  (knopki/org-ql-year "Previous Year" (org-agenda-files t t) -1 1))
+
+(defun knopki/org-ql-this-year ()
+  "Show items with an active timestamp during the current calendar year."
+  (interactive)
+  (knopki/org-ql-month "Current Year" (org-agenda-files t t) 0 1))
+
+(defun knopki/org-ql-next-year ()
+  "Show items with an active timestamp during the next calendar year."
+  (interactive)
+  (knopki/org-ql-month "Next Year" (org-agenda-files) 1 1))
+
+;;;; review queries
+
+(defun knopki/org-ql-refile ()
+  "Open a list of entries for refile."
+  (interactive)
+  (org-ql-search (org-agenda-files)
+    '(outline-path "Inbox")
+    :title "Review: Refile"
+    :sort '(date)
+    :super-groups '((:auto-category t))))
+
+(defun knopki/org-ql-stuck-projects ()
+  "Open a list of stuck projects."
+  (interactive)
+  (org-ql-search (org-agenda-files)
+    '(and (todo)
+          (org-entry-blocked-p)
+          (descendants (todo))
+          (not (descendants (todo "NEXT")))
+          (not (descendants (todo "STRT"))))
+    :title "Review: Stuck projects"
+    :sort '(date)
+    :super-groups '((:auto-category t))))
+
+(defun knopki/org-ql-stale-tasks ()
+  "Open a list of tasks without a timestamp in the past month."
+  (interactive)
+  (org-ql-search (org-agenda-files)
+    '(and (todo)
+          (not (ts :from -30))
+          (not (descendants)))
+    :title "Review: Stale tasks"
+    :sort '(date priority todo)
+    :super-groups '((:auto-outline-path t))))
+
+(defun knopki/org-ql-dangling-tasks ()
+  "Open a list of tasks whose ancestor is done."
+  (interactive)
+  (org-ql-search (org-agenda-files)
+    '(and (todo)
+          (ancestors (done)))
+    :title "Review: Dangling tasks"
+    :sort '(date priority todo)
+    :super-groups '((:auto-outline-path t))))
+
+(defun knopki/org-ql-to-archive ()
+  "Open a list of closed but not archived tasks."
+  (interactive)
+  (org-ql-search (org-agenda-files)
+    '(closed :to -30)
+    :sort '(scheduled)
+    :title "Review: to archive"
+    :super-groups '((:auto-outline-path t))))
+
+
+;;;; other queries
+(defun knopki/org-ql-quick-tasks ()
+  "Open a list of tasks with minimal effort."
+  (interactive)
+  (org-ql-search (org-agenda-files)
+    '(and (todo)
+          (property "Effort")
+          (not (scheduled))
+          (or (not (deadline))
+              (deadline auto))
+          (>= 30
+              (org-duration-to-minutes
+               (org-entry-get (point) "Effort"))))
+    :title "Quick tasks"
+    :sort '(date)
+    :super-groups '((:auto-outline-path t))))
+
+(defun knopki/org-ql-category-view (CATEGORY)
+  "Open an overview of selected project CATEGORY."
+  (org-ql-search (org-agenda-files)
+    `(and (category ,CATEGORY)
+          (todo)
+          (not (children)))
+    :title (concat "Category " CATEGORY)
+    :sort '(date priority todo)
+    :super-groups '((:auto-outline-path t))))
+
+(defun knopki/org-ql-project-view ()
+  "Open an overview of the selected project."
+  (interactive)
+  (ivy-read "Project: "
+            (-distinct
+             (org-ql-select (org-agenda-files)
+               '(todo)
+               :action #'org-get-category))
+            :require-match t
+            :action #'knopki/org-ql-category-view))
+
+(defvar knopki/org-ql-next-items-query
+  '(and (todo "NEXT")
+        (not (scheduled))
+        (or (not (deadline))
+            (deadline auto))))
+
+(defun knopki/org-ql-next-items ()
+  "Open a list of todo items marked with NEXT but not scheduled or deadlined."
+  (interactive)
+  (org-ql-search (org-agenda-files)
+    knopki/org-ql-next-items-query
+    :title "Next actions"
+    :sort '(date priority todo)
+    :super-groups '((:auto-outline-path t))))
+
+(defvar knopki/org-ql-waiting-query
+  '(and (todo "WAIT" "HOLD") (not (scheduled))))
+
+(defun knopki/org-ql-waiting ()
+  "Open a list of todo items marked with WAIT/HOLD but not scheduled."
+  (interactive)
+  (org-ql-search (org-agenda-files)
+    knopki/org-ql-waiting-query
+    :title "Waiting"
+    :sort '(date priority todo)
+    :super-groups '((:auto-outline-path t))))
+
+(defvar knopki/org-ql-started-query '(todo "STRT"))
+
+(defun knopki/org-ql-started ()
+  "Open a list of todo items marked with STRT."
+  (interactive)
+  (org-ql-search (org-agenda-files)
+    knopki/org-ql-started-query
+    :title "Started"
+    :sort '(date priority todo)
+    :super-groups '((:auto-outline-path t))))
+
+(defvar knopki/my-main-agenda-command
+  '((agenda ""
+            ((org-agenda-start-day "0d")
+             (org-agenda-span 'day)
+             (org-agenda-remove-tags t)
+             (org-agenda-use-time-grid nil)
+             (org-agenda-overriding-header "")
+             (org-agenda-prefix-format " %-15 c%?12 t%?18 s")
+             (org-agenda-deadline-leaders '("" "In %2dd:" "%2dd ago:"))
+             (org-agenda-scheduled-leaders '("" "%2dd ago:"))
+             (org-super-agenda-groups
+              '((:order 5 :log t)
+                (:order 1 :habit t)
+                (:name ""
+                 :order 0
+                 :scheduled today
+                 :date today)
+                (:name "Overdue"
+                 :order 2
+                 :scheduled past
+                 :deadline past)
+                (:name "Coming Deadlines"
+                 :order 3
+                 :deadline future)
+                (:name "Birthdays & holidays"
+                 :order 4
+                 :category "birthdays"
+                 :category "holidays")))))
+
+    (org-ql-block knopki/org-ql-started-query
+                  ((org-ql-block-header "Started")))
+
+    (org-ql-block knopki/org-ql-next-items-query
+                  ((org-ql-block-header "Next Actions")))
+
+    (org-ql-block knopki/org-ql-waiting-query
+                  ((org-ql-block-header "Waiting")))))
+
+(defun knopki/org-ql-today-agenda ()
+  "Open agenda for week."
+  (interactive)
+  (org-agenda nil "t"))
 
 
 ;;; Larger heading sizes
@@ -133,16 +359,13 @@ Customized by TITLE and DATE-FORMAT."
            "STRT(s)"    ; A task that is in progress
            "WAIT(w)"    ; Something external is holding up this task
            "HOLD(h)"    ; This task is paused/on hold because of me
-           ;; "PROJ(p)"    ; A project, which usually contains other tasks
            "|"
            "DONE(d)"    ; Task successfully completed
            "KILL(k)"))  ; Task was cancelled, aborted or is no longer applicable
         org-todo-keyword-faces
         '(("STRT" . +org-todo-active)
           ("WAIT" . +org-todo-onhold)
-          ("HOLD" . +org-todo-onhold)
-          ;; ("PROJ" . +org-todo-project)
-          )))
+          ("HOLD" . +org-todo-onhold))))
 
 
 ;;; Capture
@@ -236,134 +459,57 @@ Customized by TITLE and DATE-FORMAT."
         org-stuck-projects (quote ("" nil nil ""))
         org-agenda-default-appointment-duration 60))
 
+(use-package! org-ql
+  :after org
+  :init
+  (map! :map doom-leader-open-map
+        :desc "Org Agenda" "A" (cmd! (org-ql-view "Today Agenda"))
+        :desc "Org Agendas" "a" #'org-ql-view)
+  (map! :map doom-leader-notes-map
+        :desc "Org Agendas" "a" #'org-ql-view
+        :desc "org-ql search" "v" #'org-ql-search)
+  :config
+  (set-popup-rules!
+    '(("^\\*Org QL View" :side right :width +popup-shrink-to-fit :quit 'current :select t :modeline nil :vslot -1)
+      ("^\\*Org QL View: Now" :side right :width 0.4 :quit 'current :select t :modeline nil :vslot 2)))
+  (setq org-ql-views
+        (list (cons "Today Agenda" #'knopki/org-ql-today-agenda)
+
+              (cons "Quick Tasks" #'knopki/org-ql-quick-tasks)
+              (cons "Project View" #'knopki/org-ql-project-view)
+              (cons "Next actions" #'knopki/org-ql-next-items)
+              (cons "Waiting" #'knopki/org-ql-waiting)
+              (cons "Started" #'knopki/org-ql-started)
+
+              (cons "Calendar: Next week" #'knopki/org-ql-next-week)
+              (cons "Calendar: This week" #'knopki/org-ql-this-week)
+              (cons "Calendar: Previous week" #'knopki/org-ql-prev-week)
+              (cons "Calendar: 3 weeks" #'knopki/org-ql-3-weeks)
+              (cons "Calendar: Next month" #'knopki/org-ql-next-month)
+              (cons "Calendar: This month" #'knopki/org-ql-this-month)
+              (cons "Calendar: Previous month" #'knopki/org-ql-prev-month)
+              (cons "Calendar: Next year" #'knopki/org-ql-next-year)
+              (cons "Calendar: This year" #'knopki/org-ql-this-year)
+              (cons "Calendar: Previous year" #'knopki/org-ql-prev-year)
+
+              (cons "Review: Refile" #'knopki/org-ql-refile)
+              (cons "Review: Stuck projects" #'knopki/org-ql-stuck-projects)
+              (cons "Review: Stale tasks" #'knopki/org-ql-stale-tasks)
+              (cons "Review: Dangling tasks" #'knopki/org-ql-dangling-tasks)
+              (cons "Review: Recently timestamped" #'org-ql-view-recent-items)
+              (cons "Review: To Archive" #'knopki/org-ql-to-archive))))
+
+
 (use-package! org-super-agenda
   :after org-agenda
   :init
   (setq org-agenda-custom-commands
-        `(("p" "Planner"
-           (
-            ;; Today Agenda
-            (agenda ""
-                    ((org-agenda-start-day "0d")
-                     (org-agenda-span 'day)
-                     (org-agenda-remove-tags t)
-                     (org-agenda-use-time-grid nil)
-                     (org-agenda-overriding-header "")
-                     (org-agenda-prefix-format " %-15 c%?12 t%?18 s")
-                     (org-agenda-deadline-leaders '("" "In %2dd:" "%2dd ago:"))
-                     (org-agenda-scheduled-leaders '("" "%2dd ago:"))
-                     (org-super-agenda-groups
-                      '((:order 5 :log t)
-                        (:order 1 :habit t)
-                        (:name ""
-                         :order 0
-                         :scheduled today
-                         :date today)
-                        (:name "Overdue"
-                         :order 2
-                         :scheduled past
-                         :deadline past)
-                        (:name "Coming Deadlines"
-                         :order 3
-                         :deadline future)
-                        (:name "Birthdays & holidays"
-                         :order 4
-                         :category "birthdays"
-                         :category "holidays")))))
-
-            ;; Started
-            (org-ql-block '(todo "STRT") ((org-ql-block-header "Started")))
-
-            ;; Next Actions
-            (org-ql-block '(and (todo "NEXT")
-                                (not (scheduled))
-                                (or (not (deadline))
-                                    (deadline auto)))
-                          ((org-ql-block-header "Next Actions")))
-
-            ;; Waiting
-            (org-ql-block '(and (todo "WAIT" "HOLD") (not (scheduled)))
-                          ((org-ql-block-header "Waiting")))
-
-            ;; Stuck Projects
-            (org-ql-block '(and (todo)
-                                (org-entry-blocked-p)
-                                (descendants)
-                                (not (descendants (todo "NEXT")))
-                                (not (descendants (todo "STRT"))))
-                          ((org-ql-block-header "Stuck Projects")))
-
-            ;; Quick Tasks
-            (org-ql-block '(and (todo)
-                                (property "Effort")
-                                (not (scheduled))
-                                (or (not (deadline))
-                                    (deadline auto))
-                                (>= 30
-                                    (org-duration-to-minutes
-                                     (org-entry-get (point) "Effort"))))
-                          ((org-ql-block-header "Quick Tasks")))
-
-            ;; Refile
-            (org-ql-block '(or
-                            (and (path "todo.org")
-                                 (todo)
-                                 (parent (heading "Inbox")))
-                            (and (path "notes.org")
-                                 (parent (heading "Inbox"))))
-                          ((org-ql-block-header "Refile")))
-
-            ;; This Week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w")
-                  ,(knopki/org-agenda-command-date-range-opts "This Week" "%a, %d"))
-
-            ;; Next Week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w" "++1w")
-                  ,(knopki/org-agenda-command-date-range-opts "Next Week" "%a, %d"))))
-
-          ("r" . "Review")
-          ("rw" "Week Review"
-           (
-            ;; prev week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w" "--1w")
-                  ,(knopki/org-agenda-command-date-range-opts "Previous Week" "%a, %d"))
-            ;; this week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w")
-                  ,(knopki/org-agenda-command-date-range-opts "This Week" "%a, %d"))
-            ;; next week
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "W%V" "++1w" "++1w")
-                  ,(knopki/org-agenda-command-date-range-opts "Next Week" "%a, %d"))))
-
-          ("rm" "Month Review"
-           (
-            ;; prev month
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%Y-%m-01" "++1m" "--1m")
-                  ,(knopki/org-agenda-command-date-range-opts "Previous Month" "%a, %d"))
-            ;; this month
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%Y-%m-01" "++1m")
-                  ,(knopki/org-agenda-command-date-range-opts "This Month" "%a, %d"))
-            ;; next month
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%Y-%m-01" "++1m" "++1m")
-                  ,(knopki/org-agenda-command-date-range-opts "Next Month" "%a, %d"))))
-
-          ("ry" "Year Review"
-           (
-            ;; next year
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%Y-01-01" "++1y" "--1y")
-                  ,(knopki/org-agenda-command-date-range-opts "Next Year" "%Y-%m-%d"))
-            ;; this year
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%Y-01-01" "++1y")
-                  ,(knopki/org-agenda-command-date-range-opts "This Year" "%Y-%m-%d"))
-            ;; next year
-            (tags ,(knopki/org-agenda-tags-limit-dates-macro "%Y-01-01" "++1y" "++1y")
-                  ,(knopki/org-agenda-command-date-range-opts "Next Year" "%Y-%m-%d"))
-            ))))
+        `(("t" "Today Agenda" ,knopki/my-main-agenda-command)))
   :config
   ;; don't break evil on org-super-agenda headings
   ;; see https://github.com/alphapapa/org-super-agenda/issues/50
   (setq org-super-agenda-header-map nil)
   (org-super-agenda-mode))
-
 
 ;;; Attachments
 (after! org-download
