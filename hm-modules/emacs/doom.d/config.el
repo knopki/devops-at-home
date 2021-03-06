@@ -149,6 +149,12 @@
 ;; Visual bell in the modeline.
 (after! doom-themes (doom-themes-visual-bell-config))
 
+;;;; Deft
+
+;; remove deft key binding because there is no deft
+(undefine-key! doom-leader-notes-map "d")
+
+
 ;;;; Modeline
 
 ;; Use unicode when no icons.
