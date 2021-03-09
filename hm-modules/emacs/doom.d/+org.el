@@ -84,6 +84,7 @@
         org-log-into-drawer t
         org-pretty-entities t
         org-enforce-todo-checkbox-dependencies t
+        org-todo-repeat-to-state "LOOP"
         org-extend-today-until 5
         org-ellipsis "⤵"
         org-startup-with-inline-images t
