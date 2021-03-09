@@ -173,7 +173,7 @@
   "Open a list of entries for refile."
   (interactive)
   (org-ql-search (org-agenda-files)
-    '(outline-path "Inbox")
+    '(and (outline-path "Inbox") (parent))
     :title "Review: Refile"
     :sort '(date)
     :super-groups '((:auto-category t))))
