@@ -3,12 +3,6 @@
 ;;; Code:
 
 ;;; org-ql queries
-(defvar knopki/org-ql-next-items-query
-  '(and (todo "NEXT")
-        (not (scheduled))
-        (or (not (deadline))
-            (deadline auto))))
-
 (defvar knopki/org-ql-waiting-query
   '(and (todo "WAIT" "HOLD") (not (scheduled))))
 
@@ -45,9 +39,6 @@
 
     (org-ql-block knopki/org-ql-started-query
                   ((org-ql-block-header "Started")))
-
-    (org-ql-block knopki/org-ql-next-items-query
-                  ((org-ql-block-header "Next Actions")))
 
     (org-ql-block knopki/org-ql-waiting-query
                   ((org-ql-block-header "Waiting")))))
@@ -121,23 +112,6 @@
         (:prefix ("d" . "date/deadline")
          "c" #'knopki/org-insert-created-at-point
          "r" #'knopki/org-insert-reviewed-at-point)))
-
-;;; Keywords
-(after! org
-  (setq org-todo-keywords
-        '((sequence
-           "TODO(t)"    ; A task that needs doing
-           "NEXT(n)"    ; Next action
-           "STRT(s)"    ; A task that is in progress
-           "WAIT(w)"    ; Something external is holding up this task
-           "HOLD(h)"    ; This task is paused/on hold because of me
-           "|"
-           "DONE(d)"    ; Task successfully completed
-           "KILL(k)"))  ; Task was cancelled, aborted or is no longer applicable
-        org-todo-keyword-faces
-        '(("STRT" . +org-todo-active)
-          ("WAIT" . +org-todo-onhold)
-          ("HOLD" . +org-todo-onhold))))
 
 
 ;;; Capture
@@ -237,7 +211,6 @@
 
               (cons "Quick Tasks" #'knopki/org-ql-quick-tasks)
               (cons "Project View" #'knopki/org-ql-project-view)
-              (cons "Next actions" #'knopki/org-ql-next-items)
               (cons "Waiting" #'knopki/org-ql-waiting)
               (cons "Started" #'knopki/org-ql-started)
 

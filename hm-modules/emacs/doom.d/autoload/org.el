@@ -183,10 +183,10 @@
   "Open a list of stuck projects."
   (interactive)
   (org-ql-search (org-agenda-files)
-    '(and (todo)
+    '(and (todo "PROJ")
           (org-entry-blocked-p)
           (descendants (todo))
-          (not (descendants (todo "NEXT")))
+          (not (descendants (scheduled)))
           (not (descendants (todo "STRT"))))
     :title "Review: Stuck projects"
     :sort '(date)
@@ -265,16 +265,6 @@
                :action #'org-get-category))
             :require-match t
             :action #'knopki/org-ql-category-view))
-
-;;;###autoload
-(defun knopki/org-ql-next-items ()
-  "Open a list of todo items marked with NEXT but not scheduled or deadlined."
-  (interactive)
-  (org-ql-search (org-agenda-files)
-    knopki/org-ql-next-items-query
-    :title "Next actions"
-    :sort '(date priority todo)
-    :super-groups '((:auto-outline-path t))))
 
 ;;;###autoload
 (defun knopki/org-ql-waiting ()
