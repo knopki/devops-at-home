@@ -67,7 +67,7 @@
     (defun my-org-mode-hook ()
       (setq display-line-numbers nil)
       (mixed-pitch-mode t)
-      (org-expiry-insinuate)))
+      (knopki/org-insert-created-insinuate)))
 
   ;; Autosave (no sure is it worth it)
   (run-with-idle-timer 300 t 'org-save-all-org-buffers)
@@ -112,8 +112,15 @@
                         (directory . emacs)
                         (remote . emacs)
                         (auto-mode . emacs)))
+
   (add-to-list 'org-modules 'org-habit)
-  (add-to-list 'org-modules 'org-checklist))
+  (add-to-list 'org-modules 'org-checklist)
+
+  (map! :map org-mode-map
+        :localleader
+        (:prefix ("d" . "date/deadline")
+         "c" #'knopki/org-insert-created-at-point
+         "r" #'knopki/org-insert-reviewed-at-point)))
 
 ;;; Keywords
 (after! org
@@ -267,19 +274,6 @@
 ;;; Attachments
 (after! org-download
   (setq org-download-screenshot-method "grimshot save area %s"))
-
-;;; Expire old entries
-(use-package! org-expiry
-  :commands (org-expiry-insinuate
-             org-expiry-deinsinuate
-             org-expiry-insert-created
-             org-expiry-insert-expiry
-             org-expiry-add-keyword
-             org-expiry-archive-subtree
-             org-expiry-process-entry
-             org-expiry-process-entries)
-  :config
-  (setq org-expiry-inactive-timestamps t))
 
 ;;; org-roam
 (after! org-roam

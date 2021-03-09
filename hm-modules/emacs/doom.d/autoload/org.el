@@ -2,6 +2,44 @@
 ;;; Commentary:
 ;;; Code:
 
+;;; CREATED and REVIEWED properties
+;;;###autoload
+(defun knopki/org-insert-created-at-point (&rest _)
+  "Insert CREATED property to the entry at point if not already set."
+  (interactive)
+  (let* ((prop-name "CREATED")
+         (d (org-entry-get (point) prop-name))
+         (timestr-active (format-time-string (cdr org-time-stamp-formats)))
+         (timestr-inactive (concat "["  (substring timestr-active 1 -1)  "]")))
+    (when (null d)
+      (save-excursion (org-entry-put (point) prop-name timestr-inactive)))))
+
+;;;###autoload
+(defun knopki/org-insert-reviewed-at-point (&rest _)
+  "Insert or update REVIEWED property of the entry at point."
+  (interactive)
+  (let* ((prop-name "REVIEWED")
+         (timestr-active (format-time-string (cdr org-time-stamp-formats)))
+         (timestr-inactive (concat "[" (substring timestr-active 1 -1) "]")))
+    (save-excursion (org-entry-put (point) prop-name timestr-inactive))))
+
+;;;###autoload
+(defun knopki/org-insert-created-insinuate ()
+  "Add hooks and activate advices for CREATED property."
+  (defadvice org-schedule (after org-schedule-update-created)
+    (knopki/org-insert-created-at-point))
+  (defadvice org-deadline (after org-deadline-update-created)
+    (knopki/org-insert-created-at-point))
+  (defadvice org-time-stamp (after org-time-stamp-update-created)
+    (knopki/org-insert-created-at-point))
+  (ad-activate 'org-schedule)
+  (ad-activate 'org-time-stamp)
+  (ad-activate 'org-deadline)
+  (add-hook! '(org-insert-heading-hook
+               org-after-todo-state-change-hook
+               org-after-tags-change-hook) #'knopki/org-insert-created-at-point))
+
+
 ;;; org-ql queries
 ;;;; calendar queries
 ;;;;; weeks
