@@ -9,8 +9,11 @@
     home.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    nix-doom-emacs.url = "github:vlaci/nix-doom-emacs/develop";
+    doom-emacs.url = "github:hlissner/doom-emacs/develop";
+    doom-emacs.flake = false;
+    nix-doom-emacs.url = "github:vlaci/nix-doom-emacs/master";
     nix-doom-emacs.inputs.nixpkgs.follows = "nixpkgs";
+    nix-doom-emacs.inputs.doom-emacs.follows = "doom-emacs";
 
     # themes
     base16-default-schemes.flake = false;

@@ -115,11 +115,11 @@
     "doom-emacs": {
       "flake": false,
       "locked": {
-        "lastModified": 1614207990,
-        "narHash": "sha256-7Ho0S4wDpRNmjjBeDO8CmyIb2Ms+UryCO/SjJaDVw0M=",
+        "lastModified": 1615217109,
+        "narHash": "sha256-Jb4njIuiiiWhgnxG1k+LqTEx8gSk53KPGL4cobLQbvs=",
         "owner": "hlissner",
         "repo": "doom-emacs",
-        "rev": "d52abd37f79190e7cc20355a042938f90f2d1a24",
+        "rev": "fe6981b24541c0062b809d6d4973bb6771d00c00",
         "type": "github"
       },
       "original": {
@@ -375,7 +375,9 @@
     },
     "nix-doom-emacs": {
       "inputs": {
-        "doom-emacs": "doom-emacs",
+        "doom-emacs": [
+          "doom-emacs"
+        ],
         "doom-snippets": "doom-snippets",
         "emacs-overlay": "emacs-overlay",
         "emacs-so-long": "emacs-so-long",
@@ -406,7 +408,7 @@
       },
       "original": {
         "owner": "vlaci",
-        "ref": "develop",
+        "ref": "master",
         "repo": "nix-doom-emacs",
         "type": "github"
       }
@@ -580,6 +582,7 @@
         "base16-tmux": "base16-tmux",
         "base16-vim": "base16-vim",
         "base16-waybar": "base16-waybar",
+        "doom-emacs": "doom-emacs",
         "dracula-alacritty": "dracula-alacritty",
         "dracula-fish": "dracula-fish",
         "dracula-wofi": "dracula-wofi",
