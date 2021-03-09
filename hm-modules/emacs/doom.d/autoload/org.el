@@ -186,7 +186,7 @@
     '(and (todo "PROJ")
           (org-entry-blocked-p)
           (descendants (todo))
-          (not (descendants (scheduled)))
+          (not (descendants (or (scheduled) (deadline auto))))
           (not (descendants (todo "STRT"))))
     :title "Review: Stuck projects"
     :sort '(date)
