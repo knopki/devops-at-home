@@ -819,8 +819,8 @@
     "name": "doom-themes",
     "fetcher": "github",
     "repo": "hlissner/emacs-doom-themes",
-    "rev": "e82b6b550bcd7eaf82b5820c4a63070ea0086bc3",
-    "sha256": "1npklji5v76rj63fj1ps18670v2hvzp7vj62x3i4qar8nbzvzyn1",
+    "rev": "55f01ede533c800e6eb44ef5bdc2fe64d0400425",
+    "sha256": "19lhvf6gsvpadmx27lswdnl6y93sywn17d7yjbigva62lmr6yq0w",
     "origin": "melpa"
   },
   {
@@ -1603,8 +1603,8 @@
     "name": "forge",
     "fetcher": "github",
     "repo": "magit/forge",
-    "rev": "fa80a8789cb15c1b1c5fc7a9e328283202c75135",
-    "sha256": "0w6f5sc9l5jqvhhi6mg6n3z70l5j2kw2kns3nhw4fbd95bjrxqps",
+    "rev": "8382fd3d43855de779c46da338dd59b1cb1d333e",
+    "sha256": "1ah4f5sy2ja33ibk37yqps7vmgdvkp36vahs2njqg0rg6zx057r3",
     "origin": "melpa"
   },
   {
@@ -2258,7 +2258,7 @@
   {
     "name": "js2-refactor",
     "fetcher": "github",
-    "repo": "magnars/js2-refactor.el",
+    "repo": "js-emacs/js2-refactor.el",
     "rev": "d4c40b5fc86d3edd7c6a7d83ac86483ee1cb7a28",
     "sha256": "08b25y3raz0p98zxk9xdd8nj9shqd6mzrqhbq1gg4cwsmi7h7ly1",
     "origin": "melpa"
@@ -2491,8 +2491,8 @@
     "name": "magit",
     "fetcher": "github",
     "repo": "magit/magit",
-    "rev": "1c60edc86512c53b15e753d6dca319a5e01f83a3",
-    "sha256": "1gzqr89k3dzk953qi2c8jya4ci6l07gjd10allakapxh4chrf87i",
+    "rev": "4735b9254105eb7dd538f979d8b4c6ab96b827b9",
+    "sha256": "0c4g3gxyk4lah28121d0cfwkyravqy1vjad8sdvigg9nqqkkcjai",
     "origin": "melpa"
   },
   {
@@ -3538,7 +3538,7 @@
   {
     "name": "rubocop",
     "fetcher": "github",
-    "repo": "rubocop-hq/rubocop-emacs",
+    "repo": "rubocop/rubocop-emacs",
     "rev": "1372ee3fc1daf7dc8d96741b03e4aff5f7ae3906",
     "sha256": "1svzp1ylc3j5mfp5bgivmxgy60wyfrzgahvcfzr1217dwjbf68jm",
     "origin": "melpa"
@@ -3683,8 +3683,8 @@
     "name": "solaire-mode",
     "fetcher": "github",
     "repo": "hlissner/emacs-solaire-mode",
-    "rev": "c697925f7e03819a4046a233f6ab31664aca9d6a",
-    "sha256": "1fwyranv159sgfsc07h7vjn7c2js95zk2hw06d1dr1ddnl5hgrvf",
+    "rev": "a8fe09d8f5a9cb541c59dcd75a136f1d2a06b8bd",
+    "sha256": "1fwjy5m66nz2ipshmr7dky8v4pdwynq54282anb0rfa34dim4mrh",
     "origin": "melpa"
   },
   {
@@ -4034,7 +4034,7 @@
   {
     "name": "xref-js2",
     "fetcher": "github",
-    "repo": "NicolasPetton/xref-js2",
+    "repo": "js-emacs/xref-js2",
     "rev": "6f1ed5dae0c2485416196a51f2fa92f32e4b8262",
     "sha256": "0pbnhliq3zivijksdhdqd7m3ndc3z7kw2g21zwihq28faps96ikj",
     "origin": "melpa"
