@@ -13,7 +13,6 @@ let
       grim
       jq
       libnotify
-      nodePackages.emoj
       procps
       slurp
       sway-contrib.grimshot

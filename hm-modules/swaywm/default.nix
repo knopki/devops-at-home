@@ -127,7 +127,6 @@ in
             "Print" = "exec ${pkgs.sway-scripts}/bin/wofi-screenshot-menu \"${config.xdg.userDirs.pictures}/screenshots\"";
             "XF86Display" = "exec ${pkgs.wdisplays}/bin/wdisplays";
             "${modifier}+p" = "exec ${pkgs.sway-scripts}/bin/wofi-pass";
-            "${modifier}+m" = "exec ${pkgs.sway-scripts}/bin/wofi-emoj";
             "${modifier}+Shift+e" = "exec ${pkgs.sway-scripts}/bin/wofi-system-menu";
             "${modifier}+c" = "exec ${pkgs.qalculate-gtk}/bin/qalculate-gtk";
             "${modifier}+o" = mkIf config.knopki.emacs.org-capture.enable "mode org-capture";
