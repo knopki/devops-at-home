@@ -53,6 +53,7 @@
        make
        pass
        rgb
+       terraform
        tmux
        upload
        :lang

@@ -19,6 +19,9 @@
   (setq lsp-pyright-multi-root nil)
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.venv\\'"))
 
+;;; Terraform
+;; (setq lsp-terraform-server "terraform-lsp")
+
 
 ;;; Local Variables:
 ;;; byte-compile-warnings: (not free-vars unresolved)
