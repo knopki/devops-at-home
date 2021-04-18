@@ -1,0 +1,45 @@
+imports = [ "git.hooks" ]
+
+[devshell]
+packages = [
+  "git-crypt"
+]
+
+[[commands]]
+package = "git"
+category = "vcs"
+
+[[commands]]
+package = "nixpkgs-fmt"
+category = "linters"
+
+[[commands]]
+package = "editorconfig-checker"
+category = "linters"
+
+[[commands]]
+package = "python3Packages.grip"
+category = "documentation"
+
+[[commands]]
+package = "mdbook"
+category = "documentation"
+
+[[commands]]
+package = "manix"
+category = "documentation"
+
+[[commands]]
+package = "sops"
+category = "secrets"
+
+[[commands]]
+package = "ssh-to-pgp"
+category = "secrets"
+
+[git.hooks]
+enable = true
+
+[[env]]
+name = "sopsPGPKeyDirs"
+value = "./secrets/keys/hosts ./secrets/keys/users"

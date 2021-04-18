@@ -1,132 +1,66 @@
 {
   description = "Configuration management of the my personal machines, my dotfiles, my other somethings.";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    home.url = "github:nix-community/home-manager/release-20.09";
-    home.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    doom-emacs.url = "github:hlissner/doom-emacs/develop";
-    doom-emacs.flake = false;
-    nix-doom-emacs.url = "github:vlaci/nix-doom-emacs/master";
-    nix-doom-emacs.inputs.nixpkgs.follows = "nixpkgs";
-    nix-doom-emacs.inputs.doom-emacs.follows = "doom-emacs";
-
-    # themes
-    base16-default-schemes.flake = false;
-    base16-default-schemes.url = "github:chriskempson/base16-default-schemes";
-    base16-dracula-scheme.flake = false;
-    base16-dracula-scheme.url = "github:dracula/base16-dracula-scheme";
-    base16-shell.flake = false;
-    base16-shell.url = "github:chriskempson/base16-shell";
-    base16-textmate.flake = false;
-    base16-textmate.url = "github:chriskempson/base16-textmate";
-    base16-tmux.flake = false;
-    base16-tmux.url = "github:mattdavis90/base16-tmux";
-    base16-vim.flake = false;
-    base16-vim.url = "github:chriskempson/base16-vim";
-    base16-waybar.flake = false;
-    base16-waybar.url = "github:mnussbaum/base16-waybar";
-    dracula-alacritty.flake = false;
-    dracula-alacritty.url = "github:dracula/alacritty";
-    dracula-fish.flake = false;
-    dracula-fish.url = "github:dracula/fish";
-    dracula-wofi.flake = false;
-    dracula-wofi.url = "github:dracula/wofi";
-    dracula-zathura.flake = false;
-    dracula-zathura.url = "github:dracula/zathura";
-    ls-colors.flake = false;
-    ls-colors.url = "github:trapd00r/LS_COLORS";
-
-    # fish plugins
-    fish-kubectl-completions.flake = false;
-    fish-kubectl-completions.url = "github:evanlucas/fish-kubectl-completions";
-  };
-
-  outputs = inputs@{ self, nixpkgs, sops-nix, ... }:
-    let
-      inherit (builtins) attrNames attrValues baseNameOf elem filter listToAttrs readDir;
-      inherit (nixpkgs.lib) genAttrs filterAttrs hasSuffix removeSuffix;
-      systems = [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-darwin"
-        "x86_64-linux"
-      ];
-      forAllSystems = f: genAttrs systems (system: f system);
-      prepModules = map (
-        path: {
-          name = removeSuffix ".nix" (baseNameOf path);
-          value = import path;
-        }
-      );
-
-      # Memoize nixpkgs for different platforms for efficiency.
-      nixpkgsFor = forAllSystems (
-        system:
-        import nixpkgs {
-          inherit system;
-          config = { allowUnfree = true; };
-          overlays = attrValues self.overlays;
-        }
-      );
-
-      outerOverlays = { };
-    in
+  inputs =
     {
-      nixosConfigurations =
-        let
-          configs = import ./hosts (inputs // { inherit nixpkgsFor; });
-        in
-        configs;
-
-      overlay = import ./pkgs;
-
-      overlays =
-        let
-          filenames = filter (hasSuffix ".nix") (attrNames (readDir ./overlays));
-          names = map (removeSuffix ".nix") filenames;
-          overlays = genAttrs names (name: import (./overlays + "/${name}.nix"));
-        in
-        outerOverlays // overlays;
-
-      packages = forAllSystems (
-        system: filterAttrs (n: v: elem system v.meta.platforms) {
-          inherit (nixpkgsFor.${system}) sway-scripts winbox winbox-bin;
-        }
-      );
-
-      nixosModules =
-        let
-          # binary cache
-          cachix = import ./cachix.nix;
-          cachixAttrs = { inherit cachix; };
-
-          # modules
-          moduleList = import ./modules/list.nix;
-          modulesAttrs = listToAttrs (prepModules moduleList);
-          hmModuleList = import ./hm-modules/list.nix;
-          hmModulesAttrs = { home-manager = listToAttrs (prepModules hmModuleList); };
-
-          # profiles
-          profileList = import ./profiles/list.nix;
-          profilesAttrs = { profiles = listToAttrs (prepModules profileList); };
-        in
-        cachixAttrs // modulesAttrs // hmModulesAttrs // profilesAttrs;
-
-      checks.x86_64-linux = self.packages.x86_64-linux // {
-        alien = self.nixosConfigurations.alien.config.system.build.toplevel;
-        # iso = self.nixosConfigurations.iso.config.system.build.isoImage;
+      nixos.url = "nixpkgs/nixos-unstable"; # TODO: migrate to the stable
+      override.url = "nixpkgs/nixpkgs-unstable";
+      ci-agent = {
+        url = "github:hercules-ci/hercules-ci-agent";
+        inputs = { nix-darwin.follows = "darwin"; flake-compat.follows = "flake-compat"; nixos-20_09.follows = "nixos"; nixos-unstable.follows = "override"; };
       };
+      darwin.url = "github:LnL7/nix-darwin";
+      darwin.inputs.nixpkgs.follows = "nixos";
+      deploy = {
+        url = "github:serokell/deploy-rs";
+        inputs = { flake-compat.follows = "flake-compat"; naersk.follows = "naersk"; nixpkgs.follows = "nixos"; utils.follows = "utils"; };
+      };
+      devshell.url = "github:numtide/devshell";
+      flake-compat.url = "github:BBBSnowball/flake-compat/pr-1";
+      flake-compat.flake = false;
+      home.url = "github:nix-community/home-manager/release-21.05";
+      home.inputs.nixpkgs.follows = "nixos";
+      naersk.url = "github:nmattia/naersk";
+      naersk.inputs.nixpkgs.follows = "override";
+      nixos-hardware.url = "github:nixos/nixos-hardware";
+      utils.url = "github:numtide/flake-utils";
+      pkgs.url = "path:./pkgs";
+      pkgs.inputs.nixpkgs.follows = "nixos";
+      sops-nix.url = "github:Mic92/sops-nix";
+      sops-nix.inputs.nixpkgs.follows = "nixos";
 
-      devShell = forAllSystems (
-        system: import ./shell.nix {
-          pkgs = nixpkgsFor.${system};
-          sops-nix = import sops-nix { pkgs = nixpkgsFor.${system}; };
-        }
-      );
+      # emacs
+      doom-emacs.url = "github:hlissner/doom-emacs/develop";
+      doom-emacs.flake = false;
+      emacs-overlay.url = "github:nix-community/emacs-overlay";
+      nix-doom-emacs.url = "github:vlaci/nix-doom-emacs/master";
+      nix-doom-emacs.inputs.nixpkgs.follows = "nixos";
+      nix-doom-emacs.inputs.emacs-overlay.follows = "emacs-overlay";
+      nix-doom-emacs.inputs.doom-emacs.follows = "doom-emacs";
+      nix-doom-emacs.inputs.flake-utils.follows = "utils";
+    };
+
+  outputs = inputs@{ deploy, nixos, nur, self, utils, ... }:
+    let
+      lib = import ./lib { inherit self nixos utils inputs; };
+    in
+    lib.mkFlake
+      {
+        inherit self;
+        hosts = ./hosts;
+        packages = import ./pkgs;
+        suites = import ./profiles/suites.nix;
+        extern = import ./extern;
+        overrides = import ./extern/overrides.nix;
+        overlays = ./overlays;
+        profiles = ./profiles;
+        userProfiles = ./users/profiles;
+        modules = import ./modules/module-list.nix;
+        userModules = import ./users/modules/module-list.nix;
+      } // {
+      inherit lib;
+      defaultTemplate = self.templates.flk;
+      templates.flk.path = ./.;
+      templates.flk.description = "flk template";
     };
 }

@@ -1,0 +1,281 @@
+{
+  "nodes": {
+    "base16-default-schemes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1559992488,
+        "narHash": "sha256-pwJCHPaHhvkkjIxQhMUm9FA5jZJSrMhu+ciA3A/dsME=",
+        "owner": "chriskempson",
+        "repo": "base16-default-schemes",
+        "rev": "daf674291964321cd8c92644f9bbdbf3e7c0e8b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "repo": "base16-default-schemes",
+        "type": "github"
+      }
+    },
+    "base16-dracula-scheme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1577071917,
+        "narHash": "sha256-dU23Bps3cAuvBboq2UA9tvRANV7IAy4GJXiEobnqWaE=",
+        "owner": "dracula",
+        "repo": "base16-dracula-scheme",
+        "rev": "970c1b5bbb99cd99595ab4ace1a0ba4af9695774",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "base16-dracula-scheme",
+        "type": "github"
+      }
+    },
+    "base16-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1560619632,
+        "narHash": "sha256-OMhC6paqEOQUnxyb33u0kfKpy8plLSRgp8X8T8w0Q/o=",
+        "owner": "chriskempson",
+        "repo": "base16-shell",
+        "rev": "ce8e1e540367ea83cc3e01eec7b2a11783b3f9e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "repo": "base16-shell",
+        "type": "github"
+      }
+    },
+    "base16-textmate": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1539002895,
+        "narHash": "sha256-uU4YUCW4gS0WNL0mjWvd6hc0vWj5y34T7Ana3LD1IMA=",
+        "owner": "chriskempson",
+        "repo": "base16-textmate",
+        "rev": "1d9e52afb74e03f5a2fdc53d9327428fe00c70c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "repo": "base16-textmate",
+        "type": "github"
+      }
+    },
+    "base16-tmux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617445572,
+        "narHash": "sha256-CHDSb3uA1g3nPCED8/jMgP4xBMkk9LtGNEuJw4LJr+Q=",
+        "owner": "mattdavis90",
+        "repo": "base16-tmux",
+        "rev": "810ba8f86f028b467353e22837f8c89eb46fc287",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattdavis90",
+        "repo": "base16-tmux",
+        "type": "github"
+      }
+    },
+    "base16-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1559893574,
+        "narHash": "sha256-6FsT87qcl9GBxgxrPx2bPULIMA/O8TRxHaN49qMM4uM=",
+        "owner": "chriskempson",
+        "repo": "base16-vim",
+        "rev": "6191622d5806d4448fa2285047936bdcee57a098",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "repo": "base16-vim",
+        "type": "github"
+      }
+    },
+    "base16-waybar": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1546831770,
+        "narHash": "sha256-ehb4CLLPJ/SjMz53/inuP9ine2CfIpexp2O1lVHihM0=",
+        "owner": "mnussbaum",
+        "repo": "base16-waybar",
+        "rev": "d2f943b1abb9c9f295e4c6760b7bdfc2125171d2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mnussbaum",
+        "repo": "base16-waybar",
+        "type": "github"
+      }
+    },
+    "dracula-alacritty": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1610549865,
+        "narHash": "sha256-HeQu+yfYzIiVlH3BUjNiFeg+r4Y2V+lDV1RQ0k/PYTo=",
+        "owner": "dracula",
+        "repo": "alacritty",
+        "rev": "50afeef999f5e97543f91015ae8fb941996c326b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "alacritty",
+        "type": "github"
+      }
+    },
+    "dracula-fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1614879673,
+        "narHash": "sha256-vdqYlEyYvlPVgTkwXbE8GVZo0UBBT88JyMSWYykhfx4=",
+        "owner": "dracula",
+        "repo": "fish",
+        "rev": "28db361b55bb49dbfd7a679ebec9140be8c2d593",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "fish",
+        "type": "github"
+      }
+    },
+    "dracula-wofi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1603455500,
+        "narHash": "sha256-ra3Nbrk8ozYiqESFxYH0XRyn7bUakJKjIwk3jsZZBq8=",
+        "owner": "dracula",
+        "repo": "wofi",
+        "rev": "1f7d1b68b664901e937029025c14c7f68263f0d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "wofi",
+        "type": "github"
+      }
+    },
+    "dracula-zathura": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617383550,
+        "narHash": "sha256-WIq1eX3bQhM4ff0Zgkr+QTrt/oUFcOJC/vn1LqfJ6rA=",
+        "owner": "dracula",
+        "repo": "zathura",
+        "rev": "fcfbe3f78b85e6629fe68d2573037cd4b0d90b89",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "zathura",
+        "type": "github"
+      }
+    },
+    "fish-kubectl-completions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1611251826,
+        "narHash": "sha256-+jo6Zx6nlA5QhQ+3Vru+QbKjCwIxPEvrlKWctffG3OQ=",
+        "owner": "evanlucas",
+        "repo": "fish-kubectl-completions",
+        "rev": "bbe3b831bcf8c0511fceb0607e4e7511c73e8c71",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evanlucas",
+        "repo": "fish-kubectl-completions",
+        "type": "github"
+      }
+    },
+    "krohnkite": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1590939308,
+        "narHash": "sha256-59WDs5te7H1Jo58LTpiY8ZW9nGjKpd0P1VXD4eblgsw=",
+        "owner": "esjeon",
+        "repo": "krohnkite",
+        "rev": "c878120074fedbbde966dd6bd5b8cf722e0d54f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "esjeon",
+        "ref": "v0.8",
+        "repo": "krohnkite",
+        "type": "github"
+      }
+    },
+    "ls-colors": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1614790381,
+        "narHash": "sha256-ajYsRkW6Y7zuGoQn+mK4j2ZFE7spvAzEV6CLB3FJqrM=",
+        "owner": "trapd00r",
+        "repo": "LS_COLORS",
+        "rev": "14cc83a6a0105bebc7043ff2d35b4dc0703f7d48",
+        "type": "github"
+      },
+      "original": {
+        "owner": "trapd00r",
+        "repo": "LS_COLORS",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1619380875,
+        "narHash": "sha256-7D44Uqntzljl3RNPtTXeBeo1IRheggz7sm8gUNQZWpw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1e4cba2908b2f21f9de4b518da579296d01887bf",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "base16-default-schemes": "base16-default-schemes",
+        "base16-dracula-scheme": "base16-dracula-scheme",
+        "base16-shell": "base16-shell",
+        "base16-textmate": "base16-textmate",
+        "base16-tmux": "base16-tmux",
+        "base16-vim": "base16-vim",
+        "base16-waybar": "base16-waybar",
+        "dracula-alacritty": "dracula-alacritty",
+        "dracula-fish": "dracula-fish",
+        "dracula-wofi": "dracula-wofi",
+        "dracula-zathura": "dracula-zathura",
+        "fish-kubectl-completions": "fish-kubectl-completions",
+        "krohnkite": "krohnkite",
+        "ls-colors": "ls-colors",
+        "nixpkgs": "nixpkgs",
+        "steamcompmgr": "steamcompmgr"
+      }
+    },
+    "steamcompmgr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1618870050,
+        "narHash": "sha256-aFGVVu1DAjNz8PO0ZSAbGvClxT4QQGlX8tEwqtY6Pw0=",
+        "owner": "gamer-os",
+        "repo": "steamos-compositor-plus",
+        "rev": "4cb67e7a1505151c1a97656f2d812aaf3e09c3fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gamer-os",
+        "repo": "steamos-compositor-plus",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

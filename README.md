@@ -3,92 +3,27 @@
 Configuration management of the my personal machines, my dotfiles,
 my other somethings. Because why not.
 
+This version is based on [DevOS][devos].
+
 ## Setup
 
-Requirements:
+You need `nix` to be installed. `direnv` is recommended too, because you need
+to be inside `nix shell`.
 
-- `nix` (`pkgs.nixFlakes`)
-- `direnv` && `nix-direnv`
+Preffered way to deploy things is to use [deploy-rs][deploy-rs-guide].
 
-`direnv allow` and everything is ready.
+[sops][sops-nix] is used for secrets.
 
-## Usage
+- [How to create installation media][iso-guide]
+- [How to install][install-guide]
 
-Check configuration:
+[Packages](./pkgs), [modules](./modules) and
+[home manager modules](./users/modules) are available as flake outputs
+for reuse. Type `nix flake show` for TOC.
 
-```sh
-nix flake check
-```
-
-Switch to configuration:
-
-```sh
-nixos-rebuild switch --flake .#hostname
-```
-
-Build an ISO:
-
-```sh
-nix build -v .#nixosConfigurations.iso.config.system.build.isoImage
-```
-
-Open shell with package:
-
-```sh
-nix shell .#packages.x86_64-linux.winbox
-```
-
-Update inputs:
-
-``` sh
-nix flake update --update-input nixpkgs
-```
-
-Special case for updating Doom Emacs:
-
-``` sh
-nix flake update --update-input nix-doom-emacs
-hm-modules/emacs/update.py
-git add hm-modules/emacs/pinned.json
-```
-
-### Show Me What You Got
-
-```
-├───checks
-│   └───x86_64-linux
-│       ├───alien: derivation 'nixos-system-alien-20.09.20210123.fe08be6'
-│       ├───sway-scripts: derivation 'sway-scripts'
-│       ├───winbox: derivation 'winbox-bin-3.20'
-│       └───winbox-bin: derivation 'winbox-bin-3.20'
-├───devShell
-│   ├───aarch64-linux: development environment 'nix-shell'
-│   ├───i686-linux: development environment 'nix-shell'
-│   ├───x86_64-darwin: development environment 'nix-shell'
-│   └───x86_64-linux: development environment 'nix-shell'
-├───nixosConfigurations
-│   ├───alien: NixOS configuration
-│   └───iso: NixOS configuration
-├───nixosModules
-│   ├───boot: NixOS module
-│   ├───cachix: NixOS module
-│   ├───home-manager: NixOS module
-│   ├───meta: NixOS module
-│   ├───profiles: NixOS module
-│   └───users: NixOS module
-├───overlay: Nixpkgs overlay
-├───overlays: unknown
-└───packages
-    ├───aarch64-linux
-    │   └───sway-scripts: package 'sway-scripts'
-    ├───i686-linux
-    │   ├───sway-scripts: package 'sway-scripts'
-    │   ├───winbox: package 'winbox-bin-3.20'
-    │   └───winbox-bin: package 'winbox-bin-3.20'
-    ├───x86_64-darwin
-    │   └───sway-scripts: package 'sway-scripts'
-    └───x86_64-linux
-        ├───sway-scripts: package 'sway-scripts'
-        ├───winbox: package 'winbox-bin-3.20'
-        └───winbox-bin: package 'winbox-bin-3.20'
-```
+[mit]: https://mit-license.org
+[devos]: https://devos.divnix.com/doc/start
+[deproy-rs-guide]: https://devos.divnix.com/integrations/deploy.html
+[iso-guide]: https://devos.divnix.com/flk/iso.html
+[install-guide]: https://devos.divnix.com/flk/install.html
+[sops-nix]: https://github.com/Mic92/sops-nix

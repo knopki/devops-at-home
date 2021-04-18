@@ -1,5 +1,5 @@
 { config, lib, pkgs, nixosConfig, ... }:
-with lib;
+let inherit (lib) mkIf hm elem; in
 {
   home.activation.kopiaSettings =
     let
@@ -14,10 +14,10 @@ with lib;
         "${dst}/repository.config.kopia-password"
     '';
 
-  programs.kopia = mkIf (nixosConfig.networking.hostName == "alien") {
-    enable = true;
+  services.kopia = {
+    enable = elem nixosConfig.networking.hostName [ "alien" ];
     jobs = {
-      halfhour = {
+      alien-half-hour = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = {
           OnCalendar = "*:0/30";
           RandomizedDelaySec = "3m";
@@ -27,9 +27,10 @@ with lib;
           "${config.home.homeDirectory}/org"
         ];
       };
-      daily = {
+
+      alien-daily = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = {
-          OnCalendar = "weekly";
+          OnCalendar = "daily";
           RandomizedDelaySec = "3h";
         };
         snapshots = [
@@ -44,7 +45,8 @@ with lib;
           config.xdg.userDirs.pictures
         ];
       };
-      weekly = {
+
+      alien-weekly = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = {
           OnCalendar = "weekly";
           RandomizedDelaySec = "12h";

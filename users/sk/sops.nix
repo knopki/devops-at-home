@@ -1,12 +1,11 @@
 { config, lib, pkgs, ... }:
-with lib;
 let
+  inherit (lib) genAttrs;
   defaultSopsFile = {
-    format = "yaml";
     sopsFile = ./secrets/secrets.yaml;
   };
   defaultOpts = defaultSopsFile // {
-    owner = config.knopki.users.sk.username;
+    owner = config.users.users.sk.name;
   };
 
   sysSecs = {
@@ -21,5 +20,6 @@ let
     (_: defaultOpts);
 in
 {
+  imports = [ ../../profiles/core/sops ];
   sops.secrets = sysSecs // usrSecs;
 }
