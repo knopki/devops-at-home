@@ -1,4 +1,4 @@
-{ config, suites, hardware, pkgs, lib, ... }:
+{ config, suites, pkgs, lib, ... }:
 let
   inherit (lib) mkDefault;
   luksCommon = {
@@ -14,10 +14,6 @@ let
 in
 {
   imports = suites.devbox ++ suites.mobile ++ suites.gamestation ++ [
-    hardware.common-cpu-intel
-    hardware.common-gpu-nvidia
-    hardware.common-pc-laptop
-    hardware.common-pc-ssd
     ../users/sk
   ];
 

@@ -1,9 +1,8 @@
-{ config, lib, pkgs, nixosConfig, ... }:
+{ config, lib, pkgs, ourLib, ... }@args:
+with lib;
 let
-  inherit (lib) mkOption mkDefault mkIf types escapeShellArg
-    filterAttrs hasPrefix mapAttrs hasAttr substring literalExample;
-  inherit (lib.dev.hex) fromHex toHex2;
-
+  inherit (builtins) div;
+  inherit (ourLib.hex) toHex2 fromHex;
   cfg = config.theme;
 
   # @author Robert Helgesson

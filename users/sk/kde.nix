@@ -4,11 +4,7 @@ let
 in
 {
   programs.kde = {
-    enable = true;
     settings = {
-      kdeglobals.KDE.SingleClick = false;
-      ktimezonedrc.TimeZones.LocalZone = nixosConfig.time.timeZone;
-
       kwinrc = {
         Plugins.krohnkiteEnabled = true;
         Script-krohnkite = {
@@ -48,12 +44,6 @@ in
           Number = 10;
           Rows = 2;
         };
-      };
-
-      kxkbrc.Layout = {
-        ResetOldOptions = true;
-        SwitchMode = "Window";
-        Use = true;
       };
 
       # hotkeys
@@ -190,11 +180,6 @@ in
         };
       };
 
-      spectaclerc.General = {
-        autoSaveImage = true;
-        copyImageToClipboard = true;
-        copySaveLocation = false;
-      };
     };
   };
 }

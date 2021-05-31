@@ -39,10 +39,6 @@ in
     irony-server
     rtags
 
-    # :lang csharp
-    dotnet-sdk
-    omnisharp-roslyn
-
     # :tools docker
     docker
     docker-compose

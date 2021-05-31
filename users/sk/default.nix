@@ -47,7 +47,7 @@ in
   home-manager.users.sk = { suites, ... }: {
     imports = [ ./gpg.nix ]
       ++ suites.base
-      ++ optionals isWorkstation (suites.workstation ++ suites.graphical)
+      ++ optionals isWorkstation suites.workstation
       ++ optionals isDevbox suites.devbox
       ++ optionals isGamestation suites.gamestation
       ++ optionals isGraphical [
@@ -59,10 +59,10 @@ in
       ++ optionals isWorkstation [
       ./brave.nix
       ./chromium.nix
-      ./imv.nix
       ./emacs
       ./kopia.nix
       ] ++ optionals isDevbox [
+        ./hound.nix
         ./vscode.nix
       ];
 

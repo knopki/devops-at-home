@@ -1,7 +1,7 @@
 { lib, ... }:
 let
-  inherit (builtins) div readDir;
-  inherit (lib) elemAt mod foldl' stringToCharacters;
+  inherit (builtins) div mod;
+  inherit (lib) elemAt foldl' stringToCharacters;
 in
 {
   # @author Robert Helgesson
@@ -13,7 +13,6 @@ in
       hexVal = elemAt hex;
     in
     n: hexVal (mod 16 n) + hexVal (mod 16 (div n 16));
-
 
   # @author Robert Helgesson
   # @license MIT

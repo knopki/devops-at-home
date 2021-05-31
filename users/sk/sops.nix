@@ -20,6 +20,5 @@ let
     (_: defaultOpts);
 in
 {
-  imports = [ ../../profiles/core/sops ];
   sops.secrets = sysSecs // usrSecs;
 }

@@ -1,0 +1,3 @@
+{
+  meta.suites.mobile = true;
+}
