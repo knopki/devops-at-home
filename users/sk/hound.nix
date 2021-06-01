@@ -36,6 +36,11 @@ in
         url = "file://${config.home.homeDirectory}/dev/amperka-hq/store-cms";
         ms-between-poll = 3600000;
       };
+      odoo = mkIf isVeryDev {
+        url = "https://github.com/odoo/odoo.git";
+        ms-between-poll = 3600000;
+        vcs-config.ref = "11.0";
+      };
       aodoo = mkIf isVeryDev {
         url = "file://${config.home.homeDirectory}/dev/nkrkv/amperka-odoo";
         ms-between-poll = 3600000;
