@@ -242,11 +242,11 @@
     "doom-emacs": {
       "flake": false,
       "locked": {
-        "lastModified": 1618527578,
-        "narHash": "sha256-kDfQr7u+zIydPlek9oO+ZLjl6PJDOXL33NmTBvzQt5U=",
+        "lastModified": 1620845520,
+        "narHash": "sha256-XTyH1e+mBVmKM/AWMTuByzQCwj3nTCboutbBeCDjRSY=",
         "owner": "hlissner",
         "repo": "doom-emacs",
-        "rev": "193382e2e32011c06a1b5018f5581851437a6e3b",
+        "rev": "6d2c6b44fa915ed5db8ebcae91e9355a9ef7b663",
         "type": "github"
       },
       "original": {
@@ -259,11 +259,11 @@
     "doom-snippets": {
       "flake": false,
       "locked": {
-        "lastModified": 1613230104,
-        "narHash": "sha256-PUykdv279XJSG8m7ifP/rr4uFs1Mpx6ZyZ3XqvbDW9U=",
+        "lastModified": 1620675968,
+        "narHash": "sha256-Hhq9ZEZnTJoJ4YpGbhNo07nwXmhKT6UCo9wpePurogM=",
         "owner": "hlissner",
         "repo": "doom-snippets",
-        "rev": "afe549bd63403cec5187371ec1986e68a9e5ee3c",
+        "rev": "f7747da6343aadfbe8a3f9e6b35018ac19db4438",
         "type": "github"
       },
       "original": {
@@ -338,11 +338,11 @@
     },
     "emacs-overlay": {
       "locked": {
-        "lastModified": 1618568285,
-        "narHash": "sha256-c5WsEnDoZuVJgzEsqqrExVI297NVgrFb+tT3WdNvANo=",
+        "lastModified": 1620927136,
+        "narHash": "sha256-PUFbVKstIqwqzT7pYispDdg7gbyPEUmzYiTrCAzmROo=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "26f0a5e1d1f3934f0d6596b2c411dba52e6d7211",
+        "rev": "842a4d83a9f5366abfe4c246b6100afdaf91dda0",
         "type": "github"
       },
       "original": {
@@ -647,11 +647,11 @@
         "rotate-text": "rotate-text"
       },
       "locked": {
-        "lastModified": 1619598899,
-        "narHash": "sha256-+wvgPmY0qa+kpScJhJKyB05jWF8JaxsMlPF9kr/8WIM=",
+        "lastModified": 1621548909,
+        "narHash": "sha256-wRSb5aGu1OxSK6K7Uiilqf3aIg7sMdP2HwGv9DRxLSk=",
         "owner": "vlaci",
         "repo": "nix-doom-emacs",
-        "rev": "746c847149f3d40ea952038f7fe78ce0d7808138",
+        "rev": "201e023c671c50c0ee2efe5ca11143161166a736",
         "type": "github"
       },
       "original": {
@@ -664,16 +664,16 @@
     "nix-straight": {
       "flake": false,
       "locked": {
-        "lastModified": 1592852066,
-        "narHash": "sha256-IwmBDtGv7GamiwCG+awZN6VgtHqJElkv/ic0VrVXAkI=",
+        "lastModified": 1621543597,
+        "narHash": "sha256-E/m2Hrw2og//CfOCOWe2yapYC01Tqhozn4YMPYJsC3o=",
         "owner": "vlaci",
         "repo": "nix-straight.el",
-        "rev": "9e6f7d71760b997b09d9bd3046257bc9ec17265b",
+        "rev": "8e84d04f10b2298de856b2b8b9a0d13abc91b5ca",
         "type": "github"
       },
       "original": {
         "owner": "vlaci",
-        "ref": "v2.1.0",
+        "ref": "v2.2.0",
         "repo": "nix-straight.el",
         "type": "github"
       }
@@ -695,11 +695,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1622472829,
-        "narHash": "sha256-M5aKJMmt2X2ZFWz78GlOxMYTrg8yQNC4diahpNwGWeg=",
+        "lastModified": 1622626685,
+        "narHash": "sha256-5ZqlO4afsZ7w1+Vm5z0ssjv9o2zhGAEn3k5RV3Bw16Q=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ab98a6e1091b9714303fb22e33a9e05bd7bab281",
+        "rev": "5bf359c593330e9648f57f5e82e4ef314304e987",
         "type": "github"
       },
       "original": {
@@ -803,11 +803,11 @@
     "org-mode": {
       "flake": false,
       "locked": {
-        "lastModified": 1618887358,
-        "narHash": "sha256-dU9+/QjQ3I4qeyENtgOA7e1H6whsl1W3nJzlBVNL8S8=",
+        "lastModified": 1620910829,
+        "narHash": "sha256-+Qq1KInYH2tcWo+eiuf+x6wafqe3NzU6OF/JrM8LoUM=",
         "owner": "emacs-straight",
         "repo": "org-mode",
-        "rev": "e641d3736036732e7642807146a97b0876cb8b83",
+        "rev": "cb8e50ed152b37fcfd8754f9e6c5c7f0992ccacb",
         "type": "github"
       },
       "original": {
@@ -870,7 +870,7 @@
         "steamcompmgr": "steamcompmgr"
       },
       "locked": {
-        "narHash": "sha256-jMvpDXTdt8D/twYQg/akFOA5+fR3/qEjApNbtzZ/b6A=",
+        "narHash": "sha256-QINLXH9jhZGnyWARDfzxLSfcj7ydapyJCiv5RO6ffiI=",
         "path": "./pkgs",
         "type": "path"
       },
@@ -969,11 +969,11 @@
     "steamcompmgr": {
       "flake": false,
       "locked": {
-        "lastModified": 1618870050,
-        "narHash": "sha256-aFGVVu1DAjNz8PO0ZSAbGvClxT4QQGlX8tEwqtY6Pw0=",
+        "lastModified": 1622391127,
+        "narHash": "sha256-zpHxpRKR5asuVQvVnt82Oq/phOU982Q0CYzKL+mGtUo=",
         "owner": "gamer-os",
         "repo": "steamos-compositor-plus",
-        "rev": "4cb67e7a1505151c1a97656f2d812aaf3e09c3fe",
+        "rev": "8bde1b82dc4e8cc8db9d9d9b93dc90a9318d6f44",
         "type": "github"
       },
       "original": {

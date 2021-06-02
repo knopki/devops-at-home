@@ -262,11 +262,11 @@
     "steamcompmgr": {
       "flake": false,
       "locked": {
-        "lastModified": 1618870050,
-        "narHash": "sha256-aFGVVu1DAjNz8PO0ZSAbGvClxT4QQGlX8tEwqtY6Pw0=",
+        "lastModified": 1622391127,
+        "narHash": "sha256-zpHxpRKR5asuVQvVnt82Oq/phOU982Q0CYzKL+mGtUo=",
         "owner": "gamer-os",
         "repo": "steamos-compositor-plus",
-        "rev": "4cb67e7a1505151c1a97656f2d812aaf3e09c3fe",
+        "rev": "8bde1b82dc4e8cc8db9d9d9b93dc90a9318d6f44",
         "type": "github"
       },
       "original": {

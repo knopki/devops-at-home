@@ -3,7 +3,7 @@
 
   inputs =
     {
-      nixos.url = "nixpkgs/release-21.05"; # TODO: migrate to the stable
+      nixos.url = "nixpkgs/release-21.05";
       latest.url = "nixpkgs/nixos-unstable"; # not very latest please
       digga.url = "github:divnix/digga/develop";
 
