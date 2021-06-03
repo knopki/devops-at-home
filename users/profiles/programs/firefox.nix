@@ -20,6 +20,7 @@ in
         name = "default";
         isDefault = mkDefault true;
         settings = {
+          "browser.cache.disk.capacity" = mkDefault 128000;
           "browser.safebrowsing.allowOverride" = mkDefault false;
           "browser.safebrowsing.blockedURIs.enabled" = mkDefault false;
           "browser.safebrowsing.downloads.enabled" = mkDefault false;

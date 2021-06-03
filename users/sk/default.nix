@@ -52,6 +52,7 @@ in
       ++ optionals isGamestation suites.gamestation
       ++ optionals isGraphical [
       ./alacritty.nix
+      ./firefox.nix
       ./gnome.nix
       ./kde.nix
       ./xdg.nix
