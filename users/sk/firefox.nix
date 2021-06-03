@@ -35,6 +35,12 @@
     bind j scrollline 5
     bind k scrollline -5
 
+    " Search helpers
+    bind / fillcmdline find
+    bind ? fillcmdline find -?
+    bind n findnext +1
+    bind N findnext -1
+
     set newtab about:blank
     set tabopencontainerware true
     set editorcmd ${config.home.sessionVariables.VISUAL}
