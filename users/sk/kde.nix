@@ -58,7 +58,7 @@ in
         };
         "krunner.desktop" = {
           _k_friendly_name = "KRunner";
-          _launch = [ "Alt+Space\tAlt+F2\tSearch" "Alt+Space\tAlt+F2\tSearch" "KRunner" ];
+          _launch = [ "Alt+F2\tSearch" "Alt+F2\tSearch" "KRunner" ];
         };
         kwin = {
           _k_friendly_name = "KWin";
@@ -142,44 +142,6 @@ in
           types = 1;
         };
       };
-
-      krunnerrc = {
-        General = {
-          FreeFloating = true;
-          RetainPriorSearch = false;
-        };
-
-        Plugins = {
-          "Kill RunnerEnabled" = true;
-          "Spell CheckerEnabled" = false;
-          CharacterRunnerEnabled = false;
-          DictionaryEnabled = false;
-          PowerDevilEnabled = true;
-          appstreamEnabled = false;
-          baloosearchEnabled = true;
-          bookmarksEnabled = false;
-          browserhistoryEnabled = false;
-          browsertabsEnabled = false;
-          calculatorEnabled = true;
-          desktopsessionsEnabled = false;
-          katesessionsEnabled = false;
-          konsoleprofilesEnabled = false;
-          kwinEnabled = false;
-          locationsEnabled = true;
-          org.kde.activitiesEnabled = false;
-          org.kde.datetimeEnabled = true;
-          org.kde.windowedwidgetsEnabled = false;
-          placesEnabled = true;
-          plasma-desktopEnabled = false;
-          recentdocumentsEnabled = true;
-          servicesEnabled = true;
-          shellEnabled = true;
-          unitconverterEnabled = true;
-          webshortcutsEnabled = true;
-          windowsEnabled = false;
-        };
-      };
-
     };
   };
 }
