@@ -42,15 +42,13 @@ let
 
   mkActivationScript = { policy, userCfg, jqArgs }:
     hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir -m 755 -p $(dirname "${userCfg}")
       if [[ -f "${userCfg}" ]]; then
-        $DRY_RUN_CMD ${pkgs.jq}/bin/jq ${jqArgs} \
-          "${policy}" "${userCfg}" > "${userCfg}.tmp" && \
-          mv "${userCfg}.tmp" "${userCfg}"
+        $DRY_RUN_CMD ${pkgs.demjson}/bin/jsonlint -Sf ${userCfg} | \
+          (${pkgs.jq}/bin/jq ${jqArgs} "${policy}"; dd status=none of=/dev/null) | \
+          ${pkgs.moreutils}/bin/sponge "${userCfg}"
       else
-        $DRY_RUN_CMD cp "${policy}" "${userCfg}"
+        $DRY_RUN_CMD cp "${policy}" "${userCfg}" && chmod +600 "${userCfg}"
       fi
-      $DRY_RUN_CMD chmod +600 "${userCfg}"
     '';
 in
 {
@@ -124,7 +122,7 @@ in
 
             # https://code.visualstudio.com/docs/getstarted/keybindings#_command-arguments
             args = mkOption {
-              type = types.nullOr (types.attrs);
+              type = jsonFormat.type;
               default = null;
               example = { direction = "up"; };
               description = "Optional arguments for a command.";
@@ -189,16 +187,18 @@ in
         vscodeSettings = mkActivationScript {
           policy = settingsJson;
           userCfg = configFilePath;
-          jqArgs = "-n 'reduce inputs as $i ({}; . * $i)'";
+          jqArgs = "-n 'reduce inputs as $i ({}; $i * .)'";
         };
       })
       (optionalAttrs (cfg.keybindings != [ ]) {
-        keybindingsFilePath = mkActivationScript {
+        vscodeKeybindings = mkActivationScript {
           policy = keybindingsJson;
-          userCfg = keybindingsJson;
+          userCfg = keybindingsFilePath;
           jqArgs = "-s 'add | unique_by(.key + .when + .args)'";
         };
       })
     ]);
+
+    xdg.configFile."${userDir}/.keep".text = "";
   };
 }
