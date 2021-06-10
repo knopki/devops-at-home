@@ -18,7 +18,7 @@
       naersk.url = "github:nmattia/naersk";
       naersk.inputs.nixpkgs.follows = "nixos";
       agenix.url = "github:ryantm/agenix";
-      agenix.inputs.nixpkgs.follows = "nixos";
+      agenix.inputs.nixpkgs.follows = "latest";
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       pkgs.url = "path:./pkgs";
