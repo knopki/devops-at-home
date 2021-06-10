@@ -19,6 +19,10 @@ final: prev: {
   # desktops
   krohnkite = prev.callPackage ./desktops/plasma-5/krohnkite.nix { };
 
+  # misc
+  vscode-extensions = prev.vscode-extensions //
+    (import ./misc/vscode-extensions.nix { inherit (prev) fetchurl vscode-utils; });
+
   # tools
   sway-scripts = prev.callPackage ./tools/wayland/sway-scripts { };
   winbox-bin = prev.callPackage ./tools/networking/winbox.nix { };

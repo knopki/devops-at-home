@@ -8,9 +8,7 @@ in
     activationMode = mkDefault "merge";
 
     # HINT: <nixpkgs>/pkgs/misc/vscode-extensions/update_installed_exts.sh
-    extensions = with pkgs.vscode-extensions; [
-    ] ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-    ]);
+    extensions = with pkgs.vscode-extensions; [ ];
 
     # refer to https://code.visualstudio.com/docs/getstarted/settings#_default-settings
     userSettings = {
@@ -20,7 +18,6 @@ in
 
       "editor.minimap.enabled" = mkDefault false;
       "editor.rulers" = mkDefault [ 80 120 ];
-
     };
 
     keybindings = [];
