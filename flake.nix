@@ -27,6 +27,12 @@
       sops-nix.url = "github:Mic92/sops-nix";
       sops-nix.inputs.nixpkgs.follows = "nixos";
 
+      # neovim
+      neovim-upstream.url = "github:neovim/neovim?dir=contrib";
+      neovim-upstream.inputs.nixpkgs.follows = "latest";
+      neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+      neovim-nightly.inputs.neovim-flake.follows = "neovim-upstream";
+
       # emacs
       doom-emacs.url = "github:hlissner/doom-emacs/develop";
       doom-emacs.flake = false;
@@ -49,6 +55,7 @@
     , sops-nix
     , emacs-overlay
     , nix-doom-emacs
+    , neovim-nightly
     , agenix
     , ...
     } @ inputs:
@@ -67,6 +74,7 @@
             sops-nix.overlay
             emacs-overlay.overlay
             agenix.overlay
+            neovim-nightly.overlay
           ];
         };
         latest = { };
