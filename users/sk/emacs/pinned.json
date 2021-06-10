@@ -699,8 +699,8 @@
     "name": "dap-mode",
     "fetcher": "github",
     "repo": "emacs-lsp/dap-mode",
-    "rev": "ae395aa991d55eaddb2d2b80cd469089b9d19bb7",
-    "sha256": "1bxpnaj466n6sw00zc4fbw7i7nmkr0b6g8qvai6vql503lmm5f89",
+    "rev": "49af1b8cbd261a5f97e1b2886418dae5e51b452d",
+    "sha256": "0y1j9whxyvng9q61mmxydkp3ddi99akr9c8nzb1ghwh0cxckgp5m",
     "origin": "melpa"
   },
   {
@@ -891,8 +891,8 @@
     "name": "eglot",
     "fetcher": "github",
     "repo": "joaotavora/eglot",
-    "rev": "f930a096ebe37212949593feeb420170f52d944a",
-    "sha256": "1zi52331ik6ldxv00h70kw49wkr42ic254j2ldmqivlp9ddh8k9j",
+    "rev": "b06589b393844c31c17962497e621a72e0e78e01",
+    "sha256": "0apmn9wa3r305az4377nhqmjrcrmqvfjkgffmjjzp8571bq3mxcj",
     "origin": "melpa"
   },
   {
@@ -2003,8 +2003,8 @@
     "name": "helm-lsp",
     "fetcher": "github",
     "repo": "emacs-lsp/helm-lsp",
-    "rev": "74a02f89088484c42ffc184ece338b73abd4d6f6",
-    "sha256": "1p130xj03wh3pqwf1bb3xl86pqnv1kpmn90mwfg0g52jwl0grv6b",
+    "rev": "c2c6974dadfac459b1a69a1217441283874cea92",
+    "sha256": "0xpz9qrcbxknnncqf0hw7hs9k6sv9dckzsf081k2zmsks3l5qh4p",
     "origin": "melpa"
   },
   {
@@ -2475,8 +2475,8 @@
     "name": "lsp-ivy",
     "fetcher": "github",
     "repo": "emacs-lsp/lsp-ivy",
-    "rev": "515e5977b3d1f6cb521984f084868f28efd47e72",
-    "sha256": "1m05c80bf7d7kkk58c91c2f3lyln0wh6mvxbyi856fh1clb5gv13",
+    "rev": "4dcb63533558a83de4a1b830835687e69474cd88",
+    "sha256": "0y2116lqalipgc841kz4gangnx9xmihg3x28gv8n6myslphc45ma",
     "origin": "melpa"
   },
   {
@@ -2507,8 +2507,8 @@
     "name": "lsp-mode",
     "fetcher": "github",
     "repo": "emacs-lsp/lsp-mode",
-    "rev": "eda51c21662253fd05b4f3f20ad7b029d9c2aff7",
-    "sha256": "10nq19mn481bfxpw2kk8w4dm1cj9mznmbcqbwd0q0hdchznh7q9p",
+    "rev": "3dc87f6111ea2439a8d974a8954dcbb683144b92",
+    "sha256": "0nlb60cv0anaf3al02mryb92lkdkni3d0dibx13sgkxg0anb0sgi",
     "origin": "melpa"
   },
   {
@@ -2547,8 +2547,8 @@
     "name": "lsp-ui",
     "fetcher": "github",
     "repo": "emacs-lsp/lsp-ui",
-    "rev": "1dbea9ff206a626d5c2d735e3f8fcdac59827963",
-    "sha256": "175am5hycgxmd4329mnwgcjfpyycxyjip5wl96n297zxnb4m94wb",
+    "rev": "efae00eb6a733d5271cb33e9d92c3d8c2fa98dde",
+    "sha256": "01y5yl16kvhmwziza08q88l1dva76nzbm6ln0qymalfkxipjcxrn",
     "origin": "melpa"
   },
   {
@@ -2683,8 +2683,8 @@
     "name": "modern-cpp-font-lock",
     "fetcher": "github",
     "repo": "ludwigpacifici/modern-cpp-font-lock",
-    "rev": "865955d0035382a17a7f03add0d00d0bd812b103",
-    "sha256": "1x04jgc94gpdci24rahb1awvkjii1vdv7bdr9gyiksbry75dsxi1",
+    "rev": "43c6b68ff58fccdf9deef11674a172e4eaa8455c",
+    "sha256": "1wp90225g1pm8sr3hlknwr2q29iq90wds4n6vf1ls4cf2b71nnq2",
     "origin": "melpa"
   },
   {
@@ -3331,8 +3331,8 @@
     "name": "posframe",
     "fetcher": "github",
     "repo": "tumashu/posframe",
-    "rev": "fff21ccb706b576f4074883f9fa87d2bcc534096",
-    "sha256": "1r9i3jsdvzvbr8kggfradvk65i1d0wq96shs4dhfsr3pw7phaxv3",
+    "rev": "739d8fd1081bdd0d20dee9e437d64df58747b871",
+    "sha256": "1hapg4dwrpa1ffkx8s3pialkh9zsh3r5jxk076c750k9rdwl3q4m",
     "origin": "melpa"
   },
   {
@@ -3507,8 +3507,8 @@
     "name": "rainbow-delimiters",
     "fetcher": "github",
     "repo": "Fanael/rainbow-delimiters",
-    "rev": "f43d48a24602be3ec899345a3326ed0247b960c6",
-    "sha256": "1lm1nwm3hg7nss9i8ar1265ziiyn4ckmc4fvn5zwnqq96hxmdk7x",
+    "rev": "d576e6694ad3a3e88b2bb1363305b38fa364c149",
+    "sha256": "0sw5zjpg8xg0ri550vmblfm0h0ra56vh0vsxwglk24w29flvn18m",
     "origin": "melpa"
   },
   {
@@ -3547,16 +3547,16 @@
     "name": "realgud",
     "fetcher": "github",
     "repo": "realgud/realgud",
-    "rev": "f73c039a340579a98e6716c901fd4e80e7eaa2eb",
-    "sha256": "0v6dysd9rzhb8aw3ws3wayprrx9ll59g3isib7ni2fl6krmvyjlx",
+    "rev": "34557f8d8fc6af8d3763380942cc07193335c73b",
+    "sha256": "0m7v523s518hf7dx31ayjfa60gkf4pyncqvca7b2sm1z5qmjzqqj",
     "origin": "melpa"
   },
   {
     "name": "realgud-trepan-ni",
     "fetcher": "github",
     "repo": "realgud/realgud-trepan-ni",
-    "rev": "6e38cf838c7b47b5f1353d00901b939ffa36d707",
-    "sha256": "0qwzvaarl2vr6ca0kd9k195f5nbnkdjsrwrkhxggjqsk7v1hq6x2",
+    "rev": "0ec088ea343835e24ae73da09bea96bfb02a3130",
+    "sha256": "109v1kc29qqgabzjq9118jyw800zhl9yxykmgfl1zrpiyq6disz4",
     "origin": "melpa"
   },
   {
@@ -3635,8 +3635,8 @@
     "name": "rtags",
     "fetcher": "github",
     "repo": "Andersbakken/rtags",
-    "rev": "aa4c827b417f5448c12401c33acdab1325917c13",
-    "sha256": "02jqcbrpxm4sv15l8kyvsw9pwkmamj065cgifj68x242fw2f0sam",
+    "rev": "63f18acb21e664fd92fbc19465f0b5df085b5e93",
+    "sha256": "0wzyn9qzyly71yfwhlk5m94ygjnbk459pgbpgkhp9fqgchx12p1r",
     "origin": "melpa"
   },
   {
