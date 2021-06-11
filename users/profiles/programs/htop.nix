@@ -11,15 +11,14 @@ with config.lib.htop;
       show_thread_names = true;
       sort_key = fields.PERCENT_MEM;
       highlight_base_name = true;
-      right_meter_modes = [ "Tasks" "LoadAverage" "Uptime" ];
-    } // (leftMeters {
-      AllCPUs = modes.Bar;
-      Memory = modes.Bar;
-      Swap = modes.Bar;
-    }) // (rightMeters {
-      Tasks = modes.Text;
-      LoadAverage = modes.Text;
-      Uptime = modes.Text;
-    });
+    } // (leftMeters [
+      (bar "AllCPUs")
+      (bar "Memory")
+      (bar "Swap")
+    ]) // (rightMeters [
+      (text "Tasks")
+      (text "LoadAverage")
+      (text "Uptime")
+    ]);
   };
 }
