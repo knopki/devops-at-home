@@ -2,6 +2,6 @@
 {
   programs.direnv = {
     enable = lib.mkDefault true;
-    enableNixDirenvIntegration = true;
+    nix-direnv.enable = true;
   };
 }
