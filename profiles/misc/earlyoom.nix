@@ -4,7 +4,7 @@
     enable = true;
     enableDebugInfo = true;
     enableNotifications = true;
-    freeSwapThreshold = 50;
+    freeSwapThreshold = 10;
   };
 
   systemd.user.services.systembus-notify = {
