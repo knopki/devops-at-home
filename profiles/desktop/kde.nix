@@ -26,6 +26,7 @@ in
     with kdeFrameworks;
     [
       ark
+      krename
       plasma-applet-caffeine-plus
       plasma-systemmonitor # will replace ksysguard
 
