@@ -207,5 +207,10 @@ in
 
   system.stateVersion = "20.09";
 
+  zramSwap = {
+    enable = true;
+    swapDevices = 1;
+  };
+
   users.users.root.passwordFile = config.sops.secrets.alien-root-user-password.path;
 }
