@@ -7,6 +7,8 @@ channels: final: prev: {
     dhall
     discord
     element-desktop
+    neovim
+    neovim-unwrapped
     manix
     rage
     nixpkgs-fmt
