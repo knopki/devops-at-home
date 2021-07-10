@@ -100,22 +100,6 @@
         "type": "github"
       }
     },
-    "base16-vim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1559893574,
-        "narHash": "sha256-6FsT87qcl9GBxgxrPx2bPULIMA/O8TRxHaN49qMM4uM=",
-        "owner": "chriskempson",
-        "repo": "base16-vim",
-        "rev": "6191622d5806d4448fa2285047936bdcee57a098",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chriskempson",
-        "repo": "base16-vim",
-        "type": "github"
-      }
-    },
     "base16-waybar": {
       "flake": false,
       "locked": {
@@ -549,11 +533,11 @@
     },
     "latest": {
       "locked": {
-        "lastModified": 1625281901,
-        "narHash": "sha256-DkZDtTIPzhXATqIps2ifNFpnI+PTcfMYdcrx/oFm00Q=",
+        "lastModified": 1625697353,
+        "narHash": "sha256-/v85RkZ0Z+lxipkG2sjYNRINktc8VySbLQmPbirY0hQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "09c38c29f2c719cd76ca17a596c2fdac9e186ceb",
+        "rev": "87807e64a5ef5206b745a40af118c7be8db73681",
         "type": "github"
       },
       "original": {
@@ -695,11 +679,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1625176478,
-        "narHash": "sha256-s1RTYNKw7ySyqrZjns9Cq+Nnjpp75ePgL06pgcbIpoA=",
+        "lastModified": 1625905697,
+        "narHash": "sha256-gM4sBtguedJrQorU+YzT64/yTdm8Dzyzk4zHfhVqwFc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "21b696caf392ad6fa513caf3327d0aa0430ffb72",
+        "rev": "54db964a8b8505d0ea2b0c6dee9e6e51bf05246c",
         "type": "github"
       },
       "original": {
@@ -710,11 +694,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1625127528,
-        "narHash": "sha256-NDD8BuY8UjAs7VfeiRck7JkpsUyUWJYg1/RqdEJ0PgE=",
+        "lastModified": 1625333638,
+        "narHash": "sha256-M6J9RN60XJyv6nUfDFCwnz5aVjhe8+GJnV8Q9VpdQQQ=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "eb889532fef2cb73071436842ae2ca0ed2d011aa",
+        "rev": "41775780a0b6b32b3d32dcc32bb9bc6df809062d",
         "type": "github"
       },
       "original": {
@@ -855,7 +839,6 @@
         "base16-shell": "base16-shell",
         "base16-textmate": "base16-textmate",
         "base16-tmux": "base16-tmux",
-        "base16-vim": "base16-vim",
         "base16-waybar": "base16-waybar",
         "dracula-alacritty": "dracula-alacritty",
         "dracula-fish": "dracula-fish",
@@ -870,7 +853,7 @@
         "steamcompmgr": "steamcompmgr"
       },
       "locked": {
-        "narHash": "sha256-FiuMg/RJRM3qGuhSKtiS1bSrj7Pu3by2IKqHt+jKAz4=",
+        "narHash": "sha256-Lu/u/lNgN41krgfmYs/BhqlR1k9R0V1omZ+Tlyzysa0=",
         "path": "./pkgs",
         "type": "path"
       },
