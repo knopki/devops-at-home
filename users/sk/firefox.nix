@@ -6,7 +6,6 @@
       # TODO: waves-keeper
       auto-tab-discard
       browserpass
-      buster-captcha-solver
       bypass-paywalls
       i-dont-care-about-cookies
       ipfs-companion
@@ -18,7 +17,6 @@
       org-capture
       react-devtools
       save-page-we
-      tree-style-tab
       tridactyl
       ublock-origin
       violentmonkey

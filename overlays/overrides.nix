@@ -6,15 +6,13 @@ channels: final: prev: {
     cachix
     dhall
     discord
-    element-desktop
     neovim
     neovim-unwrapped
     manix
     rage
-    nixpkgs-fmt
-    qutebrowser
-    signal-desktop
-    starship;
+    nixpkgs-fmt;
+
+  inherit (channels.latest-working-chrome) ungoogled-chromium;
 
 
   haskellPackages = prev.haskellPackages.override {

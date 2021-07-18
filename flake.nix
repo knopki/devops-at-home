@@ -5,6 +5,7 @@
     {
       nixos.url = "nixpkgs/release-21.05";
       latest.url = "nixpkgs/nixos-unstable"; # not very latest please
+      latest-working-chrome.url = "nixpkgs/929b12e7b5b4f0f081e3ba735d39acb4ea6c858a";
       digga.url = "github:divnix/digga/develop";
 
       ci-agent = {
@@ -70,6 +71,7 @@
           ];
         };
         latest = { };
+        latest-working-chrome = { };
       };
 
       lib = import ./lib { lib = digga.lib // nixos.lib; };
@@ -116,7 +118,8 @@
             users = digga.lib.importers.rakeLeaves ./users;
           };
           suites = with profiles; rec {
-            base = [ core users.root ] ++ (with cachix; [ nix-community nrdxp ]);
+            base = [ core programs.neovim users.root ]
+              ++ (with cachix; [ nix-community nrdxp ]);
 
             workstation = base ++ [
               meta.suites.workstation
@@ -186,7 +189,6 @@
               htop
               jq
               lesspipe
-              neovim
               readline
               ssh
               tmux

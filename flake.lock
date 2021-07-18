@@ -546,6 +546,21 @@
         "type": "indirect"
       }
     },
+    "latest-working-chrome": {
+      "locked": {
+        "lastModified": 1621600123,
+        "narHash": "sha256-gBgvV6n+omCoTN4ag4ShgdlN/YV1iZcwv9hxjRSNFhE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "929b12e7b5b4f0f081e3ba735d39acb4ea6c858a",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "rev": "929b12e7b5b4f0f081e3ba735d39acb4ea6c858a",
+        "type": "indirect"
+      }
+    },
     "ls-colors": {
       "flake": false,
       "locked": {
@@ -904,6 +919,7 @@
         "emacs-overlay": "emacs-overlay",
         "home": "home",
         "latest": "latest",
+        "latest-working-chrome": "latest-working-chrome",
         "naersk": "naersk_2",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos": "nixos",

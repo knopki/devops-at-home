@@ -2,9 +2,9 @@
 {
   programs.chromium = {
     enable = lib.mkDefault true;
-    package = lib.mkDefault pkgs.ungoogled-chromium;
+    package = lib.mkDefault pkgs.chromium;
     extensions = [
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
     ];
   };
 }

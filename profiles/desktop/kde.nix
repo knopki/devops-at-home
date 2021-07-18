@@ -34,7 +34,12 @@ in
       pkgs.krohnkite
     ];
 
-  programs.partition-manager.enable = true;
+  programs = {
+    chromium.extensions = [
+      { id = "cimiefiiaegbelhefglklhhakcgmhkai"; } # plasma integration
+    ];
+    partition-manager.enable = true;
+  };
 
   security.pam.services.sddm.gnupg = {
     enable = true;
