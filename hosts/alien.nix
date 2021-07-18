@@ -135,7 +135,10 @@ in
       ];
     };
     search = [ "1984.run" ];
-    firewall.allowedTCPPorts = [ 8080 ];
+    firewall = {
+      allowedTCPPorts = [ 4001 8080 ];
+      allowedUDPPorts = [ 4001 ];
+    };
   };
 
   nix.maxJobs = mkDefault 8;
@@ -145,6 +148,16 @@ in
   security.mitigations.acceptRisk = true;
 
   services = {
+    ipfs = {
+      enable = true;
+      autoMount = true;
+      enableGC = true;
+      extraConfig = {
+        Datastore.StorageMax = "1GB";
+      };
+      startWhenNeeded = true;
+    };
+
     # broken: stuck at 800MHz
     thermald.enable = false;
 
