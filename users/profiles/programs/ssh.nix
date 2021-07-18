@@ -2,7 +2,7 @@
 {
   programs.ssh = {
     enable = lib.mkDefault true;
-    compression = true;
+    compression = false;
     controlMaster = "auto";
     controlPersist = "2h";
     extraConfig = ''
