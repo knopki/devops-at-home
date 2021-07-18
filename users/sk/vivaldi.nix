@@ -1,6 +1,7 @@
+{ pkgs, ... }:
 {
   programs.browserpass.enable = true;
-  programs.chromium = {
+  programs.vivaldi = {
     extensions = [
       { id = "naepdomgkenhinolocfifgehidddafch"; } # browserpass
       { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # tempermonkey

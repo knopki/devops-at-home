@@ -12,9 +12,6 @@ channels: final: prev: {
     rage
     nixpkgs-fmt;
 
-  inherit (channels.latest-working-chrome) ungoogled-chromium;
-
-
   haskellPackages = prev.haskellPackages.override {
     overrides = hfinal: hprev:
       let version = prev.lib.replaceChars [ "." ] [ "" ] prev.ghc.version;

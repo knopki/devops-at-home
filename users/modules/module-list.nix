@@ -1,6 +1,7 @@
 [
   # NOTE: every module's filename should be unique!
 
+  ./programs/chromium_override.nix
   ./programs/imv.nix
   ./programs/kde.nix
   ./programs/vscode.nix

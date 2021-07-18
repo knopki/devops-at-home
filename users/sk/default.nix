@@ -58,7 +58,7 @@ in
       ./xdg.nix
     ]
       ++ optionals isWorkstation [
-      ./chromium.nix
+      ./vivaldi.nix
       ./emacs
       ./kopia.nix
       ] ++ optionals isDevbox [
