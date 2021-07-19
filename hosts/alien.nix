@@ -152,8 +152,16 @@ in
       enable = true;
       autoMount = true;
       enableGC = true;
+      localDiscovery = true;
+      extraFlags = [ "--routing=dhtclient" ];
       extraConfig = {
         Datastore.StorageMax = "1GB";
+        Swarm.ConnMgr = {
+          Type = "basic";
+          LowWater = 20;
+          HighWater = 40;
+          GracePeriod = "1m0s";
+        };
       };
       startWhenNeeded = true;
     };
