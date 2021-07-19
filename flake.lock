@@ -546,6 +546,21 @@
         "type": "indirect"
       }
     },
+    "latest-working-vivaldi": {
+      "locked": {
+        "lastModified": 1625905697,
+        "narHash": "sha256-gM4sBtguedJrQorU+YzT64/yTdm8Dzyzk4zHfhVqwFc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "54db964a8b8505d0ea2b0c6dee9e6e51bf05246c",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "release-21.05",
+        "type": "indirect"
+      }
+    },
     "ls-colors": {
       "flake": false,
       "locked": {
@@ -904,6 +919,7 @@
         "emacs-overlay": "emacs-overlay",
         "home": "home",
         "latest": "latest",
+        "latest-working-vivaldi": "latest-working-vivaldi",
         "naersk": "naersk_2",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos": "nixos",

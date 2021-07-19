@@ -12,6 +12,8 @@ channels: final: prev: {
     rage
     nixpkgs-fmt;
 
+  inherit (channels.latest-working-vivaldi) vivaldi;
+
   haskellPackages = prev.haskellPackages.override {
     overrides = hfinal: hprev:
       let version = prev.lib.replaceChars [ "." ] [ "" ] prev.ghc.version;

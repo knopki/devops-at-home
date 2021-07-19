@@ -5,6 +5,7 @@
     {
       nixos.url = "nixpkgs/release-21.05";
       latest.url = "nixpkgs/nixos-unstable"; # not very latest please
+      latest-working-vivaldi.url = "nixpkgs/release-21.05";
       digga.url = "github:divnix/digga/develop";
 
       ci-agent = {
@@ -70,6 +71,7 @@
           ];
         };
         latest = { };
+        latest-working-vivaldi = { };
       };
 
       lib = import ./lib { lib = digga.lib // nixos.lib; };
@@ -213,10 +215,10 @@
             devbox = workstation ++ [
               services.hound
             ] ++ (with programs; [
-              chromium
               cloud-tools
               nodejs
               python
+              vivaldi
               winbox
             ]);
 
