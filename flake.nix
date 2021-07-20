@@ -5,7 +5,8 @@
     {
       nixos.url = "nixpkgs/release-21.05";
       latest.url = "nixpkgs/nixos-unstable"; # not very latest please
-      latest-working-vivaldi.url = "nixpkgs/release-21.05";
+      latest-working-vivaldi.url = "nixpkgs/422e6e54495a30a8e77a64f80cb795cefc445b21";
+      latest-working-brave.url = "nixpkgs/422e6e54495a30a8e77a64f80cb795cefc445b21";
       digga.url = "github:divnix/digga/develop";
 
       ci-agent = {
@@ -72,6 +73,7 @@
         };
         latest = { };
         latest-working-vivaldi = { };
+        latest-working-brave = { };
       };
 
       lib = import ./lib { lib = digga.lib // nixos.lib; };
@@ -198,6 +200,8 @@
             graphical = base ++ [ desktop.gnome desktop.kde ] ++ (with programs; [
               alacritty
               firefox
+              brave
+              vivaldi
               imv
               spectacle
               zathura
@@ -218,7 +222,6 @@
               cloud-tools
               nodejs
               python
-              vivaldi
               winbox
             ]);
 

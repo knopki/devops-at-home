@@ -58,6 +58,7 @@ in
       ./xdg.nix
     ]
       ++ optionals isWorkstation [
+      ./brave.nix
       ./vivaldi.nix
       ./emacs
       ./kopia.nix
