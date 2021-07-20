@@ -1,6 +1,7 @@
 [
   # NOTE: every module's filename should be unique!
 
+  ./programs/browserpass_override.nix
   ./programs/chromium_override.nix
   ./programs/imv.nix
   ./programs/kde.nix
