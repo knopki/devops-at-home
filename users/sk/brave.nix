@@ -24,7 +24,6 @@
       # { id = "nhnkbkgjikgcigadomkphalanndcapjk"; } # clover wallet
       { id = "aiifbnbfobpmeekipheeijimdpnlpgpp"; } # terra station
       { id = "dmkamcknogkgcdfhhbddcghachkejeap"; } # keplr
-      { id = "fhmfendgdocmcbmfikdcogofphimnkno"; } # sollet
       { id = "bfnaelmomeimhlpmgjnjophhpkkoljpa"; } # phantom
     ];
   };
