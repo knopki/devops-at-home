@@ -27,4 +27,6 @@
       { id = "bfnaelmomeimhlpmgjnjophhpkkoljpa"; } # phantom
     ];
   };
+
+  programs.kde.settings.kdeglobals.General.BrowserApplication = "brave-browser.desktop";
 }

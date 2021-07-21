@@ -40,7 +40,7 @@ in
           "image/x-portable-pixmap"
           "image/x-xbitmap"
           "image/x-xpixmap"
-        ])) // (listToAttrs (map (x: nameValuePair x "firefox.desktop") [
+        ])) // (listToAttrs (map (x: nameValuePair x "brave-browser.desktop") [
           "application/x-extension-htm"
           "application/x-extension-html"
           "application/x-extension-shtml"
@@ -52,6 +52,8 @@ in
           "x-scheme-handler/ftp"
           "x-scheme-handler/http"
           "x-scheme-handler/https"
+          "x-scheme-handler/ipfs"
+          "x-scheme-handler/ipns"
         ]));
       };
     })
