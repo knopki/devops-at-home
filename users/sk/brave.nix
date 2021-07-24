@@ -25,6 +25,7 @@
       { id = "aiifbnbfobpmeekipheeijimdpnlpgpp"; } # terra station
       { id = "dmkamcknogkgcdfhhbddcghachkejeap"; } # keplr
       { id = "bfnaelmomeimhlpmgjnjophhpkkoljpa"; } # phantom
+      { id = "fnnegphlobjdpkhecapkijjdkgcjhkib"; } # harmony wallet
     ];
   };
 
