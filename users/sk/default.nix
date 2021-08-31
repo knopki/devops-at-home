@@ -62,10 +62,9 @@ in
       ./vivaldi.nix
       ./emacs
       ./kopia.nix
-      ] ++ optionals isDevbox [
-        ./hound.nix
-        ./vscode.nix
-      ];
+    ] ++ optionals isDevbox [
+      ./vscode.nix
+    ];
 
     theme = {
       enable = true;
