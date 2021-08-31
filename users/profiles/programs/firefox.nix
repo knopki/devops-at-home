@@ -44,6 +44,4 @@ in
       };
     };
   };
-
-  programs.kde.settings.kdeglobals.General.BrowserApplication = mkDefault "firefox.desktop";
 }
