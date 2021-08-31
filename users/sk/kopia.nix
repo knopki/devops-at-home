@@ -39,6 +39,7 @@ let inherit (lib) mkIf hm elem; in
           "${config.home.homeDirectory}/.wakatime.db"
           "${config.home.homeDirectory}/library"
           "${config.home.homeDirectory}/trash"
+          "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Default"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 1"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 2"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 3"
