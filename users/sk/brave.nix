@@ -26,6 +26,7 @@
       { id = "dmkamcknogkgcdfhhbddcghachkejeap"; } # keplr
       { id = "bfnaelmomeimhlpmgjnjophhpkkoljpa"; } # phantom
       { id = "fnnegphlobjdpkhecapkijjdkgcjhkib"; } # harmony wallet
+      { id = "cfbfdhimifdmdehjmkdobpcjfefblkjm"; } # plug (icp)
     ];
   };
 
