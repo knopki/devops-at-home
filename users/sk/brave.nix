@@ -27,6 +27,7 @@
       { id = "bfnaelmomeimhlpmgjnjophhpkkoljpa"; } # phantom
       { id = "fnnegphlobjdpkhecapkijjdkgcjhkib"; } # harmony wallet
       { id = "cfbfdhimifdmdehjmkdobpcjfefblkjm"; } # plug (icp)
+      { id = "fhbohimaelbohpjbbldcngcnapndodjp"; } # binance wallet
     ];
   };
 
