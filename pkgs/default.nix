@@ -1,5 +1,6 @@
 final: prev: {
   # applications
+  marvin = prev.callPackage ./applications/misc/marvin.nix { };
   steamcompmgr = prev.callPackage ./applications/window-managers/steamcompmgr.nix { };
 
   # data

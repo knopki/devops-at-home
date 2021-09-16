@@ -6,6 +6,7 @@
     birdtray
     gnome3.simple-scan
     libreoffice-fresh
+    marvin
     speedcrunch
     thunderbird
   ];
