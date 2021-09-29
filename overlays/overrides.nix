@@ -8,6 +8,7 @@ channels: final: prev: {
     discord
     neovim
     neovim-unwrapped
+    ledger-live-desktop
     manix
     rage
     nixpkgs-fmt;
