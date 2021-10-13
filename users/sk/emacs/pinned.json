@@ -4056,14 +4056,6 @@
     "origin": "melpa"
   },
   {
-    "name": "wakatime-mode",
-    "fetcher": "github",
-    "repo": "wakatime/wakatime-mode",
-    "rev": "7626678315918bdbb81ede68149f20a7d97a928f",
-    "sha256": "0dlhj32mkylji1d55pc593d3gn8babcs6s4c0c5sfm6jfz14m9j0",
-    "origin": "melpa"
-  },
-  {
     "name": "wanderlust",
     "fetcher": "github",
     "repo": "wanderlust/wanderlust",

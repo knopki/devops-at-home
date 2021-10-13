@@ -35,8 +35,6 @@ let inherit (lib) mkIf hm elem; in
         };
         snapshots = [
           "${config.home.homeDirectory}/.gnupg"
-          "${config.home.homeDirectory}/.wakatime.cfg"
-          "${config.home.homeDirectory}/.wakatime.db"
           "${config.home.homeDirectory}/library"
           "${config.home.homeDirectory}/trash"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Default"

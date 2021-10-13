@@ -104,9 +104,6 @@ in
     nodePackages.bash-language-server
     shellcheck
 
-    # :tools wakatime-mode
-    wakatime
-
     # :lang web
     nodePackages.js-beautify
 
