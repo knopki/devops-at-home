@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     anki
+    anytype
     aspellDicts.en
     aspellDicts.ru
     birdtray
