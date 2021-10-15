@@ -500,11 +500,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1631573611,
-        "narHash": "sha256-u2E/wstadWNcn6vOIoK1xY86QPOzzBZQfT1FbePfdaI=",
+        "lastModified": 1633596850,
+        "narHash": "sha256-5+qVLYvfOropjLAvpQs/APtD8eYnEIbAd9a36lGHZM0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7d9ba15214004c979d2c8733f8be12ce6502cf8a",
+        "rev": "49695f33aac22358b59e49c94fe6472218e5d766",
         "type": "github"
       },
       "original": {
@@ -533,11 +533,11 @@
     },
     "latest": {
       "locked": {
-        "lastModified": 1632411313,
-        "narHash": "sha256-lekODc44lVo9/0EwGiX6LoEt2KhiPdcfNopealMJ7n4=",
+        "lastModified": 1633971123,
+        "narHash": "sha256-WmI4NbH1IPGFWVkuBkKoYgOnxgwSfWDgdZplJlQ93vA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "51bcdc4cdaac48535dabf0ad4642a66774c609ed",
+        "rev": "e4ef597edfd8a0ba5f12362932fc9b1dd01a0aef",
         "type": "github"
       },
       "original": {
@@ -709,11 +709,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1632896657,
-        "narHash": "sha256-E4Ygy1VZAG9MyQ1iMbHR7OLIvtA7ZybM4D+KgVzZNmU=",
+        "lastModified": 1634219595,
+        "narHash": "sha256-YH/KKGCD5vEGsnOfdmEBIriln/lKN7T/Riv45Q7/KLo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "94255ffab585b08b4e59ff74ab34c385737a436c",
+        "rev": "a255ac3b2320cb67346b6444d80fd7d238291c21",
         "type": "github"
       },
       "original": {
@@ -869,6 +869,7 @@
         "base16-shell": "base16-shell",
         "base16-textmate": "base16-textmate",
         "base16-tmux": "base16-tmux",
+        "base16-vim": "base16-vim",
         "base16-waybar": "base16-waybar",
         "dracula-alacritty": "dracula-alacritty",
         "dracula-fish": "dracula-fish",
