@@ -2,6 +2,7 @@ final: prev: {
   # applications
   marvin = prev.callPackage ./applications/misc/marvin.nix { };
   steamcompmgr = prev.callPackage ./applications/window-managers/steamcompmgr.nix { };
+  kubectl-cert-manager = prev.callPackage ./applications/networking/cluster/kubectl-cert-manager.nix {  };
 
   # data
   base16-default-schemes = prev.callPackage ./data/themes/base16-default-schemes.nix { };
