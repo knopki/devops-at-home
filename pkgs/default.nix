@@ -34,4 +34,6 @@ final: prev: {
     dracula-fish = prev.callPackage ./shells/fish/plugins/dracula-fish.nix { };
     fish-kubectl-completions = prev.callPackage ./shells/fish/plugins/fish-kubectl-completions.nix { };
   };
+
+  cronosd = prev.callPackage ./cronosd.nix { };
 }
