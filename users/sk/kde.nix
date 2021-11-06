@@ -52,9 +52,9 @@ in
           _k_friendly_name = "Alacritty";
           _launch = [ "Meta+Return" "" "Alacritty" ];
         };
-        "speedcrunch.desktop" = {
-          _k_friendly_name = "SpeedCrunch";
-          _launch = [ "Meta+C" "" "SpeedCrunch" ];
+        "kalker.desktop" = {
+          _k_friendly_name = "Kalker";
+          _launch = [ "Meta+C" "" "Kalker" ];
         };
         "krunner.desktop" = {
           _k_friendly_name = "KRunner";

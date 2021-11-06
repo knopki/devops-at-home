@@ -7,12 +7,13 @@ channels: final: prev: {
     cachix
     dhall
     discord
-    neovim
-    neovim-unwrapped
+    kalker
     ledger-live-desktop
     manix
-    rage
-    nixpkgs-fmt;
+    neovim
+    neovim-unwrapped
+    nixpkgs-fmt
+    rage;
 
   inherit (channels.latest-working-vivaldi) vivaldi;
   inherit (channels.latest-working-brave) brave;
