@@ -3,8 +3,8 @@
 
   inputs = {
     # desktops/plasma
-    krohnkite.url = "github:esjeon/krohnkite/v0.8";
-    krohnkite.flake = false;
+    bismuth.url = "github:Bismuth-Forge/bismuth/v2.0.0";
+    bismuth.flake = false;
 
     # fish plugins
     fish-kubectl-completions.url = "github:evanlucas/fish-kubectl-completions";

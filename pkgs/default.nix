@@ -19,7 +19,7 @@ final: prev: {
   ls-colors = prev.callPackage ./data/themes/ls-colors.nix { };
 
   # desktops
-  krohnkite = prev.callPackage ./desktops/plasma-5/krohnkite.nix { };
+  bismuth = prev.callPackage ./desktops/plasma-5/bismuth.nix { };
 
   # misc
   vscode-extensions = prev.vscode-extensions //

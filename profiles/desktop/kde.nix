@@ -16,8 +16,7 @@ in
       plasma-applet-caffeine-plus
       plasma-systemmonitor # will replace ksysguard
 
-      # overriden
-      pkgs.krohnkite
+      pkgs.bismuth
     ];
 
   programs.partition-manager.enable = true;

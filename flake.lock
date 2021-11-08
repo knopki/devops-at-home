@@ -116,6 +116,23 @@
         "type": "github"
       }
     },
+    "bismuth": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1635948874,
+        "narHash": "sha256-qYAadNkUfPqvWnoHdPKLz9qB1Q0yaHS+Miwh7gr4jAo=",
+        "owner": "Bismuth-Forge",
+        "repo": "bismuth",
+        "rev": "416d57ecce391817a6a5c7974de778539cfae398",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Bismuth-Forge",
+        "ref": "v2.0.0",
+        "repo": "bismuth",
+        "type": "github"
+      }
+    },
     "ci-agent": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -514,23 +531,6 @@
         "type": "github"
       }
     },
-    "krohnkite": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1590939308,
-        "narHash": "sha256-59WDs5te7H1Jo58LTpiY8ZW9nGjKpd0P1VXD4eblgsw=",
-        "owner": "esjeon",
-        "repo": "krohnkite",
-        "rev": "c878120074fedbbde966dd6bd5b8cf722e0d54f9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "esjeon",
-        "ref": "v0.8",
-        "repo": "krohnkite",
-        "type": "github"
-      }
-    },
     "latest": {
       "locked": {
         "lastModified": 1635844945,
@@ -871,12 +871,12 @@
         "base16-tmux": "base16-tmux",
         "base16-vim": "base16-vim",
         "base16-waybar": "base16-waybar",
+        "bismuth": "bismuth",
         "dracula-alacritty": "dracula-alacritty",
         "dracula-fish": "dracula-fish",
         "dracula-wofi": "dracula-wofi",
         "dracula-zathura": "dracula-zathura",
         "fish-kubectl-completions": "fish-kubectl-completions",
-        "krohnkite": "krohnkite",
         "ls-colors": "ls-colors",
         "nixpkgs": [
           "nixos"
@@ -884,7 +884,7 @@
         "steamcompmgr": "steamcompmgr"
       },
       "locked": {
-        "narHash": "sha256-5miHOMWTqQPhd/LG8banJuMvea6gHMKKEqlO+X8ZQXg=",
+        "narHash": "sha256-pJy10Ax5WK79u/6b0Mom6Np4YoVY0/r5mHjJ0NZeXGM=",
         "path": "./pkgs",
         "type": "path"
       },
