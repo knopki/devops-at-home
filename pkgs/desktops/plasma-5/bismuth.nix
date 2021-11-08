@@ -40,7 +40,7 @@ stdenv.mkDerivation rec {
     cp -r "src/kwinscript/ui" "build/kwinscript/contents"
     cp "src/kwinscript/metadata.desktop" "build/kwinscript/metadata.desktop"
     substituteInPlace build/kwinscript/metadata.desktop \
-      --replace "Version=$VER" "Version=${version}"
+      --replace "X-KDE-PluginInfo-Version=\$VER" "X-KDE-PluginInfo-Version=${version}"
 
     # Create new .kwinscript package
     pushd "build/kwinscript"
