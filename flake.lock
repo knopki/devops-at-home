@@ -119,16 +119,16 @@
     "bismuth": {
       "flake": false,
       "locked": {
-        "lastModified": 1635948874,
-        "narHash": "sha256-qYAadNkUfPqvWnoHdPKLz9qB1Q0yaHS+Miwh7gr4jAo=",
+        "lastModified": 1636493890,
+        "narHash": "sha256-ICpGgFvVi7tiYbMCo3JWQmbA36rdWF4NFYTWIejhxr4=",
         "owner": "Bismuth-Forge",
         "repo": "bismuth",
-        "rev": "416d57ecce391817a6a5c7974de778539cfae398",
+        "rev": "ec362496b7d1c57d2fea69193bc394815530cf6f",
         "type": "github"
       },
       "original": {
         "owner": "Bismuth-Forge",
-        "ref": "v2.0.0",
+        "ref": "v2.1.0",
         "repo": "bismuth",
         "type": "github"
       }
@@ -517,11 +517,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1634544068,
-        "narHash": "sha256-RlRQBaAHfdWqfRyHdWuDPMkplBTYwuyDQqDcNbP/Sog=",
+        "lastModified": 1637019201,
+        "narHash": "sha256-lq4gz51fx4m5FXfx1SCB444aEBeaYtLMVm3P18Wi9ls=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ff2bed9dac84fb202bbb3c49fdcfe30c29d0b12f",
+        "rev": "bcf03fa16a1f06b8a0abb27bf49afa8d6fffe8f1",
         "type": "github"
       },
       "original": {
@@ -533,11 +533,11 @@
     },
     "latest": {
       "locked": {
-        "lastModified": 1635844945,
-        "narHash": "sha256-tZcL307dj28jgEU1Wdn+zwG9neyW0H2+ZjdVhvJxh9g=",
+        "lastModified": 1636800699,
+        "narHash": "sha256-SwbyVxXffu3G2ulJIbTf0iQfqhbGbdml4Dyv5j9BiAI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b67e752c29f18a0ca5534a07661366d6a2c2e649",
+        "rev": "2fa862644fc15ecb525eb8cd0a60276f1c340c7c",
         "type": "github"
       },
       "original": {
@@ -709,11 +709,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1636138231,
-        "narHash": "sha256-FZQ5wBcB9zI21uQMB/PaEQ/cLYk+Bwnig5cg1+2rPgg=",
+        "lastModified": 1637036156,
+        "narHash": "sha256-62di9fxX6l61vCpEZwqxj47u2UFTchfhZKMX6HgcJQE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5c02380de3951d0237807c16eb19873cb3c5f75d",
+        "rev": "01eaa66bb663412c31b5399334f118030a91f1aa",
         "type": "github"
       },
       "original": {
@@ -884,7 +884,7 @@
         "steamcompmgr": "steamcompmgr"
       },
       "locked": {
-        "narHash": "sha256-pJy10Ax5WK79u/6b0Mom6Np4YoVY0/r5mHjJ0NZeXGM=",
+        "narHash": "sha256-jeIAFIo2PpGAhA4cbpLM8TdEZ3eQTrBqHOIKbFk4aP0=",
         "path": "./pkgs",
         "type": "path"
       },

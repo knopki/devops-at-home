@@ -99,16 +99,16 @@
     "bismuth": {
       "flake": false,
       "locked": {
-        "lastModified": 1635948874,
-        "narHash": "sha256-qYAadNkUfPqvWnoHdPKLz9qB1Q0yaHS+Miwh7gr4jAo=",
+        "lastModified": 1636493890,
+        "narHash": "sha256-ICpGgFvVi7tiYbMCo3JWQmbA36rdWF4NFYTWIejhxr4=",
         "owner": "Bismuth-Forge",
         "repo": "bismuth",
-        "rev": "416d57ecce391817a6a5c7974de778539cfae398",
+        "rev": "ec362496b7d1c57d2fea69193bc394815530cf6f",
         "type": "github"
       },
       "original": {
         "owner": "Bismuth-Forge",
-        "ref": "v2.0.0",
+        "ref": "v2.1.0",
         "repo": "bismuth",
         "type": "github"
       }

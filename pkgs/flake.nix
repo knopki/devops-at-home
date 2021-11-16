@@ -3,7 +3,7 @@
 
   inputs = {
     # desktops/plasma
-    bismuth.url = "github:Bismuth-Forge/bismuth/v2.0.0";
+    bismuth.url = "github:Bismuth-Forge/bismuth/v2.1.0";
     bismuth.flake = false;
 
     # fish plugins
