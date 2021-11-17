@@ -4,6 +4,7 @@ channels: final: prev: {
 
   inherit (channels.latest)
     anytype
+    brave
     cachix
     dhall
     discord
@@ -14,8 +15,6 @@ channels: final: prev: {
     neovim-unwrapped
     nixpkgs-fmt
     rage;
-
-  inherit (channels.latest-working-brave) brave;
 
   haskellPackages = prev.haskellPackages.override {
     overrides = hfinal: hprev:
