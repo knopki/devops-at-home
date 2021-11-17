@@ -561,21 +561,6 @@
         "type": "indirect"
       }
     },
-    "latest-working-vivaldi": {
-      "locked": {
-        "lastModified": 1621651524,
-        "narHash": "sha256-rfuC5tfPN71yEvrK5to0fno07kMpT/bn5yXVkMEit04=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "422e6e54495a30a8e77a64f80cb795cefc445b21",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "rev": "422e6e54495a30a8e77a64f80cb795cefc445b21",
-        "type": "indirect"
-      }
-    },
     "ls-colors": {
       "flake": false,
       "locked": {
@@ -936,7 +921,6 @@
         "home": "home",
         "latest": "latest",
         "latest-working-brave": "latest-working-brave",
-        "latest-working-vivaldi": "latest-working-vivaldi",
         "naersk": "naersk_2",
         "nix-doom-emacs": "nix-doom-emacs",
         "nixos": "nixos",

@@ -59,7 +59,6 @@ in
     ]
       ++ optionals isWorkstation [
       ./brave.nix
-      ./vivaldi.nix
       ./emacs
       ./kopia.nix
     ] ++ optionals isDevbox [

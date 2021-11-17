@@ -15,7 +15,6 @@ channels: final: prev: {
     nixpkgs-fmt
     rage;
 
-  inherit (channels.latest-working-vivaldi) vivaldi;
   inherit (channels.latest-working-brave) brave;
 
   haskellPackages = prev.haskellPackages.override {
