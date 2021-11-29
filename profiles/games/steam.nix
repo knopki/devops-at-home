@@ -5,9 +5,6 @@ let inherit (lib) mkDefault mkBefore; in
 
   programs.steam.enable = mkDefault true;
 
-  # Launch steam from display managers
-  services.xserver.windowManager.steam.enable = mkDefault true;
-
   # 32-bit support needed for steam
   hardware.opengl.driSupport32Bit = mkDefault true;
   hardware.pulseaudio.support32Bit = mkDefault true;

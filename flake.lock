@@ -850,11 +850,10 @@
         "ls-colors": "ls-colors",
         "nixpkgs": [
           "nixos"
-        ],
-        "steamcompmgr": "steamcompmgr"
+        ]
       },
       "locked": {
-        "narHash": "sha256-57hdrugEwgmBCKwan6s8JXpzmiGubOSVDvktHqM1AUM=",
+        "narHash": "sha256-KsPiI2KANHJW5YYDyQzFKjYKiLIUtEH056DN6O0f3i0=",
         "path": "./pkgs",
         "type": "path"
       },
@@ -947,22 +946,6 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
-        "type": "github"
-      }
-    },
-    "steamcompmgr": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1622391127,
-        "narHash": "sha256-zpHxpRKR5asuVQvVnt82Oq/phOU982Q0CYzKL+mGtUo=",
-        "owner": "gamer-os",
-        "repo": "steamos-compositor-plus",
-        "rev": "8bde1b82dc4e8cc8db9d9d9b93dc90a9318d6f44",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gamer-os",
-        "repo": "steamos-compositor-plus",
         "type": "github"
       }
     },

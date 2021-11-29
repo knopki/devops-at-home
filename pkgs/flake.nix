@@ -10,10 +10,6 @@
     fish-kubectl-completions.url = "github:evanlucas/fish-kubectl-completions";
     fish-kubectl-completions.flake = false;
 
-    # steam
-    steamcompmgr.url = "github:gamer-os/steamos-compositor-plus";
-    steamcompmgr.flake = false;
-
     # themes
     base16-default-schemes.flake = false;
     base16-default-schemes.url = "github:chriskempson/base16-default-schemes";

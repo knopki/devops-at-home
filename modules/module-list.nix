@@ -3,6 +3,5 @@
 
   ./misc/meta.nix
   ./security/mitigations.nix
-  ./services/x11/window-managers/steam.nix
   ./systemd/linger.nix
 ]

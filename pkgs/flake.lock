@@ -239,24 +239,7 @@
         "dracula-zathura": "dracula-zathura",
         "fish-kubectl-completions": "fish-kubectl-completions",
         "ls-colors": "ls-colors",
-        "nixpkgs": "nixpkgs",
-        "steamcompmgr": "steamcompmgr"
-      }
-    },
-    "steamcompmgr": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1622391127,
-        "narHash": "sha256-zpHxpRKR5asuVQvVnt82Oq/phOU982Q0CYzKL+mGtUo=",
-        "owner": "gamer-os",
-        "repo": "steamos-compositor-plus",
-        "rev": "8bde1b82dc4e8cc8db9d9d9b93dc90a9318d6f44",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gamer-os",
-        "repo": "steamos-compositor-plus",
-        "type": "github"
+        "nixpkgs": "nixpkgs"
       }
     }
   },
