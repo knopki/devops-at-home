@@ -19,10 +19,9 @@ let inherit (lib) mkDefault; in
       enableOnBoot = mkDefault false;
       liveRestore = mkDefault true;
     };
-
     libvirtd = {
       enable = true;
-      qemuRunAsRoot = false;
+      qemu.runAsRoot = false;
       allowedBridges = [ "virbr0" "virbr1" ];
     };
 

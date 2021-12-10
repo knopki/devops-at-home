@@ -23,6 +23,10 @@
 (setq safe-local-variable-values '((lsp-clients-flow-server . nil)
                                    (lsp-yaml-format-enable . nil)))
 
+;; Customize
+(setq warning-suppress-log-types '((lsp-configure-hook))
+      warning-suppress-types '((lsp-on-idle-hook) (lsp-configure-hook)))
+
 ;;; Local Variables:
 ;;; byte-compile-warnings: (not free-vars unresolved)
 ;;; End:

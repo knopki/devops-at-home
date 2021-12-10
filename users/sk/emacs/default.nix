@@ -2,7 +2,7 @@
 let
   inherit (lib) listToAttrs nameValuePair;
   p = import ./packages.nix {
-    inherit config lib pkgs;
+    inherit config inputs lib pkgs;
     nixDoomFlake = inputs.nix-doom-emacs;
   };
 in
@@ -123,6 +123,8 @@ in
       inherit (p) emacsPackagesOverlay;
       enable = true;
       doomPrivateDir = ./doom.d;
+      # emacsPackage = pkgs.emacsPgtk;
+      # emacsPackage = pkgs.emacsPgtkGcc; # very slow build
     };
   };
 
@@ -130,17 +132,6 @@ in
     enable = true;
     client.enable = true;
   };
-
-  wayland.windowManager.sway.config.modes.org-capture =
-    let
-      wlPasteBin = "${pkgs.wl-clipboard}/bin/wl-paste";
-      orgCaptureBin = "${p.doom-org-capture}/bin/doom-org-capture";
-    in
-    {
-      t = "exec ${wlPasteBin} | ${orgCaptureBin} -k t, mode default";
-      n = "exec ${wlPasteBin} | ${orgCaptureBin} -k n, mode default";
-      Escape = "mode default";
-    };
 
   xdg.mimeApps = {
     enable = true;

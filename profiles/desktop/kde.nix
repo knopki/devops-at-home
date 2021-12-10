@@ -14,9 +14,8 @@ in
       ark
       krename
       plasma-applet-caffeine-plus
-      plasma-systemmonitor # will replace ksysguard
-
-      pkgs.bismuth
+      plasma-systemmonitor
+      thirdParty.bismuth
     ];
 
   programs.partition-manager.enable = true;

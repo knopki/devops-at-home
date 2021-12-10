@@ -96,8 +96,8 @@ in
     allowedUsers = mkDefault [ "@wheel" ];
     autoOptimiseStore = mkDefault true;
     binaryCaches = [ "https://cache.nixos.org/" ];
-    daemonIONiceLevel = mkDefault 7;
-    daemonNiceLevel = mkDefault 19;
+    daemonCPUSchedPolicy = mkDefault "idle";
+    daemonIOSchedPriority = mkDefault 7;
     gc = {
       automatic = mkDefault true;
       dates = mkDefault "weekly";
@@ -168,16 +168,6 @@ in
 
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
-  };
-
-  # Dereference symlinks to /run/secrets, so users.users.<name>.passwordFile is usable
-  system.activationScripts = mkIf (length (attrNames config.sops.secrets) > 0) {
-    setup-secrets-persist = stringAfter [ "setup-secrets" ] ''
-      echo persisting secrets...
-      install -m 0750 -d /var/secrets
-      chown root:keys /var/secrets
-      find /var/secrets -type l -exec ${pkgs.bash}/bin/sh -c 'cp --remove-destination $(readlink "{}") "{}"' \;
-    '';
   };
 
   #

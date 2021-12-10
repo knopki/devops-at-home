@@ -3,7 +3,7 @@
 
   inputs =
     {
-      nixos.url = "nixpkgs/release-21.05";
+      nixos.url = "nixpkgs/release-21.11";
       latest.url = "nixpkgs/nixos-unstable"; # not very latest please
       digga.url = "github:divnix/digga/develop";
 
@@ -13,10 +13,8 @@
       };
       darwin.url = "github:LnL7/nix-darwin";
       darwin.inputs.nixpkgs.follows = "nixos";
-      home.url = "github:nix-community/home-manager/release-21.05";
+      home.url = "github:nix-community/home-manager/release-21.11";
       home.inputs.nixpkgs.follows = "nixos";
-      naersk.url = "github:nmattia/naersk";
-      naersk.inputs.nixpkgs.follows = "nixos";
       agenix.url = "github:ryantm/agenix";
       agenix.inputs.nixpkgs.follows = "latest";
       nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -28,13 +26,19 @@
       sops-nix.inputs.nixpkgs.follows = "nixos";
 
       # emacs
-      doom-emacs.url = "github:hlissner/doom-emacs/develop";
-      doom-emacs.flake = false;
       emacs-overlay.url = "github:nix-community/emacs-overlay";
-      nix-doom-emacs.url = "github:vlaci/nix-doom-emacs/master";
+      nix-doom-emacs.url = "github:vlaci/nix-doom-emacs/develop";
+      org-mode.url = "github:emacs-straight/org-mode/release_9.5.1";
+      org-mode.flake = false;
+      ws-butler.url = "github:hlissner/ws-butler/572a10c11b6cb88293de48acbb59a059d36f9ba5";
+      ws-butler.flake = false;
+      evil-escape.url = "github:hlissner/evil-escape/819f1ee1cf3f69a1ae920e6004f2c0baeebbe077";
+      evil-escape.flake = false;
+      evil-textobj-anyblock.url = "github:willghatch/evil-textobj-anyblock/fix-inner-block";
+      evil-textobj-anyblock.flake = false;
+      evil-quick-diff.url = "github:rgrinberg/evil-quick-diff/69c883720b30a892c63bc89f49d4f0e8b8028908";
+      evil-quick-diff.flake = false;
       nix-doom-emacs.inputs.nixpkgs.follows = "nixos";
-      nix-doom-emacs.inputs.emacs-overlay.follows = "emacs-overlay";
-      nix-doom-emacs.inputs.doom-emacs.follows = "doom-emacs";
     };
 
   outputs =
@@ -234,7 +238,6 @@
             sops
             sops-init-gpg-key
             ssh-to-pgp
-            (python3.withPackages (ps: with ps; [ pyparsing ]))
           ];
 
           env = [

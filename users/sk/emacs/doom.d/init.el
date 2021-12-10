@@ -67,7 +67,7 @@
        (latex +lsp +fold)
        (markdown +grip)
        nix
-       (org +dragndrop +gnuplot +present +pretty +roam)
+       (org +dragndrop +gnuplot +present +pretty +roam2)
        php
        plantuml
        (python +lsp +pyright)

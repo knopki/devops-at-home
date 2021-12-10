@@ -251,7 +251,9 @@
 
 ;;; org-roam
 (after! org-roam
-  (setq org-roam-capture-templates
+  (setq org-roam-db-location (concat doom-etc-dir "org-roam.db")
+        org-roam-v2-ack t
+        org-roam-capture-templates
         `(("d" "default" plain #'org-roam-capture--get-point
            "%?"
            ;; :file-name "%<%Y%m%d%H%M%S>-${slug}"
@@ -298,7 +300,7 @@
 
 (use-package! org-roam-bibtex
   :after org-roam
-  :hook (org-roam-mode . org-roam-bibtex-mode)
+  :hook (org-roam-db-autosync-mode . org-roam-bibtex-mode)
   :commands (orb-insert orb-note-actions)
   :config
   (require 'orb-ivy)

@@ -227,6 +227,7 @@ in
     alien-root-user-password = defaultSopsFile // {
       key = "root-user-password";
       path = "/var/secrets/root-user-password";
+      neededForUsers = true;
     };
   };
 

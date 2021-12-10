@@ -2,10 +2,6 @@
   description = "Package Sources";
 
   inputs = {
-    # desktops/plasma
-    bismuth.url = "github:Bismuth-Forge/bismuth/v2.1.0";
-    bismuth.flake = false;
-
     # fish plugins
     fish-kubectl-completions.url = "github:evanlucas/fish-kubectl-completions";
     fish-kubectl-completions.flake = false;

@@ -1,117 +1,49 @@
-{ config, lib, pkgs, nixDoomFlake, ... }:
+{ config, lib, pkgs, nixDoomFlake, inputs, ... }:
 with lib;
 let
-  pinnedPackages = builtins.fromJSON (readFile ./pinned.json);
-  pinnedPackagesAttr = foldr (a: b: b // { "${a.name}" = a; }) { } pinnedPackages;
-  pkgAliases = [
-    { pname = "evil-org-mode"; ename = "evil-org"; }
-    { pname = "reveal.js"; ename = "revealjs"; }
-  ];
+  emacsPackagesOverlay = final: prev: rec {
+    straightBuild = { pname, ... }@args: prev.trivialBuild ({
+      ename = pname;
+      version = "1";
+      src = if args ? "src" then src else inputs.nix-doom-emacs.inputs.${pname};
+      buildPhase = ":";
+    } // args);
 
-  mkPkgSrc = pkg: ({ src = null; } // (optionalAttrs (pkg.fetcher == "git") {
-    src = fetchgit {
-      inherit (pkg) sha256;
-      url = pkg.repo;
+    org-mode = straightBuild rec {
+      pname = "org-mode";
+      version = "9.5";
+      src = inputs.org-mode;
+      installPhase = ''
+        LISPDIR=$out/share/emacs/site-lisp
+        install -d $LISPDIR
+        cp -r * $LISPDIR
+        cat > $LISPDIR/lisp/org-version.el <<EOF
+        (fset 'org-release (lambda () "${version}"))
+        (fset 'org-git-version #'ignore)
+        (provide 'org-version)
+        EOF
+      '';
     };
-  }) // (optionalAttrs (pkg.fetcher == "github") {
-    src = pkgs.fetchFromGitHub {
-      inherit (pkg) sha256 rev;
-      owner = last (init (splitString "/" pkg.repo));
-      repo = last (splitString "/" pkg.repo);
+    org-with-contrib = org-mode;
+    org = org-mode;
+
+    ws-butler = straightBuild {
+      pname = "ws-butler";
+      src = inputs.ws-butler;
     };
-  }) // (optionalAttrs (pkg.fetcher == "gitlab") {
-    src = pkgs.fetchFromGitLab {
-      inherit (pkg) sha256 rev;
-      owner = last (init (splitString "/" pkg.repo));
-      repo = last (splitString "/" pkg.repo);
+    evil-escape = straightBuild {
+      pname = "evil-escape";
+      src = inputs.evil-escape;
     };
-  })).src;
-
-  sourcesWOAliases = foldr (a: b: b // { "${a.name}" = mkPkgSrc a; }) { } pinnedPackages;
-  sources = foldr
-    (a: b: b // { "${a.pname}" = b."${a.ename}"; })
-    sourcesWOAliases
-    pkgAliases;
-
-  emacsPackagesOverlay = final: prev:
-    let
-      doomMelpaEmacsOverlay = foldr
-        (a: b: b // {
-          "${a.name}" = prev."${a.name}".overrideAttrs (o: {
-            src = sources."${a.name}";
-          });
-        })
-        { }
-        (filter (x: x.origin == "melpa") pinnedPackages);
-
-      nixDoomEmacsOverrides = pkgs.callPackage
-        "${nixDoomFlake.outPath}/overrides.nix"
-        { lock = name: sources."${name}"; }
-        final
-        prev;
-
-      straightBuild = nixDoomEmacsOverrides.straightBuild;
-
-      otherPkgs = filter
-        (x: !(elem x.name (attrNames (doomMelpaEmacsOverlay // nixDoomEmacsOverrides))))
-        pinnedPackages;
-      othersOverlay = foldr
-        (a: b: a // {
-          "${a.name}" = straightBuild {
-            pname = a.name;
-          };
-        })
-        { }
-        otherPkgs;
-
-      fixes = rec {
-        all-the-icons = prev.all-the-icons.overrideAttrs (o: {
-          buildInputs = o.buildInputs ++ [ prev.memoize ];
-        });
-        cmake-mode = straightBuild { pname = "cmake-mode"; };
-        org-mode = prev.melpaBuild rec {
-          pname = "org-mode";
-          version = "9.5";
-          src = sources."${pname}";
-          recipe = pkgs.writeText "recipe" ''
-            (${pname} :fetcher github :repo "emacs-straight/org-mode"
-            :files ("*.el" "lisp/*.el" "contrib/lisp/*.el" "etc"))
-          '';
-          preBuild = ''
-            cat > org-version.el <<EOF
-            (fset 'org-release (lambda () "${version}"))
-            (fset 'org-git-version #'ignore)
-            (provide 'org-version)
-            EOF
-          '';
-        };
-        org-with-contrib = org-mode;
-        org = org-mode;
-        org-re-reveal = prev.org-re-reveal.overrideAttrs (o: {
-          src = sources."${o.pname}";
-          meta.broken = false;
-        });
-        spell-fu = prev.spell-fu.overrideAttrs (o: {
-          src = sources."${o.pname}";
-          meta.broken = false;
-        });
-        undo-fu = prev.undo-fu.overrideAttrs (o: {
-          src = sources."${o.pname}";
-          meta.broken = false;
-        });
-        undo-fu-session = prev.undo-fu-session.overrideAttrs (o: {
-          src = sources."${o.pname}";
-          meta.broken = false;
-        });
-        mixed-pitch = prev.mixed-pitch.overrideAttrs (o: {
-          src = sources."${o.pname}";
-          meta.broken = false;
-        });
-      };
-
-      overlays = doomMelpaEmacsOverlay // nixDoomEmacsOverrides // othersOverlay // fixes;
-    in
-    overlays;
+    evil-textobj-anyblock = straightBuild {
+      pname = "evil-textobj-anyblock";
+      src = inputs.evil-textobj-anyblock;
+    };
+    evil-quick-diff = straightBuild {
+      pname = "evil-quick-diff";
+      src = inputs.evil-quick-diff;
+    };
+  };
 in
 {
   inherit emacsPackagesOverlay;

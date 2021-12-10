@@ -80,6 +80,22 @@
         "type": "github"
       }
     },
+    "base16-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1559893574,
+        "narHash": "sha256-6FsT87qcl9GBxgxrPx2bPULIMA/O8TRxHaN49qMM4uM=",
+        "owner": "chriskempson",
+        "repo": "base16-vim",
+        "rev": "6191622d5806d4448fa2285047936bdcee57a098",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chriskempson",
+        "repo": "base16-vim",
+        "type": "github"
+      }
+    },
     "base16-waybar": {
       "flake": false,
       "locked": {
@@ -99,16 +115,16 @@
     "bismuth": {
       "flake": false,
       "locked": {
-        "lastModified": 1636493890,
-        "narHash": "sha256-ICpGgFvVi7tiYbMCo3JWQmbA36rdWF4NFYTWIejhxr4=",
+        "lastModified": 1638659073,
+        "narHash": "sha256-ntfLijYPaOHvQToiAxuBZ5ayHPyQyevP9l6++SL0vUw=",
         "owner": "Bismuth-Forge",
         "repo": "bismuth",
-        "rev": "ec362496b7d1c57d2fea69193bc394815530cf6f",
+        "rev": "10151209d31fb1ea4046d609ad3b58bce05f1bf5",
         "type": "github"
       },
       "original": {
         "owner": "Bismuth-Forge",
-        "ref": "v2.1.0",
+        "ref": "v2.2.0",
         "repo": "bismuth",
         "type": "github"
       }

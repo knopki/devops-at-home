@@ -11,6 +11,7 @@ let
   sysSecs = {
     sk-user-password = defaultSopsFile // {
       path = "/var/secrets/sk-user-password";
+      neededForUsers = true;
     };
   };
   usrSecs = genAttrs [
