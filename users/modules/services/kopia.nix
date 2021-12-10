@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   inherit (lib) mkOption mkEnableOption mkIf types
-    mapAttrs' nameValuePair concatStringsSep escapeShellArg;
+    mapAttrs' mapAttrsToList nameValuePair concatStringsSep escapeShellArg;
   cfg = config.services.kopia;
   jobModule = types.submodule ({ config, ... }: {
     options = {
@@ -24,6 +24,11 @@ in
       default = { };
       description = "Kopia jobs";
     };
+    env = mkOption {
+      type = with types; attrsOf str;
+      default = { };
+      description = "Kopia unit files environment variables";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -41,6 +46,7 @@ in
           Restart = "on-failure";
           RestartSec = "1m";
           Type = "oneshot";
+          Environment = mapAttrsToList (name: value: "${name}=${value}") cfg.env;
           ExecStart = ''
             ${pkgs.kopia}/bin/kopia snap create ${concatStringsSep " " (map escapeShellArg value.snapshots)}
           '';

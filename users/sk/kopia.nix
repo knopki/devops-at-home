@@ -16,6 +16,10 @@ let inherit (lib) mkIf hm elem; in
 
   services.kopia = {
     enable = elem nixosConfig.networking.hostName [ "alien" ];
+    env = {
+      KOPIA_LOG_DIR_MAX_AGE = "168h";
+      KOPIA_CONTENT_LOG_DIR_MAX_AGE = "168h";
+    };
     jobs = {
       alien-half-hour = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = {
@@ -41,6 +45,7 @@ let inherit (lib) mkIf hm elem; in
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 1"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 2"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 3"
+          "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 4"
           "${config.xdg.dataHome}/fish/fish_history"
           config.xdg.userDirs.desktop
           config.xdg.userDirs.documents
