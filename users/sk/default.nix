@@ -90,6 +90,11 @@ in
         userEmail = "korolev.srg@gmail.com";
         userName = "Sergey Korolev";
       };
+      ssh.matchBlocks = {
+        "*.odoo.com".extraOptions = {
+          HostKeyAlgorithms = "+ssh-rsa";
+        };
+      };
       password-store.settings.PASSWORD_STORE_KEY = selfHM.programs.gpg.settings.default-key;
     };
 
