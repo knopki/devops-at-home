@@ -25,6 +25,7 @@
         serverAliveCountMax = 10;
         extraOptions = {
           TCPKeepAlive = "yes";
+          PubkeyAcceptedKeyTypes = "+ssh-rsa";
         };
       };
       "*.onion" = {
