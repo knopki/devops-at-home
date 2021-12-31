@@ -9,40 +9,23 @@ let
       buildPhase = ":";
     } // args);
 
-    org-mode = straightBuild rec {
-      pname = "org-mode";
-      version = "9.5";
-      src = inputs.org-mode;
-      installPhase = ''
-        LISPDIR=$out/share/emacs/site-lisp
-        install -d $LISPDIR
-        cp -r * $LISPDIR
-        cat > $LISPDIR/lisp/org-version.el <<EOF
-        (fset 'org-release (lambda () "${version}"))
-        (fset 'org-git-version #'ignore)
-        (provide 'org-version)
-        EOF
-      '';
-    };
-    org-with-contrib = org-mode;
-    org = org-mode;
-
-    ws-butler = straightBuild {
-      pname = "ws-butler";
-      src = inputs.ws-butler;
-    };
-    evil-escape = straightBuild {
-      pname = "evil-escape";
-      src = inputs.evil-escape;
-    };
-    evil-textobj-anyblock = straightBuild {
-      pname = "evil-textobj-anyblock";
-      src = inputs.evil-textobj-anyblock;
-    };
-    evil-quick-diff = straightBuild {
-      pname = "evil-quick-diff";
-      src = inputs.evil-quick-diff;
-    };
+    #org-mode = straightBuild rec {
+    #  pname = "org-mode";
+    #  version = "9.5";
+    #  src = inputs.org-mode;
+    #  installPhase = ''
+    #    LISPDIR=$out/share/emacs/site-lisp
+    #    install -d $LISPDIR
+    #    cp -r * $LISPDIR
+    #    cat > $LISPDIR/lisp/org-version.el <<EOF
+    #    (fset 'org-release (lambda () "${version}"))
+    #    (fset 'org-git-version #'ignore)
+    #    (provide 'org-version)
+    #    EOF
+    #  '';
+    #};
+    #org-with-contrib = org-mode;
+    #org = org-mode;
   };
 in
 {

@@ -10,10 +10,6 @@
 (package! org-ref :pin "120509c38929cc25d814e9a42092c44cb34ec34e") ;; 2020-12-12
 (package! org-roam-bibtex :pin "7c08a8928967a683666dbc1850e41537ab1fa01a") ;; 0.4.0
 
-;; temporary build fix
-(when (featurep! +gnuplot)
-  (package! gnuplot :pin "f0001c30010b2899e36d7d89046322467e923088"))
-
 ;;; Local Variables:
 ;;; byte-compile-warnings: (not free-vars unresolved)
 ;;; End:

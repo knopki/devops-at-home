@@ -27,18 +27,8 @@
 
       # emacs
       emacs-overlay.url = "github:nix-community/emacs-overlay";
-      nix-doom-emacs.url = "github:vlaci/nix-doom-emacs/develop";
-      org-mode.url = "github:emacs-straight/org-mode/release_9.5.1";
-      org-mode.flake = false;
-      ws-butler.url = "github:hlissner/ws-butler/572a10c11b6cb88293de48acbb59a059d36f9ba5";
-      ws-butler.flake = false;
-      evil-escape.url = "github:hlissner/evil-escape/819f1ee1cf3f69a1ae920e6004f2c0baeebbe077";
-      evil-escape.flake = false;
-      evil-textobj-anyblock.url = "github:willghatch/evil-textobj-anyblock/fix-inner-block";
-      evil-textobj-anyblock.flake = false;
-      evil-quick-diff.url = "github:rgrinberg/evil-quick-diff/69c883720b30a892c63bc89f49d4f0e8b8028908";
-      evil-quick-diff.flake = false;
-      nix-doom-emacs.inputs.nixpkgs.follows = "nixos";
+      nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+      #nix-doom-emacs.inputs.nixpkgs.follows = "nixos";
     };
 
   outputs =

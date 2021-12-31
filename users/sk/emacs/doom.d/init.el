@@ -7,7 +7,7 @@
        (ivy +fuzzy +prescient +icons)
        :ui
        doom
-       doom-dashboard
+       ;; doom-dashboard
        doom-quit
        hl-todo
        (ligatures +fira +extra)
@@ -19,7 +19,7 @@
        vi-tilde-fringe
        (window-select +switch-window)
        workspaces
-       zen
+       zen ;; mixed-pitch!
        :editor
        (evil +everywhere)
        file-templates
