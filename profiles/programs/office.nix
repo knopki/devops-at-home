@@ -20,5 +20,8 @@ in
     libreoffice-fresh
     marvin
     thunderbird
+    offlineimap
+    isync
+    rclone
   ];
 }
