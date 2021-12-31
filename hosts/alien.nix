@@ -140,8 +140,14 @@ in
     };
     search = [ "1984.run" ];
     firewall = {
-      allowedTCPPorts = [ 4001 8080 ];
-      allowedUDPPorts = [ 4001 ];
+      allowedTCPPorts = [
+        4001 # ipfs
+        8010 # chromecast sharing port
+        8080 # ipfs
+      ];
+      allowedUDPPorts = [
+        4001 # ipfs
+      ];
     };
   };
 
