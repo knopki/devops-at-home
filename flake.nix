@@ -239,8 +239,8 @@
 
           devshell.startup = {
             sops.text = ''
-              source ${pkgs.sops-pgp-hook.outPath}/nix-support/setup-hook
-              sopsPGPHook
+              source ${pkgs.sops-import-keys-hook.outPath}/nix-support/setup-hook
+              sopsImportKeysHook
             '';
           };
 
