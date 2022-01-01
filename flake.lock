@@ -888,7 +888,7 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-+3UH9NCbqhgqw0APo4UpG9v/MInzwc59bsNY5BhOXqs=",
+        "narHash": "sha256-/tNc5Ci7wKMOEpU5vMZWDO7hO1dVJjh9/YHbkWMXvFw=",
         "path": "./pkgs",
         "type": "path"
       },
