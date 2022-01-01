@@ -9,7 +9,6 @@ let
       if targetPlatform.isx86_64
       then "1gf0zdn4ahfp08fn5w0nzigwldl3bjqcj2f08rcvyn0mbwar4znn"
       else "18rmbnv7iwba19sfh4q4wfwh385snrmpvs6dyad2s9rv7vh2nch7";
-    # sha256 = "18rmbnv7iwba19sfh4q4wfwh385snrmpvs6dyad2s9rv7vh2nch7";
   };
   description = "Winbox is a small utility that allows administration of MikroTik RouterOS using a fast and simple GUI";
   meta = {
