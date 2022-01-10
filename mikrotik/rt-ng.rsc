@@ -539,8 +539,6 @@ add chain=MYDUDES-SELF comment="MYDUDES-SELF accept SSDP/UPNP" \
     protocol=udp dst-port=1900 action=accept
 add chain=MYDUDES-SELF comment="MYDUDES-SELF accept UPNP" \
     protocol=tcp dst-port=2828 action=accept
-add chain=MYDUDES-SELF comment="MYDUDES-SELF accept NAT-PMP" \
-    protocol=udp dst-port=5351 action=accept
 add chain=MYDUDES-SELF comment="MYDUDES-SELF accept HTTP to Mikrotik" protocol=tcp \
     dst-port=[ /ip/service get www port ] action=accept
 add chain=MYDUDES-SELF comment="MYDUDES-SELF accept WINBOX" \
@@ -800,10 +798,6 @@ add chain=ALLDUDES-SELF comment="ALLDUDES-SELF accept DHCP" \
     protocol=udp dst-port=67,68 action=accept
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF accept Neighbor Discovery" \
     protocol=udp dst-port=5678 action=accept
-# add chain=ALLDUDES-SELF comment="ALLDUDES-SELF drop DTS Play-Fi broadcasts" \
-#     protocol=udp dst-port=10102 dst-address=255.255.255.255 action=drop
-# add chain=ALLDUDES-SELF comment="ALLDUDES-SELF drop Xiaomi Gateway broadcasts" \
-#     protocol=udp dst-port=54321 dst-address=255.255.255.255 action=drop
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF reject all" \
     log=yes log-prefix=reject: reject-with=icmp-admin-prohibited action=reject
 
