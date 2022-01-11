@@ -547,8 +547,6 @@ add chain=MYDUDES-SELF comment="MYDUDES-SELF accept WINBOX" \
 :if ([print count-only where chain=ALLDUDES-SELF]>0) do={ remove [ find chain=ALLDUDES-SELF ] }
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF jump to MYDUDES-SELF" \
     in-interface-list=mydudes action=jump jump-target=MYDUDES-SELF
-add chain=ALLDUDES-SELF comment="ALLDUDES-SELF accept IGMP" \
-    protocol=igmp action=accept
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF accept DNS" \
     protocol=udp dst-port=53 action=accept
 add chain=ALLDUDES-SELF protocol=tcp dst-port=53 action=accept
@@ -565,6 +563,8 @@ add chain=ALLDUDES-SELF comment="ALLDUDES-SELF reject all" \
 
 :if ([print count-only where chain=main-input]>0) do={ remove [ find chain=main-input ] }
 add chain=main-input comment="main-input common rules" action=jump jump-target=common-rules
+add chain=main-input comment="main-input accept IGMP" \
+    protocol=igmp action=accept
 add chain=main-input comment="Jump to WAN-SELF chain" in-interface-list=WAN \
     action=jump jump-target=WAN-SELF
 add chain=main-input comment="Jump to ALLDUDES-SELF chain" in-interface-list=alldudes \
@@ -789,8 +789,6 @@ add chain=MYDUDES-SELF comment="MYDUDES-SELF accept WINBOX" \
 :if ([print count-only where chain=ALLDUDES-SELF]>0) do={ remove [ find chain=ALLDUDES-SELF ] }
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF jump to MYDUDES-SELF" \
     in-interface-list=mydudes action=jump jump-target=MYDUDES-SELF
-add chain=ALLDUDES-SELF comment="ALLDUDES-SELF accept IGMP" \
-    protocol=igmp action=accept
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF accept DNS" \
     protocol=udp dst-port=53 action=accept
 add chain=ALLDUDES-SELF protocol=tcp dst-port=53 action=accept
@@ -803,6 +801,8 @@ add chain=ALLDUDES-SELF comment="ALLDUDES-SELF reject all" \
 
 :if ([print count-only where chain=main-input]>0) do={ remove [ find chain=main-input ] }
 add chain=main-input comment="main-input common rules" action=jump jump-target=common-rules
+add chain=main-input comment="main-input accept IGMP" \
+    protocol=igmp action=accept
 add chain=main-input comment="Jump to WAN-SELF chain" in-interface-list=WAN \
     action=jump jump-target=WAN-SELF
 add chain=main-input comment="Jump to ALLDUDES-SELF chain" in-interface-list=alldudes \
