@@ -191,6 +191,51 @@ set [ find name=vlan1000-rostelecom ] interface=br1 vlan-id=1000
 
 
 ##################
+# Wireguard
+##################
+
+/interface wireguard
+:do { add name=azirevpn-de1 } on-error={}
+set [ find name=azirevpn-de1 ] listen-port=51820
+# set [ find name=azirevpn-de1 ] private-key="CHANGE_ME"
+:do { add name=azirevpn-fr1 } on-error={}
+set [ find name=azirevpn-fr1 ] listen-port=51821
+# set [ find name=azirevpn-fr1 ] private-key="CHANGE_ME"
+:do { add name=azirevpn-nl1 } on-error={}
+set [ find name=azirevpn-nl1 ] listen-port=51822
+# set [ find name=azirevpn-nl1 ] private-key="CHANGE_ME"
+:do { add name=azirevpn-se1 } on-error={}
+set [ find name=azirevpn-se1 ] listen-port=51823
+# set [ find name=azirevpn-se1 ] private-key="CHANGE_ME"
+
+/interface wireguard peers
+:if ([print count-only where interface=azirevpn-de1 endpoint-address=de1.wg.azirevpn.net]=0) do={
+  add interface=azirevpn-de1 public-key="" allowed-address=::/0
+}
+set [ find interface=azirevpn-de1 ] allowed-address=0.0.0.0/0,::/0 \
+    public-key="RcA42yVW4r0fXZaCYT4yCR7MxbOLZsew/jNU4t88pWA=" \
+    endpoint-address=de1.wg.azirevpn.net endpoint-port=51820 persistent-keepalive=60s
+:if ([print count-only where interface=azirevpn-fr1 endpoint-address=fr1.wg.azirevpn.net]=0) do={
+  add interface=azirevpn-fr1 public-key="" allowed-address=::/0
+}
+set [ find interface=azirevpn-fr1 ] allowed-address=0.0.0.0/0,::/0 \
+    public-key="4ad5d5DtaiMI4aZ6x7/w8NBEhn0lzMSW3kH9fZ1FBAA=" \
+    endpoint-address=fr1.wg.azirevpn.net endpoint-port=51820 persistent-keepalive=60s
+:if ([print count-only where interface=azirevpn-nl1 endpoint-address=nl1.wg.azirevpn.net]=0) do={
+  add interface=azirevpn-nl1 public-key="" allowed-address=::/0
+}
+set [ find interface=azirevpn-nl1 ] allowed-address=0.0.0.0/0,::/0 \
+    public-key="vtoErnbB63khY7KZl4qKfByMvGoiwHIQt/IKgTgZaEM=" \
+    endpoint-address=nl1.wg.azirevpn.net endpoint-port=51820 persistent-keepalive=60s
+:if ([print count-only where interface=azirevpn-se1 endpoint-address=se1.wg.azirevpn.net]=0) do={
+  add interface=azirevpn-se1 public-key="" allowed-address=::/0
+}
+set [ find interface=azirevpn-se1 ] allowed-address=0.0.0.0/0,::/0 \
+    public-key="T28Qn5VFzT4wiwEPd7DscwcP3Rsmq23QcnjH1N5G/wc=" \
+    endpoint-address=se1.wg.azirevpn.net endpoint-port=51820 persistent-keepalive=60s
+
+
+##################
 # Interface Lists
 ##################
 
@@ -207,6 +252,7 @@ set [ find name=vlan1000-rostelecom ] interface=br1 vlan-id=1000
 :do { add name=alldudes } on-error={}
 set [ find name=mydudes ] include=clients,media,iot,mgmt exclude=""
 set [ find name=alldudes ] include=clients,media,iot,mgmt,guests exclude=""
+:do { add name=azirevpn } on-error={}
 
 /interface list member
 :do { add interface=vlan2-clients list=clients } on-error={}
@@ -215,6 +261,14 @@ set [ find name=alldudes ] include=clients,media,iot,mgmt,guests exclude=""
 :do { add interface=vlan5-iot list=iot } on-error={}
 :do { add interface=vlan100-mgmt list=mgmt } on-error={}
 :do { add interface=vlan1000-rostelecom list=WAN } on-error={}
+:do { add interface=azirevpn-de1 list=WAN } on-error={}
+:do { add interface=azirevpn-fr1 list=WAN } on-error={}
+:do { add interface=azirevpn-nl1 list=WAN } on-error={}
+:do { add interface=azirevpn-se1 list=WAN } on-error={}
+:do { add interface=azirevpn-de1 list=azirevpn } on-error={}
+:do { add interface=azirevpn-fr1 list=azirevpn } on-error={}
+:do { add interface=azirevpn-nl1 list=azirevpn } on-error={}
+:do { add interface=azirevpn-se1 list=azirevpn } on-error={}
 
 /interface detect-internet
 set detect-interface-list=WAN \
@@ -241,6 +295,14 @@ set [ find address="192.168.88.1/24" ] network=192.168.88.0 interface=vlan100-mg
 set [ find address="10.66.7.1/27" ] network=10.66.7.0 interface=vlan100-mgmt
 :do { add interface=vlan5-iot address=10.66.7.129/25 } on-error={}
 set [ find address="10.66.7.129/25" ] network=10.66.7.128 interface=vlan5-iot
+:do { add interface=azirevpn-de1 address=100.75.20.60/19 } on-error={}
+set [ find address="100.75.20.60/19" ] network=100.75.0.0 interface=azirevpn-de1
+:do { add interface=azirevpn-fr1 address=100.80.17.185/19 } on-error={}
+set [ find address="100.80.17.185/19" ] network=100.80.0.0 interface=azirevpn-fr1
+:do { add interface=azirevpn-nl1 address=10.0.4.66/19 } on-error={}
+set [ find address="10.0.4.66/19" ] network=10.0.0.0 interface=azirevpn-nl1
+:do { add interface=azirevpn-se1 address=10.10.15.61/19 } on-error={}
+set [ find address="10.10.15.61/19" ] network=10.10.0.0 interface=azirevpn-se1
 
 :if ([print count-only where interface=br1]>0) do={ remove [ find interface=br1 ] }
 
@@ -268,6 +330,18 @@ set [ find interface=vlan1000-rostelecom ] add-default-route=yes pool-name=roste
 }
 :if ([print count-only where interface=vlan100-mgmt from-pool=rostelecom-ipv6 ]=0) do={
     add interface=vlan100-mgmt from-pool=rostelecom-ipv6 address=::/64 advertise=yes eui-64=yes
+}
+:if ([print count-only where interface=azirevpn-de1]=0) do={
+    add interface=azirevpn-de1 address=2a0e:1c80:c:4:2000::143d/64 advertise=yes
+}
+:if ([print count-only where interface=azirevpn-fr1]=0) do={
+    add interface=azirevpn-fr1 address=2a0e:1c80:11:2000::11ba/64 advertise=yes
+}
+:if ([print count-only where interface=azirevpn-nl1]=0) do={
+    add interface=azirevpn-nl1 address=2a0e:1c80:4:2000::443/64 advertise=yes
+}
+:if ([print count-only where interface=azirevpn-se1]=0) do={
+    add interface=azirevpn-se1 address=2a03:8600:1001:4000::f3e/64 advertise=yes
 }
 
 
@@ -310,6 +384,16 @@ set winbox disabled=no
 set allow-remote-requests=yes servers="" \
     use-doh-server=https://1.1.1.1/dns-query verify-doh-cert=yes \
     max-concurrent-tcp-sessions=100
+
+/ip dns static
+:if ([print count-only where name=de1.wg.azirevpn.net]=0) do={ add name=de1.wg.azirevpn.net address=127.1.1.1 }
+set [ find name=de1.wg.azirevpn.net ] address=37.46.199.146
+:if ([print count-only where name=fr1.wg.azirevpn.net]=0) do={ add name=fr1.wg.azirevpn.net address=127.1.1.1 }
+set [ find name=fr1.wg.azirevpn.net ] address=62.115.229.50
+:if ([print count-only where name=nl1.wg.azirevpn.net]=0) do={ add name=nl1.wg.azirevpn.net address=127.1.1.1 }
+set [ find name=nl1.wg.azirevpn.net ] address=45.15.19.34
+:if ([print count-only where name=se1.wg.azirevpn.net]=0) do={ add name=se1.wg.azirevpn.net address=127.1.1.1 }
+set [ find name=se1.wg.azirevpn.net ] address=45.15.16.60
 
 /ip cloud set ddns-enabled=yes ddns-update-interval=5m update-time=yes
 
@@ -527,6 +611,18 @@ add chain=WAN-SELF comment="WAN-SELF reject DNS" protocol=udp dst-port=53 \
     action=reject reject-with=icmp-admin-prohibited
 add chain=WAN-SELF protocol=tcp dst-port=53 \
     action=reject reject-with=icmp-admin-prohibited
+add chain=WAN-SELF comment="WAN-SELF Wireguard" \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-de1 listen-port ] \
+    action=accept
+add chain=WAN-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-fr1 listen-port ] \
+    action=accept
+add chain=WAN-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-nl1 listen-port ] \
+    action=accept
+add chain=WAN-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-se1 listen-port ] \
+    action=accept
 add chain=WAN-SELF comment="WAN-SELF reject at the end" \
     log=yes log-prefix=reject: action=reject reject-with=icmp-admin-prohibited
 
@@ -556,6 +652,18 @@ add chain=ALLDUDES-SELF comment="ALLDUDES-SELF accept Neighbor Discovery" \
     protocol=udp dst-port=5678 action=accept
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF drop DTS Play-Fi broadcasts" \
     protocol=udp dst-port=10102 dst-address=255.255.255.255 action=drop
+add chain=ALLDUDES-SELF comment="ALLDUDES-SELF Wireguard" \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-de1 listen-port ] \
+    action=accept
+add chain=ALLDUDES-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-fr1 listen-port ] \
+    action=accept
+add chain=ALLDUDES-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-nl1 listen-port ] \
+    action=accept
+add chain=ALLDUDES-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-se1 listen-port ] \
+    action=accept
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF drop Xiaomi Gateway broadcasts" \
     protocol=udp dst-port=54321 dst-address=255.255.255.255 action=drop
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF reject all" \
@@ -675,13 +783,13 @@ add chain=forward comment="Jump to forward table" action=jump jump-target=main-f
 
 :if ([print count-only where chain=main-masq]) do={ remove [ find chain=main-masq ] }
 add chain=main-masq comment="Clients masquerade" \
-    src-address-list=clients out-interface=vlan1000-rostelecom action=masquerade
+    src-address-list=clients out-interface-list=WAN action=masquerade
 add chain=main-masq comment="Guests masquerade" \
-    src-address-list=guests out-interface=vlan1000-rostelecom action=masquerade
+    src-address-list=guests out-interface-list=WAN action=masquerade
 add chain=main-masq comment="Media masquerade" \
-    src-address-list=media out-interface=vlan1000-rostelecom action=masquerade
+    src-address-list=media out-interface-list=WAN action=masquerade
 add chain=main-masq comment="IoT masquerade" \
-    src-address-list=iot out-interface=vlan1000-rostelecom action=masquerade
+    src-address-list=iot out-interface-list=WAN action=masquerade
 
 :if ([print count-only where jump-target=main-masq]) do={ remove [ find jump-target=main-masq ] }
 add chain=srcnat comment="Jump to masquerade table" action=jump jump-target=main-masq
@@ -773,6 +881,18 @@ add chain=WAN-SELF protocol=tcp dst-port=53 \
     action=reject reject-with=icmp-admin-prohibited
 add chain=WAN-SELF comment="WAN-SELF DHCPv6-Client prefix delegation" \
     protocol=udp dst-port=546 action=accept
+add chain=WAN-SELF comment="WAN-SELF Wireguard" \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-de1 listen-port ] \
+    action=accept
+add chain=WAN-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-fr1 listen-port ] \
+    action=accept
+add chain=WAN-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-nl1 listen-port ] \
+    action=accept
+add chain=WAN-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-se1 listen-port ] \
+    action=accept
 add chain=WAN-SELF comment="WAN-SELF reject at the end" \
     log=yes log-prefix=reject: action=reject reject-with=icmp-admin-prohibited
 
@@ -796,6 +916,18 @@ add chain=ALLDUDES-SELF comment="ALLDUDES-SELF accept DHCP" \
     protocol=udp dst-port=67,68 action=accept
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF accept Neighbor Discovery" \
     protocol=udp dst-port=5678 action=accept
+add chain=ALLDUDES-SELF comment="ALLDUDES-SELF Wireguard" \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-de1 listen-port ] \
+    action=accept
+add chain=ALLDUDES-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-fr1 listen-port ] \
+    action=accept
+add chain=ALLDUDES-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-nl1 listen-port ] \
+    action=accept
+add chain=ALLDUDES-SELF \
+    protocol=udp dst-port=[ /interface/wireguard/get azirevpn-se1 listen-port ] \
+    action=accept
 add chain=ALLDUDES-SELF comment="ALLDUDES-SELF reject all" \
     log=yes log-prefix=reject: reject-with=icmp-admin-prohibited action=reject
 
