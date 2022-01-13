@@ -589,8 +589,7 @@ add chain=ssh-bruteforce connection-state=new address-list=ssh_stage1 \
 :if ([print count-only where chain=common-rules]>0) do={ remove [ find chain=common-rules ] }
 add chain=common-rules comment="Common rules" \
     action=accept connection-state=established,related,untracked
-add chain=common-rules connection-state=invalid \
-    log=yes log-prefix=invalid: action=drop
+add chain=common-rules connection-state=invalid action=drop
 add chain=common-rules protocol=icmp action=jump jump-target=ICMP
 
 
@@ -849,8 +848,7 @@ add chain=ssh-bruteforce connection-state=new address-list=ssh_stage1 \
 :if ([print count-only where chain=common-rules]>0) do={ remove [ find chain=common-rules ] }
 add chain=common-rules comment="Common: accept established,related,untracked" \
     connection-state=established,related,untracked action=accept
-add chain=common-rules comment="Common: invalid" \
-    log=yes log-prefix=invalid: action=drop connection-state=invalid
+add chain=common-rules comment="Common: invalid" connection-state=invalid action=drop
 add chain=common-rules comment="Common: all ICMPv6" protocol=icmpv6 action=accept
 add chain=common-rules comment="Common: accept IKE" protocol=udp dst-port=500,4500 action=accept
 add chain=common-rules comment="Common: accept HIP" protocol=139
