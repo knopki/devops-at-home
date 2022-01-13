@@ -289,8 +289,6 @@ set [ find address="10.66.6.1/25" ] network=10.66.6.0 interface=vlan2-clients
 set [ find address="10.66.6.129/27" ] network=10.66.6.128 interface=vlan3-guests
 :do { add interface=vlan4-media address=10.66.6.161/27 } on-error={}
 set [ find address="10.66.6.161/27" ] network=10.66.6.160 interface=vlan4-media
-:do { add interface=vlan100-mgmt address=192.168.88.1/24 } on-error={}
-set [ find address="192.168.88.1/24" ] network=192.168.88.0 interface=vlan100-mgmt
 :do { add interface=vlan100-mgmt address=10.66.7.1/27 } on-error={}
 set [ find address="10.66.7.1/27" ] network=10.66.7.0 interface=vlan100-mgmt
 :do { add interface=vlan5-iot address=10.66.7.129/25 } on-error={}
@@ -533,7 +531,6 @@ add address=10.66.6.160/27 comment=media list=media
 
 :if ([print count-only where list=mgmt]>0) do={ remove [ find list=mgmt ] }
 add address=10.66.7.0/27 comment=mgmt list=mgmt
-add address=192.168.88.0/24 comment=mgmt list=mgmt
 
 :if ([print count-only where list=iot]>0) do={ remove [ find list=iot ] }
 add address=10.66.7.128/25 comment=iot list=iot
@@ -552,7 +549,6 @@ add address=10.66.7.0/27 comment=mgmt list=alldudes
 add address=10.66.7.128/25 comment=iot list=alldudes
 
 :if ([print count-only where list=self]>0) do={ remove [ find list=self ] }
-add address=192.168.88.1/32 comment=self list=self
 add address=10.66.6.1/32 comment=self list=self
 add address=10.66.6.129/32 comment=self list=self
 add address=10.66.6.161/32 comment=self list=self
