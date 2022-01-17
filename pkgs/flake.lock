@@ -112,23 +112,6 @@
         "type": "github"
       }
     },
-    "bismuth": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1638659073,
-        "narHash": "sha256-ntfLijYPaOHvQToiAxuBZ5ayHPyQyevP9l6++SL0vUw=",
-        "owner": "Bismuth-Forge",
-        "repo": "bismuth",
-        "rev": "10151209d31fb1ea4046d609ad3b58bce05f1bf5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Bismuth-Forge",
-        "ref": "v2.2.0",
-        "repo": "bismuth",
-        "type": "github"
-      }
-    },
     "dracula-alacritty": {
       "flake": false,
       "locked": {
@@ -248,7 +231,6 @@
         "base16-tmux": "base16-tmux",
         "base16-vim": "base16-vim",
         "base16-waybar": "base16-waybar",
-        "bismuth": "bismuth",
         "dracula-alacritty": "dracula-alacritty",
         "dracula-fish": "dracula-fish",
         "dracula-wofi": "dracula-wofi",

@@ -228,6 +228,7 @@
             sops
             sops-init-gpg-key
             ssh-to-pgp
+            wgcf
           ];
 
           env = [
