@@ -26,6 +26,7 @@
         extraOptions = {
           TCPKeepAlive = "yes";
           PubkeyAcceptedKeyTypes = "+ssh-rsa";
+          HostkeyAlgorithms = "+ssh-rsa";
         };
       };
       "*.onion" = {
