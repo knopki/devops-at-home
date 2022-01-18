@@ -305,7 +305,7 @@ set [ find address="172.16.0.2/32" ] network=172.16.0.2 interface=warp
 /ip dhcp-client
 :if ([print count-only where interface=vlan1000-rostelecom]=0) do={ add interface=vlan1000-rostelecom }
 set [ find interface=vlan1000-rostelecom ] !dhcp-options use-peer-dns=no \
-    add-default-route=no script=":if (\$bound=1) do={\r\
+    add-default-route=yes script=":if (\$bound=1) do={\r\
     \n    /ip route set [ find comment=ISP1-check ] gateway=\$\"gateway-address\"\r\
     \n    /routing bgp template set default router-id=\$\"lease-address\"\r\
     \n} else={\
@@ -521,12 +521,12 @@ set [ find interface=vlan4-media ] type=internal disabled=no
 
 /routing rule
 :if ([print count-only]>0) do={ remove [ find ] }
-add action=lookup-only-in-table routing-mark=ISP1 table=ISP1
-add action=lookup-only-in-table routing-mark=anyvpn table=anyvpn
-add action=lookup-only-in-table routing-mark=azirevpn-dk1 table=azirevpn-dk1
-add action=lookup-only-in-table routing-mark=azirevpn-no1 table=azirevpn-no1
-add action=lookup-only-in-table routing-mark=azirevpn-se1 table=azirevpn-se1
-add action=lookup-only-in-table routing-mark=warp table=warp
+add action=lookup routing-mark=ISP1 table=ISP1
+add action=lookup routing-mark=anyvpn table=anyvpn
+add action=lookup routing-mark=azirevpn-dk1 table=azirevpn-dk1
+add action=lookup routing-mark=azirevpn-no1 table=azirevpn-no1
+add action=lookup routing-mark=azirevpn-se1 table=azirevpn-se1
+add action=lookup routing-mark=warp table=warp
 add action=lookup comment="alien to vpn" src-address=10.66.6.7/32 table=anyvpn
 add action=lookup comment="anitifilter bgp peer" dst-address=163.172.210.8/32 table=anyvpn
 
@@ -611,8 +611,9 @@ add comment=warp distance=1 gateway=10.88.2.4 scope=10 target-scope=12 routing-t
 
 :if ([print count-only where comment=anyvpn]>0) do={ remove [ find comment=anyvpn ] }
 :foreach i,gw in={1="10.88.2.3";2="10.88.2.1";3="10.88.2.2";4="10.88.2.4"} do={
-    add comment=anyvpn distance="$i" gateway="$gw" routing-table=anyvpn scope=10 target-scope=12
+    add comment=anyvpn distance="$i" dst-address=10.88.2.100/32 gateway="$gw" scope=10 target-scope=12
 }
+add comment=anyvpn distance=1 gateway=10.88.2.100 scope=10 target-scope=13 routing-table=anyvpn
 
 
 #######################################
