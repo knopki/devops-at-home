@@ -307,12 +307,11 @@ set [ find address="172.16.0.2/32" ] network=172.16.0.2 interface=warp
 set [ find interface=vlan1000-rostelecom ] !dhcp-options use-peer-dns=no \
     add-default-route=yes script=":if (\$bound=1) do={\r\
     \n    /ip route set [ find comment=ISP1-check ] gateway=\$\"gateway-address\"\r\
-    \n    /routing rule add comment=ISP1-out place-before=*0 src-address=\$\"lease-address\" action=lookup table=ISP1\
-    \r\
+    \n    /routing rule set [ find comment=ISP1-out ] src-address=\$\"lease-address\" disabled=no\r\
     \n    /routing bgp template set default router-id=\$\"lease-address\"\r\
     \n} else={\
     \n    /ip firewall connection remove [ find connection-mark=ISP1 ]\r\
-    \n    /routing rule remove [ find comment=ISP1-out ]\
+    \n    /routing rule set [ find comment=ISP1-out ] disabled=yes\
     \n}"
 
 /ipv6 dhcp-client
@@ -534,6 +533,7 @@ set [ find interface=vlan4-media ] type=internal disabled=no
 /routing rule
 :if ([print count-only]>0) do={ remove [ find ] }
 add comment=toLAN dst-address=10.66.6.0/23 action=lookup table=main
+add comment=ISP1-out action=lookup table=ISP1
 add comment=azirevpn-dk1-out src-address=100.73.18.133/19 action=lookup table=azirevpn-dk1
 add comment=azirevpn-no1-out src-address=10.0.28.206/19 action=lookup table=azirevpn-no1
 add comment=azirevpn-se1-out src-address=10.10.15.61/19 action=lookup table=azirevpn-se1
