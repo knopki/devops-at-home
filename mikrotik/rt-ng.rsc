@@ -307,9 +307,12 @@ set [ find address="172.16.0.2/32" ] network=172.16.0.2 interface=warp
 set [ find interface=vlan1000-rostelecom ] !dhcp-options use-peer-dns=no \
     add-default-route=yes script=":if (\$bound=1) do={\r\
     \n    /ip route set [ find comment=ISP1-check ] gateway=\$\"gateway-address\"\r\
+    \n    /routing rule add comment=ISP1-out place-before=*0 src-address=\$\"lease-address\" action=lookup table=ISP1\
+    \r\
     \n    /routing bgp template set default router-id=\$\"lease-address\"\r\
     \n} else={\
-    \n    /ip firewall connection remove [ find connection-mark=\"ISP1\" ]\
+    \n    /ip firewall connection remove [ find connection-mark=ISP1 ]\r\
+    \n    /routing rule remove [ find comment=ISP1-out ]\
     \n}"
 
 /ipv6 dhcp-client
@@ -352,7 +355,7 @@ set [ find interface=vlan1000-rostelecom ] add-default-route=yes pool-name=roste
 # Services
 #######################################
 
-/ip neighbor discovery-settings set discover-interface-list=alldudes
+/ip neighbor discovery-settings set discover-interface-list=!WAN
 
 
 ##################
@@ -510,6 +513,10 @@ set [ find interface=vlan4-media ] type=internal disabled=no
 # Routing
 #######################################
 
+##################
+# Routings tables
+##################
+
 /routing table
 :if ([print count-only where name=ISP1]=0) do={ add fib name=ISP1 }
 :if ([print count-only where name=anyvpn]=0) do={ add fib name=anyvpn }
@@ -517,19 +524,56 @@ set [ find interface=vlan4-media ] type=internal disabled=no
 :if ([print count-only where name=azirevpn-no1]=0) do={ add fib name=azirevpn-no1 }
 :if ([print count-only where name=azirevpn-se1]=0) do={ add fib name=azirevpn-se1 }
 :if ([print count-only where name=warp]=0) do={ add fib name=warp }
+:if ([print count-only where name=antifilter]=0) do={ add fib name=antifilter }
 
+
+##################
+# Routing rules
+##################
 
 /routing rule
 :if ([print count-only]>0) do={ remove [ find ] }
-add action=lookup routing-mark=ISP1 table=ISP1
-add action=lookup routing-mark=anyvpn table=anyvpn
-add action=lookup routing-mark=azirevpn-dk1 table=azirevpn-dk1
-add action=lookup routing-mark=azirevpn-no1 table=azirevpn-no1
-add action=lookup routing-mark=azirevpn-se1 table=azirevpn-se1
-add action=lookup routing-mark=warp table=warp
-add action=lookup comment="alien to vpn" src-address=10.66.6.7/32 table=anyvpn
-add action=lookup comment="anitifilter bgp peer" dst-address=163.172.210.8/32 table=anyvpn
+add comment=toLAN dst-address=10.66.6.0/23 action=lookup table=main
+add comment=azirevpn-dk1-out src-address=100.73.18.133/19 action=lookup table=azirevpn-dk1
+add comment=azirevpn-no1-out src-address=10.0.28.206/19 action=lookup table=azirevpn-no1
+add comment=azirevpn-se1-out src-address=10.10.15.61/19 action=lookup table=azirevpn-se1
+add comment=warp-out src-address=172.16.0.2/32 action=lookup table=warp
+# dhcp client adds dynamic rule
+/ip dhcp-client release vlan1000-rostelecom
 
+add comment="anitifilter bgp peer" dst-address=163.172.210.8/32 action=lookup table=anyvpn
+add comment="Cloudflare DoH" dst-address=1.1.1.1/32 action=lookup table=anyvpn
+add comment="alien to vpn" src-address=10.66.6.7/32 action=lookup table=anyvpn
+add comment="antifilter - last before main table" action=lookup table=antifilter
+
+
+##################
+# Static routes
+##################
+
+#               Virtual IPs
+# ISP1          10.88.1.1
+# ISP2          10.88.1.2
+# azirevpn-dk1  10.88.2.1
+# azirevpn-no1  10.88.2.2
+# azirevpn-se1  10.88.2.3
+# warp          10.88.2.4
+# any alive vpn 10.88.2.100
+
+# checks
+#         adguard             cleanbrowsing   opendns        cloudflare           yndx                    quad9           safedns
+# ISP1    94.140.14.14        185.228.168.168 208.67.222.123 1.1.1.2              77.88.8.88
+#         2a10:50c0::ad1:ff   2a0d:2a00:1::                  2606:4700:4700::1112 2a02:6b8::feed:bad
+# ISP2    94.140.15.15        185.228.169.168 208.67.220.123 1.0.0.2              77.88.8.2
+#         2a10:50c0::ad2:ff   2a0d:2a00:2::                  2606:4700:4700::1002 2a02:6b8:0:1::feed:bad
+# az dk1  94.140.14.140       185.228.168.10  208.67.222.222 1.1.1.3                                      9.9.9.9
+#         2a10:50c0::1:ff     2a0d:2a00:1::1                 2606:4700:4700::1113                         2620:fe::fe
+# az no1  94.140.14.141       185.228.169.11  208.67.220.220 1.0.0.3                                      9.9.9.11
+#         2a10:50c0::2:ff     2a0d:2a00:2::1                 2606:4700:4700::1003                         2620:fe::9
+# az se1  94.140.14.15        185.228.168.9                                       77.88.8.7               149.112.112.112 195.46.39.39
+#         2a10:50c0::bad1:ff  2a0d:2a00:1::2                                      2a02:6b8::feed:a11      2620:fe::11
+# warp    94.140.15.16        185.228.169.9                                       77.88.8.3               149.112.112.11  195.46.39.40
+#         2a10:50c0::bad2:ff  2a0d:2a00:2::2                                      2a02:6b8:0:1::feed:a11  2620:fe::fe:11
 
 /ip route
 
@@ -538,23 +582,10 @@ add comment=BOGONs blackhole dst-address=10.0.0.0/8
 add comment=BOGONs blackhole dst-address=172.16.0.0/12
 add comment=BOGONs blackhole dst-address=192.168.0.0/16
 
-# hosts to ping
-# adguard: 94.140.14.14, 94.140.15.15, 94.140.14.140, 94.140.14.141, 94.140.14.15, 94.140.15.16
-# adguard v6: 2a10:50c0::ad1:ff, 2a10:50c0::ad2:ff, 2a10:50c0::1:ff, 2a10:50c0::2:ff, 2a10:50c0::bad1:ff, 2a10:50c0::bad2:ff
-# cleanbrowsing: 185.228.168.168, 185.228.169.168, 185.228.168.10, 185.228.169.11, 185.228.168.9, 185.228.169.9
-# cleanbrowsing v6: 2a0d:2a00:1::, 2a0d:2a00:2::, 2a0d:2a00:1::1, 2a0d:2a00:2::1, 2a0d:2a00:1::2, 2a0d:2a00:2::2
-# opendns: 208.67.222.123, 208.67.220.123, 208.67.222.222, 208.67.220.220
-# yandex: 77.88.8.88, 77.88.8.2, 77.88.8.7, 77.88.8.3
-# yandex v6: 2a02:6b8::feed:bad, 2a02:6b8:0:1::feed:bad, 2a02:6b8::feed:a11, 2a02:6b8:0:1::feed:a11
-# cloudflare: 1.1.1.2, 1.0.0.2, 1.1.1.3, 1.0.0.3
-# cloudflare v6: 2606:4700:4700::1112, 2606:4700:4700::1002, 2606:4700:4700::1113, 2606:4700:4700::1003
-# quad9: 9.9.9.9, 149.112.112.112, 9.9.9.11, 149.112.112.11
-# quad9 v6: 2620:fe::fe, 2620:fe::9, 2620:fe::11, 2620:fe::fe:11
-
 :if ([print count-only where comment=ISP1-check]>0) do={ remove [ find comment=ISP1-check ] }
 :if ([print count-only where comment=ISP1]>0) do={ remove [ find comment=ISP1 ] }
 :foreach host in={
-    "94.140.14.14";"185.228.168.168";"208.67.222.123";"77.88.8.88";"1.1.1.2";"9.9.9.9"
+    "94.140.14.14";"185.228.168.168";"208.67.222.123";"1.1.1.2";"77.88.8.88";
 } do={
     add comment=ISP1-check distance=1 dst-address="$host/32" gateway=vlan1000-rostelecom scope=10
     add comment=ISP1 distance=1 dst-address=10.88.1.1/32 gateway="$host" \
@@ -567,7 +598,7 @@ add comment=ISP1 distance=1 gateway=10.88.1.1 scope=10 target-scope=12 routing-t
 
 :if ([print count-only where comment=azirevpn-dk1]>0) do={ remove [ find comment=azirevpn-dk1 ] }
 :foreach host in={
-    "94.140.15.15";"185.228.169.168";"208.67.220.123";"77.88.8.2";"1.0.0.2";"149.112.112.112";
+    "94.140.14.140";"185.228.168.10";"208.67.222.222";"1.1.1.3";"9.9.9.9";
 } do={
     add comment=azirevpn-dk1 distance=1 dst-address="$host/32" gateway=azirevpn-dk1 scope=10
     add comment=azirevpn-dk1 distance=1 dst-address=10.88.2.1/32 gateway="$host" \
@@ -578,7 +609,7 @@ add comment=azirevpn-dk1 distance=1 gateway=10.88.2.1 scope=10 target-scope=12 r
 
 :if ([print count-only where comment=azirevpn-no1]>0) do={ remove [ find comment=azirevpn-no1 ] }
 :foreach host in={
-    "94.140.14.140";"185.228.168.10";"208.67.222.222";"77.88.8.7";"1.1.1.3";"9.9.9.11";
+    "94.140.14.141";"185.228.169.11";"208.67.220.220";"1.0.0.3";"9.9.9.11";
 } do={
     add comment=azirevpn-no1 distance=1 dst-address="$host/32" gateway=azirevpn-no1 scope=10
     add comment=azirevpn-no1 distance=1 dst-address=10.88.2.2/32 gateway="$host" \
@@ -589,7 +620,7 @@ add comment=azirevpn-no1 distance=1 gateway=10.88.2.2 scope=10 target-scope=12 r
 
 :if ([print count-only where comment=azirevpn-se1]>0) do={ remove [ find comment=azirevpn-se1 ] }
 :foreach host in={
-    "94.140.14.141";"185.228.169.11";"208.67.220.220";"77.88.8.3";"1.0.0.3";"149.112.112.11";
+    "94.140.14.15";"185.228.168.9";"77.88.8.7";"149.112.112.112";"195.46.39.39";
 } do={
     add comment=azirevpn-se1 distance=1 dst-address="$host/32" gateway=azirevpn-se1 scope=10
     add comment=azirevpn-se1 distance=1 dst-address=10.88.2.3/32 gateway="$host" \
@@ -600,7 +631,7 @@ add comment=azirevpn-se1 distance=1 gateway=10.88.2.3 scope=10 target-scope=12 r
 
 :if ([print count-only where comment=warp]>0) do={ remove [ find comment=warp ] }
 :foreach host in={
-    "94.140.14.15";"185.228.168.9";
+    "94.140.15.16";"185.228.169.9";"77.88.8.3";"149.112.112.11";"195.46.39.40";
 } do={
     add comment=warp distance=1 dst-address="$host/32" gateway=warp scope=10
     add comment=warp distance=1 dst-address=10.88.2.4/32 gateway="$host" \
@@ -614,6 +645,27 @@ add comment=warp distance=1 gateway=10.88.2.4 scope=10 target-scope=12 routing-t
     add comment=anyvpn distance="$i" dst-address=10.88.2.100/32 gateway="$gw" scope=10 target-scope=12
 }
 add comment=anyvpn distance=1 gateway=10.88.2.100 scope=10 target-scope=13 routing-table=anyvpn
+
+
+##################
+# BGP
+##################
+
+/routing bgp template
+set [ find default-name=default ] as=64512 router-id=[/routing/id/get main dynamic-id ]
+
+/routing bgp connection
+:if ([print count-only where name=antifilter]=0) do={ add name=antifilter remote.address=163.172.210.8 local.role=ibgp }
+set [ find name=antifilter ] disabled=no templates=default \
+    local.role=ibgp \
+    input.ignore-as-path-len=yes input.filter=bgp_in \
+    remote.address=163.172.210.8/32 \
+    hold-time=4m keepalive-time=1m multihop=yes routing-table=antifilter
+
+/routing filter rule
+:if ([print count-only where chain=bgp_in]>0) do={ remove [ find chain=bgp_in ] }
+# accept routes and send to any vpn gw
+add chain=bgp_in rule="set gw 10.88.2.100; accept"
 
 
 #######################################
@@ -680,14 +732,6 @@ add address=10.66.7.129/32 comment=self list=self
 
 /ip firewall filter
 
-:if ([print count-only where chain=ICMP]>0) do={ remove [ find chain=ICMP ] }
-add chain=ICMP action=accept protocol=icmp comment="ICMP chain" icmp-options=8:0 limit=10,100:packet
-add chain=ICMP action=accept protocol=icmp icmp-options=0:0
-add chain=ICMP action=accept protocol=icmp icmp-options=11:0
-add chain=ICMP action=accept protocol=icmp icmp-options=3:0-1
-add chain=ICMP action=accept protocol=icmp icmp-options=3:4
-add chain=ICMP action=drop protocol=icmp log=yes log-prefix="reject:"
-
 :if ([print count-only where chain=ssh-bruteforce]>0) do={ remove [ find chain=ssh-bruteforce ] }
 add chain=ssh-bruteforce comment="Prevent SSH bruteforce" \
     src-address-list=ssh_blacklist action=drop
@@ -704,7 +748,7 @@ add chain=ssh-bruteforce connection-state=new address-list=ssh_stage1 \
 add chain=common-rules comment="Common rules" \
     action=accept connection-state=established,related,untracked
 add chain=common-rules connection-state=invalid action=drop
-add chain=common-rules protocol=icmp action=jump jump-target=ICMP
+add chain=common-rules protocol=icmp action=accept
 
 
 ##################
@@ -882,6 +926,9 @@ add chain=main-masq comment="Media masquerade" ipsec-policy=out,none \
     src-address-list=media out-interface-list=WAN action=masquerade
 add chain=main-masq comment="IoT masquerade" ipsec-policy=out,none \
     src-address-list=iot out-interface-list=WAN action=masquerade
+add chain=main-masq comment="Hairpin to ALLDUDES" out-interface-list=alldudes \
+    action=src-nat src-address-list=alldudes to-addresses=10.66.6.0/23
+
 
 :if ([print count-only where jump-target=main-masq]) do={ remove [ find jump-target=main-masq ] }
 add chain=srcnat comment="Jump to masquerade table" action=jump jump-target=main-masq
@@ -900,7 +947,6 @@ add chain=forward comment=MTU-fix out-interface-list=wg \
     protocol=tcp tcp-flags=syn tcp-mss=!0-1380 \
     action=change-mss new-mss=1380 passthrough=yes
 
-
 :foreach int,mark in={
   "vlan1000-rostelecom"="ISP1";
   "azirevpn-dk1"="azirevpn-dk1";
@@ -909,19 +955,20 @@ add chain=forward comment=MTU-fix out-interface-list=wg \
   "warp"="warp";
 } do={
     :if ([print count-only where new-connection-mark="$mark-conn"]>0) do={ remove [ find new-connection-mark="$mark-conn" ] }
+    :if ([print count-only where new-routing-mark="$mark"]>0) do={ remove [ find new-routing-mark="$mark" ] }
+
+    # connmark ingress from isp (input + forward)
     add chain=prerouting comment="$mark" in-interface="$int" \
         connection-state=new connection-mark=no-mark \
         action=mark-connection new-connection-mark="$mark-conn" passthrough=yes
-    add chain=output out-interface="$int" \
-        connection-state=new connection-mark=no-mark \
-        action=mark-connection new-connection-mark="$mark-conn" passthrough=yes
-    add chain=forward out-interface="$int" \
-        connection-state=new connection-mark=no-mark \
-        action=mark-connection new-connection-mark="$mark-conn" passthrough=yes
 
-    :if ([print count-only where new-routing-mark="$mark"]>0) do={ remove [ find new-routing-mark="$mark" ] }
-    add chain=output connection-mark="$mark-conn" \
-        action=mark-routing new-routing-mark="$mark"
+    # routemark transit out
+    add chain=prerouting in-interface-list=!WAN connection-mark="$mark-conn" \
+        dst-address-type=!local action=mark-routing new-routing-mark="$mark"
+
+    # routemark local out
+    add chain=output out-interface="$int" connection-mark="$mark-conn" \
+        dst-address-type=!local action=mark-routing new-routing-mark="$mark"
 }
 
 
