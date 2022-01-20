@@ -670,7 +670,7 @@ set [ find name=antifilter ] disabled=no templates=default \
 /routing filter rule
 :if ([print count-only where chain=bgp_in]>0) do={ remove [ find chain=bgp_in ] }
 # accept routes and send to any vpn gw
-add chain=bgp_in rule="set gw 10.88.2.100; accept"
+add chain=bgp_in rule="set gw 127.88.2.100; accept"
 
 
 #######################################
