@@ -963,8 +963,7 @@ add chain=forward comment=MTU-fix out-interface-list=wg \
     :if ([print count-only where new-routing-mark="$mark"]>0) do={ remove [ find new-routing-mark="$mark" ] }
 
     # connmark ingress from isp (input + forward)
-    add chain=prerouting comment="$mark" in-interface="$int" \
-        connection-state=new connection-mark=no-mark \
+    add chain=prerouting comment="$mark" in-interface="$int" connection-mark=no-mark \
         action=mark-connection new-connection-mark="$mark-conn" passthrough=yes
 
     # routemark transit out
