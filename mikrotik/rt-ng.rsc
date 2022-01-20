@@ -557,16 +557,16 @@ add comment="antifilter - last before main table" action=lookup table=antifilter
 ##################
 
 #               Virtual IPs
-# ISP1          10.88.1.1
-# ISP2          10.88.1.2
-# azirevpn-dk1  10.88.2.1
-# azirevpn-no1  10.88.2.2
-# azirevpn-se1  10.88.2.3
-# warp          10.88.2.4
-# any alive vpn 10.88.2.100
+# ISP1          127.88.1.1
+# ISP2          127.88.1.2
+# azirevpn-dk1  127.88.2.1
+# azirevpn-no1  127.88.2.2
+# azirevpn-se1  127.88.2.3
+# warp          127.88.2.4
+# any alive vpn 127.88.2.100
 
 # checks
-#         adguard             cleanbrowsing   opendns        cloudflare           yndx                    quad9           safedns
+#         adguard             cleanbrowsing   opendns        cloudflare           yndx                    quad9           dnsfilter
 # ISP1    94.140.14.14        185.228.168.168 208.67.222.123 1.1.1.2              77.88.8.88
 #         2a10:50c0::ad1:ff   2a0d:2a00:1::                  2606:4700:4700::1112 2a02:6b8::feed:bad
 # ISP2    94.140.15.15        185.228.169.168 208.67.220.123 1.0.0.2              77.88.8.2
@@ -575,9 +575,9 @@ add comment="antifilter - last before main table" action=lookup table=antifilter
 #         2a10:50c0::1:ff     2a0d:2a00:1::1                 2606:4700:4700::1113                         2620:fe::fe
 # az no1  94.140.14.141       185.228.169.11  208.67.220.220 1.0.0.3                                      9.9.9.11
 #         2a10:50c0::2:ff     2a0d:2a00:2::1                 2606:4700:4700::1003                         2620:fe::9
-# az se1  94.140.14.15        185.228.168.9                                       77.88.8.7               149.112.112.112 195.46.39.39
+# az se1  94.140.14.15        185.228.168.9                                       77.88.8.7               149.112.112.112 103.247.36.36
 #         2a10:50c0::bad1:ff  2a0d:2a00:1::2                                      2a02:6b8::feed:a11      2620:fe::11
-# warp    94.140.15.16        185.228.169.9                                       77.88.8.3               149.112.112.11  195.46.39.40
+# warp    94.140.15.16        185.228.169.9                                       77.88.8.3               149.112.112.11  103.247.37.37
 #         2a10:50c0::bad2:ff  2a0d:2a00:2::2                                      2a02:6b8:0:1::feed:a11  2620:fe::fe:11
 
 /ip route
@@ -593,63 +593,63 @@ add comment=BOGONs blackhole dst-address=192.168.0.0/16
     "94.140.14.14";"185.228.168.168";"208.67.222.123";"1.1.1.2";"77.88.8.88";
 } do={
     add comment=ISP1-check distance=1 dst-address="$host/32" gateway=vlan1000-rostelecom scope=10
-    add comment=ISP1 distance=1 dst-address=10.88.1.1/32 gateway="$host" \
+    add comment=ISP1 distance=1 dst-address=127.88.1.1/32 gateway="$host" \
         scope=10 target-scope=11 check-gateway=ping
     add comment=ISP1 distance=99 dst-address="$host/32" blackhole
 }
 /ip dhcp-client release vlan1000-rostelecom
-add comment=ISP1 distance=1 gateway=10.88.1.1 scope=10 target-scope=12
-add comment=ISP1 distance=1 gateway=10.88.1.1 scope=10 target-scope=12 routing-table=ISP1
+add comment=ISP1 distance=1 gateway=127.88.1.1 scope=10 target-scope=12
+add comment=ISP1 distance=1 gateway=127.88.1.1 scope=10 target-scope=12 routing-table=ISP1
 
 :if ([print count-only where comment=azirevpn-dk1]>0) do={ remove [ find comment=azirevpn-dk1 ] }
 :foreach host in={
     "94.140.14.140";"185.228.168.10";"208.67.222.222";"1.1.1.3";"9.9.9.9";
 } do={
     add comment=azirevpn-dk1 distance=1 dst-address="$host/32" gateway=azirevpn-dk1 scope=10
-    add comment=azirevpn-dk1 distance=1 dst-address=10.88.2.1/32 gateway="$host" \
+    add comment=azirevpn-dk1 distance=1 dst-address=127.88.2.1/32 gateway="$host" \
         scope=10 target-scope=11 check-gateway=ping
     add comment=azirevpn-dk1 distance=99 dst-address="$host/32" blackhole
 }
-add comment=azirevpn-dk1 distance=1 gateway=10.88.2.1 scope=10 target-scope=12 routing-table=azirevpn-dk1
+add comment=azirevpn-dk1 distance=1 gateway=127.88.2.1 scope=10 target-scope=12 routing-table=azirevpn-dk1
 
 :if ([print count-only where comment=azirevpn-no1]>0) do={ remove [ find comment=azirevpn-no1 ] }
 :foreach host in={
     "94.140.14.141";"185.228.169.11";"208.67.220.220";"1.0.0.3";"9.9.9.11";
 } do={
     add comment=azirevpn-no1 distance=1 dst-address="$host/32" gateway=azirevpn-no1 scope=10
-    add comment=azirevpn-no1 distance=1 dst-address=10.88.2.2/32 gateway="$host" \
+    add comment=azirevpn-no1 distance=1 dst-address=127.88.2.2/32 gateway="$host" \
         scope=10 target-scope=11 check-gateway=ping
     add comment=azirevpn-no1 distance=99 dst-address="$host/32" blackhole
 }
-add comment=azirevpn-no1 distance=1 gateway=10.88.2.2 scope=10 target-scope=12 routing-table=azirevpn-no1
+add comment=azirevpn-no1 distance=1 gateway=127.88.2.2 scope=10 target-scope=12 routing-table=azirevpn-no1
 
 :if ([print count-only where comment=azirevpn-se1]>0) do={ remove [ find comment=azirevpn-se1 ] }
 :foreach host in={
-    "94.140.14.15";"185.228.168.9";"77.88.8.7";"149.112.112.112";"195.46.39.39";
+    "94.140.14.15";"185.228.168.9";"77.88.8.7";"149.112.112.112";"103.247.36.36";
 } do={
     add comment=azirevpn-se1 distance=1 dst-address="$host/32" gateway=azirevpn-se1 scope=10
-    add comment=azirevpn-se1 distance=1 dst-address=10.88.2.3/32 gateway="$host" \
+    add comment=azirevpn-se1 distance=1 dst-address=127.88.2.3/32 gateway="$host" \
         scope=10 target-scope=11 check-gateway=ping
     add comment=azirevpn-se1 distance=99 dst-address="$host/32" blackhole
 }
-add comment=azirevpn-se1 distance=1 gateway=10.88.2.3 scope=10 target-scope=12 routing-table=azirevpn-se1
+add comment=azirevpn-se1 distance=1 gateway=127.88.2.3 scope=10 target-scope=12 routing-table=azirevpn-se1
 
 :if ([print count-only where comment=warp]>0) do={ remove [ find comment=warp ] }
 :foreach host in={
-    "94.140.15.16";"185.228.169.9";"77.88.8.3";"149.112.112.11";"195.46.39.40";
+    "94.140.15.16";"185.228.169.9";"77.88.8.3";"149.112.112.11";"103.247.37.37";
 } do={
     add comment=warp distance=1 dst-address="$host/32" gateway=warp scope=10
-    add comment=warp distance=1 dst-address=10.88.2.4/32 gateway="$host" \
+    add comment=warp distance=1 dst-address=127.88.2.4/32 gateway="$host" \
         scope=10 target-scope=11 check-gateway=ping
     add comment=warp distance=99 dst-address="$host/32" blackhole
 }
-add comment=warp distance=1 gateway=10.88.2.4 scope=10 target-scope=12 routing-table=warp
+add comment=warp distance=1 gateway=127.88.2.4 scope=10 target-scope=12 routing-table=warp
 
 :if ([print count-only where comment=anyvpn]>0) do={ remove [ find comment=anyvpn ] }
-:foreach i,gw in={1="10.88.2.3";2="10.88.2.1";3="10.88.2.2";4="10.88.2.4"} do={
-    add comment=anyvpn distance="$i" dst-address=10.88.2.100/32 gateway="$gw" scope=10 target-scope=12
+:foreach i,gw in={1="127.88.2.3";2="127.88.2.1";3="127.88.2.2";4="127.88.2.4"} do={
+    add comment=anyvpn distance="$i" dst-address=127.88.2.100/32 gateway="$gw" scope=10 target-scope=12
 }
-add comment=anyvpn distance=1 gateway=10.88.2.100 scope=10 target-scope=13 routing-table=anyvpn
+add comment=anyvpn distance=1 gateway=127.88.2.100 scope=10 target-scope=13 routing-table=anyvpn
 
 
 ##################
