@@ -533,11 +533,16 @@ set [ find interface=vlan4-media ] type=internal disabled=no
 /routing rule
 :if ([print count-only]>0) do={ remove [ find ] }
 add comment=toLAN dst-address=10.66.6.0/23 action=lookup table=main
-add comment=ISP1-out action=lookup table=ISP1
-add comment=azirevpn-dk1-out src-address=100.73.18.133/19 action=lookup table=azirevpn-dk1
-add comment=azirevpn-no1-out src-address=10.0.28.206/19 action=lookup table=azirevpn-no1
-add comment=azirevpn-se1-out src-address=10.10.15.61/19 action=lookup table=azirevpn-se1
-add comment=warp-out src-address=172.16.0.2/32 action=lookup table=warp
+add comment=ISP1-out action=lookup table=ISP1 \
+    src-address=[ /ip/address/get value-name=address number=[ find interface=vlan1000-rostelecom ] ]
+add comment=azirevpn-dk1-out action=lookup table=azirevpn-dk1 \
+    src-address=[ /ip/address/get value-name=address number=[ find interface=azirevpn-dk1 ] ]
+add comment=azirevpn-no1-out action=lookup table=azirevpn-no1 \
+    src-address=[ /ip/address/get value-name=address number=[ find interface=azirevpn-no1 ] ]
+add comment=azirevpn-se1-out action=lookup table=azirevpn-se1 \
+    src-address=[ /ip/address/get value-name=address number=[ find interface=azirevpn-se1 ] ]
+add comment=warp-out action=lookup table=warp \
+    src-address=[ /ip/address/get value-name=address number=[ find interface=warp ] ]
 # dhcp client adds dynamic rule
 /ip dhcp-client release vlan1000-rostelecom
 
