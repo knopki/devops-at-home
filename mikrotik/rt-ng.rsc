@@ -1230,6 +1230,44 @@ set [ find name=cbackup ] source="/system/backup/cloud\r\n:if ([print count-only
 set [ find name="cloud_backup" ] interval=1d on-event=cbackup
 
 
+#######################################
+# ADBlock
+#######################################
+
+/system script
+:do { add name=adblock } on-error={}
+set [ find name=adblock ] policy=read,write,policy,test source="{\r\
+    \n:local hostScriptUrl \"https://stopad.hook.sh/script/source\?format=routeros&version=4.4.0&redirect_to=127.4.5.\
+    1&limit=15000&sources_urls=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Ftarampampam%2Fmikrotik-hosts-parser%40master%2F.\
+    hosts%2Fbasic.txt,https%3A%2F%2Fadaway.org%2Fhosts.txt&excluded_hosts=localhost,localhost.localdomain,broadcastho\
+    st,local,ip6-localhost,ip6-loopback,ip6-localnet,ip6-mcastprefix,ip6-allnodes,ip6-allrouters,ip6-allhosts\";\r\
+    \n:local scriptName \"adblock.rsc\";\r\
+    \n:local logPrefix \"[ADBlock]\";\r\
+    \n\r\
+    \ndo {\r\
+    \n  /tool fetch check-certificate=no mode=https url=\$hostScriptUrl dst-path=(\"./\".\$scriptName);\r\
+    \n  :delay 3s;\r\
+    \n  :if ([:len [/file find name=\$scriptName]] > 0) do={\r\
+    \n    /ip dns static\r\
+    \n    remove [ find comment=ADBlock ]\r\
+    \n    /import file-name=\$scriptName;\r\
+    \n    /file remove \$scriptName;\r\
+    \n    :log info \"\$logPrefix AD block script imported\";\r\
+    \n  } else={\r\
+    \n    :log warning \"\$logPrefix AD block script not downloaded, script stopped\";\r\
+    \n  }\r\
+    \n} on-error={\r\
+    \n  :log warning \"\$logPrefix AD block script download FAILED\";\r\
+    \n};\r\
+    \n}"
+
+/system scheduler
+:do { add name=update_adblock } on-error={}
+set [ name=update_adblock ] policy=read,write,policy,test \
+    start-date=jan/22/2022 start-time=03:53:25 interval=1d on-event=adblock
+
+
+
 # ending delay
 :delay 10s
 
