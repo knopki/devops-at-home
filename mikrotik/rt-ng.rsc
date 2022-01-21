@@ -1263,7 +1263,7 @@ set [ find name=adblock ] policy=read,write,policy,test source="{\r\
 
 /system scheduler
 :do { add name=update_adblock } on-error={}
-set [ name=update_adblock ] policy=read,write,policy,test \
+set [ find name=update_adblock ] policy=read,write,policy,test \
     start-date=jan/22/2022 start-time=03:53:25 interval=1d on-event=adblock
 
 
