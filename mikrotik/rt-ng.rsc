@@ -386,7 +386,8 @@ set winbox disabled=no
 /certificate import file-name=flash/DigiCertGlobalRootCA.crt.pem passphrase=""
 
 /ip dns
-set allow-remote-requests=yes servers="" \
+set allow-remote-requests=yes \
+    servers=91.231.153.2,2001:67c:15ec:1337::2,192.211.0.2,2a0a:3507::2 \
     use-doh-server=https://1.1.1.1/dns-query verify-doh-cert=yes \
     max-concurrent-tcp-sessions=100
 
