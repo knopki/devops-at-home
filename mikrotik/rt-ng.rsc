@@ -548,7 +548,10 @@ add comment=warp-out action=lookup table=warp \
 /ip dhcp-client release vlan1000-rostelecom
 
 add comment="anitifilter bgp peer" dst-address=163.172.210.8/32 action=lookup table=anyvpn
-add comment="Cloudflare DoH" dst-address=1.1.1.1/32 action=lookup table=anyvpn
+add comment="Upstream DNS servers" dst-address=91.231.153.2/32 action=lookup table=anyvpn
+add comment="Upstream DNS servers" dst-address=192.211.0.2/32 action=lookup table=anyvpn
+add comment="Upstream DNS servers" dst-address=2001:67c:15ec:1337::2/128 action=lookup table=anyvpn
+add comment="Upstream DNS servers" dst-address=2a0a:3507::2/128 action=lookup table=anyvpn
 add comment="alien to vpn" src-address=10.66.6.7/32 action=lookup table=anyvpn
 add comment="antifilter - last before main table" action=lookup table=antifilter
 
