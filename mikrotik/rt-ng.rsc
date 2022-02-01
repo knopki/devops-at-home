@@ -552,6 +552,7 @@ add comment="Upstream DNS servers" dst-address=91.231.153.2/32 action=lookup tab
 add comment="Upstream DNS servers" dst-address=192.211.0.2/32 action=lookup table=anyvpn
 add comment="Upstream DNS servers" dst-address=2001:67c:15ec:1337::2/128 action=lookup table=anyvpn
 add comment="Upstream DNS servers" dst-address=2a0a:3507::2/128 action=lookup table=anyvpn
+add comment="LinkedIn" dst-address=144.2.12.0/24 action=lookup table=anyvpn
 add comment="alien to vpn" src-address=10.66.6.7/32 action=lookup table=anyvpn
 add comment="antifilter - last before main table" action=lookup table=antifilter
 
