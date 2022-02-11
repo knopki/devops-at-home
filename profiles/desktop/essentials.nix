@@ -55,10 +55,7 @@ let inherit (lib) mkDefault genAttrs; in
         in
         (genAttrs trustInterfaces (name: allowedAllPortRanges));
     };
-    networkmanager = {
-      enable = mkDefault true;
-      dns = "systemd-resolved";
-    };
+    networkmanager.enable = mkDefault true;
     useNetworkd = true;
     wireguard.enable = true;
   };
