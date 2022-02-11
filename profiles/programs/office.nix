@@ -17,7 +17,7 @@ in
     gnome3.simple-scan
     kalker
     kalkerDesktopItem
-    libreoffice-fresh
+    libreoffice-qt
     marvin
     thunderbird
     offlineimap
