@@ -18,9 +18,6 @@ final: prev: {
   dracula-zathura = prev.callPackage ./data/themes/dracula-zathura.nix { };
   ls-colors = prev.callPackage ./data/themes/ls-colors.nix { };
 
-  # desktops
-  bismuth = prev.callPackage ./desktops/plasma-5/bismuth.nix { };
-
   # misc
   vscode-extensions = prev.vscode-extensions //
     (import ./misc/vscode-extensions.nix { inherit (prev) fetchurl vscode-utils; });
