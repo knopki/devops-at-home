@@ -120,18 +120,19 @@
               fonts
               misc.earlyoom
             ] ++ (with programs; [
-              three-de
               chat
               cryptowallets
               downloaders
-              image-viewers
               image-editors
-              video-player
-              video-editor
-              office
+              image-viewers
               music
+              office
               passwords
               remote
+              three-de
+              video-editor
+              video-player
+              web
             ]);
 
             mobile = base ++ [
@@ -153,7 +154,7 @@
               games.steam
               misc.earlyoom
               security.disable-mitigations
-            ] ++ (with programs; [ downloaders image-viewers video-player music ]);
+            ] ++ (with programs; [ downloaders image-viewers video-player music web ]);
           };
         };
       };

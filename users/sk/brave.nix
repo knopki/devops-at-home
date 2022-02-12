@@ -1,9 +1,7 @@
 { pkgs, ... }:
 {
-  programs.browserpass.enable = true;
   programs.brave = {
     extensions = [
-      { id = "naepdomgkenhinolocfifgehidddafch"; } # browserpass
       { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # tempermonkey
       { id = "jhnleheckmknfcgijgkadoemagpecfol"; } # auto tab discard
       {

@@ -17,7 +17,6 @@ let inherit (lib) mkDefault genAttrs; in
 
   environment.systemPackages = with pkgs; [
     asciinema
-    firefox
     gnupg
     hdparm
     lm_sensors

@@ -1,7 +1,6 @@
 [
   # NOTE: every module's filename should be unique!
 
-  ./programs/browserpass_override.nix
   ./programs/imv.nix
   ./programs/kde.nix
   ./programs/vscode.nix
