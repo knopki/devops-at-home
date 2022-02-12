@@ -2,19 +2,15 @@
 {
   programs.firefox = {
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      # TODO: polkadot
-      # TODO: waves-keeper
       auto-tab-discard
       browserpass
       bypass-paywalls
       i-dont-care-about-cookies
       ipfs-companion
       languagetool
-      metamask
       multi-account-containers
       no-pdf-download
       old-reddit-redirect
-      org-capture
       react-devtools
       save-page-we
       tridactyl
