@@ -1,9 +1,6 @@
 { config, nixosConfig, lib, pkgs, ... }:
 let
   inherit (lib) mkDefault;
-  chromiumExts = [
-    { id = "cimiefiiaegbelhefglklhhakcgmhkai"; } # plasma integration
-  ];
 in
 {
   programs = {
@@ -19,8 +16,5 @@ in
         };
       };
     };
-
-    brave.extensions = chromiumExts;
-    chromium.extensions = chromiumExts;
   };
 }

@@ -4,6 +4,18 @@ let
   inherit (libsForQt5) kdeApplications kdeFrameworks plasma5;
 in
 {
+  environment.etc =
+    let
+      appId = "org.kde.plasma.browser_integration.json";
+      source = "${pkgs.plasma-browser-integration}/etc/chromium/native-messaging-hosts/${appId}";
+    in
+    {
+      "brave/native-messaging-hosts/${appId}".source = source;
+      "chromium/native-messaging-hosts/${appId}".source = source;
+      "opt/chrome/native-messaging-hosts/${appId}".source = source;
+      "opt/vivaldi/native-messaging-hosts/${appId}".source = source;
+    };
+
   environment.systemPackages =
     with pkgs;
     with libsForQt5;
@@ -18,7 +30,15 @@ in
       thirdParty.bismuth
     ];
 
-  programs.partition-manager.enable = true;
+  programs =
+    let
+      extId = "cimiefiiaegbelhefglklhhakcgmhkai";
+    in
+    {
+      brave.extensions = [ extId ];
+      chromium.extensions = [ extId ];
+      partition-manager.enable = true;
+    };
 
   security.pam.services.sddm.gnupg = {
     enable = true;
