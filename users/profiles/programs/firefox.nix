@@ -9,7 +9,6 @@ in
     package = pkgs.firefox.override {
       cfg = {
         enableBrowserpass = true;
-        enableTridactylNative = true;
         enablePlasmaBrowserIntegration = config.programs.kde.enable;
       };
     };

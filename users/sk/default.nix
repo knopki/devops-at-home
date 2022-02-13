@@ -52,13 +52,12 @@ in
       ++ optionals isGamestation suites.gamestation
       ++ optionals isGraphical [
       ./alacritty.nix
-      ./firefox.nix
+      ./web.nix
       ./gnome.nix
       ./kde.nix
       ./xdg.nix
     ]
       ++ optionals isWorkstation [
-      ./brave.nix
       ./emacs
       ./kopia.nix
     ] ++ optionals isDevbox [

@@ -5,6 +5,7 @@ in
 {
   programs.kde = {
     settings = {
+      kdeglobals.General.BrowserApplication = "brave-browser.desktop";
       kwinrc = {
         Plugins.bismuthEnabled = true;
         Script-bismuth = {
