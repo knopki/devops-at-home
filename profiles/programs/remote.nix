@@ -6,4 +6,6 @@
     remmina
     teamviewer
   ];
+
+  services.teamviewer.enable = true;
 }
