@@ -44,10 +44,6 @@ in
           _k_friendly_name = "Alacritty";
           _launch = [ "Meta+Return" "" "Alacritty" ];
         };
-        "kalker.desktop" = {
-          _k_friendly_name = "Kalker";
-          _launch = [ "Meta+C" "" "Kalker" ];
-        };
         "krunner.desktop" = {
           _k_friendly_name = "KRunner";
           _launch = [ "Alt+F2\tSearch" "Alt+F2\tSearch" "KRunner" ];
@@ -127,6 +123,11 @@ in
         "org.kde.dolphin.desktop" = {
           _k_friendly_name = "Dolphin";
           _launch = [ "Meta+E" "Meta+E" "" ];
+        };
+
+        "speedcrunch.desktop" = {
+          _k_friendly_name = "SpeedCrunch";
+          _launch = [ "Meta+C" "" "SpeedCrunch" ];
         };
       };
 

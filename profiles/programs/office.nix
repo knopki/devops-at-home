@@ -1,12 +1,4 @@
 { pkgs, ... }:
-let
-  kalkerDesktopItem = pkgs.makeDesktopItem {
-    name = "kalker";
-    desktopName = "Kalker";
-    icon = "accessories-calculator";
-    exec = "${pkgs.alacritty}/bin/alacritty -t Kalker --class Kalker -e ${pkgs.kalker}/bin/kalker";
-  };
-in
 {
   environment.systemPackages = with pkgs; [
     anki
@@ -15,13 +7,12 @@ in
     aspellDicts.ru
     birdtray
     gnome3.simple-scan
-    kalker
-    kalkerDesktopItem
+    isync
     libreoffice-qt
     marvin
-    thunderbird
     offlineimap
-    isync
     rclone
+    speedcrunch
+    thunderbird
   ];
 }
