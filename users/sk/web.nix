@@ -125,7 +125,7 @@ let
     waitForEnterForFilteredHints = true;
     previousPatterns = "prev,previous,back,older,<,‹,←,«,≪,<<";
     nextPatterns = "next,more,newer,>,›,→,»,≫,>>";
-    newTabUrl = "about:newtab";
+    newTabUrl = "pages/blank.html";
     searchUrl = "https://duckduckgo.com/?q=";
     userDefinedLinkHintCss = ''
       /* linkhint boxes */
