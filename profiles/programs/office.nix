@@ -5,7 +5,6 @@
     anytype
     aspellDicts.en
     aspellDicts.ru
-    birdtray
     gnome3.simple-scan
     isync
     libreoffice-qt
@@ -13,6 +12,5 @@
     offlineimap
     rclone
     speedcrunch
-    thunderbird
   ];
 }
