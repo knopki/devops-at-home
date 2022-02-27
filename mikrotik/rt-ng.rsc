@@ -480,8 +480,14 @@ set [ find interface=vlan100-mgmt ] name=dhcp-mgmt interface=vlan100-mgmt \
     server-address=10.66.7.129 address-pool=mgmt lease-time=1w disabled=no
 
 /ip dhcp-server lease
+:if ([print count-only where mac-address=38:F9:D3:31:69:88]=0) do={ add mac-address=38:F9:D3:31:69:88 }
+set [ find mac-address=38:F9:D3:31:69:88 ] address=10.66.6.6 server=dhcp-clients comment="air"
 :if ([print count-only where mac-address=9C:B6:D0:03:A3:8F]=0) do={ add mac-address=9C:B6:D0:03:A3:8F }
 set [ find mac-address=9C:B6:D0:03:A3:8F ] address=10.66.6.7 server=dhcp-clients comment="alien"
+:if ([print count-only where mac-address=20:F4:78:19:A5:54]=0) do={ add mac-address=20:F4:78:19:A5:54 }
+set [ find mac-address=20:F4:78:19:A5:54 ] address=10.66.6.8 server=dhcp-clients comment="mi9t"
+:if ([print count-only where mac-address=78:F8:82:B1:B3:99]=0) do={ add mac-address=78:F8:82:B1:B3:99 }
+set [ find mac-address=78:F8:82:B1:B3:99 ] address=10.66.6.9 server=dhcp-clients comment="mi9"
 :if ([print count-only where mac-address=54:EF:44:2F:2C:8D]=0) do={ add mac-address=54:EF:44:2F:2C:8D }
 set [ find mac-address=54:EF:44:2F:2C:8D ] address=10.66.7.130 server=dhcp-iot comment="Xiaomi Gateway 3"
 
@@ -555,7 +561,10 @@ add comment="Upstream DNS servers" dst-address=2a0a:3507::2/128 action=lookup ta
 add comment="LinkedIn" dst-address=108.174.0.0/20 action=lookup table=anyvpn
 add comment="LinkedIn" dst-address=144.2.16.0/24 action=lookup table=anyvpn
 add comment="LinkedIn" dst-address=144.2.9.0/21 action=lookup table=anyvpn
+add comment="air to vpn" src-address=10.66.6.6/32 action=lookup table=anyvpn
 add comment="alien to vpn" src-address=10.66.6.7/32 action=lookup table=anyvpn
+add comment="mi9t to vpn" src-address=10.66.6.8/32 action=lookup table=anyvpn
+add comment="mi9 to vpn" src-address=10.66.6.9/32 action=lookup table=anyvpn
 add comment="antifilter - last before main table" action=lookup table=antifilter
 
 
