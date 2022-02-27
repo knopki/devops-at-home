@@ -667,11 +667,11 @@ add comment=anyvpn distance=1 gateway=127.88.2.100 scope=10 target-scope=13 rout
 set [ find default-name=default ] as=64512 router-id=[/routing/id/get main dynamic-id ]
 
 /routing bgp connection
-:if ([print count-only where name=antifilter]=0) do={ add name=antifilter remote.address=163.172.210.8 local.role=ibgp }
+:if ([print count-only where name=antifilter]=0) do={ add name=antifilter remote.address=45.154.73.71 local.role=ibgp }
 set [ find name=antifilter ] disabled=no templates=default \
     local.role=ibgp \
     input.ignore-as-path-len=yes input.filter=bgp_in \
-    remote.address=163.172.210.8/32 \
+    remote.address=45.154.73.71/32 \
     hold-time=4m keepalive-time=1m multihop=yes routing-table=antifilter
 
 /routing filter rule
