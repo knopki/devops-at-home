@@ -26,4 +26,8 @@ channels: final: prev: {
       bismuth = channels.latest.libsForQt5.thirdParty.bismuth;
     };
   };
+
+  nodePackages = prev.nodePackages // {
+    pyright = channels.latest.nodePackages.pyright;
+  };
 }
