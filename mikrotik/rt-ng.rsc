@@ -291,12 +291,12 @@ set [ find address="10.66.6.161/27" ] network=10.66.6.160 interface=vlan4-media
 set [ find address="10.66.7.1/27" ] network=10.66.7.0 interface=vlan100-mgmt
 :do { add interface=vlan5-iot address=10.66.7.129/25 } on-error={}
 set [ find address="10.66.7.129/25" ] network=10.66.7.128 interface=vlan5-iot
-:do { add interface=azirevpn-dk1 address=100.73.18.133/19 } on-error={}
-set [ find address="100.73.18.133/19" ] network=100.73.0.0 interface=azirevpn-dk1
-:do { add interface=azirevpn-no1 address=10.0.28.206/19 } on-error={}
-set [ find address="10.0.28.206/19" ] network=10.0.0.0 interface=azirevpn-no1
-:do { add interface=azirevpn-se1 address=10.10.15.61/19 } on-error={}
-set [ find address="10.10.15.61/19" ] network=10.10.0.0 interface=azirevpn-se1
+:do { add interface=azirevpn-dk1 address=100.73.11.179/19 } on-error={}
+set [ find address="100.73.11.179/19" ] network=100.73.0.0 interface=azirevpn-dk1
+:do { add interface=azirevpn-no1 address=10.0.9.148/19 } on-error={}
+set [ find address="10.0.9.148/19" ] network=10.0.0.0 interface=azirevpn-no1
+:do { add interface=azirevpn-se1 address=10.10.15.182/19 } on-error={}
+set [ find address="10.10.15.182/19" ] network=10.10.0.0 interface=azirevpn-se1
 :do { add interface=warp address=172.16.0.2/32 } on-error={}
 set [ find address="172.16.0.2/32" ] network=172.16.0.2 interface=warp
 
@@ -337,13 +337,13 @@ set [ find interface=vlan1000-rostelecom ] add-default-route=yes pool-name=roste
     add interface=vlan100-mgmt from-pool=rostelecom-ipv6 address=::/64 advertise=yes eui-64=yes
 }
 :if ([print count-only where interface=azirevpn-dk1]=0) do={
-    add interface=azirevpn-dk1 address=2a0e:1c80:f:2000::1286/64 advertise=yes
+    add interface=azirevpn-dk1 address=2a0e:1c80:f:2000::bb4/64 advertise=yes
 }
 :if ([print count-only where interface=azirevpn-se1]=0) do={
-    add interface=azirevpn-se1 address=2a03:8600:1001:4000::f3e/64 advertise=yes
+    add interface=azirevpn-se1 address=2a03:8600:1001:4000::fb7/64 advertise=yes
 }
 :if ([print count-only where interface=azirevpn-no1]=0) do={
-    add interface=azirevpn-no1 address=2a0c:dd43:1:2000::1ccf/64 advertise=yes
+    add interface=azirevpn-no1 address=2a0c:dd43:1:2000::995/64 advertise=yes
 }
 :if ([print count-only where interface=warp]=0) do={
     add interface=warp address=fd01:5ca1:ab1e:82d0:ae30:4c4a:9629:2bbe/128 advertise=no
@@ -411,15 +411,15 @@ set [ find name=engage.cloudflareclient.com ] address=162.159.192.1
 /ipv6 nd
 :if ([print count-only where interface=all]>0) do={ set [ find interface=all ] disabled=yes }
 :do { add interface=vlan2-clients } on-error={}
-set [ find inreface=vlan2-clients ] ra-lifetime=2h
+set [ find interface=vlan2-clients ] ra-lifetime=2h
 :do { add interface=vlan3-guests } on-error={}
-set [ find inreface=vlan3-guests ] ra-lifetime=2h
+set [ find interface=vlan3-guests ] ra-lifetime=2h
 :do { add interface=vlan4-media } on-error={}
-set [ find inreface=vlan4-media ] ra-lifetime=2h
+set [ find interface=vlan4-media ] ra-lifetime=2h
 :do { add interface=vlan5-iot } on-error={}
-set [ find inreface=vlan5-iot ] ra-lifetime=2h
+set [ find interface=vlan5-iot ] ra-lifetime=2h
 :do { add interface=vlan100-mgmt } on-error={}
-set [ find inreface=vlan100-mgmt ] ra-lifetime=2h
+set [ find interface=vlan100-mgmt ] ra-lifetime=2h
 
 /ipv6 nd prefix default
 set preferred-lifetime=1w valid-lifetime=31d
@@ -554,6 +554,7 @@ add comment=warp-out action=lookup table=warp \
 /ip dhcp-client release vlan1000-rostelecom
 
 add comment="anitifilter bgp peer" dst-address=163.172.210.8/32 action=lookup table=anyvpn
+add comment="Upstream DNS servers" dst-address=1.1.1.1/32 action=lookup table=anyvpn
 add comment="Upstream DNS servers" dst-address=91.231.153.2/32 action=lookup table=anyvpn
 add comment="Upstream DNS servers" dst-address=192.211.0.2/32 action=lookup table=anyvpn
 add comment="Upstream DNS servers" dst-address=2001:67c:15ec:1337::2/128 action=lookup table=anyvpn
