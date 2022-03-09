@@ -4,6 +4,5 @@
     aliza
     imgcat
     imv
-    gwenview
   ];
 }
