@@ -73,13 +73,14 @@ set [ find name=media ] authentication-types=wpa2-psk  \
 set [ find default-name=wlan2 ] name=wlan5 mode=ap-bridge disabled=no \
     comment="WLAN 5 Clients" ssid=KotikiHQ_5 security-profile=clients \
     antenna-gain=0 band=5ghz-a/n/ac channel-width=20/40/80mhz-Ceee \
-    distance=indoors frequency=auto installation=indoor station-roaming=enabled \
+    distance=indoors frequency=5260 installation=indoor station-roaming=enabled \
     wireless-protocol=802.11 wps-mode=disabled multicast-helper=full
 set [ find default-name=wlan1 ] name=wlan24 mode=ap-bridge disabled=no \
     comment="WLAN 2.4 Clients" ssid=KotikiHQ_2.4 security-profile=clients \
     antenna-gain=0 band=2ghz-b/g/n channel-width=20/40mhz-Ce \
-    distance=indoors frequency=auto installation=indoor station-roaming=enabled \
-    wireless-protocol=802.11 wps-mode=disabled multicast-helper=full
+    distance=indoors frequency=2447 installation=indoor station-roaming=enabled \
+    wireless-protocol=802.11 wps-mode=disabled multicast-helper=full \
+    tx-power-mode=all-rates-fixed tx-power=6
 
 :do { add name=wlan-guests5 master-interface=wlan5 } on-error={}
 set [ find name=wlan-guests5 ] ssid=Kotiki_Guests comment="WLAN 5 Guests" disabled=no \
@@ -94,7 +95,7 @@ set [ find name=wlan-iot24 ] ssid=iotta comment="WLAN 2.4 IoT" disabled=no \
     master-interface=wlan24 security-profile=iot wps-mode=disabled \
     mac-address=76:4D:28:01:CD:36 multicast-helper=full
 :do { add name=wlan-media5 master-interface=wlan5 } on-error={}
-set [ find name=wlan-media5 ] ssid=Kotiki_Media comment="WLAN 2.4 IoT" disabled=no \
+set [ find name=wlan-media5 ] ssid=Kotiki_Media comment="WLAN 5 Media" disabled=no \
     master-interface=wlan5 security-profile=media wps-mode=disabled \
     mac-address=76:4D:28:01:CD:39 multicast-helper=full
 
