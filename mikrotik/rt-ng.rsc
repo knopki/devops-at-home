@@ -111,7 +111,7 @@ set [ find name=br1 ] comment="LAN Bridge" protocol-mode=none \
     igmp-snooping=yes multicast-querier=yes
 
 /interface bridge port
-# ISP
+# ISP1
 :do { add bridge=br1 interface=ether1 } on-error={}
 set bridge=br1 [ find interface=ether1 ] pvid=1000 comment="ISP1" \
     frame-types=admit-only-untagged-and-priority-tagged ingress-filtering=yes
@@ -190,6 +190,17 @@ set [ find name=vlan100-mgmt ] interface=br1 vlan-id=100
 :do { add interface=br1 name=vlan1000-rostelecom vlan-id=1000 } on-error={}
 set [ find name=vlan1000-rostelecom ] interface=br1 vlan-id=1000
 
+##################
+# LTE
+##################
+
+/interface lte apn
+:do { add name=megafon apn=internet } on-error={}
+set [ find name=megafon ] apn=internet add-default-route=no use-peer-dns=no
+
+/interface lte
+set [ find name=lte1 ] apn-profiles=megafon comment=MF
+
 
 ##################
 # Wireguard
@@ -262,6 +273,7 @@ set [ find name=alldudes ] include=clients,media,iot,mgmt,guests exclude=""
 :do { add interface=vlan5-iot list=iot } on-error={}
 :do { add interface=vlan100-mgmt list=mgmt } on-error={}
 :do { add interface=vlan1000-rostelecom list=WAN } on-error={}
+:do { add interface=lte1 list=WAN } on-error={}
 :do { add interface=azirevpn-dk1 list=WAN } on-error={}
 :do { add interface=azirevpn-no1 list=WAN } on-error={}
 :do { add interface=azirevpn-se1 list=WAN } on-error={}
@@ -290,6 +302,8 @@ set [ find address="10.66.6.129/27" ] network=10.66.6.128 interface=vlan3-guests
 set [ find address="10.66.6.161/27" ] network=10.66.6.160 interface=vlan4-media
 :do { add interface=vlan100-mgmt address=10.66.7.1/27 } on-error={}
 set [ find address="10.66.7.1/27" ] network=10.66.7.0 interface=vlan100-mgmt
+:do { add interface=lte1 address=10.66.7.126/30 } on-error={}
+set [ find address="10.66.7.126/30" ] network=10.66.7.124 interface=lte1
 :do { add interface=vlan5-iot address=10.66.7.129/25 } on-error={}
 set [ find address="10.66.7.129/25" ] network=10.66.7.128 interface=vlan5-iot
 :do { add interface=azirevpn-dk1 address=100.73.11.179/19 } on-error={}
@@ -306,7 +320,7 @@ set [ find address="172.16.0.2/32" ] network=172.16.0.2 interface=warp
 /ip dhcp-client
 :if ([print count-only where interface=vlan1000-rostelecom]=0) do={ add interface=vlan1000-rostelecom }
 set [ find interface=vlan1000-rostelecom ] !dhcp-options use-peer-dns=no \
-    add-default-route=yes script=":if (\$bound=1) do={\r\
+    add-default-route=yes default-route-distance=254 script=":if (\$bound=1) do={\r\
     \n    /ip route set [ find comment=ISP1-check ] gateway=\$\"gateway-address\"\r\
     \n    /routing rule set [ find comment=ISP1-out ] src-address=\$\"lease-address\" disabled=no\r\
     \n    /routing bgp template set default router-id=\$\"lease-address\"\r\
@@ -528,6 +542,7 @@ set [ find interface=vlan4-media ] type=internal disabled=no
 
 /routing table
 :if ([print count-only where name=ISP1]=0) do={ add fib name=ISP1 }
+:if ([print count-only where name=ISP2]=0) do={ add fib name=ISP2 }
 :if ([print count-only where name=anyvpn]=0) do={ add fib name=anyvpn }
 :if ([print count-only where name=azirevpn-dk1]=0) do={ add fib name=azirevpn-dk1 }
 :if ([print count-only where name=azirevpn-no1]=0) do={ add fib name=azirevpn-no1 }
@@ -545,6 +560,8 @@ set [ find interface=vlan4-media ] type=internal disabled=no
 add comment=toLAN dst-address=10.66.6.0/23 action=lookup table=main
 add comment=ISP1-out action=lookup table=ISP1 \
     src-address=[ /ip/address/get value-name=address number=[ find interface=vlan1000-rostelecom ] ]
+add comment=ISP2-out action=lookup table=ISP2 \
+    src-address=[ /ip/address/get value-name=address number=[ find interface=lte1 ] ]
 add comment=azirevpn-dk1-out action=lookup table=azirevpn-dk1 \
     src-address=[ /ip/address/get value-name=address number=[ find interface=azirevpn-dk1 ] ]
 add comment=azirevpn-no1-out action=lookup table=azirevpn-no1 \
@@ -618,6 +635,21 @@ add comment=BOGONs blackhole dst-address=192.168.0.0/16
 /ip dhcp-client release vlan1000-rostelecom
 add comment=ISP1 distance=1 gateway=127.88.1.1 scope=10 target-scope=12
 add comment=ISP1 distance=1 gateway=127.88.1.1 scope=10 target-scope=12 routing-table=ISP1
+
+:if ([print count-only where comment=ISP2-check]>0) do={ remove [ find comment=ISP2-check ] }
+:if ([print count-only where comment=ISP2]>0) do={ remove [ find comment=ISP2 ] }
+:foreach host in={
+    "94.140.15.15";"185.228.169.168";"208.67.220.123";"1.0.0.2";"77.88.8.2";
+} do={
+    add comment=ISP2-check distance=1 dst-address="$host/32" gateway=10.66.7.125 scope=10
+    add comment=ISP2 distance=2 dst-address=127.88.1.2/32 gateway="$host" \
+        scope=10 target-scope=11 check-gateway=ping
+    add comment=ISP2 distance=99 dst-address="$host/32" blackhole
+}
+add comment=ISP2 distance=2 gateway=127.88.1.2 scope=10 target-scope=12
+add comment=ISP2 distance=1 gateway=127.88.1.2 scope=10 target-scope=12 routing-table=ISP2
+add comment=ISP2 distance=254 gateway=10.66.7.125 scope=10 target-scope=30
+
 
 :if ([print count-only where comment=azirevpn-dk1]>0) do={ remove [ find comment=azirevpn-dk1 ] }
 :foreach host in={
@@ -970,8 +1002,13 @@ add chain=forward comment=MTU-fix out-interface-list=wg \
     protocol=tcp tcp-flags=syn tcp-mss=!0-1380 \
     action=change-mss new-mss=1380 passthrough=yes
 
+:if ([print count-only where comment="LTE TTL fix"]>0) do={ remove [ find commnet="LTE TTL fix" ] }
+add chain=postrouting out-interface=lte1 comment="LTE TTL fix" \
+    action=change-ttl new-ttl=set:65  passthrough=yes
+
 :foreach int,mark in={
   "vlan1000-rostelecom"="ISP1";
+  "lte1"="ISP2";
   "azirevpn-dk1"="azirevpn-dk1";
   "azirevpn-no1"="azirevpn-no1";
   "azirevpn-se1"="azirevpn-se1";
@@ -992,6 +1029,28 @@ add chain=forward comment=MTU-fix out-interface-list=wg \
     add chain=output out-interface="$int" connection-mark="$mark-conn" \
         dst-address-type=!local action=mark-routing new-routing-mark="$mark"
 }
+
+:if ([print count-only where new-packet-mark=ISP1-up]>0) do={ remove [ find new-packet-mark=ISP1-up ] }
+add comment=ISP1-up chain=forward out-interface=vlan1000-rostelecom action=mark-packet new-packet-mark=ISP1-up
+add chain=output out-interface=vlan1000-rostelecom action=mark-packet new-packet-mark=ISP1-up
+:if ([print count-only where new-packet-mark=ISP1-down]>0) do={ remove [ find new-packet-mark=ISP1-down ] }
+add comment=ISP1-down chain=forward in-interface=vlan1000-rostelecom action=mark-packet new-packet-mark=ISP1-down
+add chain=input in-interface=vlan1000-rostelecom action=mark-packet new-packet-mark=ISP1-down
+
+:if ([print count-only where new-packet-mark=ISP2-up]>0) do={ remove [ find new-packet-mark=ISP2-up ] }
+add comment=ISP2-up chain=forward out-interface=lte1 action=mark-packet new-packet-mark=ISP2-up
+add chain=output out-interface=lte1 action=mark-packet new-packet-mark=ISP2-up
+:if ([print count-only where new-packet-mark=ISP2-down]>0) do={ remove [ find new-packet-mark=ISP2-down ] }
+add comment=ISP2-down chain=forward in-interface=lte1 action=mark-packet new-packet-mark=ISP2-down
+add chain=input in-interface=lte1 action=mark-packet new-packet-mark=ISP2-down
+
+:if ([print count-only where new-packet-mark=VPN-up]>0) do={ remove [ find new-packet-mark=VPN-up ] }
+add comment=VPN-up chain=forward out-interface-list=wg action=mark-packet new-packet-mark=VPN-up
+add chain=output out-interface-list=wg action=mark-packet new-packet-mark=VPN-up
+:if ([print count-only where new-packet-mark=ISP1-down]>0) do={ remove [ find new-packet-mark=VPN-down ] }
+add comment=VPN-down chain=forward in-interface-list=wg action=mark-packet new-packet-mark=VPN-down
+add chain=input in-interface-list=wg action=mark-packet new-packet-mark=ISP1-down
+
 
 
 #######################################
