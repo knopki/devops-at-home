@@ -7,10 +7,6 @@
       latest.url = "nixpkgs/nixos-unstable"; # not very latest please
       digga.url = "github:divnix/digga/develop";
 
-      ci-agent = {
-        url = "github:hercules-ci/hercules-ci-agent";
-        inputs = { nix-darwin.follows = "darwin"; nixos-20_09.follows = "nixos"; nixos-unstable.follows = "latest"; };
-      };
       darwin.url = "github:LnL7/nix-darwin";
       darwin.inputs.nixpkgs.follows = "nixos";
       home.url = "github:nix-community/home-manager/release-21.11";
@@ -36,7 +32,6 @@
     , pkgs
     , digga
     , nixos
-    , ci-agent
     , home
     , nixos-hardware
     , nur
@@ -86,7 +81,6 @@
               _module.args.ourLib = self.lib;
               home-manager.extraSpecialArgs.modulesPath = "${home.outPath}/modules";
             }
-            ci-agent.nixosModules.agent-profile
             home.nixosModules.home-manager
             agenix.nixosModules.age
             sops-nix.nixosModules.sops

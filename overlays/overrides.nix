@@ -22,7 +22,7 @@ channels: final: prev: {
   };
 
   libsForQt5 = prev.libsForQt5 // {
-    thirdParty = prev.thirdParty // {
+    thirdParty = prev.libsForQt5.thirdParty // {
       bismuth = channels.latest.libsForQt5.thirdParty.bismuth;
     };
   };
