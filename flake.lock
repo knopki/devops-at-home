@@ -650,7 +650,7 @@
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "release-21.11",
+        "ref": "nixos-21.11",
         "type": "indirect"
       }
     },
