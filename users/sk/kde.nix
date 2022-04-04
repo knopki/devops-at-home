@@ -10,7 +10,7 @@ in
         Plugins.bismuthEnabled = true;
         Script-bismuth = {
           maximizeSoleTile = true;
-          tileLayoutGap=5;
+          tileLayoutGap = 5;
         };
         Desktops = {
           Id_1 = "b8f777df-3a74-4bb1-9323-76c522965b2e";

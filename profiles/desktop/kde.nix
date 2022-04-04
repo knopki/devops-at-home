@@ -26,8 +26,6 @@ in
       ark
       krename
       plasma-applet-caffeine-plus
-      plasma-systemmonitor
-      thirdParty.bismuth
     ];
 
   programs =
@@ -51,6 +49,9 @@ in
       lightdm.enable = false;
       sddm.enable = true;
     };
-    desktopManager.plasma5.enable = true;
+    desktopManager.plasma5 = {
+      enable = true;
+      runUsingSystemd = true;
+    };
   };
 }

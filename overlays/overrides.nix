@@ -21,11 +21,13 @@ channels: final: prev: {
       };
   };
 
-  libsForQt5 = prev.libsForQt5 // {
-    thirdParty = prev.libsForQt5.thirdParty // {
-      bismuth = channels.latest.libsForQt5.thirdParty.bismuth;
-    };
-  };
+  # plasma5Packages = prev.plasma5Packages // {
+  #   plasma5 = prev.plasma5Packages.plasma5 // {
+  #     thirdParty = prev.plasma5Packages.plasma5.thirdParty // {
+  #       bismuth = channels.latest.plasma5Packages.plasma5.thirdParty.bismuth;
+  #     };
+  #   };
+  # };
 
   nodePackages = prev.nodePackages // {
     pyright = channels.latest.nodePackages.pyright;
