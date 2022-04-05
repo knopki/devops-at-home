@@ -18,6 +18,10 @@ final: prev: {
   dracula-zathura = prev.callPackage ./data/themes/dracula-zathura.nix { };
   ls-colors = prev.callPackage ./data/themes/ls-colors.nix { };
 
+  # desktops
+  kwinscript-window-colors = prev.libsForQt5.callPackage
+    ./desktop/plasma-5/3rdparty/kwin/scripts/kwinscript-window-colors.nix {  };
+
   # misc
   vscode-extensions = prev.vscode-extensions //
     (import ./misc/vscode-extensions.nix { inherit (prev) fetchurl vscode-utils; });
