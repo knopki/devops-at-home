@@ -133,16 +133,16 @@ in
           "Switch to Desktop 9" = [ "Meta+9" "none" "" ];
           "Switch to Desktop 10" = [ "Meta+0" "none" "" ];
 
-          "Window to Desktop 1" = [ "Meta+Shift+1" "none" "" ];
-          "Window to Desktop 2" = [ "Meta+Shift+2" "none" "" ];
-          "Window to Desktop 3" = [ "Meta+Shift+3" "none" "" ];
-          "Window to Desktop 4" = [ "Meta+Shift+4" "none" "" ];
-          "Window to Desktop 5" = [ "Meta+Shift+5" "none" "" ];
-          "Window to Desktop 6" = [ "Meta+Shift+6" "none" "" ];
-          "Window to Desktop 7" = [ "Meta+Shift+7" "none" "" ];
-          "Window to Desktop 8" = [ "Meta+Shift+8" "none" "" ];
-          "Window to Desktop 9" = [ "Meta+Shift+9" "none" "" ];
-          "Window to Desktop 10" = [ "Meta+Shift+0" "" "" ];
+          "Window to Desktop 1" = [ "Meta+!" "none" "" ];
+          "Window to Desktop 2" = [ "Meta+@" "none" "" ];
+          "Window to Desktop 3" = [ "Meta+#" "none" "" ];
+          "Window to Desktop 4" = [ "Meta+$" "none" "" ];
+          "Window to Desktop 5" = [ "Meta+%" "none" "" ];
+          "Window to Desktop 6" = [ "Meta+^" "none" "" ];
+          "Window to Desktop 7" = [ "Meta+&" "none" "" ];
+          "Window to Desktop 8" = [ "Meta+*" "none" "" ];
+          "Window to Desktop 9" = [ "Meta+(" "none" "" ];
+          "Window to Desktop 10" = [ "Meta+)" "none" "" ];
 
           "Switch to Next Screen" = [ "Meta+." "none" "" ];
           "Switch to Previous Screen" = [ "Meta+," "none" "" ];
