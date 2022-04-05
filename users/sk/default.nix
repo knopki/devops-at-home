@@ -54,7 +54,7 @@ in
       ./alacritty.nix
       ./web.nix
       ./gnome.nix
-      ./kde.nix
+      ./kde
       ./xdg.nix
     ]
       ++ optionals isWorkstation [

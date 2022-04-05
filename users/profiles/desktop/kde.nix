@@ -10,7 +10,10 @@ in
     with kdeApplications;
     with kdeFrameworks;
     [
-      thirdParty.bismuth
+      bismuth
+      kwinscript-window-colors
+      plasma-applet-caffeine-plus
+      plasma-applet-virtual-desktop-bar
     ];
 
   programs = {

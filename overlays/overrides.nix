@@ -22,11 +22,15 @@ channels: final: prev: {
   };
 
   # plasma5Packages = prev.plasma5Packages // {
-  #   plasma5 = prev.plasma5Packages.plasma5 // {
-  #     thirdParty = prev.plasma5Packages.plasma5.thirdParty // {
-  #       bismuth = channels.latest.plasma5Packages.plasma5.thirdParty.bismuth;
+  #   bismuth = channels.latest.plasma5Packages.plasma5.thirdParty.bismuth.overrideAttrs (o: rec {
+  #     version = "3.1.0";
+  #     src = prev.fetchFromGitHub {
+  #       owner = "Bismuth-Forge";
+  #       repo = o.pname;
+  #       rev = "release-v${version}";
+  #       sha256 = "sha256-Wx1D05xGcRZgvUn/Vtxex/qReifCYCXGUjH0IhsiHeE=";
   #     };
-  #   };
+  #   });
   # };
 
   nodePackages = prev.nodePackages // {

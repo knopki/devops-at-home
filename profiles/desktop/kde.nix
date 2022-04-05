@@ -18,14 +18,15 @@ in
 
   environment.systemPackages =
     with pkgs;
-    with libsForQt5;
+    with plasma5Packages;
     with plasma5;
     with kdeApplications;
     with kdeFrameworks;
     [
       ark
       krename
-      plasma-applet-caffeine-plus
+      latte-dock
+      qt5.qttools
     ];
 
   programs =
@@ -53,5 +54,10 @@ in
       enable = true;
       runUsingSystemd = true;
     };
+  };
+
+  systemd.user.services = {
+    plasma-early-setup.restartIfChanged = false;
+    plasma-run-with-systemd.restartIfChanged = false;
   };
 }
