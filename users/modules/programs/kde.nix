@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  inherit (builtins) map typeOf;
+  inherit (builtins) isString map typeOf;
   cfg = config.programs.kde;
   jsonFormat = pkgs.formats.json { };
 
@@ -53,9 +53,16 @@ let
         (escapeShellArg (formatKConfigValue value)))
     ]);
 
+  # before configuration commands
+  lookAndFeelCmd =
+    if (isString (cfg.settings.kdeglobals.KDE.LookAndFeelPackage or null)) then ''
+      $DRY_RUN_CMD ${pkgs.plasma-workspace}/bin/lookandfeeltool -a "${cfg.settings.kdeglobals.KDE.LookAndFeelPackage}"
+    '' else "";
+
   # reload cmds
   reloadCmd = ''
     $DRY_RUN_CMD ${pkgs.libsForQt5.qt5.qttools.bin}/bin/qdbus org.kde.KWin /KWin reconfigure || echo "KWin reconfigure failed"
+    $DRY_RUN_CMD ${pkgs.libsForQt5.qt5.qttools.bin}/bin/qdbus org.kde.keyboard /modules/khotkeys reread_configuration || echo "kde keyboard reconfigure failed"
     # the actual values are https://github.com/KDE/plasma-workspace/blob/c97dddf20df5702eb429b37a8c10b2c2d8199d4e/kcms/kcms-common_p.h#L13
     for changeType in {0..10}; do
       $DRY_RUN_CMD ${pkgs.dbus}/bin/dbus-send /KGlobalSettings org.kde.KGlobalSettings.notifyChange int32:$changeType int32:0 || echo "KGlobalSettings.notifyChange failed"
@@ -63,7 +70,7 @@ let
   '';
 
   # convert { filename = { ... } } to kconfig command list
-  cmdList = flatten
+  cmdList = [ lookAndFeelCmd ] ++ flatten
     (mapAttrsToList
       (filename: settings:
         map (formatCmd filename) (flattenKdeAttrs settings))

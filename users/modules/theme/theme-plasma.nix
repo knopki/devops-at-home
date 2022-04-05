@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   inherit (lib)
-    mkIf mkMerge mkDefault mkEnableOption;
+    hm mkIf mkMerge mkDefault mkEnableOption;
   cfg = config.theme;
   isDarkTheme = cfg.base16.kind == "dark";
   iconTheme = {
@@ -14,6 +14,7 @@ let
   };
   kdeThemePkg = pkgs.arc-kde-theme;
   kvColorScheme = if isDarkTheme then "KvArcDark" else "KvArc";
+  kdeThemeId = if isDarkTheme then "com.github.varlesh.arc-dark" else "com.github.varlesh.arc";
 
   gtkSettingsRc = {
     Settings = {
@@ -76,6 +77,7 @@ in
 
       kdeglobals = {
         General = {
+          Name = if isDarkTheme then "Arc Dark" else "Arc Color";
           ColorScheme = kvColorScheme;
           fixed = mkKDEFontList cfg.fonts.monospace.family cfg.fonts.monospace.size;
           font = mkKDEFontList cfg.fonts.regular.family cfg.fonts.regular.size;
@@ -88,7 +90,10 @@ in
           inactiveFrame = [ 239 240 241 ];
         };
         Icons.Theme = iconTheme.name;
-        KDE.widgetStyle = if isDarkTheme then "kvantum-dark" else "kvantum";
+        KDE = {
+          LookAndFeelPackage = kdeThemeId;
+          widgetStyle = if isDarkTheme then "kvantum-dark" else "kvantum";
+        };
       };
 
       "Kvantum/kvantum.kvconfig".General.theme = kvColorScheme;
@@ -103,8 +108,14 @@ in
         };
       };
 
+      kscreenlockerrc = {
+        Greeter.Theme = kdeThemeId;
+        Daemon.Timeout = 15;
+      };
+
       ksplashrc = {
-        KSplash.Theme = "com.github.varlesh.arc-dark";
+        Engine = "KSplashQML";
+        KSplash.Theme = kdeThemeId;
       };
 
       kxkbrc.Layout = {
