@@ -92,13 +92,9 @@ in
       password-store.settings.PASSWORD_STORE_KEY = selfHM.programs.gpg.settings.default-key;
     };
 
-    systemd.user = mkMerge [
-      (mkIf (options ? systemd.user.tmpfiles) {
-        tmpfiles.rules = optionals isWorkstation [
-          "e ${selfHM.xdg.userDirs.download} - - - 30d"
-          "e ${selfHM.xdg.userDirs.pictures}/screenshots - - - 30d"
-        ];
-      })
+    systemd.user.tmpfiles.rules = optionals isWorkstation [
+      "e ${selfHM.xdg.userDirs.download} - - - 30d"
+      "e ${selfHM.xdg.userDirs.pictures}/screenshots - - - 30d"
     ];
   };
 }
