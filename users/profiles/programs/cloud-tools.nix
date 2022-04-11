@@ -5,5 +5,6 @@
     google-cloud-sdk
     kubectl
     kubectl-cert-manager
+    debootstrap
   ];
 }

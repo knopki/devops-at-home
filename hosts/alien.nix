@@ -138,6 +138,11 @@ in
         "xod.loc"
       ];
     };
+    nat = {
+      enable = true;
+      externalInterface = "wlp60s0";
+      internalInterfaces = ["ve-+"];
+    };
     search = [ "1984.run" ];
     firewall = {
       allowedTCPPorts = [
@@ -148,6 +153,7 @@ in
       allowedUDPPorts = [
         4001 # ipfs
       ];
+      trustedInterfaces = ["ve-+"];
     };
   };
 
