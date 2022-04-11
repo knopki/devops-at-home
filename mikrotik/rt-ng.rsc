@@ -579,9 +579,6 @@ add comment="Upstream DNS servers" dst-address=91.231.153.2/32 action=lookup tab
 add comment="Upstream DNS servers" dst-address=192.211.0.2/32 action=lookup table=anyvpn
 add comment="Upstream DNS servers" dst-address=2001:67c:15ec:1337::2/128 action=lookup table=anyvpn
 add comment="Upstream DNS servers" dst-address=2a0a:3507::2/128 action=lookup table=anyvpn
-add comment="LinkedIn" dst-address=108.174.0.0/20 action=lookup table=anyvpn
-add comment="LinkedIn" dst-address=144.2.16.0/24 action=lookup table=anyvpn
-add comment="LinkedIn" dst-address=144.2.9.0/21 action=lookup table=anyvpn
 add comment="alien to main" src-address=10.66.6.7/32 action=lookup table=main disabled=yes
 add comment="clients to vpn" src-address=10.66.6.0/25 action=lookup table=anyvpn
 add comment="antifilter - last before main table" action=lookup table=antifilter
@@ -700,6 +697,18 @@ add comment=warp distance=1 gateway=127.88.2.4 scope=10 target-scope=12 routing-
     add comment=anyvpn distance="$i" dst-address=127.88.2.100/32 gateway="$gw" scope=10 target-scope=12
 }
 add comment=anyvpn distance=1 gateway=127.88.2.100 scope=10 target-scope=13 routing-table=anyvpn
+
+# LinkedIn
+:if ([print count-only where comment=linkedin]>0) do={ remove [ find comment=linkedin ] }
+:foreach dest in={"108.174.0.0/20";"144.2.16.0/24";"144.2.9.0/21"} do={
+    add comment=spotify dst-address=$dest gateway=127.88.2.100 scope=10 target-scope=14
+}
+
+# Spotify
+:if ([print count-only where comment=spotify]>0) do={ remove [ find comment=spotify ] }
+:foreach dest in={"78.31.8.0/21";"193.182.8.0/21";"194.68.28.0/22";"193.235.32.115/24";"193.235.203.178/24";"193.235.206.102/24"} do={
+    add comment=spotify dst-address=$dest gateway=127.88.2.100 scope=10 target-scope=14
+}
 
 
 ##################
