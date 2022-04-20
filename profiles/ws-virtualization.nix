@@ -13,11 +13,12 @@ let inherit (lib) mkDefault; in
     };
 
     systemPackages = with pkgs; [
-      dive
       distrobox
-      virt-manager
+      dive
+      libguestfs-with-appliance
       podman
       podman-compose
+      virt-manager
     ];
   };
 
@@ -27,7 +28,7 @@ let inherit (lib) mkDefault; in
     libvirtd = {
       enable = true;
       qemu.runAsRoot = false;
-      allowedBridges = [ "virbr0" "virbr1" ];
+      allowedBridges = [ "virbr0" ];
     };
 
     oci-containers.backend = mkDefault "podman";
