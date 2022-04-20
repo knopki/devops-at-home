@@ -40,9 +40,8 @@ in
     rtags
 
     # :tools docker
-    docker
-    docker-compose
-    docker-machine
+    podman
+    podman-compose
     nodePackages.dockerfile-language-server-nodejs
 
     # :lang erlang
