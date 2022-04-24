@@ -6,7 +6,7 @@ in
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
-      bbenoist.Nix
+      bbenoist.nix
       # ms-kubernetes-tools.vscode-kubernetes-tools
       # redhat.vscode-yaml
       # vscodevim.vim

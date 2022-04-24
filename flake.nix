@@ -104,7 +104,7 @@
             users = digga.lib.importers.rakeLeaves ./users;
           };
           suites = with profiles; rec {
-            base = [ core programs.neovim users.root ]
+            base = [ core users.root ]
               ++ (with cachix; [ nix-community nrdxp ]);
 
             workstation = base ++ [
