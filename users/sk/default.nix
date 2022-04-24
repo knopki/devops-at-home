@@ -64,6 +64,10 @@ in
       ./vscode.nix
     ];
 
+    home.packages = with pkgs; [
+      du-dust
+    ];
+
     theme = {
       enable = true;
       preset = "dracula";
