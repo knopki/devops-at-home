@@ -1,6 +1,6 @@
 { config, suites, pkgs, lib, ... }:
 let
-  inherit (lib) mkDefault;
+  inherit (lib) mkDefault head;
   luksCommon = {
     preLVM = true;
     allowDiscards = true;
@@ -9,12 +9,12 @@ let
     keyFileSize = 512 * 8;
     fallbackToPassword = true;
   };
-  swapDevice = "/dev/mapper/nvme--vg-swap";
-  defaultSopsFile = { format = "yaml"; sopsFile = ./alien.secrets.yaml; };
+  defaultSopsFile = { format = "yaml"; sopsFile = ./secrets.yaml; };
 in
 {
   imports = suites.devbox ++ suites.mobile ++ suites.gamestation ++ [
-    ../users/sk
+    ./hardware-config-generated.nix
+    ../../users/sk
   ];
 
   boot = {
@@ -27,18 +27,12 @@ in
 
     initrd = {
       availableKernelModules = [
-        "ahci"
-        "nvme"
         "rtsx_pci_sdmmc"
         "sd_mod"
-        "usb_storage"
-        "xhci_pci"
         "aesni_intel"
         "cryptd"
         "kvm-intel"
       ];
-
-      kernelModules = [ "dm-snapshot" ];
 
       luks.devices = {
         "luks-nvme" = (
@@ -55,7 +49,7 @@ in
     };
 
     kernelParams = [
-      "resume=${swapDevice}"
+      "resume=${(head config.swapDevices).device}"
       "acpiphp.disable=1"
       "pcie_aspm.policy=powersave"
     ];
@@ -75,20 +69,8 @@ in
   };
 
   fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/e384e984-2dbf-470d-82b2-7d994f4b4a7b";
-      fsType = "ext4";
-      options = [ "relatime" ];
-    };
-    "/home" = {
-      device = "/dev/disk/by-uuid/ce307698-b1ea-4ef1-b104-304275e71818";
-      fsType = "ext4";
-      options = [ "relatime" ];
-    };
-    "/boot" = {
-      device = "/dev/disk/by-uuid/6964-B539";
-      fsType = "vfat";
-    };
+    "/" = { options = [ "relatime" ]; };
+    "/home" = { options = [ "relatime" ]; };
   };
 
   hardware = {
@@ -242,8 +224,6 @@ in
       neededForUsers = true;
     };
   };
-
-  swapDevices = [{ device = swapDevice; }];
 
   system.stateVersion = "20.09";
 
