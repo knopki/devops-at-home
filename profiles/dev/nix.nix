@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     cachix
+    graphviz
     nix-du
     nix-index
     nix-prefetch-git
