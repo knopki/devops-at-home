@@ -1,5 +1,7 @@
 { pkgs, lib, ... }:
 {
+  documentation.nixos.enable = true;
+
   environment.systemPackages = with pkgs; [
     cachix
     graphviz

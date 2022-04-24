@@ -4,6 +4,18 @@ let
 in
 {
   #
+  # Documentation
+  #
+
+  documentation = {
+    doc.enable = mkDefault false;
+    info.enable = mkDefault false;
+    man.enable = mkDefault true;
+    nixos.enable = mkDefault false;
+  };
+
+
+  #
   # Packages
   #
 
