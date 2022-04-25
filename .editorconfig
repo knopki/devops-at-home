@@ -24,15 +24,15 @@ charset = unset
 indent_style = unset
 indent_size = unset
 
-[*.el]
-indent_size = unset
+[*.py]
+indent_size = 4
 
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
 
-[*.nix]
+[*.el]
 indent_size = unset
 
-[*.py]
-indent_size = 4
+[*.nix]
+indent_size = unset

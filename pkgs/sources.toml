@@ -1,0 +1,52 @@
+# nvfetcher.toml
+[fish-kubectl-completions]
+src.git = "https://github.com/evanlucas/fish-kubectl-completions"
+fetch.github = "evanlucas/fish-kubectl-completions"
+
+[base16-default-schemes]
+src.git = "https://github.com/chriskempson/base16-default-schemes"
+fetch.github = "chriskempson/base16-default-schemes"
+
+[base16-dracula-scheme]
+src.git = "https://github.com/dracula/base16-dracula-scheme"
+fetch.github = "dracula/base16-dracula-scheme"
+
+[base16-shell]
+src.git = "https://github.com/chriskempson/base16-shell"
+fetch.github = "chriskempson/base16-shell"
+
+[base16-textmate]
+src.git = "https://github.com/chriskempson/base16-textmate"
+fetch.github = "chriskempson/base16-textmate"
+
+[base16-tmux]
+src.git = "https://github.com/mattdavis90/base16-tmux"
+fetch.github = "mattdavis90/base16-tmux"
+
+[base16-vim]
+src.git = "https://github.com/chriskempson/base16-vim"
+fetch.github = "chriskempson/base16-vim"
+
+[base16-waybar]
+src.git = "https://github.com/mnussbaum/base16-waybar"
+fetch.github = "mnussbaum/base16-waybar"
+
+[dracula-alacritty]
+src.git = "https://github.com/dracula/alacritty"
+fetch.github = "dracula/alacritty"
+
+[dracula-fish]
+src.git = "https://github.com/dracula/fish"
+fetch.github = "dracula/fish"
+
+[dracula-wofi]
+src.git = "https://github.com/dracula/wofi"
+fetch.github = "dracula/wofi"
+
+[dracula-zathura]
+src.git = "https://github.com/dracula/zathura"
+fetch.github = "dracula/zathura"
+
+[ls-colors]
+src.git = "https://github.com/trapd00r/LS_COLORS"
+fetch.github = "trapd00r/LS_COLORS"

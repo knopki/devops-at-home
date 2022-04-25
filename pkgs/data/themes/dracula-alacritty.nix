@@ -1,9 +1,6 @@
-{ srcs, lib, stdenv }:
-let src = srcs.dracula-alacritty;
-in
+{ sources, lib, stdenv }:
 stdenv.mkDerivation {
-  inherit src;
-  inherit (src) pname version;
+  inherit (sources.dracula-alacritty) pname version src;
 
   installPhase = ''
     mkdir -p $out

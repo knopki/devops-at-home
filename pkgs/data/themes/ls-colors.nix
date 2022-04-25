@@ -1,9 +1,6 @@
-{ srcs, lib, stdenv }:
-let src = srcs.ls-colors;
-in
+{ sources, lib, stdenv }:
 stdenv.mkDerivation {
-  inherit src;
-  inherit (src) pname version;
+  inherit (sources.ls-colors) pname version src;
 
   installPhase = ''
     mkdir -p $out

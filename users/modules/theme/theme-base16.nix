@@ -1,8 +1,8 @@
-{ config, lib, pkgs, ourLib, ... }@args:
+{ config, lib, pkgs, ... }@args:
 with lib;
 let
   inherit (builtins) div;
-  inherit (ourLib.hex) toHex2 fromHex;
+  inherit (lib.our.hex) toHex2 fromHex;
   cfg = config.theme;
 
   # @author Robert Helgesson

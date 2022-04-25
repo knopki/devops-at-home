@@ -1,9 +1,6 @@
-{ srcs, lib, fishPlugins }:
-let src = srcs.fish-kubectl-completions;
-in
+{ sources, lib, fishPlugins }:
 fishPlugins.buildFishPlugin {
-  inherit src;
-  inherit (src) pname version;
+  inherit (sources.fish-kubectl-completions) pname version src;
 
   meta = with lib; {
     description = "kubectl fish completions";

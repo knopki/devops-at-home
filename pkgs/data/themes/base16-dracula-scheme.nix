@@ -1,9 +1,6 @@
-{ srcs, lib, stdenv }:
-let src = srcs.base16-dracula-scheme;
-in
+{ sources, lib, stdenv }:
 stdenv.mkDerivation {
-  inherit src;
-  inherit (src) pname version;
+  inherit (sources.base16-dracula-scheme) pname version src;
 
   installPhase = ''
     mkdir -p $out

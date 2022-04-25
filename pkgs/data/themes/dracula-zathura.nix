@@ -1,9 +1,6 @@
-{ srcs, lib, stdenv }:
-let src = srcs.dracula-zathura;
-in
+{ sources, lib, stdenv }:
 stdenv.mkDerivation {
-  inherit src;
-  inherit (src) pname version;
+  inherit (sources.dracula-zathura) pname version src;
 
   installPhase = ''
     mkdir -p $out

@@ -1,27 +1,61 @@
 {
   description = "Configuration management of the my personal machines, my dotfiles, my other somethings.";
 
+  nixConfig = {
+    extra-experimental-features = "nix-command flakes";
+    extra-substituters = [
+      "https://nrdxp.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   inputs =
     {
-      nixos.url = "nixpkgs/nixos-21.11";
-      latest.url = "nixpkgs/nixos-unstable"; # not very latest please
-      digga.url = "github:divnix/digga/develop";
+      # Track channels with commits tested and built by hydra
+      nixos-21-11.url = "github:nixos/nixpkgs/nixos-21.11";
+      nixos.follows = "nixos-21-11";
+      latest.url = "github:nixos/nixpkgs/nixos-unstable";
+
+      digga.url = "github:divnix/digga/v0.11.0";
+      digga.inputs.nixpkgs.follows = "nixos";
+      digga.inputs.nixlib.follows = "nixos";
+      digga.inputs.home-manager.follows = "home";
+      digga.inputs.deploy.follows = "deploy";
+
+      bud.url = "github:divnix/bud";
+      bud.inputs.nixpkgs.follows = "nixos";
+      bud.inputs.devshell.follows = "digga/devshell";
+
+      home-21-11.url = "github:nix-community/home-manager/release-21.11";
+      home.follows = "home-21-11";
+      home.inputs.nixpkgs.follows = "nixos";
 
       darwin.url = "github:LnL7/nix-darwin";
       darwin.inputs.nixpkgs.follows = "nixos";
-      home.url = "github:nix-community/home-manager/release-21.11";
-      home.inputs.nixpkgs.follows = "nixos";
+
+      deploy.url = "github:serokell/deploy-rs";
+      deploy.inputs.nixpkgs.follows = "nixos";
+
       agenix.url = "github:ryantm/agenix";
-      agenix.inputs.nixpkgs.follows = "latest";
+      agenix.inputs.nixpkgs.follows = "nixos";
+
+      nvfetcher.url = "github:berberman/nvfetcher";
+      nvfetcher.inputs.nixpkgs.follows = "nixos";
+
+      naersk.url = "github:nmattia/naersk";
+      naersk.inputs.nixpkgs.follows = "nixos";
+
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
-      pkgs.url = "path:./pkgs";
-      pkgs.inputs.nixpkgs.follows = "nixos";
+      nixos-generators.url = "github:nix-community/nixos-generators";
 
       sops-nix.url = "github:Mic92/sops-nix";
       sops-nix.inputs.nixpkgs.follows = "nixos";
 
-      # emacs
       emacs-overlay.url = "github:nix-community/emacs-overlay";
       nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
       nix-doom-emacs.inputs.nixpkgs.follows = "nixos";
@@ -29,16 +63,18 @@
 
   outputs =
     { self
-    , pkgs
     , digga
+    , bud
     , nixos
     , home
     , nixos-hardware
     , nur
+    , agenix
+    , nvfetcher
+    , deploy
     , sops-nix
     , emacs-overlay
     , nix-doom-emacs
-    , agenix
     , ...
     } @ inputs:
     digga.lib.mkFlake {
@@ -48,14 +84,14 @@
 
       channels = {
         nixos = {
-          imports = [ (digga.lib.importers.overlays ./overlays) ];
+          imports = [ (digga.lib.importOverlays ./overlays) ];
           overlays = [
-            ./pkgs/default.nix
-            pkgs.overlay # for `srcs`
             nur.overlay
+            agenix.overlay
+            nvfetcher.overlay
             sops-nix.overlay
             emacs-overlay.overlay
-            agenix.overlay
+            ./pkgs/default.nix
           ];
         };
         latest = { };
@@ -65,6 +101,7 @@
 
       sharedOverlays = [
         (final: prev: {
+          __dontExport = true;
           lib = prev.lib.extend (lfinal: lprev: {
             our = self.lib;
           });
@@ -75,21 +112,21 @@
         hostDefaults = {
           system = "x86_64-linux";
           channelName = "nixos";
-          modules = ./modules/module-list.nix;
-          externalModules = [
-            {
-              _module.args.ourLib = self.lib;
-              home-manager.extraSpecialArgs.modulesPath = "${home.outPath}/modules";
-            }
+          imports = [ (digga.lib.importExportableModules ./modules) ];
+          modules = [
+            { lib.our = self.lib; }
+            digga.nixosModules.bootstrapIso
+            digga.nixosModules.nixConfig
             home.nixosModules.home-manager
             agenix.nixosModules.age
+            bud.nixosModules.bud
             sops-nix.nixosModules.sops
-            ./modules/customBuilds.nix
           ];
         };
 
-        imports = [ (digga.lib.importers.hosts ./hosts) ];
+        imports = [ (digga.lib.importHosts ./hosts) ];
         hosts = {
+          NixOS = {};
           alien = {
             modules = with nixos-hardware.nixosModules; [
               common-cpu-intel
@@ -100,8 +137,8 @@
           };
         };
         importables = rec {
-          profiles = digga.lib.importers.rakeLeaves ./profiles // {
-            users = digga.lib.importers.rakeLeaves ./users;
+          profiles = digga.lib.rakeLeaves ./profiles // {
+            users = digga.lib.rakeLeaves ./users;
           };
           suites = with profiles; rec {
             base = [ core users.root ]
@@ -154,16 +191,13 @@
       };
 
       home = {
-        modules = ./users/modules/module-list.nix;
-        externalModules = [
-          {
-            _module.args.ourLib = self.lib;
-            _module.args.inputs = inputs;
-          }
+        imports = [ (digga.lib.importExportableModules ./users/modules) ];
+        modules = [
+          { lib.our = self.lib; }
           nix-doom-emacs.hmModule
         ];
         importables = rec {
-          profiles = digga.lib.importers.rakeLeaves ./users/profiles;
+          profiles = digga.lib.rakeLeaves ./users/profiles;
           suites = with profiles; rec {
             base = [ hm ] ++ (with programs; [
               bash
@@ -216,54 +250,10 @@
         };
       };
 
-      devshell = {
-        externalModules = { pkgs, ... }: {
-          packages = with pkgs; [
-            # agenix
-            sops
-            sops-init-gpg-key
-            ssh-to-pgp
-            wgcf
-          ];
-
-          env = [
-            {
-              name = "sopsPGPKeyDirs";
-              value = "./secrets/keys/hosts ./secrets/keys/users";
-            }
-          ];
-
-          devshell.startup = {
-            sops.text = ''
-              source ${pkgs.sops-import-keys-hook.outPath}/nix-support/setup-hook
-              sopsImportKeysHook
-            '';
-          };
-
-          commands = with pkgs; [
-            {
-              name = "sops-edit";
-              category = "secrets";
-              command = "${pkgs.sops}/bin/sops $@";
-              help = "sops-edit <secretFileName>.yaml | Edit secretFile with sops-nix";
-            }
-            {
-              name = "ae";
-              category = "secrets";
-              command = "${pkgs.agenix}/bin/agenix -e $@";
-              help = "agenix edit file";
-            }
-          ];
-        };
-      };
+      devshell = ./shell;
 
       homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
 
       deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations { };
-
-      defaultTemplate = self.templates.flk;
-      templates.flk.path = ./.;
-      templates.flk.description = "flk template";
-
     };
 }

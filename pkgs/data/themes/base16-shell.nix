@@ -1,9 +1,6 @@
-{ srcs, lib, stdenv }:
-let src = srcs.base16-shell;
-in
+{ sources, lib, stdenv }:
 stdenv.mkDerivation {
-  inherit src;
-  inherit (src) pname version;
+  inherit (sources.base16-shell) pname version src;
 
   installPhase = ''
     mkdir -p $out

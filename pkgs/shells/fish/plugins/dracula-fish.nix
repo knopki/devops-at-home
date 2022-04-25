@@ -1,9 +1,8 @@
-{ srcs, lib, fishPlugins }:
-let src = srcs.dracula-fish;
+{ sources, lib, fishPlugins }:
+let src = sources.dracula-fish;
 in
 fishPlugins.buildFishPlugin {
-  inherit src;
-  inherit (src) pname version;
+  inherit (sources.dracula-fish) pname version src;
 
   meta = with lib; {
     description = "Dracula Fish theme";
