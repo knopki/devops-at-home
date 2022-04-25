@@ -34,9 +34,6 @@
       home.follows = "home-21-11";
       home.inputs.nixpkgs.follows = "nixos";
 
-      darwin.url = "github:LnL7/nix-darwin";
-      darwin.inputs.nixpkgs.follows = "nixos";
-
       deploy.url = "github:serokell/deploy-rs";
       deploy.inputs.nixpkgs.follows = "nixos";
 
@@ -45,9 +42,6 @@
 
       nvfetcher.url = "github:berberman/nvfetcher";
       nvfetcher.inputs.nixpkgs.follows = "nixos";
-
-      naersk.url = "github:nmattia/naersk";
-      naersk.inputs.nixpkgs.follows = "nixos";
 
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -126,15 +120,8 @@
 
         imports = [ (digga.lib.importHosts ./hosts) ];
         hosts = {
-          NixOS = {};
-          alien = {
-            modules = with nixos-hardware.nixosModules; [
-              common-cpu-intel
-              common-gpu-nvidia
-              common-pc-laptop
-              common-pc-ssd
-            ];
-          };
+          NixOS = { };
+          alien = { };
         };
         importables = rec {
           profiles = digga.lib.rakeLeaves ./profiles // {

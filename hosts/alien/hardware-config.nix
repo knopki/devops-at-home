@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, inputs, ... }:
 let
   inherit (lib) mkDefault;
   luksCommon = {
@@ -12,8 +12,12 @@ let
   swapPartName = "/dev/nvme-vg/swap";
 in
 {
-  imports = [
+  imports = with inputs.nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
+    common-cpu-intel
+    common-gpu-nvidia
+    common-pc-laptop
+    common-pc-ssd
   ];
 
   boot = {
