@@ -5,7 +5,7 @@ in
 {
   imports = suites.devbox ++ suites.mobile ++ suites.gamestation ++ [
     ./hardware-config.nix
-    ../../users/sk
+    ../../../users/sk
   ];
 
   networking = {

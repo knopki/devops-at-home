@@ -78,7 +78,7 @@
 
       channels = {
         nixos = {
-          imports = [ (digga.lib.importOverlays ./overlays) ];
+          imports = [ (digga.lib.importOverlays ./pkgs/overlays) ];
           overlays = [
             nur.overlay
             agenix.overlay
@@ -102,140 +102,9 @@
         })
       ];
 
-      nixos = {
-        hostDefaults = {
-          system = "x86_64-linux";
-          channelName = "nixos";
-          imports = [ (digga.lib.importExportableModules ./modules) ];
-          modules = [
-            { lib.our = self.lib; }
-            digga.nixosModules.bootstrapIso
-            digga.nixosModules.nixConfig
-            home.nixosModules.home-manager
-            agenix.nixosModules.age
-            bud.nixosModules.bud
-            sops-nix.nixosModules.sops
-          ];
-        };
+      nixos = import ./nixos;
 
-        imports = [ (digga.lib.importHosts ./hosts) ];
-        hosts = {
-          NixOS = { };
-          alien = { };
-        };
-        importables = rec {
-          profiles = digga.lib.rakeLeaves ./profiles // {
-            users = digga.lib.rakeLeaves ./users;
-          };
-          suites = with profiles; rec {
-            base = [ core users.root ]
-              ++ (with cachix; [ nix-community nrdxp ]);
-
-            workstation = base ++ [
-              meta.suites.workstation
-              desktop.essentials
-              desktop.kde
-              fonts
-              misc.earlyoom
-            ] ++ (with programs; [
-              chat
-              cryptowallets
-              downloaders
-              image-editors
-              image-viewers
-              music
-              office
-              passwords
-              remote
-              three-de
-              video-editor
-              video-player
-              web
-            ]);
-
-            mobile = base ++ [
-              meta.suites.mobile
-              laptop
-            ];
-
-            devbox = workstation ++ [
-              meta.suites.devbox
-              ws-virtualization
-              dev.nix
-            ];
-
-            gamestation = base ++ [
-              meta.suites.gamestation
-              desktop.essentials
-              desktop.kde
-              fonts
-              games.steam
-              misc.earlyoom
-              security.disable-mitigations
-            ] ++ (with programs; [ downloaders image-viewers video-player music web ]);
-          };
-        };
-      };
-
-      home = {
-        imports = [ (digga.lib.importExportableModules ./users/modules) ];
-        modules = [
-          { lib.our = self.lib; }
-          nix-doom-emacs.hmModule
-        ];
-        importables = rec {
-          profiles = digga.lib.rakeLeaves ./users/profiles;
-          suites = with profiles; rec {
-            base = [ hm ] ++ (with programs; [
-              bash
-              bat
-              curl
-              direnv
-              fish
-              fzf
-              git
-              htop
-              jq
-              lesspipe
-              readline
-              ssh
-              tmux
-              wget
-            ]);
-
-            graphical = base ++ [ desktop.gnome desktop.kde ] ++ (with programs; [
-              alacritty
-              firefox
-              brave
-              imv
-              spectacle
-              zathura
-            ]);
-
-            workstation = base ++ graphical ++ [
-              ws-mods
-              locale.ru-ru
-            ] ++ (with programs; [
-              password-store
-              starship
-              vscode
-            ]);
-
-            devbox = workstation ++ [
-              services.hound
-            ] ++ (with programs; [
-              cloud-tools
-              nodejs
-              python
-              winbox
-            ]);
-
-            gamestation = base ++ graphical ++ [
-              locale.ru-ru
-            ];
-          };
-        };
-      };
+      home = import ./home;
 
       devshell = ./shell;
 
