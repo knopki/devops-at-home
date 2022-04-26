@@ -26,10 +26,6 @@
       digga.inputs.home-manager.follows = "home";
       digga.inputs.deploy.follows = "deploy";
 
-      bud.url = "github:divnix/bud";
-      bud.inputs.nixpkgs.follows = "nixos";
-      bud.inputs.devshell.follows = "digga/devshell";
-
       home-21-11.url = "github:nix-community/home-manager/release-21.11";
       home.follows = "home-21-11";
       home.inputs.nixpkgs.follows = "nixos";
@@ -58,7 +54,6 @@
   outputs =
     { self
     , digga
-    , bud
     , nixos
     , home
     , nixos-hardware

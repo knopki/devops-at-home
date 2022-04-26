@@ -13,7 +13,6 @@ in
       digga.nixosModules.nixConfig
       inputs.home.nixosModules.home-manager
       inputs.agenix.nixosModules.age
-      inputs.bud.nixosModules.bud
       inputs.sops-nix.nixosModules.sops
     ];
   };
