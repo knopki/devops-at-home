@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    kdenlive
+    libsForQt5.kdenlive
     obs-studio
   ];
 }

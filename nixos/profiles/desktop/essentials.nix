@@ -26,7 +26,7 @@ let inherit (lib) mkDefault genAttrs; in
     unzip
     usbutils
     xclip
-    xdg_utils
+    xdg-utils
   ];
 
   hardware = {
@@ -74,7 +74,7 @@ let inherit (lib) mkDefault genAttrs; in
       enable = true;
       nssmdns = true;
     };
-    dbus.packages = with pkgs; [ gnome3.dconf ];
+    dbus.packages = with pkgs; [ dconf ];
     fwupd.enable = true;
     locate = {
       enable = true;

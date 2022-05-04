@@ -8,7 +8,7 @@ in
     git = {
       # NOTE: https://github.com/languitar/pass-git-helper
       extraConfig.credential.helper =
-        "!${pkgs.gitAndTools.pass-git-helper}/bin/pass-git-helper $@";
+        "!${pkgs.pass-git-helper}/bin/pass-git-helper $@";
     };
     password-store = {
       enable = mkDefault true;

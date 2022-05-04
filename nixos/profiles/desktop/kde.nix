@@ -7,7 +7,7 @@ in
   environment.etc =
     let
       appId = "org.kde.plasma.browser_integration.json";
-      source = "${pkgs.plasma-browser-integration}/etc/chromium/native-messaging-hosts/${appId}";
+      source = "${libsForQt5.plasma-browser-integration}/etc/chromium/native-messaging-hosts/${appId}";
     in
     {
       "brave/native-messaging-hosts/${appId}".source = source;

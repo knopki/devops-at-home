@@ -5,7 +5,7 @@
     anytype
     aspellDicts.en
     aspellDicts.ru
-    gnome3.simple-scan
+    gnome.simple-scan
     isync
     libreoffice-qt
     marvin

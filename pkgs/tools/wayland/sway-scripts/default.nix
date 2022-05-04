@@ -20,7 +20,7 @@ let
       systemd
       wl-clipboard
       wofi
-      xdg_utils
+      xdg-utils
     ]
   );
 in

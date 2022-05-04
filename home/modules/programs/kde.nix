@@ -56,7 +56,7 @@ let
   # before configuration commands
   lookAndFeelCmd =
     if (isString (cfg.settings.kdeglobals.KDE.LookAndFeelPackage or null)) then ''
-      $DRY_RUN_CMD ${pkgs.plasma-workspace}/bin/lookandfeeltool -a "${cfg.settings.kdeglobals.KDE.LookAndFeelPackage}" || echo "apply kde look and feel theme failed"
+      $DRY_RUN_CMD ${pkgs.libsForQt5.plasma-workspace}/bin/lookandfeeltool -a "${cfg.settings.kdeglobals.KDE.LookAndFeelPackage}" || echo "apply kde look and feel theme failed"
     '' else "";
 
   # reload cmds

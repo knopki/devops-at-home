@@ -2,7 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     mkchromecast
-    mpv-with-scripts
+    mpv
     vlc
   ];
 }
