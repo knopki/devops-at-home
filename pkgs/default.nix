@@ -4,6 +4,7 @@ final: prev: {
   # then, call packages with `final.callPackage`
 
   # applications
+  manta-signer = final.callPackage ./applications/crypto/manta-signer.nix { };
   marvin = final.callPackage ./applications/misc/marvin.nix { };
   kubectl-cert-manager = final.callPackage ./applications/networking/cluster/kubectl-cert-manager.nix {  };
   wgcf = final.callPackage ./applications/networking/wgcf.nix {  };
