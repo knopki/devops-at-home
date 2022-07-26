@@ -36,3 +36,6 @@ indent_size = unset
 
 [*.nix]
 indent_size = unset
+
+[*.rsc]
+indent_size = unset
