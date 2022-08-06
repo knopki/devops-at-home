@@ -9,6 +9,7 @@ channels: final: prev: {
     discord
     manix
     nix-direnv
+    pantum-driver
     rage;
 
   haskellPackages = prev.haskellPackages.override {

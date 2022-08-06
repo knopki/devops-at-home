@@ -84,7 +84,7 @@ let inherit (lib) mkDefault genAttrs; in
     };
     printing = {
       enable = true;
-      drivers = with pkgs; [ cups-kyocera gutenprint ];
+      drivers = with pkgs; [ gutenprint pantum-driver ];
     };
     resolved.enable = true;
     xserver = {
