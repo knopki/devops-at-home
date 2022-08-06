@@ -23,7 +23,9 @@ let inherit (lib) mkDefault; in
   };
 
   virtualisation = {
-    containers.enable = true;
+    containers = {
+      enable = true;
+    };
 
     libvirtd = {
       enable = true;
@@ -34,9 +36,11 @@ let inherit (lib) mkDefault; in
     oci-containers.backend = mkDefault "podman";
 
     podman = {
-      enable = true;
+      defaultNetwork.dnsname.enable = true;
       dockerCompat = mkDefault true;
       dockerSocket.enable = true;
+      enable = true;
+      extraPackages = with pkgs; [ aardvark-dns netavark ];
     };
 
 
