@@ -1002,7 +1002,7 @@ add chain=main-forward comment="Jump to IOT-ALLDUDES chain" in-interface-list=io
     out-interface-list=alldudes action=jump jump-target=IOT-ALLDUDES
 add chain=main-forward comment="Jump to MEDIA-ALLDUDES chain" in-interface-list=media \
     out-interface-list=alldudes action=jump jump-target=MEDIA-ALLDUDES
-add chain=main-forward comment="Jump to CLIENTS-ALLDUDES chain" in-interface-list=media \
+add chain=main-forward comment="Jump to CLIENTS-ALLDUDES chain" in-interface-list=clients \
     out-interface-list=alldudes action=jump jump-target=CLIENTS-ALLDUDES
 add chain=main-forward comment="Reject at the end" \
     log=yes log-prefix="forward chain policy reject:" \
