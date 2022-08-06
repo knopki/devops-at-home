@@ -793,6 +793,14 @@ add address=10.66.7.0/27 comment=mgmt list=mgmt
 :if ([print count-only where list=iot]>0) do={ remove [ find list=iot ] }
 add address=10.66.7.128/25 comment=iot list=iot
 
+:if ([print count-only where list=iot-allow-wan]>0) do={ remove [ find list=iot-allow-wan ] }
+add address=10.66.7.130 list=iot-allow-wan comment="Xiaomi Gateway 3"
+add address=10.66.7.131 list=iot-allow-wan comment="Zhimi Humidifier 1"
+add address=10.66.7.134 list=iot-allow-wan comment="Pet Waterer 1"
+add address=10.66.7.135 list=iot-allow-wan comment="Zhimi Humidifier 2"
+add address=10.66.7.136 list=iot-allow-wan comment="Death Rays 1"
+add address=10.66.7.137 list=iot-allow-wan comment="Amazfit Stratos 3"
+
 :if ([print count-only where list=mydudes]>0) do={ remove [ find list=mydudes ] }
 add address=10.66.6.0/25 comment=clients list=mydudes
 add address=10.66.6.160/27 comment=media list=mydudes
@@ -934,7 +942,15 @@ add chain=WAN-ALLDUDES comment="WAN-ALLDUDES reject all" \
 :if ([print count-only where chain=ALLDUDES-WAN]>0) do={ remove [ find chain=ALLDUDES-WAN ] }
 add chain=ALLDUDES-WAN comment="ALLDUDES-WAN drop packets from LAN that do not have LAN IP" \
     log=yes log-prefix="ALLDUDES-WAN !LAN:" src-address-list=!alldudes action=drop
-add chain=ALLDUDES-WAN comment="ALLDUDES-WAN accept all" action=accept
+add chain=ALLDUDES-WAN comment="ALLDUDES-WAN allow clients" \
+    in-interface-list=clients action=accept
+add chain=ALLDUDES-WAN comment="ALLDUDES-WAN allow guests" \
+    in-interface-list=guests action=accept
+add chain=ALLDUDES-WAN comment="ALLDUDES-WAN allow media" \
+    in-interface-list=media action=accept
+add chain=ALLDUDES-WAN comment="ALLDUDES-WAN allow iot" \
+    in-interface-list=iot src-address-list=iot-allow-wan action=accept
+add chain=ALLDUDES-WAN comment="ALLDUDES-WAN reject all" action=reject
 
 :if ([print count-only where chain=WAN-WAN]>0) do={ remove [ find chain=WAN-WAN ] }
 add chain=WAN-WAN comment="WAN-WAN reject all" \
