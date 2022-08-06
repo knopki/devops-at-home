@@ -505,8 +505,32 @@ set [ find mac-address=20:F4:78:19:A5:54 ] address=10.66.6.8 server=dhcp-clients
 set [ find mac-address=78:F8:82:B1:B3:99 ] address=10.66.6.9 server=dhcp-clients comment="mi9"
 :if ([print count-only where mac-address=0C:C6:FD:A2:CF:AA]=0) do={ add mac-address=0C:C6:FD:A2:CF:AA }
 set [ find mac-address=0C:C6:FD:A2:CF:AA ] address=10.66.6.10 server=dhcp-clients comment="mi11lite"
+:if ([print count-only where mac-address=01:23:45:67:00:00]=0) do={ add mac-address=01:23:45:67:00:00 }
+set [ find mac-address=01:23:45:67:00:00 ] address=10.66.6.11 server=dhcp-clients comment="alient-torrents"
+:if ([print count-only where mac-address=FC:E2:6C:0B:CF:22]=0) do={ add mac-address=FC:E2:6C:0B:CF:22 }
+set [ find mac-address=FC:E2:6C:0B:CF:22 ] address=10.66.6.12 server=dhcp-clients comment="air-wrk"
+
+:if ([print count-only where mac-address=F0:A3:B2:82:4E:BA]=0) do={ add mac-address=F0:A3:B2:82:4E:BA }
+set [ find mac-address=F0:A3:B2:82:4E:BA ] address=10.66.6.189 server=dhcp-media comment="philips-55OLED806"
+
 :if ([print count-only where mac-address=54:EF:44:2F:2C:8D]=0) do={ add mac-address=54:EF:44:2F:2C:8D }
 set [ find mac-address=54:EF:44:2F:2C:8D ] address=10.66.7.130 server=dhcp-iot comment="Xiaomi Gateway 3"
+:if ([print count-only where mac-address=B4:60:ED:39:62:A0]=0) do={ add mac-address=B4:60:ED:39:62:A0 }
+set [ find mac-address=B4:60:ED:39:62:A0 ] address=10.66.7.131 server=dhcp-iot comment="Zhimi Humidifier 1"
+:if ([print count-only where mac-address=58:B6:23:3D:3A:3D]=0) do={ add mac-address=58:B6:23:3D:3A:3D }
+set [ find mac-address=58:B6:23:3D:3A:3D ] address=10.66.7.132 server=dhcp-iot comment="Yeelink Ceiling Light 1"
+:if ([print count-only where mac-address=58:B6:23:F3:FB:02]=0) do={ add mac-address=58:B6:23:F3:FB:02 }
+set [ find mac-address=58:B6:23:F3:FB:02 ] address=10.66.7.133 server=dhcp-iot comment="Yeelink Ceiling Light 2"
+:if ([print count-only where mac-address=58:B6:23:AF:7F:11]=0) do={ add mac-address=58:B6:23:AF:7F:11 }
+set [ find mac-address=58:B6:23:AF:7F:11 ] address=10.66.7.134 server=dhcp-iot comment="Pet Waterer 1"
+:if ([print count-only where mac-address=B4:60:ED:36:12:E4]=0) do={ add mac-address=B4:60:ED:36:12:E4 }
+set [ find mac-address=B4:60:ED:36:12:E4 ] address=10.66.7.135 server=dhcp-iot comment="Zhimi Humidifier 2"
+:if ([print count-only where mac-address=60:01:94:E0:FD:6A]=0) do={ add mac-address=60:01:94:E0:FD:6A }
+set [ find mac-address=60:01:94:E0:FD:6A ] address=10.66.7.136 server=dhcp-iot comment="Death Rays 1"
+:if ([print count-only where mac-address=D8:80:3C:70:01:59]=0) do={ add mac-address=D8:80:3C:70:01:59 }
+set [ find mac-address=D8:80:3C:70:01:59 ] address=10.66.7.137 server=dhcp-iot comment="Amazfit Stratos 3"
+:if ([print count-only where mac-address=84:7A:B6:8F:42:B2]=0) do={ add mac-address=84:7A:B6:8F:42:B2 }
+set [ find mac-address=84:7A:B6:8F:42:B2 ] address=10.66.7.138 server=dhcp-iot comment="Pantum-2500NW"
 
 
 ##################
