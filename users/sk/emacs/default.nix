@@ -66,10 +66,10 @@ in
     nodePackages.vscode-json-languageserver-bin
 
     # :lang markdown
-    python3Packages.grip
-    mdl
+    nodePackages.markdownlint-cli
     pandoc
     proselint
+    python3Packages.grip
 
     # :lang nix
     nixpkgs-fmt
