@@ -796,6 +796,8 @@ add address=10.66.7.128/25 comment=iot list=iot
 :if ([print count-only where list=iot-allow-wan]>0) do={ remove [ find list=iot-allow-wan ] }
 add address=10.66.7.130 list=iot-allow-wan comment="Xiaomi Gateway 3"
 add address=10.66.7.131 list=iot-allow-wan comment="Zhimi Humidifier 1"
+add address=10.66.7.132 list=iot-allow-wan comment="Yeelight Ceiling Light 1"
+add address=10.66.7.133 list=iot-allow-wan comment="Yeelight Ceiling Light 2"
 add address=10.66.7.134 list=iot-allow-wan comment="Pet Waterer 1"
 add address=10.66.7.135 list=iot-allow-wan comment="Zhimi Humidifier 2"
 add address=10.66.7.136 list=iot-allow-wan comment="Death Rays 1"
