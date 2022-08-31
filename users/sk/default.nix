@@ -66,6 +66,7 @@ in
 
     home.packages = with pkgs; [
       du-dust
+      logseq
     ];
 
     theme = {

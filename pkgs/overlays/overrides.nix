@@ -8,6 +8,7 @@ channels: final: prev: {
     cachix
     dhall
     discord
+    logseq
     manix
     netavark
     nix-direnv
