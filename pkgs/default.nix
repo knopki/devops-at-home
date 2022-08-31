@@ -6,8 +6,8 @@ final: prev: {
   # applications
   manta-signer = final.callPackage ./applications/crypto/manta-signer.nix { };
   marvin = final.callPackage ./applications/misc/marvin.nix { };
-  kubectl-cert-manager = final.callPackage ./applications/networking/cluster/kubectl-cert-manager.nix {  };
-  wgcf = final.callPackage ./applications/networking/wgcf.nix {  };
+  kubectl-cert-manager = final.callPackage ./applications/networking/cluster/kubectl-cert-manager.nix { };
+  wgcf = final.callPackage ./applications/networking/wgcf.nix { };
 
   # data
   base16-default-schemes = final.callPackage ./data/themes/base16-default-schemes.nix { };
@@ -25,7 +25,8 @@ final: prev: {
 
   # desktops
   kwinscript-window-colors = final.libsForQt5.callPackage
-    ./desktop/plasma-5/3rdparty/kwin/scripts/kwinscript-window-colors.nix {  };
+    ./desktop/plasma-5/3rdparty/kwin/scripts/kwinscript-window-colors.nix
+    { };
 
   # misc
   vscode-extensions = prev.vscode-extensions //
@@ -38,7 +39,6 @@ final: prev: {
   # shells
   fishPlugins = prev.fishPlugins // {
     dracula-fish = final.callPackage ./shells/fish/plugins/dracula-fish.nix { };
-    fish-kubectl-completions = final.callPackage ./shells/fish/plugins/fish-kubectl-completions.nix { };
   };
 
   cronosd = final.callPackage ./cronosd.nix { };

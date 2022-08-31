@@ -3,19 +3,9 @@ channels: final: prev: {
   __dontExport = true; # overrides clutter up actual creations
 
   inherit (channels.latest)
-    aardvark-dns
-    anytype
-    cachix
-    dhall
     discord
     logseq
-    manix
-    netavark
-    nix-direnv
-    pantum-driver
-    podman
-    podman-compose
-    rage;
+    ;
 
   haskellPackages = prev.haskellPackages.override {
     overrides = hfinal: hprev:

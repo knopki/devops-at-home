@@ -28,7 +28,7 @@ let
     exec = "winbox";
     comment = meta.description;
     desktopName = "Winbox";
-    categories = "Application;Development;";
+    categories = [ "Application" "Development" ];
     genericName = "Winbox";
   };
   wineBinary =

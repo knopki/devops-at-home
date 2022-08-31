@@ -43,7 +43,7 @@ let
   mkActivationScript = { policy, userCfg, jqArgs }:
     hm.dag.entryAfter [ "writeBoundary" ] ''
       if [[ -f "${userCfg}" ]]; then
-        $DRY_RUN_CMD ${pkgs.demjson}/bin/jsonlint -Sf ${userCfg} | \
+        $DRY_RUN_CMD cat ${userCfg} | \
           (${pkgs.jq}/bin/jq ${jqArgs} "${policy}"; dd status=none of=/dev/null) | \
           ${pkgs.moreutils}/bin/sponge "${userCfg}"
       else

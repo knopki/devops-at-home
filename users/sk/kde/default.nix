@@ -86,42 +86,6 @@ in
           _launch = [ "Alt+F2\tSearch" "Alt+F2\tSearch" "KRunner" ];
         };
         kwin = {
-          bismuth_decrease_master_size = [ "Meta+Ctrl+J" "none" "Decrease Master Area Size" ];
-          bismuth_decrease_master_win_count = [ "Meta+[" "none" "Decrease Master Area Window Count" ];
-          bismuth_decrease_window_height = [ "Meta+Ctrl+K" "none" "Decrease Window Height" ];
-          bismuth_decrease_window_width = [ "Meta+Ctrl+H" "none" "Decrease Window Width" ];
-          bismuth_focus_bottom_window = [ "Meta+J" "none" "Focus Bottom Window" ];
-          bismuth_focus_left_window = [ "Meta+H" "none" "Focus Left Window" ];
-          bismuth_focus_next_window = [ "none" "none" "Focus Next Window" ];
-          bismuth_focus_prev_window = [ "none" "none" "Focus Previous Window" ];
-          bismuth_focus_right_window = [ "Meta+L" "none" "Focus Right Window" ];
-          bismuth_focus_upper_window = [ "Meta+K" "none" "Focus Upper Window" ];
-          bismuth_increase_master_size = [ "Meta+Ctrl+K" "none" "Increase Master Area Size" ];
-          bismuth_increase_master_win_count = [ "Meta+]" "none" "Increase Master Area Window Count" ];
-          bismuth_increase_window_height = [ "Meta+Ctrl+J" "none" "Increase Window Height" ];
-          bismuth_increase_window_width = [ "Meta+Ctrl+L" "none" "Increase Window Width" ];
-          bismuth_move_window_to_bottom_pos = [ "Meta+Shift+J" "none" "Move Window Down" ];
-          bismuth_move_window_to_left_pos = [ "Meta+Shift+H" "none" "Move Window Left" ];
-          bismuth_move_window_to_next_pos = [ "none" "none" "Move Window to the Next Position" ];
-          bismuth_move_window_to_prev_pos = [ "none" "none" "Move Window to the Previous Position" ];
-          bismuth_move_window_to_right_pos = [ "Meta+Shift+L" "none" "Move Window Right" ];
-          bismuth_move_window_to_upper_pos = [ "Meta+Shift+K" "none" "Move Window Up" ];
-          bismuth_next_layout = [ "Meta+\\" "none" "Switch to the Next Layout" ];
-          bismuth_prev_layout = [ "Meta+|" "none" "Switch to the Previous Layout" ];
-          bismuth_push_window_to_master = [ "Meta+PgUp" "Meta+M" "Push Active Window to Master Area" ];
-          bismuth_rotate = [ "Meta+R" "none" "Rotate" ];
-          bismuth_rotate_part = [ "Meta+Shift+R" "none" "Rotate Part" ];
-          bismuth_rotate_reverse = [ "none" "none" "Rotate (Reverse)" ];
-          bismuth_toggle_float_layout = [ "Meta+Shift+F" "none" "Toggle Floating Layout" ];
-          bismuth_toggle_monocle_layout = [ "none" "none" "Toggle Monocle Layout" ];
-          bismuth_toggle_quarter_layout = [ "none" "none" "Toggle Quarter Layout" ];
-          bismuth_toggle_spiral_layout = [ "none" "none" "Toggle Spiral Layout" ];
-          bismuth_toggle_spread_layout = [ "none" "none" "Toggle Spread Layout" ];
-          bismuth_toggle_stair_layout = [ "none" "none" "Toggle Stair Layout" ];
-          bismuth_toggle_three_column_layout = [ "none" "none" "Toggle Three Column Layout" ];
-          bismuth_toggle_tile_layout = [ "Meta+T" "none" "Toggle Tile Layout" ];
-          bismuth_toggle_window_floating = [ "Meta+F" "none" "Toggle Active Window Floating" ];
-
           "Switch to Desktop 1" = [ "Meta+1" "none" "" ];
           "Switch to Desktop 2" = [ "Meta+2" "none" "" ];
           "Switch to Desktop 3" = [ "Meta+3" "none" "" ];
@@ -164,8 +128,42 @@ in
         };
 
         bismuth = {
-          _k_friendly_name = "bismuth";
-
+          _k_friendly_name = "Window Tiling";
+          decrease_master_size = [ "Meta+Ctrl+J" "Meta+Ctrl+J" "Decrease Master Area Size" ];
+          decrease_master_win_count = [ "Meta+[" "Meta+[" "Decrease Master Area Window Count" ];
+          decrease_window_height = [ "Meta+Ctrl+K" "Meta+Ctrl+K" "Decrease Window Height" ];
+          decrease_window_width = [ "Meta+Ctrl+H" "Meta+Ctrl+H" "Decrease Window Width" ];
+          focus_bottom_window = [ "Meta+J" "Meta+J" "Focus Bottom Window" ];
+          focus_left_window = [ "Meta+H" "Meta+H" "Focus Left Window" ];
+          focus_next_window = [ "none" "none" "Focus Next Window" ];
+          focus_prev_window = [ "none" "none" "Focus Previous Window" ];
+          focus_right_window = [ "Meta+L" "Meta+L" "Focus Right Window" ];
+          focus_upper_window = [ "Meta+K" "Meta+K" "Focus Upper Window" ];
+          increase_master_size = [ "Meta+Ctrl+K" "Meta+Ctrl+K" "Increase Master Area Size" ];
+          increase_master_win_count = [ "Meta+]" "Meta+]" "Increase Master Area Window Count" ];
+          increase_window_height = [ "Meta+Ctrl+J" "Meta+Ctrl+J" "Increase Window Height" ];
+          increase_window_width = [ "Meta+Ctrl+L" "Meta+Ctrl+L" "Increase Window Width" ];
+          move_window_to_bottom_pos = [ "Meta+Shift+J" "Meta+Shift+J" "Move Window Down" ];
+          move_window_to_left_pos = [ "Meta+Shift+H" "Meta+Shift+H" "Move Window Left" ];
+          move_window_to_next_pos = [ "none" "none" "Move Window to the Next Position" ];
+          move_window_to_prev_pos = [ "none" "none" "Move Window to the Previous Position" ];
+          move_window_to_right_pos = [ "Meta+Shift+L" "Meta+Shift+L" "Move Window Right" ];
+          move_window_to_upper_pos = [ "Meta+Shift+K" "Meta+Shift+K" "Move Window Up" ];
+          next_layout = [ "Meta+\\" "Meta+\\" "Switch to the Next Layout" ];
+          prev_layout = [ "Meta+|" "Meta+|" "Switch to the Previous Layout" ];
+          push_window_to_master = [ "Meta+M" "Meta+M" "Push Active Window to Master Area" ];
+          rotate = [ "Meta+R" "Meta+R" "Rotate" ];
+          rotate_part = [ "Meta+Shift+R" "Meta+Shift+R" "Rotate Part" ];
+          rotate_reverse = [ "none" "none" "Rotate (Reverse)" ];
+          toggle_float_layout = [ "Meta+Shift+F" "Meta+Shift+F" "Toggle Floating Layout" ];
+          toggle_monocle_layout = [ "none" "none" "Toggle Monocle Layout" ];
+          toggle_quarter_layout = [ "none" "none" "Toggle Quarter Layout" ];
+          toggle_spiral_layout = [ "none" "none" "Toggle Spiral Layout" ];
+          toggle_spread_layout = [ "none" "none" "Toggle Spread Layout" ];
+          toggle_stair_layout = [ "none" "none" "Toggle Stair Layout" ];
+          toggle_three_column_layout = [ "none" "none" "Toggle Three Column Layout" ];
+          toggle_tile_layout = [ "Meta+T" "Meta+T" "Toggle Tile Layout" ];
+          toggle_window_floating = [ "Meta+F" "Meta+F" "Toggle Active Window Floating" ];
         };
 
         lattedock = listToAttrs (map

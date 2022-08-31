@@ -20,7 +20,7 @@ let inherit (lib) mkDefault genAttrs; in
     gnupg
     hdparm
     lm_sensors
-    nmap-graphical
+    nmap
     pciutils
     unrar
     unzip

@@ -1,0 +1,5 @@
+{
+  "Exclude": [
+    "pkgs/_sources"
+  ]
+}

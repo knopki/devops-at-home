@@ -87,5 +87,10 @@ in
 
   system.stateVersion = "20.09";
 
+  systemd.network.wait-online = {
+    anyInterface = true;
+    extraArgs = [ "-i" "enp59s0" "-i" "wlp60s0" ];
+  };
+
   users.users.root.passwordFile = config.sops.secrets.alien-root-user-password.path;
 }

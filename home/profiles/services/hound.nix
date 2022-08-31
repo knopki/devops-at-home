@@ -6,6 +6,7 @@ let
     desktopName = "Hound";
     icon = "system-search";
     exec = "xdg-open http://${config.services.hound.listenAddress}/";
+    categories = [ "System" ];
   };
 in
 {

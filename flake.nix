@@ -16,39 +16,56 @@
   inputs =
     {
       # Track channels with commits tested and built by hydra
-      nixos-21-11.url = "github:nixos/nixpkgs/nixos-21.11";
-      nixos.follows = "nixos-21-11";
+      nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
+      nixos.follows = "nixos-22-05";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
 
-      digga.url = "github:divnix/digga/v0.11.0";
+      nixlib.url = "github:nix-community/nixpkgs.lib";
+
+      flake-utils.url = "github:numtide/flake-utils";
+
+      flake-compat.url = "github:edolstra/flake-compat";
+      flake-compat.flake = false;
+
+      digga.url = "github:divnix/digga/d1193743a535d7fbbc7f3eda4e51295b10bd4d2c";
+      digga.inputs.latest.follows = "latest";
       digga.inputs.nixpkgs.follows = "nixos";
-      digga.inputs.nixlib.follows = "nixos";
+      digga.inputs.nixlib.follows = "nixlib";
       digga.inputs.home-manager.follows = "home";
       digga.inputs.deploy.follows = "deploy";
+      digga.inputs.flake-compat.follows = "flake-compat";
+      # digga.inputs.flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
 
-      home-21-11.url = "github:nix-community/home-manager/release-21.11";
-      home.follows = "home-21-11";
-      home.inputs.nixpkgs.follows = "nixos";
+      home-22-05.url = "github:nix-community/home-manager/release-22.05";
+      home-22-05.inputs.nixpkgs.follows = "nixos";
+      home.follows = "home-22-05";
 
       deploy.url = "github:serokell/deploy-rs";
       deploy.inputs.nixpkgs.follows = "nixos";
+      deploy.inputs.utils.follows = "flake-utils";
+      deploy.inputs.flake-compat.follows = "flake-compat";
 
       agenix.url = "github:ryantm/agenix";
       agenix.inputs.nixpkgs.follows = "nixos";
 
       nvfetcher.url = "github:berberman/nvfetcher";
       nvfetcher.inputs.nixpkgs.follows = "nixos";
+      nvfetcher.inputs.flake-utils.follows = "flake-utils";
+      nvfetcher.inputs.flake-compat.follows = "flake-compat";
 
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       nixos-generators.url = "github:nix-community/nixos-generators";
+      nixos-generators.inputs.nixlib.follows = "nixlib";
 
       sops-nix.url = "github:Mic92/sops-nix";
       sops-nix.inputs.nixpkgs.follows = "nixos";
+      sops-nix.inputs.nixpkgs-22_05.follows = "nixos-22-05";
 
-      emacs-overlay.url = "github:nix-community/emacs-overlay";
       nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
       nix-doom-emacs.inputs.nixpkgs.follows = "nixos";
+      nix-doom-emacs.inputs.flake-utils.follows = "flake-utils";
+      nix-doom-emacs.inputs.flake-compat.follows = "flake-compat";
     };
 
   outputs =
@@ -62,7 +79,6 @@
     , nvfetcher
     , deploy
     , sops-nix
-    , emacs-overlay
     , nix-doom-emacs
     , ...
     } @ inputs:
@@ -79,7 +95,6 @@
             agenix.overlay
             nvfetcher.overlay
             sops-nix.overlay
-            emacs-overlay.overlay
             ./pkgs/default.nix
           ];
         };

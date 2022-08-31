@@ -1,0 +1,230 @@
+{
+    "base16-default-schemes": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "base16-default-schemes",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "chriskempson",
+            "repo": "base16-default-schemes",
+            "rev": "daf674291964321cd8c92644f9bbdbf3e7c0e8b3",
+            "sha256": "sha256-pwJCHPaHhvkkjIxQhMUm9FA5jZJSrMhu+ciA3A/dsME=",
+            "type": "github"
+        },
+        "version": "daf674291964321cd8c92644f9bbdbf3e7c0e8b3"
+    },
+    "base16-dracula-scheme": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "base16-dracula-scheme",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "dracula",
+            "repo": "base16-dracula-scheme",
+            "rev": "9494b73c343dde092edb05db51f1fd238395f10a",
+            "sha256": "sha256-iHe/Y0+yubXseh3gMWb6wZ4rIb1GAlb6iQNVgiEncfI=",
+            "type": "github"
+        },
+        "version": "9494b73c343dde092edb05db51f1fd238395f10a"
+    },
+    "base16-shell": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "base16-shell",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "chriskempson",
+            "repo": "base16-shell",
+            "rev": "cd71822de1f9b53eea9beb9d94293985e9ad7122",
+            "sha256": "sha256-mXCC7lT2KXySn5vSK8huLFYObWA0mD3jp/WQU6iM9Vo=",
+            "type": "github"
+        },
+        "version": "cd71822de1f9b53eea9beb9d94293985e9ad7122"
+    },
+    "base16-textmate": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "base16-textmate",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "chriskempson",
+            "repo": "base16-textmate",
+            "rev": "0e51ddd568bdbe17189ac2a07eb1c5f55727513e",
+            "sha256": "sha256-reYGXrhhHNSp/1k6YJ2hxj4jnJQCDgy2Nzxse2PviTA=",
+            "type": "github"
+        },
+        "version": "0e51ddd568bdbe17189ac2a07eb1c5f55727513e"
+    },
+    "base16-tmux": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "base16-tmux",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "mattdavis90",
+            "repo": "base16-tmux",
+            "rev": "6f789462d07ba638e82176fbdc0a564b16eb6761",
+            "sha256": "sha256-OhtvKim8DZiA/fpmvgAORBYGAZaTUSwJpj3M0UPHt9g=",
+            "type": "github"
+        },
+        "version": "6f789462d07ba638e82176fbdc0a564b16eb6761"
+    },
+    "base16-vim": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "base16-vim",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "chriskempson",
+            "repo": "base16-vim",
+            "rev": "c156b909af619cdd097d8d1e2cd1dce1f45dfba1",
+            "sha256": "sha256-Hxr9lmEeO+OBEnD6tqFNhc0q9FEa6GLWWdAlluwTyNo=",
+            "type": "github"
+        },
+        "version": "c156b909af619cdd097d8d1e2cd1dce1f45dfba1"
+    },
+    "base16-waybar": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "base16-waybar",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "mnussbaum",
+            "repo": "base16-waybar",
+            "rev": "d2f943b1abb9c9f295e4c6760b7bdfc2125171d2",
+            "sha256": "sha256-ehb4CLLPJ/SjMz53/inuP9ine2CfIpexp2O1lVHihM0=",
+            "type": "github"
+        },
+        "version": "d2f943b1abb9c9f295e4c6760b7bdfc2125171d2"
+    },
+    "dracula-alacritty": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "dracula-alacritty",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "dracula",
+            "repo": "alacritty",
+            "rev": "77aff04b9f2651eac10e5cfa80a3d85ce43e7985",
+            "sha256": "sha256-eJkVxcaDiIbTrI1Js5j+Nl88gawTE/mfVjstjqQOOdU=",
+            "type": "github"
+        },
+        "version": "77aff04b9f2651eac10e5cfa80a3d85ce43e7985"
+    },
+    "dracula-fish": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "dracula-fish",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "dracula",
+            "repo": "fish",
+            "rev": "610147cc384ff161fbabb9a9ebfd22b743f82b67",
+            "sha256": "sha256-WywEGAGaRwfHJpT+B3oKoyrnLJZxURTQ+MK9e5Asxl0=",
+            "type": "github"
+        },
+        "version": "610147cc384ff161fbabb9a9ebfd22b743f82b67"
+    },
+    "dracula-wofi": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "dracula-wofi",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "dracula",
+            "repo": "wofi",
+            "rev": "04f905b10796f9491f30be024b0b5ff28c675648",
+            "sha256": "sha256-umL6QihHDJly7MjQYme2uyBzUbwl8nviPujYSxrVT+U=",
+            "type": "github"
+        },
+        "version": "04f905b10796f9491f30be024b0b5ff28c675648"
+    },
+    "dracula-zathura": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "dracula-zathura",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "dracula",
+            "repo": "zathura",
+            "rev": "b597b1537aa125e8829bef2cc57a0b0c6a6b35a1",
+            "sha256": "sha256-g6vxwPw0Q9QFJBc3d4R3ZsHnnEvU5o1f4DSuyLeN5XQ=",
+            "type": "github"
+        },
+        "version": "b597b1537aa125e8829bef2cc57a0b0c6a6b35a1"
+    },
+    "ls-colors": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "ls-colors",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "trapd00r",
+            "repo": "LS_COLORS",
+            "rev": "7271a7a8135c1e8a82584bfc9a8ebc227c5c6b2b",
+            "sha256": "sha256-hcdkgY0nM0i3VILt3FENCReGG4pmISkmK/rt3VvFQj8=",
+            "type": "github"
+        },
+        "version": "7271a7a8135c1e8a82584bfc9a8ebc227c5c6b2b"
+    }
+}
