@@ -1,6 +1,6 @@
 { config, nixosConfig, lib, pkgs, ... }:
 let
-  inherit (lib) mkDefault;
+  inherit (lib) mkDefault mkIf;
 in
 {
   home.packages =
@@ -28,6 +28,13 @@ in
           Use = mkDefault true;
         };
       };
+    };
+  };
+
+  systemd.user.targets.tray = mkIf config.programs.kde.enable {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
     };
   };
 }
