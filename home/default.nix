@@ -45,6 +45,7 @@ in
         starship
         vscode
       ]) ++ (with services; [
+        nextcloud-client
         syncthing
       ]);
 
