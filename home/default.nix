@@ -44,6 +44,8 @@ in
         password-store
         starship
         vscode
+      ]) ++ (with services; [
+        syncthing
       ]);
 
       devbox = workstation ++ [
