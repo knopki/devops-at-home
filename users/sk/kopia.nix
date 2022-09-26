@@ -21,17 +21,6 @@ let inherit (lib) mkIf hm elem; in
       KOPIA_CONTENT_LOG_DIR_MAX_AGE = "168h";
     };
     jobs = {
-      alien-half-hour = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = {
-          OnCalendar = "*:0/30";
-          RandomizedDelaySec = "3m";
-        };
-        snapshots = [
-          "${config.home.homeDirectory}/dev"
-          "${config.home.homeDirectory}/org"
-        ];
-      };
-
       alien-daily = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = {
           OnCalendar = "daily";
@@ -39,13 +28,17 @@ let inherit (lib) mkIf hm elem; in
         };
         snapshots = [
           "${config.home.homeDirectory}/.gnupg"
+          "${config.home.homeDirectory}/.logseq"
+          "${config.home.homeDirectory}/dev"
           "${config.home.homeDirectory}/library"
+          "${config.home.homeDirectory}/org"
           "${config.home.homeDirectory}/trash"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Default"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 1"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 2"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 3"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 4"
+          "${config.xdg.configHome}/Logseq/configs.edn"
           "${config.xdg.dataHome}/fish/fish_history"
           config.xdg.userDirs.desktop
           config.xdg.userDirs.documents
