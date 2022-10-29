@@ -46,7 +46,6 @@ in
         office
         passwords
         remote
-        three-de
         video-editor
         video-player
         web
