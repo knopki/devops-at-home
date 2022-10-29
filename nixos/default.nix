@@ -67,7 +67,6 @@ in
         desktop.essentials
         desktop.kde
         fonts
-        games.steam
         misc.earlyoom
         security.disable-mitigations
       ] ++ (with programs; [ downloaders image-viewers video-player music web ]);
