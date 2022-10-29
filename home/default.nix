@@ -46,7 +46,6 @@ in
         vscode
       ]) ++ (with services; [
         nextcloud-client
-        syncthing
       ]);
 
       devbox = workstation ++ [
