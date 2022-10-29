@@ -737,6 +737,9 @@
         "nixos-22-05": "nixos-22-05",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
+        "nixpkgs": [
+          "nixos"
+        ],
         "nur": "nur",
         "nvfetcher": "nvfetcher",
         "sops-nix": "sops-nix"

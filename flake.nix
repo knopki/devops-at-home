@@ -18,6 +18,7 @@
       # Track channels with commits tested and built by hydra
       nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
       nixos.follows = "nixos-22-05";
+      nixpkgs.follows = "nixos";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
 
       nixlib.url = "github:nix-community/nixpkgs.lib";
