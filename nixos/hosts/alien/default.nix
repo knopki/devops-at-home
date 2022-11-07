@@ -92,7 +92,7 @@ in
     extraArgs = [ "-i" "enp59s0" "-i" "wlp60s0" ];
   };
 
-  time.timeZone = "Asia/Aqtau";
+  time.timeZone = "Europe/Moscow";
 
   users.users.root.passwordFile = config.sops.secrets.alien-root-user-password.path;
 }
