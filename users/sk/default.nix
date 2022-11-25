@@ -93,8 +93,8 @@ in
           key = selfHM.programs.gpg.settings.default-key;
           signByDefault = true;
         };
-        userEmail = "korolev.srg@gmail.com";
-        userName = "Sergey Korolev";
+        userEmail = "knopki@duck.com";
+        userName = "Sergei Korolev";
       };
       password-store.settings.PASSWORD_STORE_KEY = selfHM.programs.gpg.settings.default-key;
     };
