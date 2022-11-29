@@ -509,6 +509,8 @@ set [ find mac-address=0C:C6:FD:A2:CF:AA ] address=10.66.6.10 server=dhcp-client
 set [ find mac-address=01:23:45:67:00:00 ] address=10.66.6.11 server=dhcp-clients comment="alient-torrents"
 :if ([print count-only where mac-address=FC:E2:6C:0B:CF:22]=0) do={ add mac-address=FC:E2:6C:0B:CF:22 }
 set [ find mac-address=FC:E2:6C:0B:CF:22 ] address=10.66.6.12 server=dhcp-clients comment="air-wrk"
+:if ([print count-only where mac-address=24:29:34:7E:25:C8]=0) do={ add mac-address=24:29:34:7E:25:C8 }
+set [ find mac-address=24:29:34:7E:25:C8 ] address=10.66.6.13 server=dhcp-clients comment="pixel6a"
 
 :if ([print count-only where mac-address=F0:A3:B2:82:4E:BA]=0) do={ add mac-address=F0:A3:B2:82:4E:BA }
 set [ find mac-address=F0:A3:B2:82:4E:BA ] address=10.66.6.189 server=dhcp-media comment="philips-55OLED806"
@@ -531,6 +533,10 @@ set [ find mac-address=60:01:94:E0:FD:6A ] address=10.66.7.136 server=dhcp-iot c
 set [ find mac-address=D8:80:3C:70:01:59 ] address=10.66.7.137 server=dhcp-iot comment="Amazfit Stratos 3"
 :if ([print count-only where mac-address=84:7A:B6:8F:42:B2]=0) do={ add mac-address=84:7A:B6:8F:42:B2 }
 set [ find mac-address=84:7A:B6:8F:42:B2 ] address=10.66.7.138 server=dhcp-iot comment="Pantum-2500NW"
+:if ([print count-only where mac-address=7C:C2:94:CC:00:7E]=0) do={ add mac-address=7C:C2:94:CC:00:7E }
+set [ find mac-address=7C:C2:94:CC:00:7E ] address=10.66.7.139 server=dhcp-iot comment="Yeelight Ceiling Light 4"
+:if ([print count-only where mac-address=58:B6:23:62:56:7A]=0) do={ add mac-address=58:B6:23:62:56:7A }
+set [ find mac-address=58:B6:23:62:56:7A ] address=10.66.7.140 server=dhcp-iot comment="Yeelight Ceiling Light 3"
 
 
 ##################
@@ -802,6 +808,8 @@ add address=10.66.7.134 list=iot-allow-wan comment="Pet Waterer 1"
 add address=10.66.7.135 list=iot-allow-wan comment="Zhimi Humidifier 2"
 add address=10.66.7.136 list=iot-allow-wan comment="Death Rays 1"
 add address=10.66.7.137 list=iot-allow-wan comment="Amazfit Stratos 3"
+add address=10.66.7.139 list=iot-allow-wan comment="Yeelight Ceiling Light 4"
+add address=10.66.7.140 list=iot-allow-wan comment="Yeelight Ceiling Light 3"
 
 :if ([print count-only where list=mydudes]>0) do={ remove [ find list=mydudes ] }
 add address=10.66.6.0/25 comment=clients list=mydudes
