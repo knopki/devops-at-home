@@ -21,6 +21,19 @@ let inherit (lib) mkIf hm elem; in
       KOPIA_CONTENT_LOG_DIR_MAX_AGE = "168h";
     };
     jobs = {
+      alien-10m = mkIf (nixosConfig.networking.hostName == "alien") {
+        timer = {
+          OnCalendar = "*:0/10";
+        };
+        snapshots = [
+          "${config.home.homeDirectory}/.logseq"
+          "${config.home.homeDirectory}/dev"
+          "${config.home.homeDirectory}/org"
+          "${config.xdg.configHome}/Logseq/Preferences"
+          "${config.xdg.configHome}/Logseq/configs.edn"
+          config.xdg.userDirs.documents
+        ];
+      };
       alien-daily = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = {
           OnCalendar = "daily";
@@ -28,31 +41,17 @@ let inherit (lib) mkIf hm elem; in
         };
         snapshots = [
           "${config.home.homeDirectory}/.gnupg"
-          "${config.home.homeDirectory}/.logseq"
-          "${config.home.homeDirectory}/dev"
+          "${config.home.homeDirectory}/.kube/config"
           "${config.home.homeDirectory}/library"
-          "${config.home.homeDirectory}/org"
           "${config.home.homeDirectory}/trash"
+          "${config.home.homeDirectory}/videos"
+          "${config.xdg.configHome}/Bitwarden/data.json"
+          "${config.xdg.configHome}/Bitwarden CLI/data.json"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Default"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 1"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 2"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 3"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 4"
-          "${config.xdg.configHome}/Logseq/configs.edn"
-          "${config.xdg.dataHome}/fish/fish_history"
-          config.xdg.userDirs.desktop
-          config.xdg.userDirs.documents
-          config.xdg.userDirs.pictures
-        ];
-      };
-
-      alien-weekly = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = {
-          OnCalendar = "weekly";
-          RandomizedDelaySec = "12h";
-        };
-        snapshots = [
-          "${config.home.homeDirectory}/.kube/config"
           "${config.xdg.configHome}/MusicBrainz"
           "${config.xdg.configHome}/cachix"
           "${config.xdg.configHome}/darktable"
@@ -61,9 +60,13 @@ let inherit (lib) mkIf hm elem; in
           "${config.xdg.configHome}/remmina"
           "${config.xdg.configHome}/teamviewer"
           "${config.xdg.dataHome}/Anki2"
+          "${config.xdg.dataHome}/fish/fish_history"
           "${config.xdg.dataHome}/keyrings"
           "${config.xdg.dataHome}/password-store"
+          "${config.xdg.dataHome}/remmina"
+          config.xdg.userDirs.desktop
           config.xdg.userDirs.music
+          config.xdg.userDirs.pictures
         ];
       };
     };
