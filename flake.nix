@@ -16,8 +16,8 @@
   inputs =
     {
       # Track channels with commits tested and built by hydra
-      nixos-22-05.url = "github:nixos/nixpkgs/nixos-22.05";
-      nixos.follows = "nixos-22-05";
+      nixos-22-11.url = "github:nixos/nixpkgs/nixos-22.11";
+      nixos.follows = "nixos-22-11";
       nixpkgs.follows = "nixos";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -28,8 +28,7 @@
       flake-compat.url = "github:edolstra/flake-compat";
       flake-compat.flake = false;
 
-      digga.url = "github:divnix/digga/d1193743a535d7fbbc7f3eda4e51295b10bd4d2c";
-      digga.inputs.latest.follows = "latest";
+      digga.url = "github:divnix/digga/54ede8e591d288c176a09d6fcf4b123896c0bf0f";
       digga.inputs.nixpkgs.follows = "nixos";
       digga.inputs.nixlib.follows = "nixlib";
       digga.inputs.home-manager.follows = "home";
@@ -37,9 +36,9 @@
       digga.inputs.flake-compat.follows = "flake-compat";
       # digga.inputs.flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
 
-      home-22-05.url = "github:nix-community/home-manager/release-22.05";
-      home-22-05.inputs.nixpkgs.follows = "nixos";
-      home.follows = "home-22-05";
+      home-22-11.url = "github:nix-community/home-manager/release-22.11";
+      home-22-11.inputs.nixpkgs.follows = "nixos-22-11";
+      home.follows = "home-22-11";
 
       deploy.url = "github:serokell/deploy-rs";
       deploy.inputs.nixpkgs.follows = "nixos";
@@ -61,7 +60,7 @@
 
       sops-nix.url = "github:Mic92/sops-nix";
       sops-nix.inputs.nixpkgs.follows = "nixos";
-      sops-nix.inputs.nixpkgs-22_05.follows = "nixos-22-05";
+      sops-nix.inputs.nixpkgs-22_05.follows = "nixos-22-11";
 
       nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
       nix-doom-emacs.inputs.nixpkgs.follows = "nixos";

@@ -53,13 +53,13 @@ in
   security.mitigations.acceptRisk = true;
 
   services = {
-    ipfs = {
+    kubo = {
       enable = true;
       autoMount = true;
       enableGC = true;
       localDiscovery = true;
       extraFlags = [ "--routing=dhtclient" ];
-      extraConfig = {
+      settings = {
         Datastore.StorageMax = "1GB";
         Swarm.ConnMgr = {
           Type = "basic";

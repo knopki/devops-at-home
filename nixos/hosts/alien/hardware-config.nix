@@ -16,7 +16,6 @@ in
     (modulesPath + "/installer/scan/not-detected.nix")
     common-cpu-intel
     common-gpu-nvidia
-    common-pc-laptop
     common-pc-ssd
   ];
 
@@ -113,30 +112,10 @@ in
     };
   };
 
-  nix.maxJobs = mkDefault 8;
+  nix.settings.max-jobs = mkDefault 8;
   nixpkgs.system = "x86_64-linux";
 
   services = {
-    # broken: stuck at 800MHz
-    thermald.enable = false;
-
-    tlp = {
-      settings = {
-        SOUND_POWER_SAVE_ON_BAT = "0";
-        DISK_IOSCHED = "mq-deadline mq-deadline";
-        INTEL_GPU_MIN_FREQ_ON_AC = "600";
-        INTEL_GPU_MIN_FREQ_ON_BAT = "350";
-        INTEL_GPU_MAX_FREQ_ON_AC = "1050";
-        INTEL_GPU_MAX_FREQ_ON_BAT = "1050";
-        INTEL_GPU_BOOST_FREQ_ON_AC = "1050";
-        INTEL_GPU_BOOST_FREQ_ON_BAT = "1050";
-        WOL_DISABLE = "Y";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-        DEVICES_TO_ENABLE_ON_STARTUP = "wwan";
-      };
-    };
-
     udev = {
       extraHwdb = ''
         # Alienware 15 R2 laptops

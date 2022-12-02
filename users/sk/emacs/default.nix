@@ -82,7 +82,7 @@ in
 
     # :lang php
     php
-    php74Packages.php-cs-fixer
+    php82Packages.php-cs-fixer
 
     # :plang plantuml
     plantuml
@@ -94,7 +94,6 @@ in
     # :lang rust
     cargo
     clippy
-    rls
     rustc
     rustfmt
 

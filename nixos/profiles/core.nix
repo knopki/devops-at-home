@@ -105,9 +105,6 @@ in
   #
 
   nix = {
-    allowedUsers = mkDefault [ "@wheel" ];
-    autoOptimiseStore = mkDefault true;
-    binaryCaches = [ "https://cache.nixos.org/" ];
     daemonCPUSchedPolicy = mkDefault "idle";
     daemonIOSchedPriority = mkDefault 7;
     gc = {
@@ -116,7 +113,12 @@ in
       options = mkDefault "--delete-older-then 30d";
     };
     optimise.automatic = mkDefault true;
-    trustedUsers = mkDefault [ "root" "@wheel" ];
+    settings = {
+      allowed-users = mkDefault [ "@wheel" ];
+      auto-optimise-store = mkDefault true;
+      trusted-users = mkDefault [ "root" "@wheel" ];
+      substituters = [ "https://cache.nixos.org/" ];
+    };
     extraOptions =
       let
         gb = 1024 * 1024 * 1024;
@@ -146,6 +148,8 @@ in
   };
 
   services = {
+    nscd.enableNsncd = true;
+
     openssh = {
       enable = mkDefault true;
       passwordAuthentication = mkDefault false;
