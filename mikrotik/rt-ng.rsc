@@ -539,6 +539,8 @@ set [ find mac-address=7C:C2:94:CC:00:7E ] address=10.66.7.139 server=dhcp-iot c
 set [ find mac-address=58:B6:23:62:56:7A ] address=10.66.7.140 server=dhcp-iot comment="Yeelight Ceiling Light 3"
 :if ([print count-only where mac-address=EC:94:CB:67:CC:70]=0) do={ add mac-address=EC:94:CB:67:CC:70 }
 set [ find mac-address=EC:94:CB:67:CC:70 ] address=10.66.7.141 server=dhcp-iot comment="SR-Organizer-3-24-1"
+:if ([print count-only where mac-address=7C:C2:94:CB:F9:64]=0) do={ add mac-address=7C:C2:94:CB:F9:64 }
+set [ find mac-address=7C:C2:94:CB:F9:64 ] address=10.66.7.142 server=dhcp-iot comment="Yeelight Ceiling Light 5"
 
 
 ##################
@@ -813,6 +815,7 @@ add address=10.66.7.137 list=iot-allow-wan comment="Amazfit Stratos 3"
 add address=10.66.7.139 list=iot-allow-wan comment="Yeelight Ceiling Light 4"
 add address=10.66.7.140 list=iot-allow-wan comment="Yeelight Ceiling Light 3"
 add address=10.66.7.141 list=iot-allow-wan comment="SR-Organizer-3-24"
+add address=10.66.7.142 list=iot-allow-wan comment="Yeelight Ceiling Light 5"
 
 :if ([print count-only where list=mydudes]>0) do={ remove [ find list=mydudes ] }
 add address=10.66.6.0/25 comment=clients list=mydudes
