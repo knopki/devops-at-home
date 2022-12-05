@@ -42,9 +42,12 @@ in
         4001 # ipfs
         8010 # chromecast sharing port
         8080 # ipfs
+        22000 # syncthing
       ];
       allowedUDPPorts = [
         4001 # ipfs
+        21027 # syncthing local discovery
+        22000 # syncthing
       ];
       trustedInterfaces = [ "ve-+" ];
     };

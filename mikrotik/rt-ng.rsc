@@ -880,6 +880,12 @@ add chain=WAN-SELF comment="WAN-SELF reject DNS" protocol=udp dst-port=53 \
     action=reject reject-with=icmp-admin-prohibited
 add chain=WAN-SELF protocol=tcp dst-port=53 \
     action=reject reject-with=icmp-admin-prohibited
+add chain=WAN-SELF comment="Syncthing@alient TCP" \
+    protocol=tcp dst-port=22000 \
+    action=accept reject-with=icmp-admin-prohibited
+add chain=WAN-SELF comment="Syncthing@alient UDP" \
+    protocol=udp dst-port=22000 \
+    action=accept reject-with=icmp-admin-prohibited
 add chain=WAN-SELF comment="WAN-SELF Wireguard" disabled=yes
 :foreach none,int in={ "azirevpn-dk1";"azirevpn-no1";"azirevpn-se1";"warp" } do={
     add chain=WAN-SELF protocol=udp  \
@@ -949,8 +955,10 @@ add chain=input comment="Jump to input table" action=jump jump-target=main-input
 
 :if ([print count-only where chain=WAN-ALLDUDES]>0) do={ remove [ find chain=WAN-ALLDUDES ] }
 add chain=WAN-ALLDUDES comment="WAN-ALLDUDES drop all not DSTNATed" \
-    connection-nat-state=!dstnat connection-state=new action=drop
-add chain=WAN-ALLDUDES comment="WAN-ALLDUDES SSH bruteforce" protocol=tcp dst-port=22 \
+    connection-state=new connection-nat-state=!dstnat \
+    action=drop
+add chain=WAN-ALLDUDES comment="WAN-ALLDUDES SSH bruteforce" \
+    protocol=tcp dst-port=22 \
     action=jump jump-target=ssh-bruteforce
 add chain=WAN-ALLDUDES comment="WAN-ALLDUDES reject all" \
     action=reject reject-with=icmp-network-unreachable
@@ -1052,6 +1060,20 @@ add chain=main-masq comment="Hairpin to ALLDUDES" out-interface-list=alldudes \
 
 :if ([print count-only where jump-target=main-masq]) do={ remove [ find jump-target=main-masq ] }
 add chain=srcnat comment="Jump to masquerade table" action=jump jump-target=main-masq
+
+
+:if ([print count-only where chain=main-rt-dstnat]) do={ remove [ find chain=main-rt-dstnat ] }
+add chain=main-rt-dstnat comment="Syncthing@alien TCP" \
+    to-ports=22000 protocol=tcp \
+    action=dst-nat to-addresses=10.66.6.7 dst-port=22000
+add chain=main-rt-dstnat comment="Syncthing@alien UDP" \
+    to-ports=22000 protocol=udp \
+    action=dst-nat to-addresses=10.66.6.7 dst-port=22000
+
+:if ([print count-only where jump-target=main-rt-dstnat]) do={ remove [ find jump-target=main-rt-dstnat ] }
+add chain=dstnat in-interface=vlan1000-rostelecom \
+    action=jump jump-target=main-rt-dstnat \
+    comment="Jump to rt dstnat table"
 
 
 ##################
