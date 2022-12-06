@@ -59,8 +59,8 @@
       nixos-generators.inputs.nixlib.follows = "nixlib";
 
       sops-nix.url = "github:Mic92/sops-nix";
-      sops-nix.inputs.nixpkgs.follows = "nixos";
-      sops-nix.inputs.nixpkgs-22_05.follows = "nixos-22-11";
+      sops-nix.inputs.nixpkgs.follows = "nixos-22-11";
+      sops-nix.inputs.nixpkgs-stable.follows = "nixos-22-11";
 
       nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
       nix-doom-emacs.inputs.nixpkgs.follows = "nixos";

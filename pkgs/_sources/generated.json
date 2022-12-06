@@ -50,11 +50,11 @@
             "name": null,
             "owner": "chriskempson",
             "repo": "base16-shell",
-            "rev": "cd71822de1f9b53eea9beb9d94293985e9ad7122",
-            "sha256": "sha256-mXCC7lT2KXySn5vSK8huLFYObWA0mD3jp/WQU6iM9Vo=",
+            "rev": "588691ba71b47e75793ed9edfcfaa058326a6f41",
+            "sha256": "sha256-X89FsG9QICDw3jZvOCB/KsPBVOLUeE7xN3VCtf0DD3E=",
             "type": "github"
         },
-        "version": "cd71822de1f9b53eea9beb9d94293985e9ad7122"
+        "version": "588691ba71b47e75793ed9edfcfaa058326a6f41"
     },
     "base16-textmate": {
         "cargoLocks": null,
@@ -88,11 +88,11 @@
             "name": null,
             "owner": "mattdavis90",
             "repo": "base16-tmux",
-            "rev": "6f789462d07ba638e82176fbdc0a564b16eb6761",
-            "sha256": "sha256-OhtvKim8DZiA/fpmvgAORBYGAZaTUSwJpj3M0UPHt9g=",
+            "rev": "c3366618c6d746647051b3cd0ded23f3f7c332e1",
+            "sha256": "sha256-lbe/Ov+ShmlA4O/qAYX8K9ZSKvCzekyXKMcSpzfyXvA=",
             "type": "github"
         },
-        "version": "6f789462d07ba638e82176fbdc0a564b16eb6761"
+        "version": "c3366618c6d746647051b3cd0ded23f3f7c332e1"
     },
     "base16-vim": {
         "cargoLocks": null,
@@ -107,11 +107,11 @@
             "name": null,
             "owner": "chriskempson",
             "repo": "base16-vim",
-            "rev": "c156b909af619cdd097d8d1e2cd1dce1f45dfba1",
-            "sha256": "sha256-Hxr9lmEeO+OBEnD6tqFNhc0q9FEa6GLWWdAlluwTyNo=",
+            "rev": "3be3cd82cd31acfcab9a41bad853d9c68d30478d",
+            "sha256": "sha256-uJvaYYDMXvoo0fhBZUhN8WBXeJ87SRgof6GEK2efFT0=",
             "type": "github"
         },
-        "version": "c156b909af619cdd097d8d1e2cd1dce1f45dfba1"
+        "version": "3be3cd82cd31acfcab9a41bad853d9c68d30478d"
     },
     "base16-waybar": {
         "cargoLocks": null,
@@ -221,10 +221,10 @@
             "name": null,
             "owner": "trapd00r",
             "repo": "LS_COLORS",
-            "rev": "7271a7a8135c1e8a82584bfc9a8ebc227c5c6b2b",
-            "sha256": "sha256-hcdkgY0nM0i3VILt3FENCReGG4pmISkmK/rt3VvFQj8=",
+            "rev": "e36eebfb3e1b39497c6038cdc70c75109b6434de",
+            "sha256": "sha256-KsVuHBd4CzAWDeobS0N4NW+z1KMK1kBnZg14g67SCeQ=",
             "type": "github"
         },
-        "version": "7271a7a8135c1e8a82584bfc9a8ebc227c5c6b2b"
+        "version": "e36eebfb3e1b39497c6038cdc70c75109b6434de"
     }
 }

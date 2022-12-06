@@ -25,13 +25,13 @@
   };
   base16-shell = {
     pname = "base16-shell";
-    version = "cd71822de1f9b53eea9beb9d94293985e9ad7122";
+    version = "588691ba71b47e75793ed9edfcfaa058326a6f41";
     src = fetchFromGitHub ({
       owner = "chriskempson";
       repo = "base16-shell";
-      rev = "cd71822de1f9b53eea9beb9d94293985e9ad7122";
+      rev = "588691ba71b47e75793ed9edfcfaa058326a6f41";
       fetchSubmodules = false;
-      sha256 = "sha256-mXCC7lT2KXySn5vSK8huLFYObWA0mD3jp/WQU6iM9Vo=";
+      sha256 = "sha256-X89FsG9QICDw3jZvOCB/KsPBVOLUeE7xN3VCtf0DD3E=";
     });
   };
   base16-textmate = {
@@ -47,24 +47,24 @@
   };
   base16-tmux = {
     pname = "base16-tmux";
-    version = "6f789462d07ba638e82176fbdc0a564b16eb6761";
+    version = "c3366618c6d746647051b3cd0ded23f3f7c332e1";
     src = fetchFromGitHub ({
       owner = "mattdavis90";
       repo = "base16-tmux";
-      rev = "6f789462d07ba638e82176fbdc0a564b16eb6761";
+      rev = "c3366618c6d746647051b3cd0ded23f3f7c332e1";
       fetchSubmodules = false;
-      sha256 = "sha256-OhtvKim8DZiA/fpmvgAORBYGAZaTUSwJpj3M0UPHt9g=";
+      sha256 = "sha256-lbe/Ov+ShmlA4O/qAYX8K9ZSKvCzekyXKMcSpzfyXvA=";
     });
   };
   base16-vim = {
     pname = "base16-vim";
-    version = "c156b909af619cdd097d8d1e2cd1dce1f45dfba1";
+    version = "3be3cd82cd31acfcab9a41bad853d9c68d30478d";
     src = fetchFromGitHub ({
       owner = "chriskempson";
       repo = "base16-vim";
-      rev = "c156b909af619cdd097d8d1e2cd1dce1f45dfba1";
+      rev = "3be3cd82cd31acfcab9a41bad853d9c68d30478d";
       fetchSubmodules = false;
-      sha256 = "sha256-Hxr9lmEeO+OBEnD6tqFNhc0q9FEa6GLWWdAlluwTyNo=";
+      sha256 = "sha256-uJvaYYDMXvoo0fhBZUhN8WBXeJ87SRgof6GEK2efFT0=";
     });
   };
   base16-waybar = {
@@ -124,13 +124,13 @@
   };
   ls-colors = {
     pname = "ls-colors";
-    version = "7271a7a8135c1e8a82584bfc9a8ebc227c5c6b2b";
+    version = "e36eebfb3e1b39497c6038cdc70c75109b6434de";
     src = fetchFromGitHub ({
       owner = "trapd00r";
       repo = "LS_COLORS";
-      rev = "7271a7a8135c1e8a82584bfc9a8ebc227c5c6b2b";
+      rev = "e36eebfb3e1b39497c6038cdc70c75109b6434de";
       fetchSubmodules = false;
-      sha256 = "sha256-hcdkgY0nM0i3VILt3FENCReGG4pmISkmK/rt3VvFQj8=";
+      sha256 = "sha256-KsVuHBd4CzAWDeobS0N4NW+z1KMK1kBnZg14g67SCeQ=";
     });
   };
 }
