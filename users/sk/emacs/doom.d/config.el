@@ -6,7 +6,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Sergey Korolev"
-      user-mail-address "korolev.srg@gmail.com")
+      user-mail-address "knopki@duck.com")
 
 
 (load! "+core")
