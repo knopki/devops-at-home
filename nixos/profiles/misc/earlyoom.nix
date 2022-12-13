@@ -1,18 +1,16 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
+let
+  inherit (lib) mkDefault mkIf;
+in
 {
   services.earlyoom = {
     enable = true;
-    enableDebugInfo = true;
     enableNotifications = true;
+    freeMemThreshold = 10;
     freeSwapThreshold = 10;
+    freeMemKillThreshold = 5;
+    freeSwapKillThreshold = 5;
   };
 
-  systemd.user.services.systembus-notify = {
-    enable = true;
-    description = "Show desktop notifications for earlyoom";
-    script = "${pkgs.systembus-notify}/bin/systembus-notify -q";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-  };
+  services.systembus-notify.enable = mkIf (config.services.earlyoom.enableNotifications) (mkDefault true);
 }
