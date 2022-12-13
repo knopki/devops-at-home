@@ -14,7 +14,6 @@ in
       enable = mkDefault true;
       package = pkgs.pass.withExtensions (
         ext: with ext; [
-          pass-audit
           pass-checkup
           pass-genphrase
           pass-otp
