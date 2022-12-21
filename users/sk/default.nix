@@ -67,6 +67,8 @@ in
     home.packages = with pkgs; [
       du-dust
     ] ++ optionals isWorkstation [
+      bitwarden
+      bitwarden-cli
       feh
       logseq
     ];
