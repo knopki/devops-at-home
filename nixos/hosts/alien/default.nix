@@ -101,9 +101,11 @@ in
       description = "Setup system Flatpak";
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
-      partOf = [ "graphical-session.target" ];
-      restartIfChanged = true;
-      serviceConfig.Type = "oneshot";
+      wantedBy = [ "graphical.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+      };
       script =
         let
           flathub_apps = [
