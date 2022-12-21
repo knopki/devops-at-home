@@ -1,5 +1,6 @@
-{ config, suites, pkgs, ... }:
+{ config, suites, lib, pkgs, ... }:
 let
+  inherit (lib) concatStringsSep;
   defaultSopsFile = { format = "yaml"; sopsFile = ./secrets.yaml; };
 in
 {
@@ -103,23 +104,31 @@ in
       partOf = [ "graphical-session.target" ];
       restartIfChanged = true;
       serviceConfig.Type = "oneshot";
-      script = ''
-        # add repos
-        ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+      script =
+        let
+          flathub_apps = [
+            "org.gtk.Gtk3theme.Arc-Dark"
+            "org.kde.KStyle.Kvantum//5.15"
+            "org.kde.KStyle.Kvantum//5.15-21.08"
+            "org.kde.KStyle.Kvantum//5.15-22.08"
+            "com.github.tchx84.Flatseal"
+            "org.telegram.desktop"
+            "com.logseq.Logseq"
+            "com.usebottles.bottles"
+            "org.kde.krita"
+            "md.obsidian.Obsidian"
+          ];
+          flathub_cmd = concatStringsSep "\n"
+            (map
+              (x: "${pkgs.flatpak}/bin/flatpak install flathub ${x} -y --noninteractive")
+              flathub_apps);
+        in
+        ''
+          # add repos
+          ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-        # install themes
-        ${pkgs.flatpak}/bin/flatpak install flathub org.gtk.Gtk3theme.Arc-Dark -y --noninteractive
-        ${pkgs.flatpak}/bin/flatpak install flathub org.kde.KStyle.Kvantum//5.15 -y --noninteractive
-        ${pkgs.flatpak}/bin/flatpak install flathub org.kde.KStyle.Kvantum//5.15-21.08 -y --noninteractive
-        ${pkgs.flatpak}/bin/flatpak install flathub org.kde.KStyle.Kvantum//5.15-22.08 -y --noninteractive
-
-        # install apps
-        ${pkgs.flatpak}/bin/flatpak install flathub com.github.tchx84.Flatseal -y --noninteractive
-        ${pkgs.flatpak}/bin/flatpak install flathub org.telegram.desktop -y --noninteractive
-        ${pkgs.flatpak}/bin/flatpak install flathub com.logseq.Logseq -y --noninteractive
-        ${pkgs.flatpak}/bin/flatpak install flathub com.usebottles.bottles -y --noninteractive
-        ${pkgs.flatpak}/bin/flatpak install flathub md.obsidian.Obsidian -y --noninteractive
-      '';
+          ${flathub_cmd}
+        '';
     };
   };
 

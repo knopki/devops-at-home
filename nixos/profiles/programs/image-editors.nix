@@ -5,6 +5,5 @@
     digikam
     gimp
     inkscape
-    krita
   ];
 }

@@ -118,6 +118,11 @@ in
           filesystems = "xdg-data/applications;";
         };
       };
+      "flatpak/overrides/org.kde.krita".text = toINI {} {
+        Context = {
+          filesystems = "!home;xdg-desktop;xdg-pictures;xdg-downloads;";
+        };
+      };
     };
   };
 }
