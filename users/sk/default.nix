@@ -113,6 +113,11 @@ in
           filesystems = "!home;xdg-config/Logseq;xdg-documents/personal;~/.logseq;";
         };
       };
+      "flatpak/overrides/com.usebottles.bottles".text = toINI {} {
+        Context = {
+          filesystems = "xdg-data/applications;";
+        };
+      };
     };
   };
 }

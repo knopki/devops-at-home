@@ -34,7 +34,6 @@ final: prev: {
 
   # tools
   sway-scripts = final.callPackage ./tools/wayland/sway-scripts { };
-  winbox-bin = final.callPackage ./tools/networking/winbox.nix { };
 
   # shells
   fishPlugins = prev.fishPlugins // {

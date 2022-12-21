@@ -55,7 +55,6 @@ in
         cloud-tools
         nodejs
         python
-        winbox
       ]);
 
       gamestation = base ++ graphical ++ [

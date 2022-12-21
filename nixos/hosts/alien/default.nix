@@ -117,6 +117,7 @@ in
         ${pkgs.flatpak}/bin/flatpak install flathub com.github.tchx84.Flatseal -y --noninteractive
         ${pkgs.flatpak}/bin/flatpak install flathub org.telegram.desktop -y --noninteractive
         ${pkgs.flatpak}/bin/flatpak install flathub com.logseq.Logseq -y --noninteractive
+        ${pkgs.flatpak}/bin/flatpak install flathub com.usebottles.bottles -y --noninteractive
         ${pkgs.flatpak}/bin/flatpak install flathub md.obsidian.Obsidian -y --noninteractive
       '';
     };
