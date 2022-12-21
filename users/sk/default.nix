@@ -1,6 +1,7 @@
 { config, options, lib, pkgs, ... }:
 let
   inherit (lib) mkDefault mkIf mkMerge optionals;
+  inherit (lib.generators) toINI;
   cfg = config.users.users.sk;
   selfHM = config.home-manager.users.sk;
   isWorkstation = config.meta.suites.workstation;
@@ -71,7 +72,6 @@ in
       bitwarden-cli
       feh
       ffmpeg
-      logseq
     ];
 
     theme = {
@@ -106,5 +106,13 @@ in
       "e ${selfHM.xdg.userDirs.download} - - - 30d"
       "e ${selfHM.xdg.userDirs.pictures}/screenshots - - - 30d"
     ];
+
+    xdg.dataFile = {
+      "flatpak/overrides/com.logseq.Logseq".text = toINI {} {
+        Context = {
+          filesystems = "!home;xdg-config/Logseq;xdg-documents/personal;~/.logseq;";
+        };
+      };
+    };
   };
 }

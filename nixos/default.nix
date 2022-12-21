@@ -34,6 +34,7 @@ in
         meta.suites.workstation
         desktop.essentials
         desktop.kde
+        flatpak
         fonts
         misc.earlyoom
       ] ++ (with programs; [

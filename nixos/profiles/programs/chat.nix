@@ -5,7 +5,6 @@
     element-desktop
     rocketchat-desktop
     skypeforlinux
-    tdesktop
     zoom-us
   ];
 }

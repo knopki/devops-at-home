@@ -90,9 +90,36 @@ in
 
   system.stateVersion = "20.09";
 
-  systemd.network.wait-online = {
-    anyInterface = true;
-    extraArgs = [ "-i" "enp59s0" "-i" "wlp60s0" ];
+  systemd = {
+    network.wait-online = {
+      anyInterface = true;
+      extraArgs = [ "-i" "enp59s0" "-i" "wlp60s0" ];
+    };
+
+    services.flatpak-setup = {
+      description = "Setup system Flatpak";
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      partOf = [ "graphical-session.target" ];
+      restartIfChanged = true;
+      serviceConfig.Type = "oneshot";
+      script = ''
+        # add repos
+        ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+        # install themes
+        ${pkgs.flatpak}/bin/flatpak install flathub org.gtk.Gtk3theme.Arc-Dark -y --noninteractive
+        ${pkgs.flatpak}/bin/flatpak install flathub org.kde.KStyle.Kvantum//5.15 -y --noninteractive
+        ${pkgs.flatpak}/bin/flatpak install flathub org.kde.KStyle.Kvantum//5.15-21.08 -y --noninteractive
+        ${pkgs.flatpak}/bin/flatpak install flathub org.kde.KStyle.Kvantum//5.15-22.08 -y --noninteractive
+
+        # install apps
+        ${pkgs.flatpak}/bin/flatpak install flathub com.github.tchx84.Flatseal -y --noninteractive
+        ${pkgs.flatpak}/bin/flatpak install flathub org.telegram.desktop -y --noninteractive
+        ${pkgs.flatpak}/bin/flatpak install flathub com.logseq.Logseq -y --noninteractive
+        ${pkgs.flatpak}/bin/flatpak install flathub md.obsidian.Obsidian -y --noninteractive
+      '';
+    };
   };
 
   time.timeZone = "Europe/Moscow";
