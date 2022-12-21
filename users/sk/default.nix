@@ -70,6 +70,7 @@ in
       bitwarden
       bitwarden-cli
       feh
+      ffmpeg
       logseq
     ];
 
