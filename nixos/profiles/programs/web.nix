@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     firefox
+    tor-browser-bundle-bin
   ];
 
   programs.brave = {
