@@ -8,6 +8,7 @@ let
     "chat.delta.desktop"
     "com.bitwarden.desktop"
     "com.discordapp.Discord"
+    "com.github.AlizaMedicalImaging.AlizaMS"
     "com.github.tchx84.Flatseal"
     "com.logseq.Logseq"
     "com.spotify.Client"
@@ -76,6 +77,14 @@ let
       text = toINI {} {
         Context = {
           filesystems = "!xdg-pictures;";
+        };
+      };
+    }
+    {
+      name = "com.github.AlizaMedicalImaging.AlizaMS";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-documents;";
         };
       };
     }
