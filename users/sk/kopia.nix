@@ -91,7 +91,7 @@ let inherit (lib) mkIf hm elem; in
       alien-random-conf = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
         snapshots = [
-          "${config.xdg.configHome}/MusicBrainz"
+          "${config.home.homeDirectory}/.var/app/org.musicbrainz.Picard/config/MusicBrainz"
           "${config.xdg.configHome}/dconf/user"
         ];
       };

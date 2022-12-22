@@ -25,6 +25,7 @@ let
     "org.kde.KStyle.Kvantum//5.15-21.08"
     "org.kde.KStyle.Kvantum//5.15-22.08"
     "org.kde.krita"
+    "org.musicbrainz.Picard"
     "org.remmina.Remmina"
     "org.telegram.desktop"
     "us.zoom.Zoom"
