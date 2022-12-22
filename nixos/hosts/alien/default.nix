@@ -24,6 +24,7 @@ let
     "org.kde.krita"
     "org.remmina.Remmina"
     "org.telegram.desktop"
+    "us.zoom.Zoom"
   ];
   flatpak_overrides = map (x: writeTextDir x.name x.text) [
     {
