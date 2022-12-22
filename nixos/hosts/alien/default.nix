@@ -6,6 +6,7 @@ let
   defaultSopsFile = { format = "yaml"; sopsFile = ./secrets.yaml; };
   flathub_apps = [
     "chat.delta.desktop"
+    "chat.rocket.RocketChat"
     "com.bitwarden.desktop"
     "com.discordapp.Discord"
     "com.github.AlizaMedicalImaging.AlizaMS"
@@ -96,6 +97,14 @@ let
       text = toINI {} {
         Context = {
           filesystems = "!xdg-documents;!xdg-music;!xdg-pictures;!xdg-videos;";
+        };
+      };
+    }
+    {
+      name = "chat.rocket.RocketChat";
+      text = toINI {} {
+        Context = {
+          filesystems = "!xdg-documents;!xdg-pictures;";
         };
       };
     }
