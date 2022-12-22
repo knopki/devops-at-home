@@ -15,6 +15,7 @@ let
     "com.skype.Client"
     "com.spotify.Client"
     "com.usebottles.bottles"
+    "im.riot.Riot"
     "md.obsidian.Obsidian"
     "net.ankiweb.Anki"
     "org.briarproject.Briar"
@@ -106,6 +107,14 @@ let
       text = toINI {} {
         Context = {
           filesystems = "!xdg-documents;!xdg-pictures;";
+        };
+      };
+    }
+    {
+      name = "im.riot.Riot";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-download;";
         };
       };
     }

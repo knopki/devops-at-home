@@ -38,7 +38,6 @@ in
         fonts
         misc.earlyoom
       ] ++ (with programs; [
-        chat
         cryptowallets
         downloaders
         image-editors
