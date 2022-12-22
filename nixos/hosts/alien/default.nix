@@ -5,6 +5,7 @@ let
   inherit (pkgs) writeTextDir;
   defaultSopsFile = { format = "yaml"; sopsFile = ./secrets.yaml; };
   flathub_apps = [
+    "com.discordapp.Discord"
     "com.github.tchx84.Flatseal"
     "com.logseq.Logseq"
     "com.spotify.Client"
@@ -62,6 +63,14 @@ let
     }
     {
       name = "com.spotify.Client";
+      text = toINI {} {
+        Context = {
+          filesystems = "!xdg-pictures;";
+        };
+      };
+    }
+    {
+      name = "com.discordapp.Discord";
       text = toINI {} {
         Context = {
           filesystems = "!xdg-pictures;";
@@ -192,6 +201,15 @@ in
           ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           ${flathub_cmd}
           ${pkgs.flatpak}/bin/flatpak uninstall --system --unused -y --noninteractive
+
+          # discord/openasar
+          DISCOSAR=/var/lib/flatpak/app/com.discordapp.Discord/current/active/files/discord/resources/app.asar
+          if [ -f "$DISCOSAR" ]; then
+            DISCOSARSIZE=$(stat -c%s "$DISCOSAR")
+            if (( DISCOSARSIZE > 1000000 )); then
+              ${pkgs.curl}/bin/curl https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar > "$DISCOSAR"
+            fi
+          fi
         '';
     };
   };

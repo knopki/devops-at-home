@@ -2,9 +2,7 @@ channels: final: prev: {
 
   __dontExport = true; # overrides clutter up actual creations
 
-  inherit (channels.latest)
-    discord
-    ;
+  # inherit (channels.latest) something;
 
   haskellPackages = prev.haskellPackages.override {
     overrides = hfinal: hprev:
