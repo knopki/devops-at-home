@@ -6,7 +6,6 @@
     aspellDicts.ru
     gnome.simple-scan
     isync
-    libreoffice-qt
     marvin
     offlineimap
     rclone

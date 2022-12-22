@@ -25,6 +25,7 @@ let
     "org.kde.KStyle.Kvantum//5.15-21.08"
     "org.kde.KStyle.Kvantum//5.15-22.08"
     "org.kde.krita"
+    "org.libreoffice.LibreOffice"
     "org.musicbrainz.Picard"
     "org.remmina.Remmina"
     "org.telegram.desktop"
@@ -116,6 +117,14 @@ let
       text = toINI {} {
         Context = {
           filesystems = "xdg-download;";
+        };
+      };
+    }
+    {
+      name = "org.libreoffice.LibreOffice";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-desktop;xdg-documents;xdg-download;";
         };
       };
     }
