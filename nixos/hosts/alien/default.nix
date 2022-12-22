@@ -20,6 +20,7 @@ let
     "md.obsidian.Obsidian"
     "net.ankiweb.Anki"
     "org.briarproject.Briar"
+    "org.darktable.Darktable"
     "org.gtk.Gtk3theme.Arc-Dark"
     "org.inkscape.Inkscape"
     "org.kde.KStyle.Kvantum//5.15"
@@ -140,6 +141,14 @@ let
     }
     {
       name = "com.obsproject.Studio";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;";
+        };
+      };
+    }
+    {
+      name = "org.darktable.Darktable";
       text = toINI {} {
         Context = {
           filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;";

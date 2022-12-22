@@ -76,8 +76,8 @@ let inherit (lib) mkIf hm elem; in
       alien-media = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
         snapshots = [
-          "${config.home.homeDirectory}/videos"
-          "${config.xdg.configHome}/darktable"
+          "${config.home.homeDirectory}/.var/app/org.darktable.Darktable/config/darktable"
+          config.xdg.userDirs.videos
           config.xdg.userDirs.music
           config.xdg.userDirs.pictures
         ];
