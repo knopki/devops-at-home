@@ -164,6 +164,8 @@ in
     ../../../users/sk
   ];
 
+  environment.systemPackages = [ pkgs.tailscale ];
+
   networking = {
     hostId = "ff0b9d65";
     hosts = {
@@ -229,6 +231,8 @@ in
       };
       startWhenNeeded = true;
     };
+
+    tailscale.enable = true;
 
     zerotierone = {
       enable = true;
