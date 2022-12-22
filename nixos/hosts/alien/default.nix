@@ -16,6 +16,7 @@ let
     "org.kde.KStyle.Kvantum//5.15-21.08"
     "org.kde.KStyle.Kvantum//5.15-22.08"
     "org.kde.krita"
+    "org.remmina.Remmina"
     "org.telegram.desktop"
   ];
   flatpak_overrides = map (x: writeTextDir x.name x.text) [

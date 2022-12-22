@@ -52,16 +52,16 @@ let inherit (lib) mkIf hm elem; in
         snapshots = [
           "${config.home.homeDirectory}/.gnupg"
           "${config.home.homeDirectory}/.kube/config"
-          "${config.xdg.configHome}/Bitwarden/data.json"
+          "${config.home.homeDirectory}/.var/app/org.remmina.Remmina/config/remmina"
+          "${config.home.homeDirectory}/.var/app/org.remmina.Remmina/data/remmina"
           "${config.xdg.configHome}/Bitwarden CLI/data.json"
-          "${config.xdg.configHome}/gcloud"
-          "${config.xdg.configHome}/remmina"
-          "${config.xdg.configHome}/teamviewer"
+          "${config.xdg.configHome}/Bitwarden/data.json"
           "${config.xdg.configHome}/cachix"
+          "${config.xdg.configHome}/gcloud"
+          "${config.xdg.configHome}/teamviewer"
           "${config.xdg.dataHome}/fish/fish_history"
           "${config.xdg.dataHome}/keyrings"
           "${config.xdg.dataHome}/password-store"
-          "${config.xdg.dataHome}/remmina"
         ];
       };
       alien-docs = mkIf (nixosConfig.networking.hostName == "alien") {
