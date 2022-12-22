@@ -120,7 +120,12 @@ in
       };
       "flatpak/overrides/org.kde.krita".text = toINI {} {
         Context = {
-          filesystems = "!home;xdg-desktop;xdg-pictures;xdg-downloads;";
+          filesystems = "!host;xdg-desktop;xdg-download;xdg-pictures;";
+        };
+      };
+      "flatpak/overrides/org.inkscape.Inkscape".text = toINI {} {
+        Context = {
+          filesystems = "!host;xdg-desktop;xdg-download;xdg-pictures;";
         };
       };
     };

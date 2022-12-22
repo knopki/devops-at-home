@@ -109,16 +109,17 @@ in
       script =
         let
           flathub_apps = [
+            "com.github.tchx84.Flatseal"
+            "com.logseq.Logseq"
+            "com.usebottles.bottles"
+            "md.obsidian.Obsidian"
             "org.gtk.Gtk3theme.Arc-Dark"
+            "org.inkscape.Inkscape"
             "org.kde.KStyle.Kvantum//5.15"
             "org.kde.KStyle.Kvantum//5.15-21.08"
             "org.kde.KStyle.Kvantum//5.15-22.08"
-            "com.github.tchx84.Flatseal"
-            "org.telegram.desktop"
-            "com.logseq.Logseq"
-            "com.usebottles.bottles"
             "org.kde.krita"
-            "md.obsidian.Obsidian"
+            "org.telegram.desktop"
           ];
           flathub_cmd = concatStringsSep "\n"
             (map
