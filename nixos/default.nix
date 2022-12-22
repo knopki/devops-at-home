@@ -43,7 +43,6 @@ in
         downloaders
         image-editors
         image-viewers
-        music
         office
         passwords
         remote
@@ -70,7 +69,7 @@ in
         fonts
         misc.earlyoom
         security.disable-mitigations
-      ] ++ (with programs; [ downloaders image-viewers video-player music web ]);
+      ] ++ (with programs; [ downloaders image-viewers video-player web ]);
     };
   };
 }

@@ -7,6 +7,7 @@ let
   flathub_apps = [
     "com.github.tchx84.Flatseal"
     "com.logseq.Logseq"
+    "com.spotify.Client"
     "com.usebottles.bottles"
     "md.obsidian.Obsidian"
     "org.gtk.Gtk3theme.Arc-Dark"
@@ -55,6 +56,14 @@ let
       text = toINI {} {
         Context = {
           filesystems = "xdg-desktop;xdg-download;xdg-pictures;";
+        };
+      };
+    }
+    {
+      name = "com.spotify.Client";
+      text = toINI {} {
+        Context = {
+          filesystems = "!xdg-pictures;";
         };
       };
     }
