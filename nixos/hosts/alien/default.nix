@@ -17,6 +17,7 @@ let
     "com.usebottles.bottles"
     "md.obsidian.Obsidian"
     "net.ankiweb.Anki"
+    "org.briarproject.Briar"
     "org.gtk.Gtk3theme.Arc-Dark"
     "org.inkscape.Inkscape"
     "org.kde.KStyle.Kvantum//5.15"
