@@ -40,7 +40,6 @@ in
       ] ++ (with programs; [
         cryptowallets
         downloaders
-        image-editors
         image-viewers
         office
         passwords
