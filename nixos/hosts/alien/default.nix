@@ -12,6 +12,7 @@ let
     "com.github.AlizaMedicalImaging.AlizaMS"
     "com.github.tchx84.Flatseal"
     "com.logseq.Logseq"
+    "com.obsproject.Studio"
     "com.skype.Client"
     "com.spotify.Client"
     "com.usebottles.bottles"
@@ -131,6 +132,14 @@ let
     }
     {
       name = "org.kde.kdenlive";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;";
+        };
+      };
+    }
+    {
+      name = "com.obsproject.Studio";
       text = toINI {} {
         Context = {
           filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;";

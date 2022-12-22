@@ -45,7 +45,6 @@ in
         office
         passwords
         remote
-        video-editor
         video-player
         web
       ]);
