@@ -6,6 +6,7 @@ let
   defaultSopsFile = { format = "yaml"; sopsFile = ./secrets.yaml; };
   flathub_apps = [
     "chat.delta.desktop"
+    "com.bitwarden.desktop"
     "com.discordapp.Discord"
     "com.github.tchx84.Flatseal"
     "com.logseq.Logseq"

@@ -52,10 +52,10 @@ let inherit (lib) mkIf hm elem; in
         snapshots = [
           "${config.home.homeDirectory}/.gnupg"
           "${config.home.homeDirectory}/.kube/config"
+          "${config.home.homeDirectory}/.var/app/com.bitwarden.desktop/config/Bitwarden CLI/data.json"
+          "${config.home.homeDirectory}/.var/app/com.bitwarden.desktop/config/Bitwarden/data.json"
           "${config.home.homeDirectory}/.var/app/org.remmina.Remmina/config/remmina"
           "${config.home.homeDirectory}/.var/app/org.remmina.Remmina/data/remmina"
-          "${config.xdg.configHome}/Bitwarden CLI/data.json"
-          "${config.xdg.configHome}/Bitwarden/data.json"
           "${config.xdg.configHome}/cachix"
           "${config.xdg.configHome}/gcloud"
           "${config.xdg.configHome}/teamviewer"
