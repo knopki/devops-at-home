@@ -1,7 +1,6 @@
 { config, options, lib, pkgs, ... }:
 let
   inherit (lib) mkDefault mkIf mkMerge optionals;
-  inherit (lib.generators) toINI;
   cfg = config.users.users.sk;
   selfHM = config.home-manager.users.sk;
   isWorkstation = config.meta.suites.workstation;
@@ -106,28 +105,5 @@ in
       "e ${selfHM.xdg.userDirs.download} - - - 30d"
       "e ${selfHM.xdg.userDirs.pictures}/screenshots - - - 30d"
     ];
-
-    xdg.dataFile = {
-      "flatpak/overrides/com.logseq.Logseq".text = toINI {} {
-        Context = {
-          filesystems = "!home;xdg-config/Logseq;xdg-documents/personal;~/.logseq;";
-        };
-      };
-      "flatpak/overrides/com.usebottles.bottles".text = toINI {} {
-        Context = {
-          filesystems = "xdg-data/applications;";
-        };
-      };
-      "flatpak/overrides/org.kde.krita".text = toINI {} {
-        Context = {
-          filesystems = "!host;xdg-desktop;xdg-download;xdg-pictures;";
-        };
-      };
-      "flatpak/overrides/org.inkscape.Inkscape".text = toINI {} {
-        Context = {
-          filesystems = "!host;xdg-desktop;xdg-download;xdg-pictures;";
-        };
-      };
-    };
   };
 }

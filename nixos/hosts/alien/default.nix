@@ -1,7 +1,64 @@
 { config, suites, lib, pkgs, ... }:
 let
-  inherit (lib) concatStringsSep;
+  inherit (lib) concatStringsSep stringAfter;
+  inherit (lib.generators) toINI;
+  inherit (pkgs) writeTextDir;
   defaultSopsFile = { format = "yaml"; sopsFile = ./secrets.yaml; };
+  flathub_apps = [
+    "com.github.tchx84.Flatseal"
+    "com.logseq.Logseq"
+    "com.usebottles.bottles"
+    "md.obsidian.Obsidian"
+    "org.gtk.Gtk3theme.Arc-Dark"
+    "org.inkscape.Inkscape"
+    "org.kde.KStyle.Kvantum//5.15"
+    "org.kde.KStyle.Kvantum//5.15-21.08"
+    "org.kde.KStyle.Kvantum//5.15-22.08"
+    "org.kde.krita"
+    "org.telegram.desktop"
+  ];
+  flatpak_overrides = map (x: writeTextDir x.name x.text) [
+    {
+      name = "global";
+      text = toINI {} {
+        Context = {
+          filesystems = "!host;!home;";
+        };
+      };
+    }
+    {
+      name = "com.logseq.Logseq";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-config/Logseq;xdg-documents;home/.logseq;";
+        };
+      };
+    }
+    {
+      name = "com.usebottles.bottles";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-data/applications;";
+        };
+      };
+    }
+    {
+      name = "org.kde.krita";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-desktop;xdg-download;xdg-pictures;";
+        };
+      };
+    }
+    {
+      name = "org.inkscape.Inkscape";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-desktop;xdg-download;xdg-pictures;";
+        };
+      };
+    }
+  ];
 in
 {
   imports = suites.devbox ++ suites.mobile ++ suites.gamestation ++ [
@@ -91,6 +148,13 @@ in
 
   system.stateVersion = "20.09";
 
+  system.activationScripts.makeFlatpakOverrides = stringAfter [ "var" ] ''
+    mkdir -p /var/lib/flatpak/overrides
+    ${pkgs.findutils}/bin/find /var/lib/flatpak/overrides -mindepth 1 -delete
+    ${concatStringsSep "\n"
+      (map (x: "cp -f ${x}/* /var/lib/flatpak/overrides/") flatpak_overrides)}
+  '';
+
   systemd = {
     network.wait-online = {
       anyInterface = true;
@@ -108,19 +172,6 @@ in
       };
       script =
         let
-          flathub_apps = [
-            "com.github.tchx84.Flatseal"
-            "com.logseq.Logseq"
-            "com.usebottles.bottles"
-            "md.obsidian.Obsidian"
-            "org.gtk.Gtk3theme.Arc-Dark"
-            "org.inkscape.Inkscape"
-            "org.kde.KStyle.Kvantum//5.15"
-            "org.kde.KStyle.Kvantum//5.15-21.08"
-            "org.kde.KStyle.Kvantum//5.15-22.08"
-            "org.kde.krita"
-            "org.telegram.desktop"
-          ];
           flathub_cmd = concatStringsSep "\n"
             (map
               (x: "${pkgs.flatpak}/bin/flatpak install flathub ${x} -y --noninteractive")
@@ -129,7 +180,6 @@ in
         ''
           # add repos
           ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
           ${flathub_cmd}
         '';
     };
