@@ -85,7 +85,7 @@ let inherit (lib) mkIf hm elem; in
       alien-anki = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = { OnCalendar = "weekly"; RandomizedDelaySec = "24h"; };
         snapshots = [
-          "${config.xdg.dataHome}/Anki2"
+          "${config.home.homeDirectory}/.var/app/net.ankiweb.Anki/data"
         ];
       };
       alien-random-conf = mkIf (nixosConfig.networking.hostName == "alien") {

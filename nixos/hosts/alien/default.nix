@@ -14,6 +14,7 @@ let
     "com.spotify.Client"
     "com.usebottles.bottles"
     "md.obsidian.Obsidian"
+    "net.ankiweb.Anki"
     "org.gtk.Gtk3theme.Arc-Dark"
     "org.inkscape.Inkscape"
     "org.kde.KStyle.Kvantum//5.15"
