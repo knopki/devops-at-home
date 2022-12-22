@@ -24,6 +24,7 @@ let
     "org.kde.KStyle.Kvantum//5.15"
     "org.kde.KStyle.Kvantum//5.15-21.08"
     "org.kde.KStyle.Kvantum//5.15-22.08"
+    "org.kde.kdenlive"
     "org.kde.krita"
     "org.libreoffice.LibreOffice"
     "org.musicbrainz.Picard"
@@ -125,6 +126,14 @@ let
       text = toINI {} {
         Context = {
           filesystems = "xdg-desktop;xdg-documents;xdg-download;";
+        };
+      };
+    }
+    {
+      name = "org.kde.kdenlive";
+      text = toINI {} {
+        Context = {
+          filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;";
         };
       };
     }
