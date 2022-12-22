@@ -11,6 +11,7 @@ let
     "com.github.AlizaMedicalImaging.AlizaMS"
     "com.github.tchx84.Flatseal"
     "com.logseq.Logseq"
+    "com.skype.Client"
     "com.spotify.Client"
     "com.usebottles.bottles"
     "md.obsidian.Obsidian"
@@ -86,6 +87,14 @@ let
       text = toINI {} {
         Context = {
           filesystems = "xdg-documents;";
+        };
+      };
+    }
+    {
+      name = "com.skype.Client";
+      text = toINI {} {
+        Context = {
+          filesystems = "!xdg-documents;!xdg-music;!xdg-pictures;!xdg-videos;";
         };
       };
     }
