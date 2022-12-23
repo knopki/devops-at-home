@@ -166,11 +166,6 @@ in
           toggle_window_floating = [ "Meta+F" "Meta+F" "Toggle Active Window Floating" ];
         };
 
-        lattedock = listToAttrs (map
-          (x:
-            let name = "activate entry ${toString (if x == 0 then 10 else x)}"; in
-            { inherit name; value = [ "none" "Meta+${toString x}" name ]; }) [ 0 1 2 3 4 5 6 7 8 9 ]);
-
         plasmashell = listToAttrs (map
           (x:
             let name = "activate task manager entry ${toString (if x == 0 then 10 else x)}"; in
@@ -187,17 +182,6 @@ in
           types = 1;
         };
       };
-
-      lattedockrc = {
-        UniversalSettings = {
-          canDisableBorders = true;
-          inAdvancedModeForEditSettings = true;
-          metaPressAndHoldEnabled = true;
-          unifiedGlobalShortcuts = false;
-          singleModeLayoutName = "Main";
-          contextMenuActionsAlwaysShown = [ "_layouts" "_preferences" "_add_latte_widgets" ];
-        };
-      };
     };
   };
 
@@ -207,22 +191,7 @@ in
     force = true;
   };
 
-  # latte dock layout
-  xdg.configFile."latte/Main.layout.latte" = {
-    text = builtins.readFile ./Main.layout.latte;
-    force = true;
-    onChange = ''
-      ${pkgs.gnused}/bin/sed -i ';' ${config.xdg.configHome}/latte/Main.layout.latte
-    '';
-  };
-
-  # autostart latte dock
-  xdg.configFile."autostart/org.kde.latte-dock.desktop".source =
-    "${pkgs.latte-dock}/etc/xdg/autostart/org.kde.latte-dock.desktop";
-
   # enable kwin scripts
-  xdg.dataFile."kservices5/kwinscript-window-colors.desktop".source =
-    "${pkgs.kwinscript-window-colors}/share/kservices5/kwinscript-window-colors.desktop";
   xdg.dataFile."kservices5/bismuth.desktop".source =
     "${pkgs.plasma5Packages.bismuth}/share/kservices5/bismuth.desktop";
 }

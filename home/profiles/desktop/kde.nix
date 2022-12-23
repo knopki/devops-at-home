@@ -11,7 +11,6 @@ in
     with kdeFrameworks;
     [
       bismuth
-      kwinscript-window-colors
       plasma-applet-caffeine-plus
       plasma-applet-virtual-desktop-bar
     ];

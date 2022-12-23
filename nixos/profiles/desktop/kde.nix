@@ -25,7 +25,6 @@ in
     [
       ark
       krename
-      latte-dock
       qt5.qttools
     ];
 
