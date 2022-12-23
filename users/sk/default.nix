@@ -68,7 +68,6 @@ in
       du-dust
     ] ++ optionals isWorkstation [
       feh
-      ffmpeg
     ];
 
     theme = {
