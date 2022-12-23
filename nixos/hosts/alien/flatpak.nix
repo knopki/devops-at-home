@@ -34,6 +34,7 @@ let
     "org.musicbrainz.Picard"
     "org.remmina.Remmina"
     "org.telegram.desktop"
+    "org.videolan.VLC"
     "us.zoom.Zoom"
   ];
   flatpak_overrides = map (x: writeTextDir x.name x.text) [
@@ -209,7 +210,7 @@ let
         Context = {
           sockets = "x11;wayland;";
           shared = "network;ipc;";
-          devices = "all;";
+          devices = "dri;all;";
           filesystems = "host:ro;xdg-download;xdg-pictures;xdg-videos;/media:ro;/run/media:ro;/tmp;";
         };
       };
@@ -352,6 +353,20 @@ let
       };
     }
     {
+      name = "org.videolan.VLC";
+      text = toINI { } {
+        Context = {
+          sockets = "x11;";
+          shared = "network;ipc;";
+          devices = "dri;all;";
+          filesystems = "host:ro;xdg-download;xdg-pictures;xdg-videos;/media:ro;/run/media:ro;/tmp;";
+        };
+        "System Bus Policy" = {
+          "org.freedesktop.secrets" = "talk";
+        };
+      };
+    }
+    {
       name = "us.zoom.Zoom";
       text = toINI { } {
         Context = {
@@ -368,6 +383,7 @@ in
 {
   environment.shellAliases = {
     mpv = "io.mpv.Mpv";
+    vlc = "org.videolan.VLC";
   };
 
   system.activationScripts.makeFlatpakOverrides = stringAfter [ "var" ] ''
