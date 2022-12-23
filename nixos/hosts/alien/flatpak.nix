@@ -32,6 +32,7 @@ let
     "org.kde.krita"
     "org.libreoffice.LibreOffice"
     "org.musicbrainz.Picard"
+    "org.qbittorrent.qBittorrent"
     "org.remmina.Remmina"
     "org.telegram.desktop"
     "org.videolan.VLC"
@@ -328,12 +329,23 @@ let
       };
     }
     {
+      name = "org.qbittorrent.qBittorrent";
+      text = toINI { } {
+        Context = {
+          sockets = "wayland;fallback-x11;";
+          shared = "network;ipc;";
+          devices = "dri;";
+          filesystems = "xdg-download;/media;/run/media;";
+        };
+      };
+    }
+    {
       name = "org.remmina.Remmina";
       text = toINI { } {
         Context = {
           sockets = "x11;wayland;fallback-x11;ssh-auth;pcsc;cups;";
           shared = "network;ipc;";
-          devices = "all;";
+          devices = "dri;all;";
           filesystems = "xdg-download;";
         };
         "System Bus Policy" = {
