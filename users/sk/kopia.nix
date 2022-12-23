@@ -24,10 +24,8 @@ let inherit (lib) mkIf hm elem; in
       alien-logseq = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = { OnCalendar = "*:0/10"; RandomizedDelaySec = "5m"; };
         snapshots = [
-          "${config.home.homeDirectory}/.logseq"
+          "${config.home.homeDirectory}/.var/app/com.logseq.Logseq/.logseq"
           "${config.home.homeDirectory}/org"
-          "${config.xdg.configHome}/Logseq/Preferences"
-          "${config.xdg.configHome}/Logseq/configs.edn"
           "${config.xdg.userDirs.documents}/personal"
         ];
       };

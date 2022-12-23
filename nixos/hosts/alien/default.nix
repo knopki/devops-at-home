@@ -1,166 +1,11 @@
 { config, suites, lib, pkgs, ... }:
 let
-  inherit (lib) concatStringsSep stringAfter;
-  inherit (lib.generators) toINI;
-  inherit (pkgs) writeTextDir;
   defaultSopsFile = { format = "yaml"; sopsFile = ./secrets.yaml; };
-  flathub_apps = [
-    "chat.delta.desktop"
-    "chat.rocket.RocketChat"
-    "com.bitwarden.desktop"
-    "com.discordapp.Discord"
-    "com.github.AlizaMedicalImaging.AlizaMS"
-    "com.github.tchx84.Flatseal"
-    "com.logseq.Logseq"
-    "com.obsproject.Studio"
-    "com.skype.Client"
-    "com.spotify.Client"
-    "com.usebottles.bottles"
-    "im.riot.Riot"
-    "md.obsidian.Obsidian"
-    "net.ankiweb.Anki"
-    "org.briarproject.Briar"
-    "org.darktable.Darktable"
-    "org.gtk.Gtk3theme.Arc-Dark"
-    "org.inkscape.Inkscape"
-    "org.kde.KStyle.Kvantum//5.15"
-    "org.kde.KStyle.Kvantum//5.15-21.08"
-    "org.kde.KStyle.Kvantum//5.15-22.08"
-    "org.kde.digikam"
-    "org.kde.kdenlive"
-    "org.kde.krita"
-    "org.libreoffice.LibreOffice"
-    "org.musicbrainz.Picard"
-    "org.remmina.Remmina"
-    "org.telegram.desktop"
-    "us.zoom.Zoom"
-  ];
-  flatpak_overrides = map (x: writeTextDir x.name x.text) [
-    {
-      name = "global";
-      text = toINI {} {
-        Context = {
-          filesystems = "!host;!home;";
-        };
-      };
-    }
-    {
-      name = "com.logseq.Logseq";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-config/Logseq;xdg-documents;home/.logseq;";
-        };
-      };
-    }
-    {
-      name = "com.usebottles.bottles";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-data/applications;";
-        };
-      };
-    }
-    {
-      name = "org.kde.krita";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-desktop;xdg-download;xdg-pictures;";
-        };
-      };
-    }
-    {
-      name = "org.inkscape.Inkscape";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-desktop;xdg-download;xdg-pictures;";
-        };
-      };
-    }
-    {
-      name = "com.spotify.Client";
-      text = toINI {} {
-        Context = {
-          filesystems = "!xdg-pictures;";
-        };
-      };
-    }
-    {
-      name = "com.discordapp.Discord";
-      text = toINI {} {
-        Context = {
-          filesystems = "!xdg-pictures;";
-        };
-      };
-    }
-    {
-      name = "com.github.AlizaMedicalImaging.AlizaMS";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-documents;";
-        };
-      };
-    }
-    {
-      name = "com.skype.Client";
-      text = toINI {} {
-        Context = {
-          filesystems = "!xdg-documents;!xdg-music;!xdg-pictures;!xdg-videos;";
-        };
-      };
-    }
-    {
-      name = "chat.rocket.RocketChat";
-      text = toINI {} {
-        Context = {
-          filesystems = "!xdg-documents;!xdg-pictures;";
-        };
-      };
-    }
-    {
-      name = "im.riot.Riot";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-download;";
-        };
-      };
-    }
-    {
-      name = "org.libreoffice.LibreOffice";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-desktop;xdg-documents;xdg-download;";
-        };
-      };
-    }
-    {
-      name = "org.kde.kdenlive";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;";
-        };
-      };
-    }
-    {
-      name = "com.obsproject.Studio";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;";
-        };
-      };
-    }
-    {
-      name = "org.darktable.Darktable";
-      text = toINI {} {
-        Context = {
-          filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;";
-        };
-      };
-    }
-  ];
 in
 {
   imports = suites.devbox ++ suites.mobile ++ suites.gamestation ++ [
     ./hardware-config.nix
+    ./flatpak.nix
     ../../../users/sk
   ];
 
@@ -250,50 +95,10 @@ in
 
   system.stateVersion = "20.09";
 
-  system.activationScripts.makeFlatpakOverrides = stringAfter [ "var" ] ''
-    mkdir -p /var/lib/flatpak/overrides
-    ${pkgs.findutils}/bin/find /var/lib/flatpak/overrides -mindepth 1 -delete
-    ${concatStringsSep "\n"
-      (map (x: "cp -f ${x}/* /var/lib/flatpak/overrides/") flatpak_overrides)}
-  '';
-
   systemd = {
     network.wait-online = {
       anyInterface = true;
       extraArgs = [ "-i" "enp59s0" "-i" "wlp60s0" ];
-    };
-
-    services.flatpak-setup = {
-      description = "Setup system Flatpak";
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
-      wantedBy = [ "graphical.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = "yes";
-      };
-      script =
-        let
-          flathub_cmd = concatStringsSep "\n"
-            (map
-              (x: "${pkgs.flatpak}/bin/flatpak install flathub ${x} -y --noninteractive")
-              flathub_apps);
-        in
-        ''
-          # add repos
-          ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          ${flathub_cmd}
-          ${pkgs.flatpak}/bin/flatpak uninstall --system --unused -y --noninteractive
-
-          # discord/openasar
-          DISCOSAR=/var/lib/flatpak/app/com.discordapp.Discord/current/active/files/discord/resources/app.asar
-          if [ -f "$DISCOSAR" ]; then
-            DISCOSARSIZE=$(stat -c%s "$DISCOSAR")
-            if (( DISCOSARSIZE > 1000000 )); then
-              ${pkgs.curl}/bin/curl https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar > "$DISCOSAR"
-            fi
-          fi
-        '';
     };
   };
 
