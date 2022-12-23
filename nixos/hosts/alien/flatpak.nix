@@ -16,11 +16,12 @@ let
     "com.spotify.Client"
     "com.usebottles.bottles"
     "im.riot.Riot"
+    "io.mpv.Mpv"
     "md.obsidian.Obsidian"
-    "org.freedesktop.Sdk.Extension.texlive//22.08" # required by pandoc in obsidian
     "net.ankiweb.Anki"
     "org.briarproject.Briar"
     "org.darktable.Darktable"
+    "org.freedesktop.Sdk.Extension.texlive//22.08" # required by pandoc in obsidian
     "org.gtk.Gtk3theme.Arc-Dark"
     "org.inkscape.Inkscape"
     "org.kde.KStyle.Kvantum//5.15"
@@ -203,6 +204,17 @@ let
       };
     }
     {
+      name = "io.mpv.Mpv";
+      text = toINI { } {
+        Context = {
+          sockets = "x11;wayland;";
+          shared = "network;ipc;";
+          devices = "all;";
+          filesystems = "host:ro;xdg-download;xdg-pictures;xdg-videos;/media:ro;/run/media:ro;/tmp;";
+        };
+      };
+    }
+    {
       name = "md.obsidian.Obsidian";
       text = toINI { } {
         Context = {
@@ -354,6 +366,10 @@ let
   ];
 in
 {
+  environment.shellAliases = {
+    mpv = "io.mpv.Mpv";
+  };
+
   system.activationScripts.makeFlatpakOverrides = stringAfter [ "var" ] ''
     mkdir -p /var/lib/flatpak/overrides
     ${pkgs.findutils}/bin/find /var/lib/flatpak/overrides -mindepth 1 -delete
