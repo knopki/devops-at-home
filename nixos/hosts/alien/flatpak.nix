@@ -2,7 +2,7 @@
 let
   inherit (lib) concatStringsSep stringAfter;
   inherit (lib.generators) toINI;
-  inherit (pkgs) writeTextDir;
+  inherit (pkgs) writeTextDir symlinkJoin;
   flathub_apps = [
     "chat.delta.desktop"
     "chat.rocket.RocketChat"
@@ -43,11 +43,49 @@ let
       name = "global";
       text = toINI { } {
         Context = {
-          sockets = "!x11;!fallback-x11;!wayland;!cups;!gpg-agent;!pcsc;!ssh-auth;!session-bus;!system-bus;";
+          sockets = concatStringsSep ";" [
+            "!x11"
+            "!fallback-x11"
+            "!wayland"
+            "!cups"
+            "!gpg-agent"
+            "!pcsc"
+            "!ssh-auth"
+            "!session-bus"
+            "!system-bus"
+            ""
+          ];
           shared = "!ipc;!network;";
           features = "!bluetooth;!devel;!multiarch;!canbus;!per-app-dev-shm;";
           devices = "!dri;!kvm;!shm;!all;";
-          filesystems = "!host;!host-etc;!host-os;!home;!xdg-desktop;!xdg-documents;!xdg-download;!xdg-music;!xdg-pictures;!xdg-public-share;!xdg-videos;!xdg-templates;!xdg-config;!xdg-cache;!xdg-data;!xdg-run/keyring;!/media;!/run/media;!/tmp";
+          filesystems = concatStringsSep ";" [
+            "!host"
+            "!host-etc"
+            "!host-os"
+            "!home"
+            "!xdg-cache"
+            "!xdg-config"
+            "!xdg-data"
+            "!xdg-desktop"
+            "!xdg-documents"
+            "!xdg-download"
+            "!xdg-music"
+            "!xdg-pictures"
+            "!xdg-public-share"
+            "!xdg-templates"
+            "!xdg-videos"
+            "!xdg-run/keyring"
+            "!/media"
+            "!/run/media"
+            "!/tmp"
+            "xdg-config/Kvantum:ro"
+            "xdg-config/gtk-3.0:ro"
+            "xdg-config/gtk-4.0:ro"
+            ""
+          ];
+        };
+        Environment = {
+          QT_STYLE_OVERRIDE = "kvantum";
         };
         "System Bus Policy" = {
           "org.freedesktop.Accounts" = "none";
@@ -124,7 +162,12 @@ let
           shared = "ipc;";
           sockets = "wayland;fallback-x11;";
           devices = "dri;";
-          filesystems = "xdg-data/flatpak/overrides:create;/var/lib/flatpak/app:ro;xdg-data/flatpak/app:ro;";
+          filesystems = concatStringsSep ";" [
+            "xdg-data/flatpak/overrides:create"
+            "xdg-data/flatpak/app:ro"
+            "/var/lib/flatpak/app:ro"
+            ""
+          ];
         };
         "System Bus Policy" = {
           "org.freedesktop.impl.portal.PermissionStore" = "talk";
@@ -212,7 +255,16 @@ let
           sockets = "x11;wayland;";
           shared = "network;ipc;";
           devices = "dri;all;";
-          filesystems = "host:ro;xdg-download;xdg-pictures;xdg-videos;/media:ro;/run/media:ro;/tmp;";
+          filesystems = concatStringsSep ";" [
+            "host:ro"
+            "xdg-download"
+            "xdg-pictures"
+            "xdg-videos"
+            "/media:ro"
+            "/run/media:ro"
+            "/tmp"
+            ""
+          ];
         };
       };
     }
@@ -257,7 +309,14 @@ let
         Context = {
           sockets = "x11;wayland;";
           shared = "ipc;";
-          filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;/media;/run/media;";
+          filesystems = concatStringsSep ";" [
+            "xdg-desktop"
+            "xdg-download"
+            "xdg-pictures"
+            "xdg-videos"
+            "/media"
+            "/run/media"
+          ];
         };
         "System Bus Policy" = {
           "org.freedesktop.secrets" = "talk";
@@ -281,7 +340,14 @@ let
           sockets = "x11;wayland;fallback-x11;cups;";
           shared = "ipc;";
           devices = "dri;";
-          filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;/media;/run/media;";
+          filesystems = concatStringsSep ";" [
+            "xdg-desktop"
+            "xdg-download"
+            "xdg-pictures"
+            "xdg-videos"
+            "/media"
+            "/run/media"
+          ];
         };
       };
     }
@@ -292,7 +358,14 @@ let
           sockets = "x11;wayland;";
           shared = "ipc;";
           devices = "dri;";
-          filesystems = "xdg-desktop;xdg-download;xdg-pictures;xdg-videos;/media;/run/media;";
+          filesystems = concatStringsSep ";" [
+            "xdg-desktop"
+            "xdg-download"
+            "xdg-pictures"
+            "xdg-videos"
+            "/media"
+            "/run/media"
+          ];
         };
       };
     }
@@ -371,7 +444,15 @@ let
           sockets = "x11;";
           shared = "network;ipc;";
           devices = "dri;all;";
-          filesystems = "host:ro;xdg-download;xdg-pictures;xdg-videos;/media:ro;/run/media:ro;/tmp;";
+          filesystems = concatStringsSep ";" [
+            "host:ro"
+            "xdg-download"
+            "xdg-pictures"
+            "xdg-videos"
+            "/media:ro"
+            "/run/media:ro"
+            "/tmp"
+          ];
         };
         "System Bus Policy" = {
           "org.freedesktop.secrets" = "talk";
@@ -391,6 +472,10 @@ let
       };
     }
   ];
+  flatpak_all_overrides = symlinkJoin {
+    name = "flatpak_overrides";
+    paths = flatpak_overrides;
+  };
 in
 {
   environment.shellAliases = {
@@ -400,10 +485,9 @@ in
   };
 
   system.activationScripts.makeFlatpakOverrides = stringAfter [ "var" ] ''
-    mkdir -p /var/lib/flatpak/overrides
-    ${pkgs.findutils}/bin/find /var/lib/flatpak/overrides -mindepth 1 -delete
-    ${concatStringsSep "\n"
-      (map (x: "cp -f ${x}/* /var/lib/flatpak/overrides/") flatpak_overrides)}
+    mkdir -p /var/lib/flatpak
+    rm -rf /var/lib/flatpak/overrides
+    ln -s ${flatpak_all_overrides} /var/lib/flatpak/overrides
   '';
 
   systemd = {
