@@ -20,7 +20,7 @@ let
     Settings = {
       gtk-font-name = config.gtk.font.name;
       gtk-application-prefer-dark-theme = config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme;
-      gtk-icon-theme = config.gtk.iconTheme.name;
+      gtk-icon-theme-name = config.gtk.iconTheme.name;
       gtk-theme-name = config.gtk.theme.name;
     };
   };
