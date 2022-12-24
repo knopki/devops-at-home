@@ -32,6 +32,7 @@ let
     "org.kde.gwenview"
     "org.kde.kdenlive"
     "org.kde.krita"
+    "org.kde.okular"
     "org.keepassxc.KeePassXC"
     "org.libreoffice.LibreOffice"
     "org.musicbrainz.Picard"
@@ -411,6 +412,24 @@ let
           shared = "ipc;";
           devices = "dri;";
           filesystems = "xdg-desktop;xdg-download;xdg-pictures;";
+        };
+      };
+    }
+    {
+      name = "org.kde.okular";
+      text = toINI { } {
+        Context = {
+          sockets = "x11;wayland;fallback-x11;cups;";
+          shared = "ipc;";
+          devices = "dri;";
+          filesystems = concatStringsSep ";" [
+            "home:ro"
+            "xdg-desktop"
+            "xdg-documents"
+            "xdg-download"
+            "/media"
+            "/run/media"
+          ];
         };
       };
     }

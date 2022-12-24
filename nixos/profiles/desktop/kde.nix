@@ -51,7 +51,13 @@ in
     desktopManager.plasma5 = {
       enable = true;
       runUsingSystemd = true;
-      excludePackages = with pkgs; [ gwenview ];
+      excludePackages =
+        with pkgs;
+        with plasma5Packages;
+        with plasma5;
+        with kdeApplications;
+        with kdeFrameworks;
+        [ gwenview okular ];
     };
   };
 
