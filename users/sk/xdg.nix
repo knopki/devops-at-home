@@ -15,7 +15,7 @@ in
         defaultApplications = {
           "application/epub+zip" = [ "org.pwmt.zathura.desktop" ];
           "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-          "x-scheme-handler/mailto" = "thunderbird.desktop";
+          "x-scheme-handler/file" = [ "org.kde.dolphin.desktop" ];
         } // (listToAttrs (map (x: nameValuePair x [ "org.kde.gwenview.desktop" ]) [
           "image/bmp"
           "image/gif"
