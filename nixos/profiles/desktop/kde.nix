@@ -51,6 +51,7 @@ in
     desktopManager.plasma5 = {
       enable = true;
       runUsingSystemd = true;
+      excludePackages = with pkgs; [ gwenview ];
     };
   };
 

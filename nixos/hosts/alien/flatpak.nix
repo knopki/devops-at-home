@@ -29,6 +29,7 @@ let
     "org.kde.KStyle.Kvantum//5.15-22.08"
     "org.kde.ark"
     "org.kde.digikam"
+    "org.kde.gwenview"
     "org.kde.kdenlive"
     "org.kde.krita"
     "org.libreoffice.LibreOffice"
@@ -364,6 +365,21 @@ let
             "xdg-videos"
             "/media"
             "/run/media"
+          ];
+        };
+      };
+    }
+    {
+      name = "org.kde.gwenview";
+      text = toINI { } {
+        Context = {
+          sockets = "x11;wayland;fallback-x11;";
+          shared = "ipc;";
+          devices = "dri;";
+          filesystems = concatStringsSep ";" [
+            "home:ro"
+            "/media:ro"
+            "/run/media:ro"
           ];
         };
       };
