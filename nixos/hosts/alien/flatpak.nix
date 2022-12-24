@@ -514,6 +514,7 @@ in
           ${pkgs.flatpak}/bin/flatpak uninstall --system --unused -y --noninteractive
 
           # discord/openasar
+          ${pkgs.flatpak}/bin/flatpak mask --system com.discordapp.Discord
           DISCOSAR=/var/lib/flatpak/app/com.discordapp.Discord/current/active/files/discord/resources/app.asar
           if [ -f "$DISCOSAR" ]; then
             DISCOSARSIZE=$(stat -c%s "$DISCOSAR")
