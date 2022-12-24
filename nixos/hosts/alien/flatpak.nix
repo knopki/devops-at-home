@@ -508,6 +508,7 @@ in
               flathub_apps);
         in
         ''
+          ${pkgs.flatpak}/bin/flatpak config --system --set languages "en;ru"
           # add repos
           ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           ${flathub_cmd}
