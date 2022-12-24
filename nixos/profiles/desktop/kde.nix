@@ -23,7 +23,6 @@ in
     with kdeApplications;
     with kdeFrameworks;
     [
-      ark
       krename
       qt5.qttools
     ];

@@ -27,6 +27,7 @@ let
     "org.kde.KStyle.Kvantum//5.15"
     "org.kde.KStyle.Kvantum//5.15-21.08"
     "org.kde.KStyle.Kvantum//5.15-22.08"
+    "org.kde.ark"
     "org.kde.digikam"
     "org.kde.kdenlive"
     "org.kde.krita"
@@ -79,6 +80,7 @@ let
             "!/run/media"
             "!/tmp"
             "xdg-config/Kvantum:ro"
+            "xdg-config/kdeglobals:ro"
             "xdg-config/gtk-3.0:ro"
             "xdg-config/gtk-4.0:ro"
             ""
@@ -330,6 +332,21 @@ let
           sockets = "x11;wayland;";
           shared = "ipc;";
           filesystems = "xdg-desktop;xdg-download;xdg-pictures;";
+        };
+      };
+    }
+    {
+      name = "org.kde.ark";
+      text = toINI { } {
+        Context = {
+          sockets = "x11;wayland;";
+          shared = "ipc;";
+          devices = "dri;";
+          filesystems = concatStringsSep ";" [
+            "home"
+            "/media"
+            "/run/media"
+          ];
         };
       };
     }
