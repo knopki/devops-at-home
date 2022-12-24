@@ -32,6 +32,7 @@ let
     "org.kde.gwenview"
     "org.kde.kdenlive"
     "org.kde.krita"
+    "org.keepassxc.KeePassXC"
     "org.libreoffice.LibreOffice"
     "org.musicbrainz.Picard"
     "org.qbittorrent.qBittorrent"
@@ -410,6 +411,17 @@ let
           shared = "ipc;";
           devices = "dri;";
           filesystems = "xdg-desktop;xdg-download;xdg-pictures;";
+        };
+      };
+    }
+    {
+      name = "org.keepassxc.KeePassXC";
+      text = toINI { } {
+        Context = {
+          sockets = "x11;wayland;ssh-auth;";
+          shared = "ipc;";
+          devices = "dri;";
+          filesystems = "xdg-desktop;xdg-documents;xdg-download;;";
         };
       };
     }
