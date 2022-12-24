@@ -57,4 +57,8 @@ in
     "/usr/share/fonts" = mkRoSymBind (aggregatedFonts + "/share/fonts");
   };
 
+  # fix can't open links in system browser
+  systemd.user.extraConfig = ''
+    DefaultEnvironment="PATH=/run/current-system/sw/bin"
+  '';
 }
