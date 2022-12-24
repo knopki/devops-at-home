@@ -13,10 +13,9 @@ in
       mimeApps = {
         enable = true;
         defaultApplications = {
-          "application/epub+zip" = [ "org.pwmt.zathura.desktop" ];
-          "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-          "x-scheme-handler/file" = [ "org.kde.dolphin.desktop" ];
-        } // (listToAttrs (map (x: nameValuePair x [ "org.kde.gwenview.desktop" ]) [
+          "application/epub+zip" = "org.pwmt.zathura.desktop";
+          "application/pdf" = "org.pwmt.zathura.desktop";
+        } // (listToAttrs (map (x: nameValuePair x "org.kde.gwenview.desktop") [
           "image/bmp"
           "image/gif"
           "image/jpeg"
