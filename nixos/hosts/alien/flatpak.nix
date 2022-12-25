@@ -280,8 +280,8 @@ let
       name = "md.obsidian.Obsidian";
       text = toINI { } {
         Context = {
-          sockets = "x11;wayland;";
-          shared = "network;ipc;ssh-auth;";
+          sockets = "x11;wayland;ssh-auth;";
+          shared = "network;ipc;";
           devices = "dri;";
           filesystems = "xdg-documents;xdg-download;xdg-run/keyring;home/.ssh";
         };
