@@ -69,12 +69,15 @@ in
     };
   };
 
-  environment.etc = {
-    "lvm/lvm.conf".text = ''
-      devices {
-        issue_discards = 1
-      }
-    '';
+  environment = {
+    etc = {
+      "lvm/lvm.conf".text = ''
+        devices {
+          issue_discards = 1
+        }
+      '';
+    };
+    systemPackages = with pkgs; [ intel-gpu-tools ];
   };
 
   fileSystems = {
