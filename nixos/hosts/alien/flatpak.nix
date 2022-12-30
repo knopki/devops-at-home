@@ -9,6 +9,7 @@ let
     "com.bitwarden.desktop"
     "com.discordapp.Discord"
     "com.github.AlizaMedicalImaging.AlizaMS"
+    "com.github.micahflee.torbrowser-launcher"
     "com.github.tchx84.Flatseal"
     "com.logseq.Logseq"
     "com.obsproject.Studio"
@@ -160,6 +161,17 @@ let
           sockets = "x11;";
           devices = "dri;";
           filesystems = "xdg-documents:ro;xdg-download;";
+        };
+      };
+    }
+    {
+      name = "com.github.micahflee.torbrowser-launcher";
+      text = toINI { } {
+        Context = {
+          sockets = "x11;wayland;fallback-x11;";
+          shared = "ipc;network;";
+          devices = "dri;";
+          filesystems = "xdg-download;";
         };
       };
     }
