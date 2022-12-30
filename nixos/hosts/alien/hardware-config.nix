@@ -23,7 +23,7 @@ in
     extraModprobeConfig = ''
       options snd_hda_intel index=0 model=alienware enable_msi=1 position_fix=0
       options i8k force=1
-      options i915 enable_fbc=1 enable_guc=3 enable_psr=1
+      options i915 error_capture=1 mitigations=off
     '';
     extraModulePackages = [ ];
     initrd = {
