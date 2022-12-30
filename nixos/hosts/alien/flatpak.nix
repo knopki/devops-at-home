@@ -559,6 +559,7 @@ in
 {
   environment.shellAliases = {
     ffmpeg = "flatpak run --command=ffmpeg io.mpv.Mpv";
+    ffprobe = "flatpak run --command=ffprobe io.mpv.Mpv";
     mpv = "io.mpv.Mpv";
     vlc = "org.videolan.VLC";
   };
