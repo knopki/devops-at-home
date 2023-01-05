@@ -43,7 +43,6 @@ in
     firewall = {
       allowedTCPPorts = [
         4001 # ipfs
-        8010 # chromecast sharing port
         8080 # ipfs
         22000 # syncthing
       ];

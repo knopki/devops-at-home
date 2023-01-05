@@ -44,7 +44,6 @@ in
         office
         passwords
         remote
-        video-player
         web
       ]);
 
@@ -66,7 +65,7 @@ in
         fonts
         misc.earlyoom
         security.disable-mitigations
-      ] ++ (with programs; [ downloaders image-viewers video-player web ]);
+      ] ++ (with programs; [ downloaders image-viewers web ]);
     };
   };
 }
