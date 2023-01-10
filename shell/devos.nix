@@ -40,9 +40,9 @@ in
     (devos agenix)
     {
       category = "devos";
-      name = pkgs.nvfetcher-bin.pname;
-      help = pkgs.nvfetcher-bin.meta.description;
-      command = "cd $PRJ_ROOT/pkgs; ${pkgs.nvfetcher-bin}/bin/nvfetcher -c ./sources.toml $@";
+      name = pkgs.nvfetcher.pname;
+      help = pkgs.nvfetcher.meta.description;
+      command = "cd $PRJ_ROOT/pkgs; ${pkgs.nvfetcher}/bin/nvfetcher -c ./sources.toml $@";
     }
     (linter nixpkgs-fmt)
     (linter editorconfig-checker)

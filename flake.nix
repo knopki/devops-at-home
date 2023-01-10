@@ -48,11 +48,6 @@
       agenix.url = "github:ryantm/agenix";
       agenix.inputs.nixpkgs.follows = "nixos";
 
-      nvfetcher.url = "github:berberman/nvfetcher";
-      nvfetcher.inputs.nixpkgs.follows = "nixos";
-      nvfetcher.inputs.flake-utils.follows = "flake-utils";
-      nvfetcher.inputs.flake-compat.follows = "flake-compat";
-
       nixos-hardware.url = "github:nixos/nixos-hardware";
 
       nixos-generators.url = "github:nix-community/nixos-generators";
@@ -76,7 +71,6 @@
     , nixos-hardware
     , nur
     , agenix
-    , nvfetcher
     , deploy
     , sops-nix
     , nix-doom-emacs
@@ -93,7 +87,6 @@
           overlays = [
             nur.overlay
             agenix.overlay
-            nvfetcher.overlay
             sops-nix.overlay
             ./pkgs/default.nix
           ];
