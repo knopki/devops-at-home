@@ -1,6 +1,6 @@
 { config, lib, pkgs, modulesPath, inputs, ... }:
 let
-  inherit (lib) mkDefault;
+  inherit (lib) mkDefault writeText;
   luksCommon = {
     preLVM = true;
     allowDiscards = true;
@@ -53,7 +53,7 @@ in
       };
     };
 
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [ "dell-smm-hwmon" "kvm-intel" ];
     kernelParams = [
       "resume=${swapPartName}"
       "acpiphp.disable=1"
@@ -98,6 +98,25 @@ in
   };
 
   hardware = {
+    fancontrol = {
+      enable = true;
+      config = ''
+        INTERVAL=2
+        DEVPATH=hwmon7=devices/platform/dell_smm_hwmon
+        DEVNAME=hwmon7=dell_smm
+        # pwr3 connected to temp2 (gpu)
+        # pwr1 connected to temp1 (cpu)
+        FCTEMPS=hwmon7/pwm3=hwmon7/temp2_input hwmon7/pwm1=hwmon7/temp1_input
+        FCFANS=hwmon7/pwm3=hwmon7/fan3_input hwmon7/pwm1=hwmon7/fan1_input
+        MINTEMP=hwmon7/pwm3=40 hwmon7/pwm1=40
+        MAXTEMP=hwmon7/pwm3=60 hwmon7/pwm1=60
+        MINSTART=hwmon7/pwm3=75 hwmon7/pwm1=75
+        MINSTOP=hwmon7/pwm3=60 hwmon7/pwm1=60
+        MINPWM=hwmon7/pwm3=0 hwmon7/pwm1=0
+        MAXPWM=hwmon7/pwm3=210 hwmon7/pwm1=210
+        AVERAGE=hwmon7/pwm3=5 hwmon7/pwm1=5
+      '';
+    };
     opengl = {
       enable = true;
       extraPackages32 = with pkgs.pkgsi686Linux; [
