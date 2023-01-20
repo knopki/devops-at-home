@@ -22,6 +22,7 @@ in
   boot = {
     extraModprobeConfig = ''
       options snd_hda_intel index=0 model=alienware enable_msi=1 position_fix=0
+      options dell-smm-hwmon force=1
       options i8k force=1
       options i915 error_capture=1 mitigations=off
     '';
@@ -53,7 +54,7 @@ in
       };
     };
 
-    kernelModules = [ "dell-smm-hwmon" "kvm-intel" ];
+    kernelModules = [ "dell-smm-hwmod" "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "resume=${swapPartName}"
