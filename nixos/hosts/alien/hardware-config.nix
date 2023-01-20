@@ -54,6 +54,7 @@ in
     };
 
     kernelModules = [ "dell-smm-hwmon" "kvm-intel" ];
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "resume=${swapPartName}"
       "acpiphp.disable=1"
