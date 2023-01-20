@@ -591,6 +591,7 @@ in
           ${pkgs.flatpak}/bin/flatpak config --system --set languages "en;ru"
           # add repos
           ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
           ${flathub_cmd}
           ${pkgs.flatpak}/bin/flatpak uninstall --system --unused -y --noninteractive
 
