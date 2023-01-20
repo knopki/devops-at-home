@@ -31,9 +31,6 @@ in
     # :tools editorconfig
     editorconfig-core-c
 
-    # :tools lookup & :lang org +roam
-    sqlite
-
     # :lang cc
     ccls
     irony-server
@@ -52,9 +49,6 @@ in
     gocode
     gomodifytags
     gotests
-
-    # :lang latex & :lang org (latex previews)
-    texlive.combined.scheme-medium
 
     # :lang javascript
     nodejs
@@ -77,8 +71,6 @@ in
     # :lang org
     gnuplot
     sway-contrib.grimshot
-    p.doom-org-capture
-    p.orgProtoClientDesktopItem
 
     # :lang php
     php
