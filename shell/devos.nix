@@ -46,7 +46,7 @@ in
     }
     (linter nixpkgs-fmt)
     (linter editorconfig-checker)
-    (devos inputs.deploy.packages.${pkgs.system}.deploy-rs)
+    (devos pkgs.deploy-rs)
     {
       name = "sops-edit";
       category = "devos";
