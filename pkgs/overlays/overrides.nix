@@ -2,5 +2,5 @@ channels: final: prev: {
 
   __dontExport = true; # overrides clutter up actual creations
 
-  # inherit (channels.latest) something;
+  inherit (channels.latest) ledger-live-desktop;
 }
