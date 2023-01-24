@@ -23,6 +23,7 @@ let
     "org.briarproject.Briar"
     "org.darktable.Darktable"
     "org.freedesktop.Platform.Icontheme.Adwaita"
+    "org.electrum.electrum"
     "org.freedesktop.Sdk.Extension.texlive//22.08" # required by pandoc in obsidian
     "org.gtk.Gtk3theme.Arc-Dark"
     "org.inkscape.Inkscape"
@@ -340,6 +341,17 @@ let
         };
         "System Bus Policy" = {
           "org.freedesktop.secrets" = "talk";
+        };
+      };
+    }
+    {
+      name = "org.electrum.electrum";
+      text = toINI { } {
+        Context = {
+          sockets = "x11;";
+          shared = "network;ipc;";
+          devices = "all;";
+          filesystems = "xdg-download;";
         };
       };
     }

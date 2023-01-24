@@ -62,6 +62,12 @@ let inherit (lib) mkIf hm elem; in
           "${config.xdg.dataHome}/password-store"
         ];
       };
+      alien-electrum = mkIf (nixosConfig.networking.hostName == "alien") {
+        timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
+        snapshots = [
+          "${config.home.homeDirectory}/.var/app/org.electrum.electrum/.electrum"
+        ];
+      };
       alien-docs = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
         snapshots = [
