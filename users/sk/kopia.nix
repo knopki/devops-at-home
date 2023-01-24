@@ -21,14 +21,6 @@ let inherit (lib) mkIf hm elem; in
       KOPIA_CONTENT_LOG_DIR_MAX_AGE = "168h";
     };
     jobs = {
-      alien-logseq = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "*:0/10"; RandomizedDelaySec = "5m"; };
-        snapshots = [
-          "${config.home.homeDirectory}/.var/app/com.logseq.Logseq/.logseq"
-          "${config.home.homeDirectory}/org"
-          "${config.xdg.userDirs.documents}/personal"
-        ];
-      };
       alien-devs = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = { OnCalendar = "*:0/10"; RandomizedDelaySec = "5m"; };
         snapshots = [
@@ -77,6 +69,15 @@ let inherit (lib) mkIf hm elem; in
           config.xdg.userDirs.documents
         ];
       };
+      alien-pkm = mkIf (nixosConfig.networking.hostName == "alien") {
+        timer = { OnCalendar = "*:0/10"; RandomizedDelaySec = "5m"; };
+        snapshots = [
+          "${config.home.homeDirectory}/.var/app/com.logseq.Logseq/.logseq"
+          "${config.home.homeDirectory}/org"
+          "${config.xdg.userDirs.documents}/main"
+          "${config.xdg.userDirs.documents}/personal"
+        ];
+      };
       alien-media = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
         snapshots = [
@@ -95,6 +96,9 @@ let inherit (lib) mkIf hm elem; in
       alien-random-conf = mkIf (nixosConfig.networking.hostName == "alien") {
         timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
         snapshots = [
+          "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/Custom Dictionary.txt"
+          "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/Preference"
+          "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/obsidian.json"
           "${config.home.homeDirectory}/.var/app/org.musicbrainz.Picard/config/MusicBrainz"
           "${config.xdg.configHome}/dconf/user"
         ];
