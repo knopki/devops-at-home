@@ -42,12 +42,9 @@ in
     search = [ "1984.run" ];
     firewall = {
       allowedTCPPorts = [
-        4001 # ipfs
-        8080 # ipfs
         22000 # syncthing
       ];
       allowedUDPPorts = [
-        4001 # ipfs
         21027 # syncthing local discovery
         22000 # syncthing
       ];
@@ -58,24 +55,6 @@ in
   security.mitigations.acceptRisk = true;
 
   services = {
-    kubo = {
-      enable = true;
-      autoMount = true;
-      enableGC = true;
-      localDiscovery = true;
-      extraFlags = [ "--routing=dhtclient" ];
-      settings = {
-        Datastore.StorageMax = "1GB";
-        Swarm.ConnMgr = {
-          Type = "basic";
-          LowWater = 20;
-          HighWater = 40;
-          GracePeriod = "1m0s";
-        };
-      };
-      startWhenNeeded = true;
-    };
-
     tailscale.enable = true;
 
     zerotierone = {
