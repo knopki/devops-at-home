@@ -86,7 +86,6 @@ let inherit (lib) mkDefault genAttrs; in
       enable = true;
       drivers = with pkgs; [ gutenprint pantum-driver ];
     };
-    resolved.enable = true;
     xserver = {
       enable = true;
       libinput.enable = true;
