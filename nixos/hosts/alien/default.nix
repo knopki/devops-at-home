@@ -9,7 +9,9 @@ in
     ../../../users/sk
   ];
 
-  environment.systemPackages = [ pkgs.tailscale ];
+  environment = {
+    systemPackages = with pkgs; [ tailscale wgcf ];
+  };
 
   networking = {
     hostId = "ff0b9d65";
