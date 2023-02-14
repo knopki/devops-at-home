@@ -97,7 +97,7 @@ let inherit (lib) mkIf hm elem; in
         timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
         snapshots = [
           "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/Custom Dictionary.txt"
-          "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/Preference"
+          "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/Preferences"
           "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/obsidian.json"
           "${config.home.homeDirectory}/.var/app/org.musicbrainz.Picard/config/MusicBrainz"
           "${config.xdg.configHome}/dconf/user"
