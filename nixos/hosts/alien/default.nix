@@ -10,6 +10,9 @@ in
   ];
 
   environment = {
+    variables = {
+      PLASMA_USE_QT_SCALING = "1";
+    };
     systemPackages = with pkgs; [ tailscale wgcf ];
   };
 
