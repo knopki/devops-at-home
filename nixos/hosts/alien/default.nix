@@ -44,9 +44,15 @@ in
       allowedTCPPorts = [
         22000 # syncthing
       ];
+      allowedTCPPortRanges = [
+        { from = 6881; to = 6889; } # torrents
+      ];
       allowedUDPPorts = [
         21027 # syncthing local discovery
         22000 # syncthing
+      ];
+      allowedUDPPortRanges = [
+        { from = 6881; to = 6889; } # torrents
       ];
       trustedInterfaces = [ "ve-+" ];
     };
