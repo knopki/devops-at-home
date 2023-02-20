@@ -56,7 +56,6 @@ let inherit (lib) mkDefault genAttrs; in
     };
     networkmanager.enable = mkDefault true;
     useNetworkd = true;
-    wireguard.enable = true;
   };
 
   programs = {
