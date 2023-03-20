@@ -104,6 +104,7 @@ in
           netdevConfig = {
             Name = "azire1";
             Kind = "wireguard";
+            MTUBytes = "1420";
           };
           wireguardConfig = {
             PrivateKeyFile = config.sops.secrets.azire1-wg-private-key.path;
@@ -127,7 +128,7 @@ in
           address = [ "10.0.0.14/32" "2a0e:1c80:1337:1:10:0:0:14/128" ];
           networkConfig = { IPForward = "ipv4"; };
           routes = [
-            { routeConfig = { Destination = "0.0.0.0/0"; Table = "azire"; }; }
+            { routeConfig = { Destination = "0.0.0.0/0"; Table = "azire"; MTUBytes = "1420"; }; }
           ];
           routingPolicyRules = [
             { routingPolicyRuleConfig = { IncomingInterface = "virbr1"; Table = "azire"; Priority = 1000; }; }
