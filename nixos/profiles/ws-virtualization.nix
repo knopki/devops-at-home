@@ -30,7 +30,7 @@ let inherit (lib) mkDefault; in
     libvirtd = {
       enable = true;
       qemu.runAsRoot = false;
-      allowedBridges = [ "virbr0" ];
+      allowedBridges = [ "virbr0" "virbr1" ];
     };
 
     oci-containers.backend = mkDefault "podman";

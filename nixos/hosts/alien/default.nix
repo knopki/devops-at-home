@@ -45,6 +45,8 @@ in
       internalInterfaces = [ "ve-+" ];
     };
     search = [ "1984.run" ];
+    networkmanager.unmanaged = [ "azire1" ];
+    search = [ "1984.run" "lan" ];
     firewall = {
       allowedTCPPorts = [
         22000 # syncthing
@@ -80,18 +82,71 @@ in
       path = "/var/secrets/root-user-password";
       neededForUsers = true;
     };
+    azire1-wg-private-key = defaultSopsFile // {
+      key = "azire1-wg-private-key";
+      path = "/var/secrets/azire1-wg-private-key";
+      owner = config.users.users.systemd-network.name;
+      group = config.users.groups.systemd-network.name;
+      mode = "0640";
+      reloadUnits = [ "systemd-networkd.service" ];
+    };
   };
 
   system.stateVersion = "20.09";
 
   systemd = {
-    network.wait-online = {
-      anyInterface = true;
-      extraArgs = [ "-i" "enp59s0" "-i" "wlp60s0" ];
+    network = {
+      config.routeTables = {
+        azire = 42;
+      };
+      netdevs = {
+        azire1 = {
+          netdevConfig = {
+            Name = "azire1";
+            Kind = "wireguard";
+          };
+          wireguardConfig = {
+            PrivateKeyFile = config.sops.secrets.azire1-wg-private-key.path;
+          };
+          wireguardPeers = [
+            {
+              wireguardPeerConfig = {
+                AllowedIPs = [ "0.0.0.0/0" "::/0" ];
+                Endpoint = "nl-ams.azirevpn.net:51820";
+                PersistentKeepalive = 15;
+                PublicKey = "W+LE+uFRyMRdYFCf7Jw0OPERNd1bcIm0gTKf/traIUk=";
+              };
+            }
+          ];
+        };
+      };
+      networks = {
+        azire1 = {
+          enable = true;
+          name = "azire1";
+          address = [ "10.0.0.14/32" "2a0e:1c80:1337:1:10:0:0:14/128" ];
+          networkConfig = { IPForward = "ipv4"; };
+          routes = [
+            { routeConfig = { Destination = "0.0.0.0/0"; Table = "azire"; }; }
+          ];
+          routingPolicyRules = [
+            { routingPolicyRuleConfig = { IncomingInterface = "virbr1"; Table = "azire"; Priority = 1000; }; }
+          ];
+        };
+      };
+      wait-online = {
+        anyInterface = true;
+        extraArgs = [ "-i" "enp59s0" "-i" "wlp60s0" ];
+      };
     };
+    services = {
+      systemd-networkd = {
+        serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
+      };
+    };
+    # services.NetworkManager-wait-online.enable = false;
   };
 
   time.timeZone = "Europe/Moscow";
-
   users.users.root.passwordFile = config.sops.secrets.alien-root-user-password.path;
 }
