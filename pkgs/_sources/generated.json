@@ -88,11 +88,11 @@
             "name": null,
             "owner": "mattdavis90",
             "repo": "base16-tmux",
-            "rev": "c3366618c6d746647051b3cd0ded23f3f7c332e1",
-            "sha256": "sha256-lbe/Ov+ShmlA4O/qAYX8K9ZSKvCzekyXKMcSpzfyXvA=",
+            "rev": "30fc84afc723e027d4497a284fcae3cb75097441",
+            "sha256": "sha256-JJ/eRqTayuEKrL9MBe943HpKy7yLyd2Dmes58KN1jdk=",
             "type": "github"
         },
-        "version": "c3366618c6d746647051b3cd0ded23f3f7c332e1"
+        "version": "30fc84afc723e027d4497a284fcae3cb75097441"
     },
     "base16-vim": {
         "cargoLocks": null,

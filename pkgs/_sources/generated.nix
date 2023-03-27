@@ -47,13 +47,13 @@
   };
   base16-tmux = {
     pname = "base16-tmux";
-    version = "c3366618c6d746647051b3cd0ded23f3f7c332e1";
+    version = "30fc84afc723e027d4497a284fcae3cb75097441";
     src = fetchFromGitHub ({
       owner = "mattdavis90";
       repo = "base16-tmux";
-      rev = "c3366618c6d746647051b3cd0ded23f3f7c332e1";
+      rev = "30fc84afc723e027d4497a284fcae3cb75097441";
       fetchSubmodules = false;
-      sha256 = "sha256-lbe/Ov+ShmlA4O/qAYX8K9ZSKvCzekyXKMcSpzfyXvA=";
+      sha256 = "sha256-JJ/eRqTayuEKrL9MBe943HpKy7yLyd2Dmes58KN1jdk=";
     });
   };
   base16-vim = {
