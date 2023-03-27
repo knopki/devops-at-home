@@ -68,6 +68,7 @@ in
       du-dust
     ] ++ optionals isWorkstation [
       feh
+      gh
     ];
 
     theme = {
