@@ -91,13 +91,13 @@
   };
   dracula-fish = {
     pname = "dracula-fish";
-    version = "610147cc384ff161fbabb9a9ebfd22b743f82b67";
+    version = "0e51af5e5346e5d24efabd43fb4631e2a8fd1b70";
     src = fetchFromGitHub ({
       owner = "dracula";
       repo = "fish";
-      rev = "610147cc384ff161fbabb9a9ebfd22b743f82b67";
+      rev = "0e51af5e5346e5d24efabd43fb4631e2a8fd1b70";
       fetchSubmodules = false;
-      sha256 = "sha256-WywEGAGaRwfHJpT+B3oKoyrnLJZxURTQ+MK9e5Asxl0=";
+      sha256 = "sha256-YXh6pPJ9dJDPpq1kX5xd1edoOaH6jDq8pDOkx3k03/0=";
     });
   };
   dracula-wofi = {
