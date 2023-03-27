@@ -124,13 +124,13 @@
   };
   ls-colors = {
     pname = "ls-colors";
-    version = "e36eebfb3e1b39497c6038cdc70c75109b6434de";
+    version = "09dab448207002624d17f01ed7cbf820aa048063";
     src = fetchFromGitHub ({
       owner = "trapd00r";
       repo = "LS_COLORS";
-      rev = "e36eebfb3e1b39497c6038cdc70c75109b6434de";
+      rev = "09dab448207002624d17f01ed7cbf820aa048063";
       fetchSubmodules = false;
-      sha256 = "sha256-KsVuHBd4CzAWDeobS0N4NW+z1KMK1kBnZg14g67SCeQ=";
+      sha256 = "sha256-hQTT/yNS9UIDZqHuul0xmknnOh6tOtfotQIm0SY5TTE=";
     });
   };
 }
