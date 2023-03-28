@@ -122,6 +122,14 @@
       sha256 = "sha256-g6vxwPw0Q9QFJBc3d4R3ZsHnnEvU5o1f4DSuyLeN5XQ=";
     });
   };
+  framesh = {
+    pname = "framesh";
+    version = "0.6.2";
+    src = fetchurl {
+      url = "https://github.com/floating/frame/releases/download/v0.6.2/Frame-0.6.2.AppImage";
+      sha256 = "sha256-nN5+6SwfHcwhePlbsXjT3qNd/d6Xqnd85NVC8vw3ehk=";
+    };
+  };
   ledger-live-desktop = {
     pname = "ledger-live-desktop";
     version = "2.55.0";
