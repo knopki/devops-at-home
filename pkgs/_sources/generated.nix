@@ -122,6 +122,14 @@
       sha256 = "sha256-g6vxwPw0Q9QFJBc3d4R3ZsHnnEvU5o1f4DSuyLeN5XQ=";
     });
   };
+  ledger-live-desktop = {
+    pname = "ledger-live-desktop";
+    version = "2.55.0";
+    src = fetchurl {
+      url = "https://download.live.ledger.com/ledger-live-desktop-2.55.0-linux-x86_64.AppImage";
+      sha256 = "sha256-N0BhbqZvZs3IP+jMxr85KlHs6I/fxWgoK884EKT9C9Y=";
+    };
+  };
   ls-colors = {
     pname = "ls-colors";
     version = "09dab448207002624d17f01ed7cbf820aa048063";

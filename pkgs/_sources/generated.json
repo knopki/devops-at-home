@@ -208,6 +208,20 @@
         },
         "version": "b597b1537aa125e8829bef2cc57a0b0c6a6b35a1"
     },
+    "ledger-live-desktop": {
+        "cargoLocks": null,
+        "extract": null,
+        "name": "ledger-live-desktop",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-N0BhbqZvZs3IP+jMxr85KlHs6I/fxWgoK884EKT9C9Y=",
+            "type": "url",
+            "url": "https://download.live.ledger.com/ledger-live-desktop-2.55.0-linux-x86_64.AppImage"
+        },
+        "version": "2.55.0"
+    },
     "ls-colors": {
         "cargoLocks": null,
         "extract": null,

@@ -43,6 +43,11 @@ fetch.github = "dracula/wofi"
 src.git = "https://github.com/dracula/zathura"
 fetch.github = "dracula/zathura"
 
+[ledger-live-desktop]
+src.httpheader = "https://download.live.ledger.com/latest/linux"
+src.regex = "\\d+\\.\\d+.\\d+"
+fetch.url = "https://download.live.ledger.com/ledger-live-desktop-$ver-linux-x86_64.AppImage"
+
 [ls-colors]
 src.git = "https://github.com/trapd00r/LS_COLORS"
 fetch.github = "trapd00r/LS_COLORS"
