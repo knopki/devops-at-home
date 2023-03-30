@@ -17,6 +17,8 @@ let
   usrSecs = genAttrs [
     "kopia-knopki-repo-password-file"
     "kopia-repository-config"
+    "nextcloud-sk-vdirsyncer-password"
+    "nextcloud-sk-vdirsyncer-username"
   ]
     (_: defaultOpts);
 in
