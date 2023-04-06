@@ -40,11 +40,13 @@ in
               a = "vcards_local";
               b = "nc_carddav";
               collections = [ [ "contacts" null "contacts" ] ];
+              conflict_resolution = "a wins";
             };
             calendars = {
               a = "calendars_local";
               b = "nc_caldav";
               collections = [ [ "personal" "personal" "personal" ] ];
+              conflict_resolution = "a wins";
             };
           };
         };
