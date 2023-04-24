@@ -132,10 +132,10 @@
   };
   ledger-live-desktop = {
     pname = "ledger-live-desktop";
-    version = "2.55.0";
+    version = "2.57.0";
     src = fetchurl {
-      url = "https://download.live.ledger.com/ledger-live-desktop-2.55.0-linux-x86_64.AppImage";
-      sha256 = "sha256-N0BhbqZvZs3IP+jMxr85KlHs6I/fxWgoK884EKT9C9Y=";
+      url = "https://download.live.ledger.com/ledger-live-desktop-2.57.0-linux-x86_64.AppImage";
+      sha256 = "sha256-fXvCj9eBEp/kGPSiNUdir19eU0x461KzXgl5YgeapHI=";
     };
   };
   ls-colors = {
