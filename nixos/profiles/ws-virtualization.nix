@@ -13,12 +13,15 @@ let inherit (lib) mkDefault; in
     };
 
     systemPackages = with pkgs; [
-      distrobox
       dive
       libguestfs-with-appliance
+      virt-manager
+
+      # docker client (docker compose, for example) can be used with podman
+      docker
       podman
       podman-compose
-      virt-manager
+      distrobox
     ];
   };
 
@@ -37,7 +40,6 @@ let inherit (lib) mkDefault; in
 
     podman = {
       defaultNetwork.dnsname.enable = true;
-      dockerCompat = mkDefault true;
       dockerSocket.enable = true;
       enable = true;
       extraPackages = with pkgs; [ aardvark-dns netavark ];
