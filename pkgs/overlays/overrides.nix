@@ -33,4 +33,15 @@ channels: final: prev: {
           --replace 'Exec=AppRun' 'Exec=${pname}'
       '';
   };
+
+  # stupid elisp-tree-sitter use old shitty tree sitter
+  # see: https://github.com/NixOS/nixpkgs/issues/209114
+  tree-sitter-grammars = prev.tree-sitter-grammars // {
+    tree-sitter-python = prev.tree-sitter-grammars.tree-sitter-python.overrideAttrs (_: {
+      nativeBuildInputs = [ final.nodejs final.tree-sitter ];
+      configurePhase = ''
+        tree-sitter generate --abi 13 src/grammar.json
+      '';
+    });
+  };
 }

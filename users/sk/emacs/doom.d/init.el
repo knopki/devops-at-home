@@ -4,7 +4,7 @@
 (doom! :input
        :completion
        (company +childframe)
-       (ivy +fuzzy +prescient +icons)
+       (vertico +childframe +icons)
        :ui
        doom
        ;; doom-dashboard
@@ -33,14 +33,10 @@
        undo
        vc
        :term
-       vterm
        :checkers
        syntax
        (spell +hunspell)
-       grammar
        :tools
-       ansible
-       biblio
        debugger
        direnv
        (docker +lsp)
@@ -51,34 +47,30 @@
        (lsp +peek)
        magit
        make
-       pass
        rgb
        terraform
        tmux
+       tree-sitter
        upload
        :lang
-       (cc +lsp)
+       (cc +lsp +tree-sitter)
        data
        emacs-lisp
-       erlang
-       (go +lsp)
-       (javascript +lsp)
-       (json +lsp)
-       (latex +lsp +fold)
+       (go +lsp +tree-sitter)
+       (javascript +lsp +tree-sitter)
+       (json +lsp +tree-sitter)
        (markdown +grip)
-       nix
-       (org +dragndrop +gnuplot +pretty)
-       php
+       (nix +tree-sitter)
+       (org +dragndrop +pretty)
+       (php +tree-sitter)
        plantuml
-       (python +lsp +pyright)
-       rest
-       (rust +lsp)
-       (sh +fish +lsp)
-       web
-       (yaml +lsp)
+       (python +lsp +pyright +tree-sitter)
+       (sh +fish +lsp +tree-sitter)
+       (web +tree-sitter)
+       (yaml +lsp +tree-sitter)
        :os
        (tty +osc)
-       :mail
+       :email
        :app
        :config
        (default +bindings +smartparens))

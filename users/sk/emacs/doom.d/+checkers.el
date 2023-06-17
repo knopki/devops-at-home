@@ -18,9 +18,6 @@
     (ispell-set-spellchecker-params)
     (ispell-hunspell-add-multi-dic "en_US,ru_RU")))
 
-;;; Grammar
-(setq langtool-bin "languagetool-commandline")
-
 ;;; Syntax
 
 ;; Disable checking in some modes

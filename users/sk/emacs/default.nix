@@ -41,9 +41,6 @@ in
     podman-compose
     nodePackages.dockerfile-language-server-nodejs
 
-    # :lang erlang
-    erlang
-
     # :lang go
     gopls
     gocode
