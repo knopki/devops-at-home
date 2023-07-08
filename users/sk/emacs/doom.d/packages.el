@@ -6,6 +6,7 @@
 (package! org-super-agenda :pin "857783ecd3dbe35c72b4eca046e0a5dc64041fdf") ;; 1.2
 (package! reverse-im :pin "90add9a1f8c4a3c78029d38087ff4d22fe5372d3")
 (package! russian-holidays :pin "b285a30f29d85c48e3ea4eb93972d34a090c167b")
+(package! lark-mode)
 
 ;;; Local Variables:
 ;;; byte-compile-warnings: (not free-vars unresolved)
