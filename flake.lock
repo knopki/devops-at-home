@@ -195,11 +195,11 @@
     "evil-collection": {
       "flake": false,
       "locked": {
-        "lastModified": 1686801899,
-        "narHash": "sha256-wGJWF9t8yaxLyYQRf3hK+5/AIYYAS8qWXPDEvatzBlc=",
+        "lastModified": 1688323612,
+        "narHash": "sha256-kiuP8MzR+21pNMyYBy/4UQwgcRpwlW7095KdsAST7lk=",
         "owner": "emacs-evil",
         "repo": "evil-collection",
-        "rev": "4a7d924dbd851ef1b2ccb85778be6e7a6a81ebd4",
+        "rev": "1f34f5ec4ee8e7945ecd1f885f18789526a905ee",
         "type": "github"
       },
       "original": {
@@ -462,11 +462,11 @@
         "ws-butler": "ws-butler"
       },
       "locked": {
-        "lastModified": 1680830313,
-        "narHash": "sha256-pccIv+iAFqhsxOb46VXA1uZbi2olvx7VnaFYhi82mkA=",
+        "lastModified": 1686959076,
+        "narHash": "sha256-tzwHJ8q9CMpIwxcyCM51i88arntNMARi1mFkAppMgqk=",
         "owner": "nix-community",
         "repo": "nix-doom-emacs",
-        "rev": "7f729d66aa8af11ad4a2bb2517b6379396779117",
+        "rev": "2c4ba0d77fdfa4495929c8aee814936e722715c5",
         "type": "github"
       },
       "original": {

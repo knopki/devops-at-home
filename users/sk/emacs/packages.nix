@@ -9,6 +9,8 @@ let
       buildPhase = ":";
     } // args);
 
+    evil-collection = pkgs.emacsPackages.evil-collection;
+
     lark-mode = prev.melpaBuild rec {
       pname = "lark-mode";
       ename = pname;
