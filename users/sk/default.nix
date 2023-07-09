@@ -9,7 +9,7 @@ let
   isGraphical = isWorkstation || isGamestation;
 in
 {
-  imports = [ ./sops.nix ./vdirsyncer.nix ];
+  imports = [ ./sops.nix ./pim.nix ];
 
   users.groups.sk.gid = mkDefault 1000;
 
