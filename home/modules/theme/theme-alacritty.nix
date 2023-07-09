@@ -13,7 +13,7 @@ in
       programs.alacritty.settings = {
         font = {
           normal = { family = cfg.fonts.monospace.family; };
-          size = cfg.fonts.monospace.size + 2;
+          size = cfg.fonts.monospace.size;
         };
       };
     }
