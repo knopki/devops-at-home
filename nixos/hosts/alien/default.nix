@@ -39,13 +39,7 @@ in
         "xod.loc"
       ];
     };
-    nat = {
-      enable = true;
-      externalInterface = "wlp60s0";
-      internalInterfaces = [ "ve-+" ];
-    };
-    search = [ "1984.run" ];
-    networkmanager.unmanaged = [ "azire1" ];
+    networkmanager.unmanaged = [ "azire1" "docker0" ];
     search = [ "1984.run" "lan" ];
     firewall = {
       allowedTCPPorts = [
@@ -61,7 +55,7 @@ in
       allowedUDPPortRanges = [
         { from = 6881; to = 6889; } # torrents
       ];
-      trustedInterfaces = [ "ve-+" ];
+      trustedInterfaces = [ "docker0" "ve-+" ];
     };
   };
 
