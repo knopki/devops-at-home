@@ -22,9 +22,7 @@ let
     "net.ankiweb.Anki"
     "org.briarproject.Briar"
     "org.darktable.Darktable"
-    "org.freedesktop.Platform.Icontheme.Adwaita"
     "org.electrum.electrum"
-    "org.freedesktop.Sdk.Extension.texlive//22.08" # required by pandoc in obsidian
     "org.gtk.Gtk3theme.Arc-Dark"
     "org.inkscape.Inkscape"
     "org.kde.KStyle.Adwaita/x86_64/6.4"
@@ -465,9 +463,9 @@ let
       text = toINI { } {
         Context = {
           sockets = "x11;wayland;ssh-auth;";
-          shared = "ipc;";
+          shared = "network;ipc;";
           devices = "dri;";
-          filesystems = "xdg-desktop;xdg-documents;xdg-download;;";
+          filesystems = "xdg-desktop;xdg-documents;xdg-download;";
         };
       };
     }
