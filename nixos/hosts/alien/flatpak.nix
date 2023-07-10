@@ -4,8 +4,6 @@ let
   inherit (lib.generators) toINI;
   inherit (pkgs) writeTextDir symlinkJoin;
   flathub_apps = [
-    "chat.delta.desktop"
-    "chat.rocket.RocketChat"
     "com.bitwarden.desktop"
     "com.discordapp.Discord"
     "com.github.AlizaMedicalImaging.AlizaMS"
@@ -13,14 +11,11 @@ let
     "com.github.tchx84.Flatseal"
     "com.logseq.Logseq"
     "com.obsproject.Studio"
-    "com.skype.Client"
     "com.spotify.Client"
     "com.usebottles.bottles"
-    "im.riot.Riot"
     "io.mpv.Mpv"
     "md.obsidian.Obsidian"
     "net.ankiweb.Anki"
-    "org.briarproject.Briar"
     "org.darktable.Darktable"
     "org.electrum.electrum"
     "org.gtk.Gtk3theme.Arc-Dark"
@@ -43,7 +38,6 @@ let
     "org.remmina.Remmina"
     "org.telegram.desktop"
     "org.videolan.VLC"
-    "us.zoom.Zoom"
   ];
   flatpak_overrides = map (x: writeTextDir x.name x.text) [
     {
@@ -103,28 +97,6 @@ let
         };
         "Session Bus Policy" = {
           "org.freedesktop.Flatpak" = "none";
-        };
-      };
-    }
-    {
-      name = "chat.delta.desktop";
-      text = toINI { } {
-        Context = {
-          shared = "network;ipc;";
-          sockets = "x11;";
-          devices = "dri";
-          filesystems = "xdg-documents:ro;xdg-download;xdg-pictures:ro;";
-        };
-      };
-    }
-    {
-      name = "chat.rocket.RocketChat";
-      text = toINI { } {
-        Context = {
-          shared = "network;ipc;";
-          sockets = "wayland;fallback-x11;";
-          devices = "dri;";
-          filesystems = "xdg-download;";
         };
       };
     }
@@ -220,20 +192,6 @@ let
       };
     }
     {
-      name = "com.skype.Client";
-      text = toINI { } {
-        Context = {
-          sockets = "x11;wayland;";
-          shared = "network;ipc;";
-          devices = "all;"; # bad?
-          filesystems = "xdg-download;";
-        };
-        "Session Bus Policy" = {
-          "org.freedesktop.secrets" = "talk";
-        };
-      };
-    }
-    {
       name = "com.spotify.Client";
       text = toINI { } {
         Context = {
@@ -253,17 +211,6 @@ let
           devices = "all;";
           features = "devel;multiarch;";
           filesystems = "xdg-download;xdg-data/applications;";
-        };
-      };
-    }
-    {
-      name = "im.riot.Riot";
-      text = toINI { } {
-        Context = {
-          sockets = "x11;wayland;";
-          shared = "network;ipc;";
-          devices = "all;";
-          filesystems = "xdg-download;xdg-run/keyring;";
         };
       };
     }
@@ -308,17 +255,6 @@ let
           sockets = "x11;wayland;";
           shared = "network;ipc;";
           devices = "dri;";
-        };
-      };
-    }
-    {
-      name = "org.briarproject.Briar";
-      text = toINI { } {
-        Context = {
-          sockets = "x11;";
-          shared = "network;ipc;";
-          devices = "dri;";
-          filesystems = "xdg-download;";
         };
       };
     }
@@ -545,18 +481,6 @@ let
         };
         "System Bus Policy" = {
           "org.freedesktop.secrets" = "talk";
-        };
-      };
-    }
-    {
-      name = "us.zoom.Zoom";
-      text = toINI { } {
-        Context = {
-          sockets = "x11;wayland;";
-          shared = "network;ipc;";
-          devices = "all;";
-          filesystems = "xdg-download;!~/Documents/Zoom;!~/.zoom";
-          persistent = ".zoom";
         };
       };
     }
