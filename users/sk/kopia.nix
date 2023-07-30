@@ -73,7 +73,9 @@ let inherit (lib) mkIf hm elem; in
         timer = { OnCalendar = "*:0/10"; RandomizedDelaySec = "5m"; };
         snapshots = [
           "${config.home.homeDirectory}/.var/app/com.logseq.Logseq/.logseq"
+          "${config.home.homeDirectory}/.zotero"
           "${config.home.homeDirectory}/org"
+          "${config.xdg.dataHome}/Zotero"
           "${config.xdg.userDirs.documents}/main"
           "${config.xdg.userDirs.documents}/personal"
         ];
