@@ -6,9 +6,13 @@
     aspellDicts.ru
     gnome.simple-scan
     isync
-    marvin
+    ocrfeeder
+    ocrmypdf
     offlineimap
+    pdfarranger
+    qpdf
     rclone
     speedcrunch
+    zotero
   ];
 }
