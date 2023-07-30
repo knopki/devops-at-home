@@ -113,9 +113,10 @@ in
       prime = {
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
-        offload.enable = true;
+        offload.enable = false;
+        sync.enable = true;
       };
-      powerManagement = { enable = true; finegrained = true; };
+      powerManagement = { enable = false; finegrained = false; };
     };
   };
 
@@ -181,24 +182,4 @@ in
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   zramSwap = { enable = true; swapDevices = 1; };
-
-  specialisation = {
-    nvidia-sync.configuration = {
-      hardware.nvidia = {
-        prime = {
-          offload.enable = mkForce false;
-          sync.enable = mkForce true;
-        };
-        powerManagement = {
-          enable = mkForce false;
-          finegrained = mkForce false;
-        };
-      };
-      # services.xserver.screenSection = mkForce ''
-      #   Option "UseEdidDpi" "FALSE"
-      #   Option "DPI" "144 x 144"
-      # '';
-      system.nixos.tags = [ "nvidia-sync" ];
-    };
-  };
 }
