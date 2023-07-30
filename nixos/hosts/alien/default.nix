@@ -13,7 +13,7 @@ in
     variables = {
       PLASMA_USE_QT_SCALING = "1";
     };
-    systemPackages = with pkgs; [ tailscale wgcf ];
+    systemPackages = with pkgs; [ tailscale wgcf xorg.xhost ];
   };
 
   networking = {
@@ -43,13 +43,16 @@ in
     search = [ "1984.run" "lan" ];
     firewall = {
       allowedTCPPorts = [
+        7513 # spacemesh
         22000 # syncthing
       ];
       allowedTCPPortRanges = [
         { from = 6881; to = 6889; } # torrents
+        { from = 21115; to = 21119; } # rustdesk
       ];
       allowedUDPPorts = [
         21027 # syncthing local discovery
+        21116 # rustdesk
         22000 # syncthing
       ];
       allowedUDPPortRanges = [

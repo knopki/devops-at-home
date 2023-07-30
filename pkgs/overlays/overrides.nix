@@ -4,6 +4,7 @@ channels: final: prev: {
 
   # inherit pkg from other channel like this:
   # > inherit (channels.unstable) some-pkg-name;
+  inherit (channels.unstable) rustdesk;
 
   framesh = prev.appimageTools.wrapType2 rec {
     inherit (final.sources.framesh) pname version src;

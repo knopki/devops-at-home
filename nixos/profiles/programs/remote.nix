@@ -3,7 +3,7 @@
   environment.systemPackages = with pkgs; [
     mosh
     openssh
-    teamviewer
+    rustdesk
   ];
 
   services.teamviewer.enable = true;
