@@ -99,25 +99,6 @@ in
   };
 
   hardware = {
-    fancontrol = {
-      enable = true;
-      config = ''
-        INTERVAL=2
-        DEVPATH=hwmon5=devices/platform/dell_smm_hwmon
-        DEVNAME=hwmon5=dell_smm
-        # pwr3 connected to temp2 (gpu)
-        # pwr1 connected to temp1 (cpu)
-        FCTEMPS=hwmon5/pwm3=hwmon5/temp2_input hwmon5/pwm1=hwmon5/temp1_input
-        FCFANS=hwmon5/pwm3=hwmon5/fan3_input hwmon5/pwm1=hwmon5/fan1_input
-        MINTEMP=hwmon5/pwm3=38 hwmon5/pwm1=38
-        MAXTEMP=hwmon5/pwm3=60 hwmon5/pwm1=60
-        MINSTART=hwmon5/pwm3=75 hwmon5/pwm1=75
-        MINSTOP=hwmon5/pwm3=60 hwmon5/pwm1=60
-        MINPWM=hwmon5/pwm3=0 hwmon5/pwm1=0
-        MAXPWM=hwmon5/pwm3=210 hwmon5/pwm1=210
-        AVERAGE=hwmon5/pwm3=5 hwmon5/pwm1=5
-      '';
-    };
     opengl = {
       enable = true;
       extraPackages32 = with pkgs.pkgsi686Linux; [
