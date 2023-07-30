@@ -13,106 +13,154 @@
     ];
   };
 
-  inputs =
-    {
-      # Track channels with commits tested and built by hydra
-      nixos-22-11.url = "github:nixos/nixpkgs/nixos-22.11";
-      nixos.follows = "nixos-22-11";
-      nixpkgs.follows = "nixos";
-      latest.url = "github:nixos/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs-23-05.url = "nixpkgs/nixos-23.05";
+    nixpkgs.follows = "nixpkgs-23-05";
+    nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
 
-      nixlib.url = "github:nix-community/nixpkgs.lib";
+    home-23-05.url = "github:nix-community/home-manager/release-23.05";
+    home-23-05.inputs.nixpkgs.follows = "nixpkgs-23-05";
+    home.follows = "home-23-05";
 
-      flake-utils.url = "github:numtide/flake-utils";
+    oldDigga.url = "./old-digga";
 
-      flake-compat.url = "github:edolstra/flake-compat";
-      flake-compat.flake = false;
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    haumea.url = "github:nix-community/haumea";
+    # colmena.url = "github:zhaofengli/colmena";
 
-      digga.url = "github:divnix/digga/54ede8e591d288c176a09d6fcf4b123896c0bf0f";
-      digga.inputs.nixpkgs.follows = "nixos";
-      digga.inputs.nixlib.follows = "nixlib";
-      digga.inputs.home-manager.follows = "home";
-      digga.inputs.deploy.follows = "deploy";
-      digga.inputs.flake-compat.follows = "flake-compat";
-      # digga.inputs.flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
+    devshell.url = "github:numtide/devshell";
+    # nix2container.url = "github:nlewo/nix2container";
+    # mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
+    # naersk.url = "github:nmattia/naersk";
 
-      home-22-11.url = "github:nix-community/home-manager/release-22.11";
-      home-22-11.inputs.nixpkgs.follows = "nixos-22-11";
-      home.follows = "home-22-11";
+    # treefmt-nix.url = "github:numtide/treefmt-nix";
+    nvfetcher.url = "github:berberman/nvfetcher";
 
-      deploy.url = "github:serokell/deploy-rs";
-      deploy.inputs.nixpkgs.follows = "nixos";
-      deploy.inputs.utils.follows = "flake-utils";
-      deploy.inputs.flake-compat.follows = "flake-compat";
+    # agenix.url = "github:ryantm/agenix";
 
-      agenix.url = "github:ryantm/agenix";
-      agenix.inputs.nixpkgs.follows = "nixos";
+    # simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+    # nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";
+    # mms.url = "github:mkaito/nixos-modded-minecraft-servers";
+  };
 
-      nixos-hardware.url = "github:nixos/nixos-hardware";
-
-      nixos-generators.url = "github:nix-community/nixos-generators";
-      nixos-generators.inputs.nixlib.follows = "nixlib";
-
-      sops-nix.url = "github:Mic92/sops-nix";
-      sops-nix.inputs.nixpkgs.follows = "nixos-22-11";
-      sops-nix.inputs.nixpkgs-stable.follows = "nixos-22-11";
-
-      nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
-      nix-doom-emacs.inputs.nixpkgs.follows = "nixos";
-      nix-doom-emacs.inputs.flake-utils.follows = "flake-utils";
-      nix-doom-emacs.inputs.flake-compat.follows = "flake-compat";
-    };
-
-  outputs =
-    { self
-    , digga
-    , nixos
-    , home
-    , nixos-hardware
-    , nur
-    , agenix
-    , deploy
-    , sops-nix
-    , nix-doom-emacs
-    , ...
-    } @ inputs:
-    digga.lib.mkFlake {
-      inherit self inputs;
-
-      channelsConfig = { allowUnfree = true; };
-
-      channels = {
-        nixos = {
-          imports = [ (digga.lib.importOverlays ./pkgs/overlays) ];
-          overlays = [
-            nur.overlay
-            agenix.overlay
-            sops-nix.overlay
-            ./pkgs/default.nix
-          ];
-        };
-        latest = { };
-      };
-
-      lib = import ./lib { lib = digga.lib // nixos.lib; };
-
-      sharedOverlays = [
-        (final: prev: {
-          __dontExport = true;
-          lib = prev.lib.extend (lfinal: lprev: {
-            our = self.lib;
-          });
-        })
+  outputs = {
+    self,
+    flake-parts,
+    haumea,
+    nixpkgs,
+    devshell,
+    nvfetcher,
+    oldDigga,
+    ...
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} ({moduleWithSystem, ...}: {
+      imports = [
+        devshell.flakeModule
+    #     treefmt-nix.flakeModule
       ];
 
-      nixos = import ./nixos;
+      debug = true;
 
-      home = import ./home;
+      systems = ["x86_64-linux"];
 
-      devshell = ./shell;
+      perSystem = {
+        config,
+        self',
+        inputs',
+        pkgs,
+        system,
+        ...
+      }: {
+    #     packages = import ./pkgs {inherit pkgs;};
 
-      homeConfigurations = digga.lib.mkHomeConfigurations self.nixosConfigurations;
+    #     treefmt = {
+    #       programs.alejandra.enable = true;
+    #       flakeFormatter = true;
+    #       projectRootFile = "flake.nix";
+    #     };
 
-      deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations { };
-    };
+        devshells.default = {pkgs, ...}: {
+          commands = [
+            {package = pkgs.nixUnstable;}
+    #         {package = inputs'.agenix.packages.default;}
+    #         {package = inputs'.colmena.packages.colmena;}
+          ];
+        };
+
+        # homeConfigurations
+      };
+
+      flake.nixosConfigurations = {
+        alien = oldDigga.nixosConfigurations.alien.config.system.build.toplevel;
+        # // nixpkgs.lib.nixosSystem {
+          # system is not needed with freshly generated hardware-configuration.nix
+          # system = "x86_64-linux";  # or set nixpkgs.hostPlatform in a module.
+        #   modules = [
+        #   ];
+        # };
+      };
+
+      # flake.nixosModules = {
+    #     seafdav = ./modules/seafdav.nix;
+    #     hugo-websites = ./modules/website.nix;
+      # };
+
+    #   flake.nixosProfiles = haumea.lib.load {
+    #     src = ./profiles;
+    #     loader = haumea.lib.loaders.path;
+    #   };
+    #   flake.nixosSuites = let
+    #     suites = self.nixosSuites;
+    #   in
+    #     with self.nixosProfiles; {
+    #       base = [core.default users.root users.pachums users.rightleftspin nfs];
+    #       media = with media; [wordpress photoprism];
+
+    #       network = with networking; with ci; [common wireguard nix-serve];
+    #       backups = with backup; [common onedrive];
+    #       cloud = with cloud; [nextcloud collabora seafile suites.media etebase vaultwarden];
+    #       comms = with matrix; with mail; [coturn synapse appservices backend web];
+
+    #       myrdd = with suites; nixpkgs.lib.flatten [base network cloud comms vpsadminos backups minecraft];
+    #     };
+
+    #   flake.colmena = {
+    #     meta = {
+    #       nixpkgs = import nixpkgs {
+    #         system = "x86_64-linux";
+    #         config.allowUnfree = true;
+    #       };
+    #       specialArgs.suites = self.nixosSuites;
+    #     };
+
+    #     defaults = moduleWithSystem (
+    #       perSystem @ {
+    #         inputs',
+    #         self',
+    #       }: {lib, ...}: {
+    #         imports =
+    #           [
+    #             agenix.nixosModules.default
+    #             simple-nixos-mailserver.nixosModules.mailserver
+    #             nix-matrix-appservices.nixosModule
+    #             mms.module
+    #           ]
+    #           ++ lib.attrValues self.nixosModules;
+    #         _module.args = {
+    #           inputs = perSystem.inputs';
+    #           self = self // perSystem.self'; # to preserve original attributes in self like outPath
+    #         };
+    #         deployment = {
+    #           buildOnTarget = true;
+    #           targetUser = null;
+    #         };
+    #       }
+    #     );
+    #     myrdd = {...}: {
+    #       imports = [
+    #         ./hosts/myrdd.nix
+    #       ];
+    #     };
+    #   };
+    });
 }
