@@ -1,10 +1,22 @@
-{ config, options, lib, pkgs, ... }:
-let
-  inherit (lib) mkEnableOption mkIf mkBefore
-    concatStrings concatStringsSep mapAttrsToList;
+{
+  config,
+  options,
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit
+    (lib)
+    mkEnableOption
+    mkIf
+    mkBefore
+    concatStrings
+    concatStringsSep
+    mapAttrsToList
+    ;
   cfg = config.theme;
   template = "${pkgs.base16-waybar}/templates/default.mustache";
-  themeFile = pkgs.runCommandLocal "hm-waybar-theme" { } ''
+  themeFile = pkgs.runCommandLocal "hm-waybar-theme" {} ''
     sed '${
       concatStrings
       (mapAttrsToList (n: v: "s/#{{${n}-hex}}/#${v.hex.rgb}/;") cfg.base16.colors)
@@ -16,11 +28,12 @@ let
       font-size: ${toString (cfg.fonts.regular.size + 2)}px;
     }
   '';
-in
-{
-  options.theme.components.waybar.enable = mkEnableOption "Apply theme to Waybar" // {
-    default = options ? programs.waybar && config.programs.waybar.enable;
-  };
+in {
+  options.theme.components.waybar.enable =
+    mkEnableOption "Apply theme to Waybar"
+    // {
+      default = options ? programs.waybar && config.programs.waybar.enable;
+    };
 
   config = mkIf (cfg.enable && cfg.components.waybar.enable && options ? programs.waybar) {
     xdg.configFile."waybar/style.css".text = mkBefore (concatStringsSep "\n" [

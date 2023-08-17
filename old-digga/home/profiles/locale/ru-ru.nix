@@ -1,8 +1,10 @@
-{ lib, nixosConfig, ... }:
-let
-  inherit (lib) mkDefault mkBefore;
-in
 {
+  lib,
+  nixosConfig,
+  ...
+}: let
+  inherit (lib) mkDefault mkBefore;
+in {
   home.language = {
     monetary = mkDefault "ru_RU.UTF-8";
     time = mkDefault "ru_RU.UTF-8";

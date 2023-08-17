@@ -1,12 +1,17 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.theme;
-in
-{
-  options.theme.components.gnome-terminal.enable = mkEnableOption "Apply theme to Gnome Terminal" // {
-    default = config.programs.gnome-terminal.enable;
-  };
+in {
+  options.theme.components.gnome-terminal.enable =
+    mkEnableOption "Apply theme to Gnome Terminal"
+    // {
+      default = config.programs.gnome-terminal.enable;
+    };
 
   config = mkIf (cfg.enable && cfg.components.gnome-terminal.enable) {
     programs.gnome-terminal = {

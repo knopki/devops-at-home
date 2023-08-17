@@ -1,12 +1,15 @@
-{ config, lib, ... }:
-let
-  inherit (lib) mkIf;
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) mkIf;
+in {
   programs.wofi = {
     enable = true;
     width = "40%";
-    term = mkIf config.programs.alacritty.enable
+    term =
+      mkIf config.programs.alacritty.enable
       "${config.programs.alacritty.package}/bin/alacritty -e";
     allow_images = true;
     allow_markup = true;

@@ -1,8 +1,11 @@
-{ lib, config, pkgs, ... }:
-let
-  inherit (lib) mkIf mkDefault;
-in
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
+  inherit (lib) mkIf mkDefault;
+in {
   programs.firefox = {
     enable = mkDefault true;
 

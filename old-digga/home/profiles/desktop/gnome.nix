@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-let
-  inherit (lib) mkDefault;
-in
 {
-  home.packages = [ pkgs.dconf ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (lib) mkDefault;
+in {
+  home.packages = [pkgs.dconf];
   dconf = {
     enable = mkDefault true;
     settings = {

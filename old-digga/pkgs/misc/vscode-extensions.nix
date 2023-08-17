@@ -1,8 +1,10 @@
-{ vscode-utils, fetchurl, ... }:
-let
-  inherit (vscode-utils) buildVscodeMarketplaceExtension;
-in
 {
+  vscode-utils,
+  fetchurl,
+  ...
+}: let
+  inherit (vscode-utils) buildVscodeMarketplaceExtension;
+in {
   asvetliakov.vscode-neovim = buildVscodeMarketplaceExtension {
     mktplcRef = {
       name = "vscode-neovim";

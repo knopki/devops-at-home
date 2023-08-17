@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) concatStringsSep stringAfter;
   inherit (lib.generators) toINI;
   inherit (pkgs) writeTextDir symlinkJoin;
@@ -42,7 +46,7 @@ let
   flatpak_overrides = map (x: writeTextDir x.name x.text) [
     {
       name = "global";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = concatStringsSep ";" [
             "!x11"
@@ -102,7 +106,7 @@ let
     }
     {
       name = "com.bitwarden.desktop";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           shared = "network;ipc;";
           sockets = "wayland;fallback-x11;";
@@ -116,7 +120,7 @@ let
     }
     {
       name = "com.discordapp.Discord";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           shared = "network;ipc;";
           sockets = "wayland;fallback-x11;";
@@ -126,7 +130,7 @@ let
     }
     {
       name = "com.github.AlizaMedicalImaging.AlizaMS";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           shared = "ipc;";
           sockets = "x11;";
@@ -137,7 +141,7 @@ let
     }
     {
       name = "com.github.micahflee.torbrowser-launcher";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;fallback-x11;";
           shared = "ipc;network;";
@@ -148,7 +152,7 @@ let
     }
     {
       name = "com.github.tchx84.Flatseal";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           shared = "ipc;";
           sockets = "wayland;fallback-x11;";
@@ -167,7 +171,7 @@ let
     }
     {
       name = "com.logseq.Logseq";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;cups;";
           shared = "network;ipc;";
@@ -179,7 +183,7 @@ let
     }
     {
       name = "com.obsproject.Studio";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "network;ipc;";
@@ -193,7 +197,7 @@ let
     }
     {
       name = "com.spotify.Client";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "network;ipc;";
@@ -204,7 +208,7 @@ let
     }
     {
       name = "com.usebottles.bottles";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "network;ipc;";
@@ -216,7 +220,7 @@ let
     }
     {
       name = "io.mpv.Mpv";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "network;ipc;";
@@ -236,7 +240,7 @@ let
     }
     {
       name = "md.obsidian.Obsidian";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;ssh-auth;";
           shared = "network;ipc;";
@@ -250,7 +254,7 @@ let
     }
     {
       name = "net.ankiweb.Anki";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "network;ipc;";
@@ -260,7 +264,7 @@ let
     }
     {
       name = "org.darktable.Darktable";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "ipc;";
@@ -280,7 +284,7 @@ let
     }
     {
       name = "org.electrum.electrum";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;";
           shared = "network;ipc;";
@@ -291,7 +295,7 @@ let
     }
     {
       name = "org.inkscape.Inkscape";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "ipc;";
@@ -301,7 +305,7 @@ let
     }
     {
       name = "org.kde.ark";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "ipc;";
@@ -316,7 +320,7 @@ let
     }
     {
       name = "org.kde.digikam";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;fallback-x11;cups;";
           shared = "ipc;";
@@ -334,7 +338,7 @@ let
     }
     {
       name = "org.kde.gwenview";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;fallback-x11;";
           shared = "ipc;";
@@ -349,7 +353,7 @@ let
     }
     {
       name = "org.kde.kdenlive";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "ipc;";
@@ -367,7 +371,7 @@ let
     }
     {
       name = "org.kde.krita";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "ipc;";
@@ -378,7 +382,7 @@ let
     }
     {
       name = "org.kde.okular";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;fallback-x11;cups;";
           shared = "ipc;";
@@ -396,7 +400,7 @@ let
     }
     {
       name = "org.keepassxc.KeePassXC";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;ssh-auth;";
           shared = "network;ipc;";
@@ -407,7 +411,7 @@ let
     }
     {
       name = "org.libreoffice.LibreOffice";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;fallback-x11;";
           shared = "ipc;";
@@ -418,7 +422,7 @@ let
     }
     {
       name = "org.musicbrainz.Picard";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;";
           shared = "network;ipc;";
@@ -428,7 +432,7 @@ let
     }
     {
       name = "org.qbittorrent.qBittorrent";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "wayland;fallback-x11;";
           shared = "network;ipc;";
@@ -439,7 +443,7 @@ let
     }
     {
       name = "org.remmina.Remmina";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;fallback-x11;ssh-auth;pcsc;cups;";
           shared = "network;ipc;";
@@ -453,7 +457,7 @@ let
     }
     {
       name = "org.telegram.desktop";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;wayland;fallback-x11;";
           shared = "network;ipc;";
@@ -464,7 +468,7 @@ let
     }
     {
       name = "org.videolan.VLC";
-      text = toINI { } {
+      text = toINI {} {
         Context = {
           sockets = "x11;";
           shared = "network;ipc;";
@@ -489,8 +493,7 @@ let
     name = "flatpak_overrides";
     paths = flatpak_overrides;
   };
-in
-{
+in {
   environment.shellAliases = {
     ffmpeg = "flatpak run --command=ffmpeg io.mpv.Mpv";
     ffprobe = "flatpak run --command=ffprobe io.mpv.Mpv";
@@ -498,7 +501,7 @@ in
     vlc = "org.videolan.VLC";
   };
 
-  system.activationScripts.makeFlatpakOverrides = stringAfter [ "var" ] ''
+  system.activationScripts.makeFlatpakOverrides = stringAfter ["var"] ''
     mkdir -p /var/lib/flatpak
     rm -rf /var/lib/flatpak/overrides
     ln -s ${flatpak_all_overrides} /var/lib/flatpak/overrides
@@ -507,39 +510,37 @@ in
   systemd = {
     services.flatpak-setup = {
       description = "Setup system Flatpak";
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
-      wantedBy = [ "graphical.target" ];
+      after = ["network-online.target"];
+      wants = ["network-online.target"];
+      wantedBy = ["graphical.target"];
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = "yes";
       };
-      script =
-        let
-          flathub_cmd = concatStringsSep "\n"
-            (map
-              (x: "${pkgs.flatpak}/bin/flatpak install flathub ${x} -y --noninteractive")
-              flathub_apps);
-        in
-        ''
-          ${pkgs.flatpak}/bin/flatpak config --system --set languages "en;ru"
-          # add repos
-          ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-          ${flathub_cmd}
-          ${pkgs.flatpak}/bin/flatpak uninstall --system --unused -y --noninteractive
+      script = let
+        flathub_cmd =
+          concatStringsSep "\n"
+          (map
+            (x: "${pkgs.flatpak}/bin/flatpak install flathub ${x} -y --noninteractive")
+            flathub_apps);
+      in ''
+        ${pkgs.flatpak}/bin/flatpak config --system --set languages "en;ru"
+        # add repos
+        ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+        ${flathub_cmd}
+        ${pkgs.flatpak}/bin/flatpak uninstall --system --unused -y --noninteractive
 
-          # discord/openasar
-          ${pkgs.flatpak}/bin/flatpak mask --system com.discordapp.Discord
-          DISCOSAR=/var/lib/flatpak/app/com.discordapp.Discord/current/active/files/discord/resources/app.asar
-          if [ -f "$DISCOSAR" ]; then
-            DISCOSARSIZE=$(stat -c%s "$DISCOSAR")
-            if (( DISCOSARSIZE > 1000000 )); then
-              ${pkgs.curl}/bin/curl https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar > "$DISCOSAR"
-            fi
+        # discord/openasar
+        ${pkgs.flatpak}/bin/flatpak mask --system com.discordapp.Discord
+        DISCOSAR=/var/lib/flatpak/app/com.discordapp.Discord/current/active/files/discord/resources/app.asar
+        if [ -f "$DISCOSAR" ]; then
+          DISCOSARSIZE=$(stat -c%s "$DISCOSAR")
+          if (( DISCOSARSIZE > 1000000 )); then
+            ${pkgs.curl}/bin/curl https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar > "$DISCOSAR"
           fi
-        '';
+        fi
+      '';
     };
   };
-
 }

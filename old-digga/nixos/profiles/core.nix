@@ -1,8 +1,12 @@
-{ config, lib, pkgs, self, ... }:
-let
-  inherit (lib) mkBefore mkDefault mkIf attrNames length stringAfter;
-in
 {
+  config,
+  lib,
+  pkgs,
+  self,
+  ...
+}: let
+  inherit (lib) mkBefore mkDefault mkIf attrNames length stringAfter;
+in {
   #
   # Documentation
   #
@@ -13,7 +17,6 @@ in
     man.enable = mkDefault true;
     nixos.enable = mkDefault false;
   };
-
 
   #
   # Packages
@@ -58,45 +61,43 @@ in
     tmux.enable = mkDefault true;
   };
 
-
   #
   # Shell
   #
 
-  environment.shellAliases =
-    let ifSudo = lib.mkIf config.security.sudo.enable;
-    in
-    {
-      # nix
-      n = "nix";
-      np = "n profile";
-      ni = "np install";
-      nr = "np remove";
-      ns = "n search --no-update-lock-file";
-      nf = "n flake";
-      nepl = "n repl '<nixpkgs>'";
-      srch = "ns nixos";
-      orch = "ns override";
-      nrb = ifSudo "sudo nixos-rebuild";
+  environment.shellAliases = let
+    ifSudo = lib.mkIf config.security.sudo.enable;
+  in {
+    # nix
+    n = "nix";
+    np = "n profile";
+    ni = "np install";
+    nr = "np remove";
+    ns = "n search --no-update-lock-file";
+    nf = "n flake";
+    nepl = "n repl '<nixpkgs>'";
+    srch = "ns nixos";
+    orch = "ns override";
+    nrb = ifSudo "sudo nixos-rebuild";
 
-      # fix nixos-option
-      nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
+    # fix nixos-option
+    nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
 
-      # sudo
-      s = ifSudo "sudo -E ";
-      si = ifSudo "sudo -i";
-      se = ifSudo "sudoedit";
+    # sudo
+    s = ifSudo "sudo -E ";
+    si = ifSudo "sudo -i";
+    se = ifSudo "sudoedit";
 
-      # systemd
-      ctl = "systemctl";
-      stl = ifSudo "s systemctl";
-      utl = "systemctl --user";
-      ut = "systemctl --user start";
-      un = "systemctl --user stop";
-      up = ifSudo "s systemctl start";
-      dn = ifSudo "s systemctl stop";
-      jtl = "journalctl";
-    };
+    # systemd
+    ctl = "systemctl";
+    stl = ifSudo "s systemctl";
+    utl = "systemctl --user";
+    ut = "systemctl --user start";
+    un = "systemctl --user stop";
+    up = ifSudo "s systemctl start";
+    dn = ifSudo "s systemctl stop";
+    jtl = "journalctl";
+  };
 
   users.defaultUserShell = pkgs.fish;
 
@@ -114,15 +115,14 @@ in
     };
     optimise.automatic = mkDefault true;
     settings = {
-      allowed-users = mkDefault [ "@wheel" ];
+      allowed-users = mkDefault ["@wheel"];
       auto-optimise-store = mkDefault true;
-      trusted-users = mkDefault [ "root" "@wheel" ];
-      substituters = [ "https://cache.nixos.org/" ];
+      trusted-users = mkDefault ["root" "@wheel"];
+      substituters = ["https://cache.nixos.org/"];
     };
-    extraOptions =
-      let
-        gb = 1024 * 1024 * 1024;
-      in
+    extraOptions = let
+      gb = 1024 * 1024 * 1024;
+    in
       mkBefore ''
         min-free = ${toString (gb * 10)}
         max-free = ${toString (gb * 20)}
@@ -156,9 +156,8 @@ in
       startWhenNeeded = mkDefault true;
     };
 
-    timesyncd.servers = mkDefault [ "time.cloudflare.com" ];
+    timesyncd.servers = mkDefault ["time.cloudflare.com"];
   };
-
 
   #
   # Security
@@ -197,13 +196,12 @@ in
 
   i18n = {
     defaultLocale = mkDefault "en_US.UTF-8";
-    supportedLocales = mkDefault [ "en_US.UTF-8/UTF-8" "ru_RU.UTF-8/UTF-8" ];
+    supportedLocales = mkDefault ["en_US.UTF-8/UTF-8" "ru_RU.UTF-8/UTF-8"];
   };
 
   services.xserver.layout = "us,ru";
 
   time.timeZone = mkDefault "Europe/Moscow";
-
 
   #
   # Misc

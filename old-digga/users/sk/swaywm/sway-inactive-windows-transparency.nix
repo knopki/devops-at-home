@@ -1,9 +1,7 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   inherit (pkgs.sway-contrib) inactive-windows-transparency;
-in
-{
-  home.packages = [ inactive-windows-transparency ];
+in {
+  home.packages = [inactive-windows-transparency];
 
   systemd.user.services.sway-inactive-windows-transparency = {
     Unit = {
@@ -19,6 +17,6 @@ in
       Restart = "on-failure";
       RestartSec = "1";
     };
-    Install = { WantedBy = [ "sway-session.target" ]; };
+    Install = {WantedBy = ["sway-session.target"];};
   };
 }

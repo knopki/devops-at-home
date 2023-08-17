@@ -1,4 +1,8 @@
-{ config, lib, pkgs, ... }:
 {
-  home.packages = with pkgs; [ nextcloud-client ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [nextcloud-client];
 }

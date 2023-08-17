@@ -1,8 +1,10 @@
-{ pkgs, lib, ... }:
-let
-  inherit (lib) mkDefault;
-in
 {
+  pkgs,
+  lib,
+  ...
+}: let
+  inherit (lib) mkDefault;
+in {
   programs.starship = {
     enable = mkDefault true;
     settings = {

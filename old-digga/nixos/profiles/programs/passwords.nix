@@ -1,11 +1,10 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     pass
   ];
 
   programs = {
-    brave.extensions = [ "naepdomgkenhinolocfifgehidddafch" ];
+    brave.extensions = ["naepdomgkenhinolocfifgehidddafch"];
     browserpass.enable = true;
   };
 }

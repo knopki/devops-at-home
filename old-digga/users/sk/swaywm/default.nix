@@ -1,9 +1,13 @@
-{ config, lib, pkgs, nixosConfig, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  nixosConfig,
+  ...
+}: let
   inherit (lib) mkAfter mkIf mkOptionDefault optionalAttrs hasAttr;
 
-  defaultWallpaper =
-    "${pkgs.nixos-artwork.wallpapers.dracula}/share/backgrounds/nixos/nix-wallpaper-dracula.png";
+  defaultWallpaper = "${pkgs.nixos-artwork.wallpapers.dracula}/share/backgrounds/nixos/nix-wallpaper-dracula.png";
 
   # binary paths
   alacrittyBin = "${config.programs.alacritty.package}/bin/alacritty";
@@ -25,15 +29,21 @@ let
     commands = [
       {
         command = "move scratchpad, resize set width 1250 px height 1045 px, border pixel 2";
-        criteria = { app_id = "telegramdesktop"; title = "^Telegram"; };
+        criteria = {
+          app_id = "telegramdesktop";
+          title = "^Telegram";
+        };
       }
       {
         command = "fullscreen enable";
-        criteria = { app_id = "telegramdesktop"; title = "^Media"; };
+        criteria = {
+          app_id = "telegramdesktop";
+          title = "^Media";
+        };
       }
       {
         command = "floating enable, resize set width 850 px heigth 500 px";
-        criteria = { app_id = "qalculate-gtk"; };
+        criteria = {app_id = "qalculate-gtk";};
       }
     ];
   };
@@ -54,13 +64,13 @@ let
       always = true;
     }
     # policy kit agent
-    { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
+    {command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";}
     # clipboard history
-    { command = "${pkgs.wl-clipboard}/bin/wl-paste -t text --watch ${pkgs.clipman}/bin/clipman store -P"; }
+    {command = "${pkgs.wl-clipboard}/bin/wl-paste -t text --watch ${pkgs.clipman}/bin/clipman store -P";}
     # autorun of apps
-    { command = "${pkgs.dex}/bin/dex -ae Sway"; }
+    {command = "${pkgs.dex}/bin/dex -ae Sway";}
     # telegram is must
-    { command = "${pkgs.tdesktop}/bin/telegram-desktop"; }
+    {command = "${pkgs.tdesktop}/bin/telegram-desktop";}
   ];
 
   keybindings = mkOptionDefault (
@@ -104,13 +114,13 @@ let
       "${modifier}+c" = "exec ${pkgs.qalculate-gtk}/bin/qalculate-gtk";
       "${modifier}+o" = mkIf (hasAttr "org-capture" config.wayland.windowManager.sway.config.modes) "mode org-capture";
       "${modifier}+Shift+c" = "exec ${pkgs.clipman}/bin/clipman pick -t CUSTOM -T '${wofiBin} -i -d -p Clipboard'";
-    } // optionalAttrs (nixosConfig.networking.hostName == "alien") {
+    }
+    // optionalAttrs (nixosConfig.networking.hostName == "alien") {
       # More Alienware keys: XF86KbdLightOnOff, XF86KbdLightOnOff, XF86Tools, XF86Launch5-9
       "XF86TouchpadToggle" = "input type:touchpad events toggle enabled disabled";
     }
   );
-in
-{
+in {
   imports = [
     ./mako.nix
     ./sway-inactive-windows-transparency.nix
@@ -143,12 +153,12 @@ in
     config = {
       inherit window startup keybindings;
       floating = {
-        criteria = [ ];
+        criteria = [];
       };
-      focus = { };
-      assigns = { };
+      focus = {};
+      assigns = {};
       modifier = "Mod4";
-      bars = [ ];
+      bars = [];
       gaps = {
         inner = 6;
         outer = 0;
@@ -170,13 +180,22 @@ in
           natural_scroll = "enabled";
         };
       };
-      output = {
-        "*" = { bg = "${defaultWallpaper} fill"; };
-      } // optionalAttrs (nixosConfig.networking.hostName == "alien") {
-        "eDP-1" = { resolution = "1920x1080"; position = "0,0"; };
-      } // optionalAttrs (nixosConfig.networking.hostName == "panzer") {
-        "eDP-1" = { resolution = "1600x900"; position = "0,0"; };
-      };
+      output =
+        {
+          "*" = {bg = "${defaultWallpaper} fill";};
+        }
+        // optionalAttrs (nixosConfig.networking.hostName == "alien") {
+          "eDP-1" = {
+            resolution = "1920x1080";
+            position = "0,0";
+          };
+        }
+        // optionalAttrs (nixosConfig.networking.hostName == "panzer") {
+          "eDP-1" = {
+            resolution = "1600x900";
+            position = "0,0";
+          };
+        };
     };
     extraConfig = ''
       # hide cursor on idle
@@ -217,7 +236,7 @@ in
         Restart = "on-failure";
         RestartSec = "1";
       };
-      Install = { WantedBy = [ "sway-session.target" ]; };
+      Install = {WantedBy = ["sway-session.target"];};
     };
   };
 }

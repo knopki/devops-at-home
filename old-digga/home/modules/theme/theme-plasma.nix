@@ -1,20 +1,42 @@
-{ config, lib, pkgs, ... }:
-let
-  inherit (lib)
-    hm mkIf mkMerge mkDefault mkEnableOption;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit
+    (lib)
+    hm
+    mkIf
+    mkMerge
+    mkDefault
+    mkEnableOption
+    ;
   cfg = config.theme;
   isDarkTheme = cfg.base16.kind == "dark";
   iconTheme = {
-    name = if isDarkTheme then "Papirus-Dark" else "Papirus";
+    name =
+      if isDarkTheme
+      then "Papirus-Dark"
+      else "Papirus";
     package = pkgs.papirus-icon-theme;
   };
   gtkTheme = {
-    name = if isDarkTheme then "Arc-Dark" else "Arc";
+    name =
+      if isDarkTheme
+      then "Arc-Dark"
+      else "Arc";
     package = pkgs.arc-theme;
   };
   kdeThemePkg = pkgs.arc-kde-theme;
-  kvColorScheme = if isDarkTheme then "KvArcDark" else "KvArc";
-  kdeThemeId = if isDarkTheme then "com.github.varlesh.arc-dark" else "com.github.varlesh.arc";
+  kvColorScheme =
+    if isDarkTheme
+    then "KvArcDark"
+    else "KvArc";
+  kdeThemeId =
+    if isDarkTheme
+    then "com.github.varlesh.arc-dark"
+    else "com.github.varlesh.arc";
 
   gtkSettingsRc = {
     Settings = {
@@ -25,9 +47,8 @@ let
     };
   };
 
-  mkKDEFontList = name: size: [ name size "-1" 5 50 0 0 0 0 0 ];
-in
-{
+  mkKDEFontList = name: size: [name size "-1" 5 50 0 0 0 0 0];
+in {
   options.theme.components.plasma = {
     enable = mkEnableOption "Apply theme to KDE Plasma";
   };
@@ -77,7 +98,10 @@ in
 
       kdeglobals = {
         General = {
-          Name = if isDarkTheme then "Arc Dark" else "Arc Color";
+          Name =
+            if isDarkTheme
+            then "Arc Dark"
+            else "Arc Color";
           ColorScheme = kvColorScheme;
           fixed = mkKDEFontList cfg.fonts.monospace.family cfg.fonts.monospace.size;
           font = mkKDEFontList cfg.fonts.regular.family cfg.fonts.regular.size;
@@ -86,13 +110,16 @@ in
           smallestReadableFont = mkKDEFontList cfg.fonts.regular.family (cfg.fonts.regular.size - 2);
         };
         WM = {
-          frame = [ 61 174 233 ];
-          inactiveFrame = [ 239 240 241 ];
+          frame = [61 174 233];
+          inactiveFrame = [239 240 241];
         };
         Icons.Theme = iconTheme.name;
         KDE = {
           LookAndFeelPackage = kdeThemeId;
-          widgetStyle = if isDarkTheme then "kvantum-dark" else "kvantum";
+          widgetStyle =
+            if isDarkTheme
+            then "kvantum-dark"
+            else "kvantum";
         };
       };
 
@@ -103,7 +130,10 @@ in
         Effect-kwin4_effect_translucency.Inactive = mkDefault 80;
         "org.kde.kdecoration2" = {
           library = "org.kde.kwin.aurorae";
-          theme = if isDarkTheme then "__aurorae__svg__Arc-Dark" else "__aurorae__svg__Arc";
+          theme =
+            if isDarkTheme
+            then "__aurorae__svg__Arc-Dark"
+            else "__aurorae__svg__Arc";
           BorderSizeAuto = mkDefault false;
         };
       };
@@ -125,7 +155,10 @@ in
       };
 
       plasmarc = {
-        Theme.name = if isDarkTheme then "Arc-Dark" else "Arc-Color";
+        Theme.name =
+          if isDarkTheme
+          then "Arc-Dark"
+          else "Arc-Color";
       };
     };
   };

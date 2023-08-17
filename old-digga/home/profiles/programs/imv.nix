@@ -1,5 +1,8 @@
-{ nixosConfig, lib, ... }:
 {
+  nixosConfig,
+  lib,
+  ...
+}: {
   programs.imv = {
     enable = lib.mkDefault true;
     settings = {

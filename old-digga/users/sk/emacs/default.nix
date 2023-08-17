@@ -1,16 +1,21 @@
-{ config, lib, pkgs, nixosConfig, inputs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  nixosConfig,
+  inputs,
+  ...
+}: let
   inherit (lib) listToAttrs nameValuePair;
   p = import ./packages.nix {
     inherit config inputs lib pkgs;
     nixDoomFlake = inputs.nix-doom-emacs;
   };
-in
-{
+in {
   home.packages = with pkgs; [
     # doom dependencies
     git
-    (ripgrep.override { withPCRE2 = true; })
+    (ripgrep.override {withPCRE2 = true;})
     gnutls # for TLS connectivity
 
     # optional dependencies
@@ -115,22 +120,23 @@ in
           path = doomPrivateDir;
           name = "doom-private-dir-filtered";
           filter = path: type:
-            builtins.elem (baseNameOf path) [ "init.el" "packages.el" ];
+            builtins.elem (baseNameOf path) ["init.el" "packages.el"];
         };
-      in pkgs.linkFarm "doom-packages-dir" [
-        {
-          name = "init.el";
-          path = "${filteredPath}/init.el";
-        }
-        {
-          name = "packages.el";
-          path = "${filteredPath}/packages.el";
-        }
-        {
-          name = "config.el";
-          path = pkgs.emptyFile;
-        }
-      ];
+      in
+        pkgs.linkFarm "doom-packages-dir" [
+          {
+            name = "init.el";
+            path = "${filteredPath}/init.el";
+          }
+          {
+            name = "packages.el";
+            path = "${filteredPath}/packages.el";
+          }
+          {
+            name = "config.el";
+            path = pkgs.emptyFile;
+          }
+        ];
     };
   };
 
@@ -141,37 +147,39 @@ in
 
   xdg.mimeApps = {
     enable = true;
-    defaultApplications = (
-      listToAttrs (
-        map (x: nameValuePair x "emacsclient.desktop") [
-          "application/javascript"
-          "application/json"
-          "application/markdown"
-          "application/x-php"
-          "application/x-shellscript"
-          "application/x-yaml"
-          "application/xml"
-          "text/english"
-          "text/plain"
-          "text/vnd.qt.linguist" # typescript
-          "text/x-c"
-          "text/x-c++"
-          "text/x-c++hdr"
-          "text/x-c++src"
-          "text/x-chdr"
-          "text/x-csrc"
-          "text/x-java"
-          "text/x-makefile"
-          "text/x-moc"
-          "text/x-pascal"
-          "text/x-patch"
-          "text/x-python"
-          "text/x-tcl"
-          "text/x-tex"
-        ]
+    defaultApplications =
+      (
+        listToAttrs (
+          map (x: nameValuePair x "emacsclient.desktop") [
+            "application/javascript"
+            "application/json"
+            "application/markdown"
+            "application/x-php"
+            "application/x-shellscript"
+            "application/x-yaml"
+            "application/xml"
+            "text/english"
+            "text/plain"
+            "text/vnd.qt.linguist" # typescript
+            "text/x-c"
+            "text/x-c++"
+            "text/x-c++hdr"
+            "text/x-c++src"
+            "text/x-chdr"
+            "text/x-csrc"
+            "text/x-java"
+            "text/x-makefile"
+            "text/x-moc"
+            "text/x-pascal"
+            "text/x-patch"
+            "text/x-python"
+            "text/x-tcl"
+            "text/x-tex"
+          ]
+        )
       )
-    ) // {
-      "x-scheme-handler/org-protocol" = "org-protocol.desktop";
-    };
+      // {
+        "x-scheme-handler/org-protocol" = "org-protocol.desktop";
+      };
   };
 }

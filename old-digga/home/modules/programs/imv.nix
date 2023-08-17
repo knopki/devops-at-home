@@ -1,10 +1,13 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkOption mkIf types;
   inherit (lib.generators) toINI;
   cfg = config.programs.imv;
-in
-{
+in {
   options.programs.imv = {
     enable = mkEnableOption "imv configuration";
 
@@ -12,7 +15,6 @@ in
       default = pkgs.imv;
       type = types.package;
     };
-
 
     finalPackage = mkOption {
       type = types.package;
@@ -22,7 +24,7 @@ in
     };
 
     settings = mkOption {
-      default = { };
+      default = {};
       type = with types; attrsOf (attrsOf (either str bool));
       description = "Configuration; see man 5 imv.";
     };
@@ -30,7 +32,7 @@ in
 
   config = mkIf cfg.enable {
     programs.imv.finalPackage = cfg.package;
-    home.packages = [ cfg.finalPackage ];
-    xdg.configFile."imv/config".text = toINI { } cfg.settings;
+    home.packages = [cfg.finalPackage];
+    xdg.configFile."imv/config".text = toINI {} cfg.settings;
   };
 }

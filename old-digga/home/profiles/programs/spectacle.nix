@@ -1,8 +1,11 @@
-{ config, nixosConfig, lib, ... }:
-let
-  inherit (lib) mkDefault;
-in
 {
+  config,
+  nixosConfig,
+  lib,
+  ...
+}: let
+  inherit (lib) mkDefault;
+in {
   programs.kde.settings.spectaclerc = {
     General = {
       autoSaveImage = true;

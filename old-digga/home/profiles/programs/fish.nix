@@ -1,9 +1,13 @@
-{ pkgs, lib, config, nixosConfig, ... }:
-let
-  inherit (lib) mkDefault mkIf;
-in
 {
-  home.packages = with pkgs.fishPlugins; [ foreign-env ];
+  pkgs,
+  lib,
+  config,
+  nixosConfig,
+  ...
+}: let
+  inherit (lib) mkDefault mkIf;
+in {
+  home.packages = with pkgs.fishPlugins; [foreign-env];
 
   programs.fish = {
     enable = mkDefault true;

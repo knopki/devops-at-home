@@ -1,4 +1,8 @@
-{ lib, stdenv, fetchurl }:
+{
+  lib,
+  stdenv,
+  fetchurl,
+}:
 stdenv.mkDerivation rec {
   pname = "wgcf";
   version = "2.2.11";
@@ -21,7 +25,7 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/ViRb3/wgcf";
     changelog = "https://github.com/ViRb3/wgcf/releases/tag/v${version}";
     license = licenses.mit;
-    maintainers = [ ];
-    platforms = [ "x86_64-linux" ];
+    maintainers = [];
+    platforms = ["x86_64-linux"];
   };
 }

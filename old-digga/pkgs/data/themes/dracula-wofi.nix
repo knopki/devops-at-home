@@ -1,4 +1,8 @@
-{ sources, lib, stdenv }:
+{
+  sources,
+  lib,
+  stdenv,
+}:
 stdenv.mkDerivation {
   inherit (sources.dracula-wofi) pname version src;
 

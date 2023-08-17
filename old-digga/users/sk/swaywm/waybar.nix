@@ -1,5 +1,10 @@
-{ config, lib, pkgs, nixosConfig, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  nixosConfig,
+  ...
+}: let
   inherit (lib) mkIf;
   waybarReloadCmd = ''
     echo "Reloading mako"
@@ -10,20 +15,19 @@ let
     CODE=$(curl -s http://ifconfig.co/country-iso)
     echo "{ \"class\": \"$CODE\", \"text\": \"$CODE\" }"
   '';
-in
-{
+in {
   home.packages = with pkgs; [
     libappindicator-gtk3 # tray icons support
   ];
 
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar.override { pulseSupport = true; };
+    package = pkgs.waybar.override {pulseSupport = true;};
     settings = [
       (
         {
-          modules-left = [ "sway/workspaces" "sway/mode" "sway/window" ];
-          modules-center = [ ];
+          modules-left = ["sway/workspaces" "sway/mode" "sway/window"];
+          modules-center = [];
           modules-right = [
             "tray"
             "idle_inhibitor"
@@ -44,23 +48,26 @@ in
               };
             };
             cpu = {
-              states = { critical = 75; };
+              states = {critical = 75;};
               format = "{usage}% ";
               tooltip = false;
             };
             memory = {
               format = "{}% ";
-              states = { critical = 90; };
+              states = {critical = 90;};
             };
-            temperature = {
-              format = "{temperatureC}°C ";
-              critical-threshold = 80;
-            } // (
-              if (nixosConfig.networking.hostName == "alien") then {
-                hwmon-path = "/sys/class/hwmon/hwmon0/temp1_input";
-              } else
-                { }
-            );
+            temperature =
+              {
+                format = "{temperatureC}°C ";
+                critical-threshold = 80;
+              }
+              // (
+                if (nixosConfig.networking.hostName == "alien")
+                then {
+                  hwmon-path = "/sys/class/hwmon/hwmon0/temp1_input";
+                }
+                else {}
+              );
             battery = {
               states = {
                 "awesome" = 90;
@@ -69,7 +76,7 @@ in
                 "critical" = 15;
               };
               format = "{capacity}% {icon}";
-              format-icons = [ "" "" "" "" "" ];
+              format-icons = ["" "" "" "" ""];
               format-charging = "{capacity}% ";
               format-plugged = "{capacity}% ";
               format-alt = "{time} {icon}";
@@ -101,14 +108,14 @@ in
                 headphones = "";
                 handsfree = "";
                 headset = "";
-                default = [ "" "" "" ];
+                default = ["" "" ""];
               };
               on-click = "pavucontrol";
               scroll-step = 0.001;
             };
             backlight = {
               format = "{percent}% {icon}";
-              format-icons = [ "" "" ];
+              format-icons = ["" ""];
             };
             clock = {
               format = " {:%a, %d. %b  %H:%M}";
@@ -128,11 +135,13 @@ in
                 "default" = "";
               };
             };
-            "sway/mode" = { format = ''<span style="italic">{}</span>''; };
-            "sway/window" = { max-length = 100; };
+            "sway/mode" = {format = ''<span style="italic">{}</span>'';};
+            "sway/window" = {max-length = 100;};
           };
-        } // (
-          if (nixosConfig.networking.hostName == "alien") then {
+        }
+        // (
+          if (nixosConfig.networking.hostName == "alien")
+          then {
             modules-right = [
               "tray"
               "idle_inhibitor"
@@ -146,7 +155,8 @@ in
               "backlight"
               "clock"
             ];
-          } else { }
+          }
+          else {}
         )
       )
     ];

@@ -1,8 +1,9 @@
-{ config, lib, ... }:
-
-with lib;
-
-let
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
   cfg = config.programs.brave;
 
   defaultProfile = filterAttrs (k: v: v != null) {
@@ -11,9 +12,7 @@ let
     DefaultSearchProviderSuggestURL = cfg.defaultSearchProviderSuggestURL;
     ExtensionInstallForcelist = cfg.extensions;
   };
-in
-
-{
+in {
   ###### interface
 
   options = {
@@ -32,7 +31,7 @@ in
           <link xlink:href="https://cloud.google.com/docs/chrome-enterprise/policies/?policy=ExtensionInstallForcelist">ExtensionInstallForcelist</link>
           for additional details.
         '';
-        default = [ ];
+        default = [];
         example = literalExpression ''
           [
             "chlffgpmiacpedhhbkiomidkjlcfhogd" # pushbullet
@@ -54,16 +53,14 @@ in
         type = types.nullOr types.str;
         description = "Brave default search provider url.";
         default = null;
-        example =
-          "https://encrypted.google.com/search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}{google:instantExtendedEnabledParameter}ie={inputEncoding}";
+        example = "https://encrypted.google.com/search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}{google:instantExtendedEnabledParameter}ie={inputEncoding}";
       };
 
       defaultSearchProviderSuggestURL = mkOption {
         type = types.nullOr types.str;
         description = "Brave default search provider url for suggestions.";
         default = null;
-        example =
-          "https://encrypted.google.com/complete/search?output=chrome&q={searchTerms}";
+        example = "https://encrypted.google.com/complete/search?output=chrome&q={searchTerms}";
       };
 
       extraOpts = mkOption {
@@ -74,7 +71,7 @@ in
           <link xlink:href="https://cloud.google.com/docs/chrome-enterprise/policies/">https://cloud.google.com/docs/chrome-enterprise/policies/</link>
           Make sure the selected policy is supported on Linux and your browser version.
         '';
-        default = { };
+        default = {};
         example = literalExpression ''
           {
             "BrowserSignin" = 0;

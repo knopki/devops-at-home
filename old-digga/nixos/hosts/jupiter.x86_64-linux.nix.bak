@@ -1,0 +1,138 @@
+{ config, lib, pkgs, ... }:
+with builtins;
+let
+  luksCommon = {
+    preLVM = true;
+    allowDiscards = true;
+    keyFile = "/dev/disk/by-id/usb-USB_Flash_Disk_CCYYMMDDHHmmSSU1QI0L-0:0";
+    keyFileOffset = 512 * 16;
+    keyFileSize = 512 * 8;
+    fallbackToPassword = true;
+  };
+in
+{
+  imports = [ ../modules ];
+
+  boot = {
+    extraModulePackages = [];
+    initrd = {
+      availableKernelModules = [ "ahci" "ehci_pci" "sd_mod" "usb_storage" "usbhid" "xhci_pci" ];
+      kernelModules = [ "dm-snapshot" ];
+
+      luks.devices = {
+        "luks-ssd" = (
+          luksCommon // {
+            device = "/dev/disk/by-uuid/5c68ca95-33d9-476e-8864-15d163f39de3";
+          }
+        );
+        "luks-data" = (
+          luksCommon // {
+            device = "/dev/disk/by-uuid/92179717-e72f-4d79-ad5e-f29e3d81de10";
+          }
+        );
+      };
+    };
+
+    kernelParams = [];
+
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+    };
+  };
+
+  environment.etc = {
+    "lvm/lvm.conf".text = ''
+      devices {
+        issue_discards = 1
+      }
+    '';
+  };
+
+  environment.systemPackages = with pkgs; [ hd-idle ];
+
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/fe6d8424-96e3-44a4-b939-37d89bfa401d";
+      fsType = "ext4";
+      options = [ "relatime" ];
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/C6B9-4E1F";
+      fsType = "vfat";
+    };
+    "/boot.bak" = {
+      device = "/dev/disk/by-uuid/C69C-9B91";
+      fsType = "vfat";
+    };
+    "/var/lib/nextcloud" = {
+      device = "/dev/disk/by-uuid/3de12227-9b50-4f7f-a980-6071f4054980";
+      fsType = "ext4";
+      options = [ "relatime" ];
+    };
+    "/var/lib/postgresql" = {
+      device = "/dev/disk/by-uuid/f8a2c031-7b02-4617-8a4d-e6f3cc6c50bc";
+      fsType = "ext4";
+      options = [ "relatime" ];
+    };
+  };
+
+  local = {
+    hardware.intel = true;
+    roles.essential.enable = true;
+    # roles.nextcloud = {
+    #   hostName = "z.jupiter.1984.run";
+    #   enable = true;
+    # };
+    users.setupUsers = [ "sk" ];
+  };
+
+  networking = {
+    hostId = "f2c8a36b";
+    hostName = "jupiter";
+    search = [ "1984.run" ];
+
+    interfaces.enp3s0 = { useDHCP = true; };
+    interfaces.enp4s0 = { useDHCP = false; };
+  };
+
+  nix.maxJobs = lib.mkDefault 4;
+
+  services = {
+    apcupsd = {
+      enable = true;
+      configText = ''
+        UPSCABLE usb
+        UPSTYPE usb
+        BATTERYLEVEL 30
+        MINUTES 10'';
+    };
+    fstrim.enable = true;
+    # postgresql = {
+    #   package = pkgs.postgresql_11;
+    # };
+    zerotierone = {
+      enable = true;
+      joinNetworks = [ "1c33c1ced08df9ac" ];
+    };
+  };
+
+  swapDevices = [ { device = "/dev/mapper/VG1-swap"; } ];
+
+  system.activationScripts.backupEFI = {
+    text = "${pkgs.rsync}/bin/rsync -azu --delete -h /boot/ /boot.bak";
+    deps = [];
+  };
+
+  systemd.services.hd-idle = {
+    description = "HD spin down daemon";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "forking";
+      ExecStart =
+        "${pkgs.hd-idle}/bin/hd-idle -i 0 -a /dev/sdc -i 600 -a /dev/sdd -i 600 -a /dev/sde -i 600 -a /dev/sdf -i 600 -a /dev/sdg -i 600 -a /dev/sdh -i 600";
+    };
+  };
+
+  system.stateVersion = "19.09";
+}

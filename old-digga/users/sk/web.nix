@@ -1,9 +1,19 @@
-{ pkgs, lib, config, ... }:
-let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   vimiumCommon = {
     exclusionRules = [
-      { pattern = "https?://mail.google.com/*"; passKeys = ""; }
-      { pattern = "https?://app.amazingmarvin.com/*"; passKeys = "ao"; }
+      {
+        pattern = "https?://mail.google.com/*";
+        passKeys = "";
+      }
+      {
+        pattern = "https?://app.amazingmarvin.com/*";
+        passKeys = "ao";
+      }
     ];
     keyMappings = ''
       # Navigating the current page:
@@ -145,38 +155,41 @@ let
       }
     '';
   };
-  vimiumFF = vimiumCommon // {
-    settingsVersion = "1.67.1";
-  };
-  vimiumC = vimiumCommon // {
-    settingsVersion = "1.67";
-  };
-in
-{
+  vimiumFF =
+    vimiumCommon
+    // {
+      settingsVersion = "1.67.1";
+    };
+  vimiumC =
+    vimiumCommon
+    // {
+      settingsVersion = "1.67";
+    };
+in {
   programs = {
     brave = {
       extensions = [
-        { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # tempermonkey
+        {id = "dhdgffkkebhmkfjojejmpbldmpobfkfo";} # tempermonkey
         {
           id = "dcpihecpambacapedldabdbpakmachpb";
           updateUrl = "https://raw.githubusercontent.com/iamadamdev/bypass-paywalls-chrome/master/src/updates/updates.xml";
         }
-        { id = "fihnjjcciajhdojfnbdddfaoknhalnja"; } # i don't care about cookies
-        { id = "nibjojkomfdiaoajekhjakgkdhaomnch"; } # ipfs companion
-        { id = "oldceeleldhonbafppcapldpdifcinji"; } # languagetool
-        { id = "dneaehbmnbhcippjikoajpoabadpodje"; } # old reddit redirect
-        { id = "dhhpefjklgkmgeafimnjhojgjamoafof"; } # save page we
-        { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
+        {id = "fihnjjcciajhdojfnbdddfaoknhalnja";} # i don't care about cookies
+        {id = "nibjojkomfdiaoajekhjakgkdhaomnch";} # ipfs companion
+        {id = "oldceeleldhonbafppcapldpdifcinji";} # languagetool
+        {id = "dneaehbmnbhcippjikoajpoabadpodje";} # old reddit redirect
+        {id = "dhhpefjklgkmgeafimnjhojgjamoafof";} # save page we
+        {id = "dbepggeogbaibhgnhhndojpepiihcmeb";} # vimium
 
-        { id = "nkbihfbeogaeaoehlefnkodbefgpgknn"; } # metamask
-        { id = "mopnmbcafieddcagagdcbnhejhlodfdd"; } # polkadot-js
-        { id = "lpilbniiabackdjcionkobglmddfbcjo"; } # waves keeper
-        { id = "aiifbnbfobpmeekipheeijimdpnlpgpp"; } # terra station
-        { id = "dmkamcknogkgcdfhhbddcghachkejeap"; } # keplr
-        { id = "bfnaelmomeimhlpmgjnjophhpkkoljpa"; } # phantom
-        { id = "fnnegphlobjdpkhecapkijjdkgcjhkib"; } # harmony wallet
-        { id = "cfbfdhimifdmdehjmkdobpcjfefblkjm"; } # plug (icp)
-        { id = "fhbohimaelbohpjbbldcngcnapndodjp"; } # binance wallet
+        {id = "nkbihfbeogaeaoehlefnkodbefgpgknn";} # metamask
+        {id = "mopnmbcafieddcagagdcbnhejhlodfdd";} # polkadot-js
+        {id = "lpilbniiabackdjcionkobglmddfbcjo";} # waves keeper
+        {id = "aiifbnbfobpmeekipheeijimdpnlpgpp";} # terra station
+        {id = "dmkamcknogkgcdfhhbddcghachkejeap";} # keplr
+        {id = "bfnaelmomeimhlpmgjnjophhpkkoljpa";} # phantom
+        {id = "fnnegphlobjdpkhecapkijjdkgcjhkib";} # harmony wallet
+        {id = "cfbfdhimifdmdehjmkdobpcjfefblkjm";} # plug (icp)
+        {id = "fhbohimaelbohpjbbldcngcnapndodjp";} # binance wallet
       ];
     };
 
@@ -198,7 +211,7 @@ in
         violentmonkey
       ];
 
-      profiles.default.settings = { };
+      profiles.default.settings = {};
     };
   };
   xdg.configFile = {

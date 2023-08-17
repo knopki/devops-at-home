@@ -1,11 +1,21 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkOption mkIf isBool concatStringsSep filterAttrs mapAttrs generators types;
   cfg = config.programs.wofi;
   valueToString = value:
-    if isBool value then (if value then "true" else "else") else toString value;
-in
-{
+    if isBool value
+    then
+      (
+        if value
+        then "true"
+        else "else"
+      )
+    else toString value;
+in {
   options.programs.wofi = {
     enable = mkEnableOption "Wofi: A Rofi and dmenu replacement";
 
@@ -94,7 +104,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ cfg.package ];
+    home.packages = [cfg.package];
 
     xdg.configFile."wofi/config".text = concatStringsSep "\n" [
       cfg.extraConfig
@@ -112,8 +122,7 @@ in
             key_down = cfg.key_down;
           };
           strOpts = mapAttrs (n: v: valueToString v) opts;
-        in
-        (generators.toKeyValue { } strOpts)
+        in (generators.toKeyValue {} strOpts)
       )
     ];
 

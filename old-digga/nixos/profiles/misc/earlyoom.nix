@@ -1,8 +1,11 @@
-{ lib, pkgs, config, ... }:
-let
-  inherit (lib) mkDefault mkIf;
-in
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  inherit (lib) mkDefault mkIf;
+in {
   services.earlyoom = {
     enable = true;
     enableNotifications = true;

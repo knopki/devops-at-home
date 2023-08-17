@@ -1,24 +1,29 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf mkMerge elem;
   cfg = config.theme;
-in
-{
-  options.theme.components.alacritty.enable = mkEnableOption "Apply theme to Alactritty" // {
-    default = config.programs.alacritty.enable;
-  };
+in {
+  options.theme.components.alacritty.enable =
+    mkEnableOption "Apply theme to Alactritty"
+    // {
+      default = config.programs.alacritty.enable;
+    };
 
   config = mkIf (cfg.enable && cfg.components.alacritty.enable) (mkMerge [
     {
       programs.alacritty.settings = {
         font = {
-          normal = { family = cfg.fonts.monospace.family; };
+          normal = {family = cfg.fonts.monospace.family;};
           size = cfg.fonts.monospace.size;
         };
       };
     }
 
-    (mkIf (!elem cfg.preset [ "dracula" ]) {
+    (mkIf (!elem cfg.preset ["dracula"]) {
       programs.alacritty.settings = {
         colors = with cfg.base16.colors; {
           primary = {
@@ -54,21 +59,38 @@ in
           };
 
           indexed_colors = [
-            { index = 16; color = "0x${base03.hex.rgb}"; }
-            { index = 17; color = "0x${base03.hex.rgb}"; }
-            { index = 18; color = "0x${base03.hex.rgb}"; }
-            { index = 19; color = "0x${base03.hex.rgb}"; }
-            { index = 20; color = "0x${base03.hex.rgb}"; }
-            { index = 21; color = "0x${base03.hex.rgb}"; }
+            {
+              index = 16;
+              color = "0x${base03.hex.rgb}";
+            }
+            {
+              index = 17;
+              color = "0x${base03.hex.rgb}";
+            }
+            {
+              index = 18;
+              color = "0x${base03.hex.rgb}";
+            }
+            {
+              index = 19;
+              color = "0x${base03.hex.rgb}";
+            }
+            {
+              index = 20;
+              color = "0x${base03.hex.rgb}";
+            }
+            {
+              index = 21;
+              color = "0x${base03.hex.rgb}";
+            }
           ];
         };
       };
     })
 
     (mkIf (cfg.preset == "dracula") {
-      xdg.configFile."alacritty/dracula.yml".source =
-        "${pkgs.dracula-alacritty}/dracula.yml";
-      programs.alacritty.settings.import = [ "dracula.yml" ];
+      xdg.configFile."alacritty/dracula.yml".source = "${pkgs.dracula-alacritty}/dracula.yml";
+      programs.alacritty.settings.import = ["dracula.yml"];
     })
   ]);
 }

@@ -1,9 +1,15 @@
-{ stdenv, pkgs, lib, wrapGAppsHook, makeWrapper, ... }:
-let
+{
+  stdenv,
+  pkgs,
+  lib,
+  wrapGAppsHook,
+  makeWrapper,
+  ...
+}: let
   inherit (lib) makeBinPath licenses platforms;
   internalPath = makeBinPath (
     with pkgs; [
-      (pass.withExtensions (ext: with ext; [ pass-otp ]))
+      (pass.withExtensions (ext: with ext; [pass-otp]))
       coreutils
       findutils
       gawk
@@ -24,30 +30,30 @@ let
     ]
   );
 in
-stdenv.mkDerivation rec {
-  name = "sway-scripts";
-  src = ./.;
-  nativeBuildInputs = [ makeWrapper ];
+  stdenv.mkDerivation rec {
+    name = "sway-scripts";
+    src = ./.;
+    nativeBuildInputs = [makeWrapper];
 
-  dontBuild = true;
-  dontConfigure = true;
+    dontBuild = true;
+    dontConfigure = true;
 
-  unpackPhase = ''
-    mkdir ${name}
-    cp -R $src/bin ${name}/
-  '';
+    unpackPhase = ''
+      mkdir ${name}
+      cp -R $src/bin ${name}/
+    '';
 
-  installPhase = ''
-    for file in $(ls ${name}/bin); do
-        name=$(basename $file .sh)
-        install -Dm0755 ${name}/bin/$file $out/bin/$name
-        wrapProgram $out/bin/$name --set PATH "${internalPath}"
-    done
-  '';
+    installPhase = ''
+      for file in $(ls ${name}/bin); do
+          name=$(basename $file .sh)
+          install -Dm0755 ${name}/bin/$file $out/bin/$name
+          wrapProgram $out/bin/$name --set PATH "${internalPath}"
+      done
+    '';
 
-  meta = {
-    description = "A helpers for sway wm environment";
-    license = licenses.mit;
-    platforms = platforms.linux;
-  };
-}
+    meta = {
+      description = "A helpers for sway wm environment";
+      license = licenses.mit;
+      platforms = platforms.linux;
+    };
+  }

@@ -1,19 +1,21 @@
-{ config, nixosConfig, lib, pkgs, ... }:
-let
-  inherit (lib) mkDefault mkIf;
-in
 {
-  home.packages =
-    with pkgs;
-    with plasma5Packages;
-    with plasma5;
-    with kdeApplications;
-    with kdeFrameworks;
-    [
-      bismuth
-      plasma-applet-caffeine-plus
-      plasma-applet-virtual-desktop-bar
-    ];
+  config,
+  nixosConfig,
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (lib) mkDefault mkIf;
+in {
+  home.packages = with pkgs;
+  with plasma5Packages;
+  with plasma5;
+  with kdeApplications;
+  with kdeFrameworks; [
+    bismuth
+    plasma-applet-caffeine-plus
+    plasma-applet-virtual-desktop-bar
+  ];
 
   programs = {
     kde = {
@@ -33,7 +35,7 @@ in
   systemd.user.targets.tray = mkIf config.programs.kde.enable {
     Unit = {
       Description = "Home Manager System Tray";
-      Requires = [ "graphical-session-pre.target" ];
+      Requires = ["graphical-session-pre.target"];
     };
   };
 }

@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ wget ];
+{pkgs, ...}: {
+  home.packages = with pkgs; [wget];
 
   home.file = {
     ".wgetrc".text = ''

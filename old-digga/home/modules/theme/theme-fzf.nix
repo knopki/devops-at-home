@@ -1,10 +1,13 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.theme;
-in
-{
-  options.theme.components.fzf.enable = mkEnableOption "Apply theme to fzf" // { default = cfg.enable; };
+in {
+  options.theme.components.fzf.enable = mkEnableOption "Apply theme to fzf" // {default = cfg.enable;};
 
   config = mkIf (cfg.enable && cfg.components.fzf.enable) {
     programs.fzf.defaultOptions = with cfg.base16.colors; [

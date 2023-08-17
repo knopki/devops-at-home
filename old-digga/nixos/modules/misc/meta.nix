@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }:
-let inherit (lib) mkEnableOption; in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (lib) mkEnableOption;
+in {
   options.meta.suites = {
     workstation = mkEnableOption "workstation suite activated";
     stationary = mkEnableOption "stationary suite activated";

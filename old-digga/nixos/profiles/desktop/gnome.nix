@@ -1,8 +1,10 @@
-{ pkgs, lib, ... }:
-let
-  inherit (lib) mkBefore;
-in
 {
+  pkgs,
+  lib,
+  ...
+}: let
+  inherit (lib) mkBefore;
+in {
   environment = {
     gnome3.excludePackages = with pkgs.gnome3; [
       epiphany
@@ -33,7 +35,7 @@ in
   };
 
   services = {
-    dbus.packages = with pkgs; [ gnome3.dconf ];
+    dbus.packages = with pkgs; [gnome3.dconf];
     gnome3 = {
       core-os-services.enable = true;
       core-shell.enable = true;
@@ -57,6 +59,6 @@ in
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 }

@@ -1,4 +1,8 @@
-{ lib, stdenv, sources }:
+{
+  lib,
+  stdenv,
+  sources,
+}:
 stdenv.mkDerivation {
   inherit (sources.base16-default-schemes) pname version src;
 

@@ -1,8 +1,10 @@
-{ config, lib, ... }:
-let
-  inherit (lib) mkDefault;
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) mkDefault;
+in {
   programs.kde.settings.kdeglobals.General = {
     TerminalApplication = mkDefault "alacritty";
     TerminalService = mkDefault "Alacritty.desktop";

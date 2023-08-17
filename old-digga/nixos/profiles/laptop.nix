@@ -1,8 +1,11 @@
-{ pkgs, lib, inputs, ... }:
-let
-  inherit (lib) mkDefault;
-in
 {
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
+  inherit (lib) mkDefault;
+in {
   imports = with inputs.nixos-hardware.nixosModules; [
     common-pc-laptop
   ];

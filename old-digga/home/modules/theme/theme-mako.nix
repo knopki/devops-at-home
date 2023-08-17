@@ -1,12 +1,18 @@
-{ config, options, lib, pkgs, ... }:
-let
+{
+  config,
+  options,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkDefault mkIf mkAfter;
   cfg = config.theme;
-in
-{
-  options.theme.components.mako.enable = mkEnableOption "Apply theme to Mako" // {
-    default = options ? programs.mako && config.programs.mako.enable;
-  };
+in {
+  options.theme.components.mako.enable =
+    mkEnableOption "Apply theme to Mako"
+    // {
+      default = options ? programs.mako && config.programs.mako.enable;
+    };
 
   config = mkIf (cfg.enable && cfg.components.mako.enable && options ? programs.mako) (with cfg.base16.colors; {
     programs.mako = {

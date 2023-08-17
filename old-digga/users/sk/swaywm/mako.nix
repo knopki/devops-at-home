@@ -1,8 +1,11 @@
-{ config, lib, pkgs, ... }:
-let
-  inherit (lib) mkAfter;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (lib) mkAfter;
+in {
   programs.mako = {
     enable = true;
     sort = "+time";
@@ -34,7 +37,7 @@ in
         Restart = "always";
         ExecStart = "${pkgs.mako}/bin/mako";
       };
-      Install = { WantedBy = [ "sway-session.target" ]; };
+      Install = {WantedBy = ["sway-session.target"];};
     };
   };
 }

@@ -1,32 +1,36 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.programs.vscode;
 
   vscodePname = cfg.package.pname;
 
-  jsonFormat = pkgs.formats.json { };
+  jsonFormat = pkgs.formats.json {};
 
-  configDir = {
-    "vscode" = "Code";
-    "vscode-insiders" = "Code - Insiders";
-    "vscodium" = "VSCodium";
-  }.${vscodePname};
+  configDir =
+    {
+      "vscode" = "Code";
+      "vscode-insiders" = "Code - Insiders";
+      "vscodium" = "VSCodium";
+    }
+    .${vscodePname};
 
-  extensionDir = {
-    "vscode" = "vscode";
-    "vscode-insiders" = "vscode-insiders";
-    "vscodium" = "vscode-oss";
-  }.${vscodePname};
+  extensionDir =
+    {
+      "vscode" = "vscode";
+      "vscode-insiders" = "vscode-insiders";
+      "vscodium" = "vscode-oss";
+    }
+    .${vscodePname};
 
   userDir =
-    if pkgs.stdenv.hostPlatform.isDarwin then
-      "Library/Application Support/${configDir}/User"
-    else
-      "${config.xdg.configHome}/${configDir}/User";
+    if pkgs.stdenv.hostPlatform.isDarwin
+    then "Library/Application Support/${configDir}/User"
+    else "${config.xdg.configHome}/${configDir}/User";
 
   configFilePath = "${userDir}/settings.json";
   keybindingsFilePath = "${userDir}/keybindings.json";
@@ -37,11 +41,16 @@ let
   dropNullFields = filterAttrs (_: v: v != null);
 
   settingsJson = jsonFormat.generate "vscode-user-settings" cfg.userSettings;
-  keybindingsJson = jsonFormat.generate "vscode-keybindings"
+  keybindingsJson =
+    jsonFormat.generate "vscode-keybindings"
     (map dropNullFields cfg.keybindings);
 
-  mkActivationScript = { policy, userCfg, jqArgs }:
-    hm.dag.entryAfter [ "writeBoundary" ] ''
+  mkActivationScript = {
+    policy,
+    userCfg,
+    jqArgs,
+  }:
+    hm.dag.entryAfter ["writeBoundary"] ''
       if [[ -f "${userCfg}" ]]; then
         $DRY_RUN_CMD cat ${userCfg} | \
           (${pkgs.jq}/bin/jq ${jqArgs} "${policy}"; dd status=none of=/dev/null) | \
@@ -50,16 +59,15 @@ let
         $DRY_RUN_CMD cp "${policy}" "${userCfg}" && chmod +600 "${userCfg}"
       fi
     '';
-in
-{
-  disabledModules = [ "programs/vscode.nix" ];
+in {
+  disabledModules = ["programs/vscode.nix"];
 
   options = {
     programs.vscode = {
       enable = mkEnableOption "Visual Studio Code";
 
       activationMode = mkOption {
-        type = types.enum [ "symlink" "merge" ];
+        type = types.enum ["symlink" "merge"];
         default = "symlink";
         description = ''
           How to apply settings and keyboard shortcuts.
@@ -85,7 +93,7 @@ in
 
       userSettings = mkOption {
         type = jsonFormat.type;
-        default = { };
+        default = {};
         example = literalExample ''
           {
             "update.channel" = "none";
@@ -124,12 +132,12 @@ in
             args = mkOption {
               type = jsonFormat.type;
               default = null;
-              example = { direction = "up"; };
+              example = {direction = "up";};
               description = "Optional arguments for a command.";
             };
           };
         });
-        default = [ ];
+        default = [];
         example = literalExample ''
           [
             {
@@ -147,7 +155,7 @@ in
 
       extensions = mkOption {
         type = types.listOf types.package;
-        default = [ ];
+        default = [];
         example = literalExample "[ pkgs.vscode-extensions.bbenoist.Nix ]";
         description = ''
           The extensions Visual Studio Code should be started with.
@@ -158,39 +166,38 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ cfg.package ];
+    home.packages = [cfg.package];
 
     # Adapted from https://discourse.nixos.org/t/vscode-extensions-setup/1801/2
-    home.file =
-      let
-        subDir = "share/vscode/extensions";
-        toPaths = path:
-          # Links every dir in path to the extension path.
-          mapAttrsToList
-            (k: _: { "${extensionPath}/${k}".source = "${path}/${subDir}/${k}"; })
-            (builtins.readDir (path + "/${subDir}"));
-        toSymlink = concatMap toPaths cfg.extensions;
-      in
+    home.file = let
+      subDir = "share/vscode/extensions";
+      toPaths = path:
+      # Links every dir in path to the extension path.
+        mapAttrsToList
+        (k: _: {"${extensionPath}/${k}".source = "${path}/${subDir}/${k}";})
+        (builtins.readDir (path + "/${subDir}"));
+      toSymlink = concatMap toPaths cfg.extensions;
+    in
       foldr (a: b: a // b)
-        {
-          "${configFilePath}" = mkIf (cfg.activationMode == "symlink" && cfg.userSettings != { }) {
-            source = settingsJson;
-          };
-          "${keybindingsFilePath}" = mkIf (cfg.activationMode == "symlink" && cfg.keybindings != [ ]) {
-            source = keybindingsJson;
-          };
-        }
-        toSymlink;
+      {
+        "${configFilePath}" = mkIf (cfg.activationMode == "symlink" && cfg.userSettings != {}) {
+          source = settingsJson;
+        };
+        "${keybindingsFilePath}" = mkIf (cfg.activationMode == "symlink" && cfg.keybindings != []) {
+          source = keybindingsJson;
+        };
+      }
+      toSymlink;
 
     home.activation = mkIf (cfg.activationMode == "merge") (mkMerge [
-      (optionalAttrs (cfg.userSettings != { }) {
+      (optionalAttrs (cfg.userSettings != {}) {
         vscodeSettings = mkActivationScript {
           policy = settingsJson;
           userCfg = configFilePath;
           jqArgs = "-n 'reduce inputs as $i ({}; $i * .)'";
         };
       })
-      (optionalAttrs (cfg.keybindings != [ ]) {
+      (optionalAttrs (cfg.keybindings != []) {
         vscodeKeybindings = mkActivationScript {
           policy = keybindingsJson;
           userCfg = keybindingsFilePath;

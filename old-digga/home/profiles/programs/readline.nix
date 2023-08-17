@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   programs.readline = {
     enable = lib.mkDefault true;
     bindings = {

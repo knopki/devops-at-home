@@ -1,9 +1,13 @@
-{ config, lib, pkgs, nixosConfig, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  nixosConfig,
+  ...
+}: let
   inherit (builtins) toString listToAttrs map;
   inherit (lib) mkMerge mkIf;
-in
-{
+in {
   programs.kde = {
     settings = {
       kdeglobals.General.BrowserApplication = "brave-browser.desktop";
@@ -42,8 +46,8 @@ in
           maximizeSoleTile = true;
           tileLayoutGap = 5;
           # experimentalBackend = true;
-          floatingTitle = [ "imv" "SpeedCrunch" ];
-          ignoreTitle = [ "MetaMask Notification" ];
+          floatingTitle = ["imv" "SpeedCrunch"];
+          ignoreTitle = ["MetaMask Notification"];
           ignoreRole = "pop-up";
         };
         Desktops = {
@@ -79,97 +83,104 @@ in
       kglobalshortcutsrc = {
         "Alacritty.desktop" = {
           _k_friendly_name = "Alacritty";
-          _launch = [ "Meta+Return" "" "Alacritty" ];
+          _launch = ["Meta+Return" "" "Alacritty"];
         };
         "krunner.desktop" = {
           _k_friendly_name = "KRunner";
-          _launch = [ "Alt+F2\tSearch" "Alt+F2\tSearch" "KRunner" ];
+          _launch = ["Alt+F2\tSearch" "Alt+F2\tSearch" "KRunner"];
         };
         kwin = {
-          "Switch to Desktop 1" = [ "Meta+1" "none" "" ];
-          "Switch to Desktop 2" = [ "Meta+2" "none" "" ];
-          "Switch to Desktop 3" = [ "Meta+3" "none" "" ];
-          "Switch to Desktop 4" = [ "Meta+4" "none" "" ];
-          "Switch to Desktop 5" = [ "Meta+5" "none" "" ];
-          "Switch to Desktop 6" = [ "Meta+6" "none" "" ];
-          "Switch to Desktop 7" = [ "Meta+7" "none" "" ];
-          "Switch to Desktop 8" = [ "Meta+8" "none" "" ];
-          "Switch to Desktop 9" = [ "Meta+9" "none" "" ];
-          "Switch to Desktop 10" = [ "Meta+0" "none" "" ];
+          "Switch to Desktop 1" = ["Meta+1" "none" ""];
+          "Switch to Desktop 2" = ["Meta+2" "none" ""];
+          "Switch to Desktop 3" = ["Meta+3" "none" ""];
+          "Switch to Desktop 4" = ["Meta+4" "none" ""];
+          "Switch to Desktop 5" = ["Meta+5" "none" ""];
+          "Switch to Desktop 6" = ["Meta+6" "none" ""];
+          "Switch to Desktop 7" = ["Meta+7" "none" ""];
+          "Switch to Desktop 8" = ["Meta+8" "none" ""];
+          "Switch to Desktop 9" = ["Meta+9" "none" ""];
+          "Switch to Desktop 10" = ["Meta+0" "none" ""];
 
-          "Window to Desktop 1" = [ "Meta+!" "none" "" ];
-          "Window to Desktop 2" = [ "Meta+@" "none" "" ];
-          "Window to Desktop 3" = [ "Meta+#" "none" "" ];
-          "Window to Desktop 4" = [ "Meta+$" "none" "" ];
-          "Window to Desktop 5" = [ "Meta+%" "none" "" ];
-          "Window to Desktop 6" = [ "Meta+^" "none" "" ];
-          "Window to Desktop 7" = [ "Meta+&" "none" "" ];
-          "Window to Desktop 8" = [ "Meta+*" "none" "" ];
-          "Window to Desktop 9" = [ "Meta+(" "none" "" ];
-          "Window to Desktop 10" = [ "Meta+)" "none" "" ];
+          "Window to Desktop 1" = ["Meta+!" "none" ""];
+          "Window to Desktop 2" = ["Meta+@" "none" ""];
+          "Window to Desktop 3" = ["Meta+#" "none" ""];
+          "Window to Desktop 4" = ["Meta+$" "none" ""];
+          "Window to Desktop 5" = ["Meta+%" "none" ""];
+          "Window to Desktop 6" = ["Meta+^" "none" ""];
+          "Window to Desktop 7" = ["Meta+&" "none" ""];
+          "Window to Desktop 8" = ["Meta+*" "none" ""];
+          "Window to Desktop 9" = ["Meta+(" "none" ""];
+          "Window to Desktop 10" = ["Meta+)" "none" ""];
 
-          "Switch to Next Screen" = [ "Meta+." "none" "" ];
-          "Switch to Previous Screen" = [ "Meta+," "none" "" ];
+          "Switch to Next Screen" = ["Meta+." "none" ""];
+          "Switch to Previous Screen" = ["Meta+," "none" ""];
 
-          "Window to Next Screen" = [ "Meta+>" "Meta+Shift+Right" "" ];
-          "Window to Previous Screen" = [ "Meta+<" "Meta+Shift+Left" "" ];
+          "Window to Next Screen" = ["Meta+>" "Meta+Shift+Right" ""];
+          "Window to Previous Screen" = ["Meta+<" "Meta+Shift+Left" ""];
 
-          "Window Close" = [ "Meta+Shift+Q\tAlt+F4" "Alt+F4" "" ];
+          "Window Close" = ["Meta+Shift+Q\tAlt+F4" "Alt+F4" ""];
         };
 
         "org.kde.dolphin.desktop" = {
           _k_friendly_name = "Dolphin";
-          _launch = [ "Meta+E" "Meta+E" "" ];
+          _launch = ["Meta+E" "Meta+E" ""];
         };
 
         "speedcrunch.desktop" = {
           _k_friendly_name = "SpeedCrunch";
-          _launch = [ "Meta+C" "" "SpeedCrunch" ];
+          _launch = ["Meta+C" "" "SpeedCrunch"];
         };
 
         bismuth = {
           _k_friendly_name = "Window Tiling";
-          decrease_master_size = [ "Meta+Ctrl+J" "Meta+Ctrl+J" "Decrease Master Area Size" ];
-          decrease_master_win_count = [ "Meta+[" "Meta+[" "Decrease Master Area Window Count" ];
-          decrease_window_height = [ "Meta+Ctrl+K" "Meta+Ctrl+K" "Decrease Window Height" ];
-          decrease_window_width = [ "Meta+Ctrl+H" "Meta+Ctrl+H" "Decrease Window Width" ];
-          focus_bottom_window = [ "Meta+J" "Meta+J" "Focus Bottom Window" ];
-          focus_left_window = [ "Meta+H" "Meta+H" "Focus Left Window" ];
-          focus_next_window = [ "none" "none" "Focus Next Window" ];
-          focus_prev_window = [ "none" "none" "Focus Previous Window" ];
-          focus_right_window = [ "Meta+L" "Meta+L" "Focus Right Window" ];
-          focus_upper_window = [ "Meta+K" "Meta+K" "Focus Upper Window" ];
-          increase_master_size = [ "Meta+Ctrl+K" "Meta+Ctrl+K" "Increase Master Area Size" ];
-          increase_master_win_count = [ "Meta+]" "Meta+]" "Increase Master Area Window Count" ];
-          increase_window_height = [ "Meta+Ctrl+J" "Meta+Ctrl+J" "Increase Window Height" ];
-          increase_window_width = [ "Meta+Ctrl+L" "Meta+Ctrl+L" "Increase Window Width" ];
-          move_window_to_bottom_pos = [ "Meta+Shift+J" "Meta+Shift+J" "Move Window Down" ];
-          move_window_to_left_pos = [ "Meta+Shift+H" "Meta+Shift+H" "Move Window Left" ];
-          move_window_to_next_pos = [ "none" "none" "Move Window to the Next Position" ];
-          move_window_to_prev_pos = [ "none" "none" "Move Window to the Previous Position" ];
-          move_window_to_right_pos = [ "Meta+Shift+L" "Meta+Shift+L" "Move Window Right" ];
-          move_window_to_upper_pos = [ "Meta+Shift+K" "Meta+Shift+K" "Move Window Up" ];
-          next_layout = [ "Meta+\\" "Meta+\\" "Switch to the Next Layout" ];
-          prev_layout = [ "Meta+|" "Meta+|" "Switch to the Previous Layout" ];
-          push_window_to_master = [ "Meta+M" "Meta+M" "Push Active Window to Master Area" ];
-          rotate = [ "Meta+R" "Meta+R" "Rotate" ];
-          rotate_part = [ "Meta+Shift+R" "Meta+Shift+R" "Rotate Part" ];
-          rotate_reverse = [ "none" "none" "Rotate (Reverse)" ];
-          toggle_float_layout = [ "Meta+Shift+F" "Meta+Shift+F" "Toggle Floating Layout" ];
-          toggle_monocle_layout = [ "none" "none" "Toggle Monocle Layout" ];
-          toggle_quarter_layout = [ "none" "none" "Toggle Quarter Layout" ];
-          toggle_spiral_layout = [ "none" "none" "Toggle Spiral Layout" ];
-          toggle_spread_layout = [ "none" "none" "Toggle Spread Layout" ];
-          toggle_stair_layout = [ "none" "none" "Toggle Stair Layout" ];
-          toggle_three_column_layout = [ "none" "none" "Toggle Three Column Layout" ];
-          toggle_tile_layout = [ "Meta+T" "Meta+T" "Toggle Tile Layout" ];
-          toggle_window_floating = [ "Meta+F" "Meta+F" "Toggle Active Window Floating" ];
+          decrease_master_size = ["Meta+Ctrl+J" "Meta+Ctrl+J" "Decrease Master Area Size"];
+          decrease_master_win_count = ["Meta+[" "Meta+[" "Decrease Master Area Window Count"];
+          decrease_window_height = ["Meta+Ctrl+K" "Meta+Ctrl+K" "Decrease Window Height"];
+          decrease_window_width = ["Meta+Ctrl+H" "Meta+Ctrl+H" "Decrease Window Width"];
+          focus_bottom_window = ["Meta+J" "Meta+J" "Focus Bottom Window"];
+          focus_left_window = ["Meta+H" "Meta+H" "Focus Left Window"];
+          focus_next_window = ["none" "none" "Focus Next Window"];
+          focus_prev_window = ["none" "none" "Focus Previous Window"];
+          focus_right_window = ["Meta+L" "Meta+L" "Focus Right Window"];
+          focus_upper_window = ["Meta+K" "Meta+K" "Focus Upper Window"];
+          increase_master_size = ["Meta+Ctrl+K" "Meta+Ctrl+K" "Increase Master Area Size"];
+          increase_master_win_count = ["Meta+]" "Meta+]" "Increase Master Area Window Count"];
+          increase_window_height = ["Meta+Ctrl+J" "Meta+Ctrl+J" "Increase Window Height"];
+          increase_window_width = ["Meta+Ctrl+L" "Meta+Ctrl+L" "Increase Window Width"];
+          move_window_to_bottom_pos = ["Meta+Shift+J" "Meta+Shift+J" "Move Window Down"];
+          move_window_to_left_pos = ["Meta+Shift+H" "Meta+Shift+H" "Move Window Left"];
+          move_window_to_next_pos = ["none" "none" "Move Window to the Next Position"];
+          move_window_to_prev_pos = ["none" "none" "Move Window to the Previous Position"];
+          move_window_to_right_pos = ["Meta+Shift+L" "Meta+Shift+L" "Move Window Right"];
+          move_window_to_upper_pos = ["Meta+Shift+K" "Meta+Shift+K" "Move Window Up"];
+          next_layout = ["Meta+\\" "Meta+\\" "Switch to the Next Layout"];
+          prev_layout = ["Meta+|" "Meta+|" "Switch to the Previous Layout"];
+          push_window_to_master = ["Meta+M" "Meta+M" "Push Active Window to Master Area"];
+          rotate = ["Meta+R" "Meta+R" "Rotate"];
+          rotate_part = ["Meta+Shift+R" "Meta+Shift+R" "Rotate Part"];
+          rotate_reverse = ["none" "none" "Rotate (Reverse)"];
+          toggle_float_layout = ["Meta+Shift+F" "Meta+Shift+F" "Toggle Floating Layout"];
+          toggle_monocle_layout = ["none" "none" "Toggle Monocle Layout"];
+          toggle_quarter_layout = ["none" "none" "Toggle Quarter Layout"];
+          toggle_spiral_layout = ["none" "none" "Toggle Spiral Layout"];
+          toggle_spread_layout = ["none" "none" "Toggle Spread Layout"];
+          toggle_stair_layout = ["none" "none" "Toggle Stair Layout"];
+          toggle_three_column_layout = ["none" "none" "Toggle Three Column Layout"];
+          toggle_tile_layout = ["Meta+T" "Meta+T" "Toggle Tile Layout"];
+          toggle_window_floating = ["Meta+F" "Meta+F" "Toggle Active Window Floating"];
         };
 
         plasmashell = listToAttrs (map
-          (x:
-            let name = "activate task manager entry ${toString (if x == 0 then 10 else x)}"; in
-            { inherit name; value = [ "none" "none" name ]; }) [ 0 1 2 3 4 5 6 7 8 9 ]);
+          (x: let
+            name = "activate task manager entry ${toString (
+              if x == 0
+              then 10
+              else x
+            )}";
+          in {
+            inherit name;
+            value = ["none" "none" name];
+          }) [0 1 2 3 4 5 6 7 8 9]);
       };
 
       kwinrulesrc = {
@@ -177,7 +188,7 @@ in
         # fix tiling for windows with big minimal size
         "1" = {
           Description = "Setting Minimum Geometry Size";
-          minsize = [ 1 1 ];
+          minsize = [1 1];
           minsizerule = 2;
           types = 1;
         };
@@ -192,6 +203,5 @@ in
   };
 
   # enable kwin scripts
-  xdg.dataFile."kservices5/bismuth.desktop".source =
-    "${pkgs.plasma5Packages.bismuth}/share/kservices5/bismuth.desktop";
+  xdg.dataFile."kservices5/bismuth.desktop".source = "${pkgs.plasma5Packages.bismuth}/share/kservices5/bismuth.desktop";
 }

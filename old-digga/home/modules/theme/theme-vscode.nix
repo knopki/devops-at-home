@@ -1,12 +1,17 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkIf mkEnableOption mkMerge;
   cfg = config.theme;
-in
-{
-  options.theme.components.vscode.enable = mkEnableOption "Apply theme to VS Code" // {
-    default = config.programs.vscode.enable;
-  };
+in {
+  options.theme.components.vscode.enable =
+    mkEnableOption "Apply theme to VS Code"
+    // {
+      default = config.programs.vscode.enable;
+    };
 
   config = mkIf (cfg.enable && cfg.components.vscode.enable) (mkMerge [
     {

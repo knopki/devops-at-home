@@ -1,19 +1,24 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf mkMerge mkBefore elem;
   cfg = config.theme;
-in
-{
-  options.theme.components.zathura.enable = mkEnableOption "Apply theme to Zathura" // {
-    default = config.programs.zathura.enable;
-  };
+in {
+  options.theme.components.zathura.enable =
+    mkEnableOption "Apply theme to Zathura"
+    // {
+      default = config.programs.zathura.enable;
+    };
 
   config = mkIf (cfg.enable && cfg.components.zathura.enable) (mkMerge [
     {
       programs.zathura.options.font = "${cfg.fonts.regular.family} ${toString cfg.fonts.regular.size}";
     }
 
-    (mkIf (!elem cfg.preset [ "dracula" ]) {
+    (mkIf (!elem cfg.preset ["dracula"]) {
       programs.zathura = {
         options = with cfg.base16.colors; {
           default-bg = mkDefault "#${base00.hex.rgb}";
@@ -42,10 +47,10 @@ in
       };
     })
 
-
     (mkIf (cfg.preset == "dracula") {
-      programs.zathura.extraConfig = mkBefore (builtins.readFile
-        "${pkgs.dracula-zathura}/zathurarc");
+      programs.zathura.extraConfig =
+        mkBefore (builtins.readFile
+          "${pkgs.dracula-zathura}/zathurarc");
     })
   ]);
 }

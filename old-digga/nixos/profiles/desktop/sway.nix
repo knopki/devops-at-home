@@ -1,7 +1,11 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   inherit (lib) mkDefault mkBefore concatStringsSep;
-  extraOptions = [ "--my-next-gpu-wont-be-nvidia" ];
+  extraOptions = ["--my-next-gpu-wont-be-nvidia"];
   extraSessionCommands = ''
     source /etc/profile
     test -f $HOME/.profile && source $HOME/.profile
@@ -24,8 +28,7 @@ let
     export NO_AT_BRIDGE=1
     export WLR_DRM_NO_MODIFIERS=1
   '';
-in
-{
+in {
   environment.systemPackages = with pkgs; [
     pavucontrol
     playerctl
@@ -48,6 +51,6 @@ in
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    extraPortals = [pkgs.xdg-desktop-portal-wlr];
   };
 }

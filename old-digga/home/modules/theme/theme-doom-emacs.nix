@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkBefore mkIf optionalString;
   cfg = config.theme;
   base16colors = with cfg.base16.colors; ''
@@ -24,9 +28,8 @@ let
         :base0F "#${base0F.hex.rgb}")
       "All colors for Base16 {{scheme-name}} are defined here.")
   '';
-in
-{
-  options.theme.components.doom-emacs.enable = mkEnableOption "Apply theme to Doom Emacs" // { default = cfg.enable; };
+in {
+  options.theme.components.doom-emacs.enable = mkEnableOption "Apply theme to Doom Emacs" // {default = cfg.enable;};
 
   config = mkIf (cfg.enable && cfg.components.doom-emacs.enable) {
     programs.doom-emacs.extraConfig = mkBefore ''

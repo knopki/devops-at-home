@@ -1,41 +1,38 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   libsForQt5 = pkgs.plasma5Packages;
   inherit (libsForQt5) kdeApplications kdeFrameworks plasma5;
-in
-{
-  environment.etc =
-    let
-      appId = "org.kde.plasma.browser_integration.json";
-      source = "${libsForQt5.plasma-browser-integration}/etc/chromium/native-messaging-hosts/${appId}";
-    in
-    {
-      "brave/native-messaging-hosts/${appId}".source = source;
-      "chromium/native-messaging-hosts/${appId}".source = source;
-      "opt/chrome/native-messaging-hosts/${appId}".source = source;
-      "opt/vivaldi/native-messaging-hosts/${appId}".source = source;
-    };
+in {
+  environment.etc = let
+    appId = "org.kde.plasma.browser_integration.json";
+    source = "${libsForQt5.plasma-browser-integration}/etc/chromium/native-messaging-hosts/${appId}";
+  in {
+    "brave/native-messaging-hosts/${appId}".source = source;
+    "chromium/native-messaging-hosts/${appId}".source = source;
+    "opt/chrome/native-messaging-hosts/${appId}".source = source;
+    "opt/vivaldi/native-messaging-hosts/${appId}".source = source;
+  };
 
-  environment.systemPackages =
-    with pkgs;
-    with plasma5Packages;
-    with plasma5;
-    with kdeApplications;
-    with kdeFrameworks;
-    [
-      krename
-      qt5.qttools
-    ];
+  environment.systemPackages = with pkgs;
+  with plasma5Packages;
+  with plasma5;
+  with kdeApplications;
+  with kdeFrameworks; [
+    krename
+    qt5.qttools
+  ];
 
-  programs =
-    let
-      extId = "cimiefiiaegbelhefglklhhakcgmhkai";
-    in
-    {
-      brave.extensions = [ extId ];
-      chromium.extensions = [ extId ];
-      partition-manager.enable = true;
-    };
+  programs = let
+    extId = "cimiefiiaegbelhefglklhhakcgmhkai";
+  in {
+    brave.extensions = [extId];
+    chromium.extensions = [extId];
+    partition-manager.enable = true;
+  };
 
   security.pam.services.sddm.gnupg = {
     enable = true;
@@ -51,13 +48,11 @@ in
     desktopManager.plasma5 = {
       enable = true;
       runUsingSystemd = true;
-      excludePackages =
-        with pkgs;
-        with plasma5Packages;
-        with plasma5;
-        with kdeApplications;
-        with kdeFrameworks;
-        [ gwenview okular ];
+      excludePackages = with pkgs;
+      with plasma5Packages;
+      with plasma5;
+      with kdeApplications;
+      with kdeFrameworks; [gwenview okular];
     };
   };
 

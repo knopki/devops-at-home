@@ -1,5 +1,11 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  ...
+}: let
   inherit (lib) mkDefault mkForce;
   luksCommon = {
     preLVM = true;
@@ -10,8 +16,7 @@ let
     fallbackToPassword = true;
   };
   swapPartName = "/dev/nvme-vg/swap";
-in
-{
+in {
   imports = with inputs.nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
     common-cpu-intel
@@ -26,7 +31,7 @@ in
       options i8k force=1
       options i915 error_capture=1 mitigations=off
     '';
-    extraModulePackages = [ ];
+    extraModulePackages = [];
     initrd = {
       availableKernelModules = [
         "aesni_intel"
@@ -42,19 +47,23 @@ in
         "usbhid"
         "xhci_pci"
       ];
-      kernelModules = [ "dm-snapshot" ];
+      kernelModules = ["dm-snapshot"];
 
       luks.devices = {
-        "luks-nvme" = luksCommon // {
-          device = "/dev/disk/by-uuid/b7bb1cfc-414b-4806-b7b3-ff80df7a48d5";
-        };
-        "luks-sata" = luksCommon // {
-          device = "/dev/disk/by-uuid/c594a74b-464d-49eb-a2de-70d08b75c328";
-        };
+        "luks-nvme" =
+          luksCommon
+          // {
+            device = "/dev/disk/by-uuid/b7bb1cfc-414b-4806-b7b3-ff80df7a48d5";
+          };
+        "luks-sata" =
+          luksCommon
+          // {
+            device = "/dev/disk/by-uuid/c594a74b-464d-49eb-a2de-70d08b75c328";
+          };
       };
     };
 
-    kernelModules = [ "dell-smm-hwmod" "kvm-intel" ];
+    kernelModules = ["dell-smm-hwmod" "kvm-intel"];
     kernelParams = [
       "resume=${swapPartName}"
       "acpiphp.disable=1"
@@ -78,7 +87,7 @@ in
         }
       '';
     };
-    systemPackages = with pkgs; [ intel-gpu-tools ];
+    systemPackages = with pkgs; [intel-gpu-tools];
   };
 
   fileSystems = {
@@ -89,12 +98,12 @@ in
     "/" = {
       device = "/dev/disk/by-uuid/e384e984-2dbf-470d-82b2-7d994f4b4a7b";
       fsType = "ext4";
-      options = [ "relatime" ];
+      options = ["relatime"];
     };
     "/home" = {
       device = "/dev/disk/by-uuid/ce307698-b1ea-4ef1-b104-304275e71818";
       fsType = "ext4";
-      options = [ "relatime" ];
+      options = ["relatime"];
     };
   };
 
@@ -116,12 +125,15 @@ in
         offload.enable = false;
         sync.enable = true;
       };
-      powerManagement = { enable = false; finegrained = false; };
+      powerManagement = {
+        enable = false;
+        finegrained = false;
+      };
     };
   };
 
   nix.settings.max-jobs = mkDefault 8;
-  nixpkgs.system = "x86_64-linux";
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   services = {
     autorandr = let
@@ -138,12 +150,12 @@ in
     in {
       enable = true;
       profiles."mobile" = {
-        fingerprint = { eDP-1 = eDPEDID; };
-        config = { eDP-1 = eDPconf; };
+        fingerprint = {eDP-1 = eDPEDID;};
+        config = {eDP-1 = eDPconf;};
       };
       profiles."mobile-sync" = {
-        fingerprint = { eDP-1-1 = eDPEDID; };
-        config = { eDP-1-1 = eDPconf; };
+        fingerprint = {eDP-1-1 = eDPEDID;};
+        config = {eDP-1-1 = eDPconf;};
         #hooks.postswitch."change-dpi" = ''
         #  echo "Xft.dpi: 144" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
         #'';
@@ -166,7 +178,7 @@ in
 
     xserver = {
       dpi = 96;
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = ["nvidia"];
       # monitorSection = ''
       #   DisplaySize 338 190
       # '';
@@ -176,10 +188,18 @@ in
     };
   };
 
-  swapDevices = [{ device = swapPartName; discardPolicy = "both"; }];
+  swapDevices = [
+    {
+      device = swapPartName;
+      discardPolicy = "both";
+    }
+  ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  zramSwap = { enable = true; swapDevices = 1; };
+  zramSwap = {
+    enable = true;
+    swapDevices = 1;
+  };
 }

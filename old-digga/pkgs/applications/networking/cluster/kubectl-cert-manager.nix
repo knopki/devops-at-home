@@ -1,4 +1,8 @@
-{ lib, stdenv, fetchzip }:
+{
+  lib,
+  stdenv,
+  fetchzip,
+}:
 stdenv.mkDerivation rec {
   pname = "kubectl-cert-manager";
   version = "1.5.4";
@@ -19,6 +23,6 @@ stdenv.mkDerivation rec {
     homepage = "https://cert-manager.io/docs/usage/kubectl-plugin/";
     changelog = "https://github.com/jetstack/cert-manager/releases/tag/v${version}";
     license = licenses.asl20;
-    maintainers = [ ];
+    maintainers = [];
   };
 }

@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-let
-  inherit (lib) mkDefault readFile;
-in
 {
-  home.packages = with pkgs; [ ripgrep ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  inherit (lib) mkDefault readFile;
+in {
+  home.packages = with pkgs; [ripgrep];
 
   programs.direnv.enable = true;
   programs.fzf.enable = true;

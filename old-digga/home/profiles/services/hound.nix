@@ -1,15 +1,18 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) generators optional mkDefault;
   desktopItem = pkgs.makeDesktopItem {
     name = "hound";
     desktopName = "Hound";
     icon = "system-search";
     exec = "xdg-open http://${config.services.hound.listenAddress}/";
-    categories = [ "System" ];
+    categories = ["System"];
   };
-in
-{
+in {
   home.packages = optional config.services.hound.enable desktopItem;
 
   services.hound = {

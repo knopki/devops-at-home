@@ -1,13 +1,24 @@
-{ config, lib, pkgs, nixDoomFlake, inputs, ... }:
-with lib;
-let
+{
+  config,
+  lib,
+  pkgs,
+  nixDoomFlake,
+  inputs,
+  ...
+}:
+with lib; let
   emacsPackagesOverlay = final: prev: rec {
-    straightBuild = { pname, ... }@args: prev.trivialBuild ({
-      ename = pname;
-      version = "1";
-      src = if args ? "src" then src else inputs.nix-doom-emacs.inputs.${pname};
-      buildPhase = ":";
-    } // args);
+    straightBuild = {pname, ...} @ args:
+      prev.trivialBuild ({
+          ename = pname;
+          version = "1";
+          src =
+            if args ? "src"
+            then src
+            else inputs.nix-doom-emacs.inputs.${pname};
+          buildPhase = ":";
+        }
+        // args);
 
     evil-collection = pkgs.emacsPackages.evil-collection;
 
@@ -30,7 +41,6 @@ let
       };
     };
   };
-in
-{
+in {
   inherit emacsPackagesOverlay;
 }

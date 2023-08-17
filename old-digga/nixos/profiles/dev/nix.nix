@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     cachix
     graphviz

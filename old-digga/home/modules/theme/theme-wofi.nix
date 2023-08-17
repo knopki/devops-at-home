@@ -1,15 +1,21 @@
-{ config, options, lib, pkgs, ... }:
-let
+{
+  config,
+  options,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf mkMerge mkBefore elem;
   cfg = config.theme;
-in
-{
-  options.theme.components.wofi.enable = mkEnableOption "Apply theme to Wofi" // {
-    default = options ? programs.wofi && config.programs.wofi.enable;
-  };
+in {
+  options.theme.components.wofi.enable =
+    mkEnableOption "Apply theme to Wofi"
+    // {
+      default = options ? programs.wofi && config.programs.wofi.enable;
+    };
 
   config = mkIf (cfg.enable && cfg.components.wofi.enable && options ? programs.wofi) (mkMerge [
-    (mkIf (!elem cfg.preset [ "dracula" ]) {
+    (mkIf (!elem cfg.preset ["dracula"]) {
       xdg.configFile."wofi/style.css".text = mkBefore (with cfg.base16.colors; ''
         window {
           background-color: #${base00.hex.rgb};
@@ -41,8 +47,9 @@ in
     })
 
     (mkIf (cfg.preset == "dracula") {
-      xdg.configFile."wofi/style.css".text = mkBefore (builtins.readFile
-        "${pkgs.dracula-wofi}/style.css");
+      xdg.configFile."wofi/style.css".text =
+        mkBefore (builtins.readFile
+          "${pkgs.dracula-wofi}/style.css");
     })
   ]);
 }

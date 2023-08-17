@@ -1,6 +1,9 @@
-
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   dataDir = "/var/lib/cronosd";
   cassiniChainId = "cassini_339-1";
   cassiniDataDir = "${dataDir}/${cassiniChainId}";
@@ -17,19 +20,18 @@ let
     sed -i.bak -E 's#^(create_empty_blocks_interval[[:space:]]+=[[:space:]]+).*$#\1"5s"#' $DATA_DIR/config/config.toml
     sed -i.bak -E 's#^(timeout_commit[[:space:]]+=[[:space:]]+).*$#\1"5s"#' $DATA_DIR/config/config.toml
   '';
-in
-{
+in {
   environment.systemPackages = with pkgs; [
     curl
     cronosd
   ];
 
-  networking.firewall.allowedTCPPorts = [ 26656 ];
+  networking.firewall.allowedTCPPorts = [26656];
 
   systemd.services.cronosd-cassini = {
     description = "Cassini testnet Cronosd";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
     serviceConfig = {
       User = "cronosd-cassini";
       Group = "cronosd-cassini";
@@ -39,7 +41,6 @@ in
       ExecStart = ''
         ${pkgs.cronosd}/bin/cronosd start --log_level warn
       '';
-
     };
   };
 
@@ -58,6 +59,6 @@ in
   };
 
   users.groups = {
-    cronosd-cassini = { };
+    cronosd-cassini = {};
   };
 }

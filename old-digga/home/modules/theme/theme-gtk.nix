@@ -1,14 +1,18 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkIf mkMerge mkDefault mkEnableOption elem;
   cfg = config.theme;
   isDarkTheme = cfg.base16.kind == "dark";
   materiaTheme = rec {
     name = "Materia-Base16-${cfg.base16.name}";
     package = pkgs.materia-theme.overrideAttrs (o: {
-      nativeBuildInputs = o.nativeBuildInputs ++ (with pkgs; [ inkscape optipng ]);
+      nativeBuildInputs = o.nativeBuildInputs ++ (with pkgs; [inkscape optipng]);
 
-      theme = with cfg.base16.colors; (lib.generators.toKeyValue { } {
+      theme = with cfg.base16.colors; (lib.generators.toKeyValue {} {
         # Color selection copied from
         # https://github.com/pinpox/nixos-home/blob/1cefe28c72930a0aed41c20d254ad4d193a3fa37/gtk.nix#L11
         ACCENT_BG = base0B.hex.rgb;
@@ -37,7 +41,7 @@ let
         UNITY_DEFAULT_LAUNCHER_STYLE = "False";
         NAME = name;
       });
-      passAsFile = [ "theme" ];
+      passAsFile = ["theme"];
 
       postPatch = ''
         patchShebangs .
@@ -46,11 +50,22 @@ let
       '';
     });
   };
-  papirusIcons = { name = if isDarkTheme then "Papirus-Dark" else "Papirus"; package = pkgs.papirus-icon-theme; };
-  draculaTheme = { name = "Dracula"; package = pkgs.dracula-theme; };
-  draculaIcons = { name = "Dracula"; package = pkgs.dracula-icon-theme; };
-in
-{
+  papirusIcons = {
+    name =
+      if isDarkTheme
+      then "Papirus-Dark"
+      else "Papirus";
+    package = pkgs.papirus-icon-theme;
+  };
+  draculaTheme = {
+    name = "Dracula";
+    package = pkgs.dracula-theme;
+  };
+  draculaIcons = {
+    name = "Dracula";
+    package = pkgs.dracula-icon-theme;
+  };
+in {
   options.theme.components.gtk.enable = mkEnableOption "Apply theme to Gtk";
 
   config = mkIf (cfg.enable && cfg.components.gtk.enable) (mkMerge [
@@ -71,7 +86,7 @@ in
       };
     }
 
-    (mkIf (!elem cfg.preset [ "dracula" ]) {
+    (mkIf (!elem cfg.preset ["dracula"]) {
       dconf.settings = {
         "org/gnome/desktop/wm/preferences".theme = mkDefault materiaTheme.name;
       };

@@ -1,8 +1,11 @@
-{ config, nixosConfig, lib, ... }:
-let
-  inherit (lib) mkMerge;
-in
 {
+  config,
+  nixosConfig,
+  lib,
+  ...
+}: let
+  inherit (lib) mkMerge;
+in {
   programs = {
     gpg = {
       enable = true;

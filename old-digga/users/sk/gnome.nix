@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   home.file = {
     "${config.xdg.configHome}/gtk-3.0/bookmarks".text = ''
       file://${config.home.homeDirectory}/dev Development

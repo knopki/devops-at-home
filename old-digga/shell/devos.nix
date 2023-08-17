@@ -1,18 +1,18 @@
-{ pkgs, inputs, ... }:
-let
-
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   hooks = import ./hooks;
 
-  pkgWithCategory = category: package: { inherit package category; };
+  pkgWithCategory = category: package: {inherit package category;};
   linter = pkgWithCategory "linter";
   devos = pkgWithCategory "devos";
-
-in
-{
+in {
   _file = toString ./.;
 
-  imports = [ "${inputs.digga.inputs.devshell.outPath}/extra/git/hooks.nix" ];
-  git = { inherit hooks; };
+  imports = ["${inputs.digga.inputs.devshell.outPath}/extra/git/hooks.nix"];
+  git = {inherit hooks;};
 
   devshell.startup = {
     # tempfix: remove when merged https://github.com/numtide/devshell/pull/123
@@ -35,32 +35,32 @@ in
     '';
   };
 
-  commands = with pkgs; [
-    (devos nixUnstable)
-    (devos agenix)
-    {
-      category = "devos";
-      name = pkgs.nvfetcher.pname;
-      help = pkgs.nvfetcher.meta.description;
-      command = "cd $PRJ_ROOT/pkgs; ${pkgs.nvfetcher}/bin/nvfetcher -c ./sources.toml $@";
-    }
-    (linter nixpkgs-fmt)
-    (linter editorconfig-checker)
-    (devos pkgs.deploy-rs)
-    {
-      name = "sops-edit";
-      category = "devos";
-      command = "${pkgs.sops}/bin/sops $@";
-      help = "sops-edit <secretFileName>.yaml | Edit secretFile with sops-nix";
-    }
-  ]
-  ++ lib.optional
+  commands = with pkgs;
+    [
+      (devos nixUnstable)
+      (devos agenix)
+      {
+        category = "devos";
+        name = pkgs.nvfetcher.pname;
+        help = pkgs.nvfetcher.meta.description;
+        command = "cd $PRJ_ROOT/pkgs; ${pkgs.nvfetcher}/bin/nvfetcher -c ./sources.toml $@";
+      }
+      (linter nixpkgs-fmt)
+      (linter editorconfig-checker)
+      (devos pkgs.deploy-rs)
+      {
+        name = "sops-edit";
+        category = "devos";
+        command = "${pkgs.sops}/bin/sops $@";
+        help = "sops-edit <secretFileName>.yaml | Edit secretFile with sops-nix";
+      }
+    ]
+    ++ lib.optional
     (system != "i686-linux")
     (devos cachix)
-  ++ lib.optional
+    ++ lib.optional
     (system != "aarch64-darwin")
-    (devos inputs.nixos-generators.defaultPackage.${pkgs.system})
-  ;
+    (devos inputs.nixos-generators.defaultPackage.${pkgs.system});
 
   env = [
     {

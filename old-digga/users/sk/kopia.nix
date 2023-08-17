@@ -1,13 +1,18 @@
-{ config, lib, pkgs, nixosConfig, ... }:
-let inherit (lib) mkIf hm elem; in
 {
-  home.activation.kopiaSettings =
-    let
-      lsCmd = "$DRY_RUN_CMD ${pkgs.coreutils}/bin/ln $VERBOSE_ARG -sf";
-      secrets = nixosConfig.sops.secrets;
-      dst = "${config.xdg.configHome}/kopia";
-    in
-    hm.dag.entryAfter [ "writeBoundary" ] ''
+  config,
+  lib,
+  pkgs,
+  nixosConfig,
+  ...
+}: let
+  inherit (lib) mkIf hm elem;
+in {
+  home.activation.kopiaSettings = let
+    lsCmd = "$DRY_RUN_CMD ${pkgs.coreutils}/bin/ln $VERBOSE_ARG -sf";
+    secrets = nixosConfig.sops.secrets;
+    dst = "${config.xdg.configHome}/kopia";
+  in
+    hm.dag.entryAfter ["writeBoundary"] ''
       ${lsCmd} "${secrets.kopia-repository-config.path}" \
         "${dst}/repository.config"
       ${lsCmd} "${secrets.kopia-knopki-repo-password-file.path}" \
@@ -15,20 +20,26 @@ let inherit (lib) mkIf hm elem; in
     '';
 
   services.kopia = {
-    enable = elem nixosConfig.networking.hostName [ "alien" ];
+    enable = elem nixosConfig.networking.hostName ["alien"];
     env = {
       KOPIA_LOG_DIR_MAX_AGE = "168h";
       KOPIA_CONTENT_LOG_DIR_MAX_AGE = "168h";
     };
     jobs = {
       alien-devs = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "*:0/10"; RandomizedDelaySec = "5m"; };
+        timer = {
+          OnCalendar = "*:0/10";
+          RandomizedDelaySec = "5m";
+        };
         snapshots = [
           "${config.home.homeDirectory}/dev"
         ];
       };
       alien-browsers = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
+        timer = {
+          OnCalendar = "daily";
+          RandomizedDelaySec = "12h";
+        };
         snapshots = [
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Default"
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Profile 1"
@@ -38,7 +49,10 @@ let inherit (lib) mkIf hm elem; in
         ];
       };
       alien-secrets = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "hourly"; RandomizedDelaySec = "30m"; };
+        timer = {
+          OnCalendar = "hourly";
+          RandomizedDelaySec = "30m";
+        };
         snapshots = [
           "${config.home.homeDirectory}/.gnupg"
           "${config.home.homeDirectory}/.kube/config"
@@ -55,13 +69,19 @@ let inherit (lib) mkIf hm elem; in
         ];
       };
       alien-electrum = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
+        timer = {
+          OnCalendar = "daily";
+          RandomizedDelaySec = "12h";
+        };
         snapshots = [
           "${config.home.homeDirectory}/.var/app/org.electrum.electrum/.electrum"
         ];
       };
       alien-docs = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
+        timer = {
+          OnCalendar = "daily";
+          RandomizedDelaySec = "12h";
+        };
         snapshots = [
           "${config.home.homeDirectory}/library"
           "${config.home.homeDirectory}/trash"
@@ -70,7 +90,10 @@ let inherit (lib) mkIf hm elem; in
         ];
       };
       alien-pkm = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "*:0/10"; RandomizedDelaySec = "5m"; };
+        timer = {
+          OnCalendar = "*:0/10";
+          RandomizedDelaySec = "5m";
+        };
         snapshots = [
           "${config.home.homeDirectory}/.var/app/com.logseq.Logseq/.logseq"
           "${config.home.homeDirectory}/.zotero"
@@ -81,7 +104,10 @@ let inherit (lib) mkIf hm elem; in
         ];
       };
       alien-media = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
+        timer = {
+          OnCalendar = "daily";
+          RandomizedDelaySec = "12h";
+        };
         snapshots = [
           "${config.home.homeDirectory}/.var/app/org.darktable.Darktable/config/darktable"
           config.xdg.userDirs.videos
@@ -90,13 +116,19 @@ let inherit (lib) mkIf hm elem; in
         ];
       };
       alien-anki = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "weekly"; RandomizedDelaySec = "24h"; };
+        timer = {
+          OnCalendar = "weekly";
+          RandomizedDelaySec = "24h";
+        };
         snapshots = [
           "${config.home.homeDirectory}/.var/app/net.ankiweb.Anki/data"
         ];
       };
       alien-random-conf = mkIf (nixosConfig.networking.hostName == "alien") {
-        timer = { OnCalendar = "daily"; RandomizedDelaySec = "12h"; };
+        timer = {
+          OnCalendar = "daily";
+          RandomizedDelaySec = "12h";
+        };
         snapshots = [
           "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/Custom Dictionary.txt"
           "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/Preferences"

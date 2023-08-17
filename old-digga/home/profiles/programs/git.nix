@@ -1,8 +1,11 @@
-{ pkgs, nixosConfig, lib, ... }:
-let
-  inherit (lib) mkDefault mkIf;
-in
 {
+  pkgs,
+  nixosConfig,
+  lib,
+  ...
+}: let
+  inherit (lib) mkDefault mkIf;
+in {
   programs.git = {
     enable = mkDefault true;
 
@@ -31,12 +34,9 @@ in
       h1rd = "hard HEAD~1";
 
       # logging
-      lg =
-        "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-      plog =
-        "log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'";
-      tlog =
-        "log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative";
+      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      plog = "log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'";
+      tlog = "log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative";
       rank = "shortlog -sn --no-merges";
 
       # delete merged branches
@@ -75,23 +75,23 @@ in
         changed = "green";
         untracked = "cyan";
       };
-      diff = { renames = "copies"; };
-      "diff \"bin\"" = { textconv = "hexdump -v -C"; };
+      diff = {renames = "copies";};
+      "diff \"bin\"" = {textconv = "hexdump -v -C";};
       "diff \"odf\"" = {
         binary = "true";
         textconv = "odt2txt";
       };
-      help = { autocorrect = "1"; };
+      help = {autocorrect = "1";};
       merge = {
         log = "true";
         ff = "only";
         conflictstyle = "diff3";
       };
-      rebase = { autosquash = "true"; };
-      include = { path = "local"; };
-      status = { showUntrackedFiles = "all"; };
-      transfer = { fsckobjects = "true"; };
-      init = { defaultBranch = "master"; };
+      rebase = {autosquash = "true";};
+      include = {path = "local";};
+      status = {showUntrackedFiles = "all";};
+      transfer = {fsckobjects = "true";};
+      init = {defaultBranch = "master";};
     };
 
     ignores = [

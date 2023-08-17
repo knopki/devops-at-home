@@ -1,6 +1,5 @@
-{ ... }:
-{
-  home-manager.users.nixos = { suites, ... }: {
+{...}: {
+  home-manager.users.nixos = {suites, ...}: {
     imports = suites.base;
   };
 
@@ -9,6 +8,6 @@
     password = "nixos";
     description = "default";
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
   };
 }

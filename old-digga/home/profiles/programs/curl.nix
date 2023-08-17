@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-{
-  home.packages = with pkgs; [ curl ];
+{pkgs, ...}: {
+  home.packages = with pkgs; [curl];
   home.file = {
     ".curlrc".text = ''
       # Create the necessary local directory hierarchy as needed.

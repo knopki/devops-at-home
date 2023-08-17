@@ -1,6 +1,10 @@
-{ pkgs, lib, ... }:
-let inherit (lib) mkDefault; in
 {
+  pkgs,
+  lib,
+  ...
+}: let
+  inherit (lib) mkDefault;
+in {
   environment = {
     etc = {
       "distrobox/distrobox.conf".text = ''
@@ -33,7 +37,7 @@ let inherit (lib) mkDefault; in
     libvirtd = {
       enable = true;
       qemu.runAsRoot = false;
-      allowedBridges = [ "virbr0" "virbr1" ];
+      allowedBridges = ["virbr0" "virbr1"];
     };
 
     oci-containers.backend = mkDefault "podman";
@@ -42,9 +46,7 @@ let inherit (lib) mkDefault; in
       defaultNetwork.dnsname.enable = true;
       dockerSocket.enable = true;
       enable = true;
-      extraPackages = with pkgs; [ aardvark-dns netavark ];
+      extraPackages = with pkgs; [aardvark-dns netavark];
     };
-
-
   };
 }

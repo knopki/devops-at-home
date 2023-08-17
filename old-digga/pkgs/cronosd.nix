@@ -1,6 +1,9 @@
-{ pkgs, lib, fetchurl, stdenv }:
-
-let
+{
+  pkgs,
+  lib,
+  fetchurl,
+  stdenv,
+}: let
   pname = "cronosd";
   version = "0.5.5";
   name = "cronosd-${version}";
@@ -11,17 +14,17 @@ let
     sha256 = "sha256-P3O7HgbtiqdaIqD5xMIv9x/IE0m5XCWU4f2jDEeoans=";
   };
 in
-stdenv.mkDerivation rec {
-  inherit src version name;
+  stdenv.mkDerivation rec {
+    inherit src version name;
 
-  nativeBuildInputs = [
-    pkgs.autoPatchelfHook
-  ];
+    nativeBuildInputs = [
+      pkgs.autoPatchelfHook
+    ];
 
-  phases = [ "unpackPhase" "installPhase" "fixupPhase" ];
+    phases = ["unpackPhase" "installPhase" "fixupPhase"];
 
-  installPhase = ''
-    mkdir -p $out/bin
-    cp cronosd $out/bin/cronosd
-  '';
-}
+    installPhase = ''
+      mkdir -p $out/bin
+      cp cronosd $out/bin/cronosd
+    '';
+  }

@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   programs.tmux = {
     enable = lib.mkDefault true;
     # windows start from 1
@@ -36,6 +39,6 @@
       set -ga terminal-overrides ",alacritty:Tc"
     '';
     newSession = true;
-    plugins = with pkgs.tmuxPlugins; [ pain-control sensible yank ];
+    plugins = with pkgs.tmuxPlugins; [pain-control sensible yank];
   };
 }

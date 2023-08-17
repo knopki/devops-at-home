@@ -1,10 +1,13 @@
-{ config, options, lib, ... }:
-let
+{
+  config,
+  options,
+  lib,
+  ...
+}: let
   inherit (lib) mkIf mkMerge mkBefore mkEnableOption elem;
   cfg = config.theme;
-in
-{
-  options.theme.components.swaywm.enable = mkEnableOption "Apply theme to SwayWM" // { default = cfg.enable; };
+in {
+  options.theme.components.swaywm.enable = mkEnableOption "Apply theme to SwayWM" // {default = cfg.enable;};
 
   config = mkIf (cfg.enable && cfg.components.swaywm.enable && options ? swayland.windowManager.sway) (mkMerge [
     {
@@ -13,7 +16,7 @@ in
       ];
     }
 
-    (mkIf (!elem cfg.preset [ "dracula" ]) {
+    (mkIf (!elem cfg.preset ["dracula"]) {
       wayland.windowManager.sway.config.colors = with cfg.base16.colors; {
         background = mkDefault "#${base07.hex.rgb}";
         focused = {

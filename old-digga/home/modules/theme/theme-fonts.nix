@@ -1,9 +1,13 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) types mkOption;
   cfg = config.theme.fonts;
 
-  fontModule = types.submodule ({ config, ... }: {
+  fontModule = types.submodule ({config, ...}: {
     options = {
       family = mkOption {
         type = types.str;
@@ -21,8 +25,7 @@ let
       };
     };
   });
-in
-{
+in {
   options.theme.fonts = {
     regular = mkOption {
       type = fontModule;
@@ -30,7 +33,7 @@ in
       default = {
         family = "Noto Sans";
         size = 10;
-        packages = [ pkgs.noto-fonts ];
+        packages = [pkgs.noto-fonts];
       };
     };
 
@@ -40,7 +43,7 @@ in
       default = {
         family = "Noto Sans";
         size = 10;
-        packages = [ pkgs.noto-fonts ];
+        packages = [pkgs.noto-fonts];
       };
     };
 
@@ -50,7 +53,7 @@ in
       default = {
         family = "Hack";
         size = 10;
-        packages = [ pkgs.hack-font ];
+        packages = [pkgs.hack-font];
       };
     };
   };

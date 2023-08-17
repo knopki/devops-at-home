@@ -1,4 +1,8 @@
-{ sources, lib, stdenv }:
+{
+  sources,
+  lib,
+  stdenv,
+}:
 stdenv.mkDerivation {
   inherit (sources.ls-colors) pname version src;
 

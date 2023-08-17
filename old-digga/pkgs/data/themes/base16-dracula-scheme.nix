@@ -1,4 +1,8 @@
-{ sources, lib, stdenv }:
+{
+  sources,
+  lib,
+  stdenv,
+}:
 stdenv.mkDerivation {
   inherit (sources.base16-dracula-scheme) pname version src;
 
