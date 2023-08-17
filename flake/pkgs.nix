@@ -9,7 +9,6 @@
 {
   inputs,
   flake-parts-lib,
-  self,
   ...
 }: let
   inherit (flake-parts-lib) perSystem;
@@ -17,7 +16,6 @@ in {
   config = {
     perSystem = {
       config,
-      inputs',
       lib,
       pkgs,
       system,
@@ -28,19 +26,24 @@ in {
         inherit system;
         config.allowUnfree = true;
       };
-      pkgsInputs = {inherit lib nixpkgsUnstable pkgs;};
-    in {
-      # This sets `pkgs` to a nixpkgs with allowUnfree option set and overlays
-      _module.args.pkgs = import inputs.nixpkgs {
+
+      # primary unfree nixpkgs
+      nixpkgs = import inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
         overlays = [
-          # is that really necessary?
-          (_: final: import ../pkgs (pkgsInputs // {pkgs = final;}))
+          # is that really necessary? no, just use packages from config.packages
+          (_: final: {
+            inherit (config.packages) version;
+          })
         ];
       };
-
-      packages = import ../pkgs pkgsInputs;
+    in {
+      _module.args.pkgs = nixpkgs;
+      packages = import ../pkgs/all-packages.nix {
+        inherit lib nixpkgsUnstable;
+        pkgs = nixpkgs;
+      };
     };
   };
 }
