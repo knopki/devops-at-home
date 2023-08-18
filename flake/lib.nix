@@ -25,7 +25,7 @@ in {
       self',
       ...
     }: {
-      _module.specialArgs.lib = lib.extend (_: _: {extended = self'.lib;});
+      _module.args.lib = lib.extend (_: _: {extended = self'.lib;});
     };
   };
 }

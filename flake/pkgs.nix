@@ -3,9 +3,6 @@
 #
 # Load packages and overlays from ../pkgs
 #
-# See also:
-# How to implement per host nixpkgs version:
-# https://github.com/hercules-ci/flake-parts/issues/96#issuecomment-1420196400
 {
   inputs,
   lib,
@@ -47,12 +44,12 @@ in {
       sources = pkgs.callPackage ../pkgs/_sources/generated.nix {};
 
       # package loader with additional inputs
-      pkgsInputs = pkgs // { inherit nixpkgsUnstable sources; };
+      pkgsInputs = pkgs // {inherit nixpkgsUnstable sources;};
       callPackage = lib.callPackageWith pkgsInputs;
 
       # load packages
-      importPackagesAttrs = mapAttrs (_: x: callPackage x { });
-      packages = importPackagesAttrs (toModuleAttr { src = ../pkgs; });
+      importPackagesAttrs = mapAttrs (_: x: callPackage x {});
+      packages = importPackagesAttrs (toModuleAttr {src = ../pkgs;});
     in {
       inherit packages;
       _module.args.pkgs = nixpkgs;

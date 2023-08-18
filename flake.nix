@@ -81,35 +81,20 @@
     oldDigga,
     ...
   } @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} ({moduleWithSystem, ...}: {
+    flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
       imports = [
         ./flake/lib.nix
         ./flake/shells.nix
         ./flake/pkgs.nix
+        ./flake/nixos.nix
       ];
 
       debug = false;
 
       systems = ["x86_64-linux" "aarch64-linux"];
 
-      perSystem = {
-        config,
-        self',
-        inputs',
-        pkgs,
-        system,
-        lib,
-        ...
-      }: {
-        # homeConfigurations = {};
-      };
-
       flake.nixosConfigurations = {
         alien = oldDigga.nixosConfigurations.alien;
-        # alien-new = nixpkgs.lib.nixosSystem {
-        #   modules = [
-        #   ];
-        # };
       };
     });
 }
