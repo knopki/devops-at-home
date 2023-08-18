@@ -6,11 +6,13 @@
 #
 {
   flake-parts-lib,
+  lib,
   inputs,
   self,
   ...
 }: let
-  inherit (self.lib.filesystem) haumeaLoaders toModuleAttr toModuleAttr';
+  inherit (lib.attrsets) mapAttrs;
+  inherit (self.lib.filesystem) toModuleAttr toModuleAttr';
   inherit (flake-parts-lib) perSystem;
 in {
   imports = [
@@ -27,10 +29,9 @@ in {
       pkgs,
       ...
     }: let
-      args = {
-        loader = haumeaLoaders.default;
-        inputs = {inherit config pkgs;};
-      };
+      importShellAttrs = mapAttrs (_: x: import x {inherit config pkgs;});
+      loadShells = src: importShellAttrs (toModuleAttr {inherit src;});
+      loadShells' = src: importShellAttrs (toModuleAttr' {inherit src;});
     in {
       treefmt = {
         projectRootFile = "flake.nix";
@@ -40,10 +41,13 @@ in {
         ];
       };
 
-      devshells = toModuleAttr' (args // {src = ../shells/devshells;});
+      # load devshells into prefixed `devshells-` attrs
+      devshells = loadShells' ../shells/devshells;
+      # load normal shells into root without prefix
       devShells =
-        toModuleAttr (args // {src = ../shells/devShells;})
+        (loadShells ../shells/devShells)
         // {
+          # select default shell
           default = self'.devShells.devshells-nix;
         };
     };
