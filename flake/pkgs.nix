@@ -47,7 +47,7 @@ in {
       sources = pkgs.callPackage ../pkgs/_sources/generated.nix {};
 
       # package loader with additional inputs
-      pkgsInputs = pkgs // { inherit sources; };
+      pkgsInputs = pkgs // { inherit nixpkgsUnstable sources; };
       callPackage = lib.callPackageWith pkgsInputs;
 
       # load packages
