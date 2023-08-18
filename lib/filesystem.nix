@@ -24,6 +24,7 @@ in rec {
       # If a directory contains default.nix, raise it and ignore all other
       # modules in that directory.
       # stolen from @Weathercold
+      # like liftDefault but `default` is optional
       raiseDefault = _: v: v.default or v;
       # Collect the values into a flat list
       # stolen from @Weathercold
@@ -53,35 +54,30 @@ in rec {
     };
 
   # Represent a directory as a tree of paths to nix modules.
-  toModuleTree = {loader ? haumeaLoaders.path, ...} @ args:
-    haumea.lib.load args;
+  toModuleTree = {...} @ args:
+    haumea.lib.load ({loader = haumeaLoaders.path;} // args);
 
   # List paths of all modules under a directory. If there is a default.nix in a
   # directory, it is *raised* and all other modules in that directory are
   # ignored.
-  toModuleList = {
-    loader ? haumeaLoaders.path,
-    transformer ? with haumeaTransformers; [raiseDefault toList],
-    ...
-  } @ args:
-    haumea.lib.load args;
+  toModuleList = {...} @ args:
+    haumea.lib.load ({
+        loader = haumeaLoaders.path;
+        transformer = with haumeaTransformers; [raiseDefault toList];
+      }
+      // args);
 
   # Return an attribute set of all modules under a directory, prepending
   # subdirectory names to keys. If there is a default.nix in a directory, it is
   # *raised* and all other modules in that directory are ignored.
-  toModuleAttr = {
-    loader ? haumeaLoaders.path,
-    transformer ? with haumeaTransformers; [raiseDefault flatten],
-    ...
-  } @ args:
-    haumea.lib.load args;
+  toModuleAttr = {...} @ args:
+    haumea.lib.load ({
+        loader = haumeaLoaders.path;
+        transformer = with haumeaTransformers; [raiseDefault flatten];
+      }
+      // args);
 
   # Like `toModuleAttr`, but also prepend the root directory name to keys.
-  toModuleAttr' = {
-    src,
-    loader ? haumeaLoaders.path,
-    transformer ? with haumeaTransformers; [raiseDefault flatten],
-    ...
-  } @ args:
+  toModuleAttr' = {src, ...} @ args:
     haumeaTransformers.flatten [] {${baseNameOf src} = toModuleAttr args;};
 }
