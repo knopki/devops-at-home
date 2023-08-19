@@ -87,6 +87,7 @@
         ./flake/shells.nix
         ./flake/pkgs.nix
         ./flake/nixos.nix
+        ./flake/home.nix
       ];
 
       debug = false;

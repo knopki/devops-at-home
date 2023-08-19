@@ -15,5 +15,6 @@
           -o $PRJ_ROOT/pkgs/_sources
       '';
     }
+    {package = pkgs.home-manager;}
   ];
 }

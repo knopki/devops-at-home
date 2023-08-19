@@ -5,5 +5,11 @@ self.inputs.nixpkgs.lib.nixosSystem {
   modules = with self.nixosModules; [
     profiles-workstation
     home-manager
+    ./_hardware.nix
+    ./_users-root.nix
+    ./_users-knopki.nix
+    {
+      system.stateVersion = "23.05";
+    }
   ];
 }

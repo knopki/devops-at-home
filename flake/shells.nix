@@ -48,7 +48,7 @@ in {
         (loadShells ../shells/devShells)
         // {
           # select default shell
-          default = self'.devShells.devshells-nix;
+          default = self'.devShells.devshells-nixos;
         };
     };
   };

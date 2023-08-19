@@ -13,14 +13,12 @@
 }: let
   inherit (lib.attrsets) mapAttrs;
   inherit (self.lib.filesystem) toModuleAttr toModuleList;
-
-  loadConf = x: import x config._module.specialArgs;
 in {
-  config = {
-    flake.nixosModules = toModuleAttr {src = ../nixos/modules;};
+  config.flake = {
+    nixosModules = toModuleAttr {src = ../nixos/modules;};
 
-    flake.nixosConfigurations =
-      mapAttrs (_: loadConf)
+    nixosConfigurations =
+      mapAttrs (_: x: import x config._module.specialArgs)
       (toModuleAttr {src = ../nixos/configurations;});
   };
 }

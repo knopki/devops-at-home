@@ -15,7 +15,7 @@
     home-manager.useUserPackages = true;
 
     # additional args to all homeModules
-    # default: { nixosConfig = config }
+    # default: { lib, modulesPath, nixosConfig, osConfig }
     home-manager.extraSpecialArgs = {
       # inherit self inputs;
     };
