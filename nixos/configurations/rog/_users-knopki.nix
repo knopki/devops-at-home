@@ -17,8 +17,8 @@
   };
 
   home-manager.users.knopki = {... }:  {
-    imports = [
-      self.homeModules.profiles-knopki-at-rog
+    imports = with self.homeManagerModules; [
+      profiles-knopki-at-rog
     ];
   };
 }

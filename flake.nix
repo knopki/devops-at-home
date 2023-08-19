@@ -63,13 +63,7 @@
     };
 
     # nix-doom-emacs
-    # sops-nix
     # nix2container.url = "github:nlewo/nix2container";
-    # mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
-    # naersk.url = "github:nmattia/naersk";
-    # colmena.url = "github:zhaofengli/colmena";
-    # simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-    # nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";
   };
 
   outputs = {

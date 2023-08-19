@@ -11,8 +11,8 @@
   };
 
   home-manager.users.root = {... }:  {
-    imports = [
-      self.homeModules.profiles-root-at-rog
+    imports = with self.homeManagerModules; [
+      profiles-root-at-rog
     ];
   };
 }

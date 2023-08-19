@@ -1,7 +1,7 @@
 #
 # flake.parts' flakeModule
 #
-# Load homeModules and homeConfigurations from ../home
+# Load homeManagerModules and homeManagerConfigurations from ../home
 #
 {
   lib,
@@ -12,9 +12,9 @@
   inherit (self.lib.filesystem) toModuleAttr;
 in {
   config = {
-    flake.homeModules = toModuleAttr {src = ../home/modules;};
+    flake.homeManagerModules = toModuleAttr {src = ../home/modules;};
 
-    flake.homeConfigurations =
+    flake.homeManagerConfigurations =
       mapAttrs (_: x: import x {inherit self;})
       (toModuleAttr {src = ../home/configurations;});
   };

@@ -33,7 +33,7 @@ in rec {
         then lib.flatten (attrValues v)
         else [v];
       # Flatten the attribute set by concatenating the keys. Useful for
-      # nixosModules and homeModules
+      # nixosModules and homeManagerModules
       # stolen from @Weathercold
       flatten = _: v1:
         if isAttrs v1
