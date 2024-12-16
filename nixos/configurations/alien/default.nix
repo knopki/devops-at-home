@@ -32,6 +32,7 @@ mkNixosConfiguration {
     {
       system.stateVersion = "20.09";
       networking.hostId = "ff0b9d65";
+      networking.hostName = "alien";
       sops = {
         defaultSopsFile = ../../../secrets/alien.yaml;
       };
