@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (lib) mkForce mkIf;
+  inherit (lib) mkForce;
   homePath = config.users.users.sk.home;
   jobCommon = {
     enable = true;

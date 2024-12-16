@@ -7,7 +7,7 @@
 }:
 let
   inherit (builtins) elem;
-  inherit (lib) getName getNameWithVersion;
+  inherit (lib) getName;
 in
 {
   nixpkgs.config = {

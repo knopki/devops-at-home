@@ -4,24 +4,40 @@
   pkgs,
   packages,
   ...
-}: let
-  inherit (lib) mkIf mkMerge mkBefore mkEnableOption concatStrings mapAttrsToList;
+}:
+let
+  inherit (lib)
+    mkIf
+    mkMerge
+    mkBefore
+    mkEnableOption
+    concatStrings
+    mapAttrsToList
+    ;
   cfg = config.theme;
   template = "${packages.base16-shell}/templates/default.mustache";
-  themeFile = pkgs.runCommandLocal "hm-shell-theme" {} ''
+  themeFile = pkgs.runCommandLocal "hm-shell-theme" { } ''
     sed '${
-      concatStrings
-      ((mapAttrsToList (n: v: "s/{{${n}-hex}}/${v.hex.rgb}/;") cfg.base16.colors)
+      concatStrings (
+        (mapAttrsToList (n: v: "s/{{${n}-hex}}/${v.hex.rgb}/;") cfg.base16.colors)
         ++ (mapAttrsToList (n: v: "s/{{${n}-hex-r}}/${v.hex.r}/;") cfg.base16.colors)
         ++ (mapAttrsToList (n: v: "s/{{${n}-hex-g}}/${v.hex.g}/;") cfg.base16.colors)
-        ++ (mapAttrsToList (n: v: "s/{{${n}-hex-b}}/${v.hex.b}/;") cfg.base16.colors))
+        ++ (mapAttrsToList (n: v: "s/{{${n}-hex-b}}/${v.hex.b}/;") cfg.base16.colors)
+      )
     }' ${template} > $out
   '';
-in {
+in
+{
   options.theme.components = {
-    bash.enable = mkEnableOption "Apply theme to Bash" // {default = cfg.enable;};
-    fish.enable = mkEnableOption "Apply theme to Fish" // {default = cfg.enable;};
-    zsh.enable = mkEnableOption "Apply theme to Zsh" // {default = cfg.enable;};
+    bash.enable = mkEnableOption "Apply theme to Bash" // {
+      default = cfg.enable;
+    };
+    fish.enable = mkEnableOption "Apply theme to Fish" // {
+      default = cfg.enable;
+    };
+    zsh.enable = mkEnableOption "Apply theme to Zsh" // {
+      default = cfg.enable;
+    };
   };
 
   config = mkIf (cfg.enable) (mkMerge [

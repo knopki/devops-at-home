@@ -3,29 +3,34 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) types mkOption;
   cfg = config.theme.fonts;
 
-  fontModule = types.submodule ({config, ...}: {
-    options = {
-      family = mkOption {
-        type = types.str;
-        description = "Font name";
-      };
+  fontModule = types.submodule (
+    { config, ... }:
+    {
+      options = {
+        family = mkOption {
+          type = types.str;
+          description = "Font name";
+        };
 
-      size = mkOption {
-        type = types.ints.u8;
-        description = "Base font size";
-      };
+        size = mkOption {
+          type = types.ints.u8;
+          description = "Base font size";
+        };
 
-      packages = mkOption {
-        type = types.listOf types.package;
-        description = "Font package";
+        packages = mkOption {
+          type = types.listOf types.package;
+          description = "Font package";
+        };
       };
-    };
-  });
-in {
+    }
+  );
+in
+{
   options.theme.fonts = {
     regular = mkOption {
       type = fontModule;
@@ -33,7 +38,7 @@ in {
       default = {
         family = "Noto Sans";
         size = 10;
-        packages = [pkgs.noto-fonts];
+        packages = [ pkgs.noto-fonts ];
       };
     };
 
@@ -43,7 +48,7 @@ in {
       default = {
         family = "Noto Sans";
         size = 10;
-        packages = [pkgs.noto-fonts];
+        packages = [ pkgs.noto-fonts ];
       };
     };
 
@@ -53,7 +58,7 @@ in {
       default = {
         family = "Hack";
         size = 10;
-        packages = [pkgs.hack-font];
+        packages = [ pkgs.hack-font ];
       };
     };
   };

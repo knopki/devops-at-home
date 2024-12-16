@@ -4,9 +4,9 @@
   pkgs,
   packages,
   ...
-}: let
-  inherit
-    (lib)
+}:
+let
+  inherit (lib)
     mkIf
     mkMerge
     mkEnableOption
@@ -18,21 +18,25 @@
     ;
   cfg = config.theme;
   template = "${packages.base16-vim}/templates/default.mustache";
-  themeFile = pkgs.runCommandLocal "hm-vim-theme" {} ''
+  themeFile = pkgs.runCommandLocal "hm-vim-theme" { } ''
     sed '${
-      concatStrings
-      ((mapAttrsToList (n: v: "s/{{${n}-hex}}/${v.hex.rgb}/;") cfg.base16.colors)
-        ++ ["s/{{scheme-slug}}/${cfg.base16.name}/;"])
+      concatStrings (
+        (mapAttrsToList (n: v: "s/{{${n}-hex}}/${v.hex.rgb}/;") cfg.base16.colors)
+        ++ [ "s/{{scheme-slug}}/${cfg.base16.name}/;" ]
+      )
     }' ${template} > $out
   '';
   gfn = ''
-    set gfn=${escape [" "] cfg.fonts.monospace.family}\ ${toString cfg.fonts.monospace.size}
+    set gfn=${escape [ " " ] cfg.fonts.monospace.family}\ ${toString cfg.fonts.monospace.size}
   '';
-in {
-  options.theme.components.neovim.enable = mkEnableOption "Apply theme to Neovim" // {default = cfg.enable;};
+in
+{
+  options.theme.components.neovim.enable = mkEnableOption "Apply theme to Neovim" // {
+    default = cfg.enable;
+  };
 
   config = mkIf (cfg.enable && cfg.components.neovim.enable) (mkMerge [
-    (mkIf (!elem cfg.preset ["dracula"]) {
+    (mkIf (!elem cfg.preset [ "dracula" ]) {
       programs.neovim.plugins = [
         {
           plugin = pkgs.vimPlugins.base16-vim;

@@ -9,8 +9,6 @@ let
   inherit (lib)
     mkBefore
     mkDefault
-    mkIf
-    optionals
     ;
 in
 {

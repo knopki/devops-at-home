@@ -9,7 +9,6 @@
   ...
 }:
 let
-  inherit (flake-parts-lib) perSystem;
   myLib = import ./. {
     inherit (inputs.nixpkgs) lib;
     inherit (inputs) haumea;

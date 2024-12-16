@@ -2,10 +2,17 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkEnableOption mkIf mkOption types;
+}:
+let
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
   cfg = config.theme;
-in {
+in
+{
   imports = [
     ./theme-alacritty.nix
     ./theme-base16.nix
@@ -27,11 +34,11 @@ in {
     enable = mkEnableOption "Enable theme support";
 
     preset = mkOption {
-      type = with types; nullOr (enum ["dracula"]);
+      type = with types; nullOr (enum [ "dracula" ]);
       default = null;
       description = "Apply one of predefined presets.";
     };
   };
 
-  config = mkIf cfg.enable {};
+  config = mkIf cfg.enable { };
 }

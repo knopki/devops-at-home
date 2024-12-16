@@ -1,4 +1,9 @@
-{ lib, pkgs, packages, ... }:
+{
+  lib,
+  pkgs,
+  packages,
+  ...
+}:
 let
   inherit (lib) mkDefault genAttrs;
 in

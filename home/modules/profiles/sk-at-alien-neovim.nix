@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkDefault readFile;
-in {
-  home.packages = with pkgs; [ripgrep];
+in
+{
+  home.packages = with pkgs; [ ripgrep ];
 
   programs.direnv.enable = true;
   programs.fzf.enable = true;

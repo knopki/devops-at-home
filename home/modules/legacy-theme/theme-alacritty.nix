@@ -4,27 +4,34 @@
   pkgs,
   packages,
   ...
-}: let
-  inherit (lib) mkEnableOption mkIf mkMerge elem;
+}:
+let
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkMerge
+    elem
+    ;
   cfg = config.theme;
-in {
-  options.theme.components.alacritty.enable =
-    mkEnableOption "Apply theme to Alactritty"
-    // {
-      default = config.programs.alacritty.enable;
-    };
+in
+{
+  options.theme.components.alacritty.enable = mkEnableOption "Apply theme to Alactritty" // {
+    default = config.programs.alacritty.enable;
+  };
 
   config = mkIf (cfg.enable && cfg.components.alacritty.enable) (mkMerge [
     {
       programs.alacritty.settings = {
         font = {
-          normal = {family = cfg.fonts.monospace.family;};
+          normal = {
+            family = cfg.fonts.monospace.family;
+          };
           size = cfg.fonts.monospace.size;
         };
       };
     }
 
-    (mkIf (!elem cfg.preset ["dracula"]) {
+    (mkIf (!elem cfg.preset [ "dracula" ]) {
       programs.alacritty.settings = {
         colors = with cfg.base16.colors; {
           primary = {
@@ -91,7 +98,7 @@ in {
 
     (mkIf (cfg.preset == "dracula") {
       xdg.configFile."alacritty/dracula.yml".source = "${packages.dracula-alacritty}/dracula.yml";
-      programs.alacritty.settings.import = ["dracula.yml"];
+      programs.alacritty.settings.import = [ "dracula.yml" ];
     })
   ]);
 }
