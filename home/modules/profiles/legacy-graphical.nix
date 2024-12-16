@@ -10,10 +10,6 @@ let
   inherit (lib) mkDefault mkIf;
 in
 {
-  imports = with self.modules.homeManager; [
-    legacy-kde
-  ];
-
   home.packages =
     with pkgs;
     with plasma5Packages;
@@ -156,7 +152,7 @@ in
     };
   };
 
-  systemd.user.targets.tray = mkIf config.programs.kde.enable {
+  systemd.user.targets.tray = {
     Unit = {
       Description = "Home Manager System Tray";
       Requires = [ "graphical-session-pre.target" ];
