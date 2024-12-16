@@ -23,7 +23,6 @@ in
     with kdeFrameworks;
     [
       dconf
-      bismuth
       plasma-applet-caffeine-plus
       plasma-applet-virtual-desktop-bar
     ];
