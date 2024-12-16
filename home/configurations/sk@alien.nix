@@ -14,7 +14,7 @@ mkHomeConfiguration rec {
     inherit system;
     config.allowUnfree = true;
   };
-  modules = with self.modules.home; [
+  modules = with self.modules.homeManager; [
     {
       imports = [ inputs.sops-nix.homeManagerModules.sops ];
       home.username = "sk";

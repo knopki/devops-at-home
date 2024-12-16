@@ -47,7 +47,7 @@ in
   };
 
   home-manager.users.sk = {
-    imports = with self.modules.home; [ profiles-sk-at-alien ];
+    imports = with self.modules.homeManager; [ profiles-sk-at-alien ];
     home.username = "sk";
     home.homeDirectory = "/home/sk";
   };

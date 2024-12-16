@@ -10,7 +10,7 @@ let
   inherit (lib) mkBefore mkDefault optionals;
 in
 {
-  imports = with self.modules.home; [ profiles-legacy-graphical ];
+  imports = with self.modules.homeManager; [ profiles-legacy-graphical ];
 
   home.language = {
     monetary = mkDefault "ru_RU.UTF-8";

@@ -39,6 +39,6 @@
   home-manager.users.knopki =
     { ... }:
     {
-      imports = with self.modules.home; [ profiles-knopki-at-rog ];
+      imports = with self.modules.homeManager; [ profiles-knopki-at-rog ];
     };
 }

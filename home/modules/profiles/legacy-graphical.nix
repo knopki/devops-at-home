@@ -10,7 +10,7 @@ let
   inherit (lib) mkDefault mkIf;
 in
 {
-  imports = with self.modules.home; [
+  imports = with self.modules.homeManager; [
     legacy-kde
   ];
 

@@ -7,7 +7,7 @@
   ...
 }:
 {
-  imports = with self.modules.home; [
+  imports = with self.modules.homeManager; [
     profiles-legacy-graphical
     profiles-legacy-workstation
   ];

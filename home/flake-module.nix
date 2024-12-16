@@ -51,7 +51,7 @@ in
   };
   config.flake = rec {
     homeModules = toModuleAttr ./modules;
-    modules.home = homeModules;
+    modules.homeManager = homeModules;
     homeConfigurations = toHomeConfigurations ./configurations;
   };
 }

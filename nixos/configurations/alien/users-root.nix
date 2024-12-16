@@ -19,7 +19,7 @@
   };
 
   home-manager.users.root = {
-    imports = with self.modules.home; [ profiles-root-at-alien ];
+    imports = with self.modules.homeManager; [ profiles-root-at-alien ];
     home.username = "root";
     home.homeDirectory = "/root";
   };

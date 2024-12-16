@@ -7,7 +7,7 @@
   ...
 }:
 {
-  imports = with self.modules.home; [ legacy-kopia ];
+  imports = with self.modules.homeManager; [ legacy-kopia ];
 
   sops = {
     secrets = {
