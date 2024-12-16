@@ -11,9 +11,25 @@
 }:
 let
   inherit (builtins) attrValues elem filter;
-  inherit (lib) getName;
+  inherit (lib) getName getNameWithVersion;
   inherit (lib.attrsets) filterAttrs;
   inherit (flake-parts-lib) perSystem;
+  allowlistedLicenses = with lib.licenses; [ ];
+  allowUnfreePredicate =
+    pkg:
+    elem (getName pkg) [
+      "anytype"
+      "edl"
+      "pantum-driver"
+    ];
+  allowInsecurePredicate = pkg: elem (getNameWithVersion pkg) [ ];
+  commonNixpkgsConfig = {
+    inherit
+      allowlistedLicenses
+      allowUnfreePredicate
+      allowInsecurePredicate
+      ;
+  };
 in
 {
   imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
@@ -31,13 +47,13 @@ in
       nixpkgs-24-11 = import inputs.nixpkgs-24-11 {
         inherit system;
         # overlays = [ self.overlays.default ];
-        config.allowUnfreePredicate = pkg: elem (getName pkg) [ "anytype" "edl" ];
+        config = commonNixpkgsConfig;
       };
 
       # unstable nixpkgs - don't use for evaluation speed
       nixpkgsUnstable = import inputs.nixpkgs-unstable {
         inherit system;
-        config.allowUnfreePredicate = pkg: elem (getName pkg) [ ];
+        config = commonNixpkgsConfig;
       };
 
       # additional input - nvfetcher sources

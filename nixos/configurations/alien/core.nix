@@ -53,7 +53,7 @@ in
     whois
 
     # downloaders
-    yt-dlp
+    packages.yt-dlp
 
     # image-viewers
     imgcat
@@ -245,7 +245,7 @@ in
     ];
   };
 
-  services.xserver.layout = "us,ru";
+  services.xserver.xkb.layout = "us,ru";
 
   time.timeZone = mkDefault "Europe/Moscow";
 

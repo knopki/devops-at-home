@@ -49,15 +49,11 @@ in
   };
 
   services.xserver = {
-    displayManager = {
-      lightdm.enable = false;
-      sddm.enable = true;
-    };
-    desktopManager.plasma5 = {
-      enable = true;
-      runUsingSystemd = true;
-    };
+    displayManager.lightdm.enable = false;
+    desktopManager.plasma5.enable = true;
   };
+
+  services.displayManager.sddm.enable = true;
 
   systemd.user.services = {
     plasma-early-setup.restartIfChanged = false;

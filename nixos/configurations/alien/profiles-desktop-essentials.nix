@@ -94,7 +94,8 @@ in
   services = {
     avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
+      nssmdns6 = true;
     };
     dbus.packages = with pkgs; [ dconf ];
     fwupd.enable = false;
@@ -108,13 +109,11 @@ in
       enable = true;
       drivers = with pkgs; [
         gutenprint
-        pantum-driver
+        packages.pantum-driver
       ];
     };
     resolved.dnssec = "false";
-    xserver = {
-      enable = true;
-      libinput.enable = true;
-    };
+    xserver.enable = true;
+    libinput.enable = true;
   };
 }

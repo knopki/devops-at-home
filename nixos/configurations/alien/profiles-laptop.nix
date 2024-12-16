@@ -31,7 +31,7 @@ in
       '';
     };
 
-    xserver.libinput.touchpad = {
+    libinput.touchpad = {
       middleEmulation = false;
       naturalScrolling = true;
       sendEventsMode = "disabled-on-external-mouse";
