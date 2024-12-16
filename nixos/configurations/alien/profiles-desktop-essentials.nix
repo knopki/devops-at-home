@@ -101,7 +101,7 @@ in
     locate = {
       enable = true;
       localuser = null;
-      locate = pkgs.mlocate;
+      package = pkgs.mlocate;
       pruneBindMounts = true;
     };
     printing = {

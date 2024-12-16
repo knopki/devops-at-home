@@ -18,7 +18,7 @@ in
       "corefonts"
       "mpv-thumbfast"
       "pantum-driver"
-      "trezor-suite-23.4.2"
+      "trezor-suite-24.1.2"
       "unrar"
     ];
 

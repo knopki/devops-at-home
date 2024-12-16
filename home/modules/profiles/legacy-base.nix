@@ -72,7 +72,7 @@ in
   };
 
   nix = {
-    package = pkgs.nix;
+    package = mkDefault pkgs.nix;
     settings.experimental-features = [
       "nix-command"
       "flakes"

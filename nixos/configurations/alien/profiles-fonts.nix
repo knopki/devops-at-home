@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [
+    enableDefaultPackages = true;
+    packages = with pkgs; [
       corefonts
       font-awesome_4
       noto-fonts

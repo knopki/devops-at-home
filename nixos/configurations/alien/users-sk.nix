@@ -18,7 +18,7 @@ in
     uid = mkDefault 1000;
     group = "sk";
     isNormalUser = true;
-    passwordFile = mkDefault config.sops.secrets.sk-user-password.path;
+    hashedPasswordFile = mkDefault config.sops.secrets.sk-user-password.path;
     extraGroups = with config.users.groups; [
       cfg.group
       "adbusers"
