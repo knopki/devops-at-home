@@ -12,7 +12,6 @@ in
 {
   imports = with self.modules.home; [
     legacy-kde
-    imv
   ];
 
   home.packages =
