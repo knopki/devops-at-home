@@ -144,7 +144,7 @@ in
   services.emacs = {
     enable = true;
     client.enable = true;
-    socketActivation = true;
+    socketActivation.enable = true;
   };
 
   xdg.mimeApps = {
