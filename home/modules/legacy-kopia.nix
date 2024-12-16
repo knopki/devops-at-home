@@ -60,7 +60,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ packages.kopia ];
+    home.packages = [ pkgs.kopia ];
 
     systemd.user.services = mapAttrs' (
       name: value:

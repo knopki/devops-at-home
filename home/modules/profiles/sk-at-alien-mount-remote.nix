@@ -38,7 +38,7 @@ in
     };
     Service = {
       Type = "simple";
-      ExecStart = "${packages.rclone}/bin/rclone mount --cache-dir=${skNcCachePath} --vfs-cache-mode=writes sk_at_nc: ${skNcMountPath}";
+      ExecStart = "${pkgs.rclone}/bin/rclone mount --cache-dir=${skNcCachePath} --vfs-cache-mode=writes sk_at_nc: ${skNcMountPath}";
       ExecStop = "${pkgs.fuse3}/bin/fusermount3 -zu ${skNcMountPath}";
       Restart = "on-failure";
       RestartSec = 15;

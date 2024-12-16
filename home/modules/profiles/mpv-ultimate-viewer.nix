@@ -25,18 +25,33 @@ in
 {
   programs.mpv = {
     enable = true;
-    package = pkgs.wrapMpv packages.mpv-unwrapped {
-      scripts =
-        with packages;
-        with pkgs.mpvScripts;
-        [
-          autoload
-          thumbfast
-          uosc
-          mpv-align-images
-          mpv-image-bindings
-        ];
-    };
+    package = (
+      pkgs.mpv.override {
+        scripts =
+          with pkgs;
+          with pkgs.mpvScripts;
+          with packages;
+          [
+            autoload
+            thumbfast
+            uosc
+            mpv-align-images
+            mpv-image-bindings
+          ];
+      }
+    );
+    # package = pkgs.wrapMpv packages.mpv-unwrapped {
+    #   scripts =
+    #     with packages;
+    #     with pkgs.mpvScripts;
+    #     [
+    #       autoload
+    #       thumbfast
+    #       uosc
+    #       mpv-align-images
+    #       mpv-image-bindings
+    #     ];
+    # };
     config = {
       osd-bar = "no";
       border = "no";

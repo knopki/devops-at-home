@@ -65,7 +65,7 @@ in
     nodePackages.prettier
 
     # :lang json
-    nodePackages.vscode-json-languageserver-bin
+    vscode-langservers-extracted
 
     # :lang markdown
     nodePackages.markdownlint-cli
@@ -86,7 +86,7 @@ in
 
     # :lang python
     python3Full
-    nodePackages.pyright
+    pyright
 
     # :lang rust
     cargo

@@ -77,7 +77,7 @@ in
 
     brave = {
       enable = lib.mkDefault true;
-      package = packages.brave;
+      package = pkgs.brave;
     };
 
     firefox = {

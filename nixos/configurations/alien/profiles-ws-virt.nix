@@ -23,7 +23,7 @@ in
       docker
       podman
       podman-compose
-      packages.distrobox
+      distrobox
     ];
   };
 

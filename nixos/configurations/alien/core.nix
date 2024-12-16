@@ -53,7 +53,7 @@ in
     whois
 
     # downloaders
-    packages.yt-dlp
+    yt-dlp
 
     # image-viewers
     imgcat
@@ -68,20 +68,20 @@ in
     libsForQt5.ark
     libsForQt5.gwenview
     libsForQt5.okular
-    packages.nextcloud-client
+    nextcloud-client
     ocrmypdf
     offlineimap
     pdfarranger
     poppler_utils
     qpdf
-    packages.rclone
+    rclone
     gnome.seahorse
     libsForQt5.kleopatra
     # kdePackages.kleopatra
     speedcrunch
     syncthing
-    packages.telegram-desktop
-    packages.thunderbird
+    telegram-desktop
+    thunderbird
     xfce.orage
     zotero
 
@@ -91,12 +91,12 @@ in
     openssh
 
     # misc
-    packages.android-udev-rules
+    android-udev-rules
     clevis
     tailscale
     xorg.xhost
-    packages.restic
-    packages.rustic-rs
+    restic
+    rustic-rs
     smartmontools
     yubikey-manager
     vmtouch
