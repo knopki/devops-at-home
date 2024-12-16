@@ -5,10 +5,10 @@
   ...
 }:
 mkNixosConfiguration {
-  inherit (inputs.nixpkgs-24-05.lib) nixosSystem;
+  inherit (inputs.nixpkgs-24-11.lib) nixosSystem;
   system = "x86_64-linux";
   modules = with self.modules.nixos; [
-    inputs.home-24-05.nixosModules.default
+    inputs.home-24-11.nixosModules.default
     inputs.sops-nix.nixosModules.sops
     home-manager
     ./meta.nix

@@ -75,7 +75,7 @@ in
     poppler_utils
     qpdf
     rclone
-    gnome.seahorse
+    seahorse
     libsForQt5.kleopatra
     # kdePackages.kleopatra
     speedcrunch

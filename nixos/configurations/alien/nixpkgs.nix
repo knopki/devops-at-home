@@ -14,9 +14,11 @@ in
     allowUnfreePredicate =
       pkg:
       elem (getName pkg) [
-        "anytype"
         "anydesk"
+        "anytype"
+        "aspell-dict-en-science"
         "corefonts"
+        "edl"
         "mpv-thumbfast"
         "pantum-driver"
         "trezor-suite"

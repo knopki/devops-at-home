@@ -1,7 +1,7 @@
 { pkgs, packages, ... }:
 {
   environment.systemPackages = with pkgs; [
-    packages.framesh
+    framesh
     packages.ledger-live-desktop
     trezor-suite
   ];

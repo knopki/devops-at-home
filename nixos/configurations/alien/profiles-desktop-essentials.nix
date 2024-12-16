@@ -27,7 +27,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    packages.edl
+    edl
     asciinema
     gnupg
     hdparm
@@ -43,11 +43,7 @@ in
   ];
 
   hardware = {
-    opengl = {
-      enable = mkDefault true;
-      driSupport = mkDefault true;
-    };
-    pulseaudio.enable = mkDefault true;
+    graphics.enable = mkDefault true;
     sane = {
       enable = mkDefault true;
       extraBackends = [ ];
@@ -114,7 +110,7 @@ in
       enable = true;
       drivers = with pkgs; [
         gutenprint
-        packages.pantum-driver
+        pantum-driver
       ];
     };
     resolved.dnssec = "false";

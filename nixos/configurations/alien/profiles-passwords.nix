@@ -1,7 +1,7 @@
 { pkgs, packages, ... }:
 {
   environment.systemPackages = with pkgs; [
-    packages.keepassxc
+    keepassxc
     pass
   ];
 
