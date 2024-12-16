@@ -126,35 +126,32 @@ in
       };
     };
 
-    kde = {
-      enable = mkDefault true;
-      settings = {
-        kdeglobals.KDE.SingleClick = mkDefault false;
-
-        kxkbrc.Layout = {
-          ResetOldOptions = mkDefault true;
-          SwitchMode = mkDefault "Window";
-          Use = mkDefault true;
-        };
-
-        spectaclerc = {
-          General = {
-            autoSaveImage = true;
-            copyImageToClipboard = true;
-            copySaveLocation = false;
-          };
-          Save = {
-            defaultSaveLocation = "file://${config.xdg.userDirs.pictures}/screenshots/";
-            saveFilenameFormat = "scrn-%Y%M%D-%H%m%S";
-          };
-        };
-      };
-    };
-
     zathura = {
       enable = lib.mkDefault true;
       options = {
         selection-clipboard = "clipboard";
+      };
+    };
+  };
+
+  qt.kde.settings = {
+    kdeglobals.KDE.SingleClick = mkDefault false;
+
+    kxkbrc.Layout = {
+      ResetOldOptions = mkDefault true;
+      SwitchMode = mkDefault "Window";
+      Use = mkDefault true;
+    };
+
+    spectaclerc = {
+      General = {
+        autoSaveImage = true;
+        copyImageToClipboard = true;
+        copySaveLocation = false;
+      };
+      Save = {
+        defaultSaveLocation = "file://${config.xdg.userDirs.pictures}/screenshots/";
+        saveFilenameFormat = "scrn-%Y%M%D-%H%m%S";
       };
     };
   };

@@ -3,11 +3,15 @@
   lib,
   pkgs,
   self,
-  osConfig,
   ...
 }:
 let
-  inherit (lib) mkBefore mkDefault optionals;
+  inherit (lib)
+    mkBefore
+    mkDefault
+    mkIf
+    optionals
+    ;
 in
 {
   imports = with self.modules.homeManager; [ profiles-legacy-graphical ];
@@ -29,34 +33,6 @@ in
     '';
 
     git.delta.enable = mkDefault true;
-
-    kde.settings = {
-      kdeglobals = {
-        Locale = {
-          Country = mkDefault "ru";
-          TimeFormat = mkDefault "%H:%M:%S";
-          WeekStartDay = mkDefault 1;
-        };
-      };
-
-      ktimezonedrc.TimeZones.LocalZone = mkDefault (optionals (osConfig != null) osConfig.time.timeZone);
-
-      kxkbrc = {
-        Layout = {
-          LayoutList = mkDefault (optionals (osConfig != null) osConfig.services.xserver.layout);
-          Options = mkDefault "terminate:ctrl_alt_bksp,grp:win_space_toggle";
-        };
-      };
-
-      plasma-localerc = {
-        Formats = {
-          LANG = mkDefault "ru_RU.UTF-8";
-          LC_NUMERIC = mkDefault "en_US.UTF-8";
-          useDetailed = mkDefault true;
-        };
-        Translations.LANGUAGE = mkDefault "ru:en_US";
-      };
-    };
 
     man.generateCaches = mkDefault true;
 
@@ -90,6 +66,25 @@ in
         purescript.disabled = mkDefault true;
         zig.disabled = mkDefault true;
       };
+    };
+  };
+
+  qt.kde.settings = {
+    kdeglobals = {
+      Locale = {
+        Country = mkDefault "ru";
+        TimeFormat = mkDefault "%H:%M:%S";
+        WeekStartDay = mkDefault 1;
+      };
+    };
+
+    plasma-localerc = {
+      Formats = {
+        LANG = mkDefault "ru_RU.UTF-8";
+        LC_NUMERIC = mkDefault "en_US.UTF-8";
+        useDetailed = mkDefault true;
+      };
+      Translations.LANGUAGE = mkDefault "ru:en_US";
     };
   };
 

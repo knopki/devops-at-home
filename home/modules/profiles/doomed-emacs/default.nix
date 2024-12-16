@@ -55,7 +55,6 @@ in
 
     # :lang go
     gopls
-    gocode
     gomodifytags
     gotests
 
