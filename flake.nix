@@ -58,21 +58,6 @@
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-generators.inputs.nixlib.follows = "nixpkgs-lib";
     # nixos-generators.inputs.nixpkgs.follows = "nixpkgs-24-05";
-
-    # legacy
-    # oldDigga.url = "path:./old-digga";
-    # oldDigga.inputs = {
-    #   flake-utils.follows = "flake-utils";
-    #   # home-23-05.follows = "home-23-05";
-    #   home-23-11.follows = "home-23-11";
-    #   latest.follows = "nixpkgs-24-05";
-    #   unstable.follows = "nixpkgs-unstable";
-    #   nixlib.follows = "nixpkgs-lib";
-    #   # nixos-23-05.follows = "nixpkgs-23-05";
-    #   nixos-23-11.follows = "nixpkgs-23-11";
-    #   nixos-generators.follows = "nixos-generators";
-    #   nixos-hardware.follows = "nixos-hardware";
-    # };
   };
 
   outputs =
