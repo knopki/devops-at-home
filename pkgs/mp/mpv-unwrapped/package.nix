@@ -1,1 +1,1 @@
-{ nixpkgsUnstable, ... }: nixpkgsUnstable.mpv-unwrapped
+{ nixpkgs-24-11, ... }: nixpkgs-24-11.mpv-unwrapped

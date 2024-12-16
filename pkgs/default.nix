@@ -2,6 +2,7 @@
   pkgs,
   sources,
   nixpkgsUnstable,
+  nixpkgs-24-11,
   inputs,
   ...
 }:
@@ -14,7 +15,16 @@ let
       };
     }
   );
-  extPkgs = pkgs.extend (_: _: { inherit nixpkgsUnstable sources extLib; });
+  extPkgs = pkgs.extend (
+    _: _: {
+      inherit
+        nixpkgsUnstable
+        nixpkgs-24-11
+        sources
+        extLib
+        ;
+    }
+  );
   pkgsByName = extLib.extended.filesystem.toPackages extPkgs ./.;
 in
 pkgsByName

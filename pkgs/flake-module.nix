@@ -27,17 +27,18 @@ in
       ...
     }:
     let
-      # unstable nixpkgs - don't use for evaluation speed
-      nixpkgsUnstable = import inputs.nixpkgs-unstable {
+      # primary nixpkgs
+      nixpkgs-24-11 = import inputs.nixpkgs-24-11 {
         inherit system;
+        # overlays = [ self.overlays.default ];
         config.allowUnfreePredicate = pkg: elem (getName pkg) [ "anytype" "edl" ];
       };
 
-      # primary nixpkgs
-      # pkgs = import inputs.nixpkgs {
-      #   inherit system;
-      #   # overlays = [ self.overlays.default ];
-      # };
+      # unstable nixpkgs - don't use for evaluation speed
+      nixpkgsUnstable = import inputs.nixpkgs-unstable {
+        inherit system;
+        config.allowUnfreePredicate = pkg: elem (getName pkg) [ ];
+      };
 
       # additional input - nvfetcher sources
       sources = pkgs.callPackage ../pkgs/_sources/generated.nix { };
@@ -46,6 +47,7 @@ in
         inherit
           inputs
           pkgs
+          nixpkgs-24-11
           nixpkgsUnstable
           sources
           ;

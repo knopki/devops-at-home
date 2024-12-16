@@ -1,1 +1,1 @@
-{ nixpkgsUnstable, ... }: nixpkgsUnstable.android-udev-rules
+{ nixpkgs-24-11, ... }: nixpkgs-24-11.android-udev-rules
