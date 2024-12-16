@@ -1,3 +1,1 @@
 secrets/*.yaml diff=sopsdiffer
-hosts/*/secrets/*.yaml diff=sopsdiffer
-users/*/secrets/*.yaml diff=sopsdiffer

@@ -1,3 +1,0 @@
-{
-  meta.suites.workstation = true;
-}

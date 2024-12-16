@@ -3,7 +3,30 @@ channels: final: prev: {
 
   # inherit pkg from other channel like this:
   # > inherit (channels.unstable) some-pkg-name;
-  inherit (channels.latest) rustdesk;
+
+  # anytype = let
+  #     name = "Anytype-${version}";
+  #     inherit (final.sources.anytype) pname version src;
+  #     appimageContents = prev.appimageTools.extractType2 { inherit name src; };
+  #   in prev.appimageTools.wrapType2 rec {
+  #     inherit name src;
+  #     extraPkgs = pkgs: (prev.appimageTools.defaultFhsEnvArgs.multiPkgs pkgs)
+  #       ++ [ pkgs.libsecret ];
+  #     extraInstallCommands = ''
+  #       mv $out/bin/${name} $out/bin/${pname}
+  #       source "${prev.makeWrapper}/nix-support/setup-hook"
+  #       wrapProgram $out/bin/${pname} \
+  #         --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
+  #       install -m 444 -D ${appimageContents}/anytype.desktop -t $out/share/applications
+  #       substituteInPlace $out/share/applications/anytype.desktop \
+  #         --replace 'Exec=AppRun' 'Exec=${pname}'
+  #       for size in 16 32 64 128 256 512 1024; do
+  #         install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/''${size}x''${size}/apps/anytype.png \
+  #           $out/share/icons/hicolor/''${size}x''${size}/apps/anytype.png
+  #       done
+  #     '';
+  #     meta = prev.anytype.meta;
+  # };
 
   framesh = prev.appimageTools.wrapType2 rec {
     inherit (final.sources.framesh) pname version src;

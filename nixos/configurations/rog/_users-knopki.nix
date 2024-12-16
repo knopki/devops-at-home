@@ -4,21 +4,41 @@
   pkgs,
   self,
   ...
-}: {
+}:
+{
+  users.groups.knopki = { };
   users.users.knopki = {
     description = "Red Buttons";
     uid = 1000;
     group = "knopki";
     isNormalUser = true;
-    hashedPassword = "$6$QOTimFq0v8u6oN.I$.m0BQc/tC6/8nluwwQT7AmkbJbfNoh2PnO9biVL4wgWA22zlb/0HheieexWgISAB67r/7floX3bQpZrUjZv9v.";
     extraGroups = with config.users.groups; [
-      # TODO
+      "adbusers"
+      "audio"
+      "dialout"
+      "disk"
+      "input"
+      "libvirtd"
+      "mlocate"
+      "networkmanager"
+      "plugdev"
+      "podman"
+      "pulse"
+      "sound"
+      "users"
+      "video"
+      "wheel"
+      "wireshark"
+      keys.name
     ];
+    openssh.authorizedKeys.keyFiles = [ ./knopki_id_rsa.pub ];
+    hashedPassword = "$y$j9T$Ic5vgoASIsa5wEgNyv/Iy.$3pg6OOd.eGOvvNriX60AFsXk5LueWJBbLpR3CBwBaS4";
+    # passwordFile = config.sops.secrets.rog-knopki-user-password.path;
   };
 
-  home-manager.users.knopki = {... }:  {
-    imports = with self.homeManagerModules; [
-      profiles-knopki-at-rog
-    ];
-  };
+  home-manager.users.knopki =
+    { ... }:
+    {
+      imports = with self.modules.home; [ profiles-knopki-at-rog ];
+    };
 }

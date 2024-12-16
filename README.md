@@ -3,14 +3,14 @@
 Configuration management of the my personal machines, my dotfiles,
 my other somethings. Because why not.
 
-This version is based on [DevOS][devos].
+This version is based on [DevOS].
 
 ## Setup
 
 You need `nix` to be installed. `direnv` is recommended too, because you need
 to be inside `nix shell`.
 
-Preffered way to deploy things is to use [deploy-rs][deploy-rs-guide].
+Preffered way to deploy things is to use \[deploy-rs\]\[deploy-rs-guide\].
 
 [sops][sops-nix] is used for secrets.
 
@@ -21,9 +21,7 @@ Preffered way to deploy things is to use [deploy-rs][deploy-rs-guide].
 [home manager modules](./users/modules) are available as flake outputs
 for reuse. Type `nix flake show` for TOC.
 
-[mit]: https://mit-license.org
 [devos]: https://devos.divnix.com/doc/start
-[deproy-rs-guide]: https://devos.divnix.com/integrations/deploy.html
-[iso-guide]: https://devos.divnix.com/flk/iso.html
 [install-guide]: https://devos.divnix.com/flk/install.html
+[iso-guide]: https://devos.divnix.com/flk/iso.html
 [sops-nix]: https://github.com/Mic92/sops-nix

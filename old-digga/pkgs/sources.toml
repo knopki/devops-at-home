@@ -1,4 +1,9 @@
 # nvfetcher.toml
+[anytype]
+src.github = "anyproto/anytype-ts"
+src.prefix = "v"
+fetch.url = "https://github.com/anyproto/anytype-ts/releases/download/v$ver/Anytype-$ver.AppImage"
+
 [base16-default-schemes]
 src.git = "https://github.com/chriskempson/base16-default-schemes"
 fetch.github = "chriskempson/base16-default-schemes"

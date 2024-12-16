@@ -43,11 +43,6 @@ fetch.github = "dracula/wofi"
 src.git = "https://github.com/dracula/zathura"
 fetch.github = "dracula/zathura"
 
-[framesh]
-src.github = "floating/frame"
-src.prefix = "v"
-fetch.url = "https://github.com/floating/frame/releases/download/v$ver/Frame-$ver.AppImage"
-
 [ledger-live-desktop]
 src.httpheader = "https://download.live.ledger.com/latest/linux"
 src.regex = "\\d+\\.\\d+.\\d+"
@@ -56,3 +51,11 @@ fetch.url = "https://download.live.ledger.com/ledger-live-desktop-$ver-linux-x86
 [ls-colors]
 src.git = "https://github.com/trapd00r/LS_COLORS"
 fetch.github = "trapd00r/LS_COLORS"
+
+[mpv-align-images]
+src.git = "https://github.com/guidocella/mpv-image-config"
+fetch.github = "guidocella/mpv-image-config"
+
+[mpv-image-bindings]
+src.git = "https://github.com/guidocella/mpv-image-config"
+fetch.github = "guidocella/mpv-image-config"

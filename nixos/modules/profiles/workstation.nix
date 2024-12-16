@@ -1,12 +1,4 @@
+{ self, ... }:
 {
-  lib,
-  pkgs,
-  self,
-  ...
-}: {
-  imports = with self.nixosModules; [
-    home-manager
-  ];
-  config = {
-  };
+  imports = with self.modules.nixos; [ home-manager ];
 }

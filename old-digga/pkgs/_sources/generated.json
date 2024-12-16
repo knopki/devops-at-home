@@ -1,6 +1,22 @@
 {
+    "anytype": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "anytype",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-C9TuB+QGifWlv7d4p1aEJLNcdlsN891FXFBYVjiysqM=",
+            "type": "url",
+            "url": "https://github.com/anyproto/anytype-ts/releases/download/v0.41.0/Anytype-0.41.0.AppImage"
+        },
+        "version": "0.41.0"
+    },
     "base16-default-schemes": {
         "cargoLocks": null,
+        "date": "2019-06-08",
         "extract": null,
         "name": "base16-default-schemes",
         "passthru": null,
@@ -20,6 +36,7 @@
     },
     "base16-dracula-scheme": {
         "cargoLocks": null,
+        "date": "2022-03-01",
         "extract": null,
         "name": "base16-dracula-scheme",
         "passthru": null,
@@ -39,6 +56,7 @@
     },
     "base16-shell": {
         "cargoLocks": null,
+        "date": "2022-09-13",
         "extract": null,
         "name": "base16-shell",
         "passthru": null,
@@ -58,6 +76,7 @@
     },
     "base16-textmate": {
         "cargoLocks": null,
+        "date": "2022-08-17",
         "extract": null,
         "name": "base16-textmate",
         "passthru": null,
@@ -77,6 +96,7 @@
     },
     "base16-tmux": {
         "cargoLocks": null,
+        "date": "2024-04-21",
         "extract": null,
         "name": "base16-tmux",
         "passthru": null,
@@ -96,6 +116,7 @@
     },
     "base16-vim": {
         "cargoLocks": null,
+        "date": "2022-09-20",
         "extract": null,
         "name": "base16-vim",
         "passthru": null,
@@ -115,6 +136,7 @@
     },
     "base16-waybar": {
         "cargoLocks": null,
+        "date": "2019-01-06",
         "extract": null,
         "name": "base16-waybar",
         "passthru": null,
@@ -134,6 +156,7 @@
     },
     "dracula-alacritty": {
         "cargoLocks": null,
+        "date": "2023-09-25",
         "extract": null,
         "name": "dracula-alacritty",
         "passthru": null,
@@ -149,10 +172,11 @@
             "sha256": "sha256-eJkVxcaDiIbTrI1Js5j+Nl88gawTE/mfVjstjqQOOdU=",
             "type": "github"
         },
-        "version": "77aff04b9f2651eac10e5cfa80a3d85ce43e7985"
+        "version": "9ae0fdedd423803f0401f6e7a23cd2bb88c175b2"
     },
     "dracula-fish": {
         "cargoLocks": null,
+        "date": "2023-06-23",
         "extract": null,
         "name": "dracula-fish",
         "passthru": null,
@@ -164,14 +188,15 @@
             "name": null,
             "owner": "dracula",
             "repo": "fish",
-            "rev": "0e51af5e5346e5d24efabd43fb4631e2a8fd1b70",
-            "sha256": "sha256-YXh6pPJ9dJDPpq1kX5xd1edoOaH6jDq8pDOkx3k03/0=",
+            "rev": "269cd7d76d5104fdc2721db7b8848f6224bdf554",
+            "sha256": "sha256-Hyq4EfSmWmxwCYhp3O8agr7VWFAflcUe8BUKh50fNfY=",
             "type": "github"
         },
-        "version": "0e51af5e5346e5d24efabd43fb4631e2a8fd1b70"
+        "version": "269cd7d76d5104fdc2721db7b8848f6224bdf554"
     },
     "dracula-wofi": {
         "cargoLocks": null,
+        "date": "2023-06-14",
         "extract": null,
         "name": "dracula-wofi",
         "passthru": null,
@@ -183,14 +208,15 @@
             "name": null,
             "owner": "dracula",
             "repo": "wofi",
-            "rev": "04f905b10796f9491f30be024b0b5ff28c675648",
-            "sha256": "sha256-umL6QihHDJly7MjQYme2uyBzUbwl8nviPujYSxrVT+U=",
+            "rev": "9180ba3ddda7d339293e8a1bf6a67b5ce37fdd6e",
+            "sha256": "sha256-qC1IvVJv1AmnGKm+bXadSgbc6MnrTzyUxGH2ogBOHQA=",
             "type": "github"
         },
-        "version": "04f905b10796f9491f30be024b0b5ff28c675648"
+        "version": "9180ba3ddda7d339293e8a1bf6a67b5ce37fdd6e"
     },
     "dracula-zathura": {
         "cargoLocks": null,
+        "date": "2024-03-09",
         "extract": null,
         "name": "dracula-zathura",
         "passthru": null,
@@ -202,42 +228,45 @@
             "name": null,
             "owner": "dracula",
             "repo": "zathura",
-            "rev": "b597b1537aa125e8829bef2cc57a0b0c6a6b35a1",
-            "sha256": "sha256-g6vxwPw0Q9QFJBc3d4R3ZsHnnEvU5o1f4DSuyLeN5XQ=",
+            "rev": "d21609b0548eaf45cccc275791dd3cc5c22baa5e",
+            "sha256": "sha256-1bEJYF1T1bk0meySXcww7POCjjzSQpyXdh5YwoZRhRA=",
             "type": "github"
         },
-        "version": "b597b1537aa125e8829bef2cc57a0b0c6a6b35a1"
+        "version": "d21609b0548eaf45cccc275791dd3cc5c22baa5e"
     },
     "framesh": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "framesh",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-a2OeQVMWV2VsKgM7xMLSAUaIWAEjjaHbtQE5qLAhJuY=",
+            "sha256": "sha256-SsQIAg5DttvNJk1z+GJq4+e0Qa/j+VEKPV2bPA6+V8A=",
             "type": "url",
-            "url": "https://github.com/floating/frame/releases/download/v0.6.4/Frame-0.6.4.AppImage"
+            "url": "https://github.com/floating/frame/releases/download/v0.6.9/Frame-0.6.9.AppImage"
         },
-        "version": "0.6.4"
+        "version": "0.6.9"
     },
     "ledger-live-desktop": {
         "cargoLocks": null,
+        "date": null,
         "extract": null,
         "name": "ledger-live-desktop",
         "passthru": null,
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-fXvCj9eBEp/kGPSiNUdir19eU0x461KzXgl5YgeapHI=",
+            "sha256": "sha256-dnlIIOOYmCN209avQFMcoekB7nJpc2dJnS2OBI+dq7E=",
             "type": "url",
-            "url": "https://download.live.ledger.com/ledger-live-desktop-2.57.0-linux-x86_64.AppImage"
+            "url": "https://download.live.ledger.com/ledger-live-desktop-2.81.2-linux-x86_64.AppImage"
         },
-        "version": "2.57.0"
+        "version": "2.81.2"
     },
     "ls-colors": {
         "cargoLocks": null,
+        "date": "2023-12-13",
         "extract": null,
         "name": "ls-colors",
         "passthru": null,
@@ -249,10 +278,10 @@
             "name": null,
             "owner": "trapd00r",
             "repo": "LS_COLORS",
-            "rev": "09dab448207002624d17f01ed7cbf820aa048063",
-            "sha256": "sha256-hQTT/yNS9UIDZqHuul0xmknnOh6tOtfotQIm0SY5TTE=",
+            "rev": "a283d79dcbb23a8679f4b1a07d04a80cab01c0ba",
+            "sha256": "sha256-DT9WmtyJ/wngoiOTXMcnstVbGh3BaFWrr8Zxm4g4b6U=",
             "type": "github"
         },
-        "version": "09dab448207002624d17f01ed7cbf820aa048063"
+        "version": "a283d79dcbb23a8679f4b1a07d04a80cab01c0ba"
     }
 }

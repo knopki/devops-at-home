@@ -1,0 +1,1 @@
+{ nixpkgsUnstable, ... }: nixpkgsUnstable.rustic-rs

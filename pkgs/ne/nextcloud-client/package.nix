@@ -1,0 +1,1 @@
+{ nixpkgsUnstable, ... }: nixpkgsUnstable.nextcloud-client

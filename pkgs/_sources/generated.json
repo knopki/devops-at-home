@@ -81,7 +81,7 @@
     },
     "base16-tmux": {
         "cargoLocks": null,
-        "date": "2023-07-16",
+        "date": "2024-04-07",
         "extract": null,
         "name": "base16-tmux",
         "passthru": null,
@@ -93,11 +93,11 @@
             "name": null,
             "owner": "mattdavis90",
             "repo": "base16-tmux",
-            "rev": "b38cd8181b3c90e88580425fa8da00076244d81a",
-            "sha256": "sha256-kmkJh0yq4XfEarKEHO/WNMIQyVThBF0aaVI3MvdfdRA=",
+            "rev": "b322151042538b7ee2d49000560ecefdd0fb1de9",
+            "sha256": "sha256-adikbyiK2TdKrqVyaiW9qiQzO5kG5CxwzF4cPVNEd2Y=",
             "type": "github"
         },
-        "version": "b38cd8181b3c90e88580425fa8da00076244d81a"
+        "version": "b322151042538b7ee2d49000560ecefdd0fb1de9"
     },
     "base16-vim": {
         "cargoLocks": null,
@@ -201,7 +201,7 @@
     },
     "dracula-zathura": {
         "cargoLocks": null,
-        "date": "2022-03-21",
+        "date": "2024-03-09",
         "extract": null,
         "name": "dracula-zathura",
         "passthru": null,
@@ -213,26 +213,11 @@
             "name": null,
             "owner": "dracula",
             "repo": "zathura",
-            "rev": "b597b1537aa125e8829bef2cc57a0b0c6a6b35a1",
-            "sha256": "sha256-g6vxwPw0Q9QFJBc3d4R3ZsHnnEvU5o1f4DSuyLeN5XQ=",
+            "rev": "d21609b0548eaf45cccc275791dd3cc5c22baa5e",
+            "sha256": "sha256-1bEJYF1T1bk0meySXcww7POCjjzSQpyXdh5YwoZRhRA=",
             "type": "github"
         },
-        "version": "b597b1537aa125e8829bef2cc57a0b0c6a6b35a1"
-    },
-    "framesh": {
-        "cargoLocks": null,
-        "date": null,
-        "extract": null,
-        "name": "framesh",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "name": null,
-            "sha256": "sha256-yPNgrC9ZQcl1gCStMXMbZvk15jZylM2NgKM9H3XcJVQ=",
-            "type": "url",
-            "url": "https://github.com/floating/frame/releases/download/v0.6.7/Frame-0.6.7.AppImage"
-        },
-        "version": "0.6.7"
+        "version": "d21609b0548eaf45cccc275791dd3cc5c22baa5e"
     },
     "ledger-live-desktop": {
         "cargoLocks": null,
@@ -243,15 +228,15 @@
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-8cb5FA/Ogd6GI0AclxHicZGV3K5bVsZuIl/3A03r5qQ=",
+            "sha256": "sha256-dnlIIOOYmCN209avQFMcoekB7nJpc2dJnS2OBI+dq7E=",
             "type": "url",
-            "url": "https://download.live.ledger.com/ledger-live-desktop-2.64.2-linux-x86_64.AppImage"
+            "url": "https://download.live.ledger.com/ledger-live-desktop-2.81.2-linux-x86_64.AppImage"
         },
-        "version": "2.64.2"
+        "version": "2.81.2"
     },
     "ls-colors": {
         "cargoLocks": null,
-        "date": "2023-05-25",
+        "date": "2023-12-13",
         "extract": null,
         "name": "ls-colors",
         "passthru": null,
@@ -263,10 +248,50 @@
             "name": null,
             "owner": "trapd00r",
             "repo": "LS_COLORS",
-            "rev": "eeceec887830e1b30b49b08371ae0d079578a58a",
-            "sha256": "sha256-Y8HrlS5thtXlRNtxefCIgWSD+vnW1bgpqf0Q88hW2s8=",
+            "rev": "a283d79dcbb23a8679f4b1a07d04a80cab01c0ba",
+            "sha256": "sha256-DT9WmtyJ/wngoiOTXMcnstVbGh3BaFWrr8Zxm4g4b6U=",
             "type": "github"
         },
-        "version": "eeceec887830e1b30b49b08371ae0d079578a58a"
+        "version": "a283d79dcbb23a8679f4b1a07d04a80cab01c0ba"
+    },
+    "mpv-align-images": {
+        "cargoLocks": null,
+        "date": "2024-11-03",
+        "extract": null,
+        "name": "mpv-align-images",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "guidocella",
+            "repo": "mpv-image-config",
+            "rev": "f8ba0d22bb738bb0c55545121d525613a92b498d",
+            "sha256": "sha256-xGdbyM0igHhmvmM8g1B0pretts/ajrESf0FQysZY3ig=",
+            "type": "github"
+        },
+        "version": "f8ba0d22bb738bb0c55545121d525613a92b498d"
+    },
+    "mpv-image-bindings": {
+        "cargoLocks": null,
+        "date": "2024-11-03",
+        "extract": null,
+        "name": "mpv-image-bindings",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "guidocella",
+            "repo": "mpv-image-config",
+            "rev": "f8ba0d22bb738bb0c55545121d525613a92b498d",
+            "sha256": "sha256-xGdbyM0igHhmvmM8g1B0pretts/ajrESf0FQysZY3ig=",
+            "type": "github"
+        },
+        "version": "f8ba0d22bb738bb0c55545121d525613a92b498d"
     }
 }

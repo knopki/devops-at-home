@@ -1,23 +1,36 @@
 {
   config,
-  inputs,
-  self,
   pkgs,
+  packages,
+  self,
+  self',
+  inputs,
+  inputs',
+  extLib,
+  lib,
   ...
-}: {
-  imports = [
-    self.inputs.home.nixosModules.default
-  ];
+}:
+{
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
 
-  config = {
-    environment.systemPackages = with pkgs; [hello];
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-
-    # additional args to all homeManagerModules
-    # default: { lib, modulesPath, nixosConfig, osConfig }
-    home-manager.extraSpecialArgs = {
-      # inherit self inputs;
+    # additional args to all homeModules
+    # default: { lib, pkgs, modulesPath, osConfig }
+    extraSpecialArgs = self.lib.configuration.mkSpecialArgs {
+      inherit
+        config
+        inputs
+        inputs'
+        self
+        self'
+        extLib
+        packages
+        ;
     };
+
+    sharedModules = [
+      inputs.sops-nix.homeManagerModules.sops
+    ];
   };
 }

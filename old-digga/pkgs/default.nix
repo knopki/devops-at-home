@@ -28,9 +28,6 @@ final: prev: {
     prev.vscode-extensions
     // (import ./misc/vscode-extensions.nix {inherit (final) fetchurl vscode-utils;});
 
-  # tools
-  sway-scripts = final.callPackage ./tools/wayland/sway-scripts {};
-
   # shells
   fishPlugins =
     prev.fishPlugins
@@ -39,4 +36,6 @@ final: prev: {
     };
 
   cronosd = final.callPackage ./cronosd.nix {};
+
+  # telegram-desktop = final.callPackage ./applications/tdesktop-bin.nix {};
 }

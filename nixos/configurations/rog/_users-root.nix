@@ -4,15 +4,16 @@
   pkgs,
   self,
   ...
-}: {
+}:
+{
   users.users.root = {
-    isNormalUser = true;
-    hashedPassword = "$6$QOTimFq0v8u6oN.I$.m0BQc/tC6/8nluwwQT7AmkbJbfNoh2PnO9biVL4wgWA22zlb/0HheieexWgISAB67r/7floX3bQpZrUjZv9v.";
+    hashedPassword = "$y$j9T$oz0dXbu9fVRSXj2.pcAbw0$HlXKMmJ/OXIoqRRgVX4Wzebsh5K6o1cUd.azvemKm07";
+    # passwordFile = config.sops.secrets.rog-root-user-password.path;
   };
 
-  home-manager.users.root = {... }:  {
-    imports = with self.homeManagerModules; [
-      profiles-root-at-rog
-    ];
-  };
+  home-manager.users.root =
+    { ... }:
+    {
+      imports = with self.modules.home; [ profiles-root-at-rog ];
+    };
 }

@@ -1,0 +1,1 @@
+{ nixpkgsUnstable, ... }: nixpkgsUnstable.telegram-desktop

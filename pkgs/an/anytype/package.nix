@@ -1,0 +1,1 @@
+{ nixpkgsUnstable, ... }: nixpkgsUnstable.anytype
