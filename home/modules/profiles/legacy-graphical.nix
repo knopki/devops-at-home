@@ -83,12 +83,7 @@ in
     firefox = {
       enable = mkDefault true;
 
-      package = pkgs.firefox.override {
-        cfg = {
-          enableBrowserpass = true;
-          enablePlasmaBrowserIntegration = config.programs.kde.enable;
-        };
-      };
+      package = packages.firefox;
 
       profiles = {
         default = {
