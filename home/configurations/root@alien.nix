@@ -5,7 +5,7 @@
   ...
 }:
 let
-  homeInput = inputs.home-24-05;
+  homeInput = inputs.home-24-11;
 in
 mkHomeConfiguration rec {
   inherit (homeInput.lib) homeManagerConfiguration;
