@@ -87,15 +87,15 @@
   };
   dracula-alacritty = {
     pname = "dracula-alacritty";
-    version = "77aff04b9f2651eac10e5cfa80a3d85ce43e7985";
+    version = "9ae0fdedd423803f0401f6e7a23cd2bb88c175b2";
     src = fetchFromGitHub {
       owner = "dracula";
       repo = "alacritty";
-      rev = "77aff04b9f2651eac10e5cfa80a3d85ce43e7985";
+      rev = "9ae0fdedd423803f0401f6e7a23cd2bb88c175b2";
       fetchSubmodules = false;
-      sha256 = "sha256-eJkVxcaDiIbTrI1Js5j+Nl88gawTE/mfVjstjqQOOdU=";
+      sha256 = "sha256-MgRH5Lc8wyZ6AQZweyL1QzO5eBzVdjbOPQeRs/Mf51M=";
     };
-    date = "2022-07-14";
+    date = "2023-09-25";
   };
   dracula-fish = {
     pname = "dracula-fish";

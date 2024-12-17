@@ -97,8 +97,8 @@ in
     })
 
     (mkIf (cfg.preset == "dracula") {
-      xdg.configFile."alacritty/dracula.yml".source = "${packages.dracula-alacritty}/dracula.yml";
-      programs.alacritty.settings.import = [ "dracula.yml" ];
+      xdg.configFile."alacritty/dracula.toml".source = "${packages.dracula-alacritty}/dracula.toml";
+      programs.alacritty.settings.general.import = [ "dracula.toml" ];
     })
   ]);
 }

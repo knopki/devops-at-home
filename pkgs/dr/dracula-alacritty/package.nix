@@ -8,7 +8,7 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out
-    cp -a dracula.yml $out/
+    cp -a dracula.toml $out/
   '';
 
   meta = with lib; {
