@@ -110,6 +110,14 @@ in
     iotop.enable = mkDefault true;
     mosh.enable = mkDefault true;
     mtr.enable = mkDefault true;
+    nix-ld = {
+      enable = mkDefault true;
+      libraries = with pkgs; [
+        # already included:
+        #   acl attr bzip2 curl libsodium libssh libxml2 openssl
+        #   stdenv.cc.cc systemd util-linux xz zlib zstd
+      ];
+    };
     tmux.enable = mkDefault true;
   };
 
