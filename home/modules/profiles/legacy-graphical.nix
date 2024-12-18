@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (lib) mkDefault mkIf;
+  inherit (lib) mkDefault;
 in
 {
   home.packages =
