@@ -177,13 +177,12 @@ in
     };
     optimise.automatic = mkDefault true;
     settings = {
+      inherit (self.nixConfig) experimental-features extra-substituters extra-trusted-public-keys;
       allowed-users = mkDefault [ "@wheel" ];
       auto-optimise-store = mkDefault true;
       trusted-users = mkDefault [
         "root"
-        "@wheel"
       ];
-      substituters = [ "https://cache.nixos.org/" ];
     };
     extraOptions =
       let

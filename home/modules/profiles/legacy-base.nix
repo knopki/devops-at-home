@@ -3,6 +3,7 @@
   lib,
   pkgs,
   osConfig,
+  self,
   ...
 }:
 let
@@ -73,10 +74,9 @@ in
 
   nix = {
     package = mkDefault pkgs.nix;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+      inherit (self.nixConfig) experimental-features extra-substituters extra-trusted-public-keys;
+    };
   };
 
   programs = {

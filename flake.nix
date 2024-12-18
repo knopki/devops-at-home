@@ -85,6 +85,7 @@
 
         flake = {
           inherit flakeModules;
+          nixConfig = (import ./flake.nix).nixConfig;
         };
 
         perSystem =
