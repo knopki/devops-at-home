@@ -62,7 +62,6 @@ in
     packages.anytype
     aspellDicts.en
     aspellDicts.ru
-    gscan2pdf
     img2pdf
     isync
     libsForQt5.ark
@@ -82,7 +81,6 @@ in
     syncthing
     telegram-desktop
     thunderbird
-    xfce.orage
     zotero
 
     # remote
@@ -100,7 +98,6 @@ in
     smartmontools
     yubikey-manager
     vmtouch
-    mkchromecast
   ];
 
   programs = {
@@ -276,30 +273,8 @@ in
 
   networking = {
     hostId = "ff0b9d65";
-    hosts = {
-      "127.0.0.84" = [
-        "adminer.xod.loc"
-        "api.xod.loc"
-        "auth.xod.loc"
-        "billing-db.xod.loc"
-        "billing.xod.loc"
-        "compile.xod.loc"
-        "compiler.xod.loc"
-        "mail.xod.loc"
-        "main-db.xod.loc"
-        "mqtt.xod.loc"
-        "neo4j.xod.loc"
-        "pm.xod.loc"
-        "releases.xod.loc"
-        "rethinkdb.xod.loc"
-        "s3.xod.loc"
-        "swagger-ui.xod.loc"
-        "xod.loc"
-      ];
-    };
     networkmanager.unmanaged = [ "docker0" ];
     search = [
-      "1984.run"
       "lan"
     ];
     firewall = {

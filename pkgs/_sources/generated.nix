@@ -85,18 +85,6 @@
     };
     date = "2019-01-06";
   };
-  dracula-alacritty = {
-    pname = "dracula-alacritty";
-    version = "9ae0fdedd423803f0401f6e7a23cd2bb88c175b2";
-    src = fetchFromGitHub {
-      owner = "dracula";
-      repo = "alacritty";
-      rev = "9ae0fdedd423803f0401f6e7a23cd2bb88c175b2";
-      fetchSubmodules = false;
-      sha256 = "sha256-MgRH5Lc8wyZ6AQZweyL1QzO5eBzVdjbOPQeRs/Mf51M=";
-    };
-    date = "2023-09-25";
-  };
   dracula-fish = {
     pname = "dracula-fish";
     version = "269cd7d76d5104fdc2721db7b8848f6224bdf554";

@@ -23,7 +23,6 @@ let
     package = pkgs.arc-theme;
   };
   kdeThemePkg = pkgs.arc-kde-theme;
-  kvColorScheme = if isDarkTheme then "KvArcDark" else "KvArc";
   kdeThemeId = if isDarkTheme then "com.github.varlesh.arc-dark" else "com.github.varlesh.arc";
 
   gtkSettingsRc = {
@@ -70,7 +69,6 @@ in
     ];
 
     home.packages = with pkgs; [
-      libsForQt5.qtstyleplugin-kvantum
       kdeThemePkg
       iconTheme.package
       gtkTheme.package
@@ -103,7 +101,6 @@ in
       kdeglobals = {
         General = {
           Name = if isDarkTheme then "Arc Dark" else "Arc Color";
-          ColorScheme = kvColorScheme;
           fixed = mkKDEFontList cfg.fonts.monospace.family cfg.fonts.monospace.size;
           font = mkKDEFontList cfg.fonts.regular.family cfg.fonts.regular.size;
           menuFont = mkKDEFontList cfg.fonts.regular.family cfg.fonts.regular.size;
@@ -117,11 +114,8 @@ in
         Icons.Theme = iconTheme.name;
         KDE = {
           LookAndFeelPackage = kdeThemeId;
-          widgetStyle = if isDarkTheme then "kvantum-dark" else "kvantum";
         };
       };
-
-      "Kvantum/kvantum.kvconfig".General.theme = kvColorScheme;
 
       kwinrc = {
         Effect-Slide.Duration = mkDefault 100;

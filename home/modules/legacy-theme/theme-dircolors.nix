@@ -27,7 +27,6 @@ in
       extraConfig = mkBefore (
         concatStringsSep "\n" [
           lsColors
-          "TERM alacritty"
         ]
       );
     };

@@ -10,18 +10,6 @@ let
   inherit (lib) mkDefault;
 in
 {
-  home.packages =
-    with pkgs;
-    with plasma5Packages;
-    with plasma5;
-    with kdeApplications;
-    with kdeFrameworks;
-    [
-      dconf
-      plasma-applet-caffeine-plus
-      plasma-applet-virtual-desktop-bar
-    ];
-
   dconf = {
     enable = mkDefault true;
     settings = {
@@ -54,23 +42,6 @@ in
   };
 
   programs = {
-    alacritty = {
-      enable = mkDefault true;
-      settings = {
-        keyboard.bindings = [
-          # spawn a new instance of Alacritty in the current working directory
-          {
-            key = "Return";
-            mods = "Control|Shift";
-            action = "SpawnNewInstance";
-          }
-        ];
-        window = {
-          opacity = 0.95;
-        };
-      };
-    };
-
     brave = {
       enable = lib.mkDefault true;
       package = pkgs.brave;

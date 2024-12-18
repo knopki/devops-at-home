@@ -22,11 +22,6 @@ let
     "org.electrum.electrum"
     "org.gtk.Gtk3theme.Arc-Dark"
     "org.inkscape.Inkscape"
-    "org.kde.KStyle.Adwaita/x86_64/6.4"
-    "org.kde.KStyle.Kvantum//5.15"
-    "org.kde.KStyle.Kvantum//5.15-21.08"
-    "org.kde.KStyle.Kvantum//5.15-22.08"
-    "org.kde.PlatformTheme.QGnomePlatform/x86_64/6.4"
     "org.kde.digikam"
     "org.kde.kdenlive"
     "org.kde.krita"
@@ -34,7 +29,6 @@ let
     "org.musicbrainz.Picard"
     "org.qbittorrent.qBittorrent"
     "org.remmina.Remmina"
-    "org.videolan.VLC"
   ];
   flatpak_overrides = map (x: writeTextDir x.name x.text) [
     {
@@ -391,28 +385,6 @@ let
         };
       };
     }
-    {
-      name = "org.videolan.VLC";
-      text = toINI { } {
-        Context = {
-          sockets = "x11;";
-          shared = "network;ipc;";
-          devices = "dri;all;";
-          filesystems = concatStringsSep ";" [
-            "host:ro"
-            "xdg-download"
-            "xdg-pictures"
-            "xdg-videos"
-            "/media:ro"
-            "/run/media:ro"
-            "/tmp"
-          ];
-        };
-        "System Bus Policy" = {
-          "org.freedesktop.secrets" = "talk";
-        };
-      };
-    }
   ];
   flatpak_all_overrides = symlinkJoin {
     name = "flatpak_overrides";
@@ -420,10 +392,6 @@ let
   };
 in
 {
-  environment.shellAliases = {
-    vlc = "org.videolan.VLC";
-  };
-
   system.activationScripts.makeFlatpakOverrides = stringAfter [ "var" ] ''
     mkdir -p /var/lib/flatpak
     rm -rf /var/lib/flatpak/overrides

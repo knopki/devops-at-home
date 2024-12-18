@@ -4,15 +4,11 @@
   pkgs,
   ...
 }:
-let
-  libsForQt5 = pkgs.plasma5Packages;
-  inherit (libsForQt5) kdeApplications kdeFrameworks plasma5;
-in
 {
   environment.etc =
     let
       appId = "org.kde.plasma.browser_integration.json";
-      source = "${libsForQt5.plasma-browser-integration}/etc/chromium/native-messaging-hosts/${appId}";
+      source = "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/${appId}";
     in
     {
       "brave/native-messaging-hosts/${appId}".source = source;
@@ -21,16 +17,8 @@ in
       "opt/vivaldi/native-messaging-hosts/${appId}".source = source;
     };
 
-  environment.systemPackages =
-    with pkgs;
-    with plasma5Packages;
-    with plasma5;
-    with kdeApplications;
-    with kdeFrameworks;
-    [
-      krename
-      qt5.qttools
-    ];
+  environment.systemPackages = with pkgs; [ krename ];
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [ kate ];
 
   programs =
     let
@@ -48,15 +36,6 @@ in
     storeOnly = true;
   };
 
-  services.xserver = {
-    displayManager.lightdm.enable = false;
-    desktopManager.plasma5.enable = true;
-  };
-
+  services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.enable = true;
-
-  systemd.user.services = {
-    plasma-early-setup.restartIfChanged = false;
-    plasma-run-with-systemd.restartIfChanged = false;
-  };
 }

@@ -139,26 +139,6 @@
         },
         "version": "d2f943b1abb9c9f295e4c6760b7bdfc2125171d2"
     },
-    "dracula-alacritty": {
-        "cargoLocks": null,
-        "date": "2023-09-25",
-        "extract": null,
-        "name": "dracula-alacritty",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "dracula",
-            "repo": "alacritty",
-            "rev": "9ae0fdedd423803f0401f6e7a23cd2bb88c175b2",
-            "sha256": "sha256-MgRH5Lc8wyZ6AQZweyL1QzO5eBzVdjbOPQeRs/Mf51M=",
-            "type": "github"
-        },
-        "version": "9ae0fdedd423803f0401f6e7a23cd2bb88c175b2"
-    },
     "dracula-fish": {
         "cargoLocks": null,
         "date": "2023-06-23",

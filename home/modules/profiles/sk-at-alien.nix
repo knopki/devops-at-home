@@ -18,10 +18,6 @@ let
         pattern = "https?://mail.google.com/*";
         passKeys = "";
       }
-      {
-        pattern = "https?://app.amazingmarvin.com/*";
-        passKeys = "ao";
-      }
     ];
     keyMappings = ''
       # Navigating the current page:
@@ -297,8 +293,8 @@ in
   qt.kde.settings = {
     kdeglobals.General = {
       BrowserApplication = "brave-browser.desktop";
-      TerminalApplication = mkDefault "alacritty";
-      TerminalService = mkDefault "Alacritty.desktop";
+      TerminalApplication = mkDefault "konsole";
+      TerminalService = mkDefault "org.kde.konsole.desktop";
     };
 
     kactivitymanagerdrc = {
@@ -307,12 +303,6 @@ in
       };
       activities = {
         "0da38162-91a8-4f68-9bff-8c318a46edc6" = "Default";
-        "ee03f0f7-8175-48f9-b239-ed505c53b864" = "Gaming";
-        "fdd73bec-54ba-445a-9be8-f427d6aa56d6" = "Working";
-      };
-      activities-icons = {
-        "ee03f0f7-8175-48f9-b239-ed505c53b864" = "preferences-desktop-gaming";
-        "fdd73bec-54ba-445a-9be8-f427d6aa56d6" = "planwork";
       };
     };
 
@@ -360,10 +350,6 @@ in
 
     # hotkeys
     kglobalshortcutsrc = {
-      "Alacritty.desktop" = {
-        _k_friendly_name = "Alacritty";
-        _launch = "Meta+Return,none,Alacritty";
-      };
       "krunner.desktop" = {
         _k_friendly_name = "KRunner";
         _launch = "Alt+F2\tSearch,Alt+F2\tSearch,KRunner";
@@ -473,7 +459,7 @@ in
 
   systemd.user = {
     sessionVariables = {
-      TERMINAL = mkDefault "alacritty -e";
+      TERMINAL = mkDefault "konsole -e";
     };
 
     tmpfiles.rules = [

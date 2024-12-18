@@ -27,10 +27,6 @@ fetch.github = "chriskempson/base16-vim"
 src.git = "https://github.com/mnussbaum/base16-waybar"
 fetch.github = "mnussbaum/base16-waybar"
 
-[dracula-alacritty]
-src.git = "https://github.com/dracula/alacritty"
-fetch.github = "dracula/alacritty"
-
 [dracula-fish]
 src.git = "https://github.com/dracula/fish"
 fetch.github = "dracula/fish"

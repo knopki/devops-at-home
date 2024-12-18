@@ -14,7 +14,6 @@ let
 in
 {
   imports = [
-    ./theme-alacritty.nix
     ./theme-base16.nix
     ./theme-bat.nix
     ./theme-dircolors.nix
