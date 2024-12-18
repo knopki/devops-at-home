@@ -31,9 +31,8 @@
     home-24-11.url = "github:nix-community/home-manager/release-24.11";
     home.follows = "home-24-11";
     # impermanence.url = github:nix-community/impermanence;
-    sops-nix.url = "github:Mic92/sops-nix/2168851d58595431ee11ebfc3a49d60d318b7312";
+    sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.inputs.nixpkgs-stable.url = "github:divnix/blank";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
     treefmt-nix.url = "github:numtide/treefmt-nix";
 

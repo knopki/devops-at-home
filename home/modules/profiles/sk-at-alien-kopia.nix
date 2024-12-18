@@ -21,7 +21,7 @@
     env = {
       KOPIA_LOG_DIR_MAX_AGE = "168h";
       KOPIA_CONTENT_LOG_DIR_MAX_AGE = "168h";
-      KOPIA_CONFIG_FILE = config.sops.secrets.kopia-repository-config.path;
+      KOPIA_CONFIG_PATH = config.sops.secrets.kopia-repository-config.path;
     };
     envFile = config.sops.secrets.kopia-knopki-repo-password-env-file.path;
     jobs = {

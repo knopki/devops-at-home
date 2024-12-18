@@ -82,7 +82,7 @@ in
           ExecStart = concatStringsSep " " (
             [
               "${pkgs.util-linux}/bin/flock kopia-service.lock"
-              "${pkgs.kopia}/bin/kopia --password=$(cat $KOPIA_PASSWORD_FILE) snapshot create"
+              "${pkgs.kopia}/bin/kopia snapshot create"
             ]
             ++ (map escapeShellArg value.args)
             ++ (map escapeShellArg value.snapshots)
