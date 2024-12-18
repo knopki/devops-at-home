@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  myPython = pkgs.python3;
+in
 {
   imports = [ "${inputs.devshell}/extra/services/postgres.nix" ];
 
@@ -12,34 +15,28 @@
   commands = [ ];
 
   devshell.packages = with pkgs; [
+    myPython
     nodejs
     postgresql
     pyright
-    python3
     ruff
     ruff-lsp
     uv
   ];
 
   devshell.startup.venv.text = ''
-    VIRTUAL_ENV="$PRJ_DATA_DIR/venv"
-    export UV_PYTHON=$VIRTUAL_ENV/bin/python
-    # Create a virtual environment if it doesn't exist
-    if [ ! -d "$VIRTUAL_ENV" ]; then
-      ${pkgs.uv}/bin/uv venv "$VIRTUAL_ENV"
+    export UV_PYTHON_PREFERENCE=only-system
+    export UV_PROJECT_ENVIRONMENT="$PRJ_DATA_DIR/venv"
+    if [ ! -d "$UV_PROJECT_ENVIRONMENT" ]; then
+      ${pkgs.uv}/bin/uv venv -p "${myPython}" "$UV_PROJECT_ENVIRONMENT"
     fi
-
-    source $VIRTUAL_ENV/bin/activate
+    source $UV_PROJECT_ENVIRONMENT/bin/activate
   '';
 
   env = [
     {
       name = "PATH";
       prefix = "$PRJ_ROOT/esdd-gui/node_modules/.bin";
-    }
-    {
-      name = "UV_PYTHON_DOWNLOADS";
-      value = "never";
     }
   ];
 
