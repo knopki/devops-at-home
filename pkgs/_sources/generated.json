@@ -1,4 +1,24 @@
 {
+    "aliza": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "aliza",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "AlizaMedicalImaging",
+            "repo": "AlizaMS",
+            "rev": "v1.9.10",
+            "sha256": "sha256-6x6QIkhG2Bnf+vl1BJCw+xmSo4SN42Lm1T1MzEoteP8=",
+            "type": "github"
+        },
+        "version": "v1.9.10"
+    },
     "base16-default-schemes": {
         "cargoLocks": null,
         "date": "2019-06-08",

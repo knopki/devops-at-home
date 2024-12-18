@@ -60,6 +60,7 @@ in
 
     # office
     packages.anytype
+    packages.aliza
     aspellDicts.en
     aspellDicts.ru
     img2pdf

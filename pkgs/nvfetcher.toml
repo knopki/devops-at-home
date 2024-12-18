@@ -1,4 +1,8 @@
 # nvfetcher.toml
+[aliza]
+src.github_tag = "AlizaMedicalImaging/AlizaMS"
+fetch.github = "AlizaMedicalImaging/AlizaMS"
+
 [base16-default-schemes]
 src.git = "https://github.com/chriskempson/base16-default-schemes"
 fetch.github = "chriskempson/base16-default-schemes"
