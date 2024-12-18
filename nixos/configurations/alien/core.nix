@@ -110,6 +110,7 @@ in
     iotop.enable = mkDefault true;
     mosh.enable = mkDefault true;
     mtr.enable = mkDefault true;
+    nix-index.enable = mkDefault true;
     nix-ld = {
       enable = mkDefault true;
       libraries = with pkgs; [
@@ -165,6 +166,7 @@ in
   #
 
   nix = {
+    channel.enable = false;
     daemonCPUSchedPolicy = mkDefault "idle";
     daemonIOSchedPriority = mkDefault 7;
     gc = {
@@ -188,6 +190,10 @@ in
         tarball-ttl = ${toString (86400 * 30)}
         !include ${config.sops.templates."nix-access-tokens.conf".path}
       '';
+    registry.self.to = {
+      type = "path";
+      path = self.outPath;
+    };
   };
 
   #
@@ -338,6 +344,8 @@ in
       access-tokens = github.com=${config.sops.placeholder.nix-github-access-token}
     '';
   };
+
+  system.tools.nixos-option.enable = false;
 
   systemd = {
     network = {

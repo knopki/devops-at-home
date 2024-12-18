@@ -28,11 +28,13 @@ in
         lib,
         pkgs,
         system,
+        self',
         ...
       }:
       let
         shellModuleArgs = {
           inherit config inputs;
+          inherit (self') packages;
           pkgs = import inputs.nixpkgs {
             inherit system;
             config = {

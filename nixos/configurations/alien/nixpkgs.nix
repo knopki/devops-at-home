@@ -31,11 +31,4 @@ in
         "youtube-dl"
       ];
   };
-
-  nix.channel.enable = false; # remove nix-channel related tools & configs, we use flakes instead.
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 }

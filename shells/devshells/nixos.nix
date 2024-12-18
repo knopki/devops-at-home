@@ -2,6 +2,7 @@
   config,
   inputs,
   pkgs,
+  packages,
   ...
 }:
 {
@@ -23,8 +24,8 @@
     { package = pkgs.ssh-to-pgp; }
     { package = pkgs.sops; }
     { package = pkgs.nvd; }
-    { package = pkgs.lazygit; }
     { package = pkgs.nh; }
     { package = pkgs.vulnix; }
+    { package = packages.nixos-option; }
   ];
 }
