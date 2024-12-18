@@ -78,10 +78,7 @@ rec {
       perSystemArgs:
       homeManagerConfiguration {
         inherit modules pkgs;
-        extraSpecialArgs = {
-          # TODO: remove after >= 24.11
-          osConfig = null;
-        } // mkSpecialArgs (perSystemArgs // topArgs);
+        extraSpecialArgs = mkSpecialArgs (perSystemArgs // topArgs);
       }
     );
 }
