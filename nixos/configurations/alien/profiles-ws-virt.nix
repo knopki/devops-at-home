@@ -26,8 +26,6 @@ in
 
       # docker client (docker compose, for example) can be used with podman
       docker
-      podman
-      podman-compose
       distrobox
     ];
   };

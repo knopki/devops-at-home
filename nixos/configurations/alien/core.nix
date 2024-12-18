@@ -65,9 +65,6 @@ in
     aspellDicts.ru
     img2pdf
     isync
-    libsForQt5.ark
-    libsForQt5.gwenview
-    libsForQt5.okular
     nextcloud-client
     ocrmypdf
     offlineimap
@@ -76,8 +73,7 @@ in
     qpdf
     rclone
     seahorse
-    libsForQt5.kleopatra
-    # kdePackages.kleopatra
+    kdePackages.kleopatra
     speedcrunch
     syncthing
     telegram-desktop

@@ -49,8 +49,6 @@ in
 
     # :tools docker
     dockfmt
-    podman
-    podman-compose
     nodePackages.dockerfile-language-server-nodejs
 
     # :lang go
