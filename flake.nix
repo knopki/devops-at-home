@@ -21,9 +21,9 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     # core modules and libraries
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.url = "flake:flake-parts";
     haumea.url = "github:nix-community/haumea/v0.2.2";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "flake:flake-utils";
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     devshell.url = "github:numtide/devshell";
@@ -31,7 +31,7 @@
     home-24-11.url = "github:nix-community/home-manager/release-24.11";
     home.follows = "home-24-11";
     # impermanence.url = github:nix-community/impermanence;
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.url = "flake:sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -42,12 +42,12 @@
     # applications and utilities
 
     # linux only
-    disko.url = "github:nix-community/disko/v1.8.2";
+    disko.url = "flake:disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     # microvm.url = github:astro/microvm.nix;
     # microvm.inputs.nixpkgs.follows = "nixpkgs";
     # microvm.inputs.flake-utils.follows = "flake-utils";
-    nixos-hardware.url = "github:nixos/nixos-hardware/0ccdd2705669d68bcafd15f45a70ea3c6df57b60";
+    nixos-hardware.url = "flake:nixos-hardware";
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-generators.inputs.nixlib.follows = "nixpkgs-lib";
     # nixos-generators.inputs.nixpkgs.follows = "nixpkgs-24-05";
