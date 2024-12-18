@@ -9,7 +9,6 @@ let
   inherit (lib.generators) toINI;
   inherit (pkgs) writeTextDir symlinkJoin;
   flathub_apps = [
-    "com.discordapp.Discord"
     "com.github.AlizaMedicalImaging.AlizaMS"
     "com.github.micahflee.torbrowser-launcher"
     "com.github.tchx84.Flatseal"
@@ -88,16 +87,6 @@ let
         };
         "Session Bus Policy" = {
           "org.freedesktop.Flatpak" = "none";
-        };
-      };
-    }
-    {
-      name = "com.discordapp.Discord";
-      text = toINI { } {
-        Context = {
-          shared = "network;ipc;";
-          sockets = "wayland;fallback-x11;";
-          filesystems = "xdg-download;";
         };
       };
     }

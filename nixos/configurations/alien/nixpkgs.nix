@@ -18,6 +18,7 @@ in
         "anytype"
         "aspell-dict-en-science"
         "corefonts"
+        "discord"
         "edl"
         "mpv-thumbfast"
         "pantum-driver"

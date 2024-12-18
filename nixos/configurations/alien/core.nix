@@ -81,6 +81,7 @@ in
     speedcrunch
     syncthing
     telegram-desktop
+    (discord.override { withOpenASAR = true; })
     thunderbird
     zotero
 
