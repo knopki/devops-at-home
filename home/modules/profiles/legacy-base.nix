@@ -18,6 +18,8 @@ in
       curl
       fishPlugins.foreign-env
       wget
+      xsel
+      wl-clipboard
     ];
 
     file = {
@@ -372,6 +374,12 @@ in
 
         # show hostname
         set -g status-right ' #(hostname -s) '
+
+        # clipboard
+        set -g set-clipboard on
+
+        # keys
+        setw -g mode-keys vi
       '';
       newSession = true;
       plugins = with pkgs.tmuxPlugins; [
