@@ -9,7 +9,6 @@ let
   inherit (lib.generators) toINI;
   inherit (pkgs) writeTextDir symlinkJoin;
   flathub_apps = [
-    "com.github.AlizaMedicalImaging.AlizaMS"
     "com.github.micahflee.torbrowser-launcher"
     "com.github.tchx84.Flatseal"
     "com.obsproject.Studio"
@@ -87,17 +86,6 @@ let
         };
         "Session Bus Policy" = {
           "org.freedesktop.Flatpak" = "none";
-        };
-      };
-    }
-    {
-      name = "com.github.AlizaMedicalImaging.AlizaMS";
-      text = toINI { } {
-        Context = {
-          shared = "ipc;";
-          sockets = "x11;";
-          devices = "dri;";
-          filesystems = "xdg-documents:ro;xdg-download;";
         };
       };
     }
