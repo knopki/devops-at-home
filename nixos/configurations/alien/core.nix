@@ -80,6 +80,7 @@ in
     (discord.override { withOpenASAR = true; })
     thunderbird
     zotero
+    tor-browser
 
     # remote
     anydesk

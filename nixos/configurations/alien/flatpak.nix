@@ -9,7 +9,6 @@ let
   inherit (lib.generators) toINI;
   inherit (pkgs) writeTextDir symlinkJoin;
   flathub_apps = [
-    "com.github.micahflee.torbrowser-launcher"
     "com.github.tchx84.Flatseal"
     "com.obsproject.Studio"
     "com.usebottles.bottles"
@@ -75,9 +74,6 @@ let
             ""
           ];
         };
-        Environment = {
-          QT_STYLE_OVERRIDE = "kvantum";
-        };
         "System Bus Policy" = {
           "org.freedesktop.Accounts" = "none";
           "org.freedesktop.systemd1" = "none";
@@ -86,17 +82,6 @@ let
         };
         "Session Bus Policy" = {
           "org.freedesktop.Flatpak" = "none";
-        };
-      };
-    }
-    {
-      name = "com.github.micahflee.torbrowser-launcher";
-      text = toINI { } {
-        Context = {
-          sockets = "x11;wayland;fallback-x11;";
-          shared = "ipc;network;";
-          devices = "dri;";
-          filesystems = "xdg-download;";
         };
       };
     }
