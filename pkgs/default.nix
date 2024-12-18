@@ -1,4 +1,5 @@
 {
+  self,
   pkgs,
   sources,
   nixpkgsUnstable,
@@ -18,6 +19,7 @@ let
   extPkgs = pkgs.extend (
     _: _: {
       inherit
+        self
         nixpkgsUnstable
         nixpkgs-24-11
         sources

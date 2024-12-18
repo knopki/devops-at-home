@@ -10,7 +10,12 @@
   ...
 }:
 let
-  inherit (builtins) attrValues elem filter;
+  inherit (builtins)
+    attrValues
+    elem
+    hasAttr
+    filter
+    ;
   inherit (lib) getName getNameWithVersion;
   inherit (lib.attrsets) filterAttrs;
   inherit (flake-parts-lib) perSystem;
@@ -61,6 +66,7 @@ in
 
       pkgsByName = import ./. {
         inherit
+          self
           inputs
           pkgs
           nixpkgs-24-11
@@ -68,7 +74,9 @@ in
           sources
           ;
       };
-      packages = filterAttrs (_: v: elem system v.meta.platforms) pkgsByName;
+      packages = filterAttrs (
+        _: v: !(hasAttr "meta" v) || !(hasAttr "platforms" v.meta) || (elem system v.meta.platforms)
+      ) pkgsByName;
     in
     {
       inherit packages;
