@@ -142,9 +142,6 @@ in
       orch = "ns override";
       nrb = ifSudo "sudo nixos-rebuild";
 
-      # fix nixos-option
-      nixos-option = "nixos-option -I nixpkgs=${self}/lib/compat";
-
       # sudo
       s = ifSudo "sudo -E ";
       si = ifSudo "sudo -i";
@@ -180,9 +177,6 @@ in
       inherit (self.nixConfig) experimental-features extra-substituters extra-trusted-public-keys;
       allowed-users = mkDefault [ "@wheel" ];
       auto-optimise-store = mkDefault true;
-      trusted-users = mkDefault [
-        "root"
-      ];
     };
     extraOptions =
       let
@@ -192,6 +186,7 @@ in
         min-free = ${toString (gb * 10)}
         max-free = ${toString (gb * 20)}
         tarball-ttl = ${toString (86400 * 30)}
+        !include ${config.sops.templates."nix-access-tokens.conf".path}
       '';
   };
 
@@ -333,6 +328,15 @@ in
 
   services = {
     tailscale.enable = true;
+  };
+
+  sops = {
+    secrets = {
+      nix-github-access-token = { };
+    };
+    templates."nix-access-tokens.conf".content = ''
+      access-tokens = github.com=${config.sops.placeholder.nix-github-access-token}
+    '';
   };
 
   systemd = {

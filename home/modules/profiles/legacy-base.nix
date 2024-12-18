@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (lib) mkDefault optionals;
+  inherit (lib) mkDefault mkIf optionals;
 in
 {
   home = {
@@ -72,7 +72,7 @@ in
     };
   };
 
-  nix = {
+  nix = mkIf (osConfig == null) {
     package = mkDefault pkgs.nix;
     settings = {
       inherit (self.nixConfig) experimental-features extra-substituters extra-trusted-public-keys;
