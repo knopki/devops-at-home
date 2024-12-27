@@ -32,7 +32,7 @@ in
 
     git.delta.enable = mkDefault true;
 
-    man.generateCaches = mkDefault true;
+    man.generateCaches = false;
 
     password-store = {
       enable = mkDefault true;

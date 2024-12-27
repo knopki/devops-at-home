@@ -41,6 +41,7 @@ mkNixosConfiguration {
         doc.enable = false;
         info.enable = false;
         man.enable = true;
+        man.generateCaches = false;
         nixos.enable = false;
       };
     }
