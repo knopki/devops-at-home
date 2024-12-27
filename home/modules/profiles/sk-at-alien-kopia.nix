@@ -60,15 +60,15 @@
         snapshots = [
           "${config.home.homeDirectory}/.gnupg"
           "${config.home.homeDirectory}/.kube/config"
-          "${config.home.homeDirectory}/.var/app/org.remmina.Remmina/config/remmina"
-          "${config.home.homeDirectory}/.var/app/org.remmina.Remmina/data/remmina"
           "${config.home.homeDirectory}/secrets"
           "${config.xdg.configHome}/cachix"
           "${config.xdg.configHome}/gcloud"
+          "${config.xdg.configHome}/remmina"
           "${config.xdg.configHome}/sops/age"
           "${config.xdg.dataHome}/fish/fish_history"
           "${config.xdg.dataHome}/keyrings"
           "${config.xdg.dataHome}/password-store"
+          "${config.xdg.dataHome}/remmina"
         ];
       };
       alien-electrum = {
@@ -76,7 +76,7 @@
           OnCalendar = "daily";
           RandomizedDelaySec = "12h";
         };
-        snapshots = [ "${config.home.homeDirectory}/.var/app/org.electrum.electrum/.electrum" ];
+        snapshots = [ "${config.home.homeDirectory}/.electrum" ];
       };
       alien-docs = {
         timer = {
@@ -98,7 +98,7 @@
           RandomizedDelaySec = "12h";
         };
         snapshots = [
-          "${config.home.homeDirectory}/.var/app/org.darktable.Darktable/config/darktable"
+          "${config.xdg.configHome}/darktable"
           config.xdg.userDirs.videos
           config.xdg.userDirs.music
           config.xdg.userDirs.pictures
@@ -109,7 +109,10 @@
           OnCalendar = "weekly";
           RandomizedDelaySec = "24h";
         };
-        snapshots = [ "${config.home.homeDirectory}/.var/app/net.ankiweb.Anki/data" ];
+        snapshots = [
+          "${config.xdg.dataHome}/Anki"
+          "${config.xdg.dataHome}/Anki2"
+        ];
       };
       alien-random-conf = {
         timer = {
@@ -117,11 +120,12 @@
           RandomizedDelaySec = "12h";
         };
         snapshots = [
-          "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/Custom Dictionary.txt"
-          "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/Preferences"
-          "${config.home.homeDirectory}/.var/app/md.obsidian.Obsidian/config/obsidian/obsidian.json"
-          "${config.home.homeDirectory}/.var/app/org.musicbrainz.Picard/config/MusicBrainz"
+          "${config.xdg.configHome}/MusicBrainz"
           "${config.xdg.configHome}/dconf/user"
+          "${config.xdg.configHome}/obsidian/Custom Dictionary.txt"
+          "${config.xdg.configHome}/obsidian/Custom Dictionary.txt"
+          "${config.xdg.configHome}/obsidian/Preferences"
+          "${config.xdg.configHome}/obsidian/obsidian.json"
           "${config.xdg.configHome}/rclone"
           "${config.xdg.configHome}/syncthing"
           "${config.xdg.configHome}/syncthingtray.ini"

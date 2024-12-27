@@ -52,20 +52,33 @@ in
     wget
     whois
 
-    # downloaders
+    # media
+    darktable
+    digikam
+    imgcat
+    inkscape
+    kdePackages.kdenlive
+    krita
+    obs-studio
+    packages.deezer-desktop
+    picard
+    qbittorrent
+    streamrip
+    upscaler
+    upscayl
     yt-dlp
 
-    # image-viewers
-    imgcat
-
     # office
+    anki
     packages.anytype
     packages.aliza
     aspellDicts.en
     aspellDicts.ru
     img2pdf
     isync
+    libreoffice-qt6
     nextcloud-client
+    obsidian
     ocrmypdf
     offlineimap
     pdfarranger
@@ -75,6 +88,7 @@ in
     seahorse
     kdePackages.kleopatra
     speedcrunch
+    simplex-chat-desktop
     syncthing
     telegram-desktop
     (discord.override { withOpenASAR = true; })
@@ -86,10 +100,13 @@ in
     anydesk
     mosh
     openssh
+    remmina
 
     # misc
     android-udev-rules
+    bottles
     clevis
+    golden-cheetah-bin
     tailscale
     xorg.xhost
     restic

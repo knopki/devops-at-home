@@ -1,8 +1,9 @@
-{ pkgs, packages, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    electrum
     framesh
-    packages.ledger-live-desktop
+    ledger-live-desktop
     trezor-suite
   ];
   hardware.ledger.enable = true;

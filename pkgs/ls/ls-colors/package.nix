@@ -1,15 +1,26 @@
 {
-  sources,
   lib,
   stdenv,
+  fetchFromGitHub,
+  unstableGitUpdater,
 }:
 stdenv.mkDerivation {
-  inherit (sources.ls-colors) pname version src;
+  pname = "ls-colors";
+  version = "0-unstable-2024-12-20";
+  src = fetchFromGitHub {
+    owner = "trapd00r";
+    repo = "LS_COLORS";
+    rev = "81e2ebcdc2ed815d17db962055645ccf2125560c";
+    fetchSubmodules = false;
+    sha256 = "sha256-ePs7UlgQqh3ptRXUNlY/BDa/1aH9q3dGa3h0or/e6Kk=";
+  };
 
   installPhase = ''
     mkdir -p $out
     cp -a LS_COLORS $out/
   '';
+
+  passthru.updateScript = unstableGitUpdater { };
 
   meta = with lib; {
     description = "LS_COLORS";

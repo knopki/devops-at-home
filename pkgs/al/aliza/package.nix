@@ -2,18 +2,28 @@
 {
   lib,
   pkgs,
-  sources,
+  libsForQt5,
+  fetchFromGitHub,
+  gitUpdater,
   ...
 }:
-pkgs.libsForQt5.mkDerivation {
-  inherit (sources.aliza) pname version src;
+libsForQt5.mkDerivation rec {
+  pname = "aliza";
+  version = "1.9.10";
+  src = fetchFromGitHub {
+    owner = "AlizaMedicalImaging";
+    repo = "AlizaMS";
+    rev = "v${version}";
+    fetchSubmodules = false;
+    sha256 = "sha256-6x6QIkhG2Bnf+vl1BJCw+xmSo4SN42Lm1T1MzEoteP8=";
+  };
 
-  nativeBuildInputs = with pkgs.libsForQt5; [
+  nativeBuildInputs = with libsForQt5; [
     wrapQtAppsHook
     pkgs.cmake
   ];
 
-  buildInputs = with pkgs.libsForQt5; [
+  buildInputs = with libsForQt5; [
     pkgs.itk
     qtbase
     qtsvg
@@ -33,6 +43,8 @@ pkgs.libsForQt5.mkDerivation {
     install -Dm555 ./bin/* -t $out/bin
     runHook postInstall
   '';
+
+  passthru.updateScript = gitUpdater { rev-prefix = "v"; };
 
   meta = with lib; {
     description = "A DICOM Viewer";

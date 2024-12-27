@@ -16,7 +16,6 @@ mkNixosConfiguration {
     ./core.nix
     ./nixpkgs.nix
     ./hardware-config.nix
-    ./flatpak.nix
     ./profiles-flatpak.nix
     ./profiles-fonts.nix
     ./profiles-earlyoom.nix

@@ -23,6 +23,7 @@
     # core modules and libraries
     flake-parts.url = "flake:flake-parts";
     haumea.url = "github:nix-community/haumea/v0.2.2";
+    flake-compat.url = "github:edolstra/flake-compat";
     flake-utils.url = "flake:flake-utils";
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
@@ -106,7 +107,6 @@
 # nixvim
 #
 # namaka / nixt
-# nurl (instead of nvfetcher)
 # nix-index-database
 # nixos-anywhere
 # nix2container

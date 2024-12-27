@@ -5,8 +5,9 @@
 {
   inputs,
   lib,
-  flake-parts-lib,
   self,
+  withSystem,
+  perSystem,
   ...
 }:
 let
@@ -18,12 +19,12 @@ let
     ;
   inherit (lib) getName getNameWithVersion;
   inherit (lib.attrsets) filterAttrs;
-  inherit (flake-parts-lib) perSystem;
   allowlistedLicenses = with lib.licenses; [ ];
   allowUnfreePredicate =
     pkg:
     elem (getName pkg) [
       "anytype"
+      "deezer-desktop"
       "edl"
       "pantum-driver"
     ];
@@ -37,8 +38,6 @@ let
   };
 in
 {
-  imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
-
   config.perSystem =
     {
       config,
@@ -51,28 +50,25 @@ in
       # primary nixpkgs
       nixpkgs-24-11 = import inputs.nixpkgs-24-11 {
         inherit system;
-        # overlays = [ self.overlays.default ];
+        overlays = [ self.overlays.default ];
         config = commonNixpkgsConfig;
       };
 
       # unstable nixpkgs - don't use for evaluation speed
       nixpkgsUnstable = import inputs.nixpkgs-unstable {
         inherit system;
+        overlays = [ self.overlays.default ];
         config = commonNixpkgsConfig;
       };
-
-      # additional input - nvfetcher sources
-      sources = pkgs.callPackage ../pkgs/_sources/generated.nix { };
 
       pkgsByName = import ./. {
         inherit
           self
           inputs
-          pkgs
           nixpkgs-24-11
           nixpkgsUnstable
-          sources
           ;
+          pkgs = nixpkgs-24-11;
       };
       packages = filterAttrs (
         _: v: !(hasAttr "meta" v) || !(hasAttr "platforms" v.meta) || (elem system v.meta.platforms)
@@ -80,6 +76,7 @@ in
     in
     {
       inherit packages;
+      legacyPackages = packages;
 
       checks.buildPackages = pkgs.stdenv.mkDerivation {
         name = "all-packages";
@@ -88,4 +85,18 @@ in
         installPhase = "mkdir -p $out";
       };
     };
+
+  config.flake.overlays = {
+    default =
+      _final: prev:
+      withSystem prev.stdenv.hostPlatform.system (
+        { config, ... }:
+        {
+          inherit (config.packages) aliza;
+        }
+      );
+    update =
+      _final: prev: withSystem prev.stdenv.hostPlatform.system ({ config, ... }: config.packages);
+  };
+
 }

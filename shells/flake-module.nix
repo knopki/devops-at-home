@@ -63,8 +63,6 @@ in
           };
           settings = {
             global.excludes = [
-              "old-digga/**"
-              "pkgs/_sources/**"
               "*@*.yaml"
               "secrets.yaml"
               "secrets/*@*.yaml"

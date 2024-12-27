@@ -18,9 +18,11 @@ in
         "anytype"
         "aspell-dict-en-science"
         "corefonts"
+        "deezer-desktop"
         "discord"
         "edl"
         "mpv-thumbfast"
+        "obsidian"
         "pantum-driver"
         "trezor-suite"
         "unrar"
@@ -29,6 +31,7 @@ in
     allowInsecurePredicate =
       pkg:
       elem (getName pkg) [
+        "golden-cheetah"
         "youtube-dl"
       ];
   };

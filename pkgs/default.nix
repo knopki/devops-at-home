@@ -1,7 +1,6 @@
 {
   self,
   pkgs,
-  sources,
   nixpkgsUnstable,
   nixpkgs-24-11,
   inputs,
@@ -22,7 +21,6 @@ let
         self
         nixpkgsUnstable
         nixpkgs-24-11
-        sources
         extLib
         ;
     }

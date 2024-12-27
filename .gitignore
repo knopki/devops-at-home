@@ -1,6 +1,3 @@
 result
 .direnv
 doc/index.html
-
-pkgs/_sources/.shake*
-old-digga/pkgs/_sources/.shake*
