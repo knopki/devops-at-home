@@ -10,7 +10,7 @@ let
   overlaysList = "[ (import ./. {  }).overlays.update ]";
   predicate = ''
     let
-      prefix = "./pkgs";
+      prefix = "${self.outPath}/pkgs";
       prefixLen = builtins.stringLength prefix;
     in (_: p: (builtins.substring 0 prefixLen p.meta.position) == prefix)
   '';
