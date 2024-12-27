@@ -68,7 +68,7 @@ in
           nixpkgs-24-11
           nixpkgsUnstable
           ;
-          pkgs = nixpkgs-24-11;
+        pkgs = nixpkgs-24-11;
       };
       packages = filterAttrs (
         _: v: !(hasAttr "meta" v) || !(hasAttr "platforms" v.meta) || (elem system v.meta.platforms)

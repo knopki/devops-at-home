@@ -5,7 +5,6 @@
   ...
 }:
 let
-  inherit (builtins) concatStringsSep;
 
   myPython = (
     pkgs.python3.withPackages (
