@@ -4,6 +4,7 @@
 #
 {
   inputs,
+  config,
   lib,
   self,
   withSystem,
@@ -16,9 +17,22 @@ let
     elem
     hasAttr
     filter
+    length
+    listToAttrs
     ;
   inherit (lib) getName getNameWithVersion;
-  inherit (lib.attrsets) filterAttrs;
+  inherit (lib.attrsets) filterAttrs nameValuePair;
+
+  mkOverlay =
+    pkgNames: _final: prev:
+    let
+      system = prev.stdenv.hostPlatform.system;
+      packages = config.allSystems.${system}.packages;
+      inheritPackages = listToAttrs (map (x: nameValuePair x packages.${x}) pkgNames);
+      overlay = if (length pkgNames == 0) then packages else inheritPackages;
+    in
+    if (elem system config.systems) then overlay else { };
+
   allowlistedLicenses = with lib.licenses; [ ];
   allowUnfreePredicate =
     pkg:
@@ -87,16 +101,8 @@ in
     };
 
   config.flake.overlays = {
-    default =
-      _final: prev:
-      withSystem prev.stdenv.hostPlatform.system (
-        { config, ... }:
-        {
-          inherit (config.packages) aliza;
-        }
-      );
-    update =
-      _final: prev: withSystem prev.stdenv.hostPlatform.system ({ config, ... }: config.packages);
+    default = _: __: { }; # mkOverlay [ "aliza" ];
+    update = mkOverlay [ ];
   };
 
 }
