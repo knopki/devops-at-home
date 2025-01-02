@@ -28,6 +28,7 @@ mkNixosConfiguration {
     ./profiles-ws-virt.nix
     ./users-root.nix
     ./users-sk.nix
+    ./containers.nix
     {
       system.stateVersion = "20.09";
       networking.hostId = "ff0b9d65";
