@@ -122,6 +122,31 @@
         "type": "github"
       }
     },
+    "hercules-ci-effects": {
+      "inputs": {
+        "flake-parts": [
+          "nixpak",
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpak",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733333617,
+        "narHash": "sha256-nMMQXREGvLOLvUa0ByhYFdaL0Jov0t1wzLbKjr05P2w=",
+        "owner": "hercules-ci",
+        "repo": "hercules-ci-effects",
+        "rev": "56f8ea8d502c87cf62444bec4ee04512e8ea24ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "hercules-ci-effects",
+        "type": "github"
+      }
+    },
     "home-24-11": {
       "inputs": {
         "nixpkgs": [
@@ -155,6 +180,30 @@
       "original": {
         "id": "nixos-hardware",
         "type": "indirect"
+      }
+    },
+    "nixpak": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "hercules-ci-effects": "hercules-ci-effects",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735179818,
+        "narHash": "sha256-rqm6KVk+t4BZfiUEaIYOq+EshBcNGSiwPLWTzXXq+vY=",
+        "owner": "nixpak",
+        "repo": "nixpak",
+        "rev": "93b6b3c0513479e367079496bc7da280100301db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixpak",
+        "repo": "nixpak",
+        "type": "github"
       }
     },
     "nixpkgs": {
@@ -228,6 +277,7 @@
         ],
         "home-24-11": "home-24-11",
         "nixos-hardware": "nixos-hardware",
+        "nixpak": "nixpak",
         "nixpkgs": [
           "nixpkgs-24-11"
         ],

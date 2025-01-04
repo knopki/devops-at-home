@@ -4,6 +4,7 @@
   nixpkgsUnstable,
   nixpkgs-24-11,
   inputs,
+  mkNixPakPackage,
   ...
 }:
 let
@@ -22,6 +23,7 @@ let
         nixpkgsUnstable
         nixpkgs-24-11
         extLib
+        mkNixPakPackage
         ;
     }
   );

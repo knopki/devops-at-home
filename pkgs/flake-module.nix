@@ -75,12 +75,24 @@ in
         config = commonNixpkgsConfig;
       };
 
+      mkNixPakPackage =
+        args:
+        let
+          mkNixPak = inputs.nixpak.lib.nixpak {
+            inherit (pkgs) lib;
+            inherit pkgs;
+          };
+          pkg = mkNixPak args;
+        in
+        pkg.config.env // { inherit (pkg.config.app.package) meta; };
+
       pkgsByName = import ./. {
         inherit
-          self
           inputs
+          mkNixPakPackage
           nixpkgs-24-11
           nixpkgsUnstable
+          self
           ;
         pkgs = nixpkgs-24-11;
       };

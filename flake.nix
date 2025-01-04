@@ -36,6 +36,9 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    nixpak.url = "github:nixpak/nixpak";
+    nixpak.inputs.flake-parts.follows = "flake-parts";
+    nixpak.inputs.nixpkgs.follows = "nixpkgs";
 
     # customizations
     # themes etc
