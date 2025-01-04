@@ -20,10 +20,7 @@ let
 
   extLib = pkgs.lib.extend (
     _: prev: {
-      extended = import ../lib {
-        inherit (inputs) haumea;
-        lib = prev;
-      };
+      extended = import ../lib { lib = prev; };
     }
   );
   extPkgs = pkgs.extend (
