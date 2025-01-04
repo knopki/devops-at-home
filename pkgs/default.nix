@@ -4,10 +4,20 @@
   nixpkgsUnstable,
   nixpkgs-24-11,
   inputs,
-  mkNixPakPackage,
   ...
 }:
 let
+  mkNixPakPackage =
+    args:
+    let
+      mkNixPak = inputs.nixpak.lib.nixpak {
+        inherit (pkgs) lib;
+        inherit pkgs;
+      };
+      pkg = mkNixPak args;
+    in
+    pkg.config.env // { inherit (pkg.config.app.package) meta; };
+
   extLib = pkgs.lib.extend (
     _: prev: {
       extended = import ../lib {

@@ -33,23 +33,6 @@ let
     in
     if (elem system config.systems) then overlay else { };
 
-  allowlistedLicenses = with lib.licenses; [ ];
-  allowUnfreePredicate =
-    pkg:
-    elem (getName pkg) [
-      "anytype"
-      "deezer-desktop"
-      "edl"
-      "pantum-driver"
-    ];
-  allowInsecurePredicate = pkg: elem (getNameWithVersion pkg) [ ];
-  commonNixpkgsConfig = {
-    inherit
-      allowlistedLicenses
-      allowUnfreePredicate
-      allowInsecurePredicate
-      ;
-  };
 in
 {
   config.perSystem =
@@ -65,31 +48,19 @@ in
       nixpkgs-24-11 = import inputs.nixpkgs-24-11 {
         inherit system;
         overlays = [ self.overlays.default ];
-        config = commonNixpkgsConfig;
+        config = import ./nixpkgs-config.nix { inherit lib; };
       };
 
       # unstable nixpkgs - don't use for evaluation speed
       nixpkgsUnstable = import inputs.nixpkgs-unstable {
         inherit system;
         overlays = [ self.overlays.default ];
-        config = commonNixpkgsConfig;
+        config = import ./nixpkgs-config.nix { inherit lib; };
       };
-
-      mkNixPakPackage =
-        args:
-        let
-          mkNixPak = inputs.nixpak.lib.nixpak {
-            inherit (pkgs) lib;
-            inherit pkgs;
-          };
-          pkg = mkNixPak args;
-        in
-        pkg.config.env // { inherit (pkg.config.app.package) meta; };
 
       pkgsByName = import ./. {
         inherit
           inputs
-          mkNixPakPackage
           nixpkgs-24-11
           nixpkgsUnstable
           self
