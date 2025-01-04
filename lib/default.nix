@@ -5,14 +5,11 @@
 }:
 let
   lock = builtins.fromJSON (builtins.readFile ../flake.lock);
-  flake-compat = fetchTarball {
-    url = "https://github.com/edolstra/flake-compat/archive/${lock.nodes.flake-compat.locked.rev}.tar.gz";
-    sha256 = lock.nodes.flake-compat.locked.narHash;
+  haumeaSrc = fetchTarball {
+    url = "https://github.com/nix-community/haumea/archive/${lock.nodes.haumea.locked.rev}.tar.gz";
+    sha256 = lock.nodes.haumea.locked.narHash;
   };
-  self = import flake-compat {
-    src = ../.;
-  };
-  haumeaLib = if (haumea != null) then haumea else self.defaultNix.inputs.haumea;
+  haumeaLib = if (haumea != null) then haumea else { lib = import haumeaSrc { inherit lib; }; };
 in
 haumeaLib.lib.load {
   src = ./src;
