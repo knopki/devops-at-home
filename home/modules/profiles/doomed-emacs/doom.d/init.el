@@ -60,7 +60,7 @@
        (javascript +lsp +tree-sitter)
        (json +lsp +tree-sitter)
        (markdown +grip)
-       (nix +tree-sitter)
+       (nix +tree-sitter +lsp)
        (php +tree-sitter)
        plantuml
        (python +lsp +pyright +tree-sitter)

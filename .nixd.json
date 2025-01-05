@@ -1,0 +1,23 @@
+{
+    "$schema": "https://raw.githubusercontent.com/nix-community/nixd/main/nixd/docs/nixd-schema.json",
+    "nixpkgs": {
+        "expr": "import (builtins.getFlake (toString ./.)).inputs.nixpkgs { }"
+    },
+    "formatting": {
+        "command": "nix fmt"
+    },
+    "options": {
+        "nixos": {
+            "expr": "(builtins.getFlake (toString ./.)).nixosConfigurations.alien.options"
+        },
+        "home-manager": {
+            "expr": "(builtins.getFlake (toString ./.)).homeConfigurations.\"sk@alien\".options"
+        },
+        "flake-parts": {
+            "expr": "(builtins.getFlake (toString ./.)).debug.options"
+        },
+        "flake-parts2": {
+            "expr": "(builtins.getFlake (toString ./.)).currentSystem.options"
+        }
+    }
+}
