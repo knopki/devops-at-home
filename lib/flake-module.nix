@@ -2,15 +2,10 @@
 #
 # Load library from ../lib
 #
-{
-  inputs,
-  flake-parts-lib,
-  self',
-  ...
-}:
+{ inputs, self', ... }:
 let
   myLib = import ./. {
-    inherit (inputs.nixpkgs) lib;
+    inherit (inputs.nixpkgs-lib) lib;
     inherit (inputs) haumea;
   };
 in

@@ -15,13 +15,14 @@
 
   inputs = {
     # nixpkgs
-    # nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nixpkgs-24-11.url = "nixpkgs/nixos-24.11";
     nixpkgs.follows = "nixpkgs-24-11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     # core modules and libraries
     flake-parts.url = "flake:flake-parts";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-lib";
     haumea.url = "github:nix-community/haumea/v0.2.2";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-utils.url = "flake:flake-utils";
