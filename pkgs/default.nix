@@ -1,16 +1,15 @@
 {
   self,
   pkgs,
-  nixpkgsUnstable,
-  nixpkgs-24-11,
-  inputs,
+  nixpkgsUnstable ? pkgs,
+  nixpkgs-24-11 ? pkgs,
   ...
 }:
 let
   mkNixPakPackage =
     args:
     let
-      mkNixPak = inputs.nixpak.lib.nixpak {
+      mkNixPak = self.inputs.nixpak.lib.nixpak {
         inherit (pkgs) lib;
         inherit pkgs;
       };

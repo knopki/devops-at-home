@@ -60,7 +60,6 @@ in
 
       pkgsByName = import ./. {
         inherit
-          inputs
           nixpkgs-24-11
           nixpkgsUnstable
           self
