@@ -38,6 +38,7 @@ in
     gitMinimal
     gnupg
     gptfdisk
+    helix
     iputils
     lsof
     neovim
@@ -95,6 +96,7 @@ in
     thunderbird
     zotero
     tor-browser
+    zed-editor
 
     # remote
     anydesk
