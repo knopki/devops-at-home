@@ -76,6 +76,7 @@
           ./lib/flake-module.nix
           ./pkgs/flake-module.nix
           flakeModules.shells
+          ./modules/flake-module.nix
           ./nixos/flake-module.nix
           ./home/flake-module.nix
         ];

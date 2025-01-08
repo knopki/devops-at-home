@@ -10,7 +10,7 @@
   ...
 }:
 let
-  inherit (self.lib.filesystem) toModuleAttr toImportedModuleAttr;
+  inherit (self.lib.filesystem) toImportedModuleAttr;
   mkNixosConfiguration = self.lib.configuration.nixosConfigurationLoader {
     inherit inputs self withSystem;
   };
@@ -18,8 +18,6 @@ let
 in
 {
   config.flake = rec {
-    nixosModules = toModuleAttr ./modules;
-    modules.nixos = nixosModules;
     nixosConfigurations = toNixosConfigurations ./configurations;
   };
 }

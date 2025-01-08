@@ -20,7 +20,6 @@ let
     length
     listToAttrs
     ;
-  inherit (lib) getName getNameWithVersion;
   inherit (lib.attrsets) filterAttrs nameValuePair;
 
   mkOverlay =

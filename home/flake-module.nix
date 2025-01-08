@@ -12,8 +12,7 @@
 }:
 let
   inherit (lib) mkOption types;
-  inherit (lib.attrsets) mapAttrs;
-  inherit (self.lib.filesystem) toModuleAttr toImportedModuleAttr;
+  inherit (self.lib.filesystem) toImportedModuleAttr;
   mkHomeConfiguration = self.lib.configuration.homeConfigurationLoader {
     inherit withSystem self inputs;
   };
@@ -33,25 +32,8 @@ in
         reference them in this or another flake's `homeConfigurations`.
       '';
     };
-    homeModules = mkOption {
-      type = types.lazyAttrsOf types.deferredModule;
-      default = { };
-      apply = mapAttrs (
-        k: v: {
-          _file = "${toString moduleLocation}#homeModules.${k}";
-          imports = [ v ];
-        }
-      );
-      description = ''
-        HomeManager modules.
-
-        You may use this for reusable pieces of configuration, service modules, etc.
-      '';
-    };
   };
   config.flake = rec {
-    homeModules = toModuleAttr ./modules;
-    modules.homeManager = homeModules;
     homeConfigurations = toHomeConfigurations ./configurations;
   };
 }
