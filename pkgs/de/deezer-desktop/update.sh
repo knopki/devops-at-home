@@ -3,7 +3,6 @@
 # shellcheck shell=bash
 
 set -euo pipefail
-set -o xtrace
 
 SYSTEMS=$(nix-instantiate --eval -E "with import ./. {}; builtins.concatStringsSep \" \" $UPDATE_NIX_PNAME.meta.platforms" | tr -d '"')
 GH_PREFIX="https://github.com/aunetx/deezer-linux"
