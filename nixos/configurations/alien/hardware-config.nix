@@ -35,7 +35,7 @@ in
       options i8k force=1
       options i915 error_capture=1 mitigations=off
     '';
-    extraModulePackages = [ ];
+    extraModulePackages = with config.boot.kernelPackages; [ amneziawg ];
     initrd = {
       availableKernelModules = [
         "aesni_intel"

@@ -103,6 +103,8 @@ in
     remmina
 
     # misc
+    amneziawg-go
+    packages.amneziawg-tools
     android-udev-rules
     bottles
     clevis
@@ -330,6 +332,7 @@ in
   sops = {
     secrets = {
       nix-github-access-token = { };
+      amneziawg-home-conf = { };
     };
     templates."nix-access-tokens.conf".content = ''
       access-tokens = github.com=${config.sops.placeholder.nix-github-access-token}
@@ -362,4 +365,6 @@ in
       nix-optimise.timerConfig.Persistent = mkDefault true;
     };
   };
+
+  environment.etc."amnezia/amneziawg/home.conf".source = config.sops.secrets.amneziawg-home-conf.path;
 }
