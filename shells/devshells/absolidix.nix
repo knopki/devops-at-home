@@ -2,6 +2,7 @@
   config,
   inputs,
   pkgs,
+  packages,
   ...
 }:
 let
@@ -116,6 +117,7 @@ in
     start-aiida
     start-postgres
     uv
+    packages.fleur
   ];
 
   devshell.startup.setup-env.text = ''
