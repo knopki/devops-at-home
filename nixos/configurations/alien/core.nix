@@ -111,7 +111,7 @@ in
     bottles
     clevis
     golden-cheetah-bin
-    tailscale
+    # tailscale
     xorg.xhost
     restic
     rustic-rs
@@ -328,7 +328,7 @@ in
   };
 
   services = {
-    tailscale.enable = true;
+    # tailscale.enable = true;
   };
 
   sops = {
