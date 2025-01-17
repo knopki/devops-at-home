@@ -106,6 +106,8 @@ in
 
     # misc
     amneziawg-go
+    arduino-cli
+    arduino-ide
     packages.amneziawg-tools
     android-udev-rules
     bottles
@@ -113,6 +115,7 @@ in
     golden-cheetah-bin
     # tailscale
     xorg.xhost
+    picotool
     restic
     rustic-rs
     smartmontools
