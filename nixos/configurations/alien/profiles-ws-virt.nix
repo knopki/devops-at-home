@@ -32,13 +32,10 @@ in
     oci-containers.backend = mkDefault "podman";
 
     podman = {
+      autoPrune.enable = true;
       defaultNetwork.settings.dns_enabled = true;
       dockerSocket.enable = true;
       enable = true;
-      extraPackages = with pkgs; [
-        aardvark-dns
-        netavark
-      ];
     };
   };
 }
