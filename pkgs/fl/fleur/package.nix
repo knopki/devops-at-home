@@ -11,17 +11,17 @@
 }:
 stdenv.mkDerivation rec {
   pname = "fleur";
-  version = "7.2";
+  version = "6.2";
 
   src = fetchgit {
     url = "https://iffgit.fz-juelich.de/fleur/fleur.git";
     rev = "refs/tags/MaX-R${version}";
-    hash = "sha256-svKdNuqAgN862obj3Yo3reIyUqx8FQUVm3fQSNGYxMc=";
+    hash = "sha256-DnAVsXhhgILPNvU+eS8Ivh3uQfL7h8aIvggqBpZztZo=";
     fetchSubmodules = false;
     leaveDotGit = true;
   };
 
-  passthru.updateScript = gitUpdater { rev-prefix = "MaX-R"; };
+  passthru.updateScript = gitUpdater { rev-prefix = "MaX-R"; allowedVersions = "6.2"; };
 
   preConfigure = ''
     bash ./configure.sh -hdf5 false
