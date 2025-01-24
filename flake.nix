@@ -10,6 +10,7 @@
     extra-substituters = [ "https://nix-community.cachix.org" ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "nixpkgs-python.cachix.org-1:hxjI7pFxTyuTHn2NkvWCrAUcNZLNS3ZAvfYNuYifcEU="
     ];
   };
 
@@ -45,6 +46,7 @@
     # themes etc
 
     # applications and utilities
+    nixpkgs-python.url = "github:cachix/nixpkgs-python";
 
     # linux only
     disko.url = "flake:disko";

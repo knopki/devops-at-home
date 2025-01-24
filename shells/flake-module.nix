@@ -42,6 +42,9 @@ in
               allowUnsupportedSystem = true;
               cudaSupport = true;
             };
+            overlays = [
+              self.overlays.default
+            ];
           };
         };
         loadShells = loader: paths: mergeAttrsList (map (loader shellModuleArgs) (filter pathExists paths));

@@ -46,7 +46,9 @@ in
       # primary nixpkgs
       nixpkgs-24-11 = import inputs.nixpkgs-24-11 {
         inherit system;
-        overlays = [ self.overlays.default ];
+        overlays = [
+          self.overlays.default
+        ];
         config = import ./nixpkgs-config.nix { inherit lib; };
       };
 
@@ -82,7 +84,15 @@ in
     };
 
   config.flake.overlays = {
-    default = _: __: { }; # mkOverlay [ "aliza" ];
+    default =
+      final: prev:
+      let
+        system = prev.stdenv.hostPlatform.system;
+        pythonPackages = inputs.nixpkgs-python.packages.${system};
+      in
+      {
+        python37 = pythonPackages."3.7";
+      };
     update = mkOverlay [ ];
   };
 
