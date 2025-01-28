@@ -34,6 +34,7 @@ in
       options dell-smm-hwmon force=1
       options i8k force=1
       options i915 error_capture=1 mitigations=off
+      options zfs zfs_bclone_enabled=1
     '';
     extraModulePackages = with config.boot.kernelPackages; [ amneziawg ];
     initrd = {

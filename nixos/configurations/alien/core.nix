@@ -46,7 +46,6 @@ in
     pstree
     ranger
     ripgrep
-    rmlint
     rsync
     sysstat
     tree
@@ -113,6 +112,7 @@ in
     bottles
     clevis
     golden-cheetah-bin
+    fclones
     # tailscale
     xorg.xhost
     picotool
