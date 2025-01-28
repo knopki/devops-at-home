@@ -27,15 +27,21 @@ in
   virtualisation = {
     containers = {
       enable = true;
+      storage.settings = {
+        storage.options.pull_options = {
+          convert_images = "true";
+        };
+      };
     };
 
     oci-containers.backend = mkDefault "podman";
 
     podman = {
+      enable = true;
       autoPrune.enable = true;
       defaultNetwork.settings.dns_enabled = true;
+      dockerCompat = true;
       dockerSocket.enable = true;
-      enable = true;
     };
   };
 }
