@@ -91,7 +91,7 @@ in
     simplex-chat-desktop
     syncthing
     telegram-desktop
-    (discord.override { withOpenASAR = true; })
+    discord
     thunderbird
     zotero
     tor-browser
