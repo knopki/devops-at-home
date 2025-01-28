@@ -26,7 +26,6 @@ in
       "dialout"
       "disk"
       "input"
-      "libvirtd"
       "mlocate"
       "networkmanager"
       "plugdev"
