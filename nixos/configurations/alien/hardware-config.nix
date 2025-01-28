@@ -225,6 +225,7 @@ in
     {
       device = swapPartName;
       discardPolicy = "both";
+      priority = 1;
     }
   ];
 
@@ -232,7 +233,10 @@ in
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   zramSwap = {
-    enable = false;
+    enable = true;
+    algorithm = "lz4";
+    priority = 100;
+    memoryPercent = 50;
     swapDevices = 1;
   };
 }

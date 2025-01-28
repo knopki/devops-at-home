@@ -16,6 +16,10 @@ in
       "net.ipv4.ip_nonlocal_bind" = mkDefault 1;
       "net.ipv6.ip_nonlocal_bind" = mkDefault 1;
       "vm.panic_on_oom" = mkDefault 1;
+      "vm.swappiness" = 180;
+      "vm.watermark_boost_factor" = 0;
+      "vm.watermark_scale_factor" = 125;
+      "vm.page-cluster" = 0;
     };
     kernelParams = [
       "quiet"
