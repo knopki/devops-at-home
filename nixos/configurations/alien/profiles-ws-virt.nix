@@ -27,11 +27,6 @@ in
   virtualisation = {
     containers = {
       enable = true;
-      storage.settings = {
-        storage.options.pull_options = {
-          convert_images = "true";
-        };
-      };
     };
 
     oci-containers.backend = mkDefault "podman";
