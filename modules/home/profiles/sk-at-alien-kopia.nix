@@ -28,21 +28,21 @@
       alien-anytype = {
         timer = {
           OnCalendar = "daily";
-          RandomizedDelaySec = "12h";
+          RandomizedDelaySec = "8h";
         };
         snapshots = [ "${config.xdg.dataHome}/anytype" ];
       };
       alien-devs = {
         timer = {
-          OnCalendar = "hourly";
-          RandomizedDelaySec = "5m";
+          OnCalendar = "daily";
+          RandomizedDelaySec = "8h";
         };
         snapshots = [ "${config.home.homeDirectory}/dev" ];
       };
       alien-browsers = {
         timer = {
           OnCalendar = "daily";
-          RandomizedDelaySec = "12h";
+          RandomizedDelaySec = "8h";
         };
         snapshots = [
           "${config.xdg.configHome}/BraveSoftware/Brave-Browser/Default"
@@ -74,14 +74,14 @@
       alien-electrum = {
         timer = {
           OnCalendar = "daily";
-          RandomizedDelaySec = "12h";
+          RandomizedDelaySec = "8h";
         };
         snapshots = [ "${config.home.homeDirectory}/.electrum" ];
       };
       alien-docs = {
         timer = {
-          OnCalendar = "hourly";
-          RandomizedDelaySec = "5m";
+          OnCalendar = "daily";
+          RandomizedDelaySec = "8m";
         };
         snapshots = [
           "${config.home.homeDirectory}/.zotero"
@@ -95,7 +95,7 @@
       alien-media = {
         timer = {
           OnCalendar = "daily";
-          RandomizedDelaySec = "12h";
+          RandomizedDelaySec = "8h";
         };
         snapshots = [
           "${config.xdg.configHome}/darktable"
@@ -107,7 +107,7 @@
       alien-anki = {
         timer = {
           OnCalendar = "weekly";
-          RandomizedDelaySec = "24h";
+          RandomizedDelaySec = "8h";
         };
         snapshots = [
           "${config.xdg.dataHome}/Anki"
@@ -117,7 +117,7 @@
       alien-random-conf = {
         timer = {
           OnCalendar = "daily";
-          RandomizedDelaySec = "12h";
+          RandomizedDelaySec = "8h";
         };
         snapshots = [
           "${config.xdg.configHome}/MusicBrainz"
@@ -134,7 +134,7 @@
       alien-dev-archive = {
         timer = {
           OnCalendar = "weekly";
-          RandomizedDelaySec = "24h";
+          RandomizedDelaySec = "8h";
         };
         args = [ "--override-source=${config.home.homeDirectory}/dev/archive" ];
         snapshots = [ "${config.home.homeDirectory}/remote/sk-nc/Dev/Archive" ];
@@ -142,7 +142,7 @@
       alien-library = {
         timer = {
           OnCalendar = "weekly";
-          RandomizedDelaySec = "24h";
+          RandomizedDelaySec = "8h";
         };
         args = [ "--override-source=${config.home.homeDirectory}/library" ];
         snapshots = [ "${config.home.homeDirectory}/remote/sk-nc/Family Library" ];
@@ -150,7 +150,7 @@
       alien-music = {
         timer = {
           OnCalendar = "weekly";
-          RandomizedDelaySec = "24h";
+          RandomizedDelaySec = "8h";
         };
         args = [ "--override-source=${config.home.homeDirectory}/music" ];
         snapshots = [ "${config.home.homeDirectory}/remote/sk-nc/Family Music" ];
@@ -158,7 +158,7 @@
       alien-photos = {
         timer = {
           OnCalendar = "weekly";
-          RandomizedDelaySec = "24h";
+          RandomizedDelaySec = "8h";
         };
         args = [ "--override-source=${config.home.homeDirectory}/pics/photos" ];
         snapshots = [ "${config.home.homeDirectory}/remote/sk-nc/Family Photos" ];
@@ -166,7 +166,7 @@
       alien-pics-mobile = {
         timer = {
           OnCalendar = "weekly";
-          RandomizedDelaySec = "24h";
+          RandomizedDelaySec = "8h";
         };
         args = [ "--override-source=${config.home.homeDirectory}/pics/mobile" ];
         snapshots = [ "${config.home.homeDirectory}/remote/sk-nc/Pics/Mobile" ];
@@ -174,7 +174,7 @@
       alien-photos-unsorted = {
         timer = {
           OnCalendar = "weekly";
-          RandomizedDelaySec = "24h";
+          RandomizedDelaySec = "8h";
         };
         args = [ "--override-source=${config.home.homeDirectory}/pics/photos-unsorted" ];
         snapshots = [ "${config.home.homeDirectory}/remote/sk-nc/Pics/Photos Unsorted" ];
@@ -182,7 +182,7 @@
       alien-photos-raws = {
         timer = {
           OnCalendar = "weekly";
-          RandomizedDelaySec = "24h";
+          RandomizedDelaySec = "8h";
         };
         args = [ "--override-source=${config.home.homeDirectory}/pics/raws" ];
         snapshots = [ "${config.home.homeDirectory}/remote/sk-nc/Pics/RAWs" ];
@@ -190,7 +190,7 @@
       alien-mail = {
         timer = {
           OnCalendar = "daily";
-          RandomizedDelaySec = "12h";
+          RandomizedDelaySec = "8h";
         };
         snapshots = [
           "${config.home.homeDirectory}/.thunderbird"
