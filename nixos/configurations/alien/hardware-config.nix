@@ -77,12 +77,6 @@ in
         enable = true;
       };
     };
-    supportedFilesystems = [ "zfs" ];
-    zfs = {
-      forceImportRoot = false;
-      extraPools = [ "evo970" ];
-      requestEncryptionCredentials = true;
-    };
   };
 
   environment = {
@@ -213,12 +207,6 @@ in
       # screenSection = ''
       #   Option "DPI" "144 x 144"
       # '';
-    };
-
-    zfs = {
-      autoSnapshot.enable = true;
-      autoScrub.enable = true;
-      trim.enable = true;
     };
   };
 
