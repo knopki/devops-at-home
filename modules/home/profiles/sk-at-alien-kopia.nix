@@ -98,7 +98,6 @@
           RandomizedDelaySec = "8h";
         };
         snapshots = [
-          "${config.xdg.configHome}/darktable"
           config.xdg.userDirs.videos
           config.xdg.userDirs.music
           config.xdg.userDirs.pictures
