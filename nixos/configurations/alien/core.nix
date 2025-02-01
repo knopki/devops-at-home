@@ -96,6 +96,7 @@ in
     zotero
     tor-browser
     zed-editor
+    ocrmypdf
 
     # remote
     anydesk
@@ -113,9 +114,12 @@ in
     clevis
     golden-cheetah-bin
     fclones
+    lazygit
+    lazydocker
     # tailscale
     xorg.xhost
     picotool
+    revanced-cli
     restic
     rustic-rs
     smartmontools
