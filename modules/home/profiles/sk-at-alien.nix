@@ -220,6 +220,9 @@ in
         [MASTER]
         init-hook='import os,sys;[sys.path.append(p) for p in os.environ.get("PYTHONPATH","").split(":")];'
       '';
+
+      ".config/autostart/org.keepassxc.KeePassXC.desktop".source =
+        "${pkgs.keepassxc}/share/applications/org.keepassxc.KeePassXC.desktop";
     };
   };
 
@@ -310,11 +313,9 @@ in
       Daemon.Timeout = 15;
     };
 
-    kwalletrc.Wallet = {
-      Enabled = true;
-      "Default Wallet" = "kdewallet";
-      "Leave Open" = true;
-      "Use One Wallet" = true;
+    kwalletrc = {
+      Wallet.Enabled = false;
+      "org.freedesktop.secrets".apiEnabled = true;
     };
 
     kwinrc = {
