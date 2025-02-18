@@ -89,7 +89,6 @@ in
     kdePackages.kleopatra
     speedcrunch
     simplex-chat-desktop
-    syncthing
     telegram-desktop
     discord
     thunderbird
@@ -306,21 +305,14 @@ in
     ];
     firewall = {
       rejectPackets = mkDefault true;
-      allowedTCPPorts = [
-        5000 # cast
-        7513 # spacemesh
-        22000 # syncthing
-      ];
+      allowedTCPPorts = [ ];
       allowedTCPPortRanges = [
         {
           from = 6881;
           to = 6889;
         } # torrents
       ];
-      allowedUDPPorts = [
-        21027 # syncthing local discovery
-        22000 # syncthing
-      ];
+      allowedUDPPorts = [ ];
       allowedUDPPortRanges = [
         {
           from = 6881;

@@ -126,8 +126,6 @@
           "${config.xdg.configHome}/obsidian/Preferences"
           "${config.xdg.configHome}/obsidian/obsidian.json"
           "${config.xdg.configHome}/rclone"
-          "${config.xdg.configHome}/syncthing"
-          "${config.xdg.configHome}/syncthingtray.ini"
         ];
       };
       alien-dev-archive = {

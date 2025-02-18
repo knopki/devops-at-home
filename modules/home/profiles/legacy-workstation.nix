@@ -85,26 +85,4 @@ in
       Translations.LANGUAGE = mkDefault "ru:en_US";
     };
   };
-
-  services.syncthing = {
-    enable = true;
-    tray.enable = true;
-  };
-
-  systemd.user = {
-    # delay start
-    services.${config.services.syncthing.tray.package.pname} = {
-      Install.WantedBy = lib.mkForce [ ];
-    };
-
-    timers.${config.services.syncthing.tray.package.pname} = {
-      Timer = {
-        OnActiveSec = "10s";
-        AccuracySec = "1s";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
-  };
 }
