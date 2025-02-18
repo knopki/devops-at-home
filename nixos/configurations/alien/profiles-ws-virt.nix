@@ -20,6 +20,7 @@ in
 
       # docker client (docker compose, for example) can be used with podman
       docker
+      docker-compose
       distrobox
     ];
   };

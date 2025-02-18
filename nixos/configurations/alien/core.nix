@@ -124,6 +124,8 @@ in
     smartmontools
     yubikey-manager
     vmtouch
+    httm
+    gallery-dl
   ];
 
   programs = {
