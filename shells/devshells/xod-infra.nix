@@ -11,7 +11,6 @@
     curl
     gcrane
     gnumake
-    kubectl
     rclone
     terraform
     terraform-docs
