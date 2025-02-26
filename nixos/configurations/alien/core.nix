@@ -94,8 +94,8 @@ in
     thunderbird
     zotero
     tor-browser
-    zed-editor
     ocrmypdf
+    packages.zed-editor
 
     # remote
     anydesk
