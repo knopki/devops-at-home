@@ -228,8 +228,10 @@ in
       keyMode = "vi";
       newSession = true;
       terminal = "screen-256color";
-      plugins = with pkgs.tmuxPlugins; [ pain-control sensible yank ];
+      plugins = with pkgs.tmuxPlugins; [ pain-control sensible ];
       extraConfig = ''
+        setw -g mode-keys vi
+
         # enable activity alerts
         setw -g monitor-activity on
         set -g visual-activity off
@@ -258,6 +260,7 @@ in
 
         # clipboard
         set -g set-clipboard external
+        bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "${pkgs.xclip}/bin/xclip -i -f -selection primary | ${pkgs.xclip}/bin/xclip -i -selection clipboard"
       '';
     };
   };
