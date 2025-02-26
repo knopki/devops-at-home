@@ -16,7 +16,6 @@ in
   imports = [
     ./theme-base16.nix
     ./theme-bat.nix
-    ./theme-dircolors.nix
     ./theme-emacs.nix
     ./theme-fonts.nix
     ./theme-fzf.nix
@@ -24,7 +23,6 @@ in
     ./theme-gtk.nix
     ./theme-neovim.nix
     ./theme-plasma.nix
-    ./theme-shell.nix
     ./theme-tmux.nix
     ./theme-zathura.nix
   ];
