@@ -12,6 +12,7 @@ let
     mkDefault
     nameValuePair
     ;
+  inherit (lib.strings) escapeShellArgs;
   vimiumCommon = {
     exclusionRules = [
       {
@@ -227,6 +228,29 @@ in
   };
 
   programs = {
+    atuin = {
+      enable = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      settings = {
+        dialect = "uk";
+        update_check = false;
+        filter_mode = "host";
+        filter_mode_shell_up_key_binding = "session";
+        workspaces = true;
+        style = "compact";
+        inline_height = 40;
+        exit_mode = "return-query";
+        store_failed = false;
+        enter_accept = false;
+        keymap_mode = "vim-normal";
+        daemon = {
+          enabled = true;
+          systemd_socket = true;
+        };
+      };
+    };
+
     brave = {
       extensions = [
         { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # tempermonkey
@@ -467,6 +491,37 @@ in
       "e ${config.xdg.userDirs.download} - - - 30d"
       "e ${config.xdg.userDirs.pictures}/screenshots - - - 30d"
     ];
+
+    services.atuin-daemon = {
+      Unit = {
+        Description = "Atuin daemon";
+        Requires = [ "atuin-daemon.socket" ];
+      };
+      Install = {
+        Also = [ "atuin-daemon.socket" ];
+        WantedBy = [ "default.target" ];
+      };
+      Service = {
+        ExecStart = "${lib.getExe config.programs.atuin.package} daemon";
+        Restart = "on-failure";
+        RestartSteps = 3;
+        RestartMaxDelaySec = 6;
+      };
+    };
+
+    sockets.atuin-daemon = {
+      Unit = {
+        Description = "Atuin daemon socket";
+      };
+      Install = {
+        WantedBy = [ "sockets.target" ];
+      };
+      Socket = {
+        ListenStream = "%h/.local/share/atuin/atuin.sock";
+        SocketMode = "0600";
+        RemoveOnStop = true;
+      };
+    };
   };
 
   xdg = {

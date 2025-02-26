@@ -16,7 +16,6 @@ in
 
     packages = with pkgs; [
       curl
-      fishPlugins.foreign-env
       wget
       xsel
       wl-clipboard
@@ -82,55 +81,7 @@ in
   };
 
   programs = {
-    bash.enable = lib.mkDefault true;
-
     bat.enable = lib.mkDefault true;
-
-    direnv = {
-      enable = lib.mkDefault true;
-      nix-direnv.enable = true;
-    };
-
-    fish = {
-      enable = mkDefault true;
-
-      functions = {
-        fish_hybrid_key_bindings = {
-          description = "Vi-style bindings that inherit emacs-style bindings in all modes";
-          body = ''
-            for mode in default insert visual
-                fish_default_key_bindings -M $mode
-            end
-            fish_vi_key_bindings --no-erase
-            bind --user \e\[3\;5~ kill-word  # Ctrl-Delete
-          '';
-        };
-      };
-
-      interactiveShellInit = ''
-        # keybindings
-        set -g fish_key_bindings fish_hybrid_key_bindings
-
-        # disable greeting
-        set -u fish_greeting ""
-      '';
-
-      shellAbbrs = {
-        gco = "git checkout";
-        gst = "git status";
-        o = "xdg-open";
-      };
-
-      shellAliases = {
-        fzf = "fzf-tmux -m";
-        grep = "grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
-        myip = "curl ifconfig.co";
-        rsync-copy = "rsync -avz --progress -h";
-        rsync-move = "rsync -avz --progress -h --remove-source-files";
-        rsync-synchronize = "rsync -avzu --delete --progress -h";
-        rsync-update = "rsync -avzu --progress -h";
-      };
-    };
 
     fzf = {
       enable = lib.mkDefault true;
@@ -265,30 +216,6 @@ in
       };
     };
 
-    htop = with config.lib.htop; {
-      enable = lib.mkDefault true;
-      settings =
-        {
-          hide_threads = true;
-          hide_userland_threads = true;
-          shadow_other_users = true;
-          show_program_path = false;
-          show_thread_names = true;
-          sort_key = fields.PERCENT_MEM;
-          highlight_base_name = true;
-        }
-        // (leftMeters [
-          (bar "AllCPUs")
-          (bar "Memory")
-          (bar "Swap")
-        ])
-        // (rightMeters [
-          (text "Tasks")
-          (text "LoadAverage")
-          (text "Uptime")
-        ]);
-    };
-
     jq.enable = lib.mkDefault true;
 
     lesspipe.enable = lib.mkDefault true;
@@ -341,52 +268,6 @@ in
       };
       forwardAgent = true;
       serverAliveInterval = 10;
-    };
-
-    tmux = {
-      enable = lib.mkDefault true;
-      # windows start from 1
-      baseIndex = 1;
-      clock24 = true;
-      extraConfig = ''
-        # enable activity alerts
-        setw -g monitor-activity on
-        set -g visual-activity off
-        set-option -g bell-action none
-
-        # change terminal info
-        set -g set-titles on
-        set -g set-titles-string "#T"
-
-        # jump to left/right window
-        bind-key -n M-PPage previous-window
-        bind-key -n M-NPage next-window
-
-        # mouse
-        set -g mouse on
-
-        # mouse scrolling
-        bind -n WheelUpPane   if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
-        bind -n WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
-
-        # fix keys
-        set-window-option -g xterm-keys on
-
-        # show hostname
-        set -g status-right ' #(hostname -s) '
-
-        # clipboard
-        set -g set-clipboard on
-
-        # keys
-        setw -g mode-keys vi
-      '';
-      newSession = true;
-      plugins = with pkgs.tmuxPlugins; [
-        pain-control
-        sensible
-        yank
-      ];
     };
   };
 

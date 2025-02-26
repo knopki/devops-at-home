@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (lib) mkBefore mkDefault mkIf;
+  inherit (lib) mkBefore mkDefault;
 in
 {
   #
@@ -51,6 +51,12 @@ in
     tree
     wget
     whois
+
+    # shell
+    atuin
+    fishPlugins.fish-you-should-use
+    fishPlugins.forgit
+    fishPlugins.sponge
 
     # media
     darktable
@@ -129,8 +135,69 @@ in
   ];
 
   programs = {
+    bash = {
+      blesh.enable = true;
+      undistractMe.enable = true;
+      interactiveShellInit = ''
+        if [[ -f $XDG_CONFIG_HOME/atuin/config.toml ]]; then
+          eval $(${pkgs.atuin}/bin/atuin init bash)
+        fi
+      '';
+    };
     command-not-found.enable = mkDefault false;
-    fish.enable = mkDefault true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+    fish = {
+      enable = true;
+      useBabelfish = true;
+      shellAliases = {
+        fzf = "fzf-tmux -m";
+        grep = "grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
+        myip = "curl ifconfig.co";
+      };
+      shellAbbrs = {
+        gco = "git checkout";
+        gst = "git status";
+        o = "xdg-open";
+        rsync-copy = "rsync -avz --progress -h";
+        rsync-move = "rsync -avz --progress -h --remove-source-files";
+        rsync-synchronize = "rsync -avzu --delete --progress -h";
+        rsync-update = "rsync -avzu --progress -h";
+      };
+      interactiveShellInit = ''
+        function fish_hybrid_key_bindings --description \
+        "Vi-style bindings that inherit emacs-style bindings in all modes"
+            for mode in default insert visual
+                fish_default_key_bindings -M $mode
+            end
+            fish_vi_key_bindings --no-erase
+        end
+        set -g fish_key_bindings fish_hybrid_key_bindings
+        set -g fish_greeting ""
+        source ${packages.ls-colors}/lscolors.csh
+        if test -f $XDG_CONFIG_HOME/atuin/config.toml;
+          ${pkgs.atuin}/bin/atuin init fish --disable-up-arrow | source
+        end
+      '';
+    };
+    htop = {
+      enable = true;
+      settings = {
+        hide_threads = 1;
+        hide_userland_threads = 1;
+        shadow_other_users = 1;
+        show_program_path = 0;
+        show_thread_names = 1;
+        highlight_base_name = 1;
+        sort_key = 47; # PERCENT_MEM
+        left_meters_modes = [1 1 1];
+        left_meters = ["AllCPUs" "Memory" "Swap"];
+        right_meters_modes = [2 2 2];
+        right_meters = ["Tasks" "LoadAverage" "Uptime"];
+      };
+    };
     iftop.enable = mkDefault true;
     iotop.enable = mkDefault true;
     mosh.enable = mkDefault true;
@@ -144,7 +211,55 @@ in
         #   stdenv.cc.cc systemd util-linux xz zlib zstd
       ];
     };
-    tmux.enable = mkDefault true;
+    starship = {
+      enable = true;
+      presets = [ "nerd-font-symbols" ];
+      settings = {
+        directory = {
+          truncation_length = 2;
+          fish_style_pwd_dir_length = 2;
+        };
+      };
+    };
+    tmux = {
+      enable = true;
+      baseIndex = 1;
+      clock24 = true;
+      keyMode = "vi";
+      newSession = true;
+      terminal = "screen-256color";
+      plugins = with pkgs.tmuxPlugins; [ pain-control sensible yank ];
+      extraConfig = ''
+        # enable activity alerts
+        setw -g monitor-activity on
+        set -g visual-activity off
+        set-option -g bell-action none
+
+        # change terminal info
+        set -g set-titles on
+        set -g set-titles-string "#T"
+
+        # jump to left/right window
+        bind-key -n M-PPage previous-window
+        bind-key -n M-NPage next-window
+
+        # mouse
+        set -g mouse on
+
+        # mouse scrolling
+        bind -n WheelUpPane   if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
+        bind -n WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
+
+        # fix keys
+        set-window-option -g xterm-keys on
+
+        # show hostname
+        set -g status-right ' #(hostname -s) '
+
+        # clipboard
+        set -g set-clipboard external
+      '';
+    };
   };
 
   #

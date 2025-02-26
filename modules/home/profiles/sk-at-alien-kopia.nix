@@ -65,6 +65,7 @@
           "${config.xdg.configHome}/gcloud"
           "${config.xdg.configHome}/remmina"
           "${config.xdg.configHome}/sops/age"
+          "${config.xdg.dataHome}/atuin"
           "${config.xdg.dataHome}/fish/fish_history"
           "${config.xdg.dataHome}/keyrings"
           "${config.xdg.dataHome}/password-store"

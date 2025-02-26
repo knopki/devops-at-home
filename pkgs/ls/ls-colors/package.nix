@@ -17,7 +17,7 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out
-    cp -a LS_COLORS $out/
+    cp -a LS_COLORS lscolors.csh lscolors.sh $out/
   '';
 
   passthru.updateScript = unstableGitUpdater { };

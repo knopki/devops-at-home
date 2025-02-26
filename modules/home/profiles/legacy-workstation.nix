@@ -26,10 +26,6 @@ in
       "intl.locale.requested" = mkDefault "ru,en-US";
     };
 
-    fish.shellInit = mkBefore ''
-      export LANG=en_US.UTF-8
-    '';
-
     git.delta.enable = mkDefault true;
 
     man.generateCaches = false;
@@ -44,26 +40,6 @@ in
           pass-update
         ]
       );
-    };
-
-    starship = {
-      enable = mkDefault true;
-      settings = {
-        aws.disabled = mkDefault true;
-        conda.disabled = mkDefault true;
-        crystal.disabled = mkDefault true;
-        directory = {
-          truncation_length = mkDefault 2;
-          fish_style_pwd_dir_length = mkDefault 2;
-        };
-        elixir.disabled = mkDefault true;
-        elm.disabled = mkDefault true;
-        gcloud.disabled = mkDefault true;
-        nim.disabled = mkDefault true;
-        kubernetes.disabled = mkDefault true;
-        purescript.disabled = mkDefault true;
-        zig.disabled = mkDefault true;
-      };
     };
   };
 
