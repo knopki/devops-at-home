@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 {
   devshell.name = "a* infra";
@@ -11,6 +11,7 @@
       ]
     ))
     curl
+    docker-compose
     doctl
     gcrane
     gnumake
@@ -21,6 +22,25 @@
     terraform-ls
     terragrunt
     tflint
-    yc
+    yandex-cloud
+  ];
+
+  env = [
+    {
+      name = "PODMAN_COMPOSE_PROVIDER";
+      value = "docker-compose";
+    }
+    {
+      name = "TERRAGRUNT_AUTO_INIT";
+      value = "false";
+    }
+    {
+      name = "TERRAGRUNT_DOWNLOAD";
+      eval = "$PRJ_DATA_DIR/terragrunt-cache";
+    }
+    {
+      name = "TF_PLUGIN_CACHE_DIR";
+      eval = "$PRJ_DATA_DIR/tf-plugin-cache";
+    }
   ];
 }
