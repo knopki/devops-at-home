@@ -31,7 +31,6 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    edl
     asciinema
     gnupg
     hdparm
