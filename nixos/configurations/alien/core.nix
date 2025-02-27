@@ -56,7 +56,6 @@ in
     atuin
     fishPlugins.fish-you-should-use
     fishPlugins.forgit
-    fishPlugins.sponge
 
     # media
     darktable
