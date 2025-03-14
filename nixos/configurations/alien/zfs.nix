@@ -53,10 +53,13 @@ in
         "wdc2/private/torrents".use_template = [ "minimal" ];
         "wdc3/private/temporary".use_template = [ "default" ];
         "wdc3/backups/alien/home" = {
-          use_template = [           "long_term"           "only_prune"           ];
+          use_template = [
+            "long_term"
+            "only_prune"
+          ];
           recursive = "zfs";
         };
-        "wdc3/private/alien/np".use_template = [ "long_term" "only_prune" ];
+        "wdc3/backups/alien/np".use_template = [ "long_term" "only_prune" ];
         "wdc3/backups/alien/system" = {
           use_template = [
             "default"
@@ -64,6 +67,7 @@ in
           ];
           recursive = true;
         };
+        "wdc3/backups/alien/torrents".use_template = [ "minimal" "only_prune" ];
       };
     };
 
