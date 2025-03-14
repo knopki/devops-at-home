@@ -84,7 +84,6 @@ in
 
     # :lang python
     python3Full
-    pyright
 
     # :lang rust
     cargo

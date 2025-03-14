@@ -18,7 +18,6 @@ in
     myPython
     nodejs
     postgresql
-    pyright
     ruff
     ruff-lsp
     uv

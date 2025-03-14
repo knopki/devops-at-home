@@ -15,7 +15,6 @@ in
   devshell.packages = with pkgs; [
     myPython
     nodejs
-    pyright
     ruff
     ruff-lsp
     uv

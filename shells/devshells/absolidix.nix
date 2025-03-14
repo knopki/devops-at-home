@@ -569,7 +569,6 @@ in
     gcc
     enter-container
     exec-container
-    pyright
     ruff
     ruff-lsp
     start-absolidix-container

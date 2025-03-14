@@ -63,7 +63,7 @@
        (nix +tree-sitter +lsp)
        (php +tree-sitter)
        plantuml
-       (python +lsp +pyright +tree-sitter)
+       (python +lsp +tree-sitter)
        (sh +fish +lsp +tree-sitter)
        (web +tree-sitter)
        (yaml +lsp +tree-sitter)
