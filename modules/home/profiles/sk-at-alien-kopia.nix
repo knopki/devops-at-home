@@ -54,8 +54,8 @@
       };
       alien-secrets = {
         timer = {
-          OnCalendar = "hourly";
-          RandomizedDelaySec = "30m";
+          OnCalendar = "daily";
+          RandomizedDelaySec = "8h";
         };
         snapshots = [
           "${config.home.homeDirectory}/.gnupg"
