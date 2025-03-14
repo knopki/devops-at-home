@@ -1,1 +1,1 @@
-{ nixpkgsUnstable, ... }: nixpkgsUnstable.zed-editor
+{ nixpkgsUnstable, ... }: nixpkgsUnstable.zed-editor-fhs

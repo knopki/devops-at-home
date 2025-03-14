@@ -33,7 +33,6 @@ in
     dosfstools
     du-dust
     fd
-    fdupes
     file
     gitMinimal
     gnupg
@@ -72,6 +71,9 @@ in
     upscaler
     upscayl
     yt-dlp
+    gallery-dl
+    fclones
+    packages.findimagedupes
 
     # office
     anki
@@ -117,7 +119,6 @@ in
     bottles
     clevis
     golden-cheetah-bin
-    fclones
     lazygit
     lazydocker
     # tailscale
@@ -130,7 +131,6 @@ in
     yubikey-manager
     vmtouch
     httm
-    gallery-dl
   ];
 
   programs = {
