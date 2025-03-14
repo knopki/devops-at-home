@@ -1,6 +1,4 @@
 {
-  config,
-  inputs,
   pkgs,
   packages,
   ...
@@ -199,19 +197,20 @@ let
     $CONF_SET db user "$PGUSER"
     $CONF_SET db password "$PGPASSWORD"
     $CONF_SET local data_dir "$YASCHEDULER_DATA_DIR"
+    $CONF_SET local webhook_url "http://localhost:7050/calculations/update?key=$BACKEND_API_KEY"
     $CONF_SET remote data_dir "$YASCHEDULER_DATA_DIR"
     $CONF_SET engine.dummy-test spawn "dummyengine *"
     $CONF_SET engine.dummy-test check_cmd "ps aux -ocomm= | grep -q dummyengine"
     $CONF_SET engine.dummy-test input_files "1.input 2.input 3.input"
     $CONF_SET engine.dummy-test output_files "1.input 2.input 3.input 1.input.out 2.input.out 3.input.out"
-    $CONF_SET engine.inpgen spawn "inpgen -f aiida.in -o inp.xml"
+    $CONF_SET engine.inpgen spawn "inpgen -explicit -inc +all -f aiida.in > shell.out 2> out.error"
     $CONF_SET engine.inpgen check_cmd "ps -eocomm= | grep -q inpgen"
     $CONF_SET engine.inpgen input_files "aiida.in"
-    $CONF_SET engine.inpgen output_files "aiida.in inp.xml kpts.xml sym.xml default.econfig out scratch struct.xsf"
-    $CONF_SET engine.fleur spawn "fleur"
+    $CONF_SET engine.inpgen output_files "aiida.in inp.xml default.econfig shell.out out out.error scratch struct.xsf"
+    $CONF_SET engine.fleur spawn "fleur -minimalOutput -wtime 360 > shell.out 2> out.error"
     $CONF_SET engine.fleur check_cmd "ps -eocomm= | grep -q fleur"
-    $CONF_SET engine.fleur input_files "inp.xml kpts.xml sym.xml relax.xml"
-    $CONF_SET engine.fleur output_files "inp.xml kpts.xml sym.xml relax.xml out out.xml FleurInputSchema.xsd FleurOutputSchema.xsd juDFT_times.json"
+    $CONF_SET engine.fleur input_files "inp.xml"
+    $CONF_SET engine.fleur output_files "inp.xml kpts.xml sym.xml relax.xml shell.out out.error out out.xml FleurInputSchema.xsd FleurOutputSchema.xsd juDFT_times.json cdn1 usage.json"
     popd
 
     if [ ! -f "$YASCHEDULER_DATA_DIR/keys/localhost" ]; then
@@ -234,6 +233,91 @@ let
     exec $UV_PROJECT_ENVIRONMENT/bin/yascheduler -l DEBUG
   '';
 
+  setup-backend = pkgs.writeShellScriptBin "setup-absolidix-backend" ''
+    set -euo pipefail
+    until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
+
+    pushd /app/absolidix-backend
+    ${enter-venv}
+    uv pip install -e .
+    cat schema/schema.sql | psql
+
+    if [ ! -f conf/env.ini ]; then
+      cp conf/env.ini.sample conf/env.ini
+    fi
+    CONF_SET="${pkgs.crudini}/bin/crudini --set conf/env.ini"
+    $CONF_SET db host "$PGHOST"
+    $CONF_SET db port "$PGPORT"
+    $CONF_SET db database "$PGDATABASE"
+    $CONF_SET db user "$PGUSER"
+    $CONF_SET db password "$PGPASSWORD"
+    $CONF_SET api key "$BACKEND_API_KEY"
+    $CONF_SET webhooks key "$BFF_WEBHOOK_KEY"
+    $CONF_SET webhooks calc_create "$BFF_WEBHOOK_CREATE_URL"
+    $CONF_SET webhooks calc_update "$BFF_WEBHOOK_UPDATE_URL"
+    $CONF_SET local pcrystal_bs_path "$BACKEND_LOCAL_PCRYSTAL_BS_PATH"
+    popd
+  '';
+
+  start-backend = pkgs.writeShellScriptBin "start-absolidix-backend" ''
+    set -euo pipefail
+    ${enter-venv}
+    until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
+    ${setup-backend}/bin/setup-absolidix-backend
+    exec python3 /app/absolidix-backend/index.py
+  '';
+
+  setup-bff = pkgs.writeShellScriptBin "setup-absolidix-bff" ''
+    set -euo pipefail
+    until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
+
+    pushd /app/absolidix-bff
+    ${enter-venv}
+    npm install
+
+    if [ ! -f conf/env.ini ]; then
+      cp conf/env.ini.sample conf/env.ini
+    fi
+    npm run db-migrate
+    popd
+  '';
+
+  start-bff = pkgs.writeShellScriptBin "start-absolidix-bff" ''
+    set -euo pipefail
+    ${enter-venv}
+    until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
+    NODE_ENV=development
+    PG_NAME="$PGDATABASE"
+    PG_HOST="$PGHOST"
+    PG_PORT="$PGPORT"
+    PG_USER="$PGUSER"
+    PG_PASSWORD="$PGPASSWORD"
+    API_KEY="$BACKEND_API_KEY"
+    API_SCHEMA=http
+    API_HOST=localhost
+    API_PORT=7050
+    PORT=3000
+    ${setup-bff}/bin/setup-absolidix-bff
+    exec npm run dev
+  '';
+
+  setup-gui = pkgs.writeShellScriptBin "setup-absolidix-gui" ''
+    set -euo pipefail
+
+    pushd /app/absolidix-gui
+    ${enter-venv}
+    npm install
+    popd
+  '';
+
+  start-gui = pkgs.writeShellScriptBin "start-absolidix-gui" ''
+    set -euo pipefail
+    ${enter-venv}
+    ${setup-bff}/bin/setup-absolidix-bff
+    PORT=8080
+    exec npm run dev
+  '';
+
   start-jupyter = pkgs.writeShellScriptBin "start-jupyter" ''
     ${enter-venv}
     exec uv run --with jupyter jupyter lab --no-browser --allow-root
@@ -247,14 +331,8 @@ let
         supervisor \
         openssh-server \
         postgresql \
-        rabbitmq-server \
         libboost-dev swig wait-for-it \
       && rm -rf /var/lib/apt/lists/*
-
-    ARG UV_URL=https://github.com/astral-sh/uv/releases/download/0.6.2/uv-x86_64-unknown-linux-gnu.tar.gz
-    RUN curl -sSfL "$UV_URL" -o /tmp/uv.tar.gz \
-      && tar xfv /tmp/uv.tar.gz --strip-component=1 -C /usr/local/bin \
-      && rm /tmp/uv.tar.gz
 
     ENV LANG en_US.UTF-8
     RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
@@ -262,10 +340,35 @@ let
     WORKDIR /app
   '';
 
+  myContainerEnv = pkgs.buildEnv {
+    name = "absolidix-container";
+    paths = with pkgs; [
+      packages.dummy-engine
+      packages.fleur
+      start-sshd
+      setup-postgres
+      start-postgres
+      setup-aiida
+      start-aiida
+      setup-yascheduler
+      start-yascheduler
+      setup-backend
+      start-backend
+      setup-bff
+      start-bff
+      setup-gui
+      start-gui
+      start-jupyter
+      uv
+      rabbitmq-server
+      nodejs
+    ];
+    pathsToLink = [ "/share" "/bin" ];
+  };
+
   container-path = concatStringsSep ":" [
     "/app/absolidix-backend/.venv/bin"
-    "${packages.dummy-engine}/bin"
-    "${packages.fleur}/bin"
+    "${myContainerEnv}/bin"
     "/usr/local/sbin"
     "/usr/local/bin"
     "/usr/sbin"
@@ -302,6 +405,12 @@ let
     UV_PROJECT_ENVIRONMENT=/app/absolidix-backend/.venv
     UV_CACHE_DIR=/app/absolidix-backend/.venv/cache
     PYTHONBREAKPOINT=web_pdb.set_trace
+
+    BACKEND_API_KEY=a-very-very-very-long-and-very-very-very-secret-string
+    BACKEND_LOCAL_PCRYSTAL_BS_PATH=/tmp
+    BFF_WEBHOOK_KEY=another-very-very-long-and-very-very-very-secret-string
+    BFF_WEBHOOK_CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
+    BFF_WEBHOOK_UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
   '';
 
   supervisord-config = pkgs.writeText "supervisord.conf" ''
@@ -328,7 +437,7 @@ let
     priority = 1
 
     [program:rabbitmq]
-    command = /usr/sbin/rabbitmq-server
+    command = ${pkgs.rabbitmq-server}/bin/rabbitmq-server
     user = root
     stdout_logfile = /dev/stdout
     stdout_logfile_maxbytes = 0
@@ -353,6 +462,33 @@ let
     redirect_stderr = true
     autorestart = true
     priority = 20
+
+    [program:backend]
+    command = ${start-backend}/bin/start-absolidix-backend
+    user = root
+    stdout_logfile = /dev/stdout
+    stdout_logfile_maxbytes = 0
+    redirect_stderr = true
+    autorestart = true
+    priority = 30
+
+    [program:bff]
+    command = ${start-bff}/bin/start-absolidix-bff
+    user = root
+    stdout_logfile = /dev/stdout
+    stdout_logfile_maxbytes = 0
+    redirect_stderr = true
+    autorestart = true
+    priority = 40
+
+    [program:gui]
+    command = ${start-gui}/bin/start-absolidix-gui
+    user = root
+    stdout_logfile = /dev/stdout
+    stdout_logfile_maxbytes = 0
+    redirect_stderr = true
+    autorestart = true
+    priority = 50
 
     [program:start-jupyter]
     command = ${start-jupyter}/bin/start-jupyter
@@ -389,8 +525,11 @@ let
       -v $PRJ_DATA_DIR/yascheduler:/data/yascheduler \
       -v $PRJ_ROOT:/app \
       -v ${absolidix-container-env-file}:/etc/environment \
+      -p 3000:3000 \
       -p 5432:5432 \
       -p 5555:5555 \
+      -p 7050:7050 \
+      -p 8080:8080 \
       -p 8888:8888 \
       --env-file ${absolidix-container-env-file} \
       --entrypoint /usr/bin/supervisord \
