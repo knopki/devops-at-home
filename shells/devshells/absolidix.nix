@@ -197,7 +197,7 @@ let
     $CONF_SET db user "$PGUSER"
     $CONF_SET db password "$PGPASSWORD"
     $CONF_SET local data_dir "$YASCHEDULER_DATA_DIR"
-    $CONF_SET local webhook_url "http://localhost:7050/calculations/update?key=$BACKEND_API_KEY"
+    $CONF_SET local webhook_url "http://localhost:7050/calculations/update?key=$AB_API__KEY"
     $CONF_SET remote data_dir "$YASCHEDULER_DATA_DIR"
     $CONF_SET engine.dummy-test spawn "dummyengine *"
     $CONF_SET engine.dummy-test check_cmd "ps aux -ocomm= | grep -q dummyengine"
@@ -239,23 +239,8 @@ let
 
     pushd /app/absolidix-backend
     ${enter-venv}
-    uv pip install -e .
+    uv pip install -e .[dev]
     cat schema/schema.sql | psql
-
-    if [ ! -f conf/env.ini ]; then
-      cp conf/env.ini.sample conf/env.ini
-    fi
-    CONF_SET="${pkgs.crudini}/bin/crudini --set conf/env.ini"
-    $CONF_SET db host "$PGHOST"
-    $CONF_SET db port "$PGPORT"
-    $CONF_SET db database "$PGDATABASE"
-    $CONF_SET db user "$PGUSER"
-    $CONF_SET db password "$PGPASSWORD"
-    $CONF_SET api key "$BACKEND_API_KEY"
-    $CONF_SET webhooks key "$BFF_WEBHOOK_KEY"
-    $CONF_SET webhooks calc_create "$BFF_WEBHOOK_CREATE_URL"
-    $CONF_SET webhooks calc_update "$BFF_WEBHOOK_UPDATE_URL"
-    $CONF_SET local pcrystal_bs_path "$BACKEND_LOCAL_PCRYSTAL_BS_PATH"
     popd
   '';
 
@@ -264,7 +249,9 @@ let
     ${enter-venv}
     until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
     ${setup-backend}/bin/setup-absolidix-backend
-    exec python3 /app/absolidix-backend/index.py
+    pushd /app/absolidix-backend
+    exec python3 index.py
+    popd
   '';
 
   setup-bff = pkgs.writeShellScriptBin "setup-absolidix-bff" ''
@@ -272,55 +259,56 @@ let
     until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
 
     pushd /app/absolidix-bff
-    ${enter-venv}
     npm install
 
     if [ ! -f conf/env.ini ]; then
       cp conf/env.ini.sample conf/env.ini
     fi
+
+    CONF_SET="${pkgs.crudini}/bin/crudini --set conf/env.ini"
+    $CONF_SET db data "$PGDATABASE"
+    $CONF_SET db host "$PGHOST"
+    $CONF_SET db port "$PGPORT"
+    $CONF_SET db user "$PGUSER"
+    $CONF_SET db password "$PGPASSWORD"
+    $CONF_SET api.dev key "$AB_API__KEY"
+    $CONF_SET api.dev schema http
+    $CONF_SET api.dev host localhost
+    $CONF_SET api.dev port 7050
+
     npm run db-migrate
     popd
   '';
 
   start-bff = pkgs.writeShellScriptBin "start-absolidix-bff" ''
     set -euo pipefail
-    ${enter-venv}
     until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
     NODE_ENV=development
-    PG_NAME="$PGDATABASE"
-    PG_HOST="$PGHOST"
-    PG_PORT="$PGPORT"
-    PG_USER="$PGUSER"
-    PG_PASSWORD="$PGPASSWORD"
-    API_KEY="$BACKEND_API_KEY"
-    API_SCHEMA=http
-    API_HOST=localhost
-    API_PORT=7050
     PORT=3000
     ${setup-bff}/bin/setup-absolidix-bff
+    pushd /app/absolidix-bff
     exec npm run dev
-  '';
-
-  setup-gui = pkgs.writeShellScriptBin "setup-absolidix-gui" ''
-    set -euo pipefail
-
-    pushd /app/absolidix-gui
-    ${enter-venv}
-    npm install
     popd
   '';
 
   start-gui = pkgs.writeShellScriptBin "start-absolidix-gui" ''
     set -euo pipefail
-    ${enter-venv}
-    ${setup-bff}/bin/setup-absolidix-bff
-    PORT=8080
+    pushd /app/absolidix-gui
+    npm install
+    sed -i "s/^export const IdPs.*$/export const IdPs = ['local'];/g" src/config.ts
     exec npm run dev
+    popd
   '';
 
   start-jupyter = pkgs.writeShellScriptBin "start-jupyter" ''
     ${enter-venv}
     exec uv run --with jupyter jupyter lab --no-browser --allow-root
+  '';
+
+  container-entrypoint = pkgs.writeShellScriptBin "entrypoint" ''
+    mkdir -p /data/postgres
+    chown -R postgres:postgres /data/postgres
+    exec /usr/bin/supervisord $@
   '';
 
   container-dockerfile = pkgs.writeText "Dockerfile" ''
@@ -356,9 +344,9 @@ let
       start-backend
       setup-bff
       start-bff
-      setup-gui
       start-gui
       start-jupyter
+      container-entrypoint
       uv
       rabbitmq-server
       nodejs
@@ -377,13 +365,19 @@ let
     "/bin"
   ];
 
-  absolidix-container-env-file = pkgs.writeText "env" ''
+  absolidix-container-env-file = let
+    pghost = "localhost";
+    pguser = "postgres";
+    pgpassword = "";
+    ab_api_key = "ab_api_key";
+    bff_api_key = "bff_api_key";
+  in pkgs.writeText "env" ''
     PATH=${container-path}
     PGDATA=/data/postgres
-    PGHOST=localhost
+    PGHOST=${pghost}
     PGPORT=5432
-    PGUSER=postgres
-    PGPASSWORD=
+    PGUSER=${pguser}
+    PGPASSWORD=${pgpassword}
     PGDATABASE=${absolidixDbName}
 
     RABBITMQ_BASE=/data/rabbitmq
@@ -406,9 +400,17 @@ let
     UV_CACHE_DIR=/app/absolidix-backend/.venv/cache
     PYTHONBREAKPOINT=web_pdb.set_trace
 
-    BACKEND_API_KEY=a-very-very-very-long-and-very-very-very-secret-string
-    BACKEND_LOCAL_PCRYSTAL_BS_PATH=/tmp
-    BFF_WEBHOOK_KEY=another-very-very-long-and-very-very-very-secret-string
+    AB_DB__HOST=${pghost}
+    AB_DB__DATABASE=${absolidixDbName}
+    AB_DB__USER=${pguser}
+    AB_DB__PASSWORD=${pgpassword}
+    AB_API__KEY=${ab_api_key}
+    AB_API__HOST=0.0.0.0
+    AB_WEBHOOK__KEY=${bff_api_key}
+    AB_WEBHOOK__CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
+    AB_WEBHOOK__UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
+    AB_LOCAL__PCRYSTAL_BS_PATH=/tmp
+    BFF_WEBHOOK_KEY=${ab_api_key}
     BFF_WEBHOOK_CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
     BFF_WEBHOOK_UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
   '';
@@ -504,10 +506,6 @@ let
     set -euo pipefail
     ${pkgs.podman}/bin/podman build -t absolidix-all-in-one -f ${container-dockerfile} .
 
-    ${pkgs.podman}/bin/podman unshare mkdir -p $PRJ_DATA_DIR/postgres
-    ${pkgs.podman}/bin/podman unshare chown -R 103:105 $PRJ_DATA_DIR/postgres
-    ${pkgs.podman}/bin/podman unshare mkdir -p $PRJ_DATA_DIR/rabbitmq
-    ${pkgs.podman}/bin/podman unshare chown -R 104:106 $PRJ_DATA_DIR/rabbitmq
     mkdir -p $PRJ_DATA_DIR/aiida
     mkdir -p $PRJ_DATA_DIR/yascheduler
 
@@ -526,13 +524,14 @@ let
       -v $PRJ_ROOT:/app \
       -v ${absolidix-container-env-file}:/etc/environment \
       -p 3000:3000 \
+      -p 5000:5000 \
       -p 5432:5432 \
       -p 5555:5555 \
       -p 7050:7050 \
       -p 8080:8080 \
       -p 8888:8888 \
       --env-file ${absolidix-container-env-file} \
-      --entrypoint /usr/bin/supervisord \
+      --entrypoint ${container-entrypoint}/bin/entrypoint \
       localhost/absolidix-all-in-one
   '';
 
@@ -594,7 +593,7 @@ in
       --no-project --allow-existing
     source $UV_PROJECT_ENVIRONMENT/bin/activate
     ${pkgs.uv}/bin/uv pip install -e yascheduler
-    ${pkgs.uv}/bin/uv pip install -e absolidix-backend
-    ${pkgs.uv}/bin/uv pip install -e absolidix-client
+    ${pkgs.uv}/bin/uv pip install -e "absolidix-backend[dev]"
+    ${pkgs.uv}/bin/uv pip install -e "absolidix-client[dev]"
   '';
 }
