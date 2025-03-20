@@ -1,5 +1,4 @@
 {
-  config,
   inputs,
   pkgs,
   ...
@@ -36,10 +35,6 @@ in
     {
       name = "PATH";
       prefix = "$PRJ_ROOT/esdd-gui/node_modules/.bin";
-    }
-    {
-      name = "LD_LIBRARY_PATH";
-      prefix = "$NIX_LD_LIBRARY_PATH";
     }
   ];
 

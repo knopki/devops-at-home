@@ -42,10 +42,6 @@ in
 
   env = [
     {
-      name = "LD_LIBRARY_PATH";
-      prefix = "$NIX_LD_LIBRARY_PATH";
-    }
-    {
       name = "PYTHONPATH";
       eval = pkgs.lib.concatStringsSep ":" [
         "$PRJ_ROOT/_distro/custom/src/odoo"

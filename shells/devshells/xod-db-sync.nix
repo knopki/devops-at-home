@@ -1,6 +1,4 @@
 {
-  config,
-  inputs,
   pkgs,
   ...
 }:
@@ -29,10 +27,5 @@ in
     source $UV_PROJECT_ENVIRONMENT/bin/activate
   '';
 
-  env = [
-    {
-      name = "LD_LIBRARY_PATH";
-      prefix = "$NIX_LD_LIBRARY_PATH";
-    }
-  ];
+  env = [ ];
 }

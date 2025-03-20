@@ -351,7 +351,10 @@ let
       rabbitmq-server
       nodejs
     ];
-    pathsToLink = [ "/share" "/bin" ];
+    pathsToLink = [
+      "/share"
+      "/bin"
+    ];
   };
 
   container-path = concatStringsSep ":" [
@@ -365,55 +368,57 @@ let
     "/bin"
   ];
 
-  absolidix-container-env-file = let
-    pghost = "localhost";
-    pguser = "postgres";
-    pgpassword = "";
-    ab_api_key = "ab_api_key";
-    bff_api_key = "bff_api_key";
-  in pkgs.writeText "env" ''
-    PATH=${container-path}
-    PGDATA=/data/postgres
-    PGHOST=${pghost}
-    PGPORT=5432
-    PGUSER=${pguser}
-    PGPASSWORD=${pgpassword}
-    PGDATABASE=${absolidixDbName}
+  absolidix-container-env-file =
+    let
+      pghost = "localhost";
+      pguser = "postgres";
+      pgpassword = "";
+      ab_api_key = "ab_api_key";
+      bff_api_key = "bff_api_key";
+    in
+    pkgs.writeText "env" ''
+      PATH=${container-path}
+      PGDATA=/data/postgres
+      PGHOST=${pghost}
+      PGPORT=5432
+      PGUSER=${pguser}
+      PGPASSWORD=${pgpassword}
+      PGDATABASE=${absolidixDbName}
 
-    RABBITMQ_BASE=/data/rabbitmq
-    RABBITMQ_HOME=/data/rabbitmq
-    RABBITMQ_CONFIG_FILE=/data/rabbitmq/rabbitmq
-    RABBITMQ_MNESIA_BASE=/data/rabbitmq/mnesia
-    RABBITMQ_LOG_BASE=/data/rabbitmq/log
+      RABBITMQ_BASE=/data/rabbitmq
+      RABBITMQ_HOME=/data/rabbitmq
+      RABBITMQ_CONFIG_FILE=/data/rabbitmq/rabbitmq
+      RABBITMQ_MNESIA_BASE=/data/rabbitmq/mnesia
+      RABBITMQ_LOG_BASE=/data/rabbitmq/log
 
-    AIIDA_PATH=/data/aiida
-    AIIDA_DBNAME=${aiidaDbName}
-    AIIDA_REPO=/data/aiida/repo/default
+      AIIDA_PATH=/data/aiida
+      AIIDA_DBNAME=${aiidaDbName}
+      AIIDA_REPO=/data/aiida/repo/default
 
-    YASCHEDULER_DATA_DIR=/data/yascheduler
-    YASCHEDULER_CONF_PATH=/data/yascheduler/yascheduler.conf
-    YASCHEDULER_LOG_PATH=/data/yascheduler/yascheduler.log
-    YASCHEDULER_PID_PATH=/data/yascheduler/yascheduler.pid
+      YASCHEDULER_DATA_DIR=/data/yascheduler
+      YASCHEDULER_CONF_PATH=/data/yascheduler/yascheduler.conf
+      YASCHEDULER_LOG_PATH=/data/yascheduler/yascheduler.log
+      YASCHEDULER_PID_PATH=/data/yascheduler/yascheduler.pid
 
-    UV_PROJECT=/app/absolidix-backend
-    UV_PROJECT_ENVIRONMENT=/app/absolidix-backend/.venv
-    UV_CACHE_DIR=/app/absolidix-backend/.venv/cache
-    PYTHONBREAKPOINT=web_pdb.set_trace
+      UV_PROJECT=/app/absolidix-backend
+      UV_PROJECT_ENVIRONMENT=/app/absolidix-backend/.venv
+      UV_CACHE_DIR=/app/absolidix-backend/.venv/cache
+      PYTHONBREAKPOINT=web_pdb.set_trace
 
-    AB_DB__HOST=${pghost}
-    AB_DB__DATABASE=${absolidixDbName}
-    AB_DB__USER=${pguser}
-    AB_DB__PASSWORD=${pgpassword}
-    AB_API__KEY=${ab_api_key}
-    AB_API__HOST=0.0.0.0
-    AB_WEBHOOK__KEY=${bff_api_key}
-    AB_WEBHOOK__CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
-    AB_WEBHOOK__UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
-    AB_LOCAL__PCRYSTAL_BS_PATH=/tmp
-    BFF_WEBHOOK_KEY=${ab_api_key}
-    BFF_WEBHOOK_CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
-    BFF_WEBHOOK_UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
-  '';
+      AB_DB__HOST=${pghost}
+      AB_DB__DATABASE=${absolidixDbName}
+      AB_DB__USER=${pguser}
+      AB_DB__PASSWORD=${pgpassword}
+      AB_API__KEY=${ab_api_key}
+      AB_API__HOST=0.0.0.0
+      AB_WEBHOOK__KEY=${bff_api_key}
+      AB_WEBHOOK__CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
+      AB_WEBHOOK__UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
+      AB_LOCAL__PCRYSTAL_BS_PATH=/tmp
+      BFF_WEBHOOK_KEY=${ab_api_key}
+      BFF_WEBHOOK_CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
+      BFF_WEBHOOK_UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
+    '';
 
   supervisord-config = pkgs.writeText "supervisord.conf" ''
     [supervisord]
@@ -582,9 +587,6 @@ in
   ];
 
   devshell.startup.setup-env.text = ''
-    # Dynamic libraries
-    export LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH:$LD_LIBRARY_PATH
-
     # UV
     export UV_PYTHON_PREFERENCE=only-system
     export UV_PROJECT_ENVIRONMENT="$PRJ_DATA_DIR/venv"
