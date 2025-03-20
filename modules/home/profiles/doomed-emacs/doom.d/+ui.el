@@ -29,7 +29,6 @@
           ("\\.conf$" all-the-icons-octicon "settings" :v-adjust 0.0 :face all-the-icons-yellow)
           ("\\.toml$" all-the-icons-octicon "settings" :v-adjust 0.0 :face all-the-icons-yellow)
           ("\\.xpm$" all-the-icons-octicon "file-media" :v-adjust 0.0 :face all-the-icons-dgreen)
-          (".*\\.ipynb\\'" all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange)
           ("\\.epub\\'" all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green)))
   (setq all-the-icons-mode-icon-alist
         `(,@all-the-icons-mode-icon-alist
@@ -44,8 +43,6 @@
           (helpful-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1 :face all-the-icons-purple)
           (Info-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1)
           (ein:notebooklist-mode all-the-icons-faicon "book" :face all-the-icons-lorange)
-          (ein:notebook-mode all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange)
-          (ein:notebook-multilang-mode all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-dorange)
           (nov-mode all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green)
           (gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-lblue))))
 

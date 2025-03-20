@@ -42,26 +42,6 @@ in
     # :tools lookup & :lang org +roam
     sqlite
 
-    # :lang cc
-    ccls
-    irony-server
-    rtags
-
-    # :tools docker
-    dockfmt
-    nodePackages.dockerfile-language-server-nodejs
-
-    # :lang go
-    gopls
-    gomodifytags
-    gotests
-
-    # :lang javascript
-    nodejs
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-    nodePackages.prettier
-
     # :lang json
     vscode-langservers-extracted
 
@@ -71,34 +51,11 @@ in
     proselint
     python3Packages.grip
 
-    # :lang nix
-    age
-    nixpkgs-fmt
-
-    # :lang php
-    php
-    php82Packages.php-cs-fixer
-
-    # :plang plantuml
-    plantuml
-
-    # :lang python
-    python3Full
-
-    # :lang rust
-    cargo
-    clippy
-    rustc
-    rustfmt
-
     # :lang sh
     bashdb
     nodePackages.bash-language-server
     shellcheck
     shfmt
-
-    # :lang web
-    nodePackages.js-beautify
 
     # lang: yaml
     nodePackages.yaml-language-server
@@ -151,7 +108,6 @@ in
           "application/javascript"
           "application/json"
           "application/markdown"
-          "application/x-php"
           "application/x-shellscript"
           "application/x-yaml"
           "application/xml"

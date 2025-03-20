@@ -39,7 +39,6 @@
        :tools
        debugger
        direnv
-       (docker +lsp)
        editorconfig
        (eval +overlay)
        gist
@@ -48,26 +47,16 @@
        magit
        make
        rgb
-       terraform
        tmux
        tree-sitter
        upload
        :lang
-       (cc +lsp +tree-sitter)
        data
        emacs-lisp
-       (go +lsp +tree-sitter)
-       (javascript +lsp +tree-sitter)
        (json +lsp +tree-sitter)
        (markdown +grip)
-       (nix +tree-sitter +lsp)
-       (php +tree-sitter)
-       plantuml
-       (python +lsp +tree-sitter)
        (sh +fish +lsp +tree-sitter)
-       (web +tree-sitter)
        (yaml +lsp +tree-sitter)
-       :term vterm
        :os
        (tty +osc)
        :email
