@@ -198,6 +198,8 @@ in
         "${config.xdg.dataHome}/npm/bin"
         "\${PATH}"
       ];
+      EDITOR = "hx";
+      VISUAL = "zeditor -w -n";
     };
 
     file = {

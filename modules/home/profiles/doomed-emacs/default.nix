@@ -67,11 +67,6 @@ in
     recursive = true;
   };
 
-  home.sessionVariables = {
-    EDITOR = "emacs -nw";
-    VISUAL = "emacsclient -a='emacs -nw' -c";
-  };
-
   programs = {
     imv.enable = true;
     zathura.enable = true;
