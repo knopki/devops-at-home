@@ -1,1 +1,1 @@
-{ nixpkgsUnstable, ... }: nixpkgsUnstable.zed-editor-fhs
+{ nixpkgsUnstable, ... }: nixpkgsUnstable.zed-editor.fhsWithPackages (ps: with ps; [ openssl ])
