@@ -18,6 +18,7 @@ in
         "anytype"
         "aspell-dict-en-science"
         "corefonts"
+        "cursor"
         "deezer-desktop"
         "discord"
         "edl"

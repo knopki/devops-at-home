@@ -103,6 +103,7 @@ in
     tor-browser
     ocrmypdf
     packages.zed-editor
+    code-cursor
 
     # remote
     anydesk
