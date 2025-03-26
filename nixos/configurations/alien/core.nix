@@ -184,7 +184,6 @@ in
 
   programs = {
     bash = {
-      blesh.enable = true;
       undistractMe.enable = true;
       interactiveShellInit = ''
         if [[ -f $XDG_CONFIG_HOME/atuin/config.toml ]]; then
@@ -240,10 +239,26 @@ in
         show_thread_names = 1;
         highlight_base_name = 1;
         sort_key = 47; # PERCENT_MEM
-        left_meters_modes = [1 1 1];
-        left_meters = ["AllCPUs" "Memory" "Swap"];
-        right_meters_modes = [2 2 2];
-        right_meters = ["Tasks" "LoadAverage" "Uptime"];
+        left_meters_modes = [
+          1
+          1
+          1
+        ];
+        left_meters = [
+          "AllCPUs"
+          "Memory"
+          "Swap"
+        ];
+        right_meters_modes = [
+          2
+          2
+          2
+        ];
+        right_meters = [
+          "Tasks"
+          "LoadAverage"
+          "Uptime"
+        ];
       };
     };
     iftop.enable = mkDefault true;
@@ -276,7 +291,10 @@ in
       keyMode = "vi";
       newSession = true;
       terminal = "screen-256color";
-      plugins = with pkgs.tmuxPlugins; [ pain-control sensible ];
+      plugins = with pkgs.tmuxPlugins; [
+        pain-control
+        sensible
+      ];
       extraConfig = ''
         setw -g mode-keys vi
 
