@@ -558,8 +558,8 @@ in
       enable = true;
       defaultApplications =
         {
-          "application/epub+zip" = "org.pwmt.zathura.desktop";
-          "application/pdf" = "org.pwmt.zathura.desktop";
+          "application/epub+zip" = "org.kde.okular.desktop";
+          "application/pdf" = "org.kde.okular.desktop";
         }
         // (listToAttrs (
           map (x: nameValuePair x "org.kde.gwenview.desktop") [

@@ -92,13 +92,6 @@ in
         };
       };
     };
-
-    zathura = {
-      enable = lib.mkDefault true;
-      options = {
-        selection-clipboard = "clipboard";
-      };
-    };
   };
 
   qt.kde.settings = {
@@ -132,8 +125,8 @@ in
 
   xdg.mimeApps = {
     associations.added = {
-      "application/epub+zip" = [ "org.pwmt.zathura.desktop" ];
-      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+      "application/epub+zip" = [ "org.kde.okular.desktop" ];
+      "application/pdf" = [ "org.kde.okular.desktop" ];
     };
   };
 }

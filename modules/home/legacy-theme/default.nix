@@ -24,7 +24,6 @@ in
     ./theme-neovim.nix
     ./theme-plasma.nix
     ./theme-tmux.nix
-    ./theme-zathura.nix
   ];
 
   options.theme = {

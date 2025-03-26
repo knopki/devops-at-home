@@ -2,8 +2,6 @@
   config,
   lib,
   pkgs,
-  nixosConfig,
-  inputs,
   ...
 }:
 let
@@ -69,7 +67,6 @@ in
 
   programs = {
     imv.enable = true;
-    zathura.enable = true;
     emacs = {
       enable = true;
       # package =
