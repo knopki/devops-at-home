@@ -8,55 +8,7 @@
 }:
 let
   inherit (lib) mkBefore mkDefault;
-in
-{
-  #
-  # Documentation
-  #
-
-  documentation = {
-    doc.enable = mkDefault false;
-    info.enable = mkDefault false;
-    man.enable = mkDefault true;
-    nixos.enable = mkDefault false;
-  };
-
-  #
-  # Packages
-  #
-
-  environment.systemPackages = with pkgs; [
-    # essentials
-    binutils
-    curl
-    dnsutils
-    dosfstools
-    du-dust
-    fd
-    file
-    gitMinimal
-    gnupg
-    gptfdisk
-    helix
-    iputils
-    lsof
-    neovim
-    ngrep
-    pstree
-    ranger
-    ripgrep
-    rsync
-    sysstat
-    tree
-    wget
-    whois
-
-    # shell
-    atuin
-    fishPlugins.fish-you-should-use
-    fishPlugins.forgit
-
-    # media
+  mediaPkgs = with pkgs; [
     darktable
     digikam
     imgcat
@@ -74,8 +26,8 @@ in
     gallery-dl
     fclones
     packages.findimagedupes
-
-    # office
+  ];
+  officePkgs = with pkgs; [
     anki
     packages.anytype
     packages.aliza
@@ -95,44 +47,140 @@ in
     seahorse
     kdePackages.kleopatra
     speedcrunch
-    simplex-chat-desktop
-    telegram-desktop
-    discord
-    thunderbird
     zotero
-    tor-browser
     ocrmypdf
-    packages.zed-editor
-    code-cursor
-
-    # remote
-    anydesk
-    mosh
-    openssh
-    remmina
-
-    # misc
-    amneziawg-go
-    arduino-cli
-    arduino-ide
-    packages.amneziawg-tools
-    android-udev-rules
-    bottles
-    clevis
-    golden-cheetah-bin
-    lazygit
-    lazydocker
-    # tailscale
-    xorg.xhost
-    picotool
-    revanced-cli
-    restic
-    rustic-rs
-    smartmontools
-    yubikey-manager
-    vmtouch
-    httm
   ];
+  devPkgs = with pkgs; [
+    # tools
+    gitMinimal
+    gnupg
+    ripgrep
+    android-udev-rules
+    arduino-cli
+    lazygit
+    picotool
+    python3
+
+    # editors / IDE
+    arduino-ide
+    helix
+    packages.zed-editor
+    packages.code-cursor
+    packages.aider-chat
+
+    # bash
+    bash-language-server
+    shellcheck
+
+    # css
+    tailwindcss-language-server
+
+    # docker
+    docker-compose-language-service
+    dockerfile-language-server-nodejs
+
+    # javascript
+    eslint
+    nodejs # also, required for zed-editor
+    vtsls
+
+    # python
+    pyright
+    ruff
+    uv
+
+    # terraform
+    terraform-ls
+
+    # TOML
+    taplo
+
+    # YAML
+    yaml-language-server
+  ];
+in
+{
+  #
+  # Documentation
+  #
+
+  documentation = {
+    doc.enable = mkDefault false;
+    info.enable = mkDefault false;
+    man.enable = mkDefault true;
+    nixos.enable = mkDefault false;
+  };
+
+  #
+  # Packages
+  #
+
+  environment.systemPackages =
+    with pkgs;
+    [
+      # essentials
+      binutils
+      curl
+      dnsutils
+      dosfstools
+      du-dust
+      fd
+      file
+      gitMinimal
+      gnupg
+      gptfdisk
+      helix
+      iputils
+      lsof
+      neovim
+      ngrep
+      pstree
+      ranger
+      ripgrep
+      rsync
+      sysstat
+      tree
+      wget
+      whois
+
+      # shell
+      atuin
+      fishPlugins.fish-you-should-use
+      fishPlugins.forgit
+
+      # messenging
+      simplex-chat-desktop
+      telegram-desktop
+      discord
+      thunderbird
+
+      # remote
+      anydesk
+      mosh
+      openssh
+      remmina
+
+      # misc
+      tor-browser
+      amneziawg-go
+      packages.amneziawg-tools
+      bottles
+      clevis
+      golden-cheetah-bin
+      lazydocker
+      # tailscale
+      xorg.xhost
+      revanced-cli
+      restic
+      rustic-rs
+      smartmontools
+      yubikey-manager
+      vmtouch
+      httm
+    ]
+    ++ devPkgs
+    ++ mediaPkgs
+    ++ officePkgs;
 
   programs = {
     bash = {
@@ -205,7 +253,7 @@ in
     nix-index.enable = mkDefault true;
     nix-ld = {
       enable = mkDefault true;
-      libraries = with pkgs; [
+      libraries = [
         # already included:
         #   acl attr bzip2 curl libsodium libssh libxml2 openssl
         #   stdenv.cc.cc systemd util-linux xz zlib zstd

@@ -3,12 +3,13 @@ let
   inherit (builtins) elem;
   inherit (lib) getName getNameWithVersion;
 
-  allowlistedLicenses = with lib.licenses; [ ];
+  allowlistedLicenses = [ ];
   allowUnfreePredicate =
     pkg:
     elem (getName pkg) [
       "anytype"
       "anytype-heart"
+      "cursor"
       "deezer-desktop"
       "edl"
       "pantum-driver"
