@@ -69,34 +69,13 @@ let
     packages.aider-chat
 
     # bash
-    bash-language-server
     shellcheck
 
-    # css
-    tailwindcss-language-server
-
-    # docker
-    docker-compose-language-service
-    dockerfile-language-server-nodejs
-
     # javascript
-    eslint
-    nodejs # also, required for zed-editor
-    vtsls
+    nodejs
 
     # python
-    pyright
-    ruff
     uv
-
-    # terraform
-    terraform-ls
-
-    # TOML
-    taplo
-
-    # YAML
-    yaml-language-server
   ];
 in
 {
