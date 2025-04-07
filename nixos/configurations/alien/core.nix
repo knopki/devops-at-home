@@ -65,7 +65,6 @@ let
     arduino-ide
     helix
     packages.zed-editor
-    packages.code-cursor
     packages.aider-chat
 
     # bash
