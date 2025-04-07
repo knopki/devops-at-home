@@ -389,6 +389,8 @@ in
   #
 
   services = {
+    envfs.enable = true;
+
     nscd.enableNsncd = true;
 
     openssh = {
