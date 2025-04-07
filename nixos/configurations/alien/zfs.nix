@@ -57,17 +57,28 @@ in
             "long_term"
             "only_prune"
           ];
-          recursive = "zfs";
         };
-        "wdc3/backups/alien/np".use_template = [ "long_term" "only_prune" ];
+        "wdc3/backups/alien/home/containers-storage" = {
+          use_template = [
+            "minimal"
+            "only_prune"
+          ];
+        };
+        "wdc3/backups/alien/np".use_template = [
+          "long_term"
+          "only_prune"
+        ];
         "wdc3/backups/alien/system" = {
           use_template = [
             "default"
             "only_prune"
           ];
-          recursive = true;
+          recursive = "zfs";
         };
-        "wdc3/backups/alien/torrents".use_template = [ "minimal" "only_prune" ];
+        "wdc3/backups/alien/torrents".use_template = [
+          "minimal"
+          "only_prune"
+        ];
       };
     };
 
