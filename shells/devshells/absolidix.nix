@@ -197,12 +197,23 @@ let
     $CONF_SET db user "$PGUSER"
     $CONF_SET db password "$PGPASSWORD"
     $CONF_SET local data_dir "$YASCHEDULER_DATA_DIR"
-    $CONF_SET local webhook_url "http://localhost:7050/calculations/update?key=$AB_API__KEY"
+    $CONF_SET local webhook_url "http://localhost:7050/calculations/update?key=$AB_WEBHOOKS__KEY"
     $CONF_SET remote data_dir "$YASCHEDULER_DATA_DIR"
-    $CONF_SET engine.dummy-test spawn "dummyengine *"
-    $CONF_SET engine.dummy-test check_cmd "ps aux -ocomm= | grep -q dummyengine"
-    $CONF_SET engine.dummy-test input_files "1.input 2.input 3.input"
-    $CONF_SET engine.dummy-test output_files "1.input 2.input 3.input 1.input.out 2.input.out 3.input.out"
+    $CONF_SET engine.dummy platforms linux
+    $CONF_SET engine.dummy deploy_local_files dummyengine
+    $CONF_SET engine.dummy spawn "{engine_path}/dummyengine *"
+    $CONF_SET engine.dummy check_pname dummyengine
+    $CONF_SET engine.dummy sleep_interval 1
+    $CONF_SET engine.dummy input_files "1.input 2.input 3.input"
+    $CONF_SET engine.dummy output_files "1.input 2.input 3.input 1.input.out 2.input.out 3.input.out"
+    $CONF_SET engine.pcrystal platforms linux
+    $CONF_SET engine.pcrystal platform_packages "openmpi-bin wget"
+    $CONF_SET engine.pcrystal deploy_local_files Pcrystal
+    $CONF_SET engine.pcrystal check_pname Pcrystal
+    $CONF_SET engine.pcrystal sleep_interval 6
+    $CONF_SET engine.pcrystal spawn "cp {task_path}/INPUT OUTPUT && mpirun -np {ncpus} --allow-run-as-root -wd {task_path} {engine_path}/Pcrystal >> OUTPUT 2>&1"
+    $CONF_SET engine.pcrystal input_files "INPUT fort.34"
+    $CONF_SET engine.pcrystal input_files "INPUT fort.34 OUTPUT fort.9 fort.87"
     $CONF_SET engine.inpgen spawn "inpgen -explicit -inc +all -f aiida.in > shell.out 2> out.error"
     $CONF_SET engine.inpgen check_cmd "ps -eocomm= | grep -q inpgen"
     $CONF_SET engine.inpgen input_files "aiida.in"
@@ -331,7 +342,6 @@ let
   myContainerEnv = pkgs.buildEnv {
     name = "absolidix-container";
     paths = with pkgs; [
-      packages.dummy-engine
       packages.fleur
       start-sshd
       setup-postgres
@@ -411,13 +421,13 @@ let
       AB_DB__PASSWORD=${pgpassword}
       AB_API__KEY=${ab_api_key}
       AB_API__HOST=0.0.0.0
-      AB_WEBHOOK__KEY=${bff_api_key}
-      AB_WEBHOOK__CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
-      AB_WEBHOOK__UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
+      AB_WEBHOOKS__KEY=${bff_api_key}
+      AB_WEBHOOKS__CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
+      AB_WEBHOOKS__UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
       AB_LOCAL__PCRYSTAL_BS_PATH=/tmp
-      BFF_WEBHOOK_KEY=${ab_api_key}
-      BFF_WEBHOOK_CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
-      BFF_WEBHOOK_UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
+      BFF_WEBHOOKS_KEY=${ab_api_key}
+      BFF_WEBHOOKS_CREATE_URL=http://localhost:3000/v0/webhooks/calc_create
+      BFF_WEBHOOKS_UPDATE_URL=http://localhost:3000/v0/webhooks/calc_update
     '';
 
   supervisord-config = pkgs.writeText "supervisord.conf" ''
@@ -582,7 +592,6 @@ in
     yanodes
     psql
     swig
-    packages.dummy-engine
     packages.fleur
   ];
 
