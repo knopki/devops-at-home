@@ -198,7 +198,7 @@ let
     $CONF_SET db password "$PGPASSWORD"
     $CONF_SET local data_dir "$YASCHEDULER_DATA_DIR"
     $CONF_SET local webhook_url "http://localhost:7050/calculations/update?key=$AB_WEBHOOKS__KEY"
-    $CONF_SET remote data_dir "$YASCHEDULER_DATA_DIR"
+    $CONF_SET remote data_dir "$YASCHEDULER_DATA_DIR"_remote
     $CONF_SET engine.dummy platforms linux
     $CONF_SET engine.dummy deploy_local_files dummyengine
     $CONF_SET engine.dummy spawn "{engine_path}/dummyengine *"
@@ -234,7 +234,8 @@ let
 
     echo "PATH=$PATH" > /etc/profile.d/path.sh
 
-    yasetnode --skip-setup=true root@127.0.0.1~1
+    yasetnode root@127.0.0.1~1 --remove-hard || true
+    yasetnode root@127.0.0.1~1 || true
   '';
 
   start-yascheduler = pkgs.writeShellScriptBin "start-yascheduler" ''
@@ -497,12 +498,11 @@ let
     redirect_stderr = true
     autorestart = true
     priority = 40
+    stopsignal = KILL
 
     [program:gui]
     command = ${start-gui}/bin/start-absolidix-gui
     user = root
-    stdout_logfile = /dev/stdout
-    stdout_logfile_maxbytes = 0
     redirect_stderr = true
     autorestart = true
     priority = 50
