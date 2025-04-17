@@ -25,7 +25,6 @@ in
         "mpv-thumbfast"
         "obsidian"
         "pantum-driver"
-        "trezor-suite"
         "unrar"
       ];
 
