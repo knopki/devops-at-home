@@ -327,8 +327,6 @@ in
         default-key = "58A58B6FD38C6B66";
       };
     };
-
-    password-store.settings.PASSWORD_STORE_KEY = config.programs.gpg.settings.default-key;
   };
 
   qt.kde.settings = {
@@ -475,18 +473,6 @@ in
   };
 
   services = {
-    git-sync = {
-      enable = true;
-      repositories = {
-        password-sync = {
-          name = "password-sync";
-          path = config.programs.password-store.settings.PASSWORD_STORE_DIR;
-          uri = "git+ssh://git@github.com:knopki/password-store.git";
-          interval = 3600;
-        };
-      };
-    };
-
     # use system gpg-agent
     gpg-agent.enable = false;
   };

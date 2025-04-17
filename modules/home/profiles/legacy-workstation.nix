@@ -29,18 +29,6 @@ in
     git.delta.enable = mkDefault true;
 
     man.generateCaches = false;
-
-    password-store = {
-      enable = mkDefault true;
-      package = pkgs.pass.withExtensions (
-        ext: with ext; [
-          pass-checkup
-          pass-genphrase
-          pass-otp
-          pass-update
-        ]
-      );
-    };
   };
 
   qt.kde.settings = {

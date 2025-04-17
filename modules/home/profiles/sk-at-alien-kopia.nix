@@ -68,7 +68,6 @@
           "${config.xdg.dataHome}/atuin"
           "${config.xdg.dataHome}/fish/fish_history"
           "${config.xdg.dataHome}/keyrings"
-          "${config.xdg.dataHome}/password-store"
           "${config.xdg.dataHome}/remmina"
         ];
       };
