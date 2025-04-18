@@ -9,7 +9,6 @@ let
     elem (getName pkg) [
       "anytype"
       "anytype-heart"
-      "cursor"
       "deezer-desktop"
       "edl"
       "pantum-driver"
