@@ -36,3 +36,4 @@ ROOT=$(upfind . flake.nix)
 
 gen_modules "$ROOT/modules/home"
 gen_modules "$ROOT/modules/nixos"
+gen_modules "$ROOT/modules/shared"
