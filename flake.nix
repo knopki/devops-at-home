@@ -20,6 +20,7 @@
     nixpkgs-24-11.url = "nixpkgs/nixos-24.11";
     nixpkgs.follows = "nixpkgs-24-11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-25-05.follows = "nixpkgs-unstable"; # TODO
 
     # core modules and libraries
     flake-parts.url = "flake:flake-parts";
@@ -32,8 +33,10 @@
     devshell.url = "github:numtide/devshell";
     home-24-11.inputs.nixpkgs.follows = "nixpkgs-24-11";
     home-24-11.url = "github:nix-community/home-manager/release-24.11";
+    home-25-05.inputs.nixpkgs.follows = "nixpkgs-25-05";
+    home-25-05.url = "github:nix-community/home-manager"; # TODO
     home.follows = "home-24-11";
-    # impermanence.url = github:nix-community/impermanence;
+    preservation.url = "github:nix-community/preservation";
     sops-nix.url = "flake:sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
