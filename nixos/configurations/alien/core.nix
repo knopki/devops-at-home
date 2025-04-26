@@ -119,7 +119,6 @@ in
       sysstat
       tree
       wget
-      whois
 
       # shell
       atuin
@@ -155,6 +154,9 @@ in
       yubikey-manager
       vmtouch
       httm
+
+      # temporary
+      usbimager
     ]
     ++ devPkgs
     ++ mediaPkgs

@@ -18,8 +18,10 @@
     { package = pkgs.nixVersions.latest; }
     { package = pkgs.nixd; }
     { package = pkgs.nvd; }
+    { package = pkgs.age; }
     { package = pkgs.sops; }
-    { package = pkgs.ssh-to-pgp; }
     { package = pkgs.vulnix; }
+    { package = pkgs.nixos-anywhere; }
+    { package = pkgs.deploy-rs; }
   ];
 }
