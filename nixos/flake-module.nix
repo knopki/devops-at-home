@@ -17,7 +17,7 @@ let
   toNixosConfigurations = toImportedModuleAttr { inherit inputs self mkNixosConfiguration; };
 in
 {
-  config.flake = rec {
+  config.flake = {
     nixosConfigurations = toNixosConfigurations ./configurations;
   };
 }
