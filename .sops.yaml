@@ -1,24 +1,32 @@
 keys:
-  - &knopki_pgp DF82B446BE5D7508473E47BF58A58B6FD38C6B66
   - &knopki age176u6qqk7ra4mdtptt4pfhjvsrqjg0pcsg8vm7r0slwvwph83qsqqmg58s8
-  - &alien_pgp 721b065c27bdbcc8682dcea1bf252f6be38fec14
-  # generated from server ssh key
+  # generated from the host ssh key
   - &alien age13jgfuuh7e2xjjktqj5za69zulmwjxn3uvw7y60hmznvjujxz4gtsunwkhp
-  # - &rog 721b065c27bdbcc8682dcea1bf252f6be38fec14TODO
+  - &rog age1g6nwqa788znqs5pj2fkd78n032n740ekste3zrfpfr0mdden8agsn6jmsv
 
 creation_rules:
+  # common shared not so secrets
+  - path_regex: secrets/common.yaml$
+    key_groups:
+      - age:
+          - *knopki
+          - *alien
+          - *rog
+  # alien host secrets
   - path_regex: secrets/alien.yaml$
     key_groups:
       - age:
           - *knopki
           - *alien
+  # sk@alien secrets
   - path_regex: secrets/sk-at-alien.yaml$
     key_groups:
       - age:
           - *knopki
-  # - path_regex: secrets/[^/]+\.yaml$
-  #   key_groups:
-  #     - pgp:
-  #         # - *knopki_pgp
-  #         # - *rog
+  # rog host secrets
+  - path_regex: secrets/rog.yaml$
+    key_groups:
+      - age:
+          - *knopki
+          - *rog
   - path_regex: .*
