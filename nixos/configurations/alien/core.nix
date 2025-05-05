@@ -35,20 +35,19 @@ let
     aspellDicts.ru
     img2pdf
     isync
-    libreoffice-qt6
+    kdePackages.kleopatra
     nextcloud-client
     obsidian
     ocrmypdf
     offlineimap
+    onlyoffice-desktopeditors
     pdfarranger
     poppler_utils
     qpdf
     rclone
     seahorse
-    kdePackages.kleopatra
     speedcrunch
     zotero
-    ocrmypdf
   ];
   devPkgs = with pkgs; [
     # tools
