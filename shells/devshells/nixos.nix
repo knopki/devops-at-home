@@ -22,6 +22,5 @@
     { package = pkgs.sops; }
     { package = pkgs.vulnix; }
     { package = pkgs.nixos-anywhere; }
-    { package = pkgs.deploy-rs; }
   ];
 }
