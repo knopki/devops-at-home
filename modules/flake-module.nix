@@ -40,6 +40,7 @@ in
     modules = {
       homeManager = homeModules;
       nixos = nixosModules;
+      shared = import ./shared/module-attrset.nix;
     };
   };
 }
