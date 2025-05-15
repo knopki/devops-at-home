@@ -221,7 +221,7 @@ let
     $CONF_SET engine.fleur spawn "fleur -minimalOutput -wtime 360 > shell.out 2> out.error"
     $CONF_SET engine.fleur check_cmd "ps -eocomm= | grep -q fleur"
     $CONF_SET engine.fleur input_files "inp.xml"
-    $CONF_SET engine.fleur output_files "inp.xml kpts.xml sym.xml relax.xml shell.out out.error out out.xml FleurInputSchema.xsd FleurOutputSchema.xsd juDFT_times.json cdn1 usage.json"
+    $CONF_SET engine.fleur output_files "inp.xml kpts.xml sym.xml relax.xml shell.out out.error out out.xml FleurInputSchema.xsd FleurOutputSchema.xsd juDFT_times.json cdn1 cdn.hdf usage.json relax-struct.xsf struct.xsf"
     popd
 
     if [ ! -f "$YASCHEDULER_DATA_DIR/keys/localhost" ]; then
@@ -590,6 +590,7 @@ in
     verdi
     yastatus
     yanodes
+    packer
     psql
     swig
     packages.fleur
