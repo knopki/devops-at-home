@@ -29,8 +29,6 @@ let
   ];
   officePkgs = with pkgs; [
     anki
-    packages.anytype
-    packages.aliza
     aspellDicts.en
     aspellDicts.ru
     img2pdf
@@ -47,7 +45,9 @@ let
     rclone
     seahorse
     speedcrunch
+    weasis
     zotero
+    packages.anytype
   ];
   devPkgs = with pkgs; [
     # tools
