@@ -67,13 +67,10 @@
 
   hardware = {
     asus.battery.chargeUpto = 80;
-    bluetooth.enable = true;
     enableRedistributableFirmware = true;
     flipperzero.enable = true;
     ledger.enable = true;
   };
-
-  powerManagement.enable = true;
 
   preservation = {
     enable = true;

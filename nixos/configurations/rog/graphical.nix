@@ -1,35 +1,18 @@
+{ pkgs, ... }:
 {
-  pkgs,
-  ...
-}:
-{
-
-  environment.gnome.excludePackages = with pkgs; [
-    atomix # puzzle game
-    cheese # webcam tool
-    epiphany # web browser
-    geary # email reader
-    gedit # text editor
-    gnome-characters
-    gnome-music
-    gnome-photos
-    gnome-tour
-    hitori # sudoku game
-    iagno # go game
-    tali # poker game
-    totem # video player
-  ];
-
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    kate
-  ];
+  environment.sessionVariables = {
+    # to make Clipboard Manager work
+    COSMIC_DATA_CONTROL_ENABLED = 1;
+    # enable Ozone Wayland support in Chromium and Electron
+    NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland";
+    GDK_BACKEND = "wayland";
+  };
 
   environment.systemPackages = with pkgs; [
-    adwaita-icon-theme
+    cosmic-ext-tweaks
     gnome-themes-extra
   ];
-
-  programs.dconf.enable = true;
 
   qt = {
     enable = true;
@@ -38,12 +21,10 @@
   };
 
   services = {
-    xserver.enable = true;
-    desktopManager.plasma6.enable = true;
-    displayManager.sddm.enable = true;
-
-    # xserver.displayManager.gdm.enable = true;
-    # xserver.desktopManager.gnome.enable = true;
     udev.packages = with pkgs; [ gnome-settings-daemon ];
+
+    displayManager.cosmic-greeter.enable = true;
+    desktopManager.cosmic.enable = true;
+    desktopManager.cosmic.xwayland.enable = true;
   };
 }

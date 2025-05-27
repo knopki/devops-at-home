@@ -10,7 +10,6 @@ mkNixosConfiguration {
   modules = with self.modules.nixos; [
     inputs.sops-nix.nixosModules.sops
     inputs.preservation.nixosModules.preservation
-    inputs.home-25-05.nixosModules.default
     profiles-workstation
     {
       system.stateVersion = "25.05";
@@ -18,7 +17,6 @@ mkNixosConfiguration {
       services.userborn.enable = true;
       users.mutableUsers = false;
       sops.defaultSopsFile = ../../../secrets/rog.yaml;
-      programs.git.enable = true;
     }
     ./graphical.nix
     ./hardware.nix
@@ -27,5 +25,6 @@ mkNixosConfiguration {
     ./nixpkgs.nix
     ./users-knopki.nix
     ./users-root.nix
+    ./inbox.nix
   ];
 }
