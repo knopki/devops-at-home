@@ -1,11 +1,5 @@
 { config, self, ... }:
 {
-  home-manager.users.knopki =
-    { ... }:
-    {
-      imports = with self.modules.homeManager; [ profiles-knopki-at-rog ];
-    };
-
   sops.secrets = {
     knopki-user-password.neededForUsers = true;
   };

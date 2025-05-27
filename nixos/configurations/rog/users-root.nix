@@ -1,11 +1,5 @@
 { self, config, ... }:
 {
-  home-manager.users.root =
-    { ... }:
-    {
-      imports = with self.modules.homeManager; [ profiles-root-at-rog ];
-    };
-
   preservation.preserveAt."/state".users.root = {
     # specify user home when it is not `/home/${user}`
     home = "/root";
@@ -21,5 +15,8 @@
 
   users.users.root = {
     hashedPasswordFile = config.sops.secrets.root-user-password.path;
+    openssh.authorizedKeys.keys = [
+      self.lib.ssh-pubkeys.knopki-ssh-pubkey1
+    ];
   };
 }
