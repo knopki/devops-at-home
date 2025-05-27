@@ -8,7 +8,6 @@
       "flakes"
     ];
     extra-substituters = [
-      "https://nixos-cache-proxy.cofob.dev"
       "https://nix-community.cachix.org"
     ];
     extra-trusted-public-keys = [
@@ -21,9 +20,9 @@
     # nixpkgs
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nixpkgs-24-11.url = "nixpkgs/nixos-24.11";
-    nixpkgs.follows = "nixpkgs-24-11";
+    nixpkgs-25-05.url = "nixpkgs/nixos-25.05";
+    nixpkgs.follows = "nixpkgs-25-05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    nixpkgs-25-05.follows = "nixpkgs-unstable"; # TODO
 
     # core modules and libraries
     flake-parts.url = "flake:flake-parts";
@@ -37,8 +36,8 @@
     home-24-11.inputs.nixpkgs.follows = "nixpkgs-24-11";
     home-24-11.url = "github:nix-community/home-manager/release-24.11";
     home-25-05.inputs.nixpkgs.follows = "nixpkgs-25-05";
-    home-25-05.url = "github:nix-community/home-manager"; # TODO
-    home.follows = "home-24-11";
+    home-25-05.url = "github:nix-community/home-manager/release-25.05";
+    home.follows = "home-25-05";
     preservation.url = "github:nix-community/preservation";
     sops-nix.url = "flake:sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
