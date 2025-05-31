@@ -9,6 +9,8 @@ let
   aiidaDbName = "aiida";
   absolidixDbName = "absolidix";
 
+  myPython = pkgs.python3;
+
   enter-venv = ''
     uv venv --project $UV_PROJECT --allow-existing
     source $UV_PROJECT_ENVIRONMENT/bin/activate
@@ -526,7 +528,7 @@ let
 
     ${pkgs.podman}/bin/podman run \
       --name absolidix-all-in-one \
-      --rm --replace \
+      --rm --replace --detach \
       --cpus 1.0 \
       --hostuser $USER \
       --init \
@@ -584,7 +586,6 @@ in
     enter-container
     exec-container
     ruff
-    ruff-lsp
     start-absolidix-container
     uv
     verdi
@@ -601,11 +602,11 @@ in
     export UV_PYTHON_PREFERENCE=only-system
     export UV_PROJECT_ENVIRONMENT="$PRJ_DATA_DIR/venv"
     export UV_CACHE_DIR="$UV_PROJECT_ENVIRONMENT/cache"
-    ${pkgs.uv}/bin/uv venv -p "${pkgs.python3}" "$UV_PROJECT_ENVIRONMENT" \
+    ${pkgs.uv}/bin/uv venv -p "${myPython.interpreter}" "$UV_PROJECT_ENVIRONMENT" \
       --no-project --allow-existing
     source $UV_PROJECT_ENVIRONMENT/bin/activate
-    ${pkgs.uv}/bin/uv pip install -e yascheduler
-    ${pkgs.uv}/bin/uv pip install -e "absolidix-backend[dev]"
-    ${pkgs.uv}/bin/uv pip install -e "absolidix-client[dev]"
+    ${pkgs.uv}/bin/uv pip list | grep yascheduler || ${pkgs.uv}/bin/uv pip install -e yascheduler
+    ${pkgs.uv}/bin/uv pip list | grep absolidix-client || ${pkgs.uv}/bin/uv pip install -e "absolidix-client[dev]"
+    ${pkgs.uv}/bin/uv pip list | grep absolidix-backend || ${pkgs.uv}/bin/uv pip install -e "absolidix-backend[dev]" --no-binary numpy
   '';
 }
