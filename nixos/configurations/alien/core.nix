@@ -16,7 +16,6 @@ let
     kdePackages.kdenlive
     krita
     obs-studio
-    packages.deezer-desktop
     picard
     qbittorrent
     streamrip

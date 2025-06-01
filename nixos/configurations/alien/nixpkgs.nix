@@ -18,7 +18,6 @@ in
         "anytype"
         "aspell-dict-en-science"
         "corefonts"
-        "deezer-desktop"
         "discord"
         "edl"
         "mpv-thumbfast"
