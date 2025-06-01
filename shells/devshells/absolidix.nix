@@ -310,13 +310,13 @@ let
     pushd /app/absolidix-gui
     npm install
     sed -i "s/^export const IdPs.*$/export const IdPs = ['local'];/g" src/config.ts
-    exec npm run dev
+    exec npm run dev --host 0.0.0.0
     popd
   '';
 
   start-jupyter = pkgs.writeShellScriptBin "start-jupyter" ''
     ${enter-venv}
-    exec uv run --with jupyter jupyter lab --no-browser --allow-root
+    exec uv run --with jupyter jupyter lab --no-browser --allow-root --ip 0.0.0.0
   '';
 
   container-entrypoint = pkgs.writeShellScriptBin "entrypoint" ''
@@ -509,7 +509,7 @@ let
     autorestart = true
     priority = 50
 
-    [program:start-jupyter]
+    [program:jupyter]
     command = ${start-jupyter}/bin/start-jupyter
     user = root
     stdout_logfile = /dev/stdout
