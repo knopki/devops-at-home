@@ -16,12 +16,15 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "https://iffgit.fz-juelich.de/fleur/fleur.git";
     rev = "refs/tags/MaX-R${version}";
-    hash = "sha256-DnAVsXhhgILPNvU+eS8Ivh3uQfL7h8aIvggqBpZztZo=";
+    hash = "sha256-+SGtMkAv/mIXbKkgNmMXfF1qS7CcmKGOG3jFx6BoIDM=";
     fetchSubmodules = false;
     leaveDotGit = true;
   };
 
-  passthru.updateScript = gitUpdater { rev-prefix = "MaX-R"; allowedVersions = "6.2"; };
+  passthru.updateScript = gitUpdater {
+    rev-prefix = "MaX-R";
+    allowedVersions = "6.2";
+  };
 
   preConfigure = ''
     bash ./configure.sh -hdf5 false
@@ -42,7 +45,6 @@ stdenv.mkDerivation rec {
     blas
     lapack
   ];
-
 
   meta = with lib; {
     description = "The FLEUR project provides a simulation tool for materials properties using density functional theory and related methods.";
