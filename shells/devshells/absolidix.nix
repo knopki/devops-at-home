@@ -122,41 +122,41 @@ let
     computer.configure(safe_interval=1.0, username=os.getenv("USER"), port=22, key_filename=f"{os.getenv("YASCHEDULER_DATA_DIR")}/keys/localhost", key_policy="AutoAddPolicy")
     computer.store()
 
-    for label, plugin, exe in [
-        ("add", "core.arithmetic.add", "/bin/sh"),
-        ("dummy", "aiida_dummy", "/bin/sh"),
-        ("inpgen", "fleur.inpgen", "inpgen"),
-        ("fleur", "fleur.fleur", "fleur"),
-    ]:
-        code = None
-        hide = []
-        codes = orm.InstalledCode.Collection(orm.InstalledCode)
-        for c in codes.find({"label": label, "dbcomputer_id": computer.id}):
-            if (
-                (code is not None)
-                or (c.is_hidden)
-                or (c.filepath_executable is not exe)
-                or (c.use_double_quotes is False)
-                or (c.default_calc_job_plugin is not plugin)
-            ):
-                hide.append(c)
-            else:
-                code = c
+    # for label, plugin, exe in [
+    #     ("add", "core.arithmetic.add", "/bin/sh"),
+    #     ("dummy", "aiida_dummy", "/bin/sh"),
+    #     ("inpgen", "fleur.inpgen", "inpgen"),
+    #     ("fleur", "fleur.fleur", "fleur"),
+    # ]:
+    #     code = None
+    #     hide = []
+    #     codes = orm.InstalledCode.Collection(orm.InstalledCode)
+    #     for c in codes.find({"label": label, "dbcomputer_id": computer.id}):
+    #         if (
+    #             (code is not None)
+    #             or (c.is_hidden)
+    #             or (c.filepath_executable is not exe)
+    #             or (c.use_double_quotes is False)
+    #             or (c.default_calc_job_plugin is not plugin)
+    #         ):
+    #             hide.append(c)
+    #         else:
+    #             code = c
 
-        if not code:
-            code = orm.InstalledCode(
-                computer,
-                label=label,
-                filepath_executable=exe,
-                use_double_quotes=True,
-                default_calc_job_plugin=plugin,
-            )
-            code.store()
+    #     if not code:
+    #         code = orm.InstalledCode(
+    #             computer,
+    #             label=label,
+    #             filepath_executable=exe,
+    #             use_double_quotes=True,
+    #             default_calc_job_plugin=plugin,
+    #         )
+    #         code.store()
 
-        for code in hide:
-            code.label = f"{label}_archived"
-            code.is_hidden = True
-            code.store()
+    #     for code in hide:
+    #         code.label = f"{label}_archived"
+    #         code.is_hidden = True
+    #         code.store()
   '';
 
   setup-aiida = pkgs.writeShellScriptBin "setup-aiida" ''
@@ -236,8 +236,8 @@ let
 
     echo "PATH=$PATH" > /etc/profile.d/path.sh
 
-    yasetnode root@127.0.0.1~1 --remove-hard || true
-    yasetnode root@127.0.0.1~1 || true
+    #yasetnode root@127.0.0.1~1 --remove-hard || true
+    #yasetnode root@127.0.0.1~1 || true
   '';
 
   start-yascheduler = pkgs.writeShellScriptBin "start-yascheduler" ''
@@ -264,7 +264,7 @@ let
     until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
     ${setup-backend}/bin/setup-absolidix-backend
     pushd /app/absolidix-backend
-    exec python3 index.py
+    exec absolidix-backend serve
     popd
   '';
 
@@ -273,7 +273,7 @@ let
     until pg_isready; do echo "Waiting for postgres..."; sleep 1; done
 
     pushd /app/absolidix-bff
-    npm install
+    npm ci
 
     if [ ! -f conf/env.ini ]; then
       cp conf/env.ini.sample conf/env.ini
@@ -308,9 +308,10 @@ let
   start-gui = pkgs.writeShellScriptBin "start-absolidix-gui" ''
     set -euo pipefail
     pushd /app/absolidix-gui
-    npm install
+    npm ci
     sed -i "s/^export const IdPs.*$/export const IdPs = ['local'];/g" src/config.ts
-    exec npm run dev --host 0.0.0.0
+    npm run build
+    exec node_modules/.bin/sirv --host 0.0.0.0 dist
     popd
   '';
 
@@ -602,11 +603,12 @@ in
     export UV_PYTHON_PREFERENCE=only-system
     export UV_PROJECT_ENVIRONMENT="$PRJ_DATA_DIR/venv"
     export UV_CACHE_DIR="$UV_PROJECT_ENVIRONMENT/cache"
+    export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath pkgs.pythonManylinuxPackages.manylinux1}";
     ${pkgs.uv}/bin/uv venv -p "${myPython.interpreter}" "$UV_PROJECT_ENVIRONMENT" \
       --no-project --allow-existing
     source $UV_PROJECT_ENVIRONMENT/bin/activate
     ${pkgs.uv}/bin/uv pip list | grep yascheduler || ${pkgs.uv}/bin/uv pip install -e yascheduler
     ${pkgs.uv}/bin/uv pip list | grep absolidix-client || ${pkgs.uv}/bin/uv pip install -e "absolidix-client[dev]"
-    ${pkgs.uv}/bin/uv pip list | grep absolidix-backend || ${pkgs.uv}/bin/uv pip install -e "absolidix-backend[dev]" --no-binary numpy
+    ${pkgs.uv}/bin/uv pip list | grep absolidix-backend || ${pkgs.uv}/bin/uv pip install -e "absolidix-backend[dev]" #--no-binary numpy --no-binary matplotlib
   '';
 }
