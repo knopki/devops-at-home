@@ -11,6 +11,7 @@ let
   mediaPkgs = with pkgs; [
     darktable
     digikam
+    rawtherapee
     imgcat
     inkscape
     kdePackages.kdenlive
@@ -46,6 +47,7 @@ let
     rclone
     seahorse
     speedcrunch
+    weasis
     zotero
   ];
   devPkgs = with pkgs; [
@@ -63,7 +65,7 @@ let
     arduino-ide
     helix
     packages.zed-editor
-    packages.aider-chat
+    packages.aider-chat-full
 
     # bash
     shellcheck
@@ -245,7 +247,7 @@ in
     mtr.enable = mkDefault true;
     nix-index.enable = mkDefault true;
     nix-ld = {
-      enable = mkDefault true;
+      enable = true;
       libraries = [
         # already included:
         #   acl attr bzip2 curl libsodium libssh libxml2 openssl
@@ -389,6 +391,7 @@ in
 
   services = {
     envfs.enable = true;
+    gvfs.enable = true;
 
     nscd.enableNsncd = true;
 
