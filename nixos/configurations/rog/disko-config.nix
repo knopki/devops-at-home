@@ -12,7 +12,7 @@
           type = "gpt";
           partitions = {
             ESP = {
-              size = "512M";
+              size = "1024M";
               type = "EF00";
               label = "esp";
               content = {
@@ -60,8 +60,8 @@
               resumeDevice = true;
             };
           };
-          root = {
-            size = "100%";
+          sys = {
+            size = "200G";
             content = {
               type = "btrfs";
               # Subvolumes must set a mountpoint in order to be mounted,
@@ -81,6 +81,14 @@
                     "noatime"
                   ];
                 };
+              };
+            };
+          };
+          state = {
+            size = "100%";
+            content = {
+              type = "btrfs";
+              subvolumes = {
                 "@state" = {
                   mountpoint = "/state";
                   mountOptions = [
@@ -90,6 +98,7 @@
                 };
                 "@state/srv" = { };
                 "@state/home" = { };
+                "@state/home/knopki" = { };
               };
             };
           };
