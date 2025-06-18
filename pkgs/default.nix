@@ -3,6 +3,7 @@
   pkgs,
   nixpkgsUnstable ? pkgs,
   nixpkgs-24-11 ? pkgs,
+  nixpkgs-25-05 ? pkgs,
   ...
 }:
 let
@@ -28,6 +29,7 @@ let
         self
         nixpkgsUnstable
         nixpkgs-24-11
+        nixpkgs-25-05
         extLib
         mkNixPakPackage
         ;

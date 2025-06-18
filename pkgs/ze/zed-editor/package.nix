@@ -1,5 +1,5 @@
-{ nixpkgsUnstable, ... }:
-nixpkgsUnstable.zed-editor.fhsWithPackages (
+{ nixpkgs-25-05, ... }:
+nixpkgs-25-05.zed-editor.fhsWithPackages (
   ps: with ps; [
     bash-language-server
     docker-compose-language-service

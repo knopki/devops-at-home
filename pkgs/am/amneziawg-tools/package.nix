@@ -1,1 +1,1 @@
-{ nixpkgsUnstable, ... }: nixpkgsUnstable.amneziawg-tools
+{ nixpkgs-25-05, ... }: nixpkgs-25-05.amneziawg-tools

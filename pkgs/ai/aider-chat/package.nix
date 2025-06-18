@@ -1,1 +1,0 @@
-{ nixpkgsUnstable, ... }: nixpkgsUnstable.aider-chat

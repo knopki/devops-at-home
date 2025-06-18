@@ -52,6 +52,14 @@ in
         config = import ./nixpkgs-config.nix { inherit lib; };
       };
 
+      nixpkgs-25-05 = import inputs.nixpkgs-25-05 {
+        inherit system;
+        overlays = [
+          self.overlays.default
+        ];
+        config = import ./nixpkgs-config.nix { inherit lib; };
+      };
+
       # unstable nixpkgs - don't use for evaluation speed
       nixpkgsUnstable = import inputs.nixpkgs-unstable {
         inherit system;
@@ -62,10 +70,11 @@ in
       pkgsByName = import ./. {
         inherit
           nixpkgs-24-11
+          nixpkgs-25-05
           nixpkgsUnstable
           self
           ;
-        pkgs = nixpkgs-24-11;
+        pkgs = nixpkgs-25-05;
       };
       packages = filterAttrs (
         _: v: !(hasAttr "meta" v) || !(hasAttr "platforms" v.meta) || (elem system v.meta.platforms)
