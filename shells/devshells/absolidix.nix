@@ -309,8 +309,8 @@ let
     set -euo pipefail
     pushd /app/absolidix-gui
     npm ci
-    sed -i "s/^export const IdPs.*$/export const IdPs = ['local'];/g" src/config.ts
-    npm run build
+    #npm run build
+    sed -i -e '0,/window/ s|^\(.*window._ABSOLIDIX_RUNTIME_CONFIG.=.\){}|\1{IDPS: ["local"], API_HOST:"http://localhost:3000"}|g' dist/index.html
     exec node_modules/.bin/sirv --host 0.0.0.0 dist
     popd
   '';
@@ -358,7 +358,7 @@ let
       start-backend
       setup-bff
       start-bff
-      start-gui
+      # start-gui
       start-jupyter
       container-entrypoint
       uv
@@ -503,12 +503,12 @@ let
     priority = 40
     stopsignal = KILL
 
-    [program:gui]
-    command = ${start-gui}/bin/start-absolidix-gui
-    user = root
-    redirect_stderr = true
-    autorestart = true
-    priority = 50
+    # [program:gui]
+    # command = ${start-gui}/bin/start-absolidix-gui
+    # user = root
+    # redirect_stderr = true
+    # autorestart = true
+    # priority = 50
 
     [program:jupyter]
     command = ${start-jupyter}/bin/start-jupyter
@@ -542,7 +542,6 @@ let
       -v $PRJ_ROOT:/app \
       -v ${absolidix-container-env-file}:/etc/environment \
       -p 3000:3000 \
-      -p 5000:5000 \
       -p 5432:5432 \
       -p 5555:5555 \
       -p 7050:7050 \
