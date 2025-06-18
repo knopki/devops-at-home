@@ -34,20 +34,20 @@
       };
     };
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10; # TODO
+      };
       timeout = 0;
     };
-    plymouth = {
-      enable = true;
-      themePackages = [ pkgs.nixos-bgrt-plymouth ];
-    };
+    plymouth.enable = true;
     supportedFilesystems = {
       btrfs = true;
-      ntfs = true;
       f2fs = true;
-      vfat = true;
       xfs = true;
-      zfs = true;
+      zfs = true; # TODO disable later?
+      iso9660 = true;
+      udf = true;
     };
   };
 
@@ -134,7 +134,10 @@
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
-    fileSystems = [ "/" ];
+    fileSystems = [
+      "/"
+      "/state"
+    ];
   };
 
   systemd.services.systemd-machine-id-commit = {
