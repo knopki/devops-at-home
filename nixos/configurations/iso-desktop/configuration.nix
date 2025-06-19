@@ -7,7 +7,6 @@
     du-dust
     fd
     file
-    gitMinimal
     gnupg
     gptfdisk
     helix
@@ -19,7 +18,6 @@
     rsync
     tree
     wget
-    remmina
   ];
 
   nix.settings = {
@@ -27,6 +25,7 @@
   };
 
   programs = {
+    git.enable = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;

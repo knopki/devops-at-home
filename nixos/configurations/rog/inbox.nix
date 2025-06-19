@@ -12,7 +12,13 @@
 
   i18n.extraLocales = [ "ru_RU.UTF-8/UTF-8" ];
 
-  programs.git.enable = true;
+  programs = {
+    bat.enable = true;
+    git = {
+      enable = true;
+      lfs.enable = true;
+    };
+  };
 
   time.timeZone = "Europe/Moscow";
 }

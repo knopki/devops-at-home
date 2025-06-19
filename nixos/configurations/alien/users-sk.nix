@@ -53,9 +53,8 @@ in
 
   sops = {
     secrets = {
-      sk-user-password = {
-        neededForUsers = true;
-      };
+      sk-user-password.neededForUsers = true;
+      sk-chezmoi-age-key.owner = config.users.users.sk.name;
     };
   };
 }

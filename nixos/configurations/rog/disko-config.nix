@@ -97,6 +97,7 @@
                   ];
                 };
                 "@state/srv" = { };
+                "@state/root" = { };
                 "@state/home" = { };
                 "@state/home/knopki" = { };
               };

@@ -15,7 +15,6 @@ in
 {
   imports = [
     ./theme-base16.nix
-    ./theme-bat.nix
     ./theme-emacs.nix
     ./theme-fonts.nix
     ./theme-fzf.nix

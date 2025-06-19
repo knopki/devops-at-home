@@ -1,19 +1,14 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
-let
-  inherit (lib) listToAttrs nameValuePair;
-in
 {
   home.packages = with pkgs; [
     # emacs
     binutils # native-comp needs 'as', provided by this
 
     # doom dependencies
-    git
     (ripgrep.override { withPCRE2 = true; })
     gnutls # for TLS connectivity
 
@@ -66,7 +61,6 @@ in
   };
 
   programs = {
-    imv.enable = true;
     emacs = {
       enable = true;
       # package =
@@ -90,38 +84,5 @@ in
     enable = true;
     client.enable = true;
     socketActivation.enable = true;
-  };
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = (
-      listToAttrs (
-        map (x: nameValuePair x "emacsclient.desktop") [
-          "application/javascript"
-          "application/json"
-          "application/markdown"
-          "application/x-shellscript"
-          "application/x-yaml"
-          "application/xml"
-          "text/english"
-          "text/plain"
-          "text/vnd.qt.linguist" # typescript
-          "text/x-c"
-          "text/x-c++"
-          "text/x-c++hdr"
-          "text/x-c++src"
-          "text/x-chdr"
-          "text/x-csrc"
-          "text/x-java"
-          "text/x-makefile"
-          "text/x-moc"
-          "text/x-pascal"
-          "text/x-patch"
-          "text/x-python"
-          "text/x-tcl"
-          "text/x-tex"
-        ]
-      )
-    );
   };
 }

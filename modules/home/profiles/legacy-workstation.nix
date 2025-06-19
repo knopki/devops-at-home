@@ -26,8 +26,6 @@ in
       "intl.locale.requested" = mkDefault "ru,en-US";
     };
 
-    git.delta.enable = mkDefault true;
-
     man.generateCaches = false;
   };
 

@@ -52,7 +52,6 @@ let
   ];
   devPkgs = with pkgs; [
     # tools
-    gitMinimal
     gnupg
     ripgrep
     android-udev-rules
@@ -97,6 +96,7 @@ in
     with pkgs;
     [
       # essentials
+      bat
       binutils
       curl
       dnsutils
@@ -104,7 +104,6 @@ in
       du-dust
       fd
       file
-      gitMinimal
       gnupg
       gptfdisk
       helix
@@ -119,6 +118,7 @@ in
       sysstat
       tree
       wget
+      chezmoi
 
       # shell
       atuin
@@ -208,6 +208,10 @@ in
           ${pkgs.atuin}/bin/atuin init fish --disable-up-arrow | source
         end
       '';
+    };
+    git = {
+      enable = true;
+      lfs.enable = true;
     };
     htop = {
       enable = true;

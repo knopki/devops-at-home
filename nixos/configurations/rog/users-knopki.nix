@@ -1,7 +1,50 @@
-{ config, self, ... }:
 {
+  config,
+  pkgs,
+  self,
+  ...
+}:
+{
+  environment.systemPackages = with pkgs; [
+    chezmoi
+    wget
+    curl
+  ];
+
+  preservation.preserveAt."/state".users.knopki = {
+    directories = [
+      {
+        directory = ".gnupg";
+        mode = "0700";
+      }
+      {
+        directory = ".local/share/keyrings";
+        mode = "0700";
+      }
+      {
+        directory = ".ssh";
+        mode = "0700";
+      }
+      ".config/chezmoi"
+      ".config/git"
+      ".local/share/chezmoi"
+      ".local/share/direnv"
+      ".local/state/nix"
+      ".local/state/nvim"
+      ".mozilla"
+      "prj"
+    ];
+    files = [
+      ".face"
+      ".face."
+      ".curlrc"
+      ".wgetrc"
+    ];
+  };
+
   sops.secrets = {
     knopki-user-password.neededForUsers = true;
+    knopki-chezmoi-age-key.owner = config.users.users.knopki.name;
   };
 
   users.groups.knopki = { };
@@ -33,28 +76,6 @@
       self.lib.ssh-pubkeys.knopki-ssh-pubkey1
     ];
     hashedPasswordFile = config.sops.secrets.knopki-user-password.path;
-  };
-
-  preservation.preserveAt."/state".users.knopki = {
-    directories = [
-      {
-        directory = ".gnupg";
-        mode = "0700";
-      }
-      {
-        directory = ".local/share/keyrings";
-        mode = "0700";
-      }
-      {
-        directory = ".ssh";
-        mode = "0700";
-      }
-      ".local/state/nvim"
-      ".local/share/direnv"
-      ".local/state/nix"
-      ".mozilla"
-    ];
-    files = [ ];
   };
 
   # Note that immediate parent directories of persisted files can also be

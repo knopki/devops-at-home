@@ -11,6 +11,7 @@
 
   sops.secrets = {
     root-user-password.neededForUsers = true;
+    root-chezmoi-age-key = { };
   };
 
   home-manager.users.root = {

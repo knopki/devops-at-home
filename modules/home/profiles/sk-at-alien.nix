@@ -311,15 +311,6 @@ in
       };
     };
 
-    git = {
-      signing = {
-        key = config.programs.gpg.settings.default-key;
-        signByDefault = true;
-      };
-      userEmail = "knopki@duck.com";
-      userName = "Sergei Korolev";
-    };
-
     gpg = {
       enable = true;
       settings = {
