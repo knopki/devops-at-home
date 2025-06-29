@@ -56,9 +56,9 @@
     # linux only
     disko.url = "flake:disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
-    # microvm.url = github:astro/microvm.nix;
-    # microvm.inputs.nixpkgs.follows = "nixpkgs";
-    # microvm.inputs.flake-utils.follows = "flake-utils";
+    microvm.url = "github:astro/microvm.nix";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
+    microvm.inputs.flake-utils.follows = "flake-utils";
     nixos-hardware.url = "flake:nixos-hardware";
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-generators.inputs.nixlib.follows = "nixpkgs-lib";
