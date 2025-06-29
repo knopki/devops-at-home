@@ -59,7 +59,6 @@
         };
         snapshots = [
           "${config.home.homeDirectory}/.gnupg"
-          "${config.home.homeDirectory}/.kube/config"
           "${config.home.homeDirectory}/secrets"
           "${config.xdg.configHome}/cachix"
           "${config.xdg.configHome}/gcloud"
