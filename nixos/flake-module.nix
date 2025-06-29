@@ -10,14 +10,16 @@
   ...
 }:
 let
-  inherit (self.lib.filesystem) toImportedModuleAttr;
+  inherit (lib.attrsets) mapAttrs;
   mkNixosConfiguration = self.lib.configuration.nixosConfigurationLoader {
     inherit inputs self withSystem;
   };
-  toNixosConfigurations = toImportedModuleAttr { inherit inputs self mkNixosConfiguration; };
+  namePathAttrset = import ./nixos-configurations.nix;
 in
 {
   config.flake = {
-    nixosConfigurations = toNixosConfigurations ./configurations;
+    nixosConfigurations = mapAttrs (
+      _: path: import path { inherit inputs self mkNixosConfiguration; }
+    ) namePathAttrset;
   };
 }
