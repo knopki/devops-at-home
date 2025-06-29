@@ -17,7 +17,7 @@ rec {
       packages ? args.config.packages,
       ...
     }@args:
-    rec {
+    {
       inherit inputs self;
       inherit inputs' self';
       inherit packages;

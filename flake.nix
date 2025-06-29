@@ -84,7 +84,7 @@
           ./pkgs/flake-module.nix
           flakeModules.shells
           ./modules/flake-module.nix
-          ./configurations/flake-module.nix
+          ./lib/flake-module-nixos.nix
           ./home/flake-module.nix
         ];
 

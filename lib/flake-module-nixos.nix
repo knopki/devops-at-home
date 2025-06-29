@@ -12,7 +12,7 @@
   config.flake = {
     nixosConfigurations = self.lib.configuration.mkNixosConfigurationsAttrset {
       inherit inputs self withSystem;
-      configurations = import ./nixos-configurations.nix;
+      configurations = import ../configurations/nixos-configurations.nix;
     };
   };
 }
