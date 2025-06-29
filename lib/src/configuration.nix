@@ -1,4 +1,7 @@
-{ lib, super, ... }:
+{ lib, ... }:
+let
+  inherit (lib.attrsets) mapAttrs;
+in
 rec {
   /**
     Creates common module import arguments for nixos and home configuration.
@@ -22,7 +25,6 @@ rec {
 
   /**
     Creates NixOS configuration.
-    Example: see nixos/flake-module.nix.
   */
   nixosConfigurationLoader =
     {
@@ -49,6 +51,25 @@ rec {
         specialArgs = mkSpecialArgs (perSystemArgs // topArgs);
       }
     );
+
+  /**
+    Convert attrset of paths to attrset NixOS configurations.
+  */
+  mkNixosConfigurationsAttrset =
+    {
+      inputs,
+      self,
+      withSystem,
+      configurations,
+      ...
+    }:
+    let
+      deps = { inherit inputs self withSystem; };
+      fullDeps = deps // {
+        mkNixosConfiguration = nixosConfigurationLoader deps;
+      };
+    in
+    mapAttrs (_: path: import path fullDeps) configurations;
 
   /**
     Creates home configuration.

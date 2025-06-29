@@ -103,6 +103,22 @@
               };
             };
           };
+          sensitive = {
+            size = "1G";
+            content = {
+              type = "btrfs";
+              subvolumes = {
+                "@sensitive" = {
+                  mountpoint = "/state/sensitive";
+                  mountOptions = [
+                    "compress=zstd"
+                    "relatime"
+                    "noauto"
+                  ];
+                };
+              };
+            };
+          };
         };
       };
     };
