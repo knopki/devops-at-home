@@ -469,7 +469,7 @@ in
   };
 
   sops = {
-    defaultSopsFile = ../../../secrets/sk-at-alien.yaml;
+    defaultSopsFile = ../../secrets/sk-at-alien.yaml;
     age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
   };
 

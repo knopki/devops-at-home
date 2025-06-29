@@ -35,7 +35,7 @@ mkNixosConfiguration {
       networking.hostId = "ff0b9d65";
       networking.hostName = "alien";
       sops = {
-        defaultSopsFile = ../../../secrets/alien.yaml;
+        defaultSopsFile = ../../secrets/alien.yaml;
       };
 
       # TODO: temporary

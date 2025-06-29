@@ -15,7 +15,7 @@ mkNixosConfiguration {
       networking.hostId = "c1cb4f76";
       services.userborn.enable = true;
       users.mutableUsers = false;
-      sops.defaultSopsFile = ../../../secrets/rog.yaml;
+      sops.defaultSopsFile = ../../secrets/rog.yaml;
     }
     ./graphical.nix
     ./hardware.nix
