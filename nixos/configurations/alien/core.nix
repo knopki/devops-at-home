@@ -59,6 +59,7 @@ let
     lazygit
     picotool
     python3
+    just
 
     # editors / IDE
     arduino-ide
