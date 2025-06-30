@@ -83,6 +83,7 @@
           ./pkgs/flake-module.nix
           flakeModules.shells
           ./modules/flake-module.nix
+          ./lib/flake-modules/disko-configurations.nix
           ./lib/flake-modules/nixos-configurations.nix
           ./home/flake-module.nix
         ];

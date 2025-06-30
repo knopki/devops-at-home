@@ -11,10 +11,10 @@
 let
   inherit (lib.attrsets) mapAttrs;
   namePaths = import "${self.outPath}/configurations/nixos-configurations.nix";
-  loadConfiguration = path: import path { inherit inputs self; };
+  loadConfiguration = _: path: import path { inherit inputs self; };
 in
 {
   config.flake = {
-    nixosConfigurations = mapAttrs (_: loadConfiguration) namePaths;
+    nixosConfigurations = mapAttrs loadConfiguration namePaths;
   };
 }

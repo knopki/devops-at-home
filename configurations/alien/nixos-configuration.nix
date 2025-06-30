@@ -1,5 +1,5 @@
 { inputs, self, ... }:
-inputs.nixpkgs-25-05.lib.nixosSystem {
+inputs.nixpkgs-24-11.lib.nixosSystem {
   specialArgs = {
     inherit inputs self;
   };
