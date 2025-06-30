@@ -5,9 +5,7 @@
 
 {
   lib,
-  inputs,
   self,
-  withSystem,
   moduleLocation ? "${self.outPath}/flake.nix",
   ...
 }:
@@ -35,12 +33,12 @@ in
   };
 
   config.flake = rec {
-    homeModules = import ./home/module-attrset.nix;
-    nixosModules = import ./nixos/module-attrset.nix;
+    homeModules = import "${self.outPath}/modules/home/home-modules.nix";
+    nixosModules = import "${self.outPath}/modules/nixos/nixos-modules.nix";
     modules = {
       homeManager = homeModules;
       nixos = nixosModules;
-      shared = import ./shared/module-attrset.nix;
+      shared = import "${self.outPath}/modules/shared/shared-modules.nix";
     };
   };
 }

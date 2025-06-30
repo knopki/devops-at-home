@@ -8,7 +8,6 @@
   commands = [
     { package = config.treefmt.build.wrapper; }
     { package = config.treefmt.programs.nixfmt.package; }
-    { package = packages.generate-modules; }
     { package = packages.nixos-option; }
     { package = packages.update-packages; }
     { package = pkgs.home-manager; }
