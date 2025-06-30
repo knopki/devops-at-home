@@ -1,11 +1,7 @@
 {
-  config,
   self,
-  self',
   inputs,
-  inputs',
   extLib,
-  lib,
   ...
 }:
 {
@@ -16,15 +12,8 @@
 
     # additional args to all homeModules
     # default: { lib, pkgs, modulesPath, osConfig }
-    extraSpecialArgs = self.lib.configuration.mkSpecialArgs {
-      inherit
-        config
-        inputs
-        inputs'
-        self
-        self'
-        extLib
-        ;
+    extraSpecialArgs = {
+      inherit inputs self extLib;
     };
 
     sharedModules = [
