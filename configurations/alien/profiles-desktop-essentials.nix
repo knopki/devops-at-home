@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  packages,
   ...
 }:
 let
@@ -105,7 +104,6 @@ in
     fwupd.enable = false;
     locate = {
       enable = true;
-      localuser = null;
       package = pkgs.mlocate;
       pruneBindMounts = true;
     };

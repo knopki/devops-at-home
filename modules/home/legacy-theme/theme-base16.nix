@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  packages,
   self,
   ...
 }:
@@ -87,7 +86,7 @@ let
     }) bases;
 
   presetFileMap = {
-    dracula = "${packages.base16-dracula-scheme}/dracula.yaml";
+    dracula = "${pkgs.base16-dracula-scheme}/dracula.yaml";
   };
 
   themeFile =

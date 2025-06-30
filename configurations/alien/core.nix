@@ -3,7 +3,6 @@
   lib,
   pkgs,
   self,
-  packages,
   ...
 }:
 let
@@ -25,12 +24,12 @@ let
     yt-dlp
     gallery-dl
     fclones
-    packages.findimagedupes
+    findimagedupes
   ];
   officePkgs = with pkgs; [
     anki
-    packages.anytype
-    packages.aliza
+    anytype
+    aliza
     aspellDicts.en
     aspellDicts.ru
     img2pdf
@@ -64,8 +63,8 @@ let
     # editors / IDE
     arduino-ide
     helix
-    packages.zed-editor
-    packages.aider-chat-full
+    zed-editor
+    aider-chat-full
 
     # bash
     shellcheck
@@ -141,7 +140,7 @@ in
       # misc
       tor-browser
       amneziawg-go
-      packages.amneziawg-tools
+      amneziawg-tools
       bottles
       clevis
       golden-cheetah-bin
@@ -204,7 +203,7 @@ in
         end
         set -g fish_key_bindings fish_hybrid_key_bindings
         set -g fish_greeting ""
-        source ${packages.ls-colors}/lscolors.csh
+        source ${pkgs.ls-colors}/lscolors.csh
         if test -f $XDG_CONFIG_HOME/atuin/config.toml;
           ${pkgs.atuin}/bin/atuin init fish --disable-up-arrow | source
         end

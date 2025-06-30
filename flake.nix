@@ -78,13 +78,12 @@
       in
       {
         imports = [
-          flake-parts.flakeModules.flakeModules
           flake-parts.flakeModules.modules
           ./lib/flake-module.nix
           ./pkgs/flake-module.nix
           flakeModules.shells
           ./modules/flake-module.nix
-          ./lib/flake-module-nixos.nix
+          ./lib/flake-modules/nixos-configurations.nix
           ./home/flake-module.nix
         ];
 

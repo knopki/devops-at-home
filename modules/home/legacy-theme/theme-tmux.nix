@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  packages,
   ...
 }:
 let
@@ -14,7 +13,7 @@ let
     mapAttrsToList
     ;
   cfg = config.theme;
-  template = "${packages.base16-tmux}/templates/base16.mustache";
+  template = "${pkgs.base16-tmux}/templates/base16.mustache";
   themeFile = pkgs.runCommandLocal "hm-tmux-theme" { } ''
     sed '${
       concatStrings (mapAttrsToList (n: v: "s/#{{${n}-hex}}/#${v.hex.rgb}/;") cfg.base16.colors)

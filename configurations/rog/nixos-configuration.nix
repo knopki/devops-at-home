@@ -1,12 +1,8 @@
-{
-  inputs,
-  mkNixosConfiguration,
-  self,
-  ...
-}:
-mkNixosConfiguration {
-  inherit (inputs.nixpkgs-25-05.lib) nixosSystem;
-  system = "x86_64-linux";
+{ inputs, self, ... }:
+inputs.nixpkgs-25-05.lib.nixosSystem {
+  specialArgs = {
+    inherit inputs self;
+  };
   modules = with self.modules.nixos; [
     inputs.sops-nix.nixosModules.sops
     inputs.preservation.nixosModules.preservation

@@ -53,7 +53,7 @@ rec {
     );
 
   /**
-    Convert attrset of paths to attrset NixOS configurations.
+    Convert attrset of paths to attrset of NixOS configurations.
   */
   mkNixosConfigurationsAttrset =
     {

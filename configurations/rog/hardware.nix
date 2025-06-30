@@ -8,7 +8,7 @@
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga402x-amdgpu
     inputs.nixos-hardware.nixosModules.asus-battery
     inputs.disko.nixosModules.default
-    ./disko-config.nix
+    ./disko-configuration.nix
   ];
 
   boot = {
@@ -71,6 +71,8 @@
     flipperzero.enable = true;
     ledger.enable = true;
   };
+
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   preservation = {
     enable = true;

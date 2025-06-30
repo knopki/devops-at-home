@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  packages,
   ...
 }:
 let
@@ -30,7 +29,6 @@ in
         scripts =
           with pkgs;
           with pkgs.mpvScripts;
-          with packages;
           [
             autoload
             thumbfast

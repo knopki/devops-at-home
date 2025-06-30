@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  packages,
   ...
 }:
 let
@@ -17,7 +16,7 @@ let
     escape
     ;
   cfg = config.theme;
-  template = "${packages.base16-vim}/templates/default.mustache";
+  template = "${pkgs.base16-vim}/templates/default.mustache";
   themeFile = pkgs.runCommandLocal "hm-vim-theme" { } ''
     sed '${
       concatStrings (

@@ -1,7 +1,5 @@
 {
   config,
-  pkgs,
-  packages,
   self,
   self',
   inputs,
@@ -26,7 +24,6 @@
         self
         self'
         extLib
-        packages
         ;
     };
 

@@ -2,6 +2,8 @@
 {
   imports = [ inputs.microvm.nixosModules.microvm ];
 
+  nixpkgs.hostPlatform = "x86_64-linux";
+
   microvm = {
     hypervisor = "qemu";
     vcpu = 1;

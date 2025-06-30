@@ -1,7 +1,7 @@
-{ packages, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = [
-    packages.firefox
+    pkgs.firefox
   ];
 
   programs.brave = {

@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  packages,
   ...
 }:
 let
@@ -21,7 +20,7 @@ in
       # docker client (docker compose, for example) can be used with podman
       distrobox
       docker
-      packages.lima
+      lima
       podman-desktop
     ];
   };

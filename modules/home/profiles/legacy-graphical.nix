@@ -2,8 +2,6 @@
   config,
   lib,
   pkgs,
-  self,
-  packages,
   ...
 }:
 let
@@ -50,7 +48,7 @@ in
     firefox = {
       enable = mkDefault true;
 
-      package = packages.firefox;
+      package = pkgs.firefox;
 
       profiles = {
         default = {
