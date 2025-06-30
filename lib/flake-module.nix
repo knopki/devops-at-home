@@ -2,7 +2,7 @@
 #
 # Load library from ../lib
 #
-{ inputs, self', ... }:
+{ inputs, ... }:
 let
   myLib = import ./. {
     inherit (inputs.nixpkgs-lib) lib;
@@ -13,7 +13,6 @@ in
   config = {
     flake = {
       lib = myLib;
-      schemas = inputs.flake-schemas.schemas // inputs.haumea.lib.load { src = ./schemas; };
     };
   };
 }
