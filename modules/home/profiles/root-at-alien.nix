@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  self,
-  ...
-}:
+{ self, ... }:
 {
   imports = with self.modules.homeManager; [
     profiles-legacy-base

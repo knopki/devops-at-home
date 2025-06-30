@@ -9,7 +9,7 @@
 # blas,
 # lapack,
 }:
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "dummy-engine";
   version = "0-unstable-0000-00-00";
 

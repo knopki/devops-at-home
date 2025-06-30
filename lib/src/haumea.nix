@@ -16,7 +16,7 @@ let
     recursiveUpdate
     ;
 in
-rec {
+{
   loaders = haumea.lib.loaders // { };
 
   transformers = haumea.lib.transformers // {

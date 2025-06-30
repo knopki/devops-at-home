@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  self,
-  inputs,
-  ...
-}:
+{ config, self, ... }:
 {
   imports = with self.modules.homeManager; [ legacy-kopia ];
 

@@ -7,8 +7,6 @@
   config,
   lib,
   self,
-  withSystem,
-  perSystem,
   ...
 }:
 let
@@ -36,7 +34,6 @@ in
 {
   config.perSystem =
     {
-      config,
       lib,
       pkgs,
       system,
