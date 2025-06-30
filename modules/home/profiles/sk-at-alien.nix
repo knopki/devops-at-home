@@ -12,7 +12,6 @@ let
     mkDefault
     nameValuePair
     ;
-  inherit (lib.strings) escapeShellArgs;
   vimiumCommon = {
     exclusionRules = [
       {

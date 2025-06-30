@@ -5,9 +5,9 @@
   stdenv,
   fetchFromGitHub,
   unstableGitUpdater,
-  # libxml2,
-  # blas,
-  # lapack,
+# libxml2,
+# blas,
+# lapack,
 }:
 stdenv.mkDerivation rec {
   pname = "dummy-engine";

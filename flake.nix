@@ -7,9 +7,7 @@
       "nix-command"
       "flakes"
     ];
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-    ];
+    extra-substituters = [ "https://nix-community.cachix.org" ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nixpkgs-python.cachix.org-1:hxjI7pFxTyuTHn2NkvWCrAUcNZLNS3ZAvfYNuYifcEU="
@@ -41,8 +39,6 @@
     preservation.url = "github:nix-community/preservation";
     sops-nix.url = "flake:sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
     nixpak.url = "github:nixpak/nixpak";
     nixpak.inputs.flake-parts.follows = "flake-parts";
     nixpak.inputs.nixpkgs.follows = "nixpkgs";
@@ -82,6 +78,7 @@
           ./lib/flake-module.nix
           ./pkgs/flake-module.nix
           flakeModules.shells
+          ./lib/flake-modules/formatter.nix
           ./lib/flake-modules/modules.nix
           ./lib/flake-modules/disko-configurations.nix
           ./lib/flake-modules/nixos-configurations.nix
@@ -100,7 +97,7 @@
         };
 
         perSystem =
-          { self', ... }:
+          { self', inputs', ... }:
           {
             devShells.default = self'.devShells.devshells-nixos;
           };

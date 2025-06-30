@@ -94,7 +94,7 @@ in
 
   config.flake.overlays = {
     default =
-      final: prev:
+      _final: prev:
       let
         system = prev.stdenv.hostPlatform.system;
         pythonPackages = inputs.nixpkgs-python.packages.${system};

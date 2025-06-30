@@ -1,15 +1,13 @@
 {
-  config,
   pkgs,
   packages,
   ...
 }:
 {
   commands = [
-    { package = config.treefmt.build.wrapper; }
-    { package = config.treefmt.programs.nixfmt.package; }
     { package = packages.nixos-option; }
     { package = packages.update-packages; }
+    { package = packages.formatter; }
     { package = pkgs.home-manager; }
     { package = pkgs.nh; }
     { package = pkgs.nil; }
@@ -21,5 +19,8 @@
     { package = pkgs.sops; }
     { package = pkgs.vulnix; }
     { package = pkgs.nixos-anywhere; }
+    { package = pkgs.deadnix; }
+    { package = pkgs.nixfmt-rfc-style; }
+    { package = pkgs.shellcheck; }
   ];
 }

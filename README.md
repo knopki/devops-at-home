@@ -22,16 +22,19 @@ Get a machine's public AGE key from the host SSH keys:
 nix-shell -p ssh-to-age --run 'ssh-keyscan x.x.x.x | ssh-to-age'
 ```
 
-Save this key to the `.sops.yaml`.  setup `secrets/<hostname>.yaml` with all needed secrets.
+Save this key to the `.sops.yaml`. setup `secrets/<hostname>.yaml` with all needed secrets.
 
 Run something like this:
+
 ```sh
 nixos-anywhere -f .#name --copy-host-keys \
   --disk-encryption-keys /tmp/disk.key /tmp/deploy/disk.key \
   --target-host root@x.x.x.x`
 ```
+
 Where:
- - `name` is `nixosConfiguration`'s name
- - `/tmp/deploy/disk.key` contains initial LUKS password.
+
+- `name` is `nixosConfiguration`'s name
+- `/tmp/deploy/disk.key` contains initial LUKS password.
 
 Login to the machine after reboot.

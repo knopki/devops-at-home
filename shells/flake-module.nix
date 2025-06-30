@@ -16,17 +16,12 @@ let
   inherit (self.lib.filesystem) toImportedModuleAttr toImportedModuleAttr';
 in
 {
-  imports = [
-    inputs.treefmt-nix.flakeModule
-    inputs.devshell.flakeModule
-  ];
+  imports = [ inputs.devshell.flakeModule ];
 
   config = {
     perSystem =
       {
         config,
-        lib,
-        pkgs,
         system,
         self',
         ...
@@ -42,42 +37,12 @@ in
               allowUnsupportedSystem = true;
               cudaSupport = true;
             };
-            overlays = [
-              self.overlays.default
-            ];
+            overlays = [ self.overlays.default ];
           };
         };
         loadShells = loader: paths: mergeAttrsList (map (loader shellModuleArgs) (filter pathExists paths));
       in
       {
-        treefmt = {
-          projectRootFile = "flake.nix";
-          programs = {
-            deadnix = {
-              enable = true;
-              no-lambda-pattern-names = true;
-            };
-            jsonfmt.enable = true;
-            mdformat.enable = true;
-            nixfmt.enable = true;
-            shellcheck.enable = true;
-            shfmt.enable = true;
-            yamlfmt.enable = true;
-          };
-          settings = {
-            global.excludes = [
-              "*@*.yaml"
-              "secrets.yaml"
-              "secrets/*@*.yaml"
-              "*.asc"
-              ".envrc"
-              ".gitkeep"
-              ".sops.yaml"
-              "LICENSE"
-            ];
-          };
-        };
-
         # load devshells into prefixed `devshells-` attrs
         devshells = loadShells toImportedModuleAttr' [
           ./nix/shells/devshells
