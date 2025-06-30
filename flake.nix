@@ -64,20 +64,13 @@
   outputs =
     { self, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } (
-      { flake-parts-lib, ... }:
-      let
-        inherit (flake-parts-lib) importApply;
-        flakeModules = rec {
-          shells = importApply ./shells/flake-module.nix { };
-          default = shells;
-        };
-      in
+      { ... }:
       {
         imports = [
           flake-parts.flakeModules.modules
           ./lib/flake-module.nix
           ./pkgs/flake-module.nix
-          flakeModules.shells
+          ./lib/flake-modules/shells.nix
           ./lib/flake-modules/formatter.nix
           ./lib/flake-modules/modules.nix
           ./lib/flake-modules/disko-configurations.nix
@@ -92,14 +85,13 @@
         ];
 
         flake = {
-          inherit flakeModules;
           nixConfig = (import ./flake.nix).nixConfig;
         };
 
         perSystem =
-          { self', inputs', ... }:
+          { self', ... }:
           {
-            devShells.default = self'.devShells.devshells-nixos;
+            devShells.default = self'.devShells.nixos;
           };
       }
     );

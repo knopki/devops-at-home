@@ -18,7 +18,6 @@ in
     nodejs
     postgresql
     ruff
-    ruff-lsp
     uv
   ];
 

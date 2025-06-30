@@ -1,8 +1,4 @@
-{
-  pkgs,
-  packages,
-  ...
-}:
+{ pkgs, ... }:
 let
   inherit (pkgs.lib) concatStringsSep;
 
@@ -346,7 +342,7 @@ let
   myContainerEnv = pkgs.buildEnv {
     name = "absolidix-container";
     paths = with pkgs; [
-      packages.fleur
+      fleur
       start-sshd
       setup-postgres
       start-postgres
@@ -594,7 +590,7 @@ in
     packer
     psql
     swig
-    packages.fleur
+    fleur
   ];
 
   devshell.startup.setup-env.text = ''
