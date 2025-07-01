@@ -12,7 +12,7 @@ let
     let
       prefix = "${self.outPath}/pkgs";
       prefixLen = builtins.stringLength prefix;
-    in (_: p: (builtins.substring 0 prefixLen p.meta.position) == prefix)
+    in (_: p: (builtins.substring 0 prefixLen (p.meta.position or "")) == prefix)
   '';
   execCmd = concatStringsSep " " [
     "exec nix-shell"
