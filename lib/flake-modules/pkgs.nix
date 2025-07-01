@@ -43,22 +43,4 @@ in
         installPhase = "mkdir -p $out";
       };
     };
-
-  config.flake.overlays = {
-    # mark packages to update with update-packages tool
-    auto-update-packages =
-      _final: prev:
-      let
-        system = prev.stdenv.hostPlatform.system;
-      in
-      {
-        inherit (self.packages.${system})
-          aliza
-          findimagedupes
-          ls-colors
-          mpv-align-images
-          mpv-image-bindings
-          ;
-      };
-  };
 }

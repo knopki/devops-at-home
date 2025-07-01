@@ -7,7 +7,7 @@ let
   inherit (builtins) concatStringsSep;
   inherit (pkgs.lib) escapeShellArg;
   nixShellPath = "${self.inputs.nixpkgs.outPath}/maintainers/scripts/update.nix";
-  overlaysList = "[ (import ./. {  }).overlays.auto-update-packages ]";
+  overlaysList = "[ (import ./. {  }).overlays.my-packages ]";
   predicate = ''
     let
       prefix = "${self.outPath}/pkgs";
