@@ -65,7 +65,7 @@
   users.users.root = {
     hashedPasswordFile = config.sops.secrets.root-user-password.path;
     openssh.authorizedKeys.keys = [
-      self.lib.ssh-pubkeys.knopki-ssh-pubkey1
+      self.lib.sshPubKeys.knopkiSshPubKey1
     ];
   };
 }

@@ -25,7 +25,6 @@
     # core modules and libraries
     flake-parts.url = "flake:flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-lib";
-    haumea.url = "github:nix-community/haumea/v0.2.2";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-utils.url = "flake:flake-utils";
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
@@ -39,15 +38,15 @@
     preservation.url = "github:nix-community/preservation";
     sops-nix.url = "flake:sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    nixpak.url = "github:nixpak/nixpak";
-    nixpak.inputs.flake-parts.follows = "flake-parts";
-    nixpak.inputs.nixpkgs.follows = "nixpkgs";
+    # nixpak.url = "github:nixpak/nixpak";
+    # nixpak.inputs.flake-parts.follows = "flake-parts";
+    # nixpak.inputs.nixpkgs.follows = "nixpkgs";
 
     # customizations
     # themes etc
 
     # applications and utilities
-    nixpkgs-python.url = "github:cachix/nixpkgs-python";
+    # nixpkgs-python.url = "github:cachix/nixpkgs-python";
 
     # linux only
     disko.url = "flake:disko";
@@ -68,7 +67,7 @@
       {
         imports = [
           flake-parts.flakeModules.modules
-          ./lib/flake-module.nix
+          ./lib/flake-modules/lib.nix
           ./lib/flake-modules/overlays.nix
           ./lib/flake-modules/pkgs.nix
           ./lib/flake-modules/shells.nix

@@ -20,7 +20,7 @@ in
   config.perSystem =
     { pkgs, system, ... }:
     let
-      extLib = pkgs.lib.extend (_final: prev: { extended = self.lib; });
+      extLib = pkgs.lib.extend (_final: _prev: { extended = self.lib; });
       extPkgs = pkgs.extend (_final: _prev: { inherit self extLib; });
       pkgsByName = pkgs.lib.filesystem.packagesFromDirectoryRecursive {
         callPackage = extPkgs.callPackage;

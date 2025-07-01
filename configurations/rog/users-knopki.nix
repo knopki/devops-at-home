@@ -73,7 +73,7 @@
       keys.name
     ];
     openssh.authorizedKeys.keys = [
-      self.lib.ssh-pubkeys.knopki-ssh-pubkey1
+      self.lib.sshPubKeys.knopkiSshPubKey1
     ];
     hashedPasswordFile = config.sops.secrets.knopki-user-password.path;
   };

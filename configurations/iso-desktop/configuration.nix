@@ -34,9 +34,9 @@
   };
 
   users.users.nixos.openssh.authorizedKeys.keys = [
-    self.lib.ssh-pubkeys.knopki-ssh-pubkey1
+    self.lib.sshPubKeys.knopkiSshPubKey1
   ];
   users.users.root.openssh.authorizedKeys.keys = [
-    self.lib.ssh-pubkeys.knopki-ssh-pubkey1
+    self.lib.sshPubKeys.knopkiSshPubKey1
   ];
 }

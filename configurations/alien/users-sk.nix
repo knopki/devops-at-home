@@ -41,7 +41,7 @@ in
 
     linger = true;
     openssh.authorizedKeys.keys = [
-      self.lib.ssh-pubkeys.knopki-ssh-pubkey1
+      self.lib.sshPubKeys.knopkiSshPubKey1
     ];
   };
 
