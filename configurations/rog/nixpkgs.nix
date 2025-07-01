@@ -4,7 +4,7 @@ let
   inherit (lib) getName;
 in
 {
-  nixpkgs.overlays = [ self.overlays.myPackages ];
+  nixpkgs.overlays = [ self.overlays.my-packages ];
   nixpkgs.config = {
     allowUnfreePredicate =
       pkg:
@@ -14,7 +14,6 @@ in
         "aspell-dict-en-science"
         "corefonts"
         "discord"
-        "edl"
         "mpv-thumbfast"
         "obsidian"
         "pantum-driver"

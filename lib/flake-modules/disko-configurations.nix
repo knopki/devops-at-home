@@ -2,10 +2,10 @@
 #
 # Load diskoConfiguration from /configurations
 #
-{ lib, self, ... }:
+{ lib, ... }:
 let
   inherit (lib.attrsets) mapAttrs;
-  namePaths = import "${self.outPath}/configurations/disko-configurations.nix";
+  namePaths = import ../../configurations/disko-configurations.nix;
   loadConfiguration = _: path: import path;
 in
 

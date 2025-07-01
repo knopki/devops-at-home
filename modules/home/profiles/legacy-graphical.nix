@@ -48,7 +48,7 @@ in
     firefox = {
       enable = mkDefault true;
 
-      package = pkgs.firefox;
+      package = pkgs.firefox-with-keepassxc;
 
       profiles = {
         default = {

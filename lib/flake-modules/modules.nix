@@ -33,12 +33,12 @@ in
   };
 
   config.flake = rec {
-    homeModules = import "${self.outPath}/modules/home/home-modules.nix";
-    nixosModules = import "${self.outPath}/modules/nixos/nixos-modules.nix";
+    homeModules = import ../../modules/home/home-modules.nix;
+    nixosModules = import ../../modules/nixos/nixos-modules.nix;
     modules = {
       homeManager = homeModules;
       nixos = nixosModules;
-      shared = import "${self.outPath}/modules/shared/shared-modules.nix";
+      shared = import ../../modules/shared/shared-modules.nix;
     };
   };
 }

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = [
-    pkgs.firefox
+    pkgs.firefox-with-keepassxc
   ];
 
   programs.brave = {

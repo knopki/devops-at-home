@@ -63,7 +63,7 @@ let
     # editors / IDE
     arduino-ide
     helix
-    zed-editor
+    zed-editor-fhs
     aider-chat-full
 
     # bash
