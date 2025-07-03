@@ -30,7 +30,10 @@
           OnCalendar = "daily";
           RandomizedDelaySec = "8h";
         };
-        snapshots = [ "${config.home.homeDirectory}/dev" ];
+        snapshots = [
+          "${config.home.homeDirectory}/dev"
+          "${config.home.homeDirectory}/prj"
+        ];
       };
       alien-browsers = {
         timer = {
