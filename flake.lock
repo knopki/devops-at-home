@@ -105,27 +105,6 @@
         "type": "indirect"
       }
     },
-    "home-24-11": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs-24-11"
-        ]
-      },
-      "locked": {
-        "lastModified": 1747688870,
-        "narHash": "sha256-ypL9WAZfmJr5V70jEVzqGjjQzF0uCkz+AFQF7n9NmNc=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "d5f1f641b289553927b3801580598d200a501863",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "release-24.11",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "home-25-05": {
       "inputs": {
         "nixpkgs": [
@@ -182,21 +161,6 @@
       },
       "original": {
         "id": "nixos-hardware",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs-24-11": {
-      "locked": {
-        "lastModified": 1751274312,
-        "narHash": "sha256-/bVBlRpECLVzjV19t5KMdMFWSwKLtb5RyXdjz3LJT+g=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "50ab793786d9de88ee30ec4e4c24fb4236fc2674",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-24.11",
         "type": "indirect"
       }
     },
@@ -271,14 +235,12 @@
         "home": [
           "home-25-05"
         ],
-        "home-24-11": "home-24-11",
         "home-25-05": "home-25-05",
         "microvm": "microvm",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": [
           "nixpkgs-25-05"
         ],
-        "nixpkgs-24-11": "nixpkgs-24-11",
         "nixpkgs-25-05": "nixpkgs-25-05",
         "nixpkgs-lib": "nixpkgs-lib",
         "nixpkgs-unstable": "nixpkgs-unstable",
