@@ -11,7 +11,7 @@
       ]
     ))
     curl
-    docker-compose
+    docker
     doctl
     gcrane
     gnumake
@@ -35,7 +35,7 @@
       value = "false";
     }
     {
-      name = "TERRAGRUNT_DOWNLOAD";
+      name = "TG_DOWNLOAD_DIR";
       eval = "$PRJ_DATA_DIR/terragrunt-cache";
     }
     {
