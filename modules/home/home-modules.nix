@@ -1,7 +1,6 @@
 {
   legacy-kopia = ./legacy-kopia.nix;
   legacy-theme = ./legacy-theme;
-  profiles-doomed-emacs = ./profiles/doomed-emacs;
   profiles-knopki-at-rog = ./profiles/knopki-at-rog.nix;
   profiles-legacy-base = ./profiles/legacy-base.nix;
   profiles-legacy-devbox = ./profiles/legacy-devbox.nix;

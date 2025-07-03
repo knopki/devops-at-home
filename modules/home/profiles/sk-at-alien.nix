@@ -173,7 +173,6 @@ in
     profiles-legacy-workstation
     profiles-legacy-devbox
     profiles-mpv-ultimate-viewer
-    profiles-doomed-emacs
     profiles-sk-at-alien-kopia
     profiles-sk-at-alien-mount-remote
     profiles-sk-at-alien-pim
@@ -193,17 +192,13 @@ in
     sessionVariables = {
       PATH = concatStringsSep ":" [
         "${config.home.homeDirectory}/.local/bin"
-        "${config.xdg.configHome}/emacs/bin"
         "${config.xdg.dataHome}/npm/bin"
         "\${PATH}"
       ];
-      EDITOR = "hx";
-      VISUAL = "zeditor -w -n";
     };
 
     file = {
       ".gnupg/gpg-agent.conf".text = ''
-        allow-emacs-pinentry
         allow-loopback-pinentry
         allow-preset-passphrase
         default-cache-ttl 2592000

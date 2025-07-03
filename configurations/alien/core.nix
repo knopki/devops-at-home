@@ -23,6 +23,7 @@ let
     gallery-dl
     fclones
     findimagedupes
+    imagemagick
   ];
   officePkgs = with pkgs; [
     anki
@@ -327,6 +328,11 @@ in
   #
   # Shell
   #
+
+  environment.variables = {
+    EDITOR = "hx";
+    VISUAL = "zeditor -w -n";
+  };
 
   environment.shellAliases =
     let
