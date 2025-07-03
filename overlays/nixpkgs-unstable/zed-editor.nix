@@ -1,5 +1,5 @@
 final: prev: {
-  zed-editor-fhs = prev.nixpkgsUnstable.zed-editor.fhsWithPackages (ps: [
+  zed-editor-fhs = prev.nixpkgsUnstable.zed-editor.fhsWithPackages (_ps: [
     # final. prefix - install from the current pkgs
     # ps. prefix - install from the zed-editor's pkgs
     final.bash-language-server
