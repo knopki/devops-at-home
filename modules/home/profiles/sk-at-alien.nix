@@ -257,57 +257,8 @@ in
         store_failed = false;
         enter_accept = false;
         keymap_mode = "vim-normal";
-        daemon = {
-          enabled = true;
-          systemd_socket = true;
-        };
       };
-    };
-
-    brave = {
-      extensions = [
-        { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # tempermonkey
-        {
-          id = "dcpihecpambacapedldabdbpakmachpb";
-          updateUrl = "https://raw.githubusercontent.com/iamadamdev/bypass-paywalls-chrome/master/src/updates/updates.xml";
-        }
-        { id = "fihnjjcciajhdojfnbdddfaoknhalnja"; } # i don't care about cookies
-        { id = "nibjojkomfdiaoajekhjakgkdhaomnch"; } # ipfs companion
-        { id = "oldceeleldhonbafppcapldpdifcinji"; } # languagetool
-        { id = "dneaehbmnbhcippjikoajpoabadpodje"; } # old reddit redirect
-        { id = "dhhpefjklgkmgeafimnjhojgjamoafof"; } # save page we
-        { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # vimium
-
-        { id = "nkbihfbeogaeaoehlefnkodbefgpgknn"; } # metamask
-        { id = "mopnmbcafieddcagagdcbnhejhlodfdd"; } # polkadot-js
-        { id = "lpilbniiabackdjcionkobglmddfbcjo"; } # waves keeper
-        { id = "aiifbnbfobpmeekipheeijimdpnlpgpp"; } # terra station
-        { id = "dmkamcknogkgcdfhhbddcghachkejeap"; } # keplr
-        { id = "bfnaelmomeimhlpmgjnjophhpkkoljpa"; } # phantom
-        { id = "fnnegphlobjdpkhecapkijjdkgcjhkib"; } # harmony wallet
-        { id = "cfbfdhimifdmdehjmkdobpcjfefblkjm"; } # plug (icp)
-        { id = "fhbohimaelbohpjbbldcngcnapndodjp"; } # binance wallet
-      ];
-    };
-
-    firefox = {
-      profiles.default = {
-        # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        #   auto-tab-discard
-        #   bypass-paywalls-clean
-        #   i-dont-care-about-cookies
-        #   ipfs-companion
-        #   languagetool
-        #   multi-account-containers
-        #   no-pdf-download
-        #   old-reddit-redirect
-        #   react-devtools
-        #   save-page-we
-        #   ublock-origin
-        #   vimium
-        #   violentmonkey
-        # ];
-      };
+      daemon.enable = true;
     };
 
     gpg = {
@@ -481,37 +432,6 @@ in
       "e ${config.xdg.userDirs.download} - - - 30d"
       "e ${config.xdg.userDirs.pictures}/screenshots - - - 30d"
     ];
-
-    services.atuin-daemon = {
-      Unit = {
-        Description = "Atuin daemon";
-        Requires = [ "atuin-daemon.socket" ];
-      };
-      Install = {
-        Also = [ "atuin-daemon.socket" ];
-        WantedBy = [ "default.target" ];
-      };
-      Service = {
-        ExecStart = "${lib.getExe config.programs.atuin.package} daemon";
-        Restart = "on-failure";
-        RestartSteps = 3;
-        RestartMaxDelaySec = 6;
-      };
-    };
-
-    sockets.atuin-daemon = {
-      Unit = {
-        Description = "Atuin daemon socket";
-      };
-      Install = {
-        WantedBy = [ "sockets.target" ];
-      };
-      Socket = {
-        ListenStream = "%h/.local/share/atuin/atuin.sock";
-        SocketMode = "0600";
-        RemoveOnStop = true;
-      };
-    };
   };
 
   xdg = {
@@ -619,12 +539,8 @@ in
         family = "FiraCode Nerd Font Mono";
         size = 10;
         packages = with pkgs; [
-          (nerdfonts.override {
-            fonts = [
-              "FiraCode"
-              "NerdFontsSymbolsOnly"
-            ];
-          })
+          nerd-fonts.fira-code
+          nerd-fonts.symbols-only
           fira-code-symbols
         ];
       };

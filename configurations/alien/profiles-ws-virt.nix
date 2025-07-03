@@ -26,12 +26,7 @@ in
   };
 
   virtualisation = {
-    containers = {
-      enable = true;
-    };
-
     oci-containers.backend = mkDefault "podman";
-
     podman = {
       enable = true;
       autoPrune.enable = true;

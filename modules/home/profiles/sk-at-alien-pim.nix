@@ -31,7 +31,7 @@
       [default]
       default_calendar = private
       highlight_event_days = True
-      print_new = True
+      print_new = event
       timedelta = 14d
 
       [locale]
@@ -47,7 +47,7 @@
           priority = 20
         [[ann]]
           path = ~/.local/share/calendars/family
-          color = violet
+          color = dark gray
           priority = 5
     '';
   };

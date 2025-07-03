@@ -2,3 +2,4 @@ result
 .direnv
 doc/index.html
 .aider*
+/TODO.md

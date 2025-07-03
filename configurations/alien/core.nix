@@ -8,19 +8,17 @@
 let
   inherit (lib) mkBefore mkDefault;
   mediaPkgs = with pkgs; [
-    darktable
-    digikam
-    rawtherapee
+    # darktable
+    # digikam
+    # rawtherapee
     imgcat
-    inkscape
-    kdePackages.kdenlive
     krita
     obs-studio
     picard
     qbittorrent
-    streamrip
-    upscaler
-    upscayl
+    # streamrip
+    # upscaler # is it needed?
+    # upscayl # is it needed?
     yt-dlp
     gallery-dl
     fclones
@@ -32,11 +30,13 @@ let
     aliza
     aspellDicts.en
     aspellDicts.ru
+    brave
     img2pdf
     isync
-    kdePackages.kleopatra
+    keepassxc
     nextcloud-client
     obsidian
+    obsidian-export
     ocrmypdf
     offlineimap
     onlyoffice-desktopeditors
@@ -45,8 +45,8 @@ let
     qpdf
     rclone
     seahorse
-    speedcrunch
     weasis
+    qalculate-gtk
     zotero
   ];
   devPkgs = with pkgs; [
@@ -65,12 +65,6 @@ let
     helix
     zed-editor-fhs
     aider-chat-full
-
-    # bash
-    shellcheck
-
-    # javascript
-    nodejs
 
     # python
     uv
@@ -129,7 +123,6 @@ in
       simplex-chat-desktop
       telegram-desktop
       discord
-      thunderbird
 
       # remote
       anydesk
@@ -142,8 +135,6 @@ in
       amneziawg-go
       amneziawg-tools
       bottles
-      clevis
-      golden-cheetah-bin
       lazydocker
       # tailscale
       xorg.xhost
@@ -171,10 +162,25 @@ in
         fi
       '';
     };
+    chromium = {
+      enable = true;
+      enablePlasmaBrowserIntegration = true;
+      extensions = [
+        "npeicpdbkakmehahjeeohfdhnlpdklia" # webrtc network linter
+      ];
+    };
     command-not-found.enable = mkDefault false;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+    firefox = {
+      enable = true;
+      nativeMessagingHosts.packages = [ pkgs.keepassxc ];
+      languagePacks = [
+        "en-US"
+        "ru"
+      ];
     };
     fish = {
       enable = true;
@@ -267,6 +273,9 @@ in
           fish_style_pwd_dir_length = 2;
         };
       };
+    };
+    thunderbird = {
+      enable = true;
     };
     tmux = {
       enable = true;

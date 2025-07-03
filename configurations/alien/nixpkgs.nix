@@ -5,14 +5,11 @@ let
 in
 {
   nixpkgs.overlays = with self.overlays; [
-    nixpkgs-25-05
-    anytype-25-05
-    aider-chat-25-05
-    amneziawg-tools-25-05
     nixpkgs-unstable
+    anytype-unstable
     lima-unstable
+    simplex-chat-desktop-unstable
     zed-editor-unstable
-    firefox
     my-packages
   ];
   nixpkgs.config = {
@@ -21,6 +18,7 @@ in
       elem (getName pkg) [
         "anydesk"
         "anytype"
+        "anytype-heart"
         "aspell-dict-en-science"
         "corefonts"
         "discord"

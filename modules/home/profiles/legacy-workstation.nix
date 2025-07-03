@@ -13,12 +13,6 @@ in
   };
 
   programs = {
-    firefox.profiles.default.settings = {
-      "browser.search.countryCode" = mkDefault "RU";
-      "browser.search.region" = mkDefault "RU";
-      "intl.locale.requested" = mkDefault "ru,en-US";
-    };
-
     man.generateCaches = false;
   };
 

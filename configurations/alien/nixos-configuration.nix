@@ -1,14 +1,13 @@
 { inputs, self, ... }:
-inputs.nixpkgs-24-11.lib.nixosSystem {
+inputs.nixpkgs-25-05.lib.nixosSystem {
   specialArgs = {
     inherit inputs self;
   };
   modules = with self.modules.nixos; [
-    inputs.home-24-11.nixosModules.default
+    inputs.home-25-05.nixosModules.default
     inputs.sops-nix.nixosModules.sops
     home-manager
     ./meta.nix
-    ./brave.nix
     ./core.nix
     ./nixpkgs.nix
     ./hardware-config.nix
@@ -16,8 +15,6 @@ inputs.nixpkgs-24-11.lib.nixosSystem {
     ./profiles-fonts.nix
     ./profiles-earlyoom.nix
     ./profiles-cryptowallets.nix
-    ./profiles-passwords.nix
-    ./profiles-web.nix
     ./profiles-desktop-essentials.nix
     ./profiles-desktop-kde.nix
     ./profiles-laptop.nix
