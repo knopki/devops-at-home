@@ -22,7 +22,9 @@ let
     yt-dlp
     gallery-dl
     fclones
+    fclones-gui
     findimagedupes
+    czkawka-full
     imagemagick
   ];
   officePkgs = with pkgs; [
