@@ -21,7 +21,7 @@ in
       distrobox
       docker
       lima
-      podman-desktop
+      # podman-desktop # NOTE: disabled temporary (?) because of insecure deps
     ];
   };
 
