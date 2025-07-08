@@ -5,13 +5,13 @@ final: prev: {
     final.bash-language-server
     final.docker-compose-language-service
     final.dockerfile-language-server-nodejs
-    final.eslint
-    final.pyright
-    final.ruff
-    final.tailwindcss-language-server
+    # final.eslint
+    final.package-version-server
+    # final.pyright
+    # final.tailwindcss-language-server
     final.taplo
     final.terraform-ls
-    final.vtsls
-    final.yaml-language-server
+    # final.vtsls
+    # final.yaml-language-server
   ]);
 }
