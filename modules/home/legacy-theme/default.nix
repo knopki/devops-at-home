@@ -16,7 +16,6 @@ in
   imports = [
     ./theme-base16.nix
     ./theme-fonts.nix
-    ./theme-fzf.nix
     ./theme-gnome-terminal.nix
     ./theme-gtk.nix
     ./theme-neovim.nix

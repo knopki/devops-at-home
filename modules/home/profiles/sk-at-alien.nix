@@ -169,10 +169,6 @@ in
 {
   imports = with self.modules.homeManager; [
     profiles-legacy-base
-    profiles-legacy-graphical
-    profiles-legacy-workstation
-    profiles-legacy-devbox
-    profiles-mpv-ultimate-viewer
     profiles-sk-at-alien-kopia
     profiles-sk-at-alien-mount-remote
     profiles-sk-at-alien-pim
@@ -447,68 +443,11 @@ in
 
     mimeApps = {
       enable = true;
-      defaultApplications =
-        {
-          "application/epub+zip" = "org.kde.okular.desktop";
-          "application/pdf" = "org.kde.okular.desktop";
-        }
-        // (listToAttrs (
-          map (x: nameValuePair x "org.kde.gwenview.desktop") [
-            "image/bmp"
-            "image/gif"
-            "image/jpeg"
-            "image/jpg"
-            "image/pjpeg"
-            "image/png"
-            "image/svg+xml"
-            "image/svg+xml-compressed"
-            "image/tiff"
-            "image/vnd.wap.wbmp"
-            "image/x-bmp"
-            "image/x-gray"
-            "image/x-icb"
-            "image/x-icns"
-            "image/x-ico"
-            "image/x-pcx"
-            "image/x-png"
-            "image/x-portable-anymap"
-            "image/x-portable-bitmap"
-            "image/x-portable-graymap"
-            "image/x-portable-pixmap"
-            "image/x-xbitmap"
-            "image/x-xpixmap"
-          ]
-        ))
-        // (listToAttrs (
-          map (x: nameValuePair x "brave-browser.desktop") [
-            "application/x-extension-htm"
-            "application/x-extension-html"
-            "application/x-extension-shtml"
-            "application/x-extension-xht"
-            "application/x-extension-xhtml"
-            "application/xhtml+xml"
-            "application/xml"
-            "text/html"
-            "x-scheme-handler/ftp"
-            "x-scheme-handler/http"
-            "x-scheme-handler/https"
-            "x-scheme-handler/ipfs"
-            "x-scheme-handler/ipns"
-          ]
-        ));
     };
 
     configFile = {
-      "mimeapps.list".force = true;
-
       "user-dirs.locale".text = "en_US";
       "user-dirs.dirs".force = true;
-
-      # powermanager - just copy
-      "powermanagementprofilesrc" = {
-        text = builtins.readFile ./powermanagementprofilesrc;
-        force = true;
-      };
 
       "vimium.ff.json".text = builtins.toJSON vimiumFF;
       "vimium.json".text = builtins.toJSON vimiumC;

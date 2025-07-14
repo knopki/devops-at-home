@@ -10,6 +10,7 @@ in
     lima-unstable
     simplex-chat-desktop-unstable
     zed-editor-unstable
+    mpv
     my-packages
   ];
   nixpkgs.config = {

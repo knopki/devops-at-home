@@ -11,7 +11,6 @@ in
   home.packages = with pkgs; [ ripgrep ];
 
   programs.direnv.enable = true;
-  programs.fzf.enable = true;
 
   #
   # Reference:

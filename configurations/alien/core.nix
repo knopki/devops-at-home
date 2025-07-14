@@ -13,6 +13,7 @@ let
     # rawtherapee
     imgcat
     krita
+    mpv-with-plugins
     obs-studio
     picard
     qbittorrent
@@ -148,6 +149,7 @@ in
       yubikey-manager
       vmtouch
       httm
+      jq
 
       # temporary
       usbimager
@@ -218,6 +220,10 @@ in
         end
       '';
     };
+    fzf = {
+      fuzzyCompletion = true;
+      keybindings = true;
+    };
     git = {
       enable = true;
       lfs.enable = true;
@@ -256,6 +262,7 @@ in
     };
     iftop.enable = mkDefault true;
     iotop.enable = mkDefault true;
+    less.lessopen = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
     mosh.enable = mkDefault true;
     mtr.enable = mkDefault true;
     nix-index.enable = mkDefault true;

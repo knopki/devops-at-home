@@ -3,10 +3,6 @@
   legacy-theme = ./legacy-theme;
   profiles-knopki-at-rog = ./profiles/knopki-at-rog.nix;
   profiles-legacy-base = ./profiles/legacy-base.nix;
-  profiles-legacy-devbox = ./profiles/legacy-devbox.nix;
-  profiles-legacy-graphical = ./profiles/legacy-graphical.nix;
-  profiles-legacy-workstation = ./profiles/legacy-workstation.nix;
-  profiles-mpv-ultimate-viewer = ./profiles/mpv-ultimate-viewer.nix;
   profiles-root-at-alien = ./profiles/root-at-alien.nix;
   profiles-root-at-rog = ./profiles/root-at-rog.nix;
   profiles-sk-at-alien-kopia = ./profiles/sk-at-alien-kopia.nix;
