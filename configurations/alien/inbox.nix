@@ -66,7 +66,6 @@ let
 
     # editors / IDE
     arduino-ide
-    helix
     zed-editor-fhs
     aider-chat-full
 
@@ -104,7 +103,6 @@ in
       file
       gnupg
       gptfdisk
-      helix
       iputils
       lsof
       neovim
@@ -339,7 +337,6 @@ in
   #
 
   environment.variables = {
-    EDITOR = "hx";
     VISUAL = "zeditor -w -n";
   };
 
@@ -484,11 +481,6 @@ in
     SystemMaxUse=250M
     SystemMaxFileSize=50M
   '';
-
-  meta.suites.workstation = true;
-  meta.suites.devbox = true;
-  meta.suites.mobile = true;
-  meta.suites.gamestation = true;
 
   environment.variables = {
     PLASMA_USE_QT_SCALING = "1";

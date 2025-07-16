@@ -10,7 +10,6 @@ let
   inherit (lib)
     concatStringsSep
     mkDefault
-    nameValuePair
     ;
   vimiumCommon = {
     exclusionRules = [

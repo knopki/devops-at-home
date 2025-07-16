@@ -7,7 +7,6 @@
     python3
     vmtouch
     swayimg
-    helix
   ];
 
   i18n.extraLocales = [ "ru_RU.UTF-8/UTF-8" ];

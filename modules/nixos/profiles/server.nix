@@ -1,5 +1,5 @@
 #
-# Workstation
+# Some server host
 #
 { self, ... }:
 {
@@ -11,9 +11,6 @@
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
-      extraPackagesBash = true;
-      extraPackagesJson = true;
-      extraPackagesMarkdown = true;
     };
   };
 }

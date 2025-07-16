@@ -7,8 +7,9 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
     inputs.home-25-05.nixosModules.default
     inputs.sops-nix.nixosModules.sops
     home-manager
-    ./meta.nix
-    ./core.nix
+    profiles-workstation
+    profiles-devhost
+    ./inbox.nix
     ./nixpkgs.nix
     ./hardware-config.nix
     ./profiles-flatpak.nix

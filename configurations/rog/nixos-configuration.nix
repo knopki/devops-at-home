@@ -6,6 +6,8 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
   modules = with self.modules.nixos; [
     inputs.sops-nix.nixosModules.sops
     inputs.preservation.nixosModules.preservation
+    profiles-workstation
+    profiles-devhost
     {
       system.stateVersion = "25.05";
       networking.hostId = "c1cb4f76";
