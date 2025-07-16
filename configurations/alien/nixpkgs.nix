@@ -26,6 +26,7 @@ in
         "mpv-thumbfast"
         "obsidian"
         "pantum-driver"
+        "terraform"
         "unrar"
       ];
 

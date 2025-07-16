@@ -18,45 +18,102 @@ let
   extraPackagesFinal =
     with pkgs;
     cfg.extraPackages
-    # awk
-    ++ (optional cfg.extraPackagesAwk awk-language-server)
     # bash
-    ++ (optional cfg.extraPackagesBash bash-language-server)
+    ++ (optionals cfg.extraPackagesBash [
+      awk-language-server
+      bash-language-server
+      shfmt
+    ])
     # css
-    ++ (optional cfg.extraPackagesCss vscode-langservers-extracted)
+    ++ (optionals cfg.extraPackagesCss [
+      dprint
+      dprint-plugins.g-plane-malva
+      tailwindcss-language-server
+      vscode-langservers-extracted
+    ])
     # docker
     ++ (optionals cfg.extraPackagesDocker [
       docker-compose-language-service
       dockerfile-language-server-nodejs
+      dprint
+      dprint-plugins.dprint-plugin-dockerfile
+      dprint-plugins.g-plane-pretty_yaml
+    ])
+    # fish
+    ++ (optionals cfg.extraPackagesFish [
+      fish
+      fish-lsp
     ])
     # html
-    ++ (optional cfg.extraPackagesHtml vscode-langservers-extracted)
+    ++ (optionals cfg.extraPackagesHtml [
+      dprint
+      dprint-plugins.g-plane-markup_fmt
+      tailwindcss-language-server
+      vscode-langservers-extracted
+    ])
     # jq
     ++ (optional cfg.extraPackagesJq jq-lsp)
     # json
-    ++ (optional cfg.extraPackagesJson vscode-langservers-extracted)
+    ++ (optionals cfg.extraPackagesJson [
+      dprint
+      dprint-plugins.dprint-plugin-json
+      vscode-langservers-extracted
+    ])
+    # just
+    ++ (optionals cfg.extraPackagesJust [
+      just
+      just-lsp
+    ])
     # lua
-    ++ (optional cfg.extraPackagesLua lua-language-server)
+    ++ (optionals cfg.extraPackagesLua [
+      lua-language-server
+      stylua
+    ])
     # markdown
-    ++ (optional cfg.extraPackagesMarkdown marksman)
+    ++ (optionals cfg.extraPackagesMarkdown [
+      dprint
+      dprint-plugins.dprint-plugin-markdown
+      marksman
+    ])
     # nix
     ++ (optional cfg.extraPackagesNix nil)
     # protobuf
     ++ (optional cfg.extraPackagesProtobuf buf)
     # python
-    ++ (optional cfg.extraPackagesPython ruff)
+    ++ (optionals cfg.extraPackagesPython [
+      pyright
+      ruff
+      ty
+    ])
     # svelte
-    ++ (optional cfg.extraPackagesSvelte svelte-language-server)
+    ++ (optionals cfg.extraPackagesSvelte [
+      dprint
+      dprint-plugins.g-plane-markup_fmt
+      svelte-language-server
+      tailwindcss-language-server
+    ])
+    # systemd
+    ++ (optional cfg.extraPackagesSystemd systemd-language-server)
     # terraform
-    ++ (optional cfg.extraPackagesTerraform terraform-ls)
+    ++ (optionals cfg.extraPackagesTerraform [
+      terraform
+      terraform-ls
+    ])
     # toml
     ++ (optional cfg.extraPackagesToml taplo)
     # typescript
-    ++ (optional cfg.extraPackagesTypescript typescript-language-server)
+    ++ (optionals cfg.extraPackagesTypescript [
+      dprint
+      dprint-plugins.dprint-plugin-typescript
+      tailwindcss-language-server
+      typescript-language-server
+    ])
     # yaml
-    ++ (optional cfg.extraPackagesYaml yaml-language-server)
-
-  ;
+    ++ (optionals cfg.extraPackagesYaml [
+      dprint
+      dprint-plugins.g-plane-pretty_yaml
+      yaml-language-server
+    ]);
 in
 {
   options.programs.helix = {
@@ -96,19 +153,21 @@ in
       description = "Extra packages available to hx.";
     };
 
-    extraPackagesAwk = mkEnableOption "extra packages for awk support";
     extraPackagesBash = mkEnableOption "extra packages for bash support";
     extraPackagesCss = mkEnableOption "extra packages for css support";
     extraPackagesDocker = mkEnableOption "extra packages for docker support";
+    extraPackagesFish = mkEnableOption "extra packages for fish support";
     extraPackagesHtml = mkEnableOption "extra packages for html support";
     extraPackagesJq = mkEnableOption "extra packages for jq support";
     extraPackagesJson = mkEnableOption "extra packages for json support";
+    extraPackagesJust = mkEnableOption "extra packages for just support";
     extraPackagesLua = mkEnableOption "extra packages for lua support";
     extraPackagesMarkdown = mkEnableOption "extra packages for markdown support";
     extraPackagesNix = mkEnableOption "extra packages for nix support";
     extraPackagesProtobuf = mkEnableOption "extra packages for protobuf support";
     extraPackagesPython = mkEnableOption "extra packages for python support";
     extraPackagesSvelte = mkEnableOption "extra packages for svelte support";
+    extraPackagesSystemd = mkEnableOption "extra packages for systemd support";
     extraPackagesTerraform = mkEnableOption "extra packages for terraform support";
     extraPackagesToml = mkEnableOption "extra packages for toml support";
     extraPackagesTypescript = mkEnableOption "extra packages for typescript support";
