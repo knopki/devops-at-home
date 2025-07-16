@@ -18,7 +18,6 @@ in
     ./theme-fonts.nix
     ./theme-gnome-terminal.nix
     ./theme-gtk.nix
-    ./theme-neovim.nix
     ./theme-plasma.nix
     ./theme-tmux.nix
   ];

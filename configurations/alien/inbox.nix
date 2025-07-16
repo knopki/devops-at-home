@@ -105,7 +105,6 @@ in
       gptfdisk
       iputils
       lsof
-      neovim
       ngrep
       pstree
       ranger

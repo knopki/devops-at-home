@@ -27,10 +27,10 @@
       }
       ".config/chezmoi"
       ".config/git"
+      ".config/helix"
       ".local/share/chezmoi"
       ".local/share/direnv"
       ".local/state/nix"
-      ".local/state/nvim"
       ".mozilla"
       "prj"
     ];

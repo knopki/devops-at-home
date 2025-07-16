@@ -21,9 +21,9 @@
       }
       ".config/chezmoi"
       ".config/git"
+      ".config/helix"
       ".local/share/chezmoi"
       ".local/state/nix"
-      ".local/state/nvim"
     ];
     files = [
       ".curlrc"
