@@ -335,10 +335,6 @@ in
   # Shell
   #
 
-  environment.variables = {
-    VISUAL = "zeditor -w -n";
-  };
-
   environment.shellAliases =
     let
       ifSudo = lib.mkIf config.security.sudo.enable;
