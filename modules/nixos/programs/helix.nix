@@ -114,12 +114,28 @@ let
       dprint-plugins.g-plane-pretty_yaml
       yaml-language-server
     ]);
+  wrappedHx = pkgs.symlinkJoin {
+    name = "${getName cfg.package}-wrapped-${getVersion cfg.package}";
+    paths = [ cfg.package ];
+    preferLocalBuild = true;
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/hx \
+        --suffix PATH : ${makeBinPath extraPackagesFinal}
+    '';
+  };
 in
 {
   options.programs.helix = {
     enable = mkEnableOption "helix text editor";
 
     package = mkPackageOption pkgs "helix" { example = "pkgs.evil-helix"; };
+
+    finalPackage = mkOption {
+      type = lib.types.package;
+      readOnly = true;
+      description = "Resulting customized neovim package.";
+    };
 
     defaultEditor = mkOption {
       type = lib.types.bool;
@@ -175,28 +191,17 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages =
-      if extraPackagesFinal != [ ] then
-        [
-          (pkgs.symlinkJoin {
-            name = "${getName cfg.package}-wrapped-${getVersion cfg.package}";
-            paths = [ cfg.package ];
-            preferLocalBuild = true;
-            nativeBuildInputs = [ pkgs.makeWrapper ];
-            postBuild = ''
-              wrapProgram $out/bin/hx \
-                --suffix PATH : ${makeBinPath extraPackagesFinal}
-            '';
-          })
-        ]
-      else
-        [ cfg.package ];
+    environment = {
+      variables = mkIf cfg.defaultEditor { EDITOR = "hx"; };
 
-    environment.variables = mkIf cfg.defaultEditor { EDITOR = "hx"; };
+      shellAliases = {
+        vi = mkIf cfg.viAlias "hx";
+        vim = mkIf cfg.vimAlias "hx";
+      };
 
-    environment.shellAliases = {
-      vi = mkIf cfg.viAlias "hx";
-      vim = mkIf cfg.vimAlias "hx";
+      systemPackages = [ cfg.finalPackage ];
     };
+
+    programs.helix.finalPackage = if extraPackagesFinal != [ ] then wrappedHx else cfg.package;
   };
 }
