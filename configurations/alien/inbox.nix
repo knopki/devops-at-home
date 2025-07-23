@@ -29,15 +29,17 @@ let
     imagemagick
   ];
   officePkgs = with pkgs; [
+    aliza
     anki
     anytype
-    aliza
     aspellDicts.en
     aspellDicts.ru
     brave
     img2pdf
     isync
     keepassxc
+    khal
+    khard
     nextcloud-client
     obsidian
     obsidian-export
@@ -46,11 +48,11 @@ let
     onlyoffice-desktopeditors
     pdfarranger
     poppler_utils
+    qalculate-gtk
     qpdf
     rclone
     seahorse
     weasis
-    qalculate-gtk
     zotero
   ];
   devPkgs = with pkgs; [
@@ -273,13 +275,7 @@ in
     };
     starship = {
       enable = true;
-      presets = [ "nerd-font-symbols" ];
-      settings = {
-        directory = {
-          truncation_length = 2;
-          fish_style_pwd_dir_length = 2;
-        };
-      };
+      transientPrompt.enable = true;
     };
     thunderbird = {
       enable = true;

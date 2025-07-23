@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  self,
-  ...
-}:
+{ config, ... }:
 {
   users.users.root = {
     hashedPasswordFile = config.sops.secrets.root-user-password.path;
@@ -15,8 +10,12 @@
   };
 
   home-manager.users.root = {
-    imports = with self.modules.homeManager; [ profiles-root-at-alien ];
     home.username = "root";
     home.homeDirectory = "/root";
+    home.stateVersion = "20.09";
+
+    programs = {
+      man.generateCaches = false;
+    };
   };
 }

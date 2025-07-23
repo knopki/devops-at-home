@@ -49,6 +49,11 @@ in
     imports = with self.modules.homeManager; [ profiles-sk-at-alien ];
     home.username = "sk";
     home.homeDirectory = "/home/sk";
+    home.stateVersion = "20.09";
+
+    programs = {
+      man.generateCaches = false;
+    };
   };
 
   sops = {

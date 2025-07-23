@@ -167,16 +167,12 @@ let
 in
 {
   imports = with self.modules.homeManager; [
-    profiles-legacy-base
     profiles-sk-at-alien-kopia
     profiles-sk-at-alien-mount-remote
-    profiles-sk-at-alien-pim
     legacy-theme
   ];
 
   home = {
-    stateVersion = "20.09";
-
     packages = with pkgs; [
       gpgme
       du-dust
