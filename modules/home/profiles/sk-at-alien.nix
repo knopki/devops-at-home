@@ -413,11 +413,6 @@ in
     sessionVariables = {
       TERMINAL = mkDefault "konsole -e";
     };
-
-    tmpfiles.rules = [
-      "e ${config.xdg.userDirs.download} - - - 30d"
-      "e ${config.xdg.userDirs.pictures}/screenshots - - - 30d"
-    ];
   };
 
   xdg = {
