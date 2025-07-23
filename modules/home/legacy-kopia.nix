@@ -18,7 +18,7 @@ let
     ;
   cfg = config.services.kopia;
   jobModule = types.submodule (
-    { config, ... }:
+    { ... }:
     {
       options = {
         snapshots = mkOption {
@@ -99,7 +99,8 @@ in
         Timer = {
           Unit = "kopia-${name}.service";
           Persistent = true;
-        } // value.timer;
+        }
+        // value.timer;
         Install = {
           WantedBy = [ "timers.target" ];
         };

@@ -22,7 +22,8 @@ Get a machine's public AGE key from the host SSH keys:
 nix-shell -p ssh-to-age --run 'ssh-keyscan x.x.x.x | ssh-to-age'
 ```
 
-Save this key to the `.sops.yaml`. setup `secrets/<hostname>.yaml` with all needed secrets.
+Save this key to the `.sops.yaml`. setup `secrets/<hostname>.yaml` with all
+needed secrets.
 
 Run something like this:
 
