@@ -1,9 +1,29 @@
 #
 # Development host
 #
-{ self, ... }:
+{
+  self,
+  pkgs,
+  config,
+  ...
+}:
+let
+
+  zedEditorFhs = pkgs.zed-editor.fhsWithPackages (
+    _ps:
+    [
+      # ps. prefix - install from the zed-editor's pkgs
+      pkgs.package-version-server
+    ]
+    ++ config.programs.helix.finalExtraPackages
+  );
+in
 {
   imports = with self.modules.nixos; [ profiles-workstation ];
+
+  environment.systemPackages = [
+    zedEditorFhs
+  ];
 
   programs.helix = {
     extraPackagesCss = true;

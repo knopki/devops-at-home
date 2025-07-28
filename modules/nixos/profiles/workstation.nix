@@ -12,6 +12,7 @@
       viAlias = true;
       vimAlias = true;
       extraPackagesBash = true;
+      extraPackagesGit = true;
       extraPackagesJson = true;
       extraPackagesMarkdown = true;
     };

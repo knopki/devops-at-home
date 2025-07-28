@@ -68,7 +68,6 @@ let
 
     # editors / IDE
     arduino-ide
-    zed-editor-fhs
     aider-chat-full
 
     # python
