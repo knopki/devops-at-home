@@ -44,6 +44,11 @@ let
       fish
       fish-lsp
     ])
+    # git
+    ++ (optionals cfg.extraPackagesGit [
+      git
+      lazygit
+    ])
     # html
     ++ (optionals cfg.extraPackagesHtml [
       dprint
@@ -173,6 +178,7 @@ in
     extraPackagesCss = mkEnableOption "extra packages for css support";
     extraPackagesDocker = mkEnableOption "extra packages for docker support";
     extraPackagesFish = mkEnableOption "extra packages for fish support";
+    extraPackagesGit = mkEnableOption "extra packages for git support";
     extraPackagesHtml = mkEnableOption "extra packages for html support";
     extraPackagesJq = mkEnableOption "extra packages for jq support";
     extraPackagesJson = mkEnableOption "extra packages for json support";
