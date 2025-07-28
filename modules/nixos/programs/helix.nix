@@ -174,6 +174,12 @@ in
       description = "Extra packages available to hx.";
     };
 
+    finalExtraPackages = mkOption {
+      type = with lib.types; listOf package;
+      readOnly = true;
+      description = "Resulting extra packages available to hx.";
+    };
+
     extraPackagesBash = mkEnableOption "extra packages for bash support";
     extraPackagesCss = mkEnableOption "extra packages for css support";
     extraPackagesDocker = mkEnableOption "extra packages for docker support";
@@ -208,6 +214,9 @@ in
       systemPackages = [ cfg.finalPackage ];
     };
 
-    programs.helix.finalPackage = if extraPackagesFinal != [ ] then wrappedHx else cfg.package;
+    programs.helix = {
+      finalPackage = if extraPackagesFinal != [ ] then wrappedHx else cfg.package;
+      finalExtraPackages = extraPackagesFinal;
+    };
   };
 }
