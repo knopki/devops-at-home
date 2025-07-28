@@ -1,10 +1,9 @@
-{ lib, self, ... }:
+{ lib, ... }:
 let
   inherit (builtins) elem;
   inherit (lib) getName;
 in
 {
-  nixpkgs.overlays = [ self.overlays.my-packages ];
   nixpkgs.config = {
     allowUnfreePredicate =
       pkg:

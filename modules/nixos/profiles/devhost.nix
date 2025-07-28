@@ -25,6 +25,11 @@ in
     zedEditorFhs
   ];
 
+  nixpkgs.overlays = with self.overlays; [
+    lima-unstable
+    zed-editor-unstable
+  ];
+
   programs.helix = {
     extraPackagesCss = true;
     extraPackagesDocker = true;

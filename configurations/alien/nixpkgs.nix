@@ -5,13 +5,9 @@ let
 in
 {
   nixpkgs.overlays = with self.overlays; [
-    nixpkgs-unstable
     anytype-unstable
-    lima-unstable
     simplex-chat-desktop-unstable
-    zed-editor-unstable
     mpv
-    my-packages
   ];
   nixpkgs.config = {
     allowUnfreePredicate =
