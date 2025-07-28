@@ -168,7 +168,6 @@ in
 {
   imports = with self.modules.homeManager; [
     profiles-sk-at-alien-kopia
-    profiles-sk-at-alien-mount-remote
     legacy-theme
   ];
 
