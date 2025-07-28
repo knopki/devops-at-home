@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  self,
   ...
 }:
 {
@@ -9,7 +10,8 @@
     inputs.nixos-hardware.nixosModules.asus-battery
     inputs.disko.nixosModules.default
     ./disko-configuration.nix
-  ];
+  ]
+  ++ (with self.modules.nixos; [ mixin-systemd-boot ]);
 
   boot = {
     bootspec.enable = true;
@@ -32,13 +34,6 @@
         emergencyAccess = true;
         tpm2.enable = true;
       };
-    };
-    loader = {
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 10; # TODO
-      };
-      timeout = 0;
     };
     plymouth.enable = true;
     supportedFilesystems = {

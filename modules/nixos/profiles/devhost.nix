@@ -19,7 +19,7 @@ let
   );
 in
 {
-  imports = with self.modules.nixos; [ profiles-workstation ];
+  imports = with self.modules.nixos; [ profile-workstation ];
 
   environment.systemPackages = [
     zedEditorFhs

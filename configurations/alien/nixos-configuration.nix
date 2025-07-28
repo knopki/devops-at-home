@@ -7,7 +7,7 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
     inputs.home-25-05.nixosModules.default
     inputs.sops-nix.nixosModules.sops
     home-manager
-    profiles-devhost
+    profile-devhost
     ./inbox.nix
     ./nixpkgs.nix
     ./hardware-config.nix

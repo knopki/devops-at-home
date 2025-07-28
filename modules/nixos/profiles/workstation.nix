@@ -1,9 +1,16 @@
 #
 # Workstation
 #
-{ self, ... }:
+{ lib, self, ... }:
 {
-  imports = with self.modules.nixos; [ programs-helix ];
+  imports = with self.modules.nixos; [
+    profile-common
+    mixin-pipewire
+    programs-helix
+  ];
+
+  nix.daemonCPUSchedPolicy = "idle";
+  systemd.services.nix-gc.serviceConfig.CPUSchedulingPolicy = "idle";
 
   nixpkgs.overlays = with self.overlays; [
     nixpkgs-unstable
@@ -20,6 +27,14 @@
       extraPackagesGit = true;
       extraPackagesJson = true;
       extraPackagesMarkdown = true;
+    };
+  };
+
+  services = {
+    # Enable SSH everywhere
+    openssh = {
+      enable = true;
+      startWhenNeeded = lib.mkDefault true;
     };
   };
 }

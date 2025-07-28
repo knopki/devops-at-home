@@ -4,6 +4,7 @@
   pkgs,
   modulesPath,
   inputs,
+  self,
   ...
 }:
 let
@@ -19,14 +20,17 @@ let
   swapPartName = "/dev/nvme-vg/swap";
 in
 {
-  imports = with inputs.nixos-hardware.nixosModules; [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    common-cpu-intel-cpu-only
-    common-gpu-intel
-    # common-gpu-nvidia-nonprime
-    common-gpu-nvidia-disable
-    common-pc-ssd
-  ];
+  imports =
+    with inputs.nixos-hardware.nixosModules;
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
+      common-cpu-intel-cpu-only
+      common-gpu-intel
+      # common-gpu-nvidia-nonprime
+      common-gpu-nvidia-disable
+      common-pc-ssd
+    ]
+    ++ (with self.modules.nixos; [ mixin-systemd-boot ]);
 
   boot = {
     extraModprobeConfig = ''
@@ -72,10 +76,7 @@ in
     ];
 
     loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot = {
-        enable = true;
-      };
+      # efi.canTouchEfiVariables = false;
     };
   };
 

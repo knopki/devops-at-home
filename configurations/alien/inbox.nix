@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  self,
   ...
 }:
 let
@@ -75,17 +74,6 @@ let
   ];
 in
 {
-  #
-  # Documentation
-  #
-
-  documentation = {
-    doc.enable = mkDefault false;
-    info.enable = mkDefault false;
-    man.enable = mkDefault true;
-    nixos.enable = mkDefault false;
-  };
-
   #
   # Packages
   #
@@ -370,34 +358,9 @@ in
   #
 
   nix = {
-    channel.enable = false;
-    daemonCPUSchedPolicy = mkDefault "idle";
-    daemonIOSchedPriority = mkDefault 7;
-    gc = {
-      automatic = mkDefault true;
-      dates = mkDefault "weekly";
-      options = mkDefault "--delete-older-then 30d";
-    };
-    optimise.automatic = mkDefault true;
-    settings = {
-      inherit (self.nixConfig) experimental-features extra-substituters extra-trusted-public-keys;
-      allowed-users = mkDefault [ "@wheel" ];
-      auto-optimise-store = mkDefault true;
-    };
-    extraOptions =
-      let
-        gb = 1024 * 1024 * 1024;
-      in
-      mkBefore ''
-        min-free = ${toString (gb * 10)}
-        max-free = ${toString (gb * 20)}
-        tarball-ttl = ${toString (86400 * 30)}
-        !include ${config.sops.templates."nix-access-tokens.conf".path}
-      '';
-    registry.self.to = {
-      type = "path";
-      path = self.outPath;
-    };
+    extraOptions = mkBefore ''
+      !include ${config.sops.templates."nix-access-tokens.conf".path}
+    '';
   };
 
   #
@@ -411,11 +374,7 @@ in
     nscd.enableNsncd = true;
 
     openssh = {
-      enable = mkDefault true;
       startWhenNeeded = mkDefault true;
-      settings = {
-        PasswordAuthentication = mkDefault false;
-      };
     };
 
     timesyncd.servers = mkDefault [ "time.cloudflare.com" ];
