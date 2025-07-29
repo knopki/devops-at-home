@@ -172,13 +172,6 @@ in
   ];
 
   home = {
-    packages = with pkgs; [
-      gpgme
-      du-dust
-      feh
-      gh
-    ];
-
     sessionVariables = {
       PATH = concatStringsSep ":" [
         "${config.home.homeDirectory}/.local/bin"

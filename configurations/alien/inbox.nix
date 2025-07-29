@@ -26,6 +26,8 @@ let
     findimagedupes
     czkawka-full
     imagemagick
+    swayimg
+    feh
   ];
   officePkgs = with pkgs; [
     aliza
@@ -56,6 +58,7 @@ let
   ];
   devPkgs = with pkgs; [
     # tools
+    gh
     gnupg
     ripgrep
     android-udev-rules
