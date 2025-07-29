@@ -210,18 +210,6 @@ in
 
       ".config/autostart/org.keepassxc.KeePassXC.desktop".source =
         "${pkgs.keepassxc}/share/applications/org.keepassxc.KeePassXC.desktop";
-
-      ".terraformrc".text = ''
-        provider_installation {
-          network_mirror {
-            url = "https://terraform-mirror.yandexcloud.net/"
-            include = ["registry.terraform.io/*/*"]
-          }
-          direct {
-            exclude = ["registry.terraform.io/*/*"]
-          }
-        }
-      '';
     };
   };
 
