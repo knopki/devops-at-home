@@ -188,20 +188,6 @@ in
     };
 
     file = {
-      ".gnupg/gpg-agent.conf".text = ''
-        allow-loopback-pinentry
-        allow-preset-passphrase
-        default-cache-ttl 2592000
-        default-cache-ttl-ssh 2592000
-        max-cache-ttl 2592000
-        max-cache-ttl-ssh 2592000
-      '';
-
-      # keys to open with pam_gnupg
-      ".pam-gnupg".text = ''
-        C87C6FBFDA8F3C18CF9BE03F139F5BD50CFB1753 # ${config.programs.gpg.settings.default-key}
-      '';
-
       # HACK: support virtualenv and nix shells
       ".pylintrc".text = ''
         [MASTER]
@@ -232,14 +218,6 @@ in
         keymap_mode = "vim-normal";
       };
       daemon.enable = true;
-    };
-
-    gpg = {
-      enable = true;
-      settings = {
-        throw-keyids = true;
-        default-key = "58A58B6FD38C6B66";
-      };
     };
   };
 
