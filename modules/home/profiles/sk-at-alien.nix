@@ -188,12 +188,6 @@ in
     };
 
     file = {
-      # HACK: support virtualenv and nix shells
-      ".pylintrc".text = ''
-        [MASTER]
-        init-hook='import os,sys;[sys.path.append(p) for p in os.environ.get("PYTHONPATH","").split(":")];'
-      '';
-
       ".config/autostart/org.keepassxc.KeePassXC.desktop".source =
         "${pkgs.keepassxc}/share/applications/org.keepassxc.KeePassXC.desktop";
     };
