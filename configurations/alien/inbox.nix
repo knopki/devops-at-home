@@ -123,6 +123,10 @@ in
       openssh
       remmina
 
+      # backups
+      kopia
+      flock
+
       # misc
       tor-browser
       amneziawg-go

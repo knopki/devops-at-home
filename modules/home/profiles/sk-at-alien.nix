@@ -11,7 +11,6 @@ let
 in
 {
   imports = with self.modules.homeManager; [
-    profiles-sk-at-alien-kopia
     legacy-theme
   ];
 
@@ -198,11 +197,6 @@ in
   services = {
     # use system gpg-agent
     gpg-agent.enable = false;
-  };
-
-  sops = {
-    defaultSopsFile = ../../../secrets/sk-at-alien.yaml;
-    age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
   };
 
   systemd.user = {
