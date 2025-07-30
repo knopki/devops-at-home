@@ -22,11 +22,6 @@ in
         "\${PATH}"
       ];
     };
-
-    file = {
-      ".config/autostart/org.keepassxc.KeePassXC.desktop".source =
-        "${pkgs.keepassxc}/share/applications/org.keepassxc.KeePassXC.desktop";
-    };
   };
 
   programs = {
