@@ -154,11 +154,6 @@ in
   programs = {
     bash = {
       undistractMe.enable = true;
-      interactiveShellInit = ''
-        if [[ -f $XDG_CONFIG_HOME/atuin/config.toml ]]; then
-          eval $(${pkgs.atuin}/bin/atuin init bash)
-        fi
-      '';
     };
     chromium = {
       enable = true;
@@ -208,9 +203,6 @@ in
         set -g fish_key_bindings fish_hybrid_key_bindings
         set -g fish_greeting ""
         source ${pkgs.ls-colors}/lscolors.csh
-        if test -f $XDG_CONFIG_HOME/atuin/config.toml;
-          ${pkgs.atuin}/bin/atuin init fish --disable-up-arrow | source
-        end
       '';
     };
     fzf = {
