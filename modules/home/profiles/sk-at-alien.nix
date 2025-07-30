@@ -24,28 +24,6 @@ in
     };
   };
 
-  programs = {
-    atuin = {
-      enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-      settings = {
-        dialect = "uk";
-        update_check = false;
-        filter_mode = "host";
-        filter_mode_shell_up_key_binding = "session";
-        workspaces = true;
-        style = "compact";
-        inline_height = 40;
-        exit_mode = "return-query";
-        store_failed = false;
-        enter_accept = false;
-        keymap_mode = "vim-normal";
-      };
-      daemon.enable = true;
-    };
-  };
-
   qt.kde.settings = {
     kdeglobals.General = {
       BrowserApplication = "brave-browser.desktop";
