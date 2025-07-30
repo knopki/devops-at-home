@@ -106,6 +106,7 @@ in
       tree
       wget
       chezmoi
+      starship
 
       # shell
       atuin
