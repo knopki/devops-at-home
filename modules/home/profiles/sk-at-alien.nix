@@ -14,16 +14,6 @@ in
     legacy-theme
   ];
 
-  home = {
-    sessionVariables = {
-      PATH = concatStringsSep ":" [
-        "${config.home.homeDirectory}/.local/bin"
-        "${config.xdg.dataHome}/npm/bin"
-        "\${PATH}"
-      ];
-    };
-  };
-
   qt.kde.settings = {
     kdeglobals.General = {
       BrowserApplication = "brave-browser.desktop";
@@ -170,49 +160,6 @@ in
   services = {
     # use system gpg-agent
     gpg-agent.enable = false;
-  };
-
-  systemd.user = {
-    sessionVariables = {
-      TERMINAL = mkDefault "konsole -e";
-    };
-  };
-
-  xdg = {
-    enable = true;
-
-    userDirs = {
-      enable = true;
-      createDirectories = true;
-      desktop = "${config.home.homeDirectory}/desktop";
-      documents = "${config.home.homeDirectory}/docs";
-      download = "${config.home.homeDirectory}/downloads";
-      music = "${config.home.homeDirectory}/music";
-      pictures = "${config.home.homeDirectory}/pics";
-      publicShare = "${config.home.homeDirectory}/public";
-      templates = "${config.home.homeDirectory}/templates";
-      videos = "${config.home.homeDirectory}/videos";
-    };
-
-    mimeApps = {
-      enable = true;
-    };
-
-    configFile = {
-      "user-dirs.locale".text = "en_US";
-      "user-dirs.dirs".force = true;
-
-      "gtk-3.0/bookmarks".text = ''
-        file://${config.home.homeDirectory}/dev Development
-        file://${config.home.homeDirectory}/docs Documents
-        file://${config.home.homeDirectory}/downloads Downloads
-        file://${config.home.homeDirectory}/music Music
-        file://${config.home.homeDirectory}/pics Pictures
-        file://${config.home.homeDirectory}/videos Videos
-        file://${config.home.homeDirectory}/library Library
-        file://${config.home.homeDirectory}/trash Trash
-      '';
-    };
   };
 
   theme = {
