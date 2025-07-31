@@ -2,6 +2,8 @@
 
 NixOS yeeeeaaaahhhh!
 
+The Home Manager is no longer in use. Instead, all dotfiles are managed by `chezmoi` in a [separate repository](https://github.com/knopki/dotfiles).
+
 ## How to create a NixOS installation media
 
 Build ISO:
