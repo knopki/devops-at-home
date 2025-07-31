@@ -4,9 +4,7 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
     inherit inputs self;
   };
   modules = with self.modules.nixos; [
-    inputs.home-25-05.nixosModules.default
     inputs.sops-nix.nixosModules.sops
-    home-manager
     profile-devhost
     ./inbox.nix
     ./nixpkgs.nix

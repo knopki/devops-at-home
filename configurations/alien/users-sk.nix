@@ -45,22 +45,10 @@ in
     ];
   };
 
-  home-manager.users.sk = {
-    imports = with self.modules.homeManager; [ profiles-sk-at-alien ];
-    home.username = "sk";
-    home.homeDirectory = "/home/sk";
-    home.stateVersion = "20.09";
-
-    programs = {
-      man.generateCaches = false;
-    };
-  };
-
   sops = {
     secrets = {
       sk-user-password.neededForUsers = true;
       sk-chezmoi-age-key.owner = config.users.users.sk.name;
-      sk-kopia-repository-config.owner = config.users.users.sk.name;
       sk-kopia-repo-password-env-file.owner = config.users.users.sk.name;
     };
   };

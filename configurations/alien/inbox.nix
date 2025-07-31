@@ -128,6 +128,14 @@ in
       kopia
       flock
 
+      # look and feel
+      arc-kde-theme
+      arc-theme
+      fira-code-symbols
+      nerd-fonts.fira-code
+      nerd-fonts.symbols-only
+      papirus-icon-theme
+
       # misc
       tor-browser
       amneziawg-go
