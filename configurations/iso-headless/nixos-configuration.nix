@@ -3,8 +3,8 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
   specialArgs = {
     inherit inputs self;
   };
-  modules = with self.modules.nixos; [
-    "${inputs.nixpkgs-25-05.outPath}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+  modules = [
+    "${inputs.nixpkgs-25-05.outPath}/nixos/modules/installer/cd-dvd/installation-cd-minimal-combined.nix"
     "${inputs.nixpkgs-25-05.outPath}/nixos/modules/installer/cd-dvd/channel.nix"
     ./configuration.nix
     {

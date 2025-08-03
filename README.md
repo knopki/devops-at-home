@@ -9,7 +9,7 @@ The Home Manager is no longer in use. Instead, all dotfiles are managed by `chez
 Build ISO:
 
 ```sh
-nix build .#nixosConfigurations.iso-desktop.config.system.build.isoImage
+nix build .#nixosConfigurations.iso-headless.config.system.build.isoImage
 ```
 
 Copy it to the USB drive from `result/iso` via `dd` or `usbimager`.
