@@ -359,8 +359,6 @@ in
       jtl = "journalctl";
     };
 
-  users.defaultUserShell = pkgs.fish;
-
   #
   # Nix
   #
