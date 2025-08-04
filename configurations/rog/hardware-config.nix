@@ -62,11 +62,6 @@ in
     usbutils
   ];
 
-  fileSystems = {
-    "/".neededForBoot = true;
-    "/nix".neededForBoot = true;
-  };
-
   hardware = {
     asus.battery.chargeUpto = 80;
     enableRedistributableFirmware = true;
