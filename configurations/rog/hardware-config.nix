@@ -4,6 +4,11 @@
   self,
   ...
 }:
+let
+  preservationCommonModule = import self.modules.nixos.preservation-common {
+    statePath = "/state";
+  };
+in
 {
   imports = [
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga402x-amdgpu
@@ -11,7 +16,10 @@
     inputs.disko.nixosModules.default
     ./disko-configuration.nix
   ]
-  ++ (with self.modules.nixos; [ mixin-systemd-boot ]);
+  ++ (with self.modules.nixos; [
+    mixin-systemd-boot
+  ])
+  ++ [ preservationCommonModule ];
 
   boot = {
     bootspec.enable = true;
@@ -57,7 +65,6 @@
   fileSystems = {
     "/".neededForBoot = true;
     "/nix".neededForBoot = true;
-    "/state".neededForBoot = true;
   };
 
   hardware = {
@@ -69,62 +76,7 @@
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
-  preservation = {
-    enable = true;
-    preserveAt."/state" = {
-      commonMountOptions = [
-        "x-gvfs-hide"
-        "x-gdu.hide"
-      ];
-      directories = [
-        "/etc/NetworkManager/system-connections"
-        "/etc/secureboot"
-        "/var/lib/bluetooth"
-        "/var/lib/fprint"
-        "/var/lib/fwupd"
-        "/var/lib/libvirt"
-        "/var/lib/power-profiles-daemon"
-        "/var/lib/systemd/coredump"
-        "/var/lib/systemd/rfkill"
-        "/var/lib/systemd/timers"
-        "/var/log"
-        {
-          directory = "/var/lib/nixos";
-          inInitrd = true;
-        }
-      ];
-      files = [
-        {
-          file = "/etc/machine-id";
-          inInitrd = true;
-          how = "symlink";
-          configureParent = true;
-        }
-        {
-          file = "/etc/ssh/ssh_host_rsa_key";
-          how = "symlink";
-          configureParent = true;
-        }
-        {
-          file = "/etc/ssh/ssh_host_ed25519_key";
-          how = "symlink";
-          configureParent = true;
-          inInitrd = true;
-        }
-        "/var/lib/usbguard/rules.conf"
-
-        # creates a symlink on the volatile root
-        # creates an empty directory on the persistent volume, i.e. /state/var/lib/systemd
-        # does not create an empty file at the symlink's target (would require `createLinkTarget = true`)
-        {
-          file = "/var/lib/systemd/random-seed";
-          how = "symlink";
-          inInitrd = true;
-          configureParent = true;
-        }
-      ];
-    };
-  };
+  preservation.enable = true;
 
   security.tpm2.enable = true;
 
@@ -134,17 +86,6 @@
     fileSystems = [
       "/"
       "/state"
-    ];
-  };
-
-  systemd.services.systemd-machine-id-commit = {
-    unitConfig.ConditionPathIsMountPoint = [
-      ""
-      "/state/etc/machine-id"
-    ];
-    serviceConfig.ExecStart = [
-      ""
-      "systemd-machine-id-setup --commit --root /state"
     ];
   };
 }

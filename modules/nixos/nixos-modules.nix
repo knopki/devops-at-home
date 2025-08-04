@@ -8,6 +8,7 @@
   mixin-no-docs = ./mixins/no-docs.nix;
   mixin-openssh = ./mixins/openssh.nix;
   mixin-pipewire = ./mixins/pipewire.nix;
+  mixin-preservation-common = ./mixins/preservation-common.nix;
   mixin-sudo = ./mixins/sudo.nix;
   mixin-systemd-boot = ./mixins/systemd-boot.nix;
   mixin-terminfo = ./mixins/terminfo.nix;

@@ -25,9 +25,6 @@
         directory = ".ssh";
         mode = "0700";
       }
-      ".config/chezmoi"
-      ".config/git"
-      ".config/helix"
       ".local/share/chezmoi"
       ".local/share/direnv"
       ".local/state/nix"
@@ -35,10 +32,6 @@
       "prj"
     ];
     files = [
-      ".face"
-      ".face."
-      ".curlrc"
-      ".wgetrc"
     ];
   };
 
@@ -76,31 +69,5 @@
       self.lib.sshPubKeys.knopkiSshPubKey1
     ];
     hashedPasswordFile = config.sops.secrets.knopki-user-password.path;
-  };
-
-  # Note that immediate parent directories of persisted files can also be
-  # configured with ownership and permissions from the `parent` settings if
-  # `configureParent = true` is set for the file.
-  systemd.tmpfiles.settings.preservation = {
-    "/home/knopki/.config".d = {
-      user = "knopki";
-      group = "knopki";
-      mode = "0700";
-    };
-    "/home/knopki/.local".d = {
-      user = "knopki";
-      group = "knopki";
-      mode = "0700";
-    };
-    "/home/knopki/.local/share".d = {
-      user = "knopki";
-      group = "knopki";
-      mode = "0700";
-    };
-    "/home/knopki/.local/state".d = {
-      user = "knopki";
-      group = "knopki";
-      mode = "0700";
-    };
   };
 }
