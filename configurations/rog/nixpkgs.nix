@@ -22,7 +22,6 @@ in
     allowInsecurePredicate =
       pkg:
       elem (getName pkg) [
-        "golden-cheetah"
         "youtube-dl"
       ];
   };
