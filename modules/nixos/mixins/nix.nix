@@ -28,7 +28,7 @@
   nix.settings.tarball-ttl = lib.mkDefault (86400 * 30);
   nix.gc = {
     automatic = lib.mkDefault (!config.programs.nh.clean.enable);
-    dates = lib.mkDefault "weekly";
+    dates = lib.mkDefault "daily";
     options = lib.mkDefault "--delete-older-then 7d";
   };
 
@@ -63,7 +63,7 @@
     flake = lib.mkDefault self.outPath;
     clean = {
       enable = lib.mkDefault true;
-      dates = lib.mkDefault "weekly";
+      dates = lib.mkDefault "daily";
       extraArgs = "--keep 5 --keep-since 1weeks";
     };
   };
