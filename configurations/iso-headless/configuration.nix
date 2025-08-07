@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = with self.modules.nixos; [ mixin-nix ];
+
   environment.systemPackages = with pkgs; [
     binutils
     curl
@@ -25,13 +27,12 @@
     wget
   ];
 
-  nix.settings = {
-    inherit (self.nixConfig) experimental-features extra-substituters extra-trusted-public-keys;
-  };
+  nix.gc.automatic = false;
 
   programs = {
     git.enable = true;
     fish.enable = true;
+    nh.clean.enable = false;
   };
 
   users.users.nixos = {
