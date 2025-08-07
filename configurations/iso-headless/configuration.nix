@@ -32,7 +32,6 @@
   programs = {
     git.enable = true;
     fish.enable = true;
-    nh.enable = true;
   };
 
   users.users.nixos = {

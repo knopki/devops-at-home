@@ -259,6 +259,7 @@ in
     less.lessopen = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
     mosh.enable = mkDefault true;
     mtr.enable = mkDefault true;
+    nh.flake = "/home/sk/dev/knopki/devops-at-home";
     nix-index.enable = mkDefault true;
     nix-ld = {
       enable = true;

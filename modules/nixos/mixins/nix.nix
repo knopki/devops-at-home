@@ -27,9 +27,9 @@
   nix.settings.min-free = lib.mkDefault (512 * 1024 * 1024);
   nix.settings.tarball-ttl = lib.mkDefault (86400 * 30);
   nix.gc = {
-    automatic = lib.mkDefault true;
+    automatic = lib.mkDefault (!config.programs.nh.clean.enable);
     dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-then 30d";
+    options = lib.mkDefault "--delete-older-then 7d";
   };
 
   # Avoid copying unnecessary stuff over SSH
@@ -56,4 +56,15 @@
   # 100 is the default for user slices and 500 is systemd-coredumpd@
   # We rather want a build to be killed than our precious user sessions as builds can be easily restarted.
   systemd.services.nix-daemon.serviceConfig.OOMScoreAdjust = lib.mkDefault 250;
+
+  # nh settings
+  programs.nh = {
+    enable = lib.mkDefault true;
+    flake = lib.mkDefault self.outPath;
+    clean = {
+      enable = lib.mkDefault true;
+      dates = lib.mkDefault "weekly";
+      extraArgs = "--keep 5 --keep-since 1weeks";
+    };
+  };
 }
