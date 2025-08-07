@@ -300,43 +300,6 @@ in
   };
 
   #
-  # Shell
-  #
-
-  environment.shellAliases =
-    let
-      ifSudo = lib.mkIf config.security.sudo.enable;
-    in
-    {
-      # nix
-      n = "nix";
-      np = "n profile";
-      ni = "np install";
-      nr = "np remove";
-      ns = "n search --no-update-lock-file";
-      nf = "n flake";
-      nepl = "n repl '<nixpkgs>'";
-      srch = "ns nixos";
-      orch = "ns override";
-      nrb = ifSudo "sudo nixos-rebuild";
-
-      # sudo
-      s = ifSudo "sudo -E ";
-      si = ifSudo "sudo -i";
-      se = ifSudo "sudoedit";
-
-      # systemd
-      ctl = "systemctl";
-      stl = ifSudo "s systemctl";
-      utl = "systemctl --user";
-      ut = "systemctl --user start";
-      un = "systemctl --user stop";
-      up = ifSudo "s systemctl start";
-      dn = ifSudo "s systemctl stop";
-      jtl = "journalctl";
-    };
-
-  #
   # Nix
   #
 
