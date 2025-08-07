@@ -111,7 +111,6 @@ in
       # shell
       atuin
       fishPlugins.fish-you-should-use
-      fishPlugins.forgit
 
       # messenging
       simplex-chat-desktop
@@ -187,30 +186,7 @@ in
     fish = {
       enable = true;
       useBabelfish = true;
-      shellAliases = {
-        fzf = "fzf-tmux -m";
-        grep = "grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
-        myip = "curl ifconfig.co";
-      };
-      shellAbbrs = {
-        gco = "git checkout";
-        gst = "git status";
-        o = "xdg-open";
-        rsync-copy = "rsync -avz --progress -h";
-        rsync-move = "rsync -avz --progress -h --remove-source-files";
-        rsync-synchronize = "rsync -avzu --delete --progress -h";
-        rsync-update = "rsync -avzu --progress -h";
-      };
       interactiveShellInit = ''
-        function fish_hybrid_key_bindings --description \
-        "Vi-style bindings that inherit emacs-style bindings in all modes"
-            for mode in default insert visual
-                fish_default_key_bindings -M $mode
-            end
-            fish_vi_key_bindings --no-erase
-        end
-        set -g fish_key_bindings fish_hybrid_key_bindings
-        set -g fish_greeting ""
         source ${pkgs.ls-colors}/lscolors.csh
       '';
     };
