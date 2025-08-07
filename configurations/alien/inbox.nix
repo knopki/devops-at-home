@@ -500,16 +500,11 @@ in
       };
     };
     services = {
-      nix-daemon.serviceConfig.LimitSTACKSoft = "infinity";
       systemd-networkd = {
         serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
       };
     };
     # services.NetworkManager-wait-online.enable = false;
-    timers = {
-      nix-gc.timerConfig.Persistent = mkDefault true;
-      nix-optimise.timerConfig.Persistent = mkDefault true;
-    };
   };
 
   environment.etc."amnezia/amneziawg/home.conf".source = config.sops.secrets.amneziawg-home-conf.path;
