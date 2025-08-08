@@ -9,8 +9,6 @@ let
   cfg = config.users.users.sk;
 in
 {
-  imports = [ ./users-sk-pim.nix ];
-
   users.groups.sk.gid = mkDefault 1000;
 
   users.users.sk = {

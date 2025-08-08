@@ -53,6 +53,7 @@ let
     qpdf
     rclone
     seahorse
+    vdirsyncer
     weasis
     zotero
   ];
@@ -107,6 +108,7 @@ in
       wget
       chezmoi
       starship
+      libsecret # secret-tool
 
       # shell
       atuin
