@@ -47,7 +47,6 @@ in
     secrets = {
       sk-user-password.neededForUsers = true;
       sk-chezmoi-age-key.owner = config.users.users.sk.name;
-      sk-kopia-repo-password-env-file.owner = config.users.users.sk.name;
     };
   };
 }

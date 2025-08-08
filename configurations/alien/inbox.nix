@@ -127,6 +127,7 @@ in
 
       # backups
       kopia
+      kopia-ui
       flock
 
       # look and feel
