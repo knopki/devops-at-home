@@ -71,7 +71,6 @@ let
 
     # editors / IDE
     arduino-ide
-    aider-chat-full
 
     # python
     uv
