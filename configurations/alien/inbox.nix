@@ -33,6 +33,8 @@ let
     aliza
     anki
     anytype
+    affine
+    siyuan
     aspellDicts.en
     aspellDicts.ru
     brave
@@ -125,9 +127,10 @@ in
       remmina
 
       # backups
+      btrbk
       kopia
       kopia-ui
-      flock
+      plakar
 
       # look and feel
       arc-kde-theme
@@ -148,10 +151,12 @@ in
       revanced-cli
       restic
       rustic-rs
+      redu
       smartmontools
       yubikey-manager
       vmtouch
       httm
+      dduper
       jq
 
       # temporary
@@ -233,7 +238,6 @@ in
       };
     };
     iftop.enable = mkDefault true;
-    iotop.enable = mkDefault true;
     less.lessopen = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
     mosh.enable = mkDefault true;
     mtr.enable = mkDefault true;
