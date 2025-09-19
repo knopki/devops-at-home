@@ -4,7 +4,6 @@ let
 in
 {
   boot = {
-    supportedFilesystems = [ "zfs" ];
     zfs = {
       forceImportRoot = false;
       extraPools = [ "evo970" ];
@@ -49,8 +48,6 @@ in
           use_template = [ "default" ];
           recursive = "zfs";
         };
-        "wdc2/private/np".use_template = [ "long_term" ];
-        "wdc2/private/torrents".use_template = [ "minimal" ];
         "wdc3/private/temporary".use_template = [ "default" ];
         "wdc3/backups/alien/home" = {
           use_template = [
@@ -64,10 +61,6 @@ in
             "only_prune"
           ];
         };
-        "wdc3/backups/alien/np".use_template = [
-          "long_term"
-          "only_prune"
-        ];
         "wdc3/backups/alien/system" = {
           use_template = [
             "default"
@@ -75,10 +68,6 @@ in
           ];
           recursive = "zfs";
         };
-        "wdc3/backups/alien/torrents".use_template = [
-          "minimal"
-          "only_prune"
-        ];
       };
     };
 
@@ -110,20 +99,6 @@ in
           recursive = true;
           sendOptions = "w";
           recvOptions = commonRecvOptions;
-        };
-        np = {
-          source = "wdc2/private/np";
-          target = "wdc3/backups/alien/np";
-          sendOptions = "w";
-          recvOptions = commonRecvOptions;
-          # recvOptions = "ux recordsize o canmount=off o recordsize=1M";
-        };
-        torrents = {
-          source = "wdc2/private/torrents";
-          target = "wdc3/backups/alien/torrents";
-          sendOptions = "w";
-          recvOptions = commonRecvOptions;
-          # recvOptions = "ux recordsize o canmount=off o recordsize=1M";
         };
       };
     };
