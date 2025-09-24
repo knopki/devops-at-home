@@ -5,7 +5,6 @@
 {
   config,
   inputs,
-  self,
   lib,
   ...
 }:

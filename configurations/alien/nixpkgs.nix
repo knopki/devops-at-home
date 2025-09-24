@@ -5,10 +5,7 @@ let
 in
 {
   nixpkgs.overlays = with self.overlays; [
-    # anytype-unstable
-    affine-unstable
-    plakar-unstable
-    simplex-chat-desktop-unstable
+    unstable-backports
     mpv
   ];
   nixpkgs.config = {

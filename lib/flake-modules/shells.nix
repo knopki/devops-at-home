@@ -30,7 +30,11 @@ in
               allowUnsupportedSystem = true;
               cudaSupport = true;
             };
-            overlays = [ self.overlays.my-packages ];
+            overlays = with self.overlays; [
+              my-packages
+              nixpkgs-unstable
+              unstable-backports
+            ];
           };
         };
         loadShell = _: path: import path shellModuleArgs;

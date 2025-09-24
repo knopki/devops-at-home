@@ -13,8 +13,9 @@
   systemd.services.nix-gc.serviceConfig.CPUSchedulingPolicy = "idle";
 
   nixpkgs.overlays = with self.overlays; [
-    nixpkgs-unstable
     my-packages
+    nixpkgs-unstable
+    unstable-backports
   ];
 
   programs = {
