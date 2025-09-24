@@ -43,6 +43,7 @@ let
     keepassxc
     khal
     khard
+    naps2
     nextcloud-client
     obsidian
     obsidian-export

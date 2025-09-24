@@ -21,6 +21,12 @@ in
 
   lima = pkgIfVersionMin prev.lima "1.2" p.lima;
 
+  naps2 =
+    let
+      unstableNaps2 = prev.callPackage p.naps2.override { };
+    in
+    pkgIfVersionMin prev.anytype "8.2.1" unstableNaps2;
+
   # not in 25.05
   plakar = prev.callPackage p.plakar.override { };
 
