@@ -28,6 +28,7 @@ Each shell module is added to the list in a file corresponding to its type.
 
 ## Available Environments
 
+- [Github Actions](gh-actions) - Github Actions development
 - [nixos](nixos/README.md) - NixOS system development and administration
 - [ODOO 11 Doodba](odoo-doodba-11/README.md) - ERP development with Doodba framework
 - [Infrastructure Management](wrk-a25-infra/README.md) - Cloud infrastructure management (terraform)
