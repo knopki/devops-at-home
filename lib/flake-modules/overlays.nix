@@ -6,44 +6,25 @@
   config,
   inputs,
   lib,
+  self,
   ...
 }:
 let
   inherit (builtins) elem;
-  inherit (lib) getName;
   inherit (lib.attrsets) mapAttrs;
-
-  nixpkgsArgs = {
-    overlays = [ ];
-    config = {
-      allowlistedLicenses = [ ];
-      allowUnfreePredicate =
-        pkg:
-        elem (getName pkg) [
-          "anytype"
-          "anytype-heart"
-          "pantum-driver"
-        ];
-      allowInsecurePredicate =
-        pkg:
-        elem (lib.debug.traceVal "${pkg.pname}-${pkg.version}") [
-          "electron-35.7.5"
-        ];
-    };
-  };
 
   # backport for legacy systems
   nixpkgs2505Overlay = final: _prev: {
     nixpkgs-25-05 = import inputs.nixpkgs-25-05 {
       inherit (final) system;
-      inherit (nixpkgsArgs) overlays config;
+      config = self.lib.nixpkgsPolicies.configStandard;
     };
   };
 
   unstableOverlay = final: _prev: {
     nixpkgsUnstable = import inputs.nixpkgs-unstable {
       inherit (final) system;
-      inherit (nixpkgsArgs) overlays config;
+      config = self.lib.nixpkgsPolicies.configStandard;
     };
   };
 

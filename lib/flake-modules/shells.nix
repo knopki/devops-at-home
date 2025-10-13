@@ -25,8 +25,7 @@ in
           inherit config inputs;
           pkgs = import inputs.nixpkgs {
             inherit system;
-            config = {
-              allowUnfree = true;
+            config = self.lib.nixpkgsPolicies.configStandard // {
               allowUnsupportedSystem = true;
               cudaSupport = true;
             };

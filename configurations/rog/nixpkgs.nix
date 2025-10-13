@@ -1,28 +1,4 @@
-{ lib, ... }:
-let
-  inherit (builtins) elem;
-  inherit (lib) getName;
-in
+{ self, ... }:
 {
-  nixpkgs.config = {
-    allowUnfreePredicate =
-      pkg:
-      elem (getName pkg) [
-        "anydesk"
-        "anytype"
-        "aspell-dict-en-science"
-        "corefonts"
-        "discord"
-        "mpv-thumbfast"
-        "obsidian"
-        "pantum-driver"
-        "unrar"
-      ];
-
-    allowInsecurePredicate =
-      pkg:
-      elem (getName pkg) [
-        "youtube-dl"
-      ];
-  };
+  nixpkgs.config = self.lib.nixpkgsPolicies.configStandard;
 }
