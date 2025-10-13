@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let
-  myPython = pkgs.python37;
+  # TODO: broken
+  myPython = pkgs.python310;
 in
 {
   devshell.name = "odoo-doodba-11";
@@ -22,7 +23,7 @@ in
     nodejs
     pgcopydb
     podman
-    postgresql
+    postgresql_16
     rsync
     shellcheck
     shfmt
