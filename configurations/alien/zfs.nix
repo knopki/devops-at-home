@@ -48,7 +48,6 @@ in
           use_template = [ "default" ];
           recursive = "zfs";
         };
-        "wdc3/private/temporary".use_template = [ "default" ];
         "wdc3/backups/alien/home" = {
           use_template = [
             "long_term"
@@ -73,6 +72,7 @@ in
 
     syncoid = {
       enable = true;
+      interval = "yearly";
       localTargetAllow = [
         "canmount"
         "change-key"
