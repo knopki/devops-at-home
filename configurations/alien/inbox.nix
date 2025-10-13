@@ -11,7 +11,7 @@ let
     # digikam
     # rawtherapee
     imgcat
-    krita
+    pinta
     mpv-with-plugins
     obs-studio
     picard
@@ -28,13 +28,13 @@ let
     imagemagick
     swayimg
     feh
+    kdePackages.kdenlive
+    handbrake
   ];
   officePkgs = with pkgs; [
     aliza
     anki
     anytype
-    affine
-    siyuan
     aspellDicts.en
     aspellDicts.ru
     brave
@@ -131,7 +131,11 @@ in
       btrbk
       kopia
       kopia-ui
-      plakar
+      restic
+      restic-browser
+      rustic-rs
+      redu
+      deja-dup
 
       # look and feel
       arc-kde-theme
@@ -142,6 +146,7 @@ in
       papirus-icon-theme
 
       # misc
+      bees
       tor-browser
       amneziawg-go
       amneziawg-tools
@@ -150,14 +155,10 @@ in
       # tailscale
       xorg.xhost
       revanced-cli
-      restic
-      rustic-rs
-      redu
       smartmontools
       yubikey-manager
       vmtouch
       httm
-      dduper
       jq
 
       # temporary
