@@ -19,6 +19,8 @@ in
     in
     pkgIfVersionMin prev.anytype "0.49.2" unstableAnytype;
 
+  bees = pkgIfVersionMin prev.bees "0.11" p.bees;
+
   lima = pkgIfVersionMin prev.lima "1.2" p.lima;
 
   naps2 =
