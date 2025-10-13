@@ -143,7 +143,7 @@ in
       fira-code-symbols
       nerd-fonts.fira-code
       nerd-fonts.symbols-only
-      papirus-icon-theme
+      (hiPrio papirus-icon-theme)
 
       # misc
       bees
