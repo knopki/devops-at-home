@@ -10,7 +10,7 @@
 }:
 let
   inherit (builtins) elem;
-  inherit (lib) getName getNameWithVersion;
+  inherit (lib) getName;
   inherit (lib.attrsets) mapAttrs;
 
   nixpkgsArgs = {
@@ -24,7 +24,11 @@ let
           "anytype-heart"
           "pantum-driver"
         ];
-      allowInsecurePredicate = pkg: elem (getNameWithVersion pkg) [ ];
+      allowInsecurePredicate =
+        pkg:
+        elem (lib.debug.traceVal "${pkg.pname}-${pkg.version}") [
+          "electron-35.7.5"
+        ];
     };
   };
 

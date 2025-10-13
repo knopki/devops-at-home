@@ -27,8 +27,7 @@ in
 
     allowInsecurePredicate =
       pkg:
-      elem (getName pkg) [
-        "youtube-dl"
+      elem (lib.debug.traceVal "${pkg.pname}-${pkg.version}") [
       ];
   };
 }
