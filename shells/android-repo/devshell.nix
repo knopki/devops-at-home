@@ -16,6 +16,7 @@ in
   devshell.packages = with pkgs; [
     androidComposition.platform-tools
     apkeep
+    fdroidcl
     fdroidserver
     jdk
     myPython
