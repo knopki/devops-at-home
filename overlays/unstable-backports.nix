@@ -17,7 +17,7 @@ in
         anytype-heart = p.anytype-heart;
       };
     in
-    pkgIfVersionMin prev.anytype "0.49.2" unstableAnytype;
+    pkgIfVersionMin prev.anytype "0.50.5" unstableAnytype;
 
   bees = pkgIfVersionMin prev.bees "0.11" p.bees;
 
