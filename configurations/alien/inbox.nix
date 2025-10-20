@@ -71,6 +71,7 @@ let
     picotool
     python3
     just
+    devenv
 
     # editors / IDE
     arduino-ide
