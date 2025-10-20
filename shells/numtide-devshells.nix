@@ -1,6 +1,5 @@
 {
   absolidix = ./absolidix/devshell.nix;
-  android-repo = ./android-repo/devshell.nix;
   gh-actions = ./gh-actions/devshell.nix;
   esdd = ./esdd/devshell.nix;
   nixos = ./nixos/devshell.nix;
