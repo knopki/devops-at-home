@@ -21,6 +21,8 @@ in
 
   bees = pkgIfVersionMin prev.bees "0.11" p.bees;
 
+  devenv = pkgIfVersionMin prev.devenv "1.10" p.devenv;
+
   lima = pkgIfVersionMin prev.lima "1.2" p.lima;
 
   naps2 =
