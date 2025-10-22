@@ -29,7 +29,6 @@ Each shell module is added to the list in a file corresponding to its type.
 
 ## Available Environments
 
-- [Github Actions](gh-actions) - Github Actions development
 - [nixos](nixos/README.md) - NixOS system development and administration
 
 ## Development Workflow

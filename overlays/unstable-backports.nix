@@ -7,8 +7,6 @@ let
   p = prev.nixpkgsUnstable;
 in
 {
-  act = pkgIfVersionMin prev.act "0.2.81" p.act;
-
   affine = pkgIfVersionMin prev.affine "0.24" p.affine;
 
   anytype =
