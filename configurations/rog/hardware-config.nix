@@ -4,11 +4,6 @@
   self,
   ...
 }:
-let
-  preservationCommonModule = import self.modules.nixos.preservation-common {
-    statePath = "/state";
-  };
-in
 {
   imports = [
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga402x-amdgpu
@@ -18,8 +13,8 @@ in
   ]
   ++ (with self.modules.nixos; [
     mixin-systemd-boot
-  ])
-  ++ [ preservationCommonModule ];
+    mixin-preservation-common
+  ]);
 
   boot = {
     bootspec.enable = true;

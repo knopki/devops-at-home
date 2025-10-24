@@ -10,8 +10,17 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # DE stuff
     cosmic-ext-tweaks
+    cosmic-ext-applet-caffeine
+    cosmic-reader
+    cosmic-store
     gnome-themes-extra
+    quick-webapps
+
+    # System stuff
+    gnome-disk-utility
+    gparted
   ];
 
   qt = {

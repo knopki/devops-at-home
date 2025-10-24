@@ -70,4 +70,6 @@
     ];
     hashedPasswordFile = config.sops.secrets.knopki-user-password.path;
   };
+
+  systemd.user.tmpfiles.users.knopki.rules = self.lib.preservationPolicies.commonUserTmpfilesRules;
 }

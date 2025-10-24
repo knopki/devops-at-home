@@ -13,7 +13,6 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
       users.mutableUsers = false;
       sops.defaultSopsFile = ../../secrets/rog.yaml;
     }
-    ./graphical.nix
     ./hardware-config.nix
     ./networking.nix
     ./nixpkgs.nix

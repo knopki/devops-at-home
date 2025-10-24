@@ -46,6 +46,7 @@ chmod 600 /tmp/disk.key
 ```
 
 Deploy the system:
+
 ```bash
 nixos-anywhere -f .#<hostname> --copy-host-keys \
   --disk-encryption-keys /tmp/disk.key /tmp/disk.key \  --target-host root@<TARGET_IP>
@@ -71,6 +72,7 @@ systemd-cryptenroll /dev/<target_luks_partition> \
 ### Daily Operations
 
 **Update System**:
+
 ```bash
 # Update flake inputs
 nix flake update
@@ -110,12 +112,14 @@ Current user's AGE key is most likely at `~/.config/sops/age/keys.txt`.
 The matching of keys and files is described in the `.sops.yaml` file.
 
 **Edit Secrets**:
+
 ```bash
 # Edit host-specific secrets
 sops edit secrets/$(hostname).yaml
 ```
 
 **Rotate Keys**:
+
 ```bash
 # Generate new age key
 age-keygen -o ~/.age/new-key.txt
@@ -132,6 +136,7 @@ sops updatekeys secrets/hostname.yaml
 TODO: `btrbk`, `kopia`/`restic`/`plakar` guide
 
 **ZFS Snapshots** (alien):
+
 ```bash
 # Manual snapshot
 zfs snapshot pool/dataset@manual-$(date +%Y%m%d)
@@ -144,6 +149,7 @@ zfs rollback pool/dataset@snapshot-name
 ```
 
 **Btrfs Snapshots** (rog):
+
 ```bash
 # Manual snapshot
 btrfs subvolume snapshot / /snapshots/manual-$(date +%Y%m%d)
@@ -158,27 +164,31 @@ btrfs subvolume list /
 ### Recovery Procedures
 
 **Boot from Previous Generation**:
+
 1. Select previous generation in boot menu
-2. System automatically uses previous configuration
-3. Fix issues and rebuild (redeploy - push new configuration)
+1. System automatically uses previous configuration
+1. Fix issues and rebuild (redeploy - push new configuration)
 
 **Emergency Recovery**:
+
 1. Boot from installation media
-2. Mount encrypted storage with recovery key
-3. True to repair
+1. Mount encrypted storage with recovery key
+1. True to repair
 
 **Complete System Recovery**:
+
 1. Boot installation media
-2. Backup if needed
-3. Partition storage according to host configuration
-3. Run `nixos-anywhere` with current configuration
-4. Restore data from backups
+1. Backup if needed
+1. Partition storage according to host configuration
+1. Run `nixos-anywhere` with current configuration
+1. Restore data from backups
 
 ## Monitoring and Maintenance
 
 ### System Health
 
 **Automated Maintenance**:
+
 - Nix garbage collection runs periodically
 - Btrfs/ZFS scrubs runs periodically
 - Filsesystem snapshot cleanup

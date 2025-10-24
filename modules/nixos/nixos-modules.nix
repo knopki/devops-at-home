@@ -2,6 +2,7 @@
   home-manager = ./home-manager.nix;
 
   # mixins
+  mixin-cosmic-de = ./mixins/cosmic-de.nix;
   mixin-essential-server-packages = ./mixins/essential-server-packages.nix;
   mixin-networking = ./mixins/networking.nix;
   mixin-nix = ./mixins/nix.nix;

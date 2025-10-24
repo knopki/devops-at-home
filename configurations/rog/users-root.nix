@@ -36,4 +36,6 @@
       self.lib.sshPubKeys.knopkiSshPubKey1
     ];
   };
+
+  systemd.user.tmpfiles.users.root.rules = self.lib.preservationPolicies.commonUserTmpfilesRules;
 }

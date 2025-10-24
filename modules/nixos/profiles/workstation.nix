@@ -1,12 +1,22 @@
 #
 # Workstation
 #
-{ lib, self, ... }:
+{
+  lib,
+  self,
+  pkgs,
+  ...
+}:
 {
   imports = with self.modules.nixos; [
     profile-common
+    mixin-cosmic-de
     mixin-pipewire
     programs-helix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    qalculate-gtk
   ];
 
   nix.daemonCPUSchedPolicy = "idle";

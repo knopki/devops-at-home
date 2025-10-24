@@ -14,7 +14,6 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
     ./profiles-earlyoom.nix
     ./profiles-cryptowallets.nix
     ./profiles-desktop-essentials.nix
-    ./profiles-desktop-kde.nix
     ./profiles-laptop.nix
     ./profiles-ws-virt.nix
     ./users-root.nix

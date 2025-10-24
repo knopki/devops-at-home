@@ -27,9 +27,11 @@ let
     czkawka-full
     imagemagick
     swayimg
-    feh
-    kdePackages.kdenlive
+    # kdePackages.kdenlive
     handbrake
+    szyszka
+    rnr
+    edir
   ];
   officePkgs = with pkgs; [
     aliza
@@ -52,7 +54,6 @@ let
     onlyoffice-desktopeditors
     pdfarranger
     poppler_utils
-    qalculate-gtk
     qpdf
     rclone
     seahorse
@@ -118,9 +119,7 @@ in
       fishPlugins.fish-you-should-use
 
       # messenging
-      simplex-chat-desktop
       telegram-desktop
-      discord
 
       # remote
       anydesk
@@ -139,12 +138,9 @@ in
       deja-dup
 
       # look and feel
-      arc-kde-theme
-      arc-theme
       fira-code-symbols
       nerd-fonts.fira-code
       nerd-fonts.symbols-only
-      (hiPrio papirus-icon-theme)
 
       # misc
       bees
@@ -175,7 +171,6 @@ in
     };
     chromium = {
       enable = true;
-      enablePlasmaBrowserIntegration = true;
       extensions = [
         "npeicpdbkakmehahjeeohfdhnlpdklia" # webrtc network linter
       ];
@@ -387,10 +382,6 @@ in
     SystemMaxFileSize=50M
   '';
 
-  environment.variables = {
-    PLASMA_USE_QT_SCALING = "1";
-  };
-
   networking = {
     hostId = "ff0b9d65";
     networkmanager.unmanaged = [ "docker0" ];
@@ -418,10 +409,6 @@ in
         "ve-+"
       ];
     };
-  };
-
-  services = {
-    # tailscale.enable = true;
   };
 
   sops = {
@@ -453,7 +440,6 @@ in
         serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
       };
     };
-    # services.NetworkManager-wait-online.enable = false;
   };
 
   environment.etc."amnezia/amneziawg/home.conf".source = config.sops.secrets.amneziawg-home-conf.path;

@@ -3,6 +3,7 @@
 Laptop from 2014. Very old installation of NixOS (2019?).
 
 **Hardware**: Dell Alienware 15 R2
+
 - **CPU**: Intel with integrated graphics
 - **GPU**: Intel (NVIDIA disabled because of instability)
 - **Storage**: NVMe SSD with ZFS
@@ -11,13 +12,15 @@ Laptop from 2014. Very old installation of NixOS (2019?).
 ### Configuration Details
 
 **Storage Architecture**:
+
 - Boot: UEFI boot partition
 - Root: Full disk encryption with LUKS
 - Data: ZFS pool with encryption
 - Backup: Automated snapshots with Sanoid, replication with Syncoid + offsite backup with kopia
 
 **Key Features**:
-- Full desktop environment (KDE Plasma)
+
+- Full desktop environment (Cosmic DE)
 - Development tools and IDEs
 - Container runtime (Podman)
 - Media applications
@@ -25,12 +28,13 @@ Laptop from 2014. Very old installation of NixOS (2019?).
 - VPN client (AmneziaWG)
 
 **Services**:
-- TorrServer (port 5665)
+
 - iSponsorBlockTV
 - SSH daemon
 - Printing support
 
 **File Systems**:
+
 ```
 /boot     -> /dev/disk/by-uuid/6964-B539 (vfat)
 /         -> /dev/disk/by-uuid/e384e984-... (ext4)
