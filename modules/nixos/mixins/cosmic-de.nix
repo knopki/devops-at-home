@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
+let
+  inherit (lib) mkDefault;
+in
 {
   environment.sessionVariables = {
     # to make Clipboard Manager work
@@ -10,23 +13,39 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # DE stuff
+    # Look & feel
     cosmic-ext-tweaks
     cosmic-ext-applet-caffeine
-    cosmic-reader
-    cosmic-store
     gnome-themes-extra
-    quick-webapps
 
-    # System stuff
-    gnome-disk-utility
+    # get some DE parts from GNOME
+    baobab
+    resources
     gparted
+    seahorse # COSMIC use GNOME's keyring
+    papers # alternative to cosmic reader
+    cosmic-reader # not ready to be a default pdf viewer
+    file-roller # archive management
+    gnome-calendar
+    gnome-characters
+    gnome-contacts
+    gnome-font-viewer
+    gnome-weather
+    networkmanagerapplet
+    loupe
+
+    quick-webapps
+    hardinfo2
   ];
 
+  programs = {
+    gnome-disks.enable = mkDefault true;
+  };
+
   qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
+    enable = mkDefault true;
+    platformTheme = mkDefault "gnome";
+    style = mkDefault "adwaita-dark";
   };
 
   services = {
@@ -35,5 +54,8 @@
     displayManager.cosmic-greeter.enable = true;
     desktopManager.cosmic.enable = true;
     desktopManager.cosmic.xwayland.enable = true;
+
+    blueman.enable = mkDefault true;
+    gnome.localsearch.enable = mkDefault true;
   };
 }

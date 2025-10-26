@@ -9,6 +9,7 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
     ./inbox.nix
     ./nixpkgs.nix
     ./hardware-config.nix
+    ./graphical.nix
     ./profiles-flatpak.nix
     ./profiles-fonts.nix
     ./profiles-earlyoom.nix

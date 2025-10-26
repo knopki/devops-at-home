@@ -45,18 +45,13 @@ let
     keepassxc
     khal
     khard
-    naps2
-    nextcloud-client
     obsidian
     obsidian-export
     ocrmypdf
     offlineimap
-    onlyoffice-desktopeditors
-    pdfarranger
     poppler_utils
     qpdf
     rclone
-    seahorse
     vdirsyncer
     weasis
     zotero
@@ -159,7 +154,7 @@ in
       jq
 
       # temporary
-      usbimager
+      impression
     ]
     ++ devPkgs
     ++ mediaPkgs

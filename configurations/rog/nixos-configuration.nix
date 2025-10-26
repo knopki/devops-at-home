@@ -16,6 +16,7 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
     ./hardware-config.nix
     ./networking.nix
     ./nixpkgs.nix
+    ./graphical.nix
     ./users-knopki.nix
     ./users-root.nix
     ./inbox.nix
