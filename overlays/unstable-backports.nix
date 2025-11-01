@@ -45,6 +45,12 @@ in
 
   cosmic-idle = pkgIfVersionMin prev.cosmic-idle "1.0.0-beta.4" p.cosmic-idle;
 
+  cosmic-initial-setup =
+    if (prev ? cosmic-initial-setup) then
+      pkgIfVersionMin prev.cosmic-initial-setup "1.0.0-beta.4" p.cosmit-initial-setup
+    else
+      p.cosmic-initial-setup;
+
   cosmic-launcher = pkgIfVersionMin prev.cosmic-launcher "1.0.0-beta.4" p.cosmic-launcher;
 
   cosmic-notifications =
@@ -86,6 +92,8 @@ in
       p.cosmic-workspaces-epoch;
 
   devenv = pkgIfVersionMin prev.devenv "1.10" p.devenv;
+
+  forecast = if (prev ? forecast) then prev.forecast else p.forecast;
 
   lima = pkgIfVersionMin prev.lima "1.2" p.lima;
 

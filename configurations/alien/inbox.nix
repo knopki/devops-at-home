@@ -314,7 +314,6 @@ in
 
   services = {
     envfs.enable = true;
-    gvfs.enable = true;
 
     nscd.enableNsncd = true;
 

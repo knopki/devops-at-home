@@ -41,7 +41,6 @@ in
   ];
 
   hardware = {
-    graphics.enable = mkDefault true;
     sane = {
       enable = mkDefault true;
       extraBackends = [ ];
@@ -73,26 +72,17 @@ in
         in
         (genAttrs trustInterfaces (_name: allowedAllPortRanges));
     };
-    networkmanager.enable = mkDefault true;
     useNetworkd = true;
   };
 
   programs = {
     adb.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableBrowserSocket = true;
-    };
-    ssh = {
-      startAgent = true;
-    };
   };
 
   security.protectKernelImage = false;
 
   services = {
     avahi = {
-      enable = true;
       nssmdns4 = true;
       nssmdns6 = true;
     };

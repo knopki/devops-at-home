@@ -31,7 +31,6 @@ in
     gnome-contacts
     gnome-font-viewer
     gnome-weather
-    networkmanagerapplet
     loupe
 
     quick-webapps

@@ -20,8 +20,6 @@ in
     usbutils
   ];
 
-  hardware.bluetooth.enable = mkDefault true;
-
   services = {
     logind = {
       lidSwitch = "suspend-then-hibernate";
