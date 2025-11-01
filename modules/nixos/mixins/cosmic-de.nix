@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkDefault;
 in
@@ -34,15 +39,18 @@ in
 
     quick-webapps
     hardinfo2
+
+    config.programs.gnupg.agent.pinentryPackage
   ];
 
   programs = {
-    seahorse.enable = mkDefault true;
+    gnupg.agent.pinentryPackage = mkDefault pkgs.pinentry-gnome3;
     gnome-disks.enable = mkDefault true;
     firefox.preferences = {
       # disable libadwaita theming for Firefox
       "widget.gtk.libadwaita-colors.enabled" = mkDefault false;
     };
+    seahorse.enable = mkDefault true;
   };
 
   qt = {
@@ -52,7 +60,7 @@ in
   };
 
   services = {
-    udev.packages = with pkgs; [ gnome-settings-daemon ];
+    udev.packages = [ pkgs.gnome-settings-daemon ];
 
     displayManager.cosmic-greeter.enable = true;
     desktopManager.cosmic.enable = true;
