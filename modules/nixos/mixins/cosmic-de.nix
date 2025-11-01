@@ -22,7 +22,6 @@ in
     baobab
     resources
     gparted
-    seahorse # COSMIC use GNOME's keyring
     papers # alternative to cosmic reader
     cosmic-reader # not ready to be a default pdf viewer
     file-roller # archive management
@@ -38,7 +37,12 @@ in
   ];
 
   programs = {
+    seahorse.enable = mkDefault true;
     gnome-disks.enable = mkDefault true;
+    firefox.preferences = {
+      # disable libadwaita theming for Firefox
+      "widget.gtk.libadwaita-colors.enabled" = mkDefault false;
+    };
   };
 
   qt = {
@@ -55,6 +59,11 @@ in
     desktopManager.cosmic.xwayland.enable = true;
 
     blueman.enable = mkDefault true;
-    gnome.localsearch.enable = mkDefault true;
+    gnome = {
+      evolution-data-server.enable = mkDefault true;
+      gnome-online-accounts.enable = mkDefault true;
+      gnome-settings-daemon.enable = mkDefault true;
+      localsearch.enable = mkDefault true;
+    };
   };
 }
