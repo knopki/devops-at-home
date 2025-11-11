@@ -17,6 +17,7 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
     ./profiles-desktop-essentials.nix
     ./profiles-laptop.nix
     ./profiles-ws-virt.nix
+    ./restic.nix
     ./users-root.nix
     ./users-sk.nix
     ./containers.nix
