@@ -7,7 +7,6 @@
 let
   inherit (builtins) toFile;
   inherit (lib.lists) foldl;
-  inherit (lib.modules) mkForce;
 
   commonResticSopsSecretAttrs = {
     owner = resticUser.name;
@@ -21,22 +20,206 @@ let
   '';
 
   mkIgnoresFile = xs: toFile "ignore" (foldl (a: b: a + "\n" + b) "" xs);
-  generalIgnorePatterns = [
-    ".cache"
-    "cache"
-    ".tmp"
-    ".temp"
-    "tmp"
-    "temp"
-    ".log"
-    "log"
-    ".Trash"
-    ".direnv"
-    ".venv"
-    "/home/*/**/node_modules"
-    "/home/*/.cache"
+  # File extensions exclude patterns
+  genericExcludedExtensions = [
+    "*.back"
+    "*.bak"
+    "*.bkp"
+    "*.cache"
+    "*.chk"
+    "*.dmp"
+    "*.dump"
+    "*.err"
+    "*.lock"
+    "*.lockfile"
+    "*.log"
+    "*.log[0-9]"
+    "*.log.[0-9]"
+    "*.log.[0-9][0-9]"
+    "*.old"
+    "*.tmp"
+    "*.temp"
+    "*.pid"
+
+    # Browser not finished downloads
+    "*.download"
+    "*.crdownload"
+    "*.part"
+
+    # Python compiled files
+    "*.py[cod]"
   ];
-  electronAppsIgnorePatterns = [
+  genericExcludes = [
+    # System trash directory
+    "**/.Trash"
+
+    # MacOS files
+    "**/.DS_Store"
+
+    # Generic directories / files
+    "**/cache*.db"
+
+    # Generic Thumbs files
+    "**/thumb*.db"
+    "**/icon*.db"
+    "**/icons*.db"
+    "**/*cache.db"
+    "**/iconcache*.db"
+
+    # Generic Thumbs directories
+    "**/.thumbnails"
+    "**/thumbnails"
+    "**/thumbcache*.db"
+
+    # Generic tmp dir
+    "**/Temp"
+    "**/tmp"
+
+    # Generic caches dir for most navigators
+    "**/.cache"
+    "**/Font*Cache"
+    "**/File*Cache"
+    "**/Dist*Cache"
+    "**/Native*Cache"
+    "**/Play*Cache"
+    "**/Asset*Cache"
+    "**/Activities*Cache"
+    "**/Script*Cache"
+    "**/Gpu*Cache"
+    "**/Code*Cache"
+    "**/Local*Cache"
+    "**/Session*Cache"
+    "**/Web*Cache"
+    "**/JS*Cache"
+    "**/CRL*Cache"
+    "**/GrShader*Cache"
+    "**/Shader*Cache"
+    "**/Cache_data"
+    "**/Cache"
+    "**/Caches"
+    "**/CacheStorage"
+    "**/Cachedata"
+    "**/CachedFiles"
+    "**/Cache*Storage"
+    "**/Cache*data"
+    "**/Cached*Files"
+    # firefox specific
+    "**/cache2"
+
+    # npm
+    "**/node_modules"
+    "**/npm-cache"
+
+    # Thumbnails folder
+    "**/Thumbnails"
+
+    # Lock files
+    "**/lock"
+    "**/lockfile"
+
+    # Generic cookie files and folders
+    "**/Cookie"
+
+    # Python cache files
+    "**/__pycache__"
+
+    # Speific coverage files
+    "**/.tox"
+    "**/.nox"
+    "**/.coverage"
+    "**/.pytest_cache"
+
+    # Python VENV files
+    "**/.venv"
+    "**/env.bak"
+    "**/venv.bak"
+
+    # PyCharm
+    "**/.idea"
+
+    # VSCore
+    "**/.vscode"
+  ];
+  nixLikeExcludes = [
+    # Generic unix sys path excludes
+    "/dev"
+    "lost+found"
+    "/media"
+    "/proc"
+    "/sys"
+    "/run"
+    "/selinux"
+    "/var/cache"
+    "/var/log"
+    "/var/run"
+    "/var/tmp"
+    "/tmp"
+
+    # More MacOS specific sys path excludes
+    "/afs"
+    "/Network"
+    "/automount"
+    "/private/Network"
+    "/private/tmp"
+    "/private/var/tmp"
+    "/private/var/folders"
+    "/private/var/run"
+    "/private/var/spool/postfix"
+    "/private/var/automount"
+    "/private/var/db/fseventsd"
+    "/Previous Systems"
+
+    # Home directory excludes mostly found on unixes
+    "/home/*/Downloads"
+    "/home/*/Library"
+    "/home/*/snap"
+    "/home/*/.Trash"
+    "/home/*/.bundle"
+    "/home/*/.cache"
+    "/home/*/.dbus"
+    "/home/*/.debug"
+    "/home/*/.gvfs"
+    "/home/*/.local/share/gvfs-metadata"
+    "/home/*/.local/share/Trash"
+    "/home/*/.dropbox"
+    "/home/*/.dropbox-dist"
+    "/home/*/.local/pipx"
+    "/home/*/.local/share/Trash"
+    "/home/*/.npm"
+    "/home/*/.pyenv"
+    "/home/*/.thumbnails"
+    "/home/*/.virtualenvs"
+    "/home/*/.recently-used"
+    "/home/*/.xession-errors"
+    "/home/*/OneDrive"
+    "/home/*/Dropbox"
+    "/home/*/SkyDrive*"
+    "$HOME/Downloads"
+    "$HOME/Library"
+    "$HOME/snap"
+    "$HOME/.Trash"
+    "$HOME/.bundle"
+    "$HOME/.cache"
+    "$HOME/.dbus"
+    "$HOME/.debug"
+    "$HOME/.gvfs"
+    "$HOME/.local/share/gvfs-metadata"
+    "$HOME/.local/share/Trash"
+    "$HOME/.dropbox"
+    "$HOME/.dropbox-dist"
+    "$HOME/.local/pipx"
+    "$HOME/.local/share/Trash"
+    "$HOME/.npm"
+    "$HOME/.pyenv"
+    "$HOME/.thumbnails"
+    "$HOME/.virtualenvs"
+    "$HOME/.recently-used"
+    "$HOME/.xession-errors"
+    "$HOME/OneDrive"
+    "$HOME/Dropbox"
+    "$HOME/SkyDrive*"
+
+    # Electron Apps
     "/home/*/.config/**/blob_storage"
     "/home/*/.config/**/Application Cache"
     "/home/*/.config/**/Cache"
@@ -48,40 +231,66 @@ let
     "/home/*/.var/app/**/Cache"
     "/home/*/.var/app/**/CachedData"
     "/home/*/.var/app/**/Code Cache"
-    "/home/*/.var/app/**/GPUCache"
-  ];
-  homeIgnorePatterns = generalIgnorePatterns ++ electronAppsIgnorePatterns;
-  homeIgnoresFile = mkIgnoresFile homeIgnorePatterns;
+    "$HOME/.config/**/blob_storage"
+    "$HOME/.config/**/Application Cache"
+    "$HOME/.config/**/Cache"
+    "$HOME/.config/**/CachedData"
+    "$HOME/.config/**/Code Cache"
+    "$HOME/.config/**/GPUCache"
+    "$HOME/.var/app/**/blob_storage"
+    "$HOME/.var/app/**/Application Cache"
+    "$HOME/.var/app/**/Cache"
+    "$HOME/.var/app/**/CachedData"
+    "$HOME/.var/app/**/Code Cache"
+    "$HOME/.var/app/**/GPUCache"
+    "$HOME/.var/app/**/GPUCache"
 
-  commonOpts = {
+    # Some morre generic MacOS exclusions
+    "**/Network Trash Folder"
+    "**/.fseventsd*"
+    "**/.Spotlight-*"
+    "**/*Mobile*Backups"
+  ];
+  commonExcludes = genericExcludedExtensions ++ genericExcludes ++ nixLikeExcludes;
+  commonExcludesFile = mkIgnoresFile commonExcludes;
+
+  commonBackupsOpts = {
     user = resticUser.name;
     createWrapper = true;
-
-    timerConfig.Persistent = true;
-
+    package = superRestic;
+    timerConfig = {
+      OnCalendar = "daily";
+      RandomizedDelaySec = "3h";
+      Persistent = true;
+    };
     extraBackupArgs = [
       "--cleanup-cache"
       "--exclude-caches"
       "--pack-size=128"
       "--ignore-ctime"
       "--ignore-inode"
-    ];
-  };
-  commonBackupsOpts = commonOpts // {
-    timerConfig.RandomizedDelaySec = "3h";
-    package = superRestic;
-    extraBackupArgs = commonOpts.extraBackupArgs ++ [
+      "--retry-lock 24h"
       "--no-scan"
-      "--exclude-file=${homeIgnoresFile}"
+      "--exclude-file=${commonExcludesFile}"
       "--exclude-file=${config.users.users.sk.home}/.resticignore"
     ];
+    backupPrepareCommand = "${superRestic}/bin/restic unlock";
   };
-  commonMaintenanceOpts = commonOpts // {
-    timerConfig.RandomizedDelaySec = "6h";
+  commonMaintenanceOpts = {
+    user = resticUser.name;
+    createWrapper = true;
+    timerConfig = {
+      OnCalendar = "weekly";
+      RandomizedDelaySec = "3h";
+      Persistent = true;
+    };
     checkOpts = [
+      "--retry-lock 24h"
       "--read-data-subset=128M"
     ];
     pruneOpts = [
+      "--retry-lock 24h"
+      "--pack-size=128"
       "--keep-within-yearly 10y"
       "--keep-within-monthly 1y"
       "--keep-within-weekly 1m"
@@ -90,59 +299,77 @@ let
     ];
   };
 
-  contentJobCommon = commonOpts // {
-    timerConfig.OnCalendar = "weekly";
+  contentJobRepoConfig = {
     environmentFile = config.sops.secrets.restic-domashka-env.path;
     repositoryFile = config.sops.secrets.restic-content-repo.path;
     passwordFile = config.sops.secrets.restic-content-repo-password.path;
   };
 
-  sensitiveJobCommon = commonOpts // {
-    timerConfig.OnCalendar = "weekly";
+  sensitiveJobRepoConfig = {
     environmentFile = config.sops.secrets.restic-domashka-env.path;
     repositoryFile = config.sops.secrets.restic-sensitive-repo.path;
     passwordFile = config.sops.secrets.restic-sensitive-repo-password.path;
   };
 
-  userDataJobCommon = commonOpts // {
-    timerConfig.OnCalendar = "weekly";
+  userDataJobRepoConfig = {
     environmentFile = config.sops.secrets.restic-domashka-env.path;
     repositoryFile = config.sops.secrets.restic-user-data-repo.path;
     passwordFile = config.sops.secrets.restic-user-data-repo-password.path;
   };
 
-  userMediaJobCommon = commonOpts // {
-    timerConfig.OnCalendar = "weekly";
+  userMediaJobRepoConfig = {
     environmentFile = config.sops.secrets.restic-domashka-env.path;
     repositoryFile = config.sops.secrets.restic-user-media-repo.path;
     passwordFile = config.sops.secrets.restic-user-media-repo-password.path;
   };
 
-  systemDataJobCommon = commonOpts // {
-    timerConfig.OnCalendar = "weekly";
+  systemDataJobRepoConfig = {
     environmentFile = config.sops.secrets.restic-domashka-env.path;
     repositoryFile = config.sops.secrets.restic-system-data-repo.path;
     passwordFile = config.sops.secrets.restic-system-data-repo-password.path;
   };
 in
 {
-  # restic user
+  #
+  # Users & Groups
+  #
+  # Restic system user with capability to read all files
+  # via access to restic security wrapper
   users.users.restic = {
     isSystemUser = true;
     description = "Restic backup user";
     group = "restic";
   };
   users.groups.restic = { };
+  # Group with access to remote repositories
   users.groups.restic-remote-domashka.members = [
     config.users.users.restic.name
     config.users.users.sk.name
   ];
+  # Group with access to remote repository's password
   users.groups.restic-repos.members = [
     config.users.users.restic.name
     config.users.users.sk.name
   ];
 
-  # security wrapper that allows restic binary to read
+  # Secrets
+  sops.secrets = {
+    restic-domashka-env = commonResticSopsSecretAttrs // {
+      group = config.users.groups.restic-remote-domashka.name;
+    };
+    restic-content-repo = commonResticSopsSecretAttrs;
+    restic-content-repo-password = commonResticSopsSecretAttrs;
+    restic-sensitive-repo = commonResticSopsSecretAttrs;
+    restic-sensitive-repo-password = commonResticSopsSecretAttrs;
+    restic-system-data-repo = commonResticSopsSecretAttrs;
+    restic-system-data-repo-password = commonResticSopsSecretAttrs;
+    restic-user-data-repo = commonResticSopsSecretAttrs;
+    restic-user-data-repo-password = commonResticSopsSecretAttrs;
+    restic-user-media-repo = commonResticSopsSecretAttrs;
+    restic-user-media-repo-password = commonResticSopsSecretAttrs;
+  };
+
+  # Security wrapper that allows restic binary to read
   # any data when running by unpriviledged user
   security.wrappers.restic = {
     source = "${pkgs.restic.out}/bin/restic";
@@ -155,7 +382,7 @@ in
   services.restic.backups = {
     content =
       commonBackupsOpts
-      // contentJobCommon
+      // contentJobRepoConfig
       // {
         timerConfig.OnCalendar = "daily";
         paths = (
@@ -165,13 +392,12 @@ in
           ]
         );
       };
-    content-maintenance = commonMaintenanceOpts // contentJobCommon;
+    content-maintenance = commonMaintenanceOpts // contentJobRepoConfig;
 
     sensitive =
       commonBackupsOpts
-      // sensitiveJobCommon
+      // sensitiveJobRepoConfig
       // {
-        timerConfig.OnCalendar = "daily";
         paths = map (x: "${config.users.users.sk.home}/${x}") [
           ".config/cachix"
           ".config/gcloud"
@@ -179,19 +405,25 @@ in
           ".config/sops/age"
           ".electrum"
           ".gnupg"
-          ".local/share/atuin"
-          ".local/share/fish"
           ".local/share/keyrings"
           "secrets"
         ];
       };
-    sensitive-maintenance = commonMaintenanceOpts // sensitiveJobCommon;
+    sensitive-shell-history =
+      commonBackupsOpts
+      // sensitiveJobRepoConfig
+      // {
+        paths = map (x: "${config.users.users.sk.home}/${x}") [
+          ".local/share/atuin"
+          ".local/share/fish"
+        ];
+      };
+    sensitive-maintenance = commonMaintenanceOpts // sensitiveJobRepoConfig;
 
     user-data =
       commonBackupsOpts
-      // userDataJobCommon
+      // userDataJobRepoConfig
       // {
-        timerConfig.OnCalendar = "daily";
         paths = (
           map (x: "${config.users.users.sk.home}/${x}") [
             ".local/share/Zotero"
@@ -205,11 +437,11 @@ in
           ]
         );
       };
-    user-data-maintenance = commonMaintenanceOpts // userDataJobCommon;
+    user-data-maintenance = commonMaintenanceOpts // userDataJobRepoConfig;
 
     user-media =
       commonBackupsOpts
-      // userMediaJobCommon
+      // userMediaJobRepoConfig
       // {
         timerConfig.OnCalendar = "daily";
         paths = (
@@ -218,13 +450,12 @@ in
           ]
         );
       };
-    user-media-maintenance = commonMaintenanceOpts // userMediaJobCommon;
+    user-media-maintenance = commonMaintenanceOpts // userMediaJobRepoConfig;
 
     system-data =
       commonBackupsOpts
-      // systemDataJobCommon
+      // systemDataJobRepoConfig
       // {
-        timerConfig.OnCalendar = "daily";
         paths = map (x: "${config.users.users.sk.home}/${x}") [
           ".config/BraveSoftware"
           ".config/MusicBrainz"
@@ -243,46 +474,6 @@ in
           ".zotero"
         ];
       };
-    system-data-maintenance = commonMaintenanceOpts // systemDataJobCommon;
-  };
-
-  sops.secrets = {
-    restic-domashka-env = commonResticSopsSecretAttrs // {
-      group = config.users.groups.restic-remote-domashka.name;
-    };
-    restic-content-repo = commonResticSopsSecretAttrs;
-    restic-content-repo-password = commonResticSopsSecretAttrs;
-    restic-sensitive-repo = commonResticSopsSecretAttrs;
-    restic-sensitive-repo-password = commonResticSopsSecretAttrs;
-    restic-system-data-repo = commonResticSopsSecretAttrs;
-    restic-system-data-repo-password = commonResticSopsSecretAttrs;
-    restic-user-data-repo = commonResticSopsSecretAttrs;
-    restic-user-data-repo-password = commonResticSopsSecretAttrs;
-    restic-user-media-repo = commonResticSopsSecretAttrs;
-    restic-user-media-repo-password = commonResticSopsSecretAttrs;
-  };
-
-  # shared cache
-  systemd.services = {
-    restic-backups-content-maintenance = {
-      environment.RESTIC_CACHE_DIR = mkForce config.systemd.services.restic-backups-content.environment.RESTIC_CACHE_DIR;
-      serviceConfig.CacheDirectory = mkForce config.systemd.services.restic-backups-content.serviceConfig.CacheDirectory;
-    };
-    restic-backups-sensitive-maintenance = {
-      environment.RESTIC_CACHE_DIR = mkForce config.systemd.services.restic-backups-sensitive.environment.RESTIC_CACHE_DIR;
-      serviceConfig.CacheDirectory = mkForce config.systemd.services.restic-backups-sensitive.serviceConfig.CacheDirectory;
-    };
-    restic-backups-user-data-maintenance = {
-      environment.RESTIC_CACHE_DIR = mkForce config.systemd.services.restic-backups-user-data.environment.RESTIC_CACHE_DIR;
-      serviceConfig.CacheDirectory = mkForce config.systemd.services.restic-backups-user-data.serviceConfig.CacheDirectory;
-    };
-    restic-backups-user-media-maintenance = {
-      environment.RESTIC_CACHE_DIR = mkForce config.systemd.services.restic-backups-user-media.environment.RESTIC_CACHE_DIR;
-      serviceConfig.CacheDirectory = mkForce config.systemd.services.restic-backups-user-media.serviceConfig.CacheDirectory;
-    };
-    restic-backups-system-data-maintenance = {
-      environment.RESTIC_CACHE_DIR = mkForce config.systemd.services.restic-backups-system-data.environment.RESTIC_CACHE_DIR;
-      serviceConfig.CacheDirectory = mkForce config.systemd.services.restic-backups-system-data.serviceConfig.CacheDirectory;
-    };
+    system-data-maintenance = commonMaintenanceOpts // systemDataJobRepoConfig;
   };
 }
