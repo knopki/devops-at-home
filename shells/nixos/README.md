@@ -3,6 +3,7 @@
 NixOS system development and administration.
 
 **Included Tools**:
+
 - `age` - Encryption tool for secrets
 - `nh` - NixOS helper for system management
 - `nixos-anywhere` - Remote NixOS installation
@@ -11,6 +12,7 @@ NixOS system development and administration.
 - `update-packages` - Custom package updater
 
 **Usage**:
+
 ```bash
 nix develop .#nixos
 # or
