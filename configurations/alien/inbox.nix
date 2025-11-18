@@ -365,7 +365,7 @@ in
     ];
     extraLocaleSettings = {
       LC_MESSAGES = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
+      LC_NUMERIC = "en_DK.UTF-8";
     };
   };
 
