@@ -152,6 +152,7 @@ in
       vmtouch
       httm
       jq
+      cherry-studio
 
       # temporary
       impression
