@@ -37,7 +37,6 @@ in
     gnome-weather
     loupe
 
-    quick-webapps
     hardinfo2
 
     config.programs.gnupg.agent.pinentryPackage
