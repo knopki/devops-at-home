@@ -39,7 +39,7 @@ let
   allowInsecurePkgVersPredicate =
     pkg:
     elem "${pkg.pname}-${pkg.version}" [
-      # "electron-35.7.5"
+      "ecdsa-0.19.1" # python3.12
     ];
   allowInsecurePredicateStandard = pkg: allowInsecurePkgVersPredicate pkg;
 
