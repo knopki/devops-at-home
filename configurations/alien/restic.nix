@@ -456,7 +456,11 @@ in
       commonBackupsOpts
       // systemDataJobRepoConfig
       // {
-        paths = map (x: "${config.users.users.sk.home}/${x}") [
+        paths = [
+          "/var/lib/isponsorblocktv"
+          "/var/lib/lampac"
+        ]
+        ++ (map (x: "${config.users.users.sk.home}/${x}") [
           ".config/BraveSoftware"
           ".config/MusicBrainz"
           ".config/dconf/user"
@@ -472,7 +476,7 @@ in
           ".mozilla"
           ".thunderbird"
           ".zotero"
-        ];
+        ]);
       };
     system-data-maintenance = commonMaintenanceOpts // systemDataJobRepoConfig;
   };
