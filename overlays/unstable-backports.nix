@@ -19,12 +19,7 @@ in
 
   bees = pkgIfVersionMin prev.bees "0.11" p.bees;
 
-  cherry-studio =
-    let
-      unstableCherryStudio = prev.callPackage p.cherry-studio.override {
-      };
-    in
-    pkgIfVersionMin prev.cherry-studio "1.6" unstableCherryStudio;
+  cherry-studio = pkgIfVersionMin prev.cherry-studio "1.6" p.cherry-studio;
 
   cosmic-applets = pkgIfVersionMin prev.cosmic-applets "1.0.0-beta.5" p.cosmic-applets;
 
