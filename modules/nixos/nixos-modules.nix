@@ -26,4 +26,6 @@
 
   # programs
   programs-helix = ./programs/helix.nix;
+
+  zswap = ./zswap.nix;
 }

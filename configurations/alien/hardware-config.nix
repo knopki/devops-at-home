@@ -74,15 +74,6 @@ in
       "acpiphp.disable=1"
       "pcie_aspm.policy=powersave"
     ];
-    kernel.sysctl = {
-      # some zswap optimizations
-      "vm.swappiness" = 180;
-      "vm.watermark_boost_factor" = 0;
-      "vm.watermark_scale_factor" = 125;
-      "vm.page-cluster" = 1;
-      "vm.dirty_background_ratio" = 1;
-    };
-
     supportedFilesystems = {
       btrfs = true;
       zfs = true;
@@ -235,13 +226,4 @@ in
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  systemd.tmpfiles.rules = [
-    "w /sys/module/zswap/parameters/enabled          - - - - Y"
-    # LZ4 is a faster, Zstd compresses better
-    "w /sys/module/zswap/parameters/compressor       - - - - lz4"
-    # how much of the system RAM may be taken up by swap (20% by default)
-    "w /sys/module/zswap/parameters/max_pool_percent - - - - 20"
-    # this reduces the amount of cold data in the pool
-    "w /sys/module/zswap/parameters/shrinker_enabled - - - - Y"
-  ];
 }
