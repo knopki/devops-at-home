@@ -3,13 +3,8 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    mpv
     python3
-    vmtouch
-    swayimg
   ];
-
-  i18n.extraLocales = [ "ru_RU.UTF-8/UTF-8" ];
 
   programs = {
     bat.enable = true;
@@ -18,6 +13,4 @@
       lfs.enable = true;
     };
   };
-
-  time.timeZone = "Europe/Moscow";
 }

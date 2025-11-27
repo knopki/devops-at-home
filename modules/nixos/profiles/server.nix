@@ -11,6 +11,7 @@
   imports = with self.modules.nixos; [
     profile-common
     mixin-essential-server-packages
+    mixin-locale-white-russian
     mixin-no-docs
   ];
 

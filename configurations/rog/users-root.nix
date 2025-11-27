@@ -6,7 +6,6 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    chezmoi
     wget
     curl
   ];

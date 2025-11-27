@@ -26,16 +26,18 @@ in
   };
 
   virtualisation = {
-    containers.registries = {
-      search = [
-        "dockerhub.timeweb.cloud"
-        "dockerhub1.beget.com"
-        "mirror.gcr.io"
-        "ghcr.io"
-        "quay.io"
-        "public.ecr.aws"
-      ];
-      block = [ "docker.io" ];
+    containers = {
+      enable = true;
+      registries = {
+        search = [
+          "dockerhub.timeweb.cloud"
+          "dockerhub1.beget.com"
+          "mirror.gcr.io"
+          "ghcr.io"
+          "quay.io"
+          "public.ecr.aws"
+        ];
+      };
     };
     oci-containers.backend = mkDefault "podman";
     podman = {

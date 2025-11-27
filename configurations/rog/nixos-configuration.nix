@@ -1,5 +1,5 @@
 { inputs, self, ... }:
-inputs.nixpkgs-25-05.lib.nixosSystem {
+inputs.nixpkgs-25-11.lib.nixosSystem {
   specialArgs = {
     inherit inputs self;
   };
@@ -7,7 +7,7 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
     inputs.sops-nix.nixosModules.sops
     profile-devhost
     {
-      system.stateVersion = "25.05";
+      system.stateVersion = "25.11";
       networking.hostId = "c1cb4f76";
       services.userborn.enable = true;
       users.mutableUsers = false;
@@ -16,7 +16,6 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
     ./hardware-config.nix
     ./networking.nix
     ./nixpkgs.nix
-    ./graphical.nix
     ./users-knopki.nix
     ./users-root.nix
     ./inbox.nix

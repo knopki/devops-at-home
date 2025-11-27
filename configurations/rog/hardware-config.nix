@@ -60,8 +60,6 @@
   hardware = {
     asus.battery.chargeUpto = 80;
     enableRedistributableFirmware = true;
-    flipperzero.enable = true;
-    ledger.enable = true;
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -76,6 +74,7 @@
     fileSystems = [
       "/"
       "/state"
+      "/state/sensitive"
     ];
   };
 }

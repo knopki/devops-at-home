@@ -53,7 +53,7 @@
         type = "lvm_vg";
         lvs = {
           swap = {
-            size = "16G";
+            size = "48G";
             content = {
               type = "swap";
               priority = 100;
@@ -61,7 +61,7 @@
             };
           };
           sys = {
-            size = "200G";
+            size = "100G";
             content = {
               type = "btrfs";
               # Subvolumes must set a mountpoint in order to be mounted,

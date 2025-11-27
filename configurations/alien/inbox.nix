@@ -12,7 +12,6 @@ let
     # rawtherapee
     imgcat
     pinta
-    mpv-with-plugins
     obs-studio
     picard
     qbittorrent
@@ -34,27 +33,15 @@ let
     edir
   ];
   officePkgs = with pkgs; [
-    aliza
-    anki
-    anytype
     aspellDicts.en
     aspellDicts.ru
     brave
-    img2pdf
     isync
-    keepassxc
-    khal
-    khard
-    obsidian
     obsidian-export
-    ocrmypdf
     offlineimap
     poppler_utils
-    qpdf
     rclone
     vdirsyncer
-    weasis
-    zotero
   ];
   devPkgs = with pkgs; [
     # tools
@@ -64,7 +51,6 @@ let
     android-udev-rules
     arduino-cli
     lazygit
-    picotool
     python3
     just
     devenv
@@ -105,7 +91,6 @@ in
       sysstat
       tree
       wget
-      chezmoi
       starship
       libsecret # secret-tool
 
@@ -113,19 +98,12 @@ in
       atuin
       fishPlugins.fish-you-should-use
 
-      # messenging
-      telegram-desktop
-
       # remote
-      anydesk
       mosh
       openssh
-      remmina
 
       # backups
       btrbk
-      kopia
-      kopia-ui
       restic
       restic-browser
       rustic-rs
@@ -236,6 +214,10 @@ in
     mosh.enable = mkDefault true;
     mtr.enable = mkDefault true;
     nh.flake = "/home/sk/dev/knopki/devops-at-home";
+    nekoray = {
+      enable = true;
+      tunMode.enable = true;
+    };
     nix-index.enable = mkDefault true;
     nix-ld = {
       enable = true;
@@ -248,9 +230,6 @@ in
     starship = {
       enable = true;
       transientPrompt.enable = true;
-    };
-    thunderbird = {
-      enable = true;
     };
     tmux = {
       enable = true;
@@ -347,32 +326,6 @@ in
       Defaults timestamp_timeout=600
     '';
   };
-
-  #
-  # Locales
-  #
-
-  console = {
-    font = mkDefault "latarcyrheb-sun16";
-    keyMap = mkDefault "us";
-  };
-
-  i18n = {
-    defaultLocale = "ru_RU.UTF-8";
-    supportedLocales = [
-      "en_DK.UTF-8/UTF-8"
-      "en_US.UTF-8/UTF-8"
-      "ru_RU.UTF-8/UTF-8"
-    ];
-    extraLocaleSettings = {
-      LC_MESSAGES = "en_US.UTF-8";
-      LC_NUMERIC = "en_DK.UTF-8";
-    };
-  };
-
-  services.xserver.xkb.layout = "us,ru";
-
-  time.timeZone = mkDefault "Europe/Moscow";
 
   #
   # Misc

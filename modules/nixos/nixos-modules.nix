@@ -4,6 +4,8 @@
   # mixins
   mixin-cosmic-de = ./mixins/cosmic-de.nix;
   mixin-essential-server-packages = ./mixins/essential-server-packages.nix;
+  mixin-locale-black-russian = ./mixins/locale-black-russian.nix;
+  mixin-locale-white-russian = ./mixins/locale-white-russian.nix;
   mixin-networking = ./mixins/networking.nix;
   mixin-nix = ./mixins/nix.nix;
   mixin-no-docs = ./mixins/no-docs.nix;

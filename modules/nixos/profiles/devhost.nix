@@ -8,7 +8,10 @@
   ...
 }:
 let
-
+  adminTools = with pkgs; [
+    anydesk
+    remmina
+  ];
   zedEditorFhs = pkgs.zed-editor.fhsWithPackages (
     _ps:
     [
@@ -23,7 +26,12 @@ in
 
   environment.systemPackages = [
     zedEditorFhs
-  ];
+  ]
+  ++ adminTools;
+
+  hardware = {
+    flipperzero.enable = true;
+  };
 
   programs.helix = {
     extraPackagesCss = true;
