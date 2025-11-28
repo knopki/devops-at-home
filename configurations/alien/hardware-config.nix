@@ -188,14 +188,6 @@ in
           KEYBOARD_KEY_95=f17             # left column 4
           KEYBOARD_KEY_96=f18             # left column 5
       '';
-      extraRules = ''
-        # Raspberry Pi Pico
-        SUBSYSTEM=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0003", MODE="0660", TAG+="uaccess", SYMLINK+="pico%n"
-        SUBSYSTEM=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0009", MODE="0660", TAG+="uaccess", SYMLINK+="pico%n"
-        SUBSYSTEM=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="000a", MODE="0660", TAG+="uaccess", SYMLINK+="pico%n"
-        SUBSYSTEM=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="000f", MODE="0660", TAG+="uaccess", SYMLINK+="pico%n"
-        SUBSYSTEM=="usb", ATTRS{idVendor}=="2e9a", ATTRS{idProduct}=="cafe", MODE="0660", TAG+="uaccess", SYMLINK+="pico%n"
-      '';
     };
 
     pcscd = {
