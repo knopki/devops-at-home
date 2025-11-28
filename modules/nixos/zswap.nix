@@ -27,7 +27,7 @@ in
         - lzo: Fast compression with moderate ratio
         - lz4: Very fast compression, lower ratio (default)
         - zstd: Better compression ratio, slower
-        - null: kernal's default.
+        - null: kernel's default.
       '';
     };
 
