@@ -2,6 +2,8 @@
 let
   inherit (builtins) toString;
   lampaWebPort = 9118;
+  lampaTorrservePort = 9080;
+  lampaTorrservePeersPort = 16881;
   lampacDataVol = "/var/lib/lampac";
 in
 {
@@ -16,22 +18,24 @@ in
     };
 
     lampac = {
-      image = "dockerhub.timeweb.cloud/immisterio/lampac@sha256:6b7e862f2f20f17d20ddaed4095e5eccca7c53936ae5880367abb0c4b69e44ec"; # 2025-11-20
+      image = "dockerhub.timeweb.cloud/immisterio/lampac@sha256:ac597017f68ae2dd53c2d6737a0769190892e08decdcf33564daf67c97eee883"; # 2025-11-29
       environment = {
         TZ = "Europe/Moscow";
       };
       ports = [
         "${toString lampaWebPort}:9118"
+        "${toString lampaTorrservePort}:9080"
+        "${toString lampaTorrservePeersPort}:16881"
       ];
       volumes = [
-        "${config.sops.secrets.lampa-admin-password.path}:/home/passwd"
+        "${config.sops.secrets.lampa-admin-password.path}:/home/passwd:ro"
         "${lampacDataVol}/init.conf:/home/init.conf"
         "${lampacDataVol}/users.json:/home/users.json"
         "${lampacDataVol}/database:/home/database"
         "${lampacDataVol}/cache:/home/cache"
         "${lampacDataVol}/dlna:/home/dlna"
         "${lampacDataVol}/module/manifest.json:/home/module/manifest.json"
-        "${lampacDataVol}/module/JacRed.json:/home/module/JacRed.json"
+        "${lampacDataVol}/module/JacRed.json:/home/module/JacRed.current.json"
         "${lampacDataVol}/torrserver/accs.db:/home/torrserver/accs.db"
         "${lampacDataVol}/torrserver/viewed.json:/home/torrserver/viewed.json"
         "${lampacDataVol}/torrserver/settings.json:/home/torrserver/settings.json"
@@ -44,6 +48,7 @@ in
 
   networking.firewall.allowedTCPPorts = [
     lampaWebPort
+    lampaTorrservePeersPort
   ];
 
   sops.secrets.lampa-admin-password = { };
