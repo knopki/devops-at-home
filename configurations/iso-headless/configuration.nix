@@ -11,7 +11,7 @@
     binutils
     curl
     dosfstools
-    du-dust
+    dust
     fd
     file
     gnupg

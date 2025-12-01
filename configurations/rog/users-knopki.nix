@@ -1,15 +1,9 @@
 {
   config,
-  pkgs,
   self,
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    wget
-    curl
-  ];
-
   preservation.preserveAt."/state".users.knopki = {
     directories = [
       {

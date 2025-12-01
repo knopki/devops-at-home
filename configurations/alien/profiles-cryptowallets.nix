@@ -5,6 +5,5 @@
     framesh
     ledger-live-desktop
   ];
-  hardware.ledger.enable = true;
   users.groups.plugdev = { };
 }

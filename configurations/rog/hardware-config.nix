@@ -6,15 +6,21 @@
 }:
 {
   imports = [
-    inputs.nixos-hardware.nixosModules.asus-zephyrus-ga402x-amdgpu
-    inputs.nixos-hardware.nixosModules.asus-battery
     inputs.disko.nixosModules.default
     ./disko-configuration.nix
   ]
+  ++ (with inputs.nixos-hardware.nixosModules; [
+    asus-zephyrus-ga402x-amdgpu
+    asus-battery
+    common-pc-laptop
+    common-pc-ssd
+  ])
   ++ (with self.modules.nixos; [
-    mixin-systemd-boot
+    profile-systemd-boot
     mixin-preservation-common
   ]);
+
+  profiles.systemd-boot.enable = true;
 
   boot = {
     bootspec.enable = true;
@@ -29,6 +35,7 @@
         "sd_mod"
         "sdhci_pci"
       ];
+      kernelModules = [ "dm-snapshot" ];
       supportedFilesystems = {
         btrfs = true;
       };
@@ -49,17 +56,9 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    nvme-cli
-    pciutils
-    sbctl # secure boot key manager
-    smartmontools # for diagnosing hard disks
-    usbutils
-  ];
-
   hardware = {
     asus.battery.chargeUpto = 80;
-    enableRedistributableFirmware = true;
+    enableAllFirmware = true;
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";

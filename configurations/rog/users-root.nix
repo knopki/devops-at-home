@@ -1,15 +1,9 @@
 {
   self,
   config,
-  pkgs,
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    wget
-    curl
-  ];
-
   preservation.preserveAt."/state".users.root = {
     # specify user home when it is not `/home/${user}`
     home = "/root";

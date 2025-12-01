@@ -5,7 +5,7 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
   };
   modules = with self.modules.nixos; [
     inputs.sops-nix.nixosModules.sops
-    profile-devhost
+    role-devhost
     ./inbox.nix
     ./nixpkgs.nix
     ./hardware-config.nix
@@ -25,18 +25,9 @@ inputs.nixpkgs-25-05.lib.nixosSystem {
       system.stateVersion = "20.09";
       networking.hostId = "ff0b9d65";
       networking.hostName = "alien";
-      sops = {
-        defaultSopsFile = ../../secrets/alien.yaml;
-      };
+      sops.defaultSopsFile = ../../secrets/alien.yaml;
 
-      # TODO: temporary
-      documentation = {
-        doc.enable = false;
-        info.enable = false;
-        man.enable = true;
-        man.generateCaches = false;
-        nixos.enable = false;
-      };
+      roles.devhost.enable = true;
     }
   ];
 }

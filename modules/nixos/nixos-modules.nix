@@ -1,31 +1,31 @@
 {
-  home-manager = ./home-manager.nix;
-
   # mixins
-  mixin-cosmic-de = ./mixins/cosmic-de.nix;
-  mixin-essential-server-packages = ./mixins/essential-server-packages.nix;
-  mixin-locale-black-russian = ./mixins/locale-black-russian.nix;
-  mixin-locale-white-russian = ./mixins/locale-white-russian.nix;
-  mixin-networking = ./mixins/networking.nix;
-  mixin-nix = ./mixins/nix.nix;
-  mixin-no-docs = ./mixins/no-docs.nix;
-  mixin-openssh = ./mixins/openssh.nix;
-  mixin-pipewire = ./mixins/pipewire.nix;
   mixin-preservation-common = ./mixins/preservation-common.nix;
-  mixin-sudo = ./mixins/sudo.nix;
-  mixin-systemd-boot = ./mixins/systemd-boot.nix;
-  mixin-terminfo = ./mixins/terminfo.nix;
-  mixin-trusted-nix-caches = ./mixins/trusted-nix-caches.nix;
-  mixin-well-known-hosts = ./mixins/well-known-hosts.nix;
 
   # profiles
+  profile-applists = ./profiles/applists.nix;
   profile-common = ./profiles/common.nix;
-  profile-devhost = ./profiles/devhost.nix;
-  profile-server = ./profiles/server.nix;
-  profile-workstation = ./profiles/workstation.nix;
+  profile-cosmic-de = ./profiles/cosmic-de.nix;
+  profile-home-manager = ./profiles/home-manager.nix;
+  profile-htop = ./profiles/htop.nix;
+  profile-locale = ./profiles/locale.nix;
+  profile-networking = ./profiles/networking.nix;
+  profile-nix = ./profiles/nix.nix;
+  profile-no-docs = ./profiles/no-docs.nix;
+  profile-openssh = ./profiles/openssh.nix;
+  profile-pipewire = ./profiles/pipewire.nix;
+  profile-ssh-well-known-hosts = ./profiles/ssh-well-known-hosts.nix;
+  profile-sudo = ./profiles/sudo.nix;
+  profile-systemd-boot = ./profiles/systemd-boot.nix;
+  profile-terminfo = ./profiles/terminfo.nix;
 
   # programs
-  programs-helix = ./programs/helix.nix;
+  program-helix = ./programs/helix.nix;
+
+  # roles
+  role-devhost = ./roles/devhost.nix;
+  role-server = ./roles/server.nix;
+  role-workstation = ./roles/workstation.nix;
 
   zswap = ./zswap.nix;
 }

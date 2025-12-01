@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  modulesPath,
   inputs,
   self,
   ...
@@ -23,14 +22,16 @@ in
   imports =
     with inputs.nixos-hardware.nixosModules;
     [
-      (modulesPath + "/installer/scan/not-detected.nix")
       common-cpu-intel-cpu-only
       common-gpu-intel
       # common-gpu-nvidia-nonprime
       common-gpu-nvidia-disable
+      common-pc-laptop
       common-pc-ssd
     ]
-    ++ (with self.modules.nixos; [ mixin-systemd-boot ]);
+    ++ (with self.modules.nixos; [ profile-systemd-boot ]);
+
+  profiles.systemd-boot.enable = true;
 
   boot = {
     extraModprobeConfig = ''
@@ -78,24 +79,12 @@ in
       btrfs = true;
       zfs = true;
     };
-
-    loader = {
-      # efi.canTouchEfiVariables = false;
-    };
   };
 
   environment = {
-    etc = {
-      "lvm/lvm.conf".text = ''
-        devices {
-          issue_discards = 1
-        }
-      '';
-    };
     systemPackages = with pkgs; [
-      intel-gpu-tools
-      opensc
-      softhsm
+      # opensc
+      # softhsm
     ];
   };
 
@@ -112,6 +101,7 @@ in
   };
 
   hardware = {
+    enableRedistributableFirmware = true;
     graphics = {
       enable = true;
       extraPackages32 = with pkgs.pkgsi686Linux; [

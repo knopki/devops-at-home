@@ -9,15 +9,23 @@ let
 in
 {
   imports = with self.modules.nixos; [
-    mixin-networking
-    mixin-nix
-    mixin-openssh
-    mixin-sudo
-    mixin-terminfo
-    mixin-trusted-nix-caches
-    mixin-well-known-hosts
+    profile-htop
+    profile-locale
+    profile-networking
+    profile-nix
+    profile-openssh
+    profile-ssh-well-known-hosts
+    profile-sudo
     zswap
   ];
+
+  profiles.htop.enable = mkDefault true;
+  profiles.locale.enable = mkDefault true;
+  profiles.networking.enable = mkDefault true;
+  profiles.nix.enable = mkDefault true;
+  profiles.openssh.enable = mkDefault true;
+  profiles.ssh-well-known-hosts.enable = mkDefault true;
+  profiles.sudo.enable = mkDefault true;
 
   # Use systemd during boot as well except:
   # - systems with raids as this currently require manual configuration: https://github.com/NixOS/nixpkgs/issues/210210
@@ -34,6 +42,9 @@ in
     type = "path";
     path = self.outPath;
   };
+
+  # remove after 25.05
+  programs.command-not-found.enable = mkDefault false;
 
   zswap = {
     enable = (builtins.length config.swapDevices) > 0 && !config.zramSwap.enable;

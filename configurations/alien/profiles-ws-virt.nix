@@ -13,16 +13,6 @@ in
         container_manager="podman"
       '';
     };
-
-    systemPackages = with pkgs; [
-      dive
-
-      # docker client (docker compose, for example) can be used with podman
-      distrobox
-      docker
-      lima
-      # podman-desktop # NOTE: disabled temporary (?) because of insecure deps
-    ];
   };
 
   virtualisation = {

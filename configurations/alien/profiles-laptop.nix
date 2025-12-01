@@ -1,20 +1,7 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  ...
-}:
+{ inputs, ... }:
 {
   imports = with inputs.nixos-hardware.nixosModules; [
     common-pc-laptop
-  ];
-  environment.systemPackages = with pkgs; [
-    acpi
-    lm_sensors
-    wirelesstools
-    pciutils
-    powertop
-    usbutils
   ];
 
   services = {

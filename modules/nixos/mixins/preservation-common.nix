@@ -21,4 +21,8 @@
       "systemd-machine-id-setup --commit --root /state"
     ];
   };
+
+  boot.initrd.systemd.tmpfiles.settings.preservation = {
+    "/state/etc/machine-id".f.argument = "uninitialized"; # see machine-id(5)
+  };
 }

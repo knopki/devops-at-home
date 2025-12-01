@@ -25,21 +25,6 @@ in
     supportedFilesystems = [ "ntfs" ];
   };
 
-  environment.systemPackages = with pkgs; [
-    asciinema
-    gnupg
-    hdparm
-    lm_sensors
-    nmap
-    pciutils
-    trashy
-    unrar
-    unzip
-    usbutils
-    xclip
-    xdg-utils
-  ];
-
   hardware = {
     sane = {
       enable = mkDefault true;
@@ -73,10 +58,6 @@ in
         (genAttrs trustInterfaces (_name: allowedAllPortRanges));
     };
     useNetworkd = true;
-  };
-
-  programs = {
-    adb.enable = true;
   };
 
   security.protectKernelImage = false;

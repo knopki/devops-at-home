@@ -6,60 +6,8 @@
 }:
 let
   inherit (lib) mkBefore mkDefault;
-  mediaPkgs = with pkgs; [
-    # darktable
-    # digikam
-    # rawtherapee
-    imgcat
-    pinta
-    obs-studio
-    picard
-    qbittorrent
-    # streamrip
-    # upscaler # is it needed?
-    # upscayl # is it needed?
-    yt-dlp
-    gallery-dl
-    fclones
-    fclones-gui
-    findimagedupes
-    czkawka-full
-    imagemagick
-    swayimg
-    # kdePackages.kdenlive
-    handbrake
-    szyszka
-    rnr
-    edir
-  ];
   officePkgs = with pkgs; [
-    aspellDicts.en
-    aspellDicts.ru
     brave
-    isync
-    obsidian-export
-    offlineimap
-    poppler_utils
-    rclone
-    vdirsyncer
-  ];
-  devPkgs = with pkgs; [
-    # tools
-    gh
-    gnupg
-    ripgrep
-    android-udev-rules
-    arduino-cli
-    lazygit
-    python3
-    just
-    devenv
-
-    # editors / IDE
-    arduino-ide
-
-    # python
-    uv
   ];
 in
 {
@@ -71,26 +19,7 @@ in
     with pkgs;
     [
       # essentials
-      bat
-      binutils
-      curl
-      dnsutils
-      dosfstools
-      du-dust
-      fd
-      file
       gnupg
-      gptfdisk
-      iputils
-      lsof
-      ngrep
-      pstree
-      ranger
-      ripgrep
-      rsync
-      sysstat
-      tree
-      wget
       starship
       libsecret # secret-tool
 
@@ -121,22 +50,15 @@ in
       amneziawg-go
       amneziawg-tools
       bottles
-      lazydocker
       # tailscale
       xorg.xhost
-      revanced-cli
-      smartmontools
-      yubikey-manager
-      vmtouch
+      # yubikey-manager
       httm
-      jq
       cherry-studio
 
       # temporary
       impression
     ]
-    ++ devPkgs
-    ++ mediaPkgs
     ++ officePkgs;
 
   programs = {
@@ -149,7 +71,6 @@ in
         "npeicpdbkakmehahjeeohfdhnlpdklia" # webrtc network linter
       ];
     };
-    command-not-found.enable = mkDefault false;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -173,46 +94,10 @@ in
       fuzzyCompletion = true;
       keybindings = true;
     };
-    git = {
-      enable = true;
-      lfs.enable = true;
-    };
-    htop = {
-      enable = true;
-      settings = {
-        hide_threads = 1;
-        hide_userland_threads = 1;
-        shadow_other_users = 1;
-        show_program_path = 0;
-        show_thread_names = 1;
-        highlight_base_name = 1;
-        sort_key = 47; # PERCENT_MEM
-        left_meters_modes = [
-          1
-          1
-          1
-        ];
-        left_meters = [
-          "AllCPUs"
-          "Memory"
-          "Swap"
-        ];
-        right_meters_modes = [
-          2
-          2
-          2
-        ];
-        right_meters = [
-          "Tasks"
-          "LoadAverage"
-          "Uptime"
-        ];
-      };
-    };
+
     iftop.enable = mkDefault true;
     less.lessopen = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
     mosh.enable = mkDefault true;
-    mtr.enable = mkDefault true;
     nh.flake = "/home/sk/dev/knopki/devops-at-home";
     nekoray = {
       enable = true;
@@ -294,14 +179,6 @@ in
 
   services = {
     envfs.enable = true;
-
-    nscd.enableNsncd = true;
-
-    openssh = {
-      startWhenNeeded = mkDefault true;
-    };
-
-    timesyncd.servers = mkDefault [ "time.cloudflare.com" ];
   };
 
   #

@@ -5,13 +5,14 @@ inputs.nixpkgs-25-11.lib.nixosSystem {
   };
   modules = with self.modules.nixos; [
     inputs.sops-nix.nixosModules.sops
-    profile-devhost
+    role-devhost
     {
       system.stateVersion = "25.11";
       networking.hostId = "c1cb4f76";
       services.userborn.enable = true;
       users.mutableUsers = false;
       sops.defaultSopsFile = ../../secrets/rog.yaml;
+      roles.devhost.enable = true;
     }
     ./hardware-config.nix
     ./networking.nix
