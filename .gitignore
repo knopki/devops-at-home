@@ -3,3 +3,14 @@ result
 doc/index.html
 .aider*
 /TODO.md
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
