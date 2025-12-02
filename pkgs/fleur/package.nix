@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "https://iffgit.fz-juelich.de/fleur/fleur.git";
     rev = "refs/tags/MaX-R${version}";
-    hash = "sha256-+SGtMkAv/mIXbKkgNmMXfF1qS7CcmKGOG3jFx6BoIDM=";
+    hash = "sha256-gJY3JW0mXyd6sST2P2z658lU6NR4BY0Jmv6BhD/XVPY=";
     fetchSubmodules = false;
     leaveDotGit = true;
   };
@@ -51,5 +51,6 @@ stdenv.mkDerivation rec {
     homepage = "https://www.flapw.de/";
     license = licenses.mit;
     platforms = [ "x86_64-linux" ];
+    broken = true;
   };
 }
