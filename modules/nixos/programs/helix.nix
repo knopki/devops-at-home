@@ -34,7 +34,7 @@ let
     # docker
     ++ (optionals cfg.extraPackagesDocker [
       docker-compose-language-service
-      dockerfile-language-server-nodejs
+      dockerfile-language-server
       dprint
       dprint-plugins.dprint-plugin-dockerfile
       dprint-plugins.g-plane-pretty_yaml

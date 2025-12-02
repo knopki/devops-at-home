@@ -5,12 +5,10 @@
   ];
 
   services = {
-    logind = {
-      lidSwitch = "suspend-then-hibernate";
-      lidSwitchExternalPower = "suspend";
-      extraConfig = ''
-        InhibitDelayMaxSec=10
-      '';
+    logind.settings.Login = {
+      HandleLidSwitch = "suspend-then-hibernate";
+      HandleLidSwitchExternalPower = "suspend";
+      InhibitDelayMaxSec = 10;
     };
 
     libinput.touchpad = {

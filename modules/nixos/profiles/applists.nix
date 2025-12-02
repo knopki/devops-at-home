@@ -8,6 +8,7 @@ let
   inherit (lib.lists) optionals;
   inherit (lib.modules) mkDefault mkIf;
   inherit (lib.options) mkEnableOption;
+  inherit (lib) lowPrio;
   cfg = config.profiles.applists;
 in
 {
@@ -25,7 +26,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = map pkgs.lowPrio (
+    environment.systemPackages = map lowPrio (
       with pkgs;
       [
         findutils

@@ -28,7 +28,7 @@ in
       # Look & feel
       cosmic-ext-tweaks
       cosmic-ext-applet-caffeine
-      gnome-themes-extra
+      gnome-themes-extra # is it really needed?
 
       # get some DE parts from GNOME
       baobab

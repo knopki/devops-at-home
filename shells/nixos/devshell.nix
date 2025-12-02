@@ -6,7 +6,7 @@
     { package = pkgs.nix-inspect; }
     { package = pkgs.nixos-anywhere; }
     { package = pkgs.nixos-option; }
-    { package = pkgs.nvd; }
+    { package = pkgs.dix; }
     { package = pkgs.shellcheck; }
     { package = pkgs.sops; }
     { package = pkgs.update-packages; }

@@ -19,7 +19,7 @@
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nixpkgs-25-05.url = "nixpkgs/nixos-25.05";
     nixpkgs-25-11.url = "nixpkgs/nixos-25.11";
-    nixpkgs.follows = "nixpkgs-25-05";
+    nixpkgs.follows = "nixpkgs-25-11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     # core modules and libraries

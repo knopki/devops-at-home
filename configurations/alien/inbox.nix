@@ -35,7 +35,7 @@ in
       btrbk
       restic
       restic-browser
-      rustic-rs
+      rustic
       redu
       deja-dup
 
@@ -99,7 +99,7 @@ in
     less.lessopen = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
     mosh.enable = mkDefault true;
     nh.flake = "/home/sk/dev/knopki/devops-at-home";
-    nekoray = {
+    throne = {
       enable = true;
       tunMode.enable = true;
     };
