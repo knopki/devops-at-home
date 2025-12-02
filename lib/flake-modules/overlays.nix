@@ -13,14 +13,6 @@ let
   inherit (builtins) elem;
   inherit (lib.attrsets) mapAttrs;
 
-  # backport for legacy systems
-  nixpkgs2505Overlay = final: _prev: {
-    nixpkgs-25-05 = import inputs.nixpkgs-25-05 {
-      inherit (final) system;
-      config = self.lib.nixpkgsPolicies.configStandard;
-    };
-  };
-
   unstableOverlay = final: _prev: {
     nixpkgsUnstable = import inputs.nixpkgs-unstable {
       inherit (final) system;
@@ -42,7 +34,6 @@ in
 {
   config.flake = {
     overlays = (mapAttrs loadOverlay namePaths) // {
-      nixpkgs-25-05 = nixpkgs2505Overlay;
       nixpkgs-unstable = unstableOverlay;
       # all packages of this flake
       my-packages = myPackagesOverlay;
