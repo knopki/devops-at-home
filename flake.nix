@@ -89,11 +89,7 @@
           nixConfig = (import ./flake.nix).nixConfig;
         };
 
-        perSystem =
-          { self', ... }:
-          {
-            devShells.default = self'.devShells.nixos;
-          };
+        perSystem = { self', ... }: { };
       }
     );
 }
