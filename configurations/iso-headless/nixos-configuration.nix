@@ -4,8 +4,8 @@ inputs.nixpkgs-25-11.lib.nixosSystem {
     inherit inputs self;
   };
   modules = [
-    "${inputs.nixpkgs-25-05.outPath}/nixos/modules/installer/cd-dvd/installation-cd-minimal-combined.nix"
-    "${inputs.nixpkgs-25-05.outPath}/nixos/modules/installer/cd-dvd/channel.nix"
+    "${inputs.nixpkgs-25-11.outPath}/nixos/modules/installer/cd-dvd/installation-cd-minimal-combined.nix"
+    "${inputs.nixpkgs-25-11.outPath}/nixos/modules/installer/cd-dvd/channel.nix"
     ./configuration.nix
     {
       networking.hostName = "iso";
