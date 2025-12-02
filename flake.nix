@@ -17,7 +17,6 @@
   inputs = {
     # nixpkgs
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
-    nixpkgs-25-05.url = "nixpkgs/nixos-25.05";
     nixpkgs-25-11.url = "nixpkgs/nixos-25.11";
     nixpkgs.follows = "nixpkgs-25-11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
@@ -30,9 +29,9 @@
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     devshell.url = "github:numtide/devshell";
-    home-25-05.inputs.nixpkgs.follows = "nixpkgs-25-05";
-    home-25-05.url = "github:nix-community/home-manager/release-25.05";
-    home.follows = "home-25-05";
+    home-25-11.inputs.nixpkgs.follows = "nixpkgs-25-11";
+    home-25-11.url = "github:nix-community/home-manager/release-25.11";
+    home.follows = "home-25-11";
     preservation.url = "github:nix-community/preservation";
     sops-nix.url = "flake:sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
