@@ -29,16 +29,16 @@ in
       packages = filterAttrs (
         _: v: !(hasAttr "meta" v) || !(hasAttr "platforms" v.meta) || (elem system v.meta.platforms)
       ) pkgsByName;
-      nonBrokenPackages = filter (pkg: pkg ? meta.broken -> !pkg.meta.broken) (attrValues packages);
+      nonBrokenPackages = filterAttrs (_: pkg: pkg ? meta.broken -> !pkg.meta.broken) packages;
     in
     {
-      inherit packages;
+      packages = nonBrokenPackages;
       legacyPackages = packages;
 
       # add check: build all packages
       checks.buildPackages = pkgs.stdenv.mkDerivation {
         name = "all-packages";
-        buildInputs = nonBrokenPackages;
+        buildInputs = attrValues nonBrokenPackages;
         dontUnpack = true;
         installPhase = "mkdir -p $out";
       };
