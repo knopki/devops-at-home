@@ -14,13 +14,6 @@ Each shell module is added to the list in a file corresponding to its type.
 
 ### Types of Shells
 
-**Numtide DevShells** (`numtide-devshells.nix`):
-
-- Feature-rich development environments
-- Service orchestration support
-- Environment variable management
-- Command aliases and shortcuts
-
 **Standard Nix Shells** (`shells.nix`):
 
 - Simple `mkShell` environments

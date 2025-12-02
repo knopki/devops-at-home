@@ -11,12 +11,9 @@
 }:
 let
   inherit (lib.attrsets) mapAttrs;
-  numtideDevshellsNamePath = import ../../shells/numtide-devshells.nix;
   shellsNamePath = import ../../shells/shells.nix;
 in
 {
-  imports = [ inputs.devshell.flakeModule ];
-
   config = {
     perSystem =
       { config, system, ... }:
@@ -27,7 +24,6 @@ in
             inherit system;
             config = self.lib.nixpkgsPolicies.configStandard // {
               allowUnsupportedSystem = true;
-              cudaSupport = true;
             };
             overlays = with self.overlays; [
               my-packages
@@ -40,9 +36,6 @@ in
       in
       {
         devShells = mapAttrs loadShell shellsNamePath;
-
-        # load numtide/devshells (not devShells)
-        devshells = mapAttrs loadShell numtideDevshellsNamePath;
       };
   };
 }

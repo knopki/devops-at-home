@@ -76,13 +76,11 @@ in
     nix.settings.trusted-substituters = [
       "https://cache.garnix.io"
       "https://nix-community.cachix.org"
-      "https://numtide.cachix.org"
     ]
     ++ (self.nixConfig.extra-substituters or [ ]);
     nix.settings.trusted-public-keys = [
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
     ]
     ++ (self.nixConfig.extra-trusted-public-keys or [ ]);
 

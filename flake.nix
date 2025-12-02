@@ -7,10 +7,14 @@
       "nix-command"
       "flakes"
     ];
-    extra-substituters = [ "https://nix-community.cachix.org" ];
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://devenv.cachix.org"
+    ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nixpkgs-python.cachix.org-1:hxjI7pFxTyuTHn2NkvWCrAUcNZLNS3ZAvfYNuYifcEU="
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     ];
   };
 
@@ -27,8 +31,8 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-utils.url = "flake:flake-utils";
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
-    devshell.url = "github:numtide/devshell";
+    devenv.url = "github:cachix/devenv";
+    devenv.inputs.nixpkgs.follows = "nixpkgs";
     home-25-11.inputs.nixpkgs.follows = "nixpkgs-25-11";
     home-25-11.url = "github:nix-community/home-manager/release-25.11";
     home.follows = "home-25-11";
