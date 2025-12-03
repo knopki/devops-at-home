@@ -43,9 +43,6 @@ in
     path = self.outPath;
   };
 
-  # remove after 25.05
-  programs.command-not-found.enable = mkDefault false;
-
   zswap = {
     enable = (builtins.length config.swapDevices) > 0 && !config.zramSwap.enable;
     compressor = mkDefault "lz4";
