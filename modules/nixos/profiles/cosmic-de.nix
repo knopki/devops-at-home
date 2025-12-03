@@ -37,7 +37,6 @@ in
       gparted
       papers # alternative to cosmic reader
       cosmic-reader # not ready to be a default pdf viewer
-      file-roller # archive management
       gnome-calendar
       gnome-characters
       gnome-contacts
