@@ -453,9 +453,16 @@ in
     user-media-maintenance = commonMaintenanceOpts // userMediaJobRepoConfig;
 
     system-data =
+      let
+        excludes = [ "/var/lib/lampac/dlna/*" ];
+        excludeFile = mkIgnoresFile excludes;
+      in
       commonBackupsOpts
       // systemDataJobRepoConfig
       // {
+        extraBackupArgs = commonBackupsOpts.extraBackupArgs ++ [
+          "--exclude-file=${excludeFile}"
+        ];
         paths = [
           "/var/lib/isponsorblocktv"
           "/var/lib/lampac"
