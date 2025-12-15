@@ -23,4 +23,10 @@
     export PRJ_ROOT="$DEVENV_ROOT"
     nix run .#update-packages -- "$@"
   '';
+
+  scripts.generate-facts.exec = ''
+    export MYUID=$(id -u)
+    export MYGID=$(id -g)
+    run0 bash -c "${pkgs.nixos-facter}/bin/nixos-facter -o facter.json && chown $MYUID:$MYGID facter.json"
+  '';
 }
