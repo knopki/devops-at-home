@@ -10,11 +10,13 @@
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://devenv.cachix.org"
+      "https://cache.numtide.com"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nixpkgs-python.cachix.org-1:hxjI7pFxTyuTHn2NkvWCrAUcNZLNS3ZAvfYNuYifcEU="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
     ];
   };
 
@@ -29,7 +31,6 @@
     flake-parts.url = "flake:flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-lib";
     flake-compat.url = "github:edolstra/flake-compat";
-    flake-utils.url = "flake:flake-utils";
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
     devenv.url = "github:cachix/devenv";
     devenv.inputs.nixpkgs.follows = "nixpkgs";
@@ -54,7 +55,6 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
-    microvm.inputs.flake-utils.follows = "flake-utils";
     nixos-hardware.url = "flake:nixos-hardware";
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-generators.inputs.nixlib.follows = "nixpkgs-lib";

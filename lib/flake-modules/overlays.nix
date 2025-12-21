@@ -15,7 +15,7 @@ let
 
   unstableOverlay = final: _prev: {
     nixpkgsUnstable = import inputs.nixpkgs-unstable {
-      inherit (final) system;
+      system = final.stdenv.hostPlatform.system;
       config = self.lib.nixpkgsPolicies.configStandard;
     };
   };
