@@ -5,7 +5,13 @@
   ...
 }:
 let
-  inherit (lib) mkDefault mkEnableOption mkIf;
+  inherit (lib)
+    hiPrio
+    lowPrio
+    mkDefault
+    mkEnableOption
+    mkIf
+    ;
   cfg = config.profiles.cosmic-de;
 in
 {
@@ -23,7 +29,9 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      (lib.hiPrio cosmic-icons) # no need to install by this will fix collisions
+      (hiPrio cosmic-icons) # no need to install by this will fix collisions
+
+      (lowPrio (cosmic-notify-send.override { name = "notify-send"; })) # notify-send compatibility
 
       # Look & feel
       cosmic-ext-tweaks
