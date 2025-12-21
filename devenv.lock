@@ -1,12 +1,33 @@
 {
   "nodes": {
+    "blueprint": {
+      "inputs": {
+        "nixpkgs": [
+          "llm-agents",
+          "nixpkgs"
+        ],
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1763308703,
+        "owner": "numtide",
+        "repo": "blueprint",
+        "rev": "5a9bba070f801d63e2af3c9ef00b86b212429f4f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "blueprint",
+        "type": "github"
+      }
+    },
     "devenv": {
       "locked": {
         "dir": "src/modules",
-        "lastModified": 1765800147,
+        "lastModified": 1766087669,
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "ada06017aef4941e91aabe7507e33d750757ae0c",
+        "rev": "c03eed645ea94da7afbee29da76436b7ce33a5cb",
         "type": "github"
       },
       "original": {
@@ -40,10 +61,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1765464257,
+        "lastModified": 1765911976,
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "09e45f2598e1a8499c3594fe11ec2943f34fe509",
+        "rev": "b68b780b69702a090c8bb1b973bab13756cc7a27",
         "type": "github"
       },
       "original": {
@@ -72,7 +93,41 @@
         "type": "github"
       }
     },
+    "llm-agents": {
+      "inputs": {
+        "blueprint": "blueprint",
+        "nixpkgs": "nixpkgs",
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1766327205,
+        "owner": "numtide",
+        "repo": "llm-agents.nix",
+        "rev": "06a653ce6beef039762700be2c3816128d23e3a6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "llm-agents.nix",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1766125104,
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7d853e518814cca2a657b72eeba67ae20ebf7059",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1764580874,
         "owner": "cachix",
@@ -91,10 +146,45 @@
       "inputs": {
         "devenv": "devenv",
         "git-hooks": "git-hooks",
-        "nixpkgs": "nixpkgs",
+        "llm-agents": "llm-agents",
+        "nixpkgs": "nixpkgs_2",
         "pre-commit-hooks": [
           "git-hooks"
         ]
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "llm-agents",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1766000401,
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "42d96e75aa56a3f70cab7e7dc4a32868db28e8fd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
       }
     }
   },

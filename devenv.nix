@@ -1,19 +1,22 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   env.GREET = "devops-at-home";
 
-  packages = with pkgs; [
-    git
-    age
-    nh
-    nix-inspect
-    nixos-anywhere
-    nixos-option
-    dix
-    sops
-    nixVersions.latest
-    nixfmt-rfc-style
-  ];
+  packages =
+    with pkgs;
+    [
+      git
+      age
+      nh
+      nix-inspect
+      nixos-anywhere
+      nixos-option
+      dix
+      sops
+      nixVersions.latest
+      nixfmt-rfc-style
+    ]
+    ++ (with inputs.llm-agents.packages.${pkgs.system}; [ opencode ]);
 
   languages.nix.enable = true;
 
