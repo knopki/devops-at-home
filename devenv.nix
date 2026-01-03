@@ -1,12 +1,16 @@
 { pkgs, inputs, ... }:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
 {
   env.GREET = "devops-at-home";
 
   packages =
     with pkgs;
     [
-      git
       age
+      git
+      commitizen
       nh
       nix-inspect
       nixos-anywhere
@@ -16,7 +20,7 @@
       nixVersions.latest
       nixfmt-rfc-style
     ]
-    ++ (with inputs.llm-agents.packages.${pkgs.system}; [ opencode ]);
+    ++ (with inputs.llm-agents.packages.${system}; [ opencode ]);
 
   languages.nix.enable = true;
 
