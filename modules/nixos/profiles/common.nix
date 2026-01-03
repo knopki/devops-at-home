@@ -52,7 +52,7 @@ in
   };
 
   # Man cache is very slow to rebuild
-  # Remove non-needed man pages for speed up rebuild
+  # Remove non-needed man pages to speed up rebuild
   environment.extraSetup = /* bash */ ''
     # remove multilanguage man pages
     find "$out/share/man" \
@@ -60,6 +60,6 @@ in
       -not -name "man[1-8]" \
       -exec rm -r "{}" ";"
     # remove man section 3 which contains mainly C functions
-    rm -r "$out/share/man/man3"
+    rm -rf "$out/share/man/man3"
   '';
 }
