@@ -53,7 +53,7 @@
         type = "lvm_vg";
         lvs = {
           swap = {
-            size = "48G";
+            size = "40G";
             content = {
               type = "swap";
               priority = 100;
