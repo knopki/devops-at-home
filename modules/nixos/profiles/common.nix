@@ -50,4 +50,16 @@ in
     shrinker_enabled = mkDefault true;
     same_filled_pages = mkDefault true;
   };
+
+  # Man cache is very slow to rebuild
+  # Remove non-needed man pages for speed up rebuild
+  environment.extraSetup = /* bash */ ''
+    # remove multilanguage man pages
+    find "$out/share/man" \
+      -mindepth 1 -maxdepth 1 \
+      -not -name "man[1-8]" \
+      -exec rm -r "{}" ";"
+    # remove man section 3 which contains mainly C functions
+    rm -r "$out/share/man/man3"
+  '';
 }
