@@ -75,7 +75,6 @@ in
         lima
         python3
         rclone
-        uv
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
