@@ -9,10 +9,10 @@ let
   inherit (lib.modules) mkDefault mkIf;
   inherit (lib.options) mkEnableOption;
   inherit (lib) lowPrio;
-  cfg = config.profiles.applists;
+  cfg = config.custom.applists;
 in
 {
-  options.profiles.applists = {
+  options.custom.applists = {
     enable = mkEnableOption "Enable application lists profile";
     admin = mkEnableOption "Install set of admin applications";
     adminGUI = mkEnableOption "Install set of admin applications";
@@ -95,7 +95,6 @@ in
         lm_sensors
         pciutils
         powertop
-        sbctl
         smartmontools
         usbutils
         wirelesstools

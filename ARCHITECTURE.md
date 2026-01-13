@@ -18,11 +18,15 @@ devops-at-home/
 │   └── flake-modules/              # flake-parts-specific modules
 ├── modules/                        # Reusable NixOS modules
 │   ├── nixos/                      # NixOS-specific modules
+│   │   ├── config/                 # Core system configurations
 │   │   ├── hardware/               # Hardware-related
-│   │   ├── mixins/                 # Small parts to be reused in profiles
-│   │   ├── profiles/               # Big profiles (roles)
+│   │   ├── misc/                   # Miscellaneous helper modules
 │   │   ├── programs/               # Program-specific modules
+│   │   ├── roles/                  # High-level system roles
+│   │   ├── security/               # Security configurations
 │   │   ├── services/               # Modules for services
+│   │   ├── snippets/               # Reusable configuration snippets
+│   │   ├── system/                 # System-level boot configurations
 │   │   ├── themes/                 # Look & feel modules
 │   │   └── nixos-modules.nix       # Index
 │   ├── home/                       # Home Manager modules (deprecated)
@@ -68,40 +72,62 @@ devops-at-home/
 
 ### Configuration Layers
 
-1. **Common Profile** (`modules/nixos/profiles/common.nix`)
+1. **Base Mixin** (`modules/nixos/misc/common-mixin.nix`)
+   - Core system configuration modules
+   - Imports config modules (locale, nix, zswap, etc.)
+   - Programs, security, and services setup
+   - Applied through all roles
 
-   - Base system configuration
-   - Network, Nix, SSH, and security defaults
-   - Applied to all systems
-
-1. **Specialized Profiles**
-
-   - **Server Profile**: Headless systems, minimal packages
-   - **Workstation Profile**: Desktop systems, GUI applications
-   - **DevHost Profile**: Development-focused configuration
+1. **Roles** (`modules/nixos/roles/`)
+   - **Server Role**: Headless systems, minimal packages, optimized for CLI usage
+   - **Workstation Role**: Desktop systems, GUI applications, user-focused features
+   - **DevHost Role**: Development-focused configuration with dev tools and environments
+   - Each role imports the base mixin and adds specialized functionality
 
 1. **Host-Specific Configuration**
-
    - Hardware-specific settings
    - Storage configuration (ZFS, LUKS)
    - Network and service configuration
+   - Role selection and customization
 
 ### Module System
 
-**Mixins** (`modules/nixos/mixins/`):
+**Config** (`modules/nixos/config/`):
 
-- Small, focused modules for specific functionality
-- Examples: `mixin-nix.nix`, `mixin-openssh.nix`, `mixin-pipewire.nix`
+- Core system configuration modules
+- Includes: `home-manager.nix`, `locale.nix`, `nix.nix`, `preservation.nix`, `zswap.nix`
 
-**Programs** (`modules/nixos/programs/`):
+**Roles** (`modules/nixos/roles/`):
 
-- Application-specific configurations
-- Example: `programs-helix.nix` with language server support
+- High-level system profiles defining machine types
+- `server.nix` - Headless systems, minimal packages
+- `workstation.nix` - Desktop systems, GUI applications
+- `devhost.nix` - Development-focused configuration
 
 **Services** (`modules/nixos/services/`):
 
 - Service-specific configurations
-- Example: `service-kopia.nix` with backups configuration
+- Includes: `cosmic-de.nix`, `networking.nix`, `openssh.nix`, `pipewire.nix`
+
+**System** (`modules/nixos/system/`):
+
+- System-level boot and kernel configurations
+- Includes: `lanzaboote.nix` (Secure Boot), `systemd-boot.nix`
+
+**Security** (`modules/nixos/security/`):
+
+- Security-related configurations
+- Example: `sudo.nix`
+
+**Programs** (`modules/nixos/programs/`):
+
+- Application-specific configurations
+- Includes: `applists.nix`, `helix.nix` (with language server support), `htop.nix`, `ssh-well-known-hosts.nix`
+
+**Misc** (`modules/nixos/misc/`):
+
+- Miscellaneous helper modules
+- Includes: `common-mixin.nix`, `no-docs.nix`
 
 ### Package Management
 

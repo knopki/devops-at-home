@@ -37,28 +37,24 @@
     home-25-11.inputs.nixpkgs.follows = "nixpkgs-25-11";
     home-25-11.url = "github:nix-community/home-manager/release-25.11";
     home.follows = "home-25-11";
-    preservation.url = "github:nix-community/preservation";
     sops-nix.url = "flake:sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    # nixpak.url = "github:nixpak/nixpak";
-    # nixpak.inputs.flake-parts.follows = "flake-parts";
-    # nixpak.inputs.nixpkgs.follows = "nixpkgs";
-
-    # customizations
-    # themes etc
-
-    # applications and utilities
-    # nixpkgs-python.url = "github:cachix/nixpkgs-python";
 
     # linux only
     disko.url = "flake:disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+    preservation.url = "github:nix-community/preservation";
+    nixos-hardware.url = "flake:nixos-hardware";
+    lanzaboote.url = "github:nix-community/lanzaboote/7e031eb535a494582f4fc58735b5aecba7b57058"; # 2026-01-13
+    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-hardware.url = "flake:nixos-hardware";
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-generators.inputs.nixlib.follows = "nixpkgs-lib";
     # nixos-generators.inputs.nixpkgs.follows = "nixpkgs-24-05";
+    # nixpak.url = "github:nixpak/nixpak";
+    # nixpak.inputs.flake-parts.follows = "flake-parts";
+    # nixpak.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

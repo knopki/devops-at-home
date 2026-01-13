@@ -4,18 +4,16 @@
   ...
 }:
 {
-  preservation.preserveAt."/state".users.root = {
-    # specify user home when it is not `/home/${user}`
-    home = "/root";
-    directories = [
-      {
-        directory = ".ssh";
-        mode = "0700";
-      }
-      ".local/share/chezmoi"
-      ".local/state/nix"
-    ];
-    files = [ ];
+  custom.preservation = {
+    preserveAtTemplates."/state".users.root = {
+      auto.enable = true;
+      xdgTmpfiles.enable = true;
+    };
+    preserveAt."/state".users.root = {
+      directories = [ ];
+      files = [ ];
+    };
+    preserveAtTemplates."/state/sensitive".users.root.secrets.enable = true;
   };
 
   sops.secrets = {
@@ -29,6 +27,4 @@
       self.lib.sshPubKeys.knopkiSshPubKey1
     ];
   };
-
-  systemd.user.tmpfiles.users.root.rules = self.lib.preservationPolicies.commonUserTmpfilesRules;
 }

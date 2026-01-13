@@ -28,7 +28,7 @@
 /dev/nvme0n1p1  -> /boot (vfat, 1GB)
 /dev/nvme0n1p2  -> LUKS container
   └── LVM volume group
-      ├── swap (16GB)
+      ├── swap (40GB)
       ├── sys (200GB, Btrfs)
       ├── state (remaining space, Btrfs)
       └── sensitive (1GB, Btrfs)

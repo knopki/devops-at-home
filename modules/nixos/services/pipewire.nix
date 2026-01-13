@@ -2,10 +2,10 @@
 { lib, config, ... }:
 let
   inherit (lib) mkDefault mkEnableOption mkIf;
-  cfg = config.profiles.pipewire;
+  cfg = config.custom.pipewire;
 in
 {
-  options.profiles.pipewire.enable = mkEnableOption "Enable pipewire profile";
+  options.custom.pipewire.enable = mkEnableOption "Enable pipewire profile";
 
   config = mkIf cfg.enable {
     security.rtkit.enable = mkDefault config.services.pipewire.enable;

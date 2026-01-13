@@ -14,7 +14,7 @@ let
     mkPackageOption
     ;
   inherit (lib.strings) getName getVersion makeBinPath;
-  cfg = config.programs.helix;
+  cfg = config.custom.helix;
   extraPackagesFinal =
     with pkgs;
     cfg.extraPackages
@@ -131,7 +131,7 @@ let
   };
 in
 {
-  options.programs.helix = {
+  options.custom.helix = {
     enable = mkEnableOption "helix text editor";
 
     package = mkPackageOption pkgs "helix" { example = "pkgs.evil-helix"; };
@@ -214,7 +214,7 @@ in
       systemPackages = [ cfg.finalPackage ];
     };
 
-    programs.helix = {
+    custom.helix = {
       finalPackage = if extraPackagesFinal != [ ] then wrappedHx else cfg.package;
       finalExtraPackages = extraPackagesFinal;
     };

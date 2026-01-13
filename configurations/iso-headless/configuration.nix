@@ -5,9 +5,9 @@
   ...
 }:
 {
-  imports = with self.modules.nixos; [ profile-nix ];
+  imports = with self.modules.nixos; [ config-nix ];
 
-  profiles.nix.enable = true;
+  custom.nix.enable = true;
 
   environment.systemPackages = with pkgs; [
     binutils

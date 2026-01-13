@@ -12,10 +12,10 @@ let
     mkEnableOption
     mkIf
     ;
-  cfg = config.profiles.cosmic-de;
+  cfg = config.custom.cosmic-de;
 in
 {
-  options.profiles.cosmic-de.enable = mkEnableOption "Enable Cosmis DE profile";
+  options.custom.cosmic-de.enable = mkEnableOption "Enable Cosmis DE profile";
   # no SSH agent
   config = mkIf cfg.enable {
 

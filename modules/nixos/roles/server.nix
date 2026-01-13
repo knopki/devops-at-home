@@ -14,24 +14,22 @@ let
 in
 {
   imports = with self.modules.nixos; [
-    profile-common # TODO
-    profile-terminfo
     program-helix
-    program-no-docs
+    misc-common-mixin
+    misc-no-docs
   ];
 
   options.roles.server.enable = mkEnableOption "Base server role";
 
   config = mkIf cfg.enable {
-    profiles.applists = {
+    custom.applists = {
       admin = mkDefault true;
       cliTools = mkDefault true;
       hardware = mkDefault true;
       networking = mkDefault true;
     };
-    profiles.locale.flavor = mkDefault "en_RU";
-    profiles.no-docs.enable = mkDefault true;
-    profiles.terminfo.enable = mkDefault true;
+    custom.locale.flavor = mkDefault "en_RU";
+    custom.no-docs.enable = mkDefault true;
 
     # Given that our systems are headless, emergency mode is useless.
     # We prefer the system to attempt to continue booting so
@@ -66,17 +64,14 @@ in
 
     programs.git.package = mkDefault pkgs.gitMinimal;
 
-    programs.helix = {
+    custom.helix = {
       enable = lib.mkDefault true;
       defaultEditor = mkDefault true;
       viAlias = true;
       vimAlias = true;
     };
 
-    programs.htop = {
-      enable = mkDefault true;
-      applySettingsProfile = mkDefault true;
-    };
+    custom.htop.enable = mkDefault true;
 
     security.sudo.wheelNeedsPassword = false;
 

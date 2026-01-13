@@ -63,10 +63,10 @@ in
   security.protectKernelImage = false;
 
   services = {
-    avahi = {
-      nssmdns4 = true;
-      nssmdns6 = true;
-    };
+    # avahi = {
+    #   nssmdns4 = true;
+    #   nssmdns6 = true;
+    # };
     dbus.packages = with pkgs; [ dconf ];
     fwupd.enable = false;
     locate = {

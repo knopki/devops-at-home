@@ -10,7 +10,6 @@ inputs.nixpkgs-25-11.lib.nixosSystem {
     ./nixpkgs.nix
     ./hardware-config.nix
     ./profiles-flatpak.nix
-    ./profiles-fonts.nix
     ./profiles-earlyoom.nix
     ./profiles-cryptowallets.nix
     ./profiles-desktop-essentials.nix

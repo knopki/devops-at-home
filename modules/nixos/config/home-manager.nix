@@ -8,12 +8,12 @@
 }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.profiles.home-manager;
+  cfg = config.custom.home-manager;
 in
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
-  options.profiles.home-manager.enable = mkEnableOption "Enable home-manager profile";
+  options.custom.home-manager.enable = mkEnableOption "Enable home-manager profile";
 
   config = mkIf cfg.enable {
     home-manager = {

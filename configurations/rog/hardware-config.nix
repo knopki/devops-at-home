@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs,
   self,
   ...
 }:
@@ -16,23 +15,18 @@
     common-pc-ssd
   ])
   ++ (with self.modules.nixos; [
-    profile-systemd-boot
-    mixin-preservation-common
+    config-preservation
+    system-lanzaboote
   ]);
 
-  profiles.systemd-boot.enable = true;
+  custom.lanzaboote.enable = true;
 
   boot = {
     bootspec.enable = true;
     initrd = {
       availableKernelModules = [
         "tpm_tis"
-        "btrfs"
-        "nvme"
-        "xhci_pci"
         "usbhid"
-        "usb_storage"
-        "sd_mod"
         "sdhci_pci"
       ];
       kernelModules = [ "dm-snapshot" ];
@@ -56,14 +50,22 @@
     };
   };
 
+  fileSystems."/state".neededForBoot = true;
+
+  custom.preservation = {
+    enable = true;
+    resetBtrfsRoot.enable = true;
+    preserveAtTemplates."/state" = {
+      auto.enable = true;
+      vm.enable = true;
+    };
+  };
+
   hardware = {
     asus.battery.chargeUpto = 80;
     enableRedistributableFirmware = true;
+    facter.reportPath = ./facter.json;
   };
-
-  nixpkgs.hostPlatform = "x86_64-linux";
-
-  preservation.enable = true;
 
   security.tpm2.enable = true;
 

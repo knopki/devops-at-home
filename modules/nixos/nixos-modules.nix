@@ -1,31 +1,38 @@
 {
-  # mixins
-  mixin-preservation-common = ./mixins/preservation-common.nix;
+  # config
+  config-home-manager = ./config/home-manager.nix;
+  config-locale = ./config/locale.nix;
+  config-nix = ./config/nix.nix;
+  config-preservation = ./config/preservation.nix;
+  config-zswap = ./config/zswap.nix;
+
+  # misc
+  misc-common-mixin = ./misc/common-mixin.nix;
+  misc-no-docs = ./misc/no-docs.nix;
 
   # profiles
-  profile-applists = ./profiles/applists.nix;
-  profile-common = ./profiles/common.nix;
-  profile-cosmic-de = ./profiles/cosmic-de.nix;
-  profile-home-manager = ./profiles/home-manager.nix;
-  profile-htop = ./profiles/htop.nix;
-  profile-locale = ./profiles/locale.nix;
-  profile-networking = ./profiles/networking.nix;
-  profile-nix = ./profiles/nix.nix;
-  profile-no-docs = ./profiles/no-docs.nix;
-  profile-openssh = ./profiles/openssh.nix;
-  profile-pipewire = ./profiles/pipewire.nix;
-  profile-ssh-well-known-hosts = ./profiles/ssh-well-known-hosts.nix;
-  profile-sudo = ./profiles/sudo.nix;
-  profile-systemd-boot = ./profiles/systemd-boot.nix;
-  profile-terminfo = ./profiles/terminfo.nix;
 
   # programs
+  program-applists = ./programs/applists.nix;
   program-helix = ./programs/helix.nix;
+  program-htop = ./programs/htop.nix;
+  program-ssh-well-known-hosts = ./programs/ssh-well-known-hosts.nix;
 
   # roles
   role-devhost = ./roles/devhost.nix;
   role-server = ./roles/server.nix;
   role-workstation = ./roles/workstation.nix;
 
-  zswap = ./zswap.nix;
+  # security
+  security-sudo = ./security/sudo.nix;
+
+  # services
+  service-cosmic-de = ./services/cosmic-de.nix;
+  service-networking = ./services/networking.nix;
+  service-openssh = ./services/openssh.nix;
+  service-pipewire = ./services/pipewire.nix;
+
+  # system
+  system-lanzaboote = ./system/lanzaboote.nix;
+  system-systemd-boot = ./system/systemd-boot.nix;
 }

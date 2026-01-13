@@ -6,10 +6,10 @@
 let
   inherit (lib.modules) mkDefault mkIf;
   inherit (lib.options) mkEnableOption;
-  cfg = config.profiles.networking;
+  cfg = config.custom.networking;
 in
 {
-  options.profiles.networking.enable = mkEnableOption "Enable networking profile";
+  options.custom.networking.enable = mkEnableOption "Enable networking profile";
 
   config = mkIf cfg.enable {
     # Allow PMTU / DHCP

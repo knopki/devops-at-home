@@ -2,10 +2,10 @@
 let
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.modules) mkDefault mkIf mkMerge;
-  cfg = config.profiles.locale;
+  cfg = config.custom.locale;
 in
 {
-  options.profiles.locale = {
+  options.custom.locale = {
     enable = mkEnableOption "Enable locale profile";
     flavor = mkOption {
       type = lib.types.enum [
@@ -21,6 +21,7 @@ in
   config = mkIf cfg.enable (mkMerge [
     {
       console.font = mkDefault "LatArCyrHeb-16";
+      console.earlySetup = mkDefault true;
     }
 
     (mkIf (cfg.flavor == "en_US") {

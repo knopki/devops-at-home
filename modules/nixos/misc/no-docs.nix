@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
   inherit (lib) mkDefault mkEnableOption mkIf;
-  cfg = config.profiles.no-docs;
+  cfg = config.custom.no-docs;
 in
 {
-  options.profiles.no-docs.enable = mkEnableOption "Enable no documentation profile";
+  options.custom.no-docs.enable = mkEnableOption "Enable no documentation profile";
 
   config = mkIf cfg.enable {
     documentation = {

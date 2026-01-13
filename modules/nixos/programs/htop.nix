@@ -1,10 +1,10 @@
 { lib, config, ... }:
 let
   inherit (lib) mkDefault mkEnableOption mkIf;
-  cfg = config.profiles.htop;
+  cfg = config.custom.htop;
 in
 {
-  options.profiles.htop.enable = mkEnableOption "Apply htop profile";
+  options.custom.htop.enable = mkEnableOption "Apply htop profile";
 
   config = mkIf cfg.enable {
     programs.htop = {

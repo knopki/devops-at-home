@@ -9,23 +9,23 @@ let
 in
 {
   imports = with self.modules.nixos; [
-    profile-htop
-    profile-locale
-    profile-networking
-    profile-nix
-    profile-openssh
-    profile-ssh-well-known-hosts
-    profile-sudo
-    zswap
+    config-locale
+    config-nix
+    config-zswap
+    program-htop
+    program-ssh-well-known-hosts
+    security-sudo
+    service-networking
+    service-openssh
   ];
 
-  profiles.htop.enable = mkDefault true;
-  profiles.locale.enable = mkDefault true;
-  profiles.networking.enable = mkDefault true;
-  profiles.nix.enable = mkDefault true;
-  profiles.openssh.enable = mkDefault true;
-  profiles.ssh-well-known-hosts.enable = mkDefault true;
-  profiles.sudo.enable = mkDefault true;
+  custom.htop.enable = mkDefault true;
+  custom.locale.enable = mkDefault true;
+  custom.networking.enable = mkDefault true;
+  custom.nix.enable = mkDefault true;
+  custom.openssh.enable = mkDefault true;
+  custom.ssh-well-known-hosts.enable = mkDefault true;
+  custom.sudo.enable = mkDefault true;
 
   # Use systemd during boot as well except:
   # - systems with raids as this currently require manual configuration: https://github.com/NixOS/nixpkgs/issues/210210
@@ -43,13 +43,15 @@ in
     path = self.outPath;
   };
 
-  zswap = {
+  custom.zswap = {
     enable = (builtins.length config.swapDevices) > 0 && !config.zramSwap.enable;
     compressor = mkDefault "lz4";
     max_pool_percent = mkDefault 20;
     shrinker_enabled = mkDefault true;
     same_filled_pages = mkDefault true;
   };
+
+  environment.enableAllTerminfo = true;
 
   # Man cache is very slow to rebuild
   # Remove non-needed man pages to speed up rebuild

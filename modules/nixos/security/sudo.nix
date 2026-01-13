@@ -6,10 +6,10 @@
 let
   inherit (lib.modules) mkBefore mkDefault mkIf;
   inherit (lib.options) mkEnableOption;
-  cfg = config.profiles.sudo;
+  cfg = config.custom.sudo;
 in
 {
-  options.profiles.sudo.enable = mkEnableOption "Enable sudo profile";
+  options.custom.sudo.enable = mkEnableOption "Enable sudo profile";
 
   config = mkIf cfg.enable {
     # Only allow members of the wheel group te execute sudo by setting

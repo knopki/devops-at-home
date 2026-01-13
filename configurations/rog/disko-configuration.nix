@@ -1,6 +1,22 @@
 # apply with:
 #  sudo nix --experimental-features "nix-command flakes" run nixpkgs#disko -- \
 #   -m format,mount -f .#rog --root-mountpoint=/mnt
+let
+  btrfsDefaults = {
+    extraArgs = [
+      "--csum xxhash64"
+      "--features"
+      "block-group-tree"
+    ];
+    mountOptions = [
+      "compress=zstd"
+      "relatime"
+      "ssd"
+      "space_cache=v2"
+      "discard=async"
+    ];
+  };
+in
 {
   disko.devices = {
     disk = {
@@ -22,19 +38,13 @@
                 mountOptions = [ "umask=0077" ];
               };
             };
-            # Provisioned with:
-            #  1. systemd-cryptenroll /dev/nvme0n1p2 --password
-            #  2. systemd-cryptenroll /dev/nvme0n1p2 --recovery
-            #  3. systemd-cryptenroll /dev/nvme0n1p2 --tpm2-device=auto \
-            #       --tpm2-pcrs=0+2+7+12 --tpm2-with-pin=true
-            #  4. TODO: FIDO2
             luks = {
               size = "100%";
               label = "cryptroot";
               content = {
                 type = "luks";
                 name = "cryptroot";
-                passwordFile = "/tmp/disk.key"; # initial password
+                askPassword = true; # ask initial password
                 settings = {
                   allowDiscards = true;
                 };
@@ -63,23 +73,21 @@
           sys = {
             size = "100G";
             content = {
+              inherit (btrfsDefaults) extraArgs;
               type = "btrfs";
               # Subvolumes must set a mountpoint in order to be mounted,
               # unless their parent is mounted
               subvolumes = {
-                "@root" = {
+                "@" = {
+                  inherit (btrfsDefaults) mountOptions;
                   mountpoint = "/";
-                  mountOptions = [
-                    "compress=zstd"
-                    "relatime"
-                  ];
+                };
+                "@root-blank" = {
+                  inherit (btrfsDefaults) mountOptions;
                 };
                 "@nix" = {
+                  inherit (btrfsDefaults) mountOptions;
                   mountpoint = "/nix";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
                 };
               };
             };
@@ -87,15 +95,14 @@
           state = {
             size = "100%";
             content = {
+              inherit (btrfsDefaults) extraArgs;
               type = "btrfs";
               subvolumes = {
                 "@state" = {
+                  inherit (btrfsDefaults) mountOptions;
                   mountpoint = "/state";
-                  mountOptions = [
-                    "compress=zstd"
-                    "relatime"
-                  ];
                 };
+                "@state/var" = { };
                 "@state/srv" = { };
                 "@state/root" = { };
                 "@state/home" = { };
@@ -106,14 +113,13 @@
           sensitive = {
             size = "1G";
             content = {
+              inherit (btrfsDefaults) extraArgs;
               type = "btrfs";
               subvolumes = {
                 "@sensitive" = {
                   mountpoint = "/state/sensitive";
-                  mountOptions = [
-                    "compress=zstd"
-                    "relatime"
-                    "noauto"
+                  mountOptions = btrfsDefaults.mountOptions ++ [
+                    # "noauto"
                   ];
                 };
               };

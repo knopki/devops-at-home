@@ -12,7 +12,6 @@ let
     attrValues
     elem
     hasAttr
-    filter
     ;
   inherit (lib.attrsets) filterAttrs;
 in

@@ -27,10 +27,21 @@ Key based authentication is enabled.
 
 ### Prepare Secrets
 
-Get a machine's public AGE key from the host SSH keys:
+Generate SSH host keys for a new machine:
 
 ```bash
-nix-shell -p ssh-to-age --run 'ssh-keyscan <TARGET_IP> | ssh-to-age'
+mkdir -p /tmp/newroot/state/etc/ssh
+ssh-keygen -A -f /tmp/newroot/state
+```
+
+Use `/tmp/newroot/state` for ssh keys if state opt-in ("impermanence") is used.
+Otherwise, use `/tmp/newroot`.
+
+Get the machine's public AGE key from the host SSH ed25519 key:
+
+```bash
+nix-shell -p ssh-to-age \
+  --run 'ssh-to-age -i /tmp/newroot/state/etc/ssh/ssh_host_ed25519_key.pub'
 ```
 
 Add this key to `.sops.yaml` and create `secrets/<hostname>.yaml`.
@@ -38,18 +49,12 @@ Edit secrets via `sops edit secrets/<hostname>.yaml`.
 
 #### Deploy Remotely
 
-Create a temporary disk encryption key:
-
-```bash
-openssl rand -base64 32 > /tmp/disk.key
-chmod 600 /tmp/disk.key
-```
-
 Deploy the system:
 
 ```bash
-nixos-anywhere -f .#<hostname> --copy-host-keys \
-  --disk-encryption-keys /tmp/disk.key /tmp/disk.key \  --target-host root@<TARGET_IP>
+nixos-anywhere -f .#<hostname> \
+  --target-host root@<TARGET_IP> \
+  --extra-files /tmp/newroot
 ```
 
 ### Post-Installation Setup
@@ -58,11 +63,14 @@ Connect to the new machine's console and enter the disk encryption key.
 Connect to the machine via SSH. Reconfigure the disk encryption:
 
 ```bash
-systemd-cryptenroll /dev/<target_luks_partition> --password
-systemd-cryptenroll /dev/<target_luks_partition> --recovery
 systemd-cryptenroll /dev/<target_luks_partition> \
+  --wipe-slot=password --password
+systemd-cryptenroll /dev/<target_luks_partition> \
+  --wipe-slot=recovery --recovery
+systemd-cryptenroll /dev/<target_luks_partition> \
+  --wipe-slot=tpm2 \
   --tpm2-device=auto \
-  --tpm2-pcrs=0+2+7+12 \
+  --tpm2-pcrs=0+2+7+15 \
   --tpm2-with-pin=true
   # TODO: FIDO2
 ```

@@ -18,7 +18,7 @@ let
       # ps. prefix - install from the zed-editor's pkgs
       pkgs.package-version-server
     ]
-    ++ config.programs.helix.finalExtraPackages
+    ++ config.custom.helix.finalExtraPackages
   );
 in
 {
@@ -29,7 +29,7 @@ in
   config = mkIf cfg.enable {
     roles.workstation.enable = true;
 
-    profiles.applists = {
+    custom.applists = {
       admin = mkDefault true;
       adminGUI = mkDefault true;
       dev = mkDefault true;
@@ -48,7 +48,7 @@ in
       lfs.enable = true;
     };
 
-    programs.helix = {
+    custom.helix = {
       extraPackagesCss = true;
       extraPackagesDocker = true;
       extraPackagesFish = true;

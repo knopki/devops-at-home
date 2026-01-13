@@ -103,5 +103,5 @@ in
     pkgIfVersionMin prev.xdg-desktop-portal-cosmic "1.0.0"
       p.xdg-desktop-portal-cosmic;
 
-  zed-editor = pkgIfVersionMin prev.zed-editor "0.214" p.zed-editor;
+  zed-editor = pkgIfVersionMin prev.zed-editor "0.218" p.zed-editor;
 }

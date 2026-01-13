@@ -2,7 +2,7 @@ keys:
   - &knopki age176u6qqk7ra4mdtptt4pfhjvsrqjg0pcsg8vm7r0slwvwph83qsqqmg58s8
   # generated from the host ssh key
   - &alien age13jgfuuh7e2xjjktqj5za69zulmwjxn3uvw7y60hmznvjujxz4gtsunwkhp
-  - &rog age1g6nwqa788znqs5pj2fkd78n032n740ekste3zrfpfr0mdden8agsn6jmsv
+  - &rog age17r550lf3u2pvat9xh0y5runa36g8vx7mhtazl4gzx0v4u3xtzy8sysj84h
 
 creation_rules:
   # common shared not so secrets

@@ -39,11 +39,6 @@ in
       redu
       deja-dup
 
-      # look and feel
-      fira-code-symbols
-      nerd-fonts.fira-code
-      nerd-fonts.symbols-only
-
       # misc
       bees
       tor-browser
@@ -214,10 +209,7 @@ in
 
   networking = {
     hostId = "ff0b9d65";
-    networkmanager.unmanaged = [ "docker0" ];
-    search = [
-      "lan"
-    ];
+    networkmanager.wifi.macAddress = "stable-ssid";
     firewall = {
       rejectPackets = mkDefault true;
       allowedTCPPorts = [ ];
@@ -235,7 +227,7 @@ in
         } # torrents
       ];
       trustedInterfaces = [
-        "docker0"
+        "pocker0"
         "ve-+"
       ];
     };
@@ -255,6 +247,10 @@ in
 
   systemd = {
     network = {
+      networks = {
+        "40-enp59s0".enable = false;
+        "40-wlp60s0".enable = false;
+      };
       wait-online = {
         anyInterface = true;
         extraArgs = [

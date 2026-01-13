@@ -14,18 +14,17 @@ let
 in
 {
   imports = with self.modules.nixos; [
-    profile-applists
-    profile-common
-    profile-cosmic-de
-    profile-pipewire
-    profile-terminfo
+    program-applists
+    misc-common-mixin
+    service-cosmic-de
+    service-pipewire
     program-helix
   ];
 
   options.roles.workstation.enable = mkEnableOption "Workstation role";
 
   config = mkIf cfg.enable {
-    profiles.applists = {
+    custom.applists = {
       enable = mkDefault true;
       cliTools = mkDefault true;
       edu = mkDefault true;
@@ -34,11 +33,10 @@ in
       media = mkDefault true;
       office = mkDefault true;
     };
-    profiles.cosmic-de.enable = true;
-    profiles.locale.flavor = mkDefault "en_RU_alt";
-    profiles.nix.nh.enable = true;
-    profiles.pipewire.enable = true;
-    profiles.terminfo.enable = true;
+    custom.cosmic-de.enable = true;
+    custom.locale.flavor = mkDefault "en_RU_alt";
+    custom.nix.nh.enable = true;
+    custom.pipewire.enable = true;
 
     nix.daemonCPUSchedPolicy = "idle";
     systemd.services.nix-gc.serviceConfig.CPUSchedulingPolicy = "idle";
@@ -52,9 +50,19 @@ in
 
     hardware.ledger.enable = true;
 
+    fonts = {
+      enableDefaultPackages = true;
+      packages = with pkgs; [
+        corefonts
+        nerd-fonts.fira-code
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
+      ];
+    };
+
     programs.bat.enable = true;
 
-    programs.helix = {
+    custom.helix = {
       enable = true;
       defaultEditor = true;
       viAlias = true;

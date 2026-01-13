@@ -7,10 +7,10 @@
 let
   inherit (lib.modules) mkDefault mkForce mkIf;
   inherit (lib.options) mkEnableOption;
-  cfg = config.profiles.openssh;
+  cfg = config.custom.openssh;
 in
 {
-  options.profiles.openssh.enable = mkEnableOption "Enable openssh profile";
+  options.custom.openssh.enable = mkEnableOption "Enable openssh profile";
 
   config = mkIf cfg.enable {
     services.openssh = {

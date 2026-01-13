@@ -29,9 +29,9 @@ in
       common-pc-laptop
       common-pc-ssd
     ]
-    ++ (with self.modules.nixos; [ profile-systemd-boot ]);
+    ++ (with self.modules.nixos; [ system-systemd-boot ]);
 
-  profiles.systemd-boot.enable = true;
+  custom.systemd-boot.enable = true;
 
   boot = {
     extraModprobeConfig = ''
@@ -45,17 +45,11 @@ in
     initrd = {
       availableKernelModules = [
         "aesni_intel"
-        "ahci"
         "cryptd"
         "kvm-intel"
-        "nvme"
         "rtsx_pci_sdmmc"
         "rtsx_pci_sdmmc"
-        "sd_mod"
-        "sd_mod"
-        "usb_storage"
         "usbhid"
-        "xhci_pci"
       ];
       kernelModules = [ "dm-snapshot" ];
 
@@ -81,13 +75,6 @@ in
     };
   };
 
-  environment = {
-    systemPackages = with pkgs; [
-      # opensc
-      # softhsm
-    ];
-  };
-
   fileSystems = {
     "/boot" = {
       device = "/dev/disk/by-uuid/6964-B539";
@@ -101,9 +88,8 @@ in
   };
 
   hardware = {
-    enableRedistributableFirmware = true;
+    facter.reportPath = ./facter.json;
     graphics = {
-      enable = true;
       extraPackages32 = with pkgs.pkgsi686Linux; [
         libva
         libvdpau-va-gl
@@ -127,7 +113,6 @@ in
   };
 
   nix.settings.max-jobs = mkDefault 8;
-  nixpkgs.hostPlatform = "x86_64-linux";
 
   services = {
     autorandr =
@@ -206,6 +191,4 @@ in
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
 }

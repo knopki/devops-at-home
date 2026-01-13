@@ -3,10 +3,10 @@
 { lib, config, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.profiles.ssh-well-known-hosts;
+  cfg = config.custom.ssh-well-known-hosts;
 in
 {
-  options.profiles.ssh-well-known-hosts.enable = mkEnableOption "Enable SSH well known hosts profile";
+  options.custom.ssh-well-known-hosts.enable = mkEnableOption "Enable SSH well known hosts profile";
 
   config = mkIf cfg.enable {
     # Avoid TOFU MITM with github by providing their public key here.

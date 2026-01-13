@@ -10,10 +10,10 @@ let
   inherit (lib.options) mkEnableOption;
   inherit (lib.strings) versionOlder;
   inherit (lib.versions) majorMinor;
-  cfg = config.profiles.nix;
+  cfg = config.custom.nix;
 in
 {
-  options.profiles.nix = {
+  options.custom.nix = {
     enable = mkEnableOption "Enable trusted nix caches";
     nh.enable = mkEnableOption "Enable nh and nh clean";
   };

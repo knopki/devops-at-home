@@ -11,6 +11,7 @@ in
       age
       git
       commitizen
+      fd
       nh
       nix-inspect
       nixos-anywhere
@@ -35,5 +36,10 @@ in
     export MYUID=$(id -u)
     export MYGID=$(id -g)
     run0 bash -c "${pkgs.nixos-facter}/bin/nixos-facter -o facter.json && chown $MYUID:$MYGID facter.json"
+  '';
+
+  scripts.list-impermanent-files.exec = ''
+    run0 fd --one-file-system --base-directory / \
+      --type f --hidden --exclude "{tmp,etc/passwd}"
   '';
 }

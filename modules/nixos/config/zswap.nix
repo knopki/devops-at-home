@@ -7,10 +7,10 @@ let
   inherit (lib.modules) mkDefault mkIf;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.lists) optional;
-  cfg = config.zswap;
+  cfg = config.custom.zswap;
 in
 {
-  options.zswap = {
+  options.custom.zswap = {
     enable = mkEnableOption "zswap memory compression";
 
     compressor = mkOption {
