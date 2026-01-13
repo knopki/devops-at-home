@@ -23,8 +23,8 @@
     },
     "bluetooth": [
       {
-        "index": 64,
-        "attached_to": 77,
+        "index": 63,
+        "attached_to": 75,
         "class_list": [
           "usb",
           "bluetooth"
@@ -125,8 +125,8 @@
         "module_alias": "usb:v13D3p3568d0100dcEFdsc02dp01icE0isc01ip01in00"
       },
       {
-        "index": 73,
-        "attached_to": 77,
+        "index": 71,
+        "attached_to": 75,
         "class_list": [
           "usb",
           "bluetooth"
@@ -227,8 +227,8 @@
         "module_alias": "usb:v13D3p3568d0100dcEFdsc02dp01icE0isc01ip01in01"
       },
       {
-        "index": 83,
-        "attached_to": 77,
+        "index": 81,
+        "attached_to": 75,
         "class_list": [
           "usb",
           "bluetooth"
@@ -300,7 +300,7 @@
           },
           "interface_protocol": 1,
           "interface_number": 2,
-          "interface_alternate_setting": 0,
+          "interface_alternate_setting": 1,
           "interface_association": {
             "function_class": {
               "hex": "00e0",
@@ -318,6 +318,14 @@
           }
         },
         "hotplug": "usb",
+        "driver": "btusb",
+        "driver_module": "btusb",
+        "drivers": [
+          "btusb"
+        ],
+        "driver_modules": [
+          "btusb"
+        ],
         "module_alias": "usb:v13D3p3568d0100dcEFdsc02dp01icE0isc01ip01in02"
       }
     ],
@@ -1656,8 +1664,8 @@
     ],
     "camera": [
       {
-        "index": 63,
-        "attached_to": 66,
+        "index": 62,
+        "attached_to": 65,
         "class_list": [
           "camera",
           "usb"
@@ -1758,8 +1766,8 @@
         "module_alias": "usb:v13D3p56EBd1964dcEFdsc02dp01ic0Eisc01ip00in00"
       },
       {
-        "index": 69,
-        "attached_to": 66,
+        "index": 68,
+        "attached_to": 65,
         "class_list": [
           "camera",
           "usb"
@@ -1860,8 +1868,8 @@
         "module_alias": "usb:v13D3p56EBd1964dcEFdsc02dp01ic0Eisc02ip01in03"
       },
       {
-        "index": 71,
-        "attached_to": 66,
+        "index": 70,
+        "attached_to": 65,
         "class_list": [
           "camera",
           "usb"
@@ -1962,8 +1970,8 @@
         "module_alias": "usb:v13D3p56EBd1964dcEFdsc02dp01ic0Eisc02ip00in01"
       },
       {
-        "index": 82,
-        "attached_to": 66,
+        "index": 80,
+        "attached_to": 65,
         "class_list": [
           "camera",
           "usb"
@@ -2312,6 +2320,7 @@
           "/dev/disk/by-path/pci-0000:06:00.0-nvme-1",
           "/dev/nvme0n1"
         ],
+        "rom_id": "0x80",
         "resources": [
           {
             "type": "disk_geo",
@@ -2336,97 +2345,6 @@
         "driver_modules": [
           "nvme"
         ]
-      },
-      {
-        "index": 62,
-        "attached_to": 28,
-        "class_list": [
-          "disk",
-          "usb",
-          "scsi",
-          "block_device"
-        ],
-        "bus_type": {
-          "hex": "0084",
-          "name": "SCSI",
-          "value": 132
-        },
-        "slot": {
-          "bus": 0,
-          "number": 0
-        },
-        "base_class": {
-          "hex": "0106",
-          "name": "Mass Storage Device",
-          "value": 262
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Disk",
-          "value": 0
-        },
-        "vendor": {
-          "hex": "058f",
-          "name": "Generic",
-          "value": 1423
-        },
-        "device": {
-          "hex": "6387",
-          "name": "Flash Disk",
-          "value": 25479
-        },
-        "revision": {
-          "hex": "0000",
-          "name": "8.07",
-          "value": 0
-        },
-        "serial": "655DA773",
-        "model": "Generic Flash Disk",
-        "sysfs_id": "/class/block/sda",
-        "sysfs_bus_id": "0:0:0:0",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:08.1/0000:07:00.4/usb3/3-1/3-1:1.0/host0/target0:0:0/0:0:0:0",
-        "unix_device_names": [
-          "/dev/disk/by-id/usb-Generic_Flash_Disk_655DA773-0:0",
-          "/dev/disk/by-path/pci-0000:07:00.4-usb-0:1:1.0-scsi-0:0:0:0",
-          "/dev/disk/by-path/pci-0000:07:00.4-usbv2-0:1:1.0-scsi-0:0:0:0",
-          "/dev/sda"
-        ],
-        "unix_device_name2": "/dev/sg0",
-        "resources": [
-          {
-            "type": "baud",
-            "speed": 480000000,
-            "bits": 0,
-            "stop_bits": 0,
-            "parity": 0,
-            "handshake": 0
-          },
-          {
-            "type": "disk_geo",
-            "cylinders": 30000,
-            "heads": 64,
-            "sectors": 32,
-            "size": "0x0",
-            "geo_type": "logical"
-          },
-          {
-            "type": "size",
-            "unit": "sectors",
-            "value_1": 61440000,
-            "value_2": 512
-          }
-        ],
-        "driver": "usb-storage",
-        "driver_module": "usb_storage",
-        "drivers": [
-          "sd",
-          "usb-storage"
-        ],
-        "driver_modules": [
-          "sd_mod",
-          "usb_storage"
-        ],
-        "module_alias": "usb:v058Fp6387d0100dc00dsc00dp00ic08isc06ip50in00"
       }
     ],
     "graphics_card": [
@@ -2597,7 +2515,7 @@
     ],
     "hub": [
       {
-        "index": 65,
+        "index": 64,
         "attached_to": 45,
         "class_list": [
           "usb",
@@ -2684,7 +2602,7 @@
         "module_alias": "usb:v1D6Bp0002d0612dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 66,
+        "index": 65,
         "attached_to": 28,
         "class_list": [
           "usb",
@@ -2771,7 +2689,7 @@
         "module_alias": "usb:v1D6Bp0002d0612dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 67,
+        "index": 66,
         "attached_to": 45,
         "class_list": [
           "usb",
@@ -2848,7 +2766,7 @@
         "module_alias": "usb:v1D6Bp0003d0612dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 74,
+        "index": 72,
         "attached_to": 28,
         "class_list": [
           "usb",
@@ -2925,7 +2843,7 @@
         "module_alias": "usb:v1D6Bp0003d0612dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 75,
+        "index": 73,
         "attached_to": 21,
         "class_list": [
           "usb",
@@ -3012,7 +2930,7 @@
         "module_alias": "usb:v1D6Bp0002d0612dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 76,
+        "index": 74,
         "attached_to": 52,
         "class_list": [
           "usb",
@@ -3099,7 +3017,7 @@
         "module_alias": "usb:v1D6Bp0002d0612dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 77,
+        "index": 75,
         "attached_to": 29,
         "class_list": [
           "usb",
@@ -3186,7 +3104,7 @@
         "module_alias": "usb:v1D6Bp0002d0612dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 80,
+        "index": 78,
         "attached_to": 21,
         "class_list": [
           "usb",
@@ -3263,7 +3181,7 @@
         "module_alias": "usb:v1D6Bp0003d0612dc09dsc00dp03ic09isc00ip00in00"
       },
       {
-        "index": 84,
+        "index": 82,
         "attached_to": 52,
         "class_list": [
           "usb",
@@ -3342,8 +3260,8 @@
     ],
     "keyboard": [
       {
-        "index": 68,
-        "attached_to": 76,
+        "index": 67,
+        "attached_to": 74,
         "class_list": [
           "keyboard",
           "usb"
@@ -3444,8 +3362,8 @@
         "module_alias": "usb:v0B05p19B6d0002dc00dsc00dp00ic03isc01ip01in02"
       },
       {
-        "index": 70,
-        "attached_to": 76,
+        "index": 69,
+        "attached_to": 74,
         "class_list": [
           "keyboard",
           "usb"
@@ -3546,8 +3464,8 @@
         "module_alias": "usb:v0B05p19B6d0002dc00dsc00dp00ic03isc01ip01in00"
       },
       {
-        "index": 78,
-        "attached_to": 76,
+        "index": 76,
+        "attached_to": 74,
         "class_list": [
           "keyboard",
           "usb"
@@ -3592,7 +3510,7 @@
         "unix_device_names": [
           "/dev/input/mice"
         ],
-        "unix_device_name2": "/dev/input/mouse0",
+        "unix_device_name2": "/dev/input/mouse1",
         "resources": [
           {
             "type": "baud",
@@ -3646,8 +3564,8 @@
         "module_alias": "usb:v0B05p19B6d0002dc00dsc00dp00ic03isc01ip01in03"
       },
       {
-        "index": 81,
-        "attached_to": 76,
+        "index": 79,
+        "attached_to": 74,
         "class_list": [
           "keyboard",
           "usb"
@@ -3876,7 +3794,7 @@
     ],
     "mouse": [
       {
-        "index": 87,
+        "index": 85,
         "attached_to": 0,
         "bus_type": {
           "hex": "0081",
@@ -3903,7 +3821,7 @@
         },
         "sysfs_id": "/devices/platform/AMDI0010:01/i2c-0/i2c-ASUE120A:00/0018:04F3:319B.0005/input/input18",
         "unix_device_names": [
-          "/dev/input/event5",
+          "/dev/input/event6",
           "/dev/input/ + handler"
         ]
       }
@@ -3962,7 +3880,7 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 98
+            "address": 100
           },
           {
             "type": "phwaddr",
@@ -4072,7 +3990,7 @@
     ],
     "network_interface": [
       {
-        "index": 85,
+        "index": 83,
         "attached_to": 50,
         "class_list": [
           "network_interface"
@@ -4096,7 +4014,7 @@
         "resources": [
           {
             "type": "hwaddr",
-            "address": 98
+            "address": 100
           },
           {
             "type": "phwaddr",
@@ -4113,7 +4031,7 @@
         ]
       },
       {
-        "index": 86,
+        "index": 84,
         "attached_to": 0,
         "class_list": [
           "network_interface"
@@ -4732,8 +4650,8 @@
     },
     "usb": [
       {
-        "index": 79,
-        "attached_to": 66,
+        "index": 77,
+        "attached_to": 65,
         "class_list": [
           "usb",
           "unknown"
