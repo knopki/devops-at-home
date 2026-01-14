@@ -226,10 +226,6 @@ in
           to = 6889;
         } # torrents
       ];
-      trustedInterfaces = [
-        "pocker0"
-        "ve-+"
-      ];
     };
   };
 
@@ -250,15 +246,6 @@ in
       networks = {
         "40-enp59s0".enable = false;
         "40-wlp60s0".enable = false;
-      };
-      wait-online = {
-        anyInterface = true;
-        extraArgs = [
-          "-i"
-          "enp59s0"
-          "-i"
-          "wlp60s0"
-        ];
       };
     };
     services = {
