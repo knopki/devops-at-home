@@ -18,7 +18,7 @@ in
     };
 
     lampac = {
-      image = "dockerhub.timeweb.cloud/immisterio/lampac@sha256:ac597017f68ae2dd53c2d6737a0769190892e08decdcf33564daf67c97eee883"; # 2025-11-29
+      image = "dockerhub.timeweb.cloud/immisterio/lampac@sha256:6b1e63337922b3485f35aaa86702bf5ca82f9a0a2cc8c31594d39feb676087a1"; # 2025-12-23
       environment = {
         TZ = "Europe/Moscow";
       };
