@@ -73,18 +73,21 @@ devops-at-home/
 ### Configuration Layers
 
 1. **Base Mixin** (`modules/nixos/misc/common-mixin.nix`)
+
    - Core system configuration modules
    - Imports config modules (locale, nix, zswap, etc.)
    - Programs, security, and services setup
    - Applied through all roles
 
 1. **Roles** (`modules/nixos/roles/`)
+
    - **Server Role**: Headless systems, minimal packages, optimized for CLI usage
    - **Workstation Role**: Desktop systems, GUI applications, user-focused features
    - **DevHost Role**: Development-focused configuration with dev tools and environments
    - Each role imports the base mixin and adds specialized functionality
 
 1. **Host-Specific Configuration**
+
    - Hardware-specific settings
    - Storage configuration (ZFS, LUKS)
    - Network and service configuration
