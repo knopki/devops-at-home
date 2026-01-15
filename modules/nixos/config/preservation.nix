@@ -363,7 +363,10 @@ let
           "/var/lib/NetworkManager/seen-bssids"
           "/var/lib/NetworkManager/timestamps"
         ]
-        ++ optional config.services.logrotate.enable "/var/lib/logrotate.status"
+        ++ optional config.services.logrotate.enable {
+          file = "/var/lib/logrotate.status";
+          how = "symlink";
+        }
         ++ optional config.services.usbguard.enable "/var/lib/usbguard/rules.conf";
       essentialFiles = [
         {
