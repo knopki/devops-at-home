@@ -7,10 +7,11 @@
   ...
 }:
 let
-  inherit (lib.modules) mkIf mkAliasOptionModule mkMerge;
+  inherit (builtins) mapAttrs;
+  inherit (lib.modules) mkIf mkAliasOptionModule;
   inherit (lib.options) mkEnableOption mkOption;
   inherit (lib.lists) flatten optional optionals;
-  inherit (lib.attrsets) mapAttrs mapAttrsToList mergeAttrsList;
+  inherit (lib.attrsets) mapAttrsToList mergeAttrsList;
   inherit (self.lib.systemd) pathToSystemdDeviceName;
   cfg = config.custom.preservation;
 
@@ -49,14 +50,11 @@ let
     preserveName: stateCfg:
     let
       preservePath = config.preservation.preserveAt.${preserveName}.persistentStoragePath;
-      machineIdRules = optionals stateCfg.auto.enable [
-        {
-          "/${preservePath}/etc/machine-id".f.argument = "uninitialized"; # see machine-id(5)
-        }
-      ];
-      rules = machineIdRules;
+      filename = "/sysroot${preservePath}/etc/machine-id";
     in
-    rules;
+    optional stateCfg.auto.enable {
+      "${filename}".f.argument = "uninitialized";
+    };
 
   mkUserTmpfilesRules =
     preserveAtTemplates:
@@ -78,24 +76,22 @@ let
     in
     mergeAttrsList (map (name: { ${name}.rules = rules; }) usernames);
 
-  mkSystemdServices =
+  mkMachineIdCommitSvc =
     preserveName: stateCfg:
     let
       preservePath = config.preservation.preserveAt.${preserveName}.persistentStoragePath;
-      services = {
-        systemd-machine-id-commit = mkIf stateCfg.auto.enable {
-          unitConfig.ConditionPathIsMountPoint = [
-            ""
-            "${preservePath}/etc/machine-id"
-          ];
-          serviceConfig.ExecStart = [
-            ""
-            "systemd-machine-id-setup --commit --root ${preservePath}"
-          ];
-        };
+      svcOverrides = {
+        unitConfig.ConditionPathIsMountPoint = [
+          ""
+          "${preservePath}/etc/machine-id"
+        ];
+        serviceConfig.ExecStart = [
+          ""
+          "systemd-machine-id-setup --commit --root ${preservePath}"
+        ];
       };
     in
-    services;
+    if stateCfg.auto.enable then svcOverrides else { };
 
   mkPreserveAtUser =
     _username: stateCfg:
@@ -375,6 +371,7 @@ let
           inInitrd = true;
           how = "symlink";
           configureParent = true;
+          createLinkTarget = true;
         }
         {
           file = "/etc/ssh/ssh_host_rsa_key";
@@ -457,11 +454,13 @@ in
 
     preservation.preserveAt = mapAttrs mkPreserveAt cfg.preserveAtTemplates;
 
-    boot.initrd.systemd.tmpfiles.settings.preservation = mkMerge (
+    boot.initrd.systemd.tmpfiles.settings.preservation = mergeAttrsList (
       flatten (mapAttrsToList mkInitrdTmpfilesRules cfg.preserveAtTemplates)
     );
 
-    systemd.services = mkMerge (mapAttrsToList mkSystemdServices cfg.preserveAtTemplates);
+    systemd.services.systemd-machine-id-commit = mergeAttrsList (
+      mapAttrsToList mkMachineIdCommitSvc cfg.preserveAtTemplates
+    );
 
     systemd.user.tmpfiles.users = mkUserTmpfilesRules cfg.preserveAtTemplates;
 
