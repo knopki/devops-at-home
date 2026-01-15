@@ -38,6 +38,9 @@ in
     custom.nix.nh.enable = true;
     custom.pipewire.enable = true;
 
+    boot.kernelParams = [ "quit" ];
+    boot.plymouth.enable = true;
+
     nix.daemonCPUSchedPolicy = "idle";
     systemd.services.nix-gc.serviceConfig.CPUSchedulingPolicy = "idle";
 

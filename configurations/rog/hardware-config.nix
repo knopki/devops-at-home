@@ -22,7 +22,6 @@
   custom.lanzaboote.enable = true;
 
   boot = {
-    bootspec.enable = true;
     initrd = {
       availableKernelModules = [
         "tpm_tis"
@@ -39,7 +38,6 @@
         tpm2.enable = true;
       };
     };
-    plymouth.enable = true;
     supportedFilesystems = {
       btrfs = true;
       f2fs = true;
