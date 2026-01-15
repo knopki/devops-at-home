@@ -19,7 +19,7 @@ let
   hasPackageName = name: lib.any (p: (lib.getName p) == name) config.environment.systemPackages;
 
   preserveAtUserTemplatesSubmodule =
-    { name, config, ... }:
+    { ... }:
     {
       options = {
         auto.enable = mkEnableOption "Essential + autodetected paths";
@@ -30,7 +30,7 @@ let
     };
 
   preserveAtTemplatesSubmodule =
-    { name, config, ... }:
+    { ... }:
     {
       options = {
         auto.enable = mkEnableOption "Essential + autodetected paths";
@@ -134,7 +134,7 @@ let
         ++ optional (hasPackage pkgs.deja-dup) ".cache/deja-dup"
         ++ optional (hasPackage pkgs.fclones) ".cache/fclones"
         ++ optional (hasPackage pkgs.restic || config.services.restic.backups != { }) ".cache/restic"
-        ++ optional (hasPackage pkgs.aliza) ".cache/Aliza"
+        ++ optional (hasPackage pkgs.aliza) ".config/Aliza"
         ++
           optionals
             (lib.any hasPackage [
@@ -280,7 +280,7 @@ let
             ];
       autoDirs = optionals stateCfg.auto.enable (essentialDirs ++ autodetectedDirs);
       secretDirs =
-        optionals stateCfg.secrets.enable ([
+        optionals stateCfg.secrets.enable [
           {
             directory = ".ssh";
             mode = "0700";
@@ -294,13 +294,12 @@ let
             mode = "0700";
           }
           ".config/sops"
-        ])
+        ]
         ++ optional (hasPackage pkgs.electrum) ".electrum";
       essentialFiles = [
         ".bash_history"
         ".bash_profile"
         ".bashrc"
-        ".cache/CACHEDIR.TAG"
         ".python_history"
       ];
       autodetectFiles =
@@ -317,6 +316,7 @@ let
         ]
         ++ optional config.services.desktopManager.cosmic.enable ".config/cosmic-initial-setup-done"
         ++ optional (hasPackage pkgs.curl) ".curlrc"
+        ++ optional (hasPackage pkgs.gnupg) ".pam-gnupg"
         ++ optional (hasPackage pkgs.electrum) ".config/electrumrc"
         ++ optional (hasPackage pkgs.keepassxc) ".config/KeePassXCrc"
         ++ optional (config.programs.starship.enable || hasPackage pkgs.starship) ".config/starship.toml"

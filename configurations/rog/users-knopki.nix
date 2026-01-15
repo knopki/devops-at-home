@@ -34,6 +34,7 @@
         ".local/share/uv" # devenv use
         ".local/share/zed" # devenv use
         # ".mozilla"
+        ".terraformrc" # devenv use
         "desktop"
         "docs"
         "downloads"
