@@ -20,13 +20,10 @@ in
     [
       # essentials
       gnupg
-      starship
       libsecret # secret-tool
 
       # shell
       atuin
-      fishPlugins.fish-you-should-use
-
       # remote
       mosh
       openssh
@@ -78,20 +75,8 @@ in
         "ru"
       ];
     };
-    fish = {
-      enable = true;
-      useBabelfish = true;
-      interactiveShellInit = ''
-        source ${pkgs.ls-colors}/lscolors.csh
-      '';
-    };
-    fzf = {
-      fuzzyCompletion = true;
-      keybindings = true;
-    };
 
     iftop.enable = mkDefault true;
-    less.lessopen = "|${pkgs.lesspipe}/bin/lesspipe.sh %s";
     mosh.enable = mkDefault true;
     nh.flake = "/home/sk/dev/knopki/devops-at-home";
     throne = {
@@ -106,10 +91,6 @@ in
         #   acl attr bzip2 curl libsodium libssh libxml2 openssl
         #   stdenv.cc.cc systemd util-linux xz zlib zstd
       ];
-    };
-    starship = {
-      enable = true;
-      transientPrompt.enable = true;
     };
     tmux = {
       enable = true;

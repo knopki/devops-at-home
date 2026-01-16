@@ -172,7 +172,8 @@ let
           ".config/docker"
           ".docker"
         ]
-        ++ optionals (hasPackage pkgs.fish) [
+        ++ optionals (hasPackage pkgs.fish || config.programs.fish.enable) [
+          ".cache/fish"
           ".config/fish"
           ".local/share/fish"
         ]

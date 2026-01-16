@@ -15,6 +15,7 @@ in
 {
   imports = with self.modules.nixos; [
     program-applists
+    program-fish
     misc-common-mixin
     service-cosmic-de
     service-pipewire
@@ -34,6 +35,11 @@ in
       office = mkDefault true;
     };
     custom.cosmic-de.enable = true;
+    custom.fish = {
+      enable = true;
+      enableFzf = true;
+      enableStarship = true;
+    };
     custom.locale.flavor = mkDefault "en_RU_alt";
     custom.nix.nh.enable = true;
     custom.pipewire.enable = true;

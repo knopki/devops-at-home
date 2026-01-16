@@ -14,6 +14,7 @@ let
 in
 {
   imports = with self.modules.nixos; [
+    program-fish
     program-helix
     misc-common-mixin
     misc-no-docs
@@ -28,6 +29,7 @@ in
       hardware = mkDefault true;
       networking = mkDefault true;
     };
+    custom.fish.enable = mkDefault true;
     custom.locale.flavor = mkDefault "en_RU";
     custom.no-docs.enable = mkDefault true;
 

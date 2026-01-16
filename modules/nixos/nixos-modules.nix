@@ -10,10 +10,9 @@
   misc-common-mixin = ./misc/common-mixin.nix;
   misc-no-docs = ./misc/no-docs.nix;
 
-  # profiles
-
   # programs
   program-applists = ./programs/applists.nix;
+  program-fish = ./programs/fish.nix;
   program-helix = ./programs/helix.nix;
   program-htop = ./programs/htop.nix;
   program-ssh-well-known-hosts = ./programs/ssh-well-known-hosts.nix;
