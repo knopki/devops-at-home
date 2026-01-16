@@ -39,11 +39,6 @@ devops-at-home/
 │   └── <pkg name>/package.nix      # Main package file
 ├── secrets/                        # SOPS-encrypted secrets
 │   └── <host>.yaml                 # Per-host secrets (but sometimes shared)
-├── shells/                         # Development environments
-│   ├── <shell name>                # Environment root
-│   │   └── shell.nix/devshell.nix  # Main shell file
-│   ├── numtide-debshells.nix       # Index of Numtide-based shells
-│   └── shells.nix                  # Index of normal shells
 ├── .sops.yaml                      # SOPS secrets configuration (keys and rules)
 └── flake.nix                       # Main entrypoint
 ```
@@ -145,18 +140,6 @@ devops-at-home/
 - Project-specific packages
 - Packages not available in nixpkgs
 - Automated update scripts
-
-## Development Environments
-
-### Shell System (`shells/`)
-
-- **Project-specific environments**: Isolated development setups
-- **Service orchestration**: Integrated database and service management
-- **Tool provisioning**: Automated tool and dependency setup
-
-### Examples
-
-- **nixos**: NixOS development and system management
 
 ## Secrets Management
 

@@ -66,7 +66,6 @@
           ./lib/flake-modules/lib.nix
           ./lib/flake-modules/overlays.nix
           ./lib/flake-modules/pkgs.nix
-          ./lib/flake-modules/shells.nix
           ./lib/flake-modules/formatter.nix
           ./lib/flake-modules/modules.nix
           ./lib/flake-modules/disko-configurations.nix

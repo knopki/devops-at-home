@@ -28,7 +28,7 @@
 ## Dev environment tips
 
 - Before you start, check out the other `*.md` files in this repository.
-- Start development shell by executing `nix develop` at the root of the project
+- Start development shell by executing `devenv shell` at the root of the project
 - Use `nil` and `nixd` language servers if supported
 - Ignore and do not read the `flake.lock` file unless it is necessary - it is just a lock file.
 - Do not read into this directories: `.direnv`, `.zed`.
