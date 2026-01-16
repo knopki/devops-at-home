@@ -62,8 +62,6 @@ let
       rules = [
         "d %C              0700 - - -" # create XDG_CACHE_HOME
         "f %C/CACHEDIR.TAG 0644 - - - \"Signature: 8a477f597d28d172789f06886806bc55\""
-        "d %h/.config      0700 - - -" # create XDG_CONFIG_HOME
-        "d %h/.local       0700 - - -"
         "d %h/.local/share 0700 - - -" # create XDG_DATA_HOME
         "d %S              0700 - - -" # create XDG_STATE_DIR
       ];
@@ -97,19 +95,25 @@ let
     _username: stateCfg:
     let
       essentialDirs = [
-        ".config/autostart"
+        {
+          directory = ".config/systemd";
+          parent.mode = "0700";
+        }
         ".config/environment.d"
         ".config/git"
         ".config/nix"
-        ".config/systemd"
         ".config/user-tmpfiles.d"
+        {
+          directory = ".local/state";
+          parent.mode = "0700";
+        }
         ".local/bin"
         ".local/share/systemd"
         ".local/share/Trash"
-        ".local/state"
       ];
       autodetectedDirs =
         optionals config.services.graphical-desktop.enable [
+          ".config/autostart"
           ".config/menus"
           ".local/share/application"
           ".local/share/gvfs-metadata"
@@ -198,7 +202,10 @@ let
         ++ optional (hasPackage pkgs.lazydocker) ".config/lazydocker"
         ++ optional (hasPackage pkgs.lazygit) ".config/lazygit"
         ++ optional (hasPackage pkgs.ledger-live-desktop) ".config/Ledger Live"
-        ++ optional (hasPackage pkgs.lima) ".config/lima"
+        ++ optional (hasPackage pkgs.lima) {
+          directory = ".lima";
+          mode = "0700";
+        }
         ++ optional (hasPackage pkgs.mpv || hasPackageName "mpv") ".config/mpv"
         ++ optional (hasPackage pkgs.picard) ".config/MusicBrainz"
         ++ optionals (hasPackage pkgs.podman || config.virtualisation.podman.enable) [

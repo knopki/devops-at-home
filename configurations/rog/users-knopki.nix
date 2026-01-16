@@ -24,7 +24,10 @@
         ".config/opencode" # devenv use
         ".config/yandex-cloud" # devenv use
         ".config/zed" # devenv use
-        ".lima" # devenv use
+        {
+          directory = ".lima";
+          mode = "0700";
+        } # devenv use
         ".local/share/calendars"
         ".local/share/contacts"
         ".local/share/media-viewer"
