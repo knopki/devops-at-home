@@ -24,9 +24,6 @@ in
 
       # shell
       atuin
-      # remote
-      mosh
-      openssh
 
       # backups
       btrbk
@@ -54,18 +51,11 @@ in
     ++ officePkgs;
 
   programs = {
-    bash = {
-      undistractMe.enable = true;
-    };
     chromium = {
       enable = true;
       extensions = [
         "npeicpdbkakmehahjeeohfdhnlpdklia" # webrtc network linter
       ];
-    };
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
     };
     firefox = {
       enable = true;
@@ -76,21 +66,9 @@ in
       ];
     };
 
-    iftop.enable = mkDefault true;
-    mosh.enable = mkDefault true;
-    nh.flake = "/home/sk/dev/knopki/devops-at-home";
     throne = {
       enable = true;
       tunMode.enable = true;
-    };
-    nix-index.enable = mkDefault true;
-    nix-ld = {
-      enable = true;
-      libraries = [
-        # already included:
-        #   acl attr bzip2 curl libsodium libssh libxml2 openssl
-        #   stdenv.cc.cc systemd util-linux xz zlib zstd
-      ];
     };
     tmux = {
       enable = true;
@@ -134,7 +112,7 @@ in
 
         # clipboard
         set -g set-clipboard external
-        bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "${pkgs.xclip}/bin/xclip -i -f -selection primary | ${pkgs.xclip}/bin/xclip -i -selection clipboard"
+        bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "${lib.getExe pkgs.xclip} -i -f -selection primary | ${lib.getExe pkgs.xclip} -i -selection clipboard"
       '';
     };
   };
@@ -147,14 +125,6 @@ in
     extraOptions = mkBefore ''
       !include ${config.sops.templates."nix-access-tokens.conf".path}
     '';
-  };
-
-  #
-  # Network
-  #
-
-  services = {
-    envfs.enable = true;
   };
 
   #
@@ -190,7 +160,6 @@ in
 
   networking = {
     hostId = "ff0b9d65";
-    networkmanager.wifi.macAddress = "stable-ssid";
     firewall = {
       rejectPackets = mkDefault true;
       allowedTCPPorts = [ ];
@@ -219,8 +188,6 @@ in
       access-tokens = github.com=${config.sops.placeholder.nix-github-access-token}
     '';
   };
-
-  system.tools.nixos-option.enable = false;
 
   systemd = {
     network = {

@@ -71,6 +71,15 @@ in
 
     programs.bat.enable = true;
 
+    programs.bash.undistractMe.enable = mkDefault true;
+
+    programs.iftop.enable = mkDefault true;
+
+    programs.vivid = {
+      enable = mkDefault true;
+      theme = mkDefault "one-dark";
+    };
+
     custom.helix = {
       enable = true;
       defaultEditor = true;
@@ -89,6 +98,8 @@ in
         startWhenNeeded = lib.mkDefault true;
       };
     };
+
+    system.disableInstallerTools = true;
 
     time.timeZone = mkDefault "Europe/Moscow";
   };

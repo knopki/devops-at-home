@@ -1,7 +1,5 @@
 {
   networking.hostName = "rog";
-  networking.networkmanager.wifi.powersave = true;
-  networking.networkmanager.wifi.macAddress = "stable-ssid";
 
   services.openssh.enable = true;
 

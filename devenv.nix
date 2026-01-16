@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 let
   system = pkgs.stdenv.hostPlatform.system;
 in
@@ -9,17 +14,18 @@ in
     with pkgs;
     [
       age
-      git
       commitizen
+      dix
+      git
       fd
       nh
-      nix-inspect
-      nixos-anywhere
-      nixos-option
-      dix
-      sops
       nixVersions.latest
+      nix-inspect
       nixfmt-rfc-style
+      nixos-anywhere
+      nixos-build-vms
+      nixos-install-tools
+      sops
     ]
     ++ (with inputs.llm-agents.packages.${system}; [ opencode ]);
 
@@ -35,7 +41,7 @@ in
   scripts.generate-facts.exec = ''
     export MYUID=$(id -u)
     export MYGID=$(id -g)
-    run0 bash -c "${pkgs.nixos-facter}/bin/nixos-facter -o facter.json && chown $MYUID:$MYGID facter.json"
+    run0 bash -c "${lib.getExe pkgs.nixos-facter} -o facter.json && chown $MYUID:$MYGID facter.json"
   '';
 
   scripts.list-impermanent-files.exec = ''

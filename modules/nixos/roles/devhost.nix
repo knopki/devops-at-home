@@ -48,6 +48,8 @@ in
       lfs.enable = true;
     };
 
+    programs.direnv.enable = true;
+
     custom.helix = {
       extraPackagesCss = true;
       extraPackagesDocker = true;
@@ -66,5 +68,20 @@ in
       extraPackagesTypescript = true;
       extraPackagesYaml = true;
     };
+
+    programs.mosh.enable = true;
+
+    programs.nix-index.enable = mkDefault true;
+
+    programs.nix-ld = {
+      enable = mkDefault true;
+      # see https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/programs/nix-ld.nix
+      # default list of included libraries:
+      #  zlib zstd stdenv.cc.cc curl openssl attr libssh bzip2
+      #  libxml2 acl libsodium util-linux xz systemd
+      libraries = [ ];
+    };
+
+    services.envfs.enable = mkDefault true;
   };
 }

@@ -36,5 +36,8 @@ in
     systemd.services.wpa_supplicant.stopIfChanged = false;
     # Services that are only restarted might be not able to resolve when resolved is stopped before
     systemd.services.systemd-resolved.stopIfChanged = false;
+
+    networking.networkmanager.wifi.powersave = mkDefault true;
+    networking.networkmanager.wifi.macAddress = mkDefault "stable-ssid";
   };
 }

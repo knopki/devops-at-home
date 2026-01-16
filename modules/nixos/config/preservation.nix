@@ -193,7 +193,7 @@ let
         ]
         ++ optional (hasPackage pkgs.hardinfo2) ".config/hardinfo2"
         ++ optional (hasPackage pkgs.helix) ".config/helix"
-        ++ optional (hasPackage pkgs.htop) ".config/htop"
+        ++ optional (hasPackage pkgs.htop || config.programs.htop.enable) ".config/htop"
         ++ optional (hasPackage pkgs.keepassxc) ".config/keepassxc"
         ++ optionals (hasPackage pkgs.khal) [
           ".config/khal"

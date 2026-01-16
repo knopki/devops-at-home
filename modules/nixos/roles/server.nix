@@ -75,10 +75,14 @@ in
 
     custom.htop.enable = mkDefault true;
 
+    programs.iftop.enable = mkDefault true;
+
     security.sudo.wheelNeedsPassword = false;
 
     # Enable SSH everywhere
     service.openssh.enable = true;
+
+    system.disableInstallerTools = true;
 
     systemd = {
       # Given that our systems are headless, emergency mode is useless.
