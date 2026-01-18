@@ -506,6 +506,9 @@ in
           # create root device from snapshot
           btrfs subvolume snapshot /mnt/@root-blank /mnt/${cfg.resetBtrfsRoot.subvol}
 
+          # workaround of https://github.com/nixos/nixpkgs/issues/462556
+          mkdir -p /mnt/${cfg.resetBtrfsRoot.subvol}/usr/bin
+
           umount /mnt
         '';
       };
