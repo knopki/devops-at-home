@@ -78,7 +78,6 @@ in
       enable = true;
       drivers = with pkgs; [
         gutenprint
-        pantum-driver
       ];
     };
     resolved.dnssec = "false";

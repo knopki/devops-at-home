@@ -1,6 +1,7 @@
 _final: prev:
 let
-  inherit (prev.lib.strings) compareVersions getVersion;
+  inherit (builtins) compareVersions;
+  inherit (prev.lib.strings) getVersion;
   pkgIfVersionMin =
     pkg: minVer: altPkg:
     if (compareVersions (getVersion pkg) minVer) >= 0 then pkg else altPkg;
@@ -86,12 +87,6 @@ in
       unstableNaps2 = prev.callPackage p.naps2.override { };
     in
     pkgIfVersionMin prev.naps2 "8.2.1" unstableNaps2;
-
-  pantum-driver =
-    let
-      unstablePantumDriver = prev.callPackage p.pantum-driver.override { };
-    in
-    pkgIfVersionMin prev.pantum-driver "1.1.167" unstablePantumDriver;
 
   simplex-chat-desktop =
     let

@@ -29,7 +29,6 @@ let
       "aspell-dict-en-science"
       "discord"
       "obsidian"
-      "pantum-driver"
       "terraform"
       "yandex-cloud"
     ];

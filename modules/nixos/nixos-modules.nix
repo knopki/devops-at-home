@@ -32,6 +32,7 @@
   service-pipewire = ./services/pipewire.nix;
 
   # system
+  system-identity = ./system/identity.nix;
   system-lanzaboote = ./system/lanzaboote.nix;
   system-systemd-boot = ./system/systemd-boot.nix;
 }
