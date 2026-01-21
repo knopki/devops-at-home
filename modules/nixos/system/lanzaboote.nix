@@ -7,7 +7,8 @@
   ...
 }:
 let
-  inherit (lib) mkForce mkEnableOption mkIf;
+  inherit (lib.modules) mkForce mkIf;
+  inherit (lib.options) mkEnableOption;
   cfg = config.custom.lanzaboote;
 in
 {
@@ -16,14 +17,15 @@ in
     self.modules.nixos.system-systemd-boot
   ];
 
-  options.custom.lanzaboote.enable = mkEnableOption "Enable lanzaboote profile for Secure Boot";
+  options.custom.lanzaboote = {
+    enable = mkEnableOption "Enable lanzaboote profile for Secure Boot";
+    debug = mkEnableOption "Enable debug shell. WARNING Provides unauthenticated root access. DELETE all stubs after debugging!";
+  };
 
   config = mkIf cfg.enable {
     # Lanzaboote replaces systemd-boot for Secure Boot
     custom.systemd-boot.enable = true;
     boot.loader.systemd-boot.enable = mkForce false;
-
-    # boot.loader.efi.canTouchEfiVariables = true;
 
     boot.lanzaboote = {
       enable = true;
@@ -35,6 +37,15 @@ in
 
     environment.systemPackages = with pkgs; [
       sbctl
+      tpm2-tss
+      tpm2-tools
     ];
+
+    # WARNING: rd.systemd.debug_shell provides unauthenticated root access
+    boot.kernelParams = mkIf cfg.debug [
+      "systemd.log_level=debug"
+      "systemd.log_target=console"
+    ];
+    boot.initrd.systemd.emergencyAccess = mkIf cfg.debug true;
   };
 }

@@ -47,6 +47,10 @@ in
                 askPassword = true; # ask initial password
                 settings = {
                   allowDiscards = true;
+                  crypttabExtraOpts = [
+                    "tmp2-device=auto"
+                    "tpm2-measure-pcr=yes"
+                  ];
                 };
                 content = {
                   type = "lvm_pv";
