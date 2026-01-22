@@ -11,7 +11,7 @@ in
     boot.loader.systemd-boot.enable = mkDefault true;
 
     # Use systemd-boot to boot EFI machines
-    boot.loader.systemd-boot.configurationLimit = lib.mkOverride 1337 10;
+    boot.loader.systemd-boot.configurationLimit = lib.mkOverride 1337 20;
     boot.loader.timeout = mkDefault 3;
   };
 }

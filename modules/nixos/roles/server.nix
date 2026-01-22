@@ -50,12 +50,6 @@ in
       stub-ld.enable = mkDefault false;
     };
 
-    # Restrict the number of boot entries to prevent full /boot partition.
-    #
-    # Servers don't need too many generations.
-    boot.loader.grub.configurationLimit = lib.mkDefault 5;
-    boot.loader.systemd-boot.configurationLimit = lib.mkDefault 5;
-
     documentation.nixos.enable = mkDefault false;
 
     # No need for fonts on a server
