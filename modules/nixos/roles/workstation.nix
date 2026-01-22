@@ -99,7 +99,11 @@ in
       };
     };
 
-    system.disableInstallerTools = true;
+    system.tools.nixos-build-vms.enable = mkDefault false;
+    system.tools.nixos-enter.enable = mkDefault false;
+    system.tools.nixos-install.enable = mkDefault false;
+    system.tools.nixos-option.enable = mkDefault false;
+    system.tools.nixos-version.enable = mkDefault false;
 
     time.timeZone = mkDefault "Europe/Moscow";
   };
