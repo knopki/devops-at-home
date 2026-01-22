@@ -151,7 +151,7 @@ in
       unitConfig = {
         Description = "Verify Root Identity via TPM PCR";
         DefaultDependencies = false;
-        # FailureAction = "halt-force";
+        FailureAction = "halt-force";
       };
       conflicts = [ "shutdown.target" ];
       after = [
