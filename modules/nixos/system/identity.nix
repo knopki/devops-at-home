@@ -33,7 +33,7 @@
      $ journalctl -b 0 | grep print-pcr-15
   5. Bind each LUKS device to its specific PCR 15 state:
      $ sudo systemd-cryptenroll /dev/sdX --tpm2-device=auto \
-       --tpm2-pcrs=0+2+7+11+15:sha256=XXX
+       --tpm2-pcrs=0+2+7+15:sha256=XXX
      (Where XXX is the PCR 15 value recorded *immediately before* unlocking that specific device).
   6. Get the final 'Golden Master' value after all disks are open:
      $ systemd-analyze pcrs 15 --json=short | jq -r '.[0].sha256'
