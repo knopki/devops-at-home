@@ -67,13 +67,10 @@ systemd-cryptenroll /dev/<target_luks_partition> \
   --wipe-slot=password --password
 systemd-cryptenroll /dev/<target_luks_partition> \
   --wipe-slot=recovery --recovery
-systemd-cryptenroll /dev/<target_luks_partition> \
-  --wipe-slot=tpm2 \
-  --tpm2-device=auto \
-  --tpm2-pcrs=0+2+7+15 \
-  --tpm2-with-pin=true
-  # TODO: FIDO2
 ```
+
+If you need passwordless TPM2 unlocking of LUKS devices read the documentation
+of the `modules/nixos/system/identity.nix` module.
 
 ## System Management
 

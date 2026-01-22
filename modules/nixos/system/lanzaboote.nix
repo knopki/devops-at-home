@@ -9,6 +9,7 @@
 let
   inherit (lib.modules) mkForce mkIf;
   inherit (lib.options) mkEnableOption;
+  inherit (lib.lists) optional;
   cfg = config.custom.lanzaboote;
 in
 {
@@ -23,6 +24,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    warnings = optional cfg.debug "systemIdentity: Debug is enabled. Do not use in production.";
+
     # Lanzaboote replaces systemd-boot for Secure Boot
     custom.systemd-boot.enable = true;
     boot.loader.systemd-boot.enable = mkForce false;
@@ -35,11 +38,7 @@ in
       pkiBundle = "/var/lib/sbctl";
     };
 
-    environment.systemPackages = with pkgs; [
-      sbctl
-      tpm2-tss
-      tpm2-tools
-    ];
+    environment.systemPackages = [ pkgs.sbctl ];
 
     # WARNING: rd.systemd.debug_shell provides unauthenticated root access
     boot.kernelParams = mkIf cfg.debug [

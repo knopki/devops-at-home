@@ -10,8 +10,8 @@
   ...
 }:
 let
+  inherit (builtins) mapAttrs;
   inherit (lib) mkOption types;
-  inherit (lib.attrsets) mapAttrs;
 in
 {
   options = {

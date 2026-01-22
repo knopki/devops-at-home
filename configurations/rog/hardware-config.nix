@@ -16,15 +16,20 @@
   ])
   ++ (with self.modules.nixos; [
     config-preservation
+    system-identity
     system-lanzaboote
   ]);
 
   custom.lanzaboote.enable = true;
+  custom.systemIdentity = {
+    enable = true;
+    pcr15 = "83ba5359a075c34462e85021874a6adcd0416a08a31cfbaa0a9faf2e623c64e7";
+    luksDevices = [ "cryptroot" ];
+  };
 
   boot = {
     initrd = {
       availableKernelModules = [
-        "tpm_tis"
         "usbhid"
         "sdhci_pci"
       ];
@@ -34,7 +39,6 @@
       };
       systemd = {
         enable = true; # needed to auto-unlock LUKS with TPM
-        emergencyAccess = true;
         tpm2.enable = true;
       };
     };

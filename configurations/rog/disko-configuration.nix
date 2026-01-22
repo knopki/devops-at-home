@@ -45,13 +45,7 @@ in
                 type = "luks";
                 name = "cryptroot";
                 askPassword = true; # ask initial password
-                settings = {
-                  allowDiscards = true;
-                  crypttabExtraOpts = [
-                    "tmp2-device=auto"
-                    "tpm2-measure-pcr=yes"
-                  ];
-                };
+                settings.allowDiscards = true;
                 content = {
                   type = "lvm_pv";
                   vg = "root_vg";
