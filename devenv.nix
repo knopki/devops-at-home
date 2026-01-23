@@ -12,38 +12,50 @@ in
     with pkgs;
     [
       age
-      commitizen
-      dix
-      git
       fd
-      nh
-      nixVersions.latest
-      nix-inspect
-      nixfmt-rfc-style
-      nixos-anywhere
-      nixos-build-vms
-      nixos-install-tools
       sops
     ]
     ++ (with inputs.llm-agents.packages.${system}; [ opencode ]);
 
-  languages.nix.enable = true;
+  knopki.nixos.enable = true;
+  knopki.menu.enable = true;
+  git-hooks.hooks.no-commit-to-branch.enable = false;
+  treefmt = {
+    enable = true;
+    config = {
+      programs = {
+        deno.enable = true; # markdown
+        shellcheck.enable = true;
+        shfmt.enable = true;
+      };
+
+      settings = {
+        global.excludes = [
+          "*.asc"
+          ".sops.yaml"
+          "secrets/*.yaml"
+        ];
+      };
+    };
+  };
 
   languages.shell.enable = true;
 
-  scripts.update-packages.exec = ''
-    export PRJ_ROOT="$DEVENV_ROOT"
-    nix run .#update-packages -- "$@"
-  '';
+  scripts = {
+    update-packages.exec = ''
+      export PRJ_ROOT="$DEVENV_ROOT"
+      nix run .#update-packages -- "$@"
+    '';
 
-  scripts.generate-facts.exec = ''
-    export MYUID=$(id -u)
-    export MYGID=$(id -g)
-    run0 bash -c "${lib.getExe pkgs.nixos-facter} -o facter.json && chown $MYUID:$MYGID facter.json"
-  '';
+    generate-facts.exec = ''
+      export MYUID=$(id -u)
+      export MYGID=$(id -g)
+      run0 bash -c "${lib.getExe pkgs.nixos-facter} -o facter.json && chown $MYUID:$MYGID facter.json"
+    '';
 
-  scripts.list-impermanent-files.exec = ''
-    run0 fd --one-file-system --base-directory / \
-      --type f --hidden --exclude "{tmp,etc/passwd}"
-  '';
+    list-impermanent-files.exec = ''
+      run0 fd --one-file-system --base-directory / \
+        --type f --hidden --exclude "{tmp,etc/passwd}"
+    '';
+  };
 }

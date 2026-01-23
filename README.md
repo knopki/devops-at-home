@@ -4,13 +4,14 @@ Personal NixOS configuration management system using Nix flakes for multiple
 machines with modular architecture, encrypted secrets, and development
 environments.
 
-The Home Manager is no longer used for managing dotfiles.
-Instead, all dotfiles are managed by `chezmoi` in a
+The Home Manager is no longer used for managing dotfiles. Instead, all dotfiles
+are managed by `chezmoi` in a
 [separate repository](https://github.com/knopki/dotfiles).
 
 ## Overview
 
-This repository contains a comprehensive NixOS configuration system that manages:
+This repository contains a comprehensive NixOS configuration system that
+manages:
 
 - **Multiple Hosts**: Laptops, development VM, and installation media
 - **Modular Architecture**: Reusable modules, profiles, and mixins
@@ -23,7 +24,8 @@ This repository contains a comprehensive NixOS configuration system that manages
 
 - **[Usage Guide](USAGE.md)**: Recipes and tips for use
 - **[Architecture](ARCHITECTURE.md)**: System design and structure
-- **[Host Configurations](configurations/README.md)**: Detailed host specifications
+- **[Host Configurations](configurations/README.md)**: Detailed host
+  specifications
 - **[AGENTS.md](AGENTS.md)**: Instructions for AI agents
 
 ## License

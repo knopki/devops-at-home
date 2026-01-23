@@ -14,8 +14,8 @@
 
 - Reusable Modules: Common functionality extracted into modules
 
-- Profile System: Layered profiles
-  (common → server/workstation → more specific roles)
+- Profile System: Layered profiles (common → server/workstation → more specific
+  roles)
 
 - Immutable Infrastructure: Declarative configuration management
 
@@ -30,7 +30,8 @@
 - Before you start, check out the other `*.md` files in this repository.
 - Start development shell by executing `devenv shell` at the root of the project
 - Use `nil` and `nixd` language servers if supported
-- Ignore and do not read the `flake.lock` file unless it is necessary - it is just a lock file.
+- Ignore and do not read the `flake.lock` file unless it is necessary - it is
+  just a lock file.
 - Do not read into this directories: `.direnv`, `.zed`.
 - Go into `result` directory only if you really want to see build outputs.
 

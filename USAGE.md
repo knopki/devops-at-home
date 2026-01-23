@@ -44,8 +44,8 @@ nix-shell -p ssh-to-age \
   --run 'ssh-to-age -i /tmp/newroot/state/etc/ssh/ssh_host_ed25519_key.pub'
 ```
 
-Add this key to `.sops.yaml` and create `secrets/<hostname>.yaml`.
-Edit secrets via `sops edit secrets/<hostname>.yaml`.
+Add this key to `.sops.yaml` and create `secrets/<hostname>.yaml`. Edit secrets
+via `sops edit secrets/<hostname>.yaml`.
 
 #### Deploy Remotely
 
@@ -59,8 +59,8 @@ nixos-anywhere -f .#<hostname> \
 
 ### Post-Installation Setup
 
-Connect to the new machine's console and enter the disk encryption key.
-Connect to the machine via SSH. Reconfigure the disk encryption:
+Connect to the new machine's console and enter the disk encryption key. Connect
+to the machine via SSH. Reconfigure the disk encryption:
 
 ```bash
 systemd-cryptenroll /dev/<target_luks_partition> \

@@ -3,11 +3,11 @@
 ## Overview
 
 This document describes the configuration of each host managed by this NixOS
-flake. Each host has specific hardware requirements, storage configurations,
-and use cases.
+flake. Each host has specific hardware requirements, storage configurations, and
+use cases.
 
-Every NixOS configuration is listed in `nixos-configurations.nix` file.
-Every `disko` configuration is listed in `disko-configurations.nix` file.
+Every NixOS configuration is listed in `nixos-configurations.nix` file. Every
+`disko` configuration is listed in `disko-configurations.nix` file.
 
 ## Available Configurations
 

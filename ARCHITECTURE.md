@@ -2,7 +2,9 @@
 
 ## Overview
 
-This is a modular NixOS configuration management system built using Nix flakes. The project follows a structured approach to manage multiple machines with shared and host-specific configurations.
+This is a modular NixOS configuration management system built using Nix flakes.
+The project follows a structured approach to manage multiple machines with
+shared and host-specific configurations.
 
 ## Project Structure
 
@@ -68,21 +70,21 @@ devops-at-home/
 ### Configuration Layers
 
 1. **Base Mixin** (`modules/nixos/misc/common-mixin.nix`)
-
    - Core system configuration modules
    - Imports config modules (locale, nix, zswap, etc.)
    - Programs, security, and services setup
    - Applied through all roles
 
 1. **Roles** (`modules/nixos/roles/`)
-
-   - **Server Role**: Headless systems, minimal packages, optimized for CLI usage
-   - **Workstation Role**: Desktop systems, GUI applications, user-focused features
-   - **DevHost Role**: Development-focused configuration with dev tools and environments
+   - **Server Role**: Headless systems, minimal packages, optimized for CLI
+     usage
+   - **Workstation Role**: Desktop systems, GUI applications, user-focused
+     features
+   - **DevHost Role**: Development-focused configuration with dev tools and
+     environments
    - Each role imports the base mixin and adds specialized functionality
 
 1. **Host-Specific Configuration**
-
    - Hardware-specific settings
    - Storage configuration (ZFS, LUKS)
    - Network and service configuration
@@ -93,7 +95,8 @@ devops-at-home/
 **Config** (`modules/nixos/config/`):
 
 - Core system configuration modules
-- Includes: `home-manager.nix`, `locale.nix`, `nix.nix`, `preservation.nix`, `zswap.nix`
+- Includes: `home-manager.nix`, `locale.nix`, `nix.nix`, `preservation.nix`,
+  `zswap.nix`
 
 **Roles** (`modules/nixos/roles/`):
 
@@ -120,7 +123,8 @@ devops-at-home/
 **Programs** (`modules/nixos/programs/`):
 
 - Application-specific configurations
-- Includes: `applists.nix`, `helix.nix` (with language server support), `htop.nix`, `ssh-well-known-hosts.nix`
+- Includes: `applists.nix`, `helix.nix` (with language server support),
+  `htop.nix`, `ssh-well-known-hosts.nix`
 
 **Misc** (`modules/nixos/misc/`):
 

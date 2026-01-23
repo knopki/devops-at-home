@@ -1,6 +1,16 @@
 # yaml-language-server: $schema=https://devenv.sh/devenv.schema.json
 inputs:
-  nixpkgs:
-    url: github:cachix/devenv-nixpkgs/rolling
+  knopki-devenvs:
+    url: github:knopki/devenvs
+    flake: false
   llm-agents:
     url: github:numtide/llm-agents.nix
+  nixpkgs:
+    url: github:cachix/devenv-nixpkgs/rolling
+  treefmt-nix:
+    url: github:numtide/treefmt-nix
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
+imports:
+  - knopki-devenvs/modules

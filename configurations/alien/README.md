@@ -16,7 +16,8 @@ Laptop from 2014. Very old installation of NixOS (2019?).
 - Boot: UEFI boot partition
 - Root: Full disk encryption with LUKS
 - Data: ZFS pool with encryption
-- Backup: Automated snapshots with Sanoid, replication with Syncoid + offsite backup with kopia
+- Backup: Automated snapshots with Sanoid, replication with Syncoid + offsite
+  backup with kopia
 
 **Key Features**:
 
