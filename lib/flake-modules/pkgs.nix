@@ -22,7 +22,7 @@ in
       extLib = pkgs.lib.extend (_final: _prev: { extended = self.lib; });
       extPkgs = pkgs.extend (_final: _prev: { inherit self extLib; });
       pkgsByName = pkgs.lib.filesystem.packagesFromDirectoryRecursive {
-        callPackage = extPkgs.callPackage;
+        inherit (extPkgs) callPackage;
         directory = ../../pkgs;
       };
       packages = filterAttrs (

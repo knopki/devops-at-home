@@ -1,4 +1,4 @@
-{ ... }:
+_:
 let
   commonRecvOptions = "ux recordsize o canmount=off";
 in

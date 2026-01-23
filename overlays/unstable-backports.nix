@@ -11,7 +11,7 @@ in
   anytype =
     let
       unstableAnytype = prev.callPackage p.anytype.override {
-        anytype-heart = p.anytype-heart;
+        inherit (p) anytype-heart;
       };
     in
     pkgIfVersionMin prev.anytype "0.52.0" unstableAnytype;

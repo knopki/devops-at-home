@@ -28,23 +28,26 @@ in
 
     # Lanzaboote replaces systemd-boot for Secure Boot
     custom.systemd-boot.enable = true;
-    boot.loader.systemd-boot.enable = mkForce false;
 
-    boot.lanzaboote = {
-      enable = true;
-      autoGenerateKeys.enable = true;
-      autoEnrollKeys.enable = true;
-      autoEnrollKeys.autoReboot = true;
-      pkiBundle = "/var/lib/sbctl";
+    boot = {
+      loader.systemd-boot.enable = mkForce false;
+
+      lanzaboote = {
+        enable = true;
+        autoGenerateKeys.enable = true;
+        autoEnrollKeys.enable = true;
+        autoEnrollKeys.autoReboot = true;
+        pkiBundle = "/var/lib/sbctl";
+      };
+
+      # WARNING: rd.systemd.debug_shell provides unauthenticated root access
+      kernelParams = mkIf cfg.debug [
+        "systemd.log_level=debug"
+        "systemd.log_target=console"
+      ];
+      initrd.systemd.emergencyAccess = mkIf cfg.debug true;
     };
 
     environment.systemPackages = [ pkgs.sbctl ];
-
-    # WARNING: rd.systemd.debug_shell provides unauthenticated root access
-    boot.kernelParams = mkIf cfg.debug [
-      "systemd.log_level=debug"
-      "systemd.log_target=console"
-    ];
-    boot.initrd.systemd.emergencyAccess = mkIf cfg.debug true;
   };
 }

@@ -55,7 +55,7 @@ in
                 }
               ]);
         in
-        (genAttrs trustInterfaces (_name: allowedAllPortRanges));
+        genAttrs trustInterfaces (_name: allowedAllPortRanges);
     };
     useNetworkd = true;
   };

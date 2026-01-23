@@ -57,7 +57,7 @@
   };
 
   outputs =
-    { self, flake-parts, ... }@inputs:
+    { flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } (
       { ... }:
       {
@@ -80,10 +80,8 @@
         ];
 
         flake = {
-          nixConfig = (import ./flake.nix).nixConfig;
+          inherit ((import ./flake.nix)) nixConfig;
         };
-
-        perSystem = { self', ... }: { };
       }
     );
 }

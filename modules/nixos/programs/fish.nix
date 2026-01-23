@@ -19,22 +19,24 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.fish = {
-      enable = mkDefault true;
-      useBabelfish = mkDefault true;
-      interactiveShellInit = optionalString config.programs.vivid.enable ''
-        set -gx LS_COLORS "$(${config.programs.vivid.package}/bin/vivid generate ${config.programs.vivid.theme})"
-      '';
-    };
+    programs = {
+      fish = {
+        enable = mkDefault true;
+        useBabelfish = mkDefault true;
+        interactiveShellInit = optionalString config.programs.vivid.enable ''
+          set -gx LS_COLORS "$(${config.programs.vivid.package}/bin/vivid generate ${config.programs.vivid.theme})"
+        '';
+      };
 
-    programs.fzf = mkIf cfg.enableFzf {
-      fuzzyCompletion = mkDefault true;
-      keybindings = mkDefault true;
-    };
+      fzf = mkIf cfg.enableFzf {
+        fuzzyCompletion = mkDefault true;
+        keybindings = mkDefault true;
+      };
 
-    programs.starship = mkIf cfg.enableStarship {
-      enable = mkDefault true;
-      transientPrompt.enable = mkDefault true;
+      starship = mkIf cfg.enableStarship {
+        enable = mkDefault true;
+        transientPrompt.enable = mkDefault true;
+      };
     };
 
     environment.systemPackages = [

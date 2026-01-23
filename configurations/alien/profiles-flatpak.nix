@@ -1,11 +1,4 @@
-{
-  # pkgs,
-  # lib,
-  # inputs,
-  # config,
-  ...
-}:
-{
+_: {
   # services.flatpak.enable = true;
   # xdg.portal = {
   #   enable = true;

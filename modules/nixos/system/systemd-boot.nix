@@ -7,11 +7,13 @@ in
   options.custom.systemd-boot.enable = mkEnableOption "Enable systemd-boot profile";
 
   config = mkIf cfg.enable {
-    # enable but do not force
-    boot.loader.systemd-boot.enable = mkDefault true;
+    boot.loader = {
+      # enable but do not force
+      systemd-boot.enable = mkDefault true;
 
-    # Use systemd-boot to boot EFI machines
-    boot.loader.systemd-boot.configurationLimit = lib.mkOverride 1337 20;
-    boot.loader.timeout = mkDefault 3;
+      # Use systemd-boot to boot EFI machines
+      systemd-boot.configurationLimit = lib.mkOverride 1337 20;
+      timeout = mkDefault 3;
+    };
   };
 }

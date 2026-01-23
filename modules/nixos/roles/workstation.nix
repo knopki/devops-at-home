@@ -25,24 +25,26 @@ in
   options.roles.workstation.enable = mkEnableOption "Workstation role";
 
   config = mkIf cfg.enable {
-    custom.applists = {
-      enable = mkDefault true;
-      cliTools = mkDefault true;
-      edu = mkDefault true;
-      hardware = mkDefault true;
-      networking = mkDefault true;
-      media = mkDefault true;
-      office = mkDefault true;
+    custom = {
+      applists = {
+        enable = mkDefault true;
+        cliTools = mkDefault true;
+        edu = mkDefault true;
+        hardware = mkDefault true;
+        networking = mkDefault true;
+        media = mkDefault true;
+        office = mkDefault true;
+      };
+      cosmic-de.enable = true;
+      fish = {
+        enable = true;
+        enableFzf = true;
+        enableStarship = true;
+      };
+      locale.flavor = mkDefault "en_RU_alt";
+      nix.nh.enable = true;
+      pipewire.enable = true;
     };
-    custom.cosmic-de.enable = true;
-    custom.fish = {
-      enable = true;
-      enableFzf = true;
-      enableStarship = true;
-    };
-    custom.locale.flavor = mkDefault "en_RU_alt";
-    custom.nix.nh.enable = true;
-    custom.pipewire.enable = true;
 
     boot.kernelParams = [ "quit" ];
     boot.plymouth.enable = true;
@@ -69,15 +71,17 @@ in
       ];
     };
 
-    programs.bat.enable = true;
+    programs = {
+      bat.enable = true;
 
-    programs.bash.undistractMe.enable = mkDefault true;
+      bash.undistractMe.enable = mkDefault true;
 
-    programs.iftop.enable = mkDefault true;
+      iftop.enable = mkDefault true;
 
-    programs.vivid = {
-      enable = mkDefault true;
-      theme = mkDefault "one-dark";
+      vivid = {
+        enable = mkDefault true;
+        theme = mkDefault "one-dark";
+      };
     };
 
     custom.helix = {
@@ -99,11 +103,13 @@ in
       };
     };
 
-    system.tools.nixos-build-vms.enable = mkDefault false;
-    system.tools.nixos-enter.enable = mkDefault false;
-    system.tools.nixos-install.enable = mkDefault false;
-    system.tools.nixos-option.enable = mkDefault false;
-    system.tools.nixos-version.enable = mkDefault false;
+    system.tools = {
+      nixos-build-vms.enable = mkDefault false;
+      nixos-enter.enable = mkDefault false;
+      nixos-install.enable = mkDefault false;
+      nixos-option.enable = mkDefault false;
+      nixos-version.enable = mkDefault false;
+    };
 
     time.timeZone = mkDefault "Europe/Moscow";
   };

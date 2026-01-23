@@ -14,21 +14,23 @@ in
 
   config = mkIf cfg.enable {
     services.openssh = {
-      settings.X11Forwarding = mkDefault false;
-      settings.KbdInteractiveAuthentication = false;
-      settings.PasswordAuthentication = false;
-      settings.UseDns = false;
-      # unbind gnupg sockets if they exists
-      settings.StreamLocalBindUnlink = true;
+      settings = {
+        X11Forwarding = mkDefault false;
+        KbdInteractiveAuthentication = false;
+        PasswordAuthentication = false;
+        UseDns = false;
+        # unbind gnupg sockets if they exists
+        StreamLocalBindUnlink = true;
 
-      # Use key exchange algorithms recommended by `nixpkgs#ssh-audit`
-      settings.KexAlgorithms = [
-        "curve25519-sha256"
-        "curve25519-sha256@libssh.org"
-        "diffie-hellman-group16-sha512"
-        "diffie-hellman-group18-sha512"
-        "sntrup761x25519-sha512@openssh.com"
-      ];
+        # Use key exchange algorithms recommended by `nixpkgs#ssh-audit`
+        KexAlgorithms = [
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+          "diffie-hellman-group16-sha512"
+          "diffie-hellman-group18-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+        ];
+      };
       # Only allow system-level authorized_keys to avoid injections.
       # We currently don't enable this when git-based software that relies on this is enabled.
       # It would be nicer to make it more granular using `Match`.

@@ -20,11 +20,22 @@
     system-lanzaboote
   ]);
 
-  custom.lanzaboote.enable = true;
-  custom.systemIdentity = {
-    enable = true;
-    pcr15 = "83ba5359a075c34462e85021874a6adcd0416a08a31cfbaa0a9faf2e623c64e7";
-    luksDevices = [ "cryptroot" ];
+  custom = {
+    lanzaboote.enable = true;
+    systemIdentity = {
+      enable = true;
+      pcr15 = "83ba5359a075c34462e85021874a6adcd0416a08a31cfbaa0a9faf2e623c64e7";
+      luksDevices = [ "cryptroot" ];
+    };
+
+    preservation = {
+      enable = true;
+      resetBtrfsRoot.enable = true;
+      preserveAtTemplates."/state" = {
+        auto.enable = true;
+        vm.enable = true;
+      };
+    };
   };
 
   boot = {
@@ -53,15 +64,6 @@
   };
 
   fileSystems."/state".neededForBoot = true;
-
-  custom.preservation = {
-    enable = true;
-    resetBtrfsRoot.enable = true;
-    preserveAtTemplates."/state" = {
-      auto.enable = true;
-      vm.enable = true;
-    };
-  };
 
   hardware = {
     asus.battery.chargeUpto = 80;

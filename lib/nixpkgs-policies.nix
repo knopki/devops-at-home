@@ -40,7 +40,7 @@ let
     elem "${pkg.pname}-${pkg.version}" [
       "ecdsa-0.19.1" # python3.12
     ];
-  allowInsecurePredicateStandard = pkg: allowInsecurePkgVersPredicate pkg;
+  allowInsecurePredicateStandard = allowInsecurePkgVersPredicate;
 
   allowlistedLicenses = with lib.licenses; [
     unfreeRedistributable

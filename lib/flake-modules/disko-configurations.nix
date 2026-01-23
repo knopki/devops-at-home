@@ -6,7 +6,7 @@
 let
   inherit (lib.attrsets) mapAttrs;
   namePaths = import ../../configurations/disko-configurations.nix;
-  loadConfiguration = _: path: import path;
+  loadConfiguration = _: import;
 in
 
 {

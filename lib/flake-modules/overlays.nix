@@ -15,19 +15,19 @@ let
 
   unstableOverlay = final: _prev: {
     nixpkgsUnstable = import inputs.nixpkgs-unstable {
-      system = final.stdenv.hostPlatform.system;
+      inherit (final.stdenv.hostPlatform) system;
       config = self.lib.nixpkgsPolicies.configStandard;
     };
   };
 
   namePaths = import ../../overlays/overlays.nix;
-  loadOverlay = _: path: import path;
+  loadOverlay = _: import;
 
   myPackagesOverlay =
     _final: prev:
     let
-      system = prev.stdenv.hostPlatform.system;
-      packages = config.allSystems.${system}.packages;
+      inherit (prev.stdenv.hostPlatform) system;
+      inherit (config.allSystems.${system}) packages;
     in
     if (elem system config.systems) then packages else { };
 in

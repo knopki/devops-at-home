@@ -16,7 +16,7 @@ in
     freeSwapKillThreshold = 5;
   };
 
-  services.systembus-notify.enable = mkIf (config.services.earlyoom.enableNotifications) (
+  services.systembus-notify.enable = mkIf config.services.earlyoom.enableNotifications (
     mkDefault true
   );
 }

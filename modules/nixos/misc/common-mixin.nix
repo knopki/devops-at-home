@@ -19,24 +19,42 @@ in
     service-openssh
   ];
 
-  custom.htop.enable = mkDefault true;
-  custom.locale.enable = mkDefault true;
-  custom.networking.enable = mkDefault true;
-  custom.nix.enable = mkDefault true;
-  custom.openssh.enable = mkDefault true;
-  custom.ssh-well-known-hosts.enable = mkDefault true;
-  custom.sudo.enable = mkDefault true;
+  custom = {
+    htop.enable = mkDefault true;
+    locale.enable = mkDefault true;
+    networking.enable = mkDefault true;
+    nix.enable = mkDefault true;
+    openssh.enable = mkDefault true;
+    ssh-well-known-hosts.enable = mkDefault true;
+    sudo.enable = mkDefault true;
+  };
 
   # Use systemd during boot as well except:
   # - systems with raids as this currently require manual configuration: https://github.com/NixOS/nixpkgs/issues/210210
   # - for containers we currently rely on the `stage-2` init script that sets up our /etc
   boot.initrd.systemd.enable = mkDefault (!config.boot.swraid.enable && !config.boot.isContainer);
 
-  # Don't install the /lib/ld-linux.so.2 stub. This saves one instance of nixpkgs.
-  environment.ldso32 = mkDefault null;
-
   # Ensure a clean & sparkling /tmp on fresh boots.
   boot.tmp.cleanOnBoot = mkDefault true;
+
+  environment = {
+    # Don't install the /lib/ld-linux.so.2 stub. This saves one instance of nixpkgs.
+    ldso32 = mkDefault null;
+
+    enableAllTerminfo = true;
+
+    # Man cache is very slow to rebuild
+    # Remove non-needed man pages to speed up rebuild
+    extraSetup = /* bash */ ''
+      # remove multilanguage man pages
+      find "$out/share/man" \
+      -mindepth 1 -maxdepth 1 \
+      -not -name "man[1-8]" \
+      -exec rm -r "{}" ";"
+      # remove man section 3 which contains mainly C functions
+      rm -rf "$out/share/man/man3"
+    '';
+  };
 
   nix.registry.self.to = {
     type = "path";
@@ -50,18 +68,4 @@ in
     shrinker_enabled = mkDefault true;
     same_filled_pages = mkDefault true;
   };
-
-  environment.enableAllTerminfo = true;
-
-  # Man cache is very slow to rebuild
-  # Remove non-needed man pages to speed up rebuild
-  environment.extraSetup = /* bash */ ''
-    # remove multilanguage man pages
-    find "$out/share/man" \
-      -mindepth 1 -maxdepth 1 \
-      -not -name "man[1-8]" \
-      -exec rm -r "{}" ";"
-    # remove man section 3 which contains mainly C functions
-    rm -rf "$out/share/man/man3"
-  '';
 }

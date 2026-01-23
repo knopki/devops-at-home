@@ -340,17 +340,19 @@ in
     description = "Restic backup user";
     group = "restic";
   };
-  users.groups.restic = { };
-  # Group with access to remote repositories
-  users.groups.restic-remote-domashka.members = [
-    config.users.users.restic.name
-    config.users.users.sk.name
-  ];
-  # Group with access to remote repository's password
-  users.groups.restic-repos.members = [
-    config.users.users.restic.name
-    config.users.users.sk.name
-  ];
+  users.groups = {
+    restic = { };
+    # Group with access to remote repositories
+    restic-remote-domashka.members = [
+      config.users.users.restic.name
+      config.users.users.sk.name
+    ];
+    # Group with access to remote repository's password
+    restic-repos.members = [
+      config.users.users.restic.name
+      config.users.users.sk.name
+    ];
+  };
 
   # Secrets
   sops.secrets = {
@@ -385,12 +387,10 @@ in
       // contentJobRepoConfig
       // {
         timerConfig.OnCalendar = "daily";
-        paths = (
-          map (x: "${config.users.users.sk.home}/${x}") [
-            "music"
-            "videos"
-          ]
-        );
+        paths = map (x: "${config.users.users.sk.home}/${x}") [
+          "music"
+          "videos"
+        ];
       };
     content-maintenance = commonMaintenanceOpts // contentJobRepoConfig;
 
@@ -424,18 +424,16 @@ in
       commonBackupsOpts
       // userDataJobRepoConfig
       // {
-        paths = (
-          map (x: "${config.users.users.sk.home}/${x}") [
-            ".local/share/Zotero"
-            ".local/share/calendars"
-            ".local/share/contacts"
-            "desktop"
-            "dev"
-            "docs"
-            "prj"
-            "trash"
-          ]
-        );
+        paths = map (x: "${config.users.users.sk.home}/${x}") [
+          ".local/share/Zotero"
+          ".local/share/calendars"
+          ".local/share/contacts"
+          "desktop"
+          "dev"
+          "docs"
+          "prj"
+          "trash"
+        ];
       };
     user-data-maintenance = commonMaintenanceOpts // userDataJobRepoConfig;
 
@@ -444,11 +442,9 @@ in
       // userMediaJobRepoConfig
       // {
         timerConfig.OnCalendar = "daily";
-        paths = (
-          map (x: "${config.users.users.sk.home}/${x}") [
-            "pics"
-          ]
-        );
+        paths = map (x: "${config.users.users.sk.home}/${x}") [
+          "pics"
+        ];
       };
     user-media-maintenance = commonMaintenanceOpts // userMediaJobRepoConfig;
 

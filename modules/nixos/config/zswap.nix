@@ -91,11 +91,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    warnings =
-      [ ]
-      ++ optional (
-        (builtins.length config.swapDevices) == 0
-      ) "zswap: Zswap is useless without configured swap devices";
+    warnings = optional (
+      (builtins.length config.swapDevices) == 0
+    ) "zswap: Zswap is useless without configured swap devices";
 
     assertions = [
       {

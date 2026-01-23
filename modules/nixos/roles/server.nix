@@ -23,15 +23,17 @@ in
   options.roles.server.enable = mkEnableOption "Base server role";
 
   config = mkIf cfg.enable {
-    custom.applists = {
-      admin = mkDefault true;
-      cliTools = mkDefault true;
-      hardware = mkDefault true;
-      networking = mkDefault true;
+    custom = {
+      applists = {
+        admin = mkDefault true;
+        cliTools = mkDefault true;
+        hardware = mkDefault true;
+        networking = mkDefault true;
+      };
+      fish.enable = mkDefault true;
+      locale.flavor = mkDefault "en_RU";
+      no-docs.enable = mkDefault true;
     };
-    custom.fish.enable = mkDefault true;
-    custom.locale.flavor = mkDefault "en_RU";
-    custom.no-docs.enable = mkDefault true;
 
     # Given that our systems are headless, emergency mode is useless.
     # We prefer the system to attempt to continue booting so
@@ -127,10 +129,12 @@ in
       sounds.enable = mkDefault false;
     };
 
-    system.tools.nixos-build-vms.enable = mkDefault false;
-    system.tools.nixos-enter.enable = mkDefault false;
-    system.tools.nixos-install.enable = mkDefault false;
-    system.tools.nixos-option.enable = mkDefault false;
-    system.tools.nixos-version.enable = mkDefault false;
+    system.tools = {
+      nixos-build-vms.enable = mkDefault false;
+      nixos-enter.enable = mkDefault false;
+      nixos-install.enable = mkDefault false;
+      nixos-option.enable = mkDefault false;
+      nixos-version.enable = mkDefault false;
+    };
   };
 }

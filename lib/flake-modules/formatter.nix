@@ -31,7 +31,7 @@ in
           PATH=${pathWithDeps}:$PATH
           exec treefmt "$@"
         '';
-      formatter = packages.formatter;
+      inherit (packages) formatter;
       checks.format = pkgs.writeShellScriptBin "treefmt-ci" ''
         exec ${formatter} --ci "$@"
       '';

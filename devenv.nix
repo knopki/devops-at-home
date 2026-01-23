@@ -5,11 +5,9 @@
   ...
 }:
 let
-  system = pkgs.stdenv.hostPlatform.system;
+  inherit (pkgs.stdenv.hostPlatform) system;
 in
 {
-  env.GREET = "devops-at-home";
-
   packages =
     with pkgs;
     [

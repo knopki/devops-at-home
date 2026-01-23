@@ -157,10 +157,12 @@ in
       ]
     );
 
-    programs.git.enable = mkDefault (cfg.admin || cfg.cliTools || cfg.dev);
+    programs = {
+      git.enable = mkDefault (cfg.admin || cfg.cliTools || cfg.dev);
 
-    programs.mtr.enable = mkDefault cfg.networking;
+      mtr.enable = mkDefault cfg.networking;
 
-    programs.thunderbird.enable = mkDefault cfg.office;
+      thunderbird.enable = mkDefault cfg.office;
+    };
   };
 }

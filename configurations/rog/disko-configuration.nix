@@ -116,9 +116,7 @@ in
               subvolumes = {
                 "@sensitive" = {
                   mountpoint = "/state/sensitive";
-                  mountOptions = btrfsDefaults.mountOptions ++ [
-                    # "noauto"
-                  ];
+                  inherit (btrfsDefaults) mountOptions;
                 };
               };
             };

@@ -138,44 +138,88 @@ in
       tpm2-tools
     ];
 
-    boot.initrd.kernelModules = [
-      "tpm_tis"
-      "tpm_crb"
-    ];
-
-    boot.initrd.systemd.enable = true;
-
-    boot.initrd.systemd.storePaths = [ (getExe printPcr15Script) ];
-
-    boot.initrd.systemd.services."verify-sysroot-pcr15" = mkIf (cfg.pcr15 != null) {
-      unitConfig = {
-        Description = "Verify Root Identity via TPM PCR";
-        DefaultDependencies = false;
-        FailureAction = "halt-force";
-      };
-      conflicts = [ "shutdown.target" ];
-      after = [
-        "cryptsetup.target"
-        "tpm2.target"
+    boot.initrd = {
+      kernelModules = [
+        "tpm_tis"
+        "tpm_crb"
       ];
-      before = [ "shutdown.target" ];
-      wantedBy = [ "local-fs-pre.target" ];
-      requiredBy = [ "sysroot.mount" ];
 
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
+      luks.devices = listToAttrs (
+        map (name: {
+          inherit name;
+          value.crypttabExtraOpts = [
+            "tpm2-device=auto"
+            "tpm2-measure-pcr=yes"
+          ];
+        }) cfg.luksDevices
+      );
+
+      systemd = {
+        enable = true;
+
+        storePaths = [ (getExe printPcr15Script) ];
+
+        services."verify-sysroot-pcr15" = mkIf (cfg.pcr15 != null) {
+          unitConfig = {
+            Description = "Verify Root Identity via TPM PCR";
+            DefaultDependencies = false;
+            FailureAction = "halt-force";
+          };
+          conflicts = [ "shutdown.target" ];
+          after = [
+            "cryptsetup.target"
+            "tpm2.target"
+          ];
+          before = [ "shutdown.target" ];
+          wantedBy = [ "local-fs-pre.target" ];
+          requiredBy = [ "sysroot.mount" ];
+
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+          };
+          script = ''
+            CURRENT_PCR="$(cat /sys/class/tpm/tpm${toString cfg.tpmDevice}/pcr-sha256/15)"
+            echo "Checking PCR 15 value..."
+            echo "PCR 15: $CURRENT_PCR"
+            if [[ "$CURRENT_PCR" != "${toUpper cfg.pcr15}" ]] ; then
+              echo "PCR 15 check failed!"
+              exit 1
+            fi
+            echo "PCR 15 check succeeded"
+          '';
+        };
+
+        units =
+          let
+            # Create dependencies for LUKS devices for determinate hashing of PCR 15
+            unitSectionTmpl = prev: ''
+              [Unit]
+              After=systemd-cryptsetup@${prev}.service
+              Requires=systemd-cryptsetup@${prev}.service
+            '';
+            # Debug logging
+            serviceSectionTmpl = ''
+              [Service]
+              ExecStartPre=${getExe printPcr15Script}
+            '';
+
+            mkUnit =
+              i: cur:
+              let
+                prev = if i > 0 then elemAt cfg.luksDevices (i - 1) else null;
+                text = concatLines [
+                  (optionalString (prev != null) (unitSectionTmpl prev))
+                  (optionalString cfg.debug serviceSectionTmpl)
+                ];
+              in
+              nameValuePair "systemd-cryptsetup@${cur}.service" {
+                inherit text;
+                overrideStrategy = "asDropin";
+              };
+          in
+          listToAttrs (imap0 mkUnit cfg.luksDevices);
       };
-      script = ''
-        CURRENT_PCR="$(cat /sys/class/tpm/tpm${toString cfg.tpmDevice}/pcr-sha256/15)"
-        echo "Checking PCR 15 value..."
-        echo "PCR 15: $CURRENT_PCR"
-        if [[ "$CURRENT_PCR" != "${toUpper cfg.pcr15}" ]] ; then
-          echo "PCR 15 check failed!"
-          exit 1
-        fi
-        echo "PCR 15 check succeeded"
-      '';
     };
 
     # State Transition
@@ -202,45 +246,5 @@ in
         ${pkgs.systemd}/lib/systemd/systemd-pcrextend --graceful --pcr=15 "sysinit.target"
       '';
     };
-
-    boot.initrd.luks.devices = listToAttrs (
-      map (name: {
-        inherit name;
-        value.crypttabExtraOpts = [
-          "tpm2-device=auto"
-          "tpm2-measure-pcr=yes"
-        ];
-      }) cfg.luksDevices
-    );
-
-    boot.initrd.systemd.units =
-      let
-        # Create dependencies for LUKS devices for determinate hashing of PCR 15
-        unitSectionTmpl = prev: ''
-          [Unit]
-          After=systemd-cryptsetup@${prev}.service
-          Requires=systemd-cryptsetup@${prev}.service
-        '';
-        # Debug logging
-        serviceSectionTmpl = ''
-          [Service]
-          ExecStartPre=${getExe printPcr15Script}
-        '';
-
-        mkUnit =
-          i: cur:
-          let
-            prev = if i > 0 then elemAt cfg.luksDevices (i - 1) else null;
-            text = concatLines [
-              (optionalString (prev != null) (unitSectionTmpl prev))
-              (optionalString (cfg.debug) serviceSectionTmpl)
-            ];
-          in
-          nameValuePair "systemd-cryptsetup@${cur}.service" {
-            inherit text;
-            overrideStrategy = "asDropin";
-          };
-      in
-      listToAttrs (imap0 mkUnit cfg.luksDevices);
   };
 }

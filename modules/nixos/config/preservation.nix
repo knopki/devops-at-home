@@ -18,33 +18,29 @@ let
   hasPackage = p: builtins.elem p config.environment.systemPackages;
   hasPackageName = name: lib.any (p: (lib.getName p) == name) config.environment.systemPackages;
 
-  preserveAtUserTemplatesSubmodule =
-    { ... }:
-    {
-      options = {
-        auto.enable = mkEnableOption "Essential + autodetected paths";
-        chezmoi.enable = mkEnableOption "Chezmoi";
-        secrets.enable = mkEnableOption "Secrets and keyrings";
-        xdgTmpfiles.enable = mkEnableOption "Create tmpfiles.d for XDG dirs";
+  preserveAtUserTemplatesSubmodule = _: {
+    options = {
+      auto.enable = mkEnableOption "Essential + autodetected paths";
+      chezmoi.enable = mkEnableOption "Chezmoi";
+      secrets.enable = mkEnableOption "Secrets and keyrings";
+      xdgTmpfiles.enable = mkEnableOption "Create tmpfiles.d for XDG dirs";
+    };
+  };
+
+  preserveAtTemplatesSubmodule = _: {
+    options = {
+      auto.enable = mkEnableOption "Essential + autodetected paths";
+      vm.enable = mkEnableOption "VMs and containers";
+
+      users = mkOption {
+        type = with lib.types; attrsOf (submodule preserveAtUserTemplatesSubmodule);
+        description = ''
+          Per-user templates.
+        '';
+        default = { };
       };
     };
-
-  preserveAtTemplatesSubmodule =
-    { ... }:
-    {
-      options = {
-        auto.enable = mkEnableOption "Essential + autodetected paths";
-        vm.enable = mkEnableOption "VMs and containers";
-
-        users = mkOption {
-          type = with lib.types; attrsOf (submodule preserveAtUserTemplatesSubmodule);
-          description = ''
-            Per-user templates.
-          '';
-          default = { };
-        };
-      };
-    };
+  };
 
   mkInitrdTmpfilesRules =
     preserveName: stateCfg:
