@@ -8,6 +8,11 @@ The Home Manager is no longer used for managing dotfiles. Instead, all dotfiles
 are managed by `chezmoi` in a
 [separate repository](https://github.com/knopki/dotfiles).
 
+This project uses [devenv.sh](https://devenv.sh) to create a reproducible
+development environment. See also
+[knopki/devenvs](https://github.com/knopki/devenvs) - a collection of
+`devenv.sh` modules.
+
 ## Overview
 
 This repository contains a comprehensive NixOS configuration system that
