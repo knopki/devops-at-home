@@ -6,7 +6,7 @@
 - **Storage**: NVMe with LUKS + Btrfs
 - **Features**: TPM2, Secure Boot
 
-### Configuration Details
+## Configuration Details
 
 **Storage Architecture**:
 
@@ -24,7 +24,7 @@
 
 **Disk Layout**:
 
-```
+```text
 /dev/nvme0n1p1  -> /boot (vfat, 1GB)
 /dev/nvme0n1p2  -> LUKS container
   └── LVM volume group

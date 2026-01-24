@@ -8,7 +8,7 @@ shared and host-specific configurations.
 
 ## Project Structure
 
-```
+```text
 devops-at-home/
 ├── configurations/                 # Host-specific configurations (see README)
 │   ├── dev-vm/                     # Development VM configuration

@@ -9,7 +9,7 @@ Laptop from 2014. Very old installation of NixOS (2019?).
 - **Storage**: NVMe SSD with ZFS
 - **Network**: WiFi + Ethernet
 
-### Configuration Details
+## Configuration Details
 
 **Storage Architecture**:
 
@@ -36,7 +36,7 @@ Laptop from 2014. Very old installation of NixOS (2019?).
 
 **File Systems**:
 
-```
+```text
 /boot     -> /dev/disk/by-uuid/6964-B539 (vfat)
 /         -> /dev/disk/by-uuid/e384e984-... (ext4)
 ZFS pools:
