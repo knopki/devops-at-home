@@ -24,10 +24,10 @@
     "devenv": {
       "locked": {
         "dir": "src/modules",
-        "lastModified": 1769080719,
+        "lastModified": 1769201893,
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "a13cd68223ccb1c50aa9c253504463fda67e6554",
+        "rev": "685a86068d3a7f9b04e18340187e288413cb5887",
         "type": "github"
       },
       "original": {
@@ -96,10 +96,10 @@
     "knopki-devenvs": {
       "flake": false,
       "locked": {
-        "lastModified": 1769189225,
+        "lastModified": 1769220651,
         "owner": "knopki",
         "repo": "devenvs",
-        "rev": "deb649c6bdc3d045432ad1d46384a07cbdf358cd",
+        "rev": "a9a441f70fc31479535f72ae0fddc1561f4b5aa0",
         "type": "github"
       },
       "original": {
@@ -129,10 +129,10 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1768875095,
+        "lastModified": 1769092226,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ed142ab1b3a092c4d149245d0c4126a5d7ea00b0",
+        "rev": "b579d443b37c9c5373044201ea77604e37e748c8",
         "type": "github"
       },
       "original": {

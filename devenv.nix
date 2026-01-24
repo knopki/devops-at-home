@@ -17,14 +17,18 @@ in
     ]
     ++ (with inputs.llm-agents.packages.${system}; [ opencode ]);
 
-  knopki.nixos.enable = true;
-  knopki.menu.enable = true;
+  knopki = {
+    json.enable = true;
+    nixos.enable = true;
+    markdown.enable = true;
+    menu.enable = true;
+    yaml.enable = true;
+  };
   git-hooks.hooks.no-commit-to-branch.enable = false;
   treefmt = {
     enable = true;
     config = {
       programs = {
-        deno.enable = true; # markdown
         shellcheck.enable = true;
         shfmt.enable = true;
       };
