@@ -5,6 +5,9 @@ inputs:
     flake: false
   llm-agents:
     url: github:numtide/llm-agents.nix
+    inputs:
+      treefmt-nix:
+        follows: treefmt-nix
   nixpkgs:
     url: github:cachix/devenv-nixpkgs/rolling
   treefmt-nix:
