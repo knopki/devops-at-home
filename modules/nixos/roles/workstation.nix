@@ -112,5 +112,8 @@ in
     };
 
     time.timeZone = mkDefault "Europe/Moscow";
+
+    # fix chrome 140 and electron 38 (like in super-productivity-17)
+    environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HONT = "auto";
   };
 }
