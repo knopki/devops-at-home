@@ -134,6 +134,7 @@ in
       ++ optionals cfg.office [
         aliza
         anytype
+        brave
         citations
         dialect
         gImageReader

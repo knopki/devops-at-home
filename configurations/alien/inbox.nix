@@ -6,49 +6,43 @@
 }:
 let
   inherit (lib) mkBefore mkDefault;
-  officePkgs = with pkgs; [
-    brave
-  ];
 in
 {
   #
   # Packages
   #
 
-  environment.systemPackages =
-    with pkgs;
-    [
-      # essentials
-      gnupg
-      libsecret # secret-tool
+  environment.systemPackages = with pkgs; [
+    # essentials
+    gnupg
+    libsecret # secret-tool
 
-      # shell
-      atuin
+    # backups
+    btrbk
+    restic
+    restic-browser
+    rustic
+    redu
+    deja-dup
 
-      # backups
-      btrbk
-      restic
-      restic-browser
-      rustic
-      redu
-      deja-dup
+    # shell
+    atuin
 
-      # misc
-      bees
-      tor-browser
-      amneziawg-go
-      amneziawg-tools
-      bottles
-      # tailscale
-      xorg.xhost
-      # yubikey-manager
-      httm
-      cherry-studio
+    # misc
+    bees
+    tor-browser
+    amneziawg-go
+    amneziawg-tools
+    bottles
+    # tailscale
+    xorg.xhost
+    # yubikey-manager
+    httm
+    cherry-studio
 
-      # temporary
-      impression
-    ]
-    ++ officePkgs;
+    # temporary
+    impression
+  ];
 
   programs = {
     chromium = {
