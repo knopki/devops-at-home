@@ -148,9 +148,14 @@ in
         onlyoffice-desktopeditors
         pdfarranger
         poppler-utils
+        taskwarrior3
+        taskwarrior-tui
+        tasksh
         telegram-desktop
+        timewarrior
         qalculate-gtk
         qpdf
+        super-productivity
         vdirsyncer
         weasis
         zotero
