@@ -46,7 +46,6 @@
         "prj"
         "public"
         "remote"
-        "secrets"
         "templates"
         "trash"
         "videos"
@@ -56,6 +55,7 @@
       ];
     };
     preserveAtTemplates."/state/sensitive".users.knopki.secrets.enable = true;
+    preserveAt."/state/sensitive".users.knopki.directories = [ "secrets" ];
   };
 
   sops.secrets = {
