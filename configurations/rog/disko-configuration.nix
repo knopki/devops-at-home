@@ -109,7 +109,7 @@ in
             };
           };
           sensitive = {
-            size = "1G";
+            size = "2G";
             content = {
               inherit (btrfsDefaults) extraArgs;
               type = "btrfs";
