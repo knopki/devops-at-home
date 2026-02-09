@@ -133,6 +133,7 @@ let
         ]
         ++ optional (hasPackage pkgs.deja-dup) ".cache/deja-dup"
         ++ optional (hasPackage pkgs.fclones) ".cache/fclones"
+        ++ optional (hasPackage pkgs.keepassxc) ".cache/keepassxc"
         ++ optional (hasPackage pkgs.restic || config.services.restic.backups != { }) ".cache/restic"
         ++ optional (hasPackage pkgs.aliza) ".config/Aliza"
         ++
@@ -210,7 +211,7 @@ let
           ".local/share/containers"
         ]
         ++ optional (hasPackage pkgs.naps2) ".config/naps2"
-        ++ optional (hasPackage pkgs.nextcloud-client) ".config/NextCloud"
+        ++ optional (hasPackage pkgs.nextcloud-client) ".config/Nextcloud"
         ++ optional (hasPackage pkgs.nix-inspect) ".config/nix-inspect"
         ++ optional (hasPackage pkgs.nushell) ".config/nushell"
         ++ optional (hasPackage pkgs.obsidian) ".config/obsidian"
