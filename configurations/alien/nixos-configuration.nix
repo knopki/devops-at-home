@@ -18,7 +18,7 @@ inputs.nixpkgs-25-11.lib.nixosSystem {
     ./restic.nix
     ./users-root.nix
     ./users-sk.nix
-    ./containers.nix
+    ./services.nix
     ./zfs.nix
     {
       system.stateVersion = "20.09";

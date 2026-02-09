@@ -463,6 +463,7 @@ in
           "--exclude-file=${excludeFile}"
         ];
         paths = [
+          config.services.taskchampion-sync-server.dataDir
           "/var/lib/isponsorblocktv"
           "/var/lib/lampac"
         ]

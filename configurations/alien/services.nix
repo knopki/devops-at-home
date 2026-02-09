@@ -1,6 +1,5 @@
 { config, ... }:
 let
-  inherit (builtins) toString;
   lampaWebPort = 9118;
   lampaTorrservePort = 9080;
   lampaTorrservePeersPort = 16881;
@@ -50,6 +49,14 @@ in
     lampaWebPort
     lampaTorrservePeersPort
   ];
+
+  services = {
+    taskchampion-sync-server = {
+      enable = true;
+      openFirewall = true;
+      host = "0.0.0.0";
+    };
+  };
 
   sops.secrets.lampa-admin-password = { };
 }
