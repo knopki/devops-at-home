@@ -156,7 +156,6 @@ in
         timewarrior
         qalculate-gtk
         qpdf
-        super-productivity
         vdirsyncer
         weasis
         zotero

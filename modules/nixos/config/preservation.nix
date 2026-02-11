@@ -290,8 +290,7 @@ let
         ++ optionals (hasPackage pkgs.timewarrior) [
           ".config/timewarrior"
           ".local/share/timewarrior"
-        ]
-        ++ optional (hasPackage pkgs.super-productivity) ".config/superProductivity";
+        ];
       autoDirs = optionals stateCfg.auto.enable (essentialDirs ++ autodetectedDirs);
       secretDirs =
         optionals stateCfg.secrets.enable [
