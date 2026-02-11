@@ -135,6 +135,7 @@ let
         ++ optional (hasPackage pkgs.fclones) ".cache/fclones"
         ++ optional (hasPackage pkgs.keepassxc) ".cache/keepassxc"
         ++ optional (hasPackage pkgs.restic || config.services.restic.backups != { }) ".cache/restic"
+        ++ optional (hasPackage pkgs.codex) ".codex"
         ++ optional (hasPackage pkgs.aliza) ".config/Aliza"
         ++
           optionals

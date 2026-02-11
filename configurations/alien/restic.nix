@@ -468,6 +468,7 @@ in
           "/var/lib/lampac"
         ]
         ++ (map (x: "${config.users.users.sk.home}/${x}") [
+          ".codex"
           ".config/BraveSoftware"
           ".config/MusicBrainz"
           ".config/dconf/user"

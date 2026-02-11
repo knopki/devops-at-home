@@ -13,9 +13,8 @@
       directories = [
         ".android"
         ".arduino15"
-        # ".cache/.bun"
         ".cache/np"
-        # ".cache/opencode"
+        ".codex" # devenv use
         ".config/arduino-ide"
         ".config/cachix" # devenv use
         ".config/gcloud" # devenv use
@@ -36,7 +35,6 @@
         ".local/share/RecentDocuments"
         ".local/share/uv" # devenv use
         ".local/share/zed" # devenv use
-        # ".mozilla"
         ".terraformrc" # devenv use
         "desktop"
         "docs"
