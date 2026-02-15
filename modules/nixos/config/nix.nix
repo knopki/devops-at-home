@@ -31,12 +31,13 @@ in
         log-lines = mkDefault 25;
 
         # Enable flakes
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ]
-        ++ (self.nixConfig.experimental-features or [ ])
-        ++ optional (versionOlder (majorMinor config.nix.package.version) "2.22") "repl-flake";
+        experimental-features =
+          (self.nixConfig.experimental-features or [
+            "nix-command"
+            "flakes"
+          ]
+          )
+          ++ optional (versionOlder (majorMinor config.nix.package.version) "2.22") "repl-flake";
 
         # Avoid disk full issues
         max-free = mkDefault (3000 * 1024 * 1024);
@@ -51,17 +52,14 @@ in
 
         # Caches in trusted-substituters can be used by unprivileged users i.e. in
         # flakes but are not enabled by default.
-        trusted-substituters = [
-          "https://cache.garnix.io"
-          "https://nix-community.cachix.org"
-        ]
-        ++ (self.nixConfig.extra-substituters or [ ]);
-        trusted-public-keys = [
-          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ]
-        ++ (self.nixConfig.extra-trusted-public-keys or [ ]);
-
+        trusted-substituters =
+          self.nixConfig.extra-substituters or [
+            "https://nix-community.cachix.org"
+          ];
+        trusted-public-keys =
+          self.nixConfig.extra-trusted-public-keys or [
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          ];
       };
 
       # Avoid disk full issues
