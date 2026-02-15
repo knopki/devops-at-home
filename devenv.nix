@@ -86,7 +86,12 @@ in
   };
   git-hooks = {
     enable = true;
-    hooks.no-commit-to-branch.enable = false;
+    hooks = {
+      no-commit-to-branch.enable = false;
+      lychee.settings.flags = ''
+        --exclude "cache\.garnix\.io"
+      '';
+    };
   };
   treefmt.enable = true;
 
