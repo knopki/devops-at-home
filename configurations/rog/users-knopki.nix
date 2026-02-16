@@ -14,13 +14,11 @@
         ".android"
         ".arduino15"
         ".cache/np"
-        ".codex" # devenv use
         ".config/arduino-ide"
         ".config/cachix" # devenv use
         ".config/gcloud" # devenv use
         ".config/media-viewer"
         ".config/nix-inspect" # devenv use
-        ".config/opencode" # devenv use
         ".config/yandex-cloud" # devenv use
         ".config/zed" # devenv use
         {
@@ -31,7 +29,6 @@
         ".local/share/contacts"
         ".local/share/media-viewer"
         ".local/share/nix"
-        ".local/share/opencode" # devenv use
         ".local/share/RecentDocuments"
         ".local/share/uv" # devenv use
         ".local/share/zed" # devenv use

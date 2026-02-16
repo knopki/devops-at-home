@@ -65,7 +65,10 @@ in
       ]
       ++ optionals cfg.dev [
         binutils
+        ccusage-opencode
+        codex
         devenv
+        gemini-cli
         gh
         gnupg
         imgcat
@@ -73,8 +76,12 @@ in
         just
         lazygit
         lima
+        opencode
+        openspec
         python3
         rclone
+        spec-kit
+        tuicr
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
@@ -138,10 +145,12 @@ in
         citations
         dialect
         gImageReader
+        handy
         img2pdf
         keepassxc
         khal
         khard
+        localgpt
         naps2
         nextcloud-client
         obsidian

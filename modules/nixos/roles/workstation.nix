@@ -53,9 +53,10 @@ in
     systemd.services.nix-gc.serviceConfig.CPUSchedulingPolicy = "idle";
 
     nixpkgs.overlays = with self.overlays; [
-      my-packages
-      nixpkgs-unstable
-      unstable-backports
+      myPackages
+      extPackages
+      unstableBackports
+      llmAgents
       mpv
     ];
 

@@ -1,4 +1,5 @@
 {
   mpv = ./mpv.nix;
-  unstable-backports = ./unstable-backports.nix;
+  llmAgents = ./llm-agents.nix;
+  unstableBackports = ./unstable-backports.nix;
 }

@@ -1,16 +1,10 @@
 {
   config,
   pkgs,
-  inputs,
   lib,
   ...
 }:
-let
-  inherit (pkgs.stdenv.hostPlatform) system;
-in
 {
-  packages = with inputs.llm-agents.packages.${system}; [ opencode ];
-
   knopki = {
     git = {
       enable = true;

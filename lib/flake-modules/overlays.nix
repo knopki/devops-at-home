@@ -13,11 +13,12 @@ let
   inherit (builtins) elem;
   inherit (lib.attrsets) mapAttrs;
 
-  unstableOverlay = final: _prev: {
+  extPackagesOverlay = final: _prev: {
     nixpkgsUnstable = import inputs.nixpkgs-unstable {
       inherit (final.stdenv.hostPlatform) system;
       config = self.lib.nixpkgsPolicies.configStandard;
     };
+    llmAgents = inputs.llm-agents.packages.${final.stdenv.hostPlatform.system};
   };
 
   namePaths = import ../../overlays/overlays.nix;
@@ -34,9 +35,9 @@ in
 {
   config.flake = {
     overlays = (mapAttrs loadOverlay namePaths) // {
-      nixpkgs-unstable = unstableOverlay;
+      extPackages = extPackagesOverlay;
       # all packages of this flake
-      my-packages = myPackagesOverlay;
+      myPackages = myPackagesOverlay;
       default = myPackagesOverlay;
     };
   };

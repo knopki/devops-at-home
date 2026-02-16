@@ -291,7 +291,8 @@ let
         ++ optionals (hasPackage pkgs.timewarrior) [
           ".config/timewarrior"
           ".local/share/timewarrior"
-        ];
+        ]
+        ++ optional (hasPackage pkgs.gemini-cli || hasPackage pkgs.gemini-cli-bin) ".gemini";
       autoDirs = optionals stateCfg.auto.enable (essentialDirs ++ autodetectedDirs);
       secretDirs =
         optionals stateCfg.secrets.enable [

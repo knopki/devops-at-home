@@ -36,8 +36,6 @@
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-lib";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
-    devenv.url = "github:cachix/devenv";
-    devenv.inputs.nixpkgs.follows = "nixpkgs";
     home-25-11.inputs.nixpkgs.follows = "nixpkgs-25-11";
     home-25-11.url = "github:nix-community/home-manager/release-25.11";
     home.follows = "home-25-11";
@@ -49,7 +47,7 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
     preservation.url = "github:nix-community/preservation";
     nixos-hardware.url = "flake:nixos-hardware";
-    lanzaboote.url = "github:nix-community/lanzaboote/7e031eb535a494582f4fc58735b5aecba7b57058"; # 2026-01-13
+    lanzaboote.url = "github:nix-community/lanzaboote/2038a9a19adb886eccba775321b055fdbdc5029d"; # 2026-02-10
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
@@ -59,6 +57,8 @@
     # nixpak.url = "github:nixpak/nixpak";
     # nixpak.inputs.flake-parts.follows = "flake-parts";
     # nixpak.inputs.nixpkgs.follows = "nixpkgs";
+
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
