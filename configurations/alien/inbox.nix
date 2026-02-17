@@ -25,9 +25,6 @@ in
     redu
     deja-dup
 
-    # shell
-    atuin
-
     # misc
     bees
     tor-browser
