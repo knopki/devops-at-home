@@ -151,6 +151,7 @@ in
         keepassxc
         khal
         khard
+        libsecret
         localgpt
         naps2
         nextcloud-client

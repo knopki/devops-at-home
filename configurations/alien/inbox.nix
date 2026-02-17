@@ -15,7 +15,6 @@ in
   environment.systemPackages = with pkgs; [
     # essentials
     gnupg
-    libsecret # secret-tool
 
     # backups
     btrbk
