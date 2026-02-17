@@ -138,7 +138,7 @@ sops updatekeys secrets/hostname.yaml
 
 ### Backup Procedures
 
-TODO: `btrbk`, `kopia`/`restic`/`plakar` guide
+TODO: `btrbk`, `restic` guide
 
 **ZFS Snapshots** (alien):
 
