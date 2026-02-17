@@ -51,7 +51,8 @@ devops-at-home/
 
 - **Host Configurations**: Each machine has its own configuration directory
 - **Reusable Modules**: Common functionality extracted into modules
-- **Profile System**: Layered profiles (common → server/workstation → devhost)
+- **Profile System**: Layered profiles (common → server/workstation → more
+  specific roles)
 
 ### Reproducibility
 
@@ -95,8 +96,7 @@ devops-at-home/
 **Config** (`modules/nixos/config/`):
 
 - Core system configuration modules
-- Includes: `home-manager.nix`, `locale.nix`, `nix.nix`, `preservation.nix`,
-  `zswap.nix`
+- Includes: `locale.nix`, `nix.nix`, `preservation.nix`, `zswap.nix`
 
 **Roles** (`modules/nixos/roles/`):
 

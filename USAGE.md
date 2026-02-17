@@ -76,7 +76,7 @@ of the `modules/nixos/system/identity.nix` module.
 
 ### Daily Operations
 
-**Update System**:
+**Update system**:
 
 ```bash
 # Update flake inputs
@@ -89,25 +89,34 @@ update-packages package-name --argstr commit true
 
 # Rebuild and switch
 nh os switch .
-# or apply changes to the remote system
+# Or apply changes to the remote system
 nh os switch -H <remote_hostname> --target-host <remote_host> .
 ```
 
 ### Development Workflows
 
-**Enter Development Environment**:
+**Enter development environment**:
 
 ```bash
-# Enter default project's shell
-nix develop
-# or
-nix develop .#nixos
-# or some other project specific shell
-nix develop .#<name>
+devenv shell
+```
 
-# Or with direnv
-echo "use flake <path to this repo>#shell-name" > .envrc
-direnv allow
+**CI / formatting / checks**:
+
+Run formatting and checks via the repo tooling (the exact commands are defined
+in `devenv.nix` / `devenv.yaml`):
+
+```bash
+# Format the repo
+nix fmt
+# or just
+treefmt
+
+# Run checks
+nix flake check
+
+# Run pre-commit checks
+prek -V
 ```
 
 ### Secrets Management
@@ -138,7 +147,10 @@ sops updatekeys secrets/hostname.yaml
 
 ### Backup Procedures
 
-TODO: `btrbk`, `restic` guide
+Backup tooling is host-dependent and still evolving.
+
+- For current state: see each host’s configuration under
+  `configurations/<host>/` (e.g. `restic.nix`).
 
 **ZFS Snapshots** (alien):
 
