@@ -70,6 +70,7 @@ in
         devenv
         gemini-cli
         gh
+        difftastic
         gnupg
         imgcat
         jq
