@@ -2,38 +2,16 @@
 #
 # Setup formatter and checks
 #
-{ lib, ... }:
-let
-  inherit (lib.strings) makeBinPath;
-in
-{
+_: {
   perSystem =
     { pkgs, ... }:
-    rec {
-      packages.formatter =
-        let
-          pathWithDeps = makeBinPath (
-            with pkgs;
-            [
-              deadnix
-              jsonfmt
-              mdformat
-              nixfmt-rfc-style
-              shellcheck
-              shfmt
-              taplo
-              treefmt
-              yamlfmt
-            ]
-          );
-        in
-        pkgs.writeShellScriptBin "treefmt" ''
-          PATH=${pathWithDeps}:$PATH
-          exec treefmt "$@"
-        '';
-      inherit (packages) formatter;
+    {
+      # Just use treefmt provided by devenv
+      formatter = pkgs.writeShellScriptBin "treefmt" ''
+        exec treefmt "$@"
+      '';
       checks.format = pkgs.writeShellScriptBin "treefmt-ci" ''
-        exec ${formatter} --ci "$@"
+        exec treefmt --ci "$@"
       '';
     };
 }
