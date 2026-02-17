@@ -13,9 +13,6 @@ in
   #
 
   environment.systemPackages = with pkgs; [
-    # essentials
-    gnupg
-
     # backups
     btrbk
     restic
