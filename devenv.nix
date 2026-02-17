@@ -9,9 +9,7 @@
     git = {
       enable = true;
       withGitHooks = true;
-      difftastic.enable = true;
       gitleaks.enable = true;
-      lazygit.enable = true;
     };
     json = {
       enable = true;
