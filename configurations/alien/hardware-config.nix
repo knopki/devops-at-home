@@ -115,41 +115,6 @@ in
   nix.settings.max-jobs = mkDefault 8;
 
   services = {
-    autorandr =
-      let
-        eDPEDID = "00ffffffffffff004c83484c0000000000190104952213780a32359557568e291f505400000001010101010101010101010101010101603980dc703840403020250058c21000001ae72d80dc703840403020250058c21000001a000000fe00344e44444a80313536484c0a20000000000000412196011000000a010a20200055";
-        eDPconf = {
-          enable = true;
-          primary = true;
-          crtc = 0;
-          mode = "1920x1080";
-          position = "0x0";
-          rate = "60.00";
-          dpi = 96;
-        };
-      in
-      {
-        enable = true;
-        profiles."mobile" = {
-          fingerprint = {
-            eDP-1 = eDPEDID;
-          };
-          config = {
-            eDP-1 = eDPconf;
-          };
-        };
-        profiles."mobile-sync" = {
-          fingerprint = {
-            eDP-1-1 = eDPEDID;
-          };
-          config = {
-            eDP-1-1 = eDPconf;
-          };
-          #hooks.postswitch."change-dpi" = ''
-          #  echo "Xft.dpi: 144" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
-          #'';
-        };
-      };
     udev = {
       extraHwdb = ''
         # Alienware 15 R2 laptops
