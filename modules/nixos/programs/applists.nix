@@ -65,7 +65,6 @@ in
       ]
       ++ optionals cfg.dev [
         binutils
-        ccusage-opencode
         codex
         devenv
         gemini-cli
@@ -81,7 +80,6 @@ in
         openspec
         python3
         rclone
-        spec-kit
         tuicr
       ]
       ++
