@@ -98,6 +98,11 @@ in
         default = "127.19.84.";
         description = "IP address prefix for development hosts";
       };
+      hostnameSuffix = mkOption {
+        type = lib.types.str;
+        default = "test";
+        description = "Hostname suffix for development hosts";
+      };
       hostnames = mkOption {
         type = with lib.types; listOf str;
         default = planetsAndMoons;
@@ -127,7 +132,16 @@ in
         listToAttrs (
           imap1 (i: x: {
             name = "${cfg.devHosts.ipAddressPrefix}${toString i}";
-            value = [ x ];
+            value =
+              let
+                domain = "${x}.${cfg.devHosts.hostnameSuffix}";
+              in
+              [
+                domain
+                "api.${domain}"
+                "db.${domain}"
+                "www.${domain}"
+              ];
           }) cfg.devHosts.hostnames
         )
       );
