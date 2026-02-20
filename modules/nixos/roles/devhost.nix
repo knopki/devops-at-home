@@ -29,10 +29,13 @@ in
   config = mkIf cfg.enable {
     roles.workstation.enable = true;
 
-    custom.applists = {
-      admin = mkDefault true;
-      adminGUI = mkDefault true;
-      dev = mkDefault true;
+    custom = {
+      applists = {
+        admin = mkDefault true;
+        adminGUI = mkDefault true;
+        dev = mkDefault true;
+      };
+      networking.devHosts.enable = true;
     };
 
     custom.helix = {

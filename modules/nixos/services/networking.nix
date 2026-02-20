@@ -4,12 +4,107 @@
   ...
 }:
 let
+  inherit (builtins) listToAttrs;
+  inherit (lib.lists) imap1;
   inherit (lib.modules) mkDefault mkIf;
-  inherit (lib.options) mkEnableOption;
+  inherit (lib.options) mkEnableOption mkOption;
   cfg = config.custom.networking;
+
+  planetsAndMoons = [
+    "mercury"
+    "venus"
+    "earth"
+    "moon"
+    "mars"
+    "phobos"
+    "deimos"
+    "jupiter"
+    "metis"
+    "adrastea"
+    "amalthea"
+    "thebe"
+    "io"
+    "europa"
+    "ganymede"
+    "callisto"
+    "leda"
+    "himalia"
+    "elara"
+    "ananke"
+    "carme"
+    "pasiphae"
+    "sinope"
+    "saturn"
+    "pan"
+    "atlas"
+    "prometheus"
+    "pandora"
+    "epimetheus"
+    "janus"
+    "mimas"
+    "enceladus"
+    "tethys"
+    "telesto"
+    "calypso"
+    "dione"
+    "helene"
+    "rhea"
+    "titan"
+    "hyperion"
+    "iapetus"
+    "phoebe"
+    "uranus"
+    "cordelia"
+    "ophelia"
+    "binaca"
+    "cressida"
+    "desdemona"
+    "juliet"
+    "protia"
+    "rosalind"
+    "belinda"
+    "puck"
+    "miranda"
+    "ariel"
+    "umbriel"
+    "titania"
+    "oberon"
+    "caliban"
+    "sycorax"
+    "prospero"
+    "setebos"
+    "stephano"
+    "trinculo"
+    "neptune"
+    "naiad"
+    "thalassa"
+    "despina"
+    "galatea"
+    "larissa"
+    "proteus"
+    "triton"
+    "nereid"
+    "pluto"
+    "charon"
+  ];
 in
 {
-  options.custom.networking.enable = mkEnableOption "Enable networking profile";
+  options.custom.networking = {
+    enable = mkEnableOption "Enable networking profile";
+    devHosts = {
+      enable = mkEnableOption "Add a pile of hostnames to hosts for development purposes";
+      ipAddressPrefix = mkOption {
+        type = lib.types.str;
+        default = "127.19.84.";
+        description = "IP address prefix for development hosts";
+      };
+      hostnames = mkOption {
+        type = with lib.types; listOf str;
+        default = planetsAndMoons;
+        description = "List of hostnames to add to hosts file";
+      };
+    };
+  };
 
   config = mkIf cfg.enable {
     networking = {
@@ -27,6 +122,15 @@ in
 
       # more privacy-friendly
       networkmanager.wifi.macAddress = mkDefault "stable-ssid";
+
+      hosts = mkIf cfg.devHosts.enable (
+        listToAttrs (
+          imap1 (i: x: {
+            name = "${cfg.devHosts.ipAddressPrefix}${toString i}";
+            value = [ x ];
+          }) cfg.devHosts.hostnames
+        )
+      );
     };
 
     # The notion of "online" is a broken concept
