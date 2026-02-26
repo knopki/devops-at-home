@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib.lists) optional;
+  inherit (lib.lists) optional uniqueStrings;
   inherit (lib.modules) mkDefault mkIf;
   inherit (lib.options) mkEnableOption;
   inherit (lib.strings) versionOlder;
@@ -31,11 +31,14 @@ in
         log-lines = mkDefault 25;
 
         # Enable flakes
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ]
-        ++ optional (versionOlder (majorMinor config.nix.package.version) "2.22") "repl-flake";
+        experimental-features = uniqueStrings (
+          self.nixConfig.experimental-features
+          ++ [
+            "nix-command"
+            "flakes"
+          ]
+          ++ optional (versionOlder (majorMinor config.nix.package.version) "2.22") "repl-flake"
+        );
 
         # Avoid disk full issues
         max-free = mkDefault (3000 * 1024 * 1024);
@@ -50,27 +53,18 @@ in
 
         substituters = [
           "https://mirror.yandex.ru/nixos"
-          "https://cache.nixos.org"
-          "https://nix-community.cachix.org"
-          "https://cache.numtide.com"
-          "https://cache.garnix.io"
-          "https://lanzaboote.cachix.org"
-          "https://devenv.cachix.org"
         ];
 
         # Caches in trusted-substituters can be used by unprivileged users i.e. in
         # flakes but are not enabled by default.
-        trusted-substituters = [
-          "https://mirror.yandex.ru/nixos"
-          "https://cache.nixos.org"
-        ];
+        trusted-substituters = self.nixConfig.substituters or [ ];
 
-        trusted-public-keys = [
+        trusted-public-keys = (self.nixConfig.extra-trusted-public-keys or [ ]) ++ [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
           "lanzaboote.cachix.org-1:Nt9//zGmqkg1k5iu+B3bkj3OmHKjSw9pvf3faffLLNk="
           "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
-          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+          # "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         ];
       };
 
