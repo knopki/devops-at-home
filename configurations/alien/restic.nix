@@ -476,7 +476,6 @@ in
           ".config/obsidian"
           ".config/opencode"
           ".config/remmina"
-          ".gemini"
           ".lima"
           ".local/share/Anki"
           ".local/share/Anki2"

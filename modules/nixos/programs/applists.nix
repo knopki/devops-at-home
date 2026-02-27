@@ -67,7 +67,6 @@ in
         binutils
         codex
         devenv
-        gemini-cli
         gh
         difftastic
         gnupg
