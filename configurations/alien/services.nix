@@ -1,5 +1,8 @@
 { config, ... }:
 let
+  cliProxyApiPort = 8317;
+  cliProxyApiDataVol = "/var/lib/cli-proxy-api";
+
   lampaWebPort = 9118;
   lampaTorrservePort = 9080;
   lampaTorrservePeersPort = 16881;
@@ -7,6 +10,24 @@ let
 in
 {
   virtualisation.oci-containers.containers = {
+    # Run this to oauth logon:
+    # sudo podman run -it --rm -p 1455:1455 -v /var/lib/cli-proxy-api/config.yaml:/CLIProxyAPI/config.yaml -v /var/lib/cli-proxy-api/auths:/auths docker.io/eceasy/cli-proxy-api-plus:v6.8.24-0 /CLIProxyAPI/CLIProxyAPIPlus -codex-login
+
+    cliproxyapi = {
+      image = "docker.io/eceasy/cli-proxy-api-plus:v6.8.24-0";
+      environment = {
+        MANAGEMENT_STATIC_PATH = "/panel";
+      };
+      ports = [
+        "127.0.0.1:${toString cliProxyApiPort}:8317"
+      ];
+      volumes = [
+        "${cliProxyApiDataVol}/config.yaml:/CLIProxyAPI/config.yaml"
+        "${cliProxyApiDataVol}/panel:/panel"
+        "${cliProxyApiDataVol}/auths:/auths"
+      ];
+    };
+
     # how to configure:
     #   podman run --rm -it \
     #     -v /var/lib/isponsorblocktv:/app/data \
