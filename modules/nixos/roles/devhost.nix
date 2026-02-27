@@ -29,6 +29,10 @@ in
   config = mkIf cfg.enable {
     roles.workstation.enable = true;
 
+    nixpkgs.overlays = with self.overlays; [
+      devenvUpstream
+    ];
+
     custom = {
       applists = {
         admin = mkDefault true;

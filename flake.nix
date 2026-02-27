@@ -56,6 +56,8 @@
     # nixpak.inputs.nixpkgs.follows = "nixpkgs";
 
     llm-agents.url = "github:numtide/llm-agents.nix";
+    devenv.url = "github:cachix/devenv/heads/main";
+    devenv.inputs.nixpkgs.follows = "nixpkgs-25-11";
   };
 
   outputs =

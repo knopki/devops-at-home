@@ -5,6 +5,8 @@ inputs:
     flake: false
   nixpkgs:
     url: github:cachix/devenv-nixpkgs/rolling
+  git-hooks:
+    url: github:cachix/git-hooks.nix
   treefmt-nix:
     url: github:numtide/treefmt-nix
     inputs:

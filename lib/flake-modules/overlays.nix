@@ -19,6 +19,7 @@ let
       config = self.lib.nixpkgsPolicies.configStandard;
     };
     llmAgents = inputs.llm-agents.packages.${final.stdenv.hostPlatform.system};
+    devenvUpstream = inputs.devenv.packages.${final.stdenv.hostPlatform.system};
   };
 
   namePaths = import ../../overlays/overlays.nix;
