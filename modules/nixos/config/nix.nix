@@ -53,11 +53,12 @@ in
 
         substituters = [
           "https://mirror.yandex.ru/nixos"
+          "https://mirrors.ustc.edu.cn/nix-channels"
         ];
 
         # Caches in trusted-substituters can be used by unprivileged users i.e. in
         # flakes but are not enabled by default.
-        trusted-substituters = self.nixConfig.substituters or [ ];
+        trusted-substituters = self.nixConfig.extra-substituters or [ ];
 
         trusted-public-keys = (self.nixConfig.extra-trusted-public-keys or [ ]) ++ [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="

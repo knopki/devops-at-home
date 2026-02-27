@@ -7,7 +7,7 @@
       "nix-command"
       "flakes"
     ];
-    substituters = [
+    extra-substituters = [
       "https://nix-community.cachix.org"
       "https://devenv.cachix.org"
       "https://lanzaboote.cachix.org"
