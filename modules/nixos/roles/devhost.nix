@@ -39,7 +39,10 @@ in
         adminGUI = mkDefault true;
         dev = mkDefault true;
       };
-      networking.devHosts.enable = true;
+      networking.devHosts = {
+        enable = true;
+        redirectSsh = true;
+      };
     };
 
     custom.helix = {

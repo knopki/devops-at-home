@@ -6,8 +6,9 @@
 let
   inherit (builtins) listToAttrs;
   inherit (lib.lists) imap1;
-  inherit (lib.modules) mkDefault mkIf;
+  inherit (lib.modules) mkBefore mkDefault mkIf;
   inherit (lib.options) mkEnableOption mkOption;
+  inherit (lib.strings) concatStringsSep;
   cfg = config.custom.networking;
 
   planetsAndMoons = [
@@ -108,6 +109,7 @@ in
         default = planetsAndMoons;
         description = "List of hostnames to add to hosts file";
       };
+      redirectSsh = mkEnableOption "Redirect SSH :22 -> :2222";
     };
   };
 
@@ -145,6 +147,23 @@ in
           }) cfg.devHosts.hostnames
         )
       );
+
+      nftables = mkIf (cfg.devHosts.enable && cfg.devHosts.redirectSsh) {
+        enable = mkDefault true;
+        ruleset =
+          let
+            addresses = imap1 (i: _: "${cfg.devHosts.ipAddressPrefix}${toString i}") cfg.devHosts.hostnames;
+            rules = map (addr: "tcp dport 22 ip daddr ${addr} dnat to ${addr}:2222") addresses;
+          in
+          mkBefore ''
+            table ip nat {
+              chain output {
+                type nat hook output priority -100;
+                ${concatStringsSep "\n" rules}
+              }
+            }
+          '';
+      };
     };
 
     # The notion of "online" is a broken concept

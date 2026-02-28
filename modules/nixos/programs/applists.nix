@@ -32,7 +32,7 @@ in
         findutils
       ]
       ++ optionals cfg.admin [
-        # gnupg
+        nftables
       ]
       ++
         optionals
