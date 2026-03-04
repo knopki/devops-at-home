@@ -34,7 +34,6 @@ in
       (lowPrio (cosmic-notify-send.override { name = "notify-send"; })) # notify-send compatibility
 
       # Look & feel
-      cosmic-ext-tweaks
       cosmic-ext-applet-caffeine
       gnome-themes-extra # is it really needed?
       ffmpegthumbnailer # cosmic files will use it to create video thumbs
