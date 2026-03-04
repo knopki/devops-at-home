@@ -149,7 +149,6 @@ in
         khal
         khard
         libsecret
-        localgpt
         naps2
         nextcloud-client
         obsidian
