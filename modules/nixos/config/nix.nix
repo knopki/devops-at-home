@@ -53,7 +53,7 @@ in
 
         substituters = [
           "https://mirror.yandex.ru/nixos"
-          "https://mirrors.ustc.edu.cn/nix-channels"
+          "https://mirrors.ustc.edu.cn/nix-channels/store"
         ];
 
         # Caches in trusted-substituters can be used by unprivileged users i.e. in
