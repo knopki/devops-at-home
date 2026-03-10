@@ -33,6 +33,7 @@ in
       ]
       ++ optionals cfg.admin [
         nftables
+        zabor
       ]
       ++
         optionals
@@ -80,6 +81,7 @@ in
         python3
         rclone
         tuicr
+        zabor
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
