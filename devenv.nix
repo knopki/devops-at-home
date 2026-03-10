@@ -82,6 +82,7 @@
       no-commit-to-branch.enable = false;
       lychee.settings.flags = ''
         --exclude "cache\.garnix\.io"
+        --exclude "mirrors\.ustc\.edu\.cn"
       '';
     };
   };
