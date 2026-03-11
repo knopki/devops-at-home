@@ -81,6 +81,7 @@ in
         python3
         rclone
         tuicr
+        unixtools.xxd
         zabor
       ]
       ++
