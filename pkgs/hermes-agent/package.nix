@@ -2,7 +2,6 @@
   lib,
   pkgs,
   fetchgit,
-  unstableGitUpdater,
   python3Packages,
 }:
 let
@@ -106,7 +105,7 @@ python3Packages.buildPythonApplication {
     "hermes_cli.main"
   ];
 
-  passthru.updateScript = unstableGitUpdater { };
+  passthru.updateScript = [ ./update.sh ];
 
   meta = with lib; {
     description = "Self-improving AI agent by Nous Research";
