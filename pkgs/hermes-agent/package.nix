@@ -71,6 +71,7 @@ python3Packages.buildPythonApplication {
 
     cp ./*.py "$sitePackages/"
     cp -r agent "$sitePackages/"
+    cp -r gateway "$sitePackages/"
     cp -r mini-swe-agent "$sitePackages/"
     cp -r optional-skills "$sitePackages/"
     cp -r scripts "$sitePackages/"
