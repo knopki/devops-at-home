@@ -11,7 +11,10 @@
 }:
 let
   inherit (builtins) elem;
-  inherit (lib.attrsets) mapAttrs;
+  inherit (lib.attrsets)
+    attrValues
+    mapAttrs
+    ;
 
   extPackagesOverlay = final: _prev: {
     nixpkgsUnstable = import inputs.nixpkgs-unstable {
@@ -24,6 +27,7 @@ let
 
   namePaths = import ../../overlays/overlays.nix;
   loadOverlay = _: import;
+  namedOverlays = mapAttrs loadOverlay namePaths;
 
   myPackagesOverlay =
     _final: prev:
@@ -34,12 +38,19 @@ let
     if (elem system config.systems) then packages else { };
 in
 {
-  config.flake = {
-    overlays = (mapAttrs loadOverlay namePaths) // {
-      extPackages = extPackagesOverlay;
-      # all packages of this flake
-      myPackages = myPackagesOverlay;
-      default = myPackagesOverlay;
+  config = {
+    _module.args.packageOverlaysForPkgs = [
+      extPackagesOverlay
+    ]
+    ++ attrValues namedOverlays;
+
+    flake = {
+      overlays = namedOverlays // {
+        extPackages = extPackagesOverlay;
+        # all packages of this flake
+        myPackages = myPackagesOverlay;
+        default = myPackagesOverlay;
+      };
     };
   };
 }

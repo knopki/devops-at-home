@@ -4,6 +4,7 @@
 #
 {
   lib,
+  packageOverlaysForPkgs,
   self,
   ...
 }:
@@ -20,7 +21,9 @@ in
     { pkgs, system, ... }:
     let
       extLib = pkgs.lib.extend (_final: _prev: { extended = self.lib; });
-      extPkgs = pkgs.extend (_final: _prev: { inherit self extLib; });
+      extPkgs = (pkgs.extend (_final: _prev: { inherit self extLib; })).extend (
+        lib.composeManyExtensions packageOverlaysForPkgs
+      );
       pkgsByName = pkgs.lib.filesystem.packagesFromDirectoryRecursive {
         inherit (extPkgs) callPackage;
         directory = ../../pkgs;
