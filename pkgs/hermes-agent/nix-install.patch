@@ -1,0 +1,96 @@
+--- a/hermes_cli/main.py
++++ b/hermes_cli/main.py
+@@ -1498,8 +1498,16 @@
+         print("OpenAI SDK: Not installed")
+ 
+ 
++def _is_nix_install():
++    return os.getenv("HERMES_NIX_PACKAGE") == "1" or str(PROJECT_ROOT).startswith("/nix/store/")
++
++
+ def cmd_uninstall(args):
+     """Uninstall Hermes Agent."""
++    if _is_nix_install():
++        print("Hermes Agent is installed via Nix and cannot uninstall itself.")
++        print("Remove it through your flake or profile instead.")
++        return
+     from hermes_cli.uninstall import run_uninstall
+     run_uninstall(args)
+ 
+@@ -1605,6 +1613,11 @@
+     import subprocess
+     import shutil
+     
++    if _is_nix_install():
++        print("Hermes Agent is installed via Nix and cannot self-update.")
++        print("Update it through your flake and run update-packages hermes-agent.")
++        return
++    
+     print("⚕ Updating Hermes Agent...")
+     print()
+     
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -26,7 +26,6 @@
+   "prompt_toolkit",
+   # Tools
+   "firecrawl-py",
+-  "fal-client",
+   # Text-to-speech (Edge TTS is free, no API key needed)
+   "edge-tts",
+   # mini-swe-agent deps (terminal tool)
+--- a/tools/web_tools.py
++++ b/tools/web_tools.py
+@@ -39,7 +39,10 @@ import os
+ import re
+ import asyncio
+ from typing import List, Dict, Any, Optional
+-from firecrawl import Firecrawl
++try:
++    from firecrawl import Firecrawl
++except ImportError:
++    from firecrawl import FirecrawlApp as Firecrawl
+ from openai import AsyncOpenAI
+ from agent.auxiliary_client import get_async_text_auxiliary_client
+ from tools.debug_helpers import DebugSession
+--- a/tools/image_generation_tool.py
++++ b/tools/image_generation_tool.py
+@@ -33,7 +33,10 @@ import logging
+ import os
+ import datetime
+ from typing import Dict, Any, Optional, Union
+-import fal_client
++try:
++    import fal_client
++except ImportError:
++    fal_client = None
+ from tools.debug_helpers import DebugSession
+ 
+ logger = logging.getLogger(__name__)
+--- a/hermes_cli/doctor.py
++++ b/hermes_cli/doctor.py
+@@ -394,8 +394,8 @@
+     if shutil.which("node"):
+         check_ok("Node.js")
+         # Check if agent-browser is installed
+-        agent_browser_path = PROJECT_ROOT / "node_modules" / "agent-browser"
+-        if agent_browser_path.exists():
++        agent_browser_path = PROJECT_ROOT / "node_modules" / "agent-browser"
++        if shutil.which("agent-browser") or agent_browser_path.exists():
+             check_ok("agent-browser (Node.js)", "(browser automation)")
+         else:
+             check_warn("agent-browser not installed", "(run: npm install)")
+--- a/tools/rl_training_tool.py
++++ b/tools/rl_training_tool.py
+@@ -52,7 +52,10 @@ HERMES_ROOT = Path(__file__).parent.parent
+ TINKER_ATROPOS_ROOT = HERMES_ROOT / "tinker-atropos"
+ ENVIRONMENTS_DIR = TINKER_ATROPOS_ROOT / "tinker_atropos" / "environments"
+ CONFIGS_DIR = TINKER_ATROPOS_ROOT / "configs"
+-LOGS_DIR = TINKER_ATROPOS_ROOT / "logs"
++LOGS_DIR = (
++    Path(os.getenv("TMPDIR", "/tmp")) / "hermes-agent" / "tinker-atropos" / "logs"
++)
++LOGS_DIR.mkdir(parents=True, exist_ok=True)
+ 
+ # Ensure logs directory exists
+ LOGS_DIR.mkdir(exist_ok=True)
