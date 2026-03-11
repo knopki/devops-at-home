@@ -26,10 +26,6 @@ in
 
   cosmic-edit = pkgIfVersionMin prev.cosmic-edit "1.0.8" p.cosmic-edit;
 
-  cosmic-ext-applet-caffeine =
-    pkgIfVersionMin prev.cosmic-ext-applet-caffeine "0-unstable-2025-11-04"
-      p.cosmic-ext-applet-caffeine;
-
   cosmic-ext-tweaks = pkgIfVersionMin prev.cosmic-ext-tweaks "0.2.0" p.cosmic-ext-tweaks;
 
   cosmic-files = pkgIfVersionMin prev.cosmic-files "1.0.8" p.cosmic-files;
@@ -76,8 +72,6 @@ in
     pkgIfVersionMin prev.cosmic-workspaces-epoch "1.0.8"
       p.cosmic-workspaces-epoch;
 
-  devenv = pkgIfVersionMin prev.devenv "2.0" p.devenv;
-
   lima = pkgIfVersionMin prev.lima "1.2" p.lima;
 
   naps2 =
@@ -85,6 +79,8 @@ in
       unstableNaps2 = prev.callPackage p.naps2.override { };
     in
     pkgIfVersionMin prev.naps2 "8.2.1" unstableNaps2;
+
+  telegram-desktop = pkgIfVersionMin prev.telegram-desktop "6.6.1" p.telegram-desktop;
 
   simplex-chat-desktop =
     let

@@ -11,15 +11,12 @@ in
   inherit (p)
     agent-browser
     backlog-md
-    ccusage-opencode
-    handy
-    localgpt
-    openclaw
+    cli-proxy-api
     openspec
     spec-kit
     tuicr
     ;
   codex = pkgIfVersionMin prev.codex "0.95" p.codex;
-  gemini-cli = pkgIfVersionMin prev.gemini-cli "0.28" p.gemini-cli;
-  opencode = pkgIfVersionMin prev.opencode "1.2.4" p.opencode;
+  gemini-cli = pkgIfVersionMin prev.gemini-cli "0.30" p.gemini-cli;
+  opencode = pkgIfVersionMin prev.opencode "1.2.20" p.opencode;
 }
