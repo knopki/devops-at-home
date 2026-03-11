@@ -258,10 +258,9 @@ paths_rw=(
   "$home/.ssh/known_hosts"
 )
 paths_rox=(
-  /nix/store
   /bin
-  /run/current-system/sw
-  /nix/var/nix/profiles
+  /run/current-system
+  /nix
   /usr
   /lib
   /lib64
@@ -460,8 +459,8 @@ if ((profile_gpu)); then
     /run/opengl-driver-32
     /usr/lib
     /usr/lib32
-    /sys/dev
-    /sys/devices
+    /sys/dev/char
+    /sys/devices/pci0000:00
     /sys/bus/pci
   )
 fi
