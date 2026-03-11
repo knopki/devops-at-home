@@ -9,9 +9,9 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "swenson";
     repo = "findimagedupes";
-    rev = "712104864b4f93c16b8dc84d9ed1f9d637d8a41b";
+    rev = "4adb1f42c22ca8031e0f3eecea0a1df7200a0a74";
     fetchSubmodules = false;
-    sha256 = "sha256-BQUxbUZlaUMjFW4ihaBiPUqi5Pmvf/P30F2gbKgJMEM=";
+    sha256 = "sha256-WejJdCzpEUmhKggBk469HsFs/IVuxdhUZ/93V8I0eNg=";
   };
 
   vendorHash = null;
