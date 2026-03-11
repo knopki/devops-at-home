@@ -145,7 +145,6 @@ in
         citations
         dialect
         gImageReader
-        handy
         img2pdf
         keepassxc
         khal
