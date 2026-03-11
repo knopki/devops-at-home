@@ -86,7 +86,6 @@ let
     ++ (optional cfg.extraPackagesProtobuf buf)
     # python
     ++ (optionals cfg.extraPackagesPython [
-      basedpyright
       ruff
       ty
     ])
