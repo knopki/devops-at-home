@@ -281,6 +281,7 @@ extra_paths_rw=()
 extra_paths_ro=()
 project_ro=0
 project_rw=0
+profile_default=1
 profile_codex=0
 profile_gpu=0
 profile_gui=0
@@ -367,9 +368,7 @@ while (($#)); do
       profile_zed=1
       ;;
     default)
-      profile_codex=1
-      profile_helix=1
-      profile_opencode=1
+      profile_default=1
       ;;
     default-gui)
       profile_gpu=1
@@ -378,7 +377,9 @@ while (($#)); do
       profile_opencode=1
       profile_zed=1
       ;;
-    empty) ;;
+    empty)
+      profile_default=0
+      ;;
     *)
       die "unknown profile: $2"
       ;;
@@ -436,7 +437,14 @@ for p in "${extra_paths_rw[@]}"; do
   paths_rwx+=("$p")
 done
 
+if ((profile_default)); then
+  profile_codex=1
+  profile_helix=1
+  profile_opencode=1
+fi
+
 if ((profile_codex)); then
+  use_landrun=0
   paths_rw+=(
     "$home/.codex"
   )
