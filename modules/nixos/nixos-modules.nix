@@ -28,6 +28,7 @@
   # services
   service-cli-proxy-api = ./services/cli-proxy-api.nix;
   service-cosmic-de = ./services/cosmic-de.nix;
+  service-isponsorblocktv = ./services/isponsorblocktv.nix;
   service-networking = ./services/networking.nix;
   service-openssh = ./services/openssh.nix;
   service-pipewire = ./services/pipewire.nix;

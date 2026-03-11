@@ -12,20 +12,13 @@ in
 {
   imports = with self.modules.nixos; [
     service-cli-proxy-api
+    service-isponsorblocktv
   ];
 
   custom.cli-proxy-api.enable = true;
+  custom.isponsorblocktv.enable = true;
 
   virtualisation.oci-containers.containers = {
-    # how to configure:
-    #   podman run --rm -it \
-    #     -v /var/lib/isponsorblocktv:/app/data \
-    #     ghcr.io/dmunozv04/isponsorblocktv:v2.6.0 --setup
-    isponsorblocktv = {
-      image = "ghcr.io/dmunozv04/isponsorblocktv:v2.6.0";
-      volumes = [ "/var/lib/isponsorblocktv:/app/data" ];
-    };
-
     lampac = {
       image = "dockerhub.timeweb.cloud/immisterio/lampac@sha256:6b1e63337922b3485f35aaa86702bf5ca82f9a0a2cc8c31594d39feb676087a1"; # 2025-12-23
       environment = {
