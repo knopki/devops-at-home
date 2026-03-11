@@ -51,7 +51,7 @@ in
       wantedBy = [ "multi-user.target" ];
       description = "CLI Proxy API instance";
       environment = {
-        MANAGEMENT_STATIC_PATH = "%S/cli-proxy-api/panel";
+        MANAGEMENT_STATIC_PATH = pkgs.cli-proxy-api-management-center;
       };
       serviceConfig = {
         DynamicUser = true;
@@ -65,6 +65,3 @@ in
     };
   };
 }
-
-# Run this to oauth logon:
-# sudo podman run -it --rm -p 1455:1455 -v /var/lib/cli-proxy-api/config.yaml:/CLIProxyAPI/config.yaml -v /var/lib/cli-proxy-api/auths:/auths docker.io/eceasy/cli-proxy-api-plus:v6.8.24-0 /CLIProxyAPI/CLIProxyAPIPlus -codex-login
