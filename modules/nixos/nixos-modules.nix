@@ -26,6 +26,7 @@
   security-sudo = ./security/sudo.nix;
 
   # services
+  service-cli-proxy-api = ./services/cli-proxy-api.nix;
   service-cosmic-de = ./services/cosmic-de.nix;
   service-networking = ./services/networking.nix;
   service-openssh = ./services/openssh.nix;
