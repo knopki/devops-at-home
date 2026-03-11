@@ -93,7 +93,7 @@
       description = "Update ./pkgs from upstream sources";
       exec = ''
         export PRJ_ROOT="$DEVENV_ROOT"
-        nix run .#update-packages -- "$@"
+        nix run "path:$PRJ_ROOT#update-packages" -- "$@"
       '';
     };
 
