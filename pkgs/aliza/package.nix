@@ -9,13 +9,13 @@
 }:
 libsForQt5.mkDerivation rec {
   pname = "aliza";
-  version = "1.9.10";
+  version = "1.9.11";
   src = fetchFromGitHub {
     owner = "AlizaMedicalImaging";
     repo = "AlizaMS";
     rev = "v${version}";
     fetchSubmodules = false;
-    sha256 = "sha256-6x6QIkhG2Bnf+vl1BJCw+xmSo4SN42Lm1T1MzEoteP8=";
+    sha256 = "sha256-bHL7mhB6asEOIcRk6NKymoRE1BLbqKMSDZSJWOEFLqI=";
   };
 
   nativeBuildInputs = with libsForQt5; [
