@@ -2,6 +2,7 @@
   lib,
   pkgs,
   fetchgit,
+  unstableGitUpdater,
   python3Packages,
 }:
 let
@@ -16,14 +17,14 @@ let
 in
 python3Packages.buildPythonApplication {
   pname = "hermes-agent";
-  version = "0-unstable-2026-03-12";
+  version = "2026.3.12-unstable-2026-03-12";
   pyproject = true;
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "2a62514d1750eb7170a5e5ef1cc9e4fde1fafe78";
+    rev = "7e637d3b6a087721a9ae906df2c55713cf2f5c24";
     fetchSubmodules = true;
-    hash = "sha256-HGhusTP9iOfN8X6gMTU2Ld44SmU74eRTkjLWMoiwI4A=";
+    hash = "sha256-rrIalNtd0caZBOor6gbsSj1Ke5s1dBO1AZ1xA23TttQ=";
   };
 
   patches = [
@@ -106,7 +107,9 @@ python3Packages.buildPythonApplication {
     "hermes_cli.main"
   ];
 
-  passthru.updateScript = [ ./update.sh ];
+  passthru.updateScript = unstableGitUpdater {
+    tagPrefix = "v";
+  };
 
   meta = with lib; {
     description = "Self-improving AI agent by Nous Research";
