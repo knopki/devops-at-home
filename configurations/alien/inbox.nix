@@ -35,6 +35,8 @@ in
 
     # temporary
     impression
+
+    hermes-agent
   ];
 
   programs = {
