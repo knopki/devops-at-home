@@ -72,7 +72,7 @@ in
     pkgIfVersionMin prev.cosmic-workspaces-epoch "1.0.8"
       p.cosmic-workspaces-epoch;
 
-  lima = pkgIfVersionMin prev.lima "1.2" p.lima;
+  lima = pkgIfVersionMin prev.lima "2.0" p.lima;
 
   naps2 =
     let
