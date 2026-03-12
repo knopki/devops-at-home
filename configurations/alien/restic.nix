@@ -477,6 +477,7 @@ in
           ".config/obsidian"
           ".config/opencode"
           ".config/remmina"
+          ".hermes"
           ".lima"
           ".local/share/Anki"
           ".local/share/Anki2"
