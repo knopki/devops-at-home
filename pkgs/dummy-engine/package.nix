@@ -11,16 +11,18 @@
 }:
 stdenv.mkDerivation {
   pname = "dummy-engine";
-  version = "0-unstable-0000-00-00";
+  version = "0.0.3-unstable-2023-10-12";
 
   src = fetchFromGitHub {
     owner = "tilde-lab";
     repo = "dummy-engine";
-    rev = "3c54aa69d7053d4c82d19872a740022367bacb90";
-    sha256 = "sha256-OfygeiqSpePHSlq4l959OqDV83Q6vNVK08Mqewg9T3o=";
+    rev = "511956406b56b59528e9067a2f5e45bad0eee829";
+    sha256 = "sha256-IhsGyx3nGZJ4bGl1FkzcoseN67vQA7mI25aolvjHZ+w=";
   };
 
-  passthru.updateScript = unstableGitUpdater { };
+  passthru.updateScript = unstableGitUpdater {
+    tagPrefix = "v";
+  };
 
   buildPhase = ''
     make dummyengine
