@@ -227,24 +227,7 @@ pass_env_names=(
 )
 allow_network=1
 paths_ro=(
-  /etc/resolv.conf
-  /etc/hosts
-  /etc/nsswitch.conf
-  /etc/passwd
-  /etc/group
-  /etc/fonts
-  /etc/localtime
-  /etc/login.defs
-  /etc/machine-id
-  /etc/profiles
-  /etc/os-release
-  /etc/pam.d
-  /etc/shadow
-  /etc/ssl
-  /etc/static/ssl
-  /etc/sudoers
-  /etc/sudoers.d
-  /etc/zoneinfo
+  /etc
   /proc/mounts
   /run/systemd/resolve
   "$home/.ssh/config"
