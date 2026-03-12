@@ -1,6 +1,7 @@
 {
   lib,
   fetchFromGitHub,
+  unstableGitUpdater,
   buildGoModule,
 }:
 buildGoModule {
@@ -16,7 +17,7 @@ buildGoModule {
 
   vendorHash = null;
 
-  passthru.updateScript = [ ./update.sh ];
+  passthru.updateScript = unstableGitUpdater { };
 
   meta = with lib; {
     description = "findimagedupes";
