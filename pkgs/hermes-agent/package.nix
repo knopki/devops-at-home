@@ -17,14 +17,14 @@ let
 in
 python3Packages.buildPythonApplication {
   pname = "hermes-agent";
-  version = "2026.3.12-unstable-2026-03-12";
+  version = "2026.3.12-unstable-2026-03-13";
   pyproject = true;
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "7e637d3b6a087721a9ae906df2c55713cf2f5c24";
+    rev = "e8c9bcea2b2ac669c3fb42774e6f8f6f8c1fd991";
     fetchSubmodules = true;
-    hash = "sha256-rrIalNtd0caZBOor6gbsSj1Ke5s1dBO1AZ1xA23TttQ=";
+    hash = "sha256-vlBv30F/d2BLF+ktzpaCUKSTuAPRr5zjXBPAS4twbnc=";
   };
 
   patches = [
@@ -32,12 +32,37 @@ python3Packages.buildPythonApplication {
   ];
 
   nativeBuildInputs = with python3Packages; [
+    pkgs.perl
     setuptools
     wheel
   ];
 
+  postPatch = ''
+    if grep -Fq 'LOGS_DIR = TINKER_ATROPOS_ROOT / "logs"' tools/rl_training_tool.py; then
+      substituteInPlace tools/rl_training_tool.py \
+        --replace-fail \
+          'LOGS_DIR = TINKER_ATROPOS_ROOT / "logs"' \
+          $'LOGS_DIR = (\n    Path(os.getenv("TMPDIR", "/tmp")) / "hermes-agent" / "tinker-atropos" / "logs"\n)'
+    elif grep -Fq 'LOGS_DIR = Path(os.getenv("HERMES_HOME", Path.home() / ".hermes")) / "logs" / "rl_training"' tools/rl_training_tool.py; then
+      substituteInPlace tools/rl_training_tool.py \
+        --replace-fail \
+          'LOGS_DIR = Path(os.getenv("HERMES_HOME", Path.home() / ".hermes")) / "logs" / "rl_training"' \
+          $'LOGS_DIR = (\n    Path(os.getenv("TMPDIR", "/tmp")) / "hermes-agent" / "tinker-atropos" / "logs"\n)'
+    fi
+
+    if grep -Fq 'def _ensure_logs_dir():' tools/rl_training_tool.py; then
+      perl -0pi -e 's/def _ensure_logs_dir\(\):\n\s+"""Lazily create logs directory on first use \(avoid side effects at import time\)\."""\n\s+if TINKER_ATROPOS_ROOT\.exists\(\):\n\s+LOGS_DIR\.mkdir\(exist_ok=True\)/def _ensure_logs_dir():\n    """Create the logs directory on demand."""\n    LOGS_DIR.mkdir(parents=True, exist_ok=True)/' tools/rl_training_tool.py
+    elif grep -Fq '# Ensure logs directory exists' tools/rl_training_tool.py; then
+      substituteInPlace tools/rl_training_tool.py \
+        --replace-fail \
+          'LOGS_DIR.mkdir(exist_ok=True)' \
+          'LOGS_DIR.mkdir(parents=True, exist_ok=True)'
+    fi
+  '';
+
   propagatedBuildInputs = [
     python3Packages.aiohttp
+    python3Packages.anthropic
     python3Packages.croniter
     python3Packages.cryptography
     python3Packages.discordpy
