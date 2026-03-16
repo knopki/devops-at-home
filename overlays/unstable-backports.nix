@@ -80,6 +80,8 @@ in
     in
     pkgIfVersionMin prev.naps2 "8.2.1" unstableNaps2;
 
+  obsidian = pkgIfVersionMin prev.obsidian "1.12" p.obsidian;
+
   telegram-desktop = pkgIfVersionMin prev.telegram-desktop "6.6.1" p.telegram-desktop;
 
   simplex-chat-desktop =
