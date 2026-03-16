@@ -12,19 +12,21 @@ let
     pkgs.ripgrep
     pkgs.fd
     pkgs.ffmpeg
+    pkgs.tirith
+    pkgs.ocrmypdf
   ]
   ++ lib.optional (pkgs ? agent-browser) pkgs.agent-browser;
 in
 python3Packages.buildPythonApplication {
   pname = "hermes-agent";
-  version = "2026.3.12-unstable-2026-03-13";
+  version = "2026.3.12-unstable-2026-03-14";
   pyproject = true;
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "e8c9bcea2b2ac669c3fb42774e6f8f6f8c1fd991";
+    rev = "779f8df6a6c2a3fc63d2b2e8754e64fc9c3754dd";
     fetchSubmodules = true;
-    hash = "sha256-vlBv30F/d2BLF+ktzpaCUKSTuAPRr5zjXBPAS4twbnc=";
+    hash = "sha256-J93SRIdpzvJUUlKEiZ3TI/nKNeeevfBEGAaW+qN1leM=";
   };
 
   patches = [
@@ -67,12 +69,14 @@ python3Packages.buildPythonApplication {
     python3Packages.cryptography
     python3Packages.discordpy
     python3Packages."edge-tts"
+    python3Packages."faster-whisper"
     python3Packages.fire
     python3Packages."firecrawl-py"
     python3Packages.httpx
     python3Packages.jinja2
     python3Packages.litellm
     python3Packages.mcp
+    python3Packages.numpy
     python3Packages.openai
     python3Packages.platformdirs
     python3Packages."prompt-toolkit"
@@ -87,9 +91,13 @@ python3Packages.buildPythonApplication {
     python3Packages."simple-term-menu"
     python3Packages."slack-bolt"
     python3Packages."slack-sdk"
+    python3Packages.sounddevice
     python3Packages.tenacity
     python3Packages.textual
     python3Packages.typer
+    python3Packages.python-docx
+    python3Packages.python-pptx
+    python3Packages.pymupdf
   ];
 
   postInstall = ''
@@ -124,7 +132,8 @@ python3Packages.buildPythonApplication {
     (lib.makeBinPath wrapperPath)
   ];
 
-  # TODO: package optional extras that are still outside the current derivation:
+  # NOTE: optional extras that are still outside the current derivation:
+  # - fal-client (intentionally skipped for now; not available in current nixpkgs)
   # - honcho-ai
   # - elevenlabs
 
