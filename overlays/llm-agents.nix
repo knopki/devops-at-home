@@ -12,6 +12,7 @@ in
     agent-browser
     backlog-md
     cli-proxy-api
+    mcporter
     openspec
     spec-kit
     tuicr

@@ -8,14 +8,19 @@
 let
   inherit (python3Packages) python;
   wrapperPath = [
-    pkgs.nodejs
+    pkgs.nodejs-slim
+    pkgs.uv
     pkgs.ripgrep
     pkgs.fd
     pkgs.ffmpeg
-    pkgs.tirith
+    pkgs.libopus
     pkgs.ocrmypdf
+    pkgs.opencv
+    pkgs.portaudio
+    pkgs.tirith
   ]
-  ++ lib.optional (pkgs ? agent-browser) pkgs.agent-browser;
+  ++ lib.optional (pkgs ? agent-browser) pkgs.agent-browser
+  ++ lib.optional (pkgs ? mcporter) pkgs.mcporter;
 in
 python3Packages.buildPythonApplication {
   pname = "hermes-agent";
@@ -95,9 +100,10 @@ python3Packages.buildPythonApplication {
     python3Packages.tenacity
     python3Packages.textual
     python3Packages.typer
-    python3Packages.python-docx
-    python3Packages.python-pptx
-    python3Packages.pymupdf
+    python3Packages.markitdown
+    python3Packages.numpy
+    python3Packages.scipy
+    python3Packages.pillow
   ];
 
   postInstall = ''
