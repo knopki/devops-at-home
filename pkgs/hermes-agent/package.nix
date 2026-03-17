@@ -1,36 +1,43 @@
 {
   lib,
   pkgs,
+  python3,
   fetchgit,
-  python3Packages,
 }:
 let
-  inherit (python3Packages) python;
   wrapperPath = [
-    pkgs.nodejs-slim
-    pkgs.uv
-    pkgs.ripgrep
+    # find tools (optional)
     pkgs.fd
+    pkgs.ripgrep
+    # security checks (optional)
+    pkgs.tirith
+    # uvx + npm for mcp, etc (optional)
+    pkgs.uv
+    pkgs.nodejs-slim
+    # voice mode (optional)
     pkgs.ffmpeg
     pkgs.libopus
-    pkgs.ocrmypdf
-    pkgs.opencv
     pkgs.portaudio
-    pkgs.tirith
+    # ascii-video skill (optional)
+    pkgs.opencv
+    # OCR (optional)
+    pkgs.ocrmypdf
   ]
+  # browser tool (optional)
   ++ lib.optional (pkgs ? agent-browser) pkgs.agent-browser
+  # mcporter tool (optional)
   ++ lib.optional (pkgs ? mcporter) pkgs.mcporter;
 in
-python3Packages.buildPythonApplication {
+python3.pkgs.buildPythonApplication rec {
   pname = "hermes-agent";
   version = "2026.3.17-unstable-2026-03-17";
   pyproject = true;
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "aea39eeafbd5d35a394f4661091a147e6df9c5d0";
+    rev = "548cedb8694b198a67a521fb0186dd8dd5a449d3";
     fetchSubmodules = true;
-    hash = "sha256-J7XDqcubdHtIL+aoqOecmmzGw1gnvYPQAwW7KVXVN2o=";
+    hash = "sha256-4ZHquZLg/D57JO+iRWpn/iHNjb9ehCmUzcNqyQoO9F4=";
   };
 
   patches = [
@@ -38,123 +45,103 @@ python3Packages.buildPythonApplication {
     ./web_tools-firecrawl.patch
   ];
 
-  nativeBuildInputs = with python3Packages; [
-    pkgs.perl
+  build-system = with python3.pkgs; [
     setuptools
-    wheel
   ];
 
-  postPatch = ''
-    if grep -Fq 'LOGS_DIR = TINKER_ATROPOS_ROOT / "logs"' tools/rl_training_tool.py; then
-      substituteInPlace tools/rl_training_tool.py \
-        --replace-fail \
-          'LOGS_DIR = TINKER_ATROPOS_ROOT / "logs"' \
-          $'LOGS_DIR = (\n    Path(os.getenv("TMPDIR", "/tmp")) / "hermes-agent" / "tinker-atropos" / "logs"\n)'
-    elif grep -Fq 'LOGS_DIR = Path(os.getenv("HERMES_HOME", Path.home() / ".hermes")) / "logs" / "rl_training"' tools/rl_training_tool.py; then
-      substituteInPlace tools/rl_training_tool.py \
-        --replace-fail \
-          'LOGS_DIR = Path(os.getenv("HERMES_HOME", Path.home() / ".hermes")) / "logs" / "rl_training"' \
-          $'LOGS_DIR = (\n    Path(os.getenv("TMPDIR", "/tmp")) / "hermes-agent" / "tinker-atropos" / "logs"\n)'
-    fi
+  dependencies =
+    with python3.pkgs;
+    [
+      # Core
+      openai
+      anthropic
+      python-dotenv
+      fire
+      httpx
+      rich
+      tenacity
+      pyyaml
+      requests
+      jinja2
+      pydantic
+      # Interactive CLI
+      prompt-toolkit
+      # Tools
+      firecrawl-py
+      # Text-to-speech
+      edge-tts
+      faster-whisper
+      # mini-swe-agent deps
+      litellm
+      typer
+      platformdirs
+      # Skills Hub
+      pyjwt
+      # messaging
+      python-telegram-bot
+      discordpy
+      aiohttp
+      slack-bolt
+      slack-sdk
+      # cron
+      croniter
+      # cli
+      simple-term-menu
+      # voice
+      sounddevice
+      numpy
+      # pty
+      ptyprocess
+      # mcp
+      mcp
 
-    if grep -Fq 'def _ensure_logs_dir():' tools/rl_training_tool.py; then
-      perl -0pi -e 's/def _ensure_logs_dir\(\):\n\s+"""Lazily create logs directory on first use \(avoid side effects at import time\)\."""\n\s+if TINKER_ATROPOS_ROOT\.exists\(\):\n\s+LOGS_DIR\.mkdir\(exist_ok=True\)/def _ensure_logs_dir():\n    """Create the logs directory on demand."""\n    LOGS_DIR.mkdir(parents=True, exist_ok=True)/' tools/rl_training_tool.py
-    elif grep -Fq '# Ensure logs directory exists' tools/rl_training_tool.py; then
-      substituteInPlace tools/rl_training_tool.py \
-        --replace-fail \
-          'LOGS_DIR.mkdir(exist_ok=True)' \
-          'LOGS_DIR.mkdir(parents=True, exist_ok=True)'
-    fi
-  '';
+      # very optional
+      markitdown
+      scipy
+      pillow
+      ddgs
+    ]
+    ++ lib.optional (pkgs ? fal-client) pkgs.fal-client
+    ++ lib.optional (python3.pkgs ? fal-client) python3.pkgs.fal-client
+    ++ lib.optional (python3.pkgs ? agent-client-protocol) python3.pkgs.agent-client-protocol;
 
-  propagatedBuildInputs = [
-    pkgs.fal-client
-    python3Packages.aiohttp
-    python3Packages.anthropic
-    python3Packages.croniter
-    python3Packages.cryptography
-    python3Packages.discordpy
-    python3Packages."edge-tts"
-    python3Packages."faster-whisper"
-    python3Packages.fire
-    python3Packages."firecrawl-py"
-    python3Packages.httpx
-    python3Packages.jinja2
-    python3Packages.litellm
-    python3Packages.mcp
-    python3Packages.numpy
-    python3Packages.openai
-    python3Packages.platformdirs
-    python3Packages."prompt-toolkit"
-    python3Packages.ptyprocess
-    python3Packages.pydantic
-    python3Packages.pyjwt
-    python3Packages."python-dotenv"
-    python3Packages."python-telegram-bot"
-    python3Packages.pyyaml
-    python3Packages.requests
-    python3Packages.rich
-    python3Packages."simple-term-menu"
-    python3Packages."slack-bolt"
-    python3Packages."slack-sdk"
-    python3Packages.sounddevice
-    python3Packages.tenacity
-    python3Packages.textual
-    python3Packages.typer
-    python3Packages.markitdown
-    python3Packages.numpy
-    python3Packages.scipy
-    python3Packages.pillow
-    python3Packages.ddgs
+  pythonRelaxDeps = [
   ];
 
   pythonRemoveDeps = [
-    "elevenlabs"
-    "honcho-ai"
     "parallel-web"
   ];
 
-  postInstall = ''
-    sitePackages="$out/${python.sitePackages}"
-
-    cp ./*.py "$sitePackages/"
-    cp -r agent "$sitePackages/"
-    cp -r gateway "$sitePackages/"
-    cp -r mini-swe-agent "$sitePackages/"
-    cp -r optional-skills "$sitePackages/"
-    cp -r scripts "$sitePackages/"
-    cp -r skills "$sitePackages/"
-    cp -r tools/environments "$sitePackages/tools/"
-
-    ln -s "$sitePackages/mini-swe-agent/src/minisweagent" "$sitePackages/minisweagent"
-
-    install -Dm644 .env.example "$sitePackages/.env.example"
-    install -Dm644 cli-config.yaml.example "$sitePackages/cli-config.yaml.example"
-    install -Dm644 package.json "$sitePackages/package.json"
-  '';
-
   makeWrapperArgs = [
-    "--set-default"
-    "HERMES_NIX_PACKAGE"
-    "1"
-    "--set-default"
-    "HERMES_INTERACTIVE"
-    "1"
     "--prefix"
     "PATH"
     ":"
     (lib.makeBinPath wrapperPath)
   ];
 
-  pythonImportsCheck = [
-    "hermes_cli.main"
-  ];
+  postInstall = ''
+    sitePackages="$out/${python3.pkgs.python.sitePackages}"
+
+    cp ./minisweagent_path.py "$sitePackages/"
+    cp -r mini-swe-agent "$sitePackages/"
+    ln -s "$sitePackages/mini-swe-agent/src/minisweagent" "$sitePackages/minisweagent"
+  '';
+
+  pythonImportsCheck = [ "hermes_cli" ];
+
+  doInstallCheck = true;
+  nativeInstallCheckInputs = [ ];
+  versionCheckProgramArg = [ "--version" ];
+
+  passthru.category = "AI Assistants";
 
   meta = with lib; {
-    description = "Self-improving AI agent by Nous Research";
-    homepage = "https://github.com/NousResearch/hermes-agent";
+    description = "Self-improving AI agent by Nous Research — creates skills from experience and runs anywhere";
+    homepage = "https://hermes-agent.nousresearch.com/";
+    changelog = "https://github.com/NousResearch/hermes-agent/releases/tag/v${version}";
     license = licenses.mit;
-    mainProgram = "hermes";
+    sourceProvenance = with sourceTypes; [ fromSource ];
     platforms = platforms.linux ++ platforms.darwin;
+    mainProgram = "hermes";
   };
 }
