@@ -21,9 +21,12 @@ in
     { pkgs, system, ... }:
     let
       extLib = pkgs.lib.extend (_final: _prev: { extended = self.lib; });
-      extPkgs = (pkgs.extend (_final: _prev: { inherit self extLib; })).extend (
+      basePkgs = (pkgs.extend (_final: _prev: { inherit self extLib; })).extend (
         lib.composeManyExtensions packageOverlaysForPkgs
       );
+      # Expose custom packages through pkgs during package evaluation so
+      # packages under ./pkgs can depend on each other via pkgs.<name>.
+      extPkgs = basePkgs.extend (_final: _prev: pkgsByName);
       pkgsByName = pkgs.lib.filesystem.packagesFromDirectoryRecursive {
         inherit (extPkgs) callPackage;
         directory = ../../pkgs;
