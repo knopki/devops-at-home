@@ -28,9 +28,9 @@ python3Packages.buildPythonApplication {
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "ba728f3e63928088495bd79e3641e055e233be8d";
+    rev = "aea39eeafbd5d35a394f4661091a147e6df9c5d0";
     fetchSubmodules = true;
-    hash = "sha256-iKuPFy/pvBEWmzWzSUtQ/MBr0vDp3RTJqrpwvEhwsZI=";
+    hash = "sha256-J7XDqcubdHtIL+aoqOecmmzGw1gnvYPQAwW7KVXVN2o=";
   };
 
   patches = [
