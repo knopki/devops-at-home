@@ -1,0 +1,16 @@
+diff --git a/tools/web_tools.py b/tools/web_tools.py
+--- a/tools/web_tools.py
++++ b/tools/web_tools.py
+@@ -46,8 +46,11 @@ import os
+ import re
+ import asyncio
+ from typing import List, Dict, Any, Optional
+ import httpx
+-from firecrawl import Firecrawl
++try:
++    from firecrawl import Firecrawl
++except ImportError:
++    from firecrawl import FirecrawlApp as Firecrawl
+ from agent.auxiliary_client import async_call_llm
+ from tools.debug_helpers import DebugSession
+ 

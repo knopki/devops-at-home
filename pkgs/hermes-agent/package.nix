@@ -34,7 +34,8 @@ python3Packages.buildPythonApplication {
   };
 
   patches = [
-    ./nix-install.patch
+    ./doctor-agent-browser.patch
+    ./web_tools-firecrawl.patch
   ];
 
   nativeBuildInputs = with python3Packages; [
@@ -107,6 +108,12 @@ python3Packages.buildPythonApplication {
     python3Packages.ddgs
   ];
 
+  pythonRemoveDeps = [
+    "elevenlabs"
+    "honcho-ai"
+    "parallel-web"
+  ];
+
   postInstall = ''
     sitePackages="$out/${python.sitePackages}"
 
@@ -138,10 +145,6 @@ python3Packages.buildPythonApplication {
     ":"
     (lib.makeBinPath wrapperPath)
   ];
-
-  # NOTE: optional extras that are still outside the current derivation:
-  # - honcho-ai
-  # - elevenlabs
 
   pythonImportsCheck = [
     "hermes_cli.main"
