@@ -5,7 +5,7 @@
 }:
 buildGoModule {
   pname = "findimagedupes";
-  version = "0-unstable-2023-11-09";
+  version = "0-unstable-2023-11-10";
   src = fetchFromGitHub {
     owner = "swenson";
     repo = "findimagedupes";
