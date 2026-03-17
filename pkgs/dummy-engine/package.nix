@@ -1,27 +1,17 @@
 {
-  # pkgs,
-  # cmake,
   lib,
   stdenv,
   fetchFromGitHub,
-  unstableGitUpdater,
-  # libxml2,
-  # blas,
-  # lapack,
 }:
 stdenv.mkDerivation {
   pname = "dummy-engine";
-  version = "0.0.3-unstable-2023-10-12";
+  version = "0.0.3";
 
   src = fetchFromGitHub {
     owner = "tilde-lab";
     repo = "dummy-engine";
     rev = "511956406b56b59528e9067a2f5e45bad0eee829";
     sha256 = "sha256-IhsGyx3nGZJ4bGl1FkzcoseN67vQA7mI25aolvjHZ+w=";
-  };
-
-  passthru.updateScript = unstableGitUpdater {
-    tagPrefix = "v";
   };
 
   buildPhase = ''

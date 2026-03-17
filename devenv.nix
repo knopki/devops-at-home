@@ -27,10 +27,6 @@
       enable = true;
       commands = [
         {
-          inherit (config.scripts.update-packages) description;
-          name = "update-packages";
-        }
-        {
           inherit (config.scripts.generate-facts) description;
           name = "generate-facts";
         }
@@ -89,14 +85,6 @@
   treefmt.enable = true;
 
   scripts = {
-    update-packages = {
-      description = "Update ./pkgs from upstream sources";
-      exec = ''
-        export PRJ_ROOT="$DEVENV_ROOT"
-        nix run "path:$PRJ_ROOT#update-packages" -- "$@"
-      '';
-    };
-
     generate-facts = {
       description = "Generate facter report for the current host";
       exec = ''
@@ -114,4 +102,6 @@
       '';
     };
   };
+
+  packages = [ pkgs.nix-update ];
 }

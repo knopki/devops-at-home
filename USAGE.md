@@ -82,10 +82,12 @@ of the `modules/nixos/system/identity.nix` module.
 # Update flake inputs
 nix flake update
 
-# Update packages
-update-packages --all
-# or update specific package
-update-packages package-name --argstr commit true
+# Update specific package
+nix-update -F <package_name>
+# or via package's update script
+nix-update -F -u <package_name>
+# or to unstable version
+nix-update -F --version branch <package_name>
 
 # Rebuild and switch
 nh os switch .

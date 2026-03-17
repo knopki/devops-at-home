@@ -1,7 +1,6 @@
 {
   lib,
   fetchurl,
-  gitUpdater,
   stdenvNoCC,
 }:
 stdenvNoCC.mkDerivation rec {
@@ -20,11 +19,6 @@ stdenvNoCC.mkDerivation rec {
     install -Dm444 "$src" "$out/management.html"
     runHook postInstall
   '';
-
-  passthru.updateScript = gitUpdater {
-    url = "https://github.com/router-for-me/Cli-Proxy-API-Management-Center";
-    rev-prefix = "v";
-  };
 
   meta = with lib; {
     description = "Management panel HTML asset for CLI Proxy API";

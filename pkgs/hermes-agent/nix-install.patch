@@ -36,7 +36,6 @@ diff --git a/hermes_cli/main.py b/hermes_cli/main.py
      
 +    if _is_nix_install():
 +        print("Hermes Agent is installed via Nix and cannot self-update.")
-+        print("Update it through your flake and run update-packages hermes-agent.")
 +        return
 +    
      print("⚕ Updating Hermes Agent...")

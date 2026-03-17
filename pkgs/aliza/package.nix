@@ -4,7 +4,6 @@
   pkgs,
   libsForQt5,
   fetchFromGitHub,
-  gitUpdater,
   ...
 }:
 libsForQt5.mkDerivation rec {
@@ -43,8 +42,6 @@ libsForQt5.mkDerivation rec {
     install -Dm555 ./bin/* -t $out/bin
     runHook postInstall
   '';
-
-  passthru.updateScript = gitUpdater { rev-prefix = "v"; };
 
   meta = with lib; {
     description = "A DICOM Viewer";
