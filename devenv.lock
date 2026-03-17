@@ -77,11 +77,11 @@
     "knopki-devenvs": {
       "flake": false,
       "locked": {
-        "lastModified": 1773162917,
-        "narHash": "sha256-qbhJeyCtAfUW4pYDP2nT9/u2c8Yl1yO3uwwc/78ZkmI=",
+        "lastModified": 1773768580,
+        "narHash": "sha256-pAmnB1x7SaZmfdRbw8y4Nsb7QsNCGzjwkCd+OefgMag=",
         "owner": "knopki",
         "repo": "devenvs",
-        "rev": "54320a1ddc572ea26c914c6b5c04346723c54060",
+        "rev": "4b1c3dbadd044be2c3fea9831925d8f5be354a1e",
         "type": "github"
       },
       "original": {

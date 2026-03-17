@@ -49,6 +49,7 @@
       enable = true;
       nh.enable = true;
       nix-inspect.enable = true;
+      nix-update.enable = true;
       nixos-anywhere.enable = true;
       nixos-rebuild.enable = true;
       nixos-install-tools.enable = true;
@@ -102,6 +103,4 @@
       '';
     };
   };
-
-  packages = [ pkgs.nix-update ];
 }
