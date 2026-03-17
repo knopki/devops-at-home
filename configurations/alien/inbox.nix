@@ -37,6 +37,8 @@ in
     impression
 
     hermes-agent
+    agent-browser
+    mcporter
   ];
 
   programs = {
