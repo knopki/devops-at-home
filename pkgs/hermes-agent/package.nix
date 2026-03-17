@@ -24,14 +24,14 @@ let
 in
 python3Packages.buildPythonApplication {
   pname = "hermes-agent";
-  version = "2026.3.12-unstable-2026-03-16";
+  version = "2026.3.17-unstable-2026-03-17";
   pyproject = true;
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "9cf7e2f0af279c395571c1a60c582f5b942ae28f";
+    rev = "ba728f3e63928088495bd79e3641e055e233be8d";
     fetchSubmodules = true;
-    hash = "sha256-CwTyeZSfzt2UzuCPwvIXOeb68LGnlVnyRMMATNtXseg=";
+    hash = "sha256-iKuPFy/pvBEWmzWzSUtQ/MBr0vDp3RTJqrpwvEhwsZI=";
   };
 
   patches = [
@@ -104,6 +104,7 @@ python3Packages.buildPythonApplication {
     python3Packages.numpy
     python3Packages.scipy
     python3Packages.pillow
+    python3Packages.ddgs
   ];
 
   postInstall = ''
