@@ -67,6 +67,7 @@ python3Packages.buildPythonApplication {
   '';
 
   propagatedBuildInputs = [
+    pkgs.fal-client
     python3Packages.aiohttp
     python3Packages.anthropic
     python3Packages.croniter
@@ -139,7 +140,6 @@ python3Packages.buildPythonApplication {
   ];
 
   # NOTE: optional extras that are still outside the current derivation:
-  # - fal-client (intentionally skipped for now; not available in current nixpkgs)
   # - honcho-ai
   # - elevenlabs
 

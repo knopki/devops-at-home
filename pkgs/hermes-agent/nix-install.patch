@@ -30,7 +30,7 @@ diff --git a/hermes_cli/main.py b/hermes_cli/main.py
      from hermes_cli.uninstall import run_uninstall
      run_uninstall(args)
  
-@@ -1714,6 +1722,11 @@ def cmd_update(args):
+@@ -1714,6 +1722,10 @@ def cmd_update(args):
      import subprocess
      import shutil
      
@@ -48,10 +48,10 @@ diff --git a/pyproject.toml b/pyproject.toml
    "prompt_toolkit",
    # Tools
    "firecrawl-py",
--  "fal-client",
+-  "parallel-web>=0.4.2",
+   "fal-client",
    # Text-to-speech (Edge TTS is free, no API key needed)
    "edge-tts",
-   # mini-swe-agent deps (terminal tool)
 diff --git a/tools/image_generation_tool.py b/tools/image_generation_tool.py
 --- a/tools/image_generation_tool.py
 +++ b/tools/image_generation_tool.py
@@ -70,10 +70,11 @@ diff --git a/tools/image_generation_tool.py b/tools/image_generation_tool.py
 diff --git a/tools/web_tools.py b/tools/web_tools.py
 --- a/tools/web_tools.py
 +++ b/tools/web_tools.py
-@@ -46,7 +46,10 @@ import os
+@@ -46,8 +46,11 @@ import os
  import re
  import asyncio
  from typing import List, Dict, Any, Optional
+ import httpx
 -from firecrawl import Firecrawl
 +try:
 +    from firecrawl import Firecrawl
