@@ -20,17 +20,11 @@ let
     cfg.extraPackages
     # bash
     ++ (optionals cfg.extraPackagesBash [
-      awk-language-server
-      bash-language-server
+      bash-language-server # shellcheck included
       shfmt
     ])
     # css
-    ++ (optionals cfg.extraPackagesCss [
-      dprint
-      dprint-plugins.g-plane-malva
-      tailwindcss-language-server
-      vscode-langservers-extracted
-    ])
+    ++ (optionals cfg.extraPackagesCss biome)
     # docker
     ++ (optionals cfg.extraPackagesDocker [
       docker-compose-language-service
@@ -50,29 +44,15 @@ let
       lazygit
     ])
     # html
-    ++ (optionals cfg.extraPackagesHtml [
-      dprint
-      dprint-plugins.g-plane-markup_fmt
-      tailwindcss-language-server
-      vscode-langservers-extracted
-    ])
+    ++ (optional cfg.extraPackagesHtml biome)
     # jq
     ++ (optional cfg.extraPackagesJq jq-lsp)
     # json
-    ++ (optionals cfg.extraPackagesJson [
-      dprint
-      dprint-plugins.dprint-plugin-json
-      vscode-langservers-extracted
-    ])
+    ++ (optional cfg.extraPackagesJson biome)
     # just
     ++ (optionals cfg.extraPackagesJust [
       just
       just-lsp
-    ])
-    # lua
-    ++ (optionals cfg.extraPackagesLua [
-      lua-language-server
-      stylua
     ])
     # markdown
     ++ (optionals cfg.extraPackagesMarkdown [
@@ -81,7 +61,10 @@ let
       marksman
     ])
     # nix
-    ++ (optional cfg.extraPackagesNix nil)
+    ++ (optionals cfg.extraPackagesNix [
+      nixd
+      nixfmt
+    ])
     # protobuf
     ++ (optional cfg.extraPackagesProtobuf buf)
     # python
@@ -89,28 +72,13 @@ let
       ruff
       ty
     ])
-    # svelte
-    ++ (optionals cfg.extraPackagesSvelte [
-      dprint
-      dprint-plugins.g-plane-markup_fmt
-      svelte-language-server
-      tailwindcss-language-server
-    ])
     # systemd
-    ++ (optional cfg.extraPackagesSystemd systemd-language-server)
-    # terraform
-    ++ (optionals cfg.extraPackagesTerraform [
-      terraform
-      terraform-ls
-    ])
+    ++ (optional cfg.extraPackagesSystemd systemd-lsp)
     # toml
-    ++ (optional cfg.extraPackagesToml taplo)
+    ++ (optional cfg.extraPackagesToml tombi)
     # typescript
     ++ (optionals cfg.extraPackagesTypescript [
-      dprint
-      dprint-plugins.dprint-plugin-typescript
-      tailwindcss-language-server
-      typescript-language-server
+      biome
     ])
     # yaml
     ++ (optionals cfg.extraPackagesYaml [
@@ -188,12 +156,10 @@ in
     extraPackagesJq = mkEnableOption "extra packages for jq support";
     extraPackagesJson = mkEnableOption "extra packages for json support";
     extraPackagesJust = mkEnableOption "extra packages for just support";
-    extraPackagesLua = mkEnableOption "extra packages for lua support";
     extraPackagesMarkdown = mkEnableOption "extra packages for markdown support";
     extraPackagesNix = mkEnableOption "extra packages for nix support";
     extraPackagesProtobuf = mkEnableOption "extra packages for protobuf support";
     extraPackagesPython = mkEnableOption "extra packages for python support";
-    extraPackagesSvelte = mkEnableOption "extra packages for svelte support";
     extraPackagesSystemd = mkEnableOption "extra packages for systemd support";
     extraPackagesTerraform = mkEnableOption "extra packages for terraform support";
     extraPackagesToml = mkEnableOption "extra packages for toml support";

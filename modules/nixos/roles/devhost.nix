@@ -49,11 +49,10 @@ in
       extraPackagesCss = true;
       extraPackagesDocker = true;
       extraPackagesHtml = true;
-      extraPackagesJq = true;
       extraPackagesJust = true;
-      extraPackagesProtobuf = true;
+      extraPackagesMarkdown = true;
+      extraPackagesNix = true;
       extraPackagesPython = true;
-      extraPackagesSvelte = true;
       extraPackagesSystemd = true;
       extraPackagesToml = true;
       extraPackagesYaml = true;
