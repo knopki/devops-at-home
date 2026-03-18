@@ -24,7 +24,7 @@ let
       shfmt
     ])
     # css
-    ++ (optionals cfg.extraPackagesCss biome)
+    ++ (optional cfg.extraPackagesCss biome)
     # docker
     ++ (optionals cfg.extraPackagesDocker [
       docker-compose-language-service
@@ -77,9 +77,7 @@ let
     # toml
     ++ (optional cfg.extraPackagesToml tombi)
     # typescript
-    ++ (optionals cfg.extraPackagesTypescript [
-      biome
-    ])
+    ++ (optional cfg.extraPackagesTypescript biome)
     # yaml
     ++ (optionals cfg.extraPackagesYaml [
       dprint
