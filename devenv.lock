@@ -3,11 +3,11 @@
     "devenv": {
       "locked": {
         "dir": "src/modules",
-        "lastModified": 1773714831,
-        "narHash": "sha256-qUJ59Zj+M3OomXnPVx/R+AtloTuzH2zZBsK1vrVo9SA=",
+        "lastModified": 1773767086,
+        "narHash": "sha256-3eKyl4LXswf6P17/u59x8oQXDgCfYX+UX0uh7YHFwJc=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "6e82f48e9ae25c7a2560fce5324d873d8944a008",
+        "rev": "a5e5a7f8b1c9a7f33f9d82192b692768b39ec710",
         "type": "github"
       },
       "original": {
@@ -77,11 +77,11 @@
     "knopki-devenvs": {
       "flake": false,
       "locked": {
-        "lastModified": 1773768580,
-        "narHash": "sha256-pAmnB1x7SaZmfdRbw8y4Nsb7QsNCGzjwkCd+OefgMag=",
+        "lastModified": 1773802861,
+        "narHash": "sha256-o1daVWalS7o4jSXvEibg079TVQbyR89488cfsaUKTjs=",
         "owner": "knopki",
         "repo": "devenvs",
-        "rev": "4b1c3dbadd044be2c3fea9831925d8f5be354a1e",
+        "rev": "adfc64b8eda40f390b9c9999f0f758a50d8ef351",
         "type": "github"
       },
       "original": {

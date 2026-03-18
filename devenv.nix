@@ -13,11 +13,13 @@
     };
     json = {
       enable = true;
+      biome.enable = true;
       jq.enable = true;
       fx.enable = true;
     };
     markdown = {
       enable = true;
+      format.enable = true;
       glow.enable = true;
       lychee.enable = true;
       marksman.enable = true;
@@ -70,6 +72,8 @@
     };
     yaml = {
       enable = true;
+      format.enable = true;
+      lsp.enable = true;
       yamllint.enable = true;
     };
   };
