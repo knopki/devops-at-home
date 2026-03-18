@@ -16,6 +16,8 @@ in
     in
     pkgIfVersionMin prev.anytype "0.54.0" unstableAnytype;
 
+  codex = pkgIfVersionMin prev.codex "0.114" p.codex;
+
   cosmic-applets = pkgIfVersionMin prev.cosmic-applets "1.0.8" p.cosmic-applets;
 
   cosmic-applibrary = pkgIfVersionMin prev.cosmic-applibrary "1.0.8" p.cosmic-applibrary;
@@ -81,6 +83,8 @@ in
     pkgIfVersionMin prev.naps2 "8.2.1" unstableNaps2;
 
   obsidian = pkgIfVersionMin prev.obsidian "1.12" p.obsidian;
+
+  opencode = pkgIfVersionMin prev.opencode "1.2.20" p.opencode;
 
   telegram-desktop = pkgIfVersionMin prev.telegram-desktop "6.6.1" p.telegram-desktop;
 

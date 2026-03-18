@@ -14,6 +14,7 @@ in
     cli-proxy-api
     mcporter
     openspec
+    rtk
     spec-kit
     tuicr
     ;
