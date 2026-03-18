@@ -268,6 +268,7 @@ profile_codex=0
 profile_gpu=0
 profile_gui=0
 profile_helix=0
+profile_hermes=0
 profile_opencode=0
 profile_zed=0
 
@@ -340,6 +341,9 @@ while (($#)); do
       ;;
     helix)
       profile_helix=1
+      ;;
+    hermes)
+      profile_hermes=1
       ;;
     opencode)
       profile_opencode=1
@@ -419,6 +423,21 @@ for p in "${extra_paths_rw[@]}"; do
   paths_rwx+=("$p")
 done
 
+if ((profile_hermes)); then
+  profile_codex=1
+  profile_opencode=1
+  paths_ro+=(
+    "$xdg_runtime_dir/pipewire-0"
+    "$home/.config/pulse/cookie"
+  )
+  paths_rw+=(
+    "$xdg_cache_home/.huggingface"
+  )
+  paths_rwx+=(
+    "$home/.hermes"
+  )
+fi
+
 if ((profile_default)); then
   profile_codex=1
   profile_helix=1
@@ -493,7 +512,7 @@ if ((profile_gui)); then
     "$xdg_runtime_dir/pulse/native"
     "$xdg_runtime_dir/pipewire-0"
     "$xdg_runtime_dir/xdg-dbus-proxy"
-    "$HOME/.config/pulse/cookie"
+    "$home/.config/pulse/cookie"
   )
   paths_rw+=(
     "$xdg_cache_home/fontconfig"
