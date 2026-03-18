@@ -25,19 +25,23 @@ let
   ]
   # browser tool (optional)
   ++ lib.optional (pkgs ? agent-browser) pkgs.agent-browser
+  # openspec (optional)
+  ++ lib.optional (pkgs ? openspec) pkgs.openspec
   # mcporter tool (optional)
-  ++ lib.optional (pkgs ? mcporter) pkgs.mcporter;
+  ++ lib.optional (pkgs ? mcporter) pkgs.mcporter
+  # rust token killer (optional)
+  ++ lib.optional (pkgs ? rtk) pkgs.rtk;
 in
 python3.pkgs.buildPythonApplication rec {
   pname = "hermes-agent";
-  version = "2026.3.17-unstable-2026-03-17";
+  version = "2026.3.17-unstable-2026-03-18";
   pyproject = true;
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "548cedb8694b198a67a521fb0186dd8dd5a449d3";
+    rev = "22f41dadedd179958fbaf0eb4337b44b28873794";
     fetchSubmodules = true;
-    hash = "sha256-4ZHquZLg/D57JO+iRWpn/iHNjb9ehCmUzcNqyQoO9F4=";
+    hash = "sha256-OmkCqe4pDwsygPZGUDJQpecEJXvG0uI0hJyLFZwoxns=";
   };
 
   patches = [
