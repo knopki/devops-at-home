@@ -39,9 +39,9 @@ python3.pkgs.buildPythonApplication rec {
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "22f41dadedd179958fbaf0eb4337b44b28873794";
+    rev = "7b6d14e62a2b7f0015a06e48d7ba89164f3caced";
     fetchSubmodules = true;
-    hash = "sha256-OmkCqe4pDwsygPZGUDJQpecEJXvG0uI0hJyLFZwoxns=";
+    hash = "sha256-xhucLx71YLcMZFrXXVK1ZlyluzIJvCJcAkBTzv4j3Yg=";
   };
 
   patches = [
