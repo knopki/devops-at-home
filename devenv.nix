@@ -84,6 +84,7 @@
       lychee.settings.flags = ''
         --exclude "cache\.garnix\.io"
         --exclude "mirrors\.ustc\.edu\.cn"
+        --exclude "github\.com/.*/releases/.*"
       '';
     };
   };
