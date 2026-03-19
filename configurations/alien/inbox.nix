@@ -35,10 +35,6 @@ in
 
     # temporary
     impression
-
-    hermes-agent
-    agent-browser
-    mcporter
   ];
 
   programs = {

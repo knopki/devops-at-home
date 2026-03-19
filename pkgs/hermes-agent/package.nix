@@ -27,8 +27,6 @@ let
   ++ lib.optional (pkgs ? agent-browser) pkgs.agent-browser
   # openspec (optional)
   ++ lib.optional (pkgs ? openspec) pkgs.openspec
-  # mcporter tool (optional)
-  ++ lib.optional (pkgs ? mcporter) pkgs.mcporter
   # rust token killer (optional)
   ++ lib.optional (pkgs ? rtk) pkgs.rtk;
 in

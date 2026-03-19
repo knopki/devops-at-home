@@ -66,7 +66,6 @@ in
       ]
       ++ optionals cfg.dev [
         binutils
-        codex
         devenv
         gh
         difftastic
@@ -76,13 +75,19 @@ in
         just
         lazygit
         lima
-        opencode
-        openspec
         python3
         rclone
         tuicr
         unixtools.xxd
         zabor
+
+        # heavy ai stuff
+        codex
+        opencode
+        openspec
+        hermes-agent
+        agent-browser
+        rtk
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
