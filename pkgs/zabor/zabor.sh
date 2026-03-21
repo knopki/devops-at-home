@@ -432,6 +432,7 @@ if ((profile_hermes)); then
   )
   paths_rw+=(
     "$xdg_cache_home/.huggingface"
+    "$xdg_data_home/rtk"
   )
   paths_rwx+=(
     "$home/.hermes"
@@ -448,6 +449,7 @@ if ((profile_codex)); then
   use_landrun=0
   paths_rw+=(
     "$home/.codex"
+    "$xdg_data_home/rtk"
   )
 fi
 
@@ -543,6 +545,7 @@ if ((profile_opencode)); then
     "$xdg_data_home/opencode"
     "$xdg_data_home/opentui"
     "$xdg_state_home/opencode"
+    "$xdg_data_home/rtk"
   )
   mkdir -p \
     "$xdg_cache_home/opencode" \
