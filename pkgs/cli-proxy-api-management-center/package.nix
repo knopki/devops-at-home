@@ -5,11 +5,11 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "cli-proxy-api-management-center";
-  version = "1.7.11";
+  version = "1.7.12";
 
   src = fetchurl {
     url = "https://github.com/router-for-me/Cli-Proxy-API-Management-Center/releases/download/v${version}/management.html";
-    hash = "sha256-zFgiW19aFtym9dXeoqhzbY3zl35tTkmB4TrFbbMPDkU=";
+    hash = "sha256-VWqpbnEvoN/cJSDGz7djpnwnYSgVXXviF/jkusoRnMA=";
   };
 
   dontUnpack = true;
