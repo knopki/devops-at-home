@@ -38,6 +38,7 @@ in
         admin = mkDefault true;
         adminGUI = mkDefault true;
         dev = mkDefault true;
+        devAi = mkDefault true;
       };
       networking.devHosts = {
         enable = true;

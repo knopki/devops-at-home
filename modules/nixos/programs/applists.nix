@@ -19,6 +19,7 @@ in
     cliTools = mkEnableOption "Install set of optional but nice command line applications";
     edu = mkEnableOption "Install set of education applications";
     dev = mkEnableOption "Install set of dev applications";
+    devAi = mkEnableOption "Install set of AI dev applications";
     hardware = mkEnableOption "Install set of hardware applications";
     networking = mkEnableOption "Install set of networking applications";
     media = mkEnableOption "Install set of media applications";
@@ -77,17 +78,26 @@ in
         lima
         python3
         rclone
-        tuicr
         unixtools.xxd
         zabor
-
-        # heavy ai stuff
+      ]
+      ++ optionals cfg.devAi [
         codex
         opencode
-        openspec
         hermes-agent
         agent-browser
+        tuicr
+        # ai stuff deps
+        fd
+        ripgrep
+        uv
+        nodejs-slim
+        openspec
         rtk
+        opencv
+        ffmpeg
+        ocrmypdf
+        zabor
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
