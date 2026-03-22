@@ -6,40 +6,33 @@
 }:
 let
   wrapperPath = [
-    # find tools (optional)
-    pkgs.fd
-    pkgs.ripgrep
     # security checks (optional)
     pkgs.tirith
-    # uvx + npm for mcp, etc (optional)
+    # uvx + npm (optional)
     pkgs.uv
     pkgs.nodejs-slim
     # voice mode (optional)
     pkgs.ffmpeg
     pkgs.libopus
     pkgs.portaudio
-    # ascii-video skill (optional)
-    pkgs.opencv
-    # OCR (optional)
-    pkgs.ocrmypdf
   ]
   # browser tool (optional)
   ++ lib.optional (pkgs ? agent-browser) pkgs.agent-browser
   # openspec (optional)
-  ++ lib.optional (pkgs ? openspec) pkgs.openspec
+  # ++ lib.optional (pkgs ? openspec) pkgs.openspec
   # rust token killer (optional)
   ++ lib.optional (pkgs ? rtk) pkgs.rtk;
 in
 python3.pkgs.buildPythonApplication rec {
   pname = "hermes-agent";
-  version = "2026.3.17-unstable-2026-03-18";
+  version = "2026.3.17-unstable-2026-03-21";
   pyproject = true;
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "7b6d14e62a2b7f0015a06e48d7ba89164f3caced";
+    rev = "885f88fb608a6bfd7a4d9d2baaf9b09119e58b29";
     fetchSubmodules = true;
-    hash = "sha256-xhucLx71YLcMZFrXXVK1ZlyluzIJvCJcAkBTzv4j3Yg=";
+    hash = "sha256-jgjGVJ1cUma4eIRLkXA5TDSnGKAiHu1GsCF/yLz/x9Y=";
   };
 
   patches = [

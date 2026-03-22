@@ -91,7 +91,7 @@ in
         fd
         ripgrep
         uv
-        nodejs-slim
+        nodejs
         openspec
         rtk
         opencv
