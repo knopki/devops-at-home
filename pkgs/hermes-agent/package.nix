@@ -25,14 +25,14 @@ let
 in
 python3.pkgs.buildPythonApplication rec {
   pname = "hermes-agent";
-  version = "2026.3.17-unstable-2026-03-21";
+  version = "2026.3.17-unstable-2026-03-22";
   pyproject = true;
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "885f88fb608a6bfd7a4d9d2baaf9b09119e58b29";
+    rev = "6435d69a6dcde647ca4942f336b87ba44f071f70";
     fetchSubmodules = true;
-    hash = "sha256-jgjGVJ1cUma4eIRLkXA5TDSnGKAiHu1GsCF/yLz/x9Y=";
+    hash = "sha256-o66C6VDF+meApmGzMQTiK9KJF9PyNezWKTDML2JOE0M=";
   };
 
   patches = [
