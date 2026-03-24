@@ -88,16 +88,18 @@ in
         agent-browser
         tuicr
         # ai stuff deps
+        bubblewrap # required by codex
         fd
         ripgrep
-        uv
-        nodejs
+        uv # required by hermes + skills
+        nodejs # required by hermes + skills
         openspec
         rtk
-        opencv
-        ffmpeg
+        opencv # required by skills
+        ffmpeg # required by skills
         ocrmypdf
-        zabor
+        pandoc # required by skills
+        zabor # sandbox
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
