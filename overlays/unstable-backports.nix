@@ -16,7 +16,7 @@ in
     in
     pkgIfVersionMin prev.anytype "0.54.0" unstableAnytype;
 
-  codex = pkgIfVersionMin prev.codex "0.114" p.codex;
+  codex = pkgIfVersionMin prev.codex "0.116" p.codex;
 
   cosmic-applets = pkgIfVersionMin prev.cosmic-applets "1.0.8" p.cosmic-applets;
 
