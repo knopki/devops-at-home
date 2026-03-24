@@ -406,7 +406,7 @@ fi
 # autodetect
 if ((project_ro == 0 && project_rw == 0)); then
   # CWD: rw for git projects
-  if [[ -d "$cwd/.git" ]]; then
+  if [[ -e "$cwd/.git" ]]; then
     paths_rwx+=("$cwd")
   else
     paths_rox+=("$cwd")
@@ -429,6 +429,7 @@ if ((profile_hermes)); then
   paths_ro+=(
     "$xdg_runtime_dir/pipewire-0"
     "$home/.config/pulse/cookie"
+    "$home/.honcho"
   )
   paths_rw+=(
     "$xdg_cache_home/.huggingface"
@@ -448,6 +449,7 @@ fi
 if ((profile_codex)); then
   use_landrun=0
   paths_rw+=(
+    "$home/.agents"
     "$home/.codex"
     "$xdg_data_home/rtk"
   )
@@ -536,10 +538,11 @@ fi
 
 if ((profile_opencode)); then
   paths_ro+=(
+    /etc/nixos
     "$xdg_config_home/openspec"
   )
   paths_rw+=(
-    /etc/nixos
+    "$home/.agents"
     "$xdg_cache_home/opencode"
     "$xdg_config_home/opencode"
     "$xdg_data_home/opencode"
@@ -566,6 +569,12 @@ if ((profile_zed)); then
     "$xdg_data_home/zed"
   )
 fi
+
+# unique values
+mapfile -t paths_ro < <(printf '%s\n' "${paths_ro[@]}" | sort -u)
+mapfile -t paths_rox < <(printf '%s\n' "${paths_rox[@]}" | sort -u)
+mapfile -t paths_rw < <(printf '%s\n' "${paths_rw[@]}" | sort -u)
+mapfile -t paths_rwx < <(printf '%s\n' "${paths_rwx[@]}" | sort -u)
 
 bwrap_env_args=(
   --clearenv
@@ -609,8 +618,8 @@ bwrap_args=(
   --dir "$xdg_runtime_dir"
   --dir "$HOME"
 
-  # --cap-drop ALL
-  # --cap-add CAP_SYS_NICE
+  --cap-drop ALL
+  --cap-add CAP_SYS_NICE
   --chdir "$cwd"
 )
 
@@ -629,19 +638,19 @@ if ((profile_gui)); then
 fi
 
 for p in "${paths_ro[@]}"; do
-  bwrap_args+=(--ro-bind-try "$p" "$p")
+  [[ -e $p ]] && bwrap_args+=(--ro-bind-try "$p" "$p")
 done
 
 for p in "${paths_rox[@]}"; do
-  bwrap_args+=(--ro-bind-try "$p" "$p")
+  [[ -e $p ]] && bwrap_args+=(--ro-bind-try "$p" "$p")
 done
 
 for p in "${paths_rw[@]}"; do
-  bwrap_args+=(--bind-try "$p" "$p")
+  [[ -e $p ]] && bwrap_args+=(--bind-try "$p" "$p")
 done
 
 for p in "${paths_rwx[@]}"; do
-  bwrap_args+=(--bind-try "$p" "$p")
+  [[ -e $p ]] && bwrap_args+=(--bind-try "$p" "$p")
 done
 
 #
