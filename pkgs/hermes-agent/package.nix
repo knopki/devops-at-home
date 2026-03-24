@@ -15,24 +15,25 @@ let
     pkgs.ffmpeg
     pkgs.libopus
     pkgs.portaudio
+    pkgs.espeak
+    # clipboard
+    pkgs.wl-clipboard
   ]
   # browser tool (optional)
   ++ lib.optional (pkgs ? agent-browser) pkgs.agent-browser
-  # openspec (optional)
-  # ++ lib.optional (pkgs ? openspec) pkgs.openspec
   # rust token killer (optional)
   ++ lib.optional (pkgs ? rtk) pkgs.rtk;
 in
 python3.pkgs.buildPythonApplication rec {
   pname = "hermes-agent";
-  version = "2026.3.17-unstable-2026-03-22";
+  version = "2026.3.23-unstable-2026-03-24";
   pyproject = true;
 
   src = fetchgit {
     url = "https://github.com/NousResearch/hermes-agent.git";
-    rev = "6435d69a6dcde647ca4942f336b87ba44f071f70";
+    rev = "87e2626cf6d490f03f48bf44d6d8c324bed56153";
     fetchSubmodules = true;
-    hash = "sha256-o66C6VDF+meApmGzMQTiK9KJF9PyNezWKTDML2JOE0M=";
+    hash = "sha256-itTx8uwLypAvb/P8sPJApIm0N04vD39RR308ka2esx4=";
   };
 
   patches = [
@@ -97,6 +98,7 @@ python3.pkgs.buildPythonApplication rec {
       ddgs
     ]
     ++ lib.optional (pkgs ? fal-client) pkgs.fal-client
+    ++ lib.optional (pkgs ? honcho-ai) pkgs.honcho-ai
     ++ lib.optional (python3.pkgs ? fal-client) python3.pkgs.fal-client
     ++ lib.optional (python3.pkgs ? agent-client-protocol) python3.pkgs.agent-client-protocol;
 
