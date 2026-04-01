@@ -425,7 +425,6 @@ in
       // userDataJobRepoConfig
       // {
         paths = map (x: "${config.users.users.sk.home}/${x}") [
-          ".config/superProductivity"
           ".local/share/Zotero"
           ".local/share/calendars"
           ".local/share/contacts"
