@@ -81,11 +81,12 @@
     enable = true;
     hooks = {
       no-commit-to-branch.enable = false;
-      lychee.settings.flags = ''
-        --exclude "cache\.garnix\.io"
-        --exclude "mirrors\.ustc\.edu\.cn"
-        --exclude "github\.com/.*/releases/.*"
-      '';
+      lychee = {
+        files = "\.md$";
+        # settings.flags = ''
+        #   --exclude "cache\.garnix\.io"
+        # '';
+      };
     };
   };
   treefmt.enable = true;
