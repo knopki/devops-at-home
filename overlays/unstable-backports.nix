@@ -8,6 +8,8 @@ let
   p = prev.nixpkgsUnstable;
 in
 {
+  inherit (p) skills;
+
   anytype =
     let
       unstableAnytype = prev.callPackage p.anytype.override {
