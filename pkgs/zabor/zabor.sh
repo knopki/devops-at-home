@@ -429,10 +429,9 @@ if ((profile_hermes)); then
   paths_ro+=(
     "$xdg_runtime_dir/pipewire-0"
     "$home/.config/pulse/cookie"
-    "$home/.honcho"
   )
   paths_rw+=(
-    "$xdg_cache_home/.huggingface"
+    "$xdg_cache_home/huggingface"
     "$xdg_data_home/rtk"
   )
   paths_rwx+=(
