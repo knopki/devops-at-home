@@ -12,6 +12,7 @@ in
     agent-browser
     backlog-md
     cli-proxy-api
+    gitnexus
     mcporter
     openspec
     rtk

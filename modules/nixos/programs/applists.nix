@@ -109,6 +109,7 @@ in
         # ocrmypdf
         pandoc # required by skills
         zabor # sandbox
+        gitnexus
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
