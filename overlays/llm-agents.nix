@@ -18,7 +18,7 @@ in
     spec-kit
     tuicr
     ;
-  codex = pkgIfVersionMin prev.codex "0.116" p.codex;
+  codex = pkgIfVersionMin prev.codex "0.118" p.codex;
   gemini-cli = pkgIfVersionMin prev.gemini-cli "0.30" p.gemini-cli;
-  opencode = pkgIfVersionMin prev.opencode "1.2.20" p.opencode;
+  opencode = pkgIfVersionMin prev.opencode "1.3.10" p.opencode;
 }

@@ -93,12 +93,20 @@ in
         fd
         ripgrep
         uv # required by hermes + skills
-        nodejs # required by hermes + skills
+        nodejs # required by hermes + skills (npx)
+        skills
+        # libopus?
+        # ffmpeg?
+        # espeak?
+        # wl-clipboard?
+        # portaudio # required by hermes?
+        tirith # required by hermes
         openspec
         rtk # required by hermes + codex + opencode
         opencv # required by skills
-        ffmpeg # required by skills
-        ocrmypdf
+        python3Packages.ddgs # required by skills
+        # ffmpeg # required by skills
+        # ocrmypdf
         pandoc # required by skills
         zabor # sandbox
       ]
