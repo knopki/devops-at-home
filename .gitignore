@@ -1,7 +1,6 @@
 result
 .direnv
 doc/index.html
-.aider*
 /TODO.md
 
 # Devenv
@@ -14,3 +13,5 @@ devenv.local.yaml
 
 # pre-commit
 .pre-commit-config.yaml
+
+.gitnexus
