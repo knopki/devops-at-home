@@ -77,6 +77,7 @@ in
         just
         lazygit
         lima
+        nono
         python3
         rclone
         unixtools.xxd

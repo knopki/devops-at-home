@@ -8,7 +8,7 @@ let
   p = prev.nixpkgsUnstable;
 in
 {
-  inherit (p) skills;
+  inherit (p) nono skills;
 
   anytype =
     let
