@@ -32,9 +32,6 @@ in
     # yubikey-manager
     httm
     cherry-studio
-
-    # temporary
-    impression
   ];
 
   programs = {
