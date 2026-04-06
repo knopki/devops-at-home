@@ -2,7 +2,6 @@
   lib,
   config,
   pkgs,
-  inputs,
   ...
 }:
 let
@@ -86,7 +85,7 @@ in
       ++ optionals cfg.devAi [
         codex
         opencode
-        inputs.hermes-agent.packages.${pkgs.system}.default
+        # inputs.hermes-agent.packages.${pkgs.system}.default
         agent-browser # required by hermes and more
         tuicr
         # ai stuff deps
