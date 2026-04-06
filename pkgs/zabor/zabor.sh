@@ -248,7 +248,10 @@ paths_rox=(
   /lib
   /lib64
 )
-paths_rwx=()
+paths_rwx=(
+  "$home/.local/bin"
+  "$xdg_data_home/uv"
+)
 gpu_devs=(
   /dev/dri
   /dev/hugepages
