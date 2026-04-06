@@ -31,7 +31,6 @@ in
     xorg.xhost
     # yubikey-manager
     httm
-    cherry-studio
   ];
 
   programs = {
