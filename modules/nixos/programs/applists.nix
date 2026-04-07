@@ -81,6 +81,7 @@ in
         rclone
         unixtools.xxd
         zabor
+        surge-cli
       ]
       ++ optionals cfg.devAi [
         codex
@@ -110,6 +111,7 @@ in
         pandoc # required by skills
         zabor # sandbox
         gitnexus
+        surge-cli
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
@@ -153,7 +155,6 @@ in
         fclones-gui
         findimagedupes
         gallery-dl
-        handbrake
         imagemagick
         picard
         pinta
