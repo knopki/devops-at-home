@@ -142,6 +142,7 @@ in
   networking = {
     hostId = "ff0b9d65";
     firewall = {
+      trustedInterfaces = [ "podman0" ];
       rejectPackets = mkDefault true;
       allowedTCPPorts = [ ];
       allowedTCPPortRanges = [

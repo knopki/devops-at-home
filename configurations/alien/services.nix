@@ -8,6 +8,8 @@ let
   lampaTorrservePort = 9080;
   lampaTorrservePeersPort = 16881;
   lampacDataVol = "/var/lib/lampac";
+  hindsightApiPort = 8888;
+  hindsightUiPort = 8889;
 in
 {
   imports = with self.modules.nixos; [
@@ -46,6 +48,33 @@ in
         "${lampacDataVol}/wwwroot/lampa-main:/home/wwwroot/lampa-main"
       ];
     };
+
+    hindsight-api = {
+      image = "ghcr.io/vectorize-io/hindsight:0.4.22-slim";
+      ports = [ "127.0.0.1:${toString hindsightApiPort}:8888" ];
+      volumes = [ "/var/lib/hindsight-pg/_data:/home/hindsight/.pg0" ];
+      environment = {
+        HINDSIGHT_API_LLM_PROVIDER = "openai";
+        HINDSIGHT_API_LLM_BASE_URL = "http://host.containers.internal:${toString config.custom.cli-proxy-api.port}/v1";
+        HINDSIGHT_API_LLM_MODEL = "gpt-5.4-mini";
+        HINDSIGHT_API_EMBEDDINGS_PROVIDER = "openai";
+        HINDSIGHT_API_EMBEDDINGS_OPENAI_BASE_URL = "https://openrouter.ai/api/v1";
+        HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL = "text-embedding-3-small";
+        HINDSIGHT_API_RERANKER_PROVIDER = "rrf";
+        HINDSIGHT_API_HOST = "0.0.0.0";
+        HINDSIGHT_API_PORT = "8888";
+      };
+      environmentFiles = [ config.sops.secrets.hindsight-api-env.path ];
+      extraOptions = [ "--add-host=host.containers.internal:host-gateway" ];
+    };
+
+    hindsight-ui = {
+      image = "ghcr.io/vectorize-io/hindsight-control-plane:0.4.22";
+      ports = [ "127.0.0.1:${toString hindsightUiPort}:9999" ];
+      environment = {
+        HINDSIGHT_CP_DATAPLANE_API_URL = "http://hindsight-api:8888";
+      };
+    };
   };
 
   networking.firewall.allowedTCPPorts = [
@@ -61,5 +90,8 @@ in
     };
   };
 
-  sops.secrets.lampa-admin-password = { };
+  sops.secrets = {
+    lampa-admin-password = { };
+    hindsight-api-env = { };
+  };
 }
