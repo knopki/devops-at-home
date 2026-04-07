@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   inputs,
@@ -41,7 +40,6 @@ in
       options i915 error_capture=1 mitigations=off
       options zfs zfs_bclone_enabled=1
     '';
-    extraModulePackages = with config.boot.kernelPackages; [ amneziawg ];
     initrd = {
       availableKernelModules = [
         "aesni_intel"

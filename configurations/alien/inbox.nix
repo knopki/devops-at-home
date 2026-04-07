@@ -24,8 +24,6 @@ in
     # misc
     bees
     tor-browser
-    amneziawg-go
-    amneziawg-tools
     bottles
     # tailscale
     xorg.xhost
@@ -165,7 +163,6 @@ in
   sops = {
     secrets = {
       nix-github-access-token = { };
-      amneziawg-home-conf = { };
     };
     templates."nix-access-tokens.conf".content = ''
       access-tokens = github.com=${config.sops.placeholder.nix-github-access-token}
@@ -185,6 +182,4 @@ in
       };
     };
   };
-
-  environment.etc."amnezia/amneziawg/home.conf".source = config.sops.secrets.amneziawg-home-conf.path;
 }

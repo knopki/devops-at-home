@@ -27,7 +27,6 @@ Laptop from 2014. Very old installation of NixOS (2019?).
 - Container runtime (Podman)
 - Media applications
 - Office suite
-- VPN client (AmneziaWG)
 
 **Services**:
 
