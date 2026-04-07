@@ -79,6 +79,7 @@
   };
   git-hooks = {
     enable = true;
+    excludes = [ "secrets/.*" ];
     hooks = {
       no-commit-to-branch.enable = false;
       lychee = {
