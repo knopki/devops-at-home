@@ -44,9 +44,9 @@ in
       gparted
       papers # alternative to cosmic reader
       cosmic-reader # not ready to be a default pdf viewer
-      gnome-calendar
+      # gnome-calendar # temporary disabled - not used
       gnome-characters
-      gnome-contacts
+      # gnome-contacts # temporary disabled - not used
       gnome-font-viewer
       kooha
       loupe

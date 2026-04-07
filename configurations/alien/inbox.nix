@@ -24,8 +24,7 @@ in
     # misc
     bees
     tor-browser
-    bottles
-    # tailscale
+    # bottles # temporary disabled - not used
     xorg.xhost
     # yubikey-manager
     httm

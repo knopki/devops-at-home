@@ -162,16 +162,15 @@ in
         swayimg
         streamrip
         szyszka
-        upscaler
+        # upscaler # temporary disable - not used
         qbittorrent
         yt-dlp
       ]
       ++ optionals cfg.office [
-        aliza
+        # aliza # temprorary disabled - not used
         anytype
         brave
-        citations
-        dialect
+        # citations # temporary disabled - not used
         gImageReader
         img2pdf
         keepassxc
