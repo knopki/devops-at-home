@@ -86,7 +86,7 @@ in
 
   obsidian = pkgIfVersionMin prev.obsidian "1.12" p.obsidian;
 
-  opencode = pkgIfVersionMin prev.opencode "1.3.10" p.opencode;
+  opencode = pkgIfVersionMin prev.opencode "1.4.0" p.opencode;
 
   telegram-desktop = pkgIfVersionMin prev.telegram-desktop "6.6.1" p.telegram-desktop;
 

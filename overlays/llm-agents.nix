@@ -21,5 +21,5 @@ in
     ;
   codex = pkgIfVersionMin prev.codex "0.118" p.codex;
   gemini-cli = pkgIfVersionMin prev.gemini-cli "0.30" p.gemini-cli;
-  opencode = pkgIfVersionMin prev.opencode "1.3.10" p.opencode;
+  opencode = pkgIfVersionMin prev.opencode "1.4.0" p.opencode;
 }
