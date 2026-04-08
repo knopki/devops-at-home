@@ -56,7 +56,7 @@ in
       environment = {
         HINDSIGHT_API_LLM_PROVIDER = "openai";
         HINDSIGHT_API_LLM_BASE_URL = "http://host.containers.internal:${toString config.custom.cli-proxy-api.port}/v1";
-        HINDSIGHT_API_LLM_MODEL = "gpt-5.4-mini";
+        HINDSIGHT_API_LLM_MODEL = "glm-4.7";
         HINDSIGHT_API_EMBEDDINGS_PROVIDER = "openai";
         HINDSIGHT_API_EMBEDDINGS_OPENAI_BASE_URL = "https://openrouter.ai/api/v1";
         HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL = "text-embedding-3-small";
