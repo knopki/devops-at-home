@@ -96,8 +96,6 @@ in
     in
     pkgIfVersionMin prev.simplex-chat-desktop "6.4" unstableSimplexChat;
 
-  uv = pkgIfVersionMin prev.uv "0.11.2" p.uv;
-
   xdg-desktop-portal-cosmic =
     pkgIfVersionMin prev.xdg-desktop-portal-cosmic "1.0.8"
       p.xdg-desktop-portal-cosmic;
