@@ -50,13 +50,15 @@ in
     };
 
     hindsight-api = {
-      image = "ghcr.io/vectorize-io/hindsight:0.4.22-slim";
+      image = "ghcr.io/vectorize-io/hindsight:0.5.0-slim";
       ports = [ "127.0.0.1:${toString hindsightApiPort}:8888" ];
       volumes = [ "/var/lib/hindsight-pg/_data:/home/hindsight/.pg0" ];
       environment = {
         HINDSIGHT_API_LLM_PROVIDER = "openai";
-        HINDSIGHT_API_LLM_BASE_URL = "http://host.containers.internal:${toString config.custom.cli-proxy-api.port}/v1";
-        HINDSIGHT_API_LLM_MODEL = "glm-4.7";
+        # HINDSIGHT_API_LLM_BASE_URL = "http://host.containers.internal:${toString config.custom.cli-proxy-api.port}/v1";
+        HINDSIGHT_API_LLM_BASE_URL = "https://openrouter.ai/api/v1";
+        # HINDSIGHT_API_LLM_MODEL = "openai/gpt-oss-120b:free";
+        HINDSIGHT_API_LLM_MODEL = "openai/gpt-oss-120b";
         HINDSIGHT_API_EMBEDDINGS_PROVIDER = "openai";
         HINDSIGHT_API_EMBEDDINGS_OPENAI_BASE_URL = "https://openrouter.ai/api/v1";
         HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL = "text-embedding-3-small";
@@ -69,7 +71,7 @@ in
     };
 
     hindsight-ui = {
-      image = "ghcr.io/vectorize-io/hindsight-control-plane:0.4.22";
+      image = "ghcr.io/vectorize-io/hindsight-control-plane:0.5.0";
       ports = [ "127.0.0.1:${toString hindsightUiPort}:9999" ];
       environment = {
         HINDSIGHT_CP_DATAPLANE_API_URL = "http://hindsight-api:8888";
