@@ -56,19 +56,16 @@ in
       volumes = [ "/var/lib/hindsight-pg/_data:/home/hindsight/.pg0" ];
       environment = {
         HINDSIGHT_API_LLM_PROVIDER = "openai";
-        # HINDSIGHT_API_LLM_BASE_URL = "http://host.containers.internal:${toString config.custom.cli-proxy-api.port}/v1";
-        HINDSIGHT_API_LLM_BASE_URL = "https://openrouter.ai/api/v1";
-        # HINDSIGHT_API_LLM_MODEL = "openai/gpt-oss-120b:free";
-        HINDSIGHT_API_LLM_MODEL = "openai/gpt-oss-120b";
+        HINDSIGHT_API_LLM_BASE_URL = "http://omnirouter:${toString omnirouterPort}/v1";
+        HINDSIGHT_API_LLM_MODEL = "small-cheap";
         HINDSIGHT_API_EMBEDDINGS_PROVIDER = "openai";
-        HINDSIGHT_API_EMBEDDINGS_OPENAI_BASE_URL = "https://openrouter.ai/api/v1";
-        HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL = "text-embedding-3-small";
+        HINDSIGHT_API_EMBEDDINGS_OPENAI_BASE_URL = "http://omnirouter:${toString omnirouterPort}/v1";
+        HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL = "openrouter/openai/text-embedding-3-small";
         HINDSIGHT_API_RERANKER_PROVIDER = "rrf";
         HINDSIGHT_API_HOST = "0.0.0.0";
         HINDSIGHT_API_PORT = "8888";
       };
       environmentFiles = [ config.sops.secrets.hindsight-api-env.path ];
-      extraOptions = [ "--add-host=host.containers.internal:host-gateway" ];
     };
 
     hindsight-ui = {
