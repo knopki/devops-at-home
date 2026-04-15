@@ -14,11 +14,9 @@ let
 in
 {
   imports = with self.modules.nixos; [
-    service-cli-proxy-api
     service-isponsorblocktv
   ];
 
-  custom.cli-proxy-api.enable = true;
   custom.isponsorblocktv.enable = true;
 
   virtualisation.oci-containers.containers = {

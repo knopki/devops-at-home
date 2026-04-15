@@ -463,7 +463,6 @@ in
         ];
         paths = [
           config.services.taskchampion-sync-server.dataDir
-          "/var/lib/private/cli-proxy-api"
           "/var/lib/private/isponsorblocktv"
           "/var/lib/hindsight-pg"
           "/var/lib/lampac"
