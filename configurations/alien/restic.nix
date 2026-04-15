@@ -467,6 +467,7 @@ in
           "/var/lib/private/isponsorblocktv"
           "/var/lib/hindsight-pg"
           "/var/lib/lampac"
+          "/var/lib/omnirouter"
         ]
         ++ (map (x: "${config.users.users.sk.home}/${x}") [
           ".codex"

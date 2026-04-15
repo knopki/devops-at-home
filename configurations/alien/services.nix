@@ -10,6 +10,7 @@ let
   lampacDataVol = "/var/lib/lampac";
   hindsightApiPort = 8888;
   hindsightUiPort = 8889;
+  omnirouterPort = 20128;
 in
 {
   imports = with self.modules.nixos; [
@@ -76,6 +77,15 @@ in
       environment = {
         HINDSIGHT_CP_DATAPLANE_API_URL = "http://hindsight-api:8888";
       };
+    };
+
+    omnirouter = {
+      image = "docker.io/diegosouzapw/omniroute:3.6.5";
+      ports = [ "127.0.0.1:${toString omnirouterPort}:${toString omnirouterPort}" ];
+      environment = {
+        PORT = toString omnirouterPort;
+      };
+      volumes = [ "/var/lib/omnirouter/_data:/app/data" ];
     };
   };
 
