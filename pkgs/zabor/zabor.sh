@@ -453,6 +453,7 @@ if ((profile_codex)); then
   paths_rw+=(
     "$home/.agents"
     "$home/.codex"
+    "$home/.context7"
     "$xdg_data_home/rtk"
   )
 fi
@@ -545,6 +546,7 @@ if ((profile_opencode)); then
   )
   paths_rw+=(
     "$home/.agents"
+    "$home/.context7"
     "$xdg_cache_home/opencode"
     "$xdg_config_home/opencode"
     "$xdg_data_home/opencode"
