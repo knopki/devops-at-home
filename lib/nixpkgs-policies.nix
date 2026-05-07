@@ -26,7 +26,10 @@ let
     pkg:
     elem (getName pkg) [
       "anydesk"
+      "anytype"
+      "anytype-heart"
       "aspell-dict-en-science"
+      "corefonts"
       "discord"
       "obsidian"
       "terraform"
@@ -39,7 +42,7 @@ let
     pkg:
     elem "${pkg.pname}-${pkg.version}" [
       "ecdsa-0.19.1" # python3.12
-      "electron-37.10.3"
+      "electron-38.8.4"
     ];
   allowInsecurePredicateStandard = allowInsecurePkgVersPredicate;
 
