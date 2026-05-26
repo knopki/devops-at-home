@@ -93,9 +93,10 @@ in
         ripgrep
         uv # required by hermes + skills
         nodejs # required by hermes + skills (npx)
+        bun # required by skills
         skills
         # libopus?
-        # ffmpeg?
+        ffmpeg
         # espeak?
         # wl-clipboard?
         # portaudio # required by hermes?
@@ -114,6 +115,7 @@ in
           [
             distrobox
             dive
+            docker-docker-compose
           ]
       ++ optionals cfg.edu [
         anki
