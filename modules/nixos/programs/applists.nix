@@ -34,7 +34,6 @@ in
       ]
       ++ optionals cfg.admin [
         nftables
-        zabor
       ]
       ++
         optionals
@@ -80,7 +79,6 @@ in
         python3
         rclone
         unixtools.xxd
-        zabor
         surge-cli
       ]
       ++ optionals cfg.devAi [
@@ -109,8 +107,6 @@ in
         # ffmpeg # required by skills
         # ocrmypdf
         pandoc # required by skills
-        zabor # sandbox
-        gitnexus
         surge-cli
       ]
       ++
