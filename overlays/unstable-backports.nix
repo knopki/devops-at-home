@@ -18,6 +18,8 @@ in
     in
     pkgIfVersionMin prev.anytype "0.54.0" unstableAnytype;
 
+  chezmoi = pkgIfVersionMin prev.chezmoi "2.67.2" p.chezmoi;
+
   codex = pkgIfVersionMin prev.codex "0.118" p.codex;
 
   cosmic-applets = pkgIfVersionMin prev.cosmic-applets "1.0.8" p.cosmic-applets;
@@ -86,7 +88,7 @@ in
 
   obsidian = pkgIfVersionMin prev.obsidian "1.12" p.obsidian;
 
-  opencode = pkgIfVersionMin prev.opencode "1.4.0" p.opencode;
+  opencode = pkgIfVersionMin prev.opencode "1.15.0" p.opencode;
 
   telegram-desktop = pkgIfVersionMin prev.telegram-desktop "6.6.1" p.telegram-desktop;
 
@@ -100,5 +102,5 @@ in
     pkgIfVersionMin prev.xdg-desktop-portal-cosmic "1.0.8"
       p.xdg-desktop-portal-cosmic;
 
-  zed-editor = pkgIfVersionMin prev.zed-editor "0.218" p.zed-editor;
+  zed-editor = pkgIfVersionMin prev.zed-editor "1.0.0" p.zed-editor;
 }
