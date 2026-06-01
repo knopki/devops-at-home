@@ -66,6 +66,8 @@ in
       "resume=${swapPartName}"
       "acpiphp.disable=1"
       "pcie_aspm.policy=powersave"
+      "i915.enable_guc=2"
+      "vm.min_free_kbytes=262144"
     ];
     supportedFilesystems = {
       btrfs = true;
