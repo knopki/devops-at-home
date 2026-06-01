@@ -34,6 +34,7 @@ in
       ]
       ++ optionals cfg.admin [
         nftables
+        tealdeer
       ]
       ++
         optionals
@@ -80,6 +81,7 @@ in
         rclone
         unixtools.xxd
         surge-cli
+        arduino-ide
       ]
       ++ optionals cfg.devAi [
         codex
@@ -116,7 +118,7 @@ in
           [
             distrobox
             dive
-            docker-docker-compose
+            docker-compose
           ]
       ++ optionals cfg.edu [
         anki
@@ -150,6 +152,7 @@ in
         asciinema
         czkawka-full
         edir
+        exiftool
         fclones
         fclones-gui
         findimagedupes
