@@ -8,7 +8,7 @@ let
   p = prev.nixpkgsUnstable;
 in
 {
-  inherit (p) nono skills;
+  inherit (p) agent-browser nono skills;
 
   anytype =
     let

@@ -9,7 +9,6 @@ let
 in
 {
   inherit (p)
-    agent-browser
     backlog-md
     cli-proxy-api
     mcporter
@@ -18,6 +17,7 @@ in
     spec-kit
     tuicr
     ;
+  agent-browser = pkgIfVersionMin prev.agent-browser "0.26" p.agent-browser;
   codex = pkgIfVersionMin prev.codex "0.118" p.codex;
   gemini-cli = pkgIfVersionMin prev.gemini-cli "0.30" p.gemini-cli;
   nono = pkgIfVersionMin prev.nono "0.55.0" p.nono;

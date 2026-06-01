@@ -86,6 +86,7 @@ in
         opencode
         # inputs.hermes-agent.packages.${pkgs.system}.default
         agent-browser # required by hermes and more
+        chromium # for agent-browser
         tuicr
         # ai stuff deps
         bubblewrap # required by codex
