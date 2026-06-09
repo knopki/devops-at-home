@@ -35,6 +35,7 @@ in
       ++ optionals cfg.admin [
         nftables
         tealdeer
+        witr
       ]
       ++
         optionals
@@ -66,6 +67,7 @@ in
         tree
       ]
       ++ optionals cfg.dev [
+        android-tools
         binutils
         devenv
         gh
@@ -86,12 +88,12 @@ in
       ++ optionals cfg.devAi [
         codex
         opencode
+        hermes-desktop
         # inputs.hermes-agent.packages.${pkgs.system}.default
         agent-browser # required by hermes and more
         chromium # for agent-browser
         tuicr
         # ai stuff deps
-        bubblewrap # required by codex
         fd
         ripgrep
         uv # required by hermes + skills
@@ -111,7 +113,11 @@ in
         # ffmpeg # required by skills
         # ocrmypdf
         pandoc # required by skills
-        surge-cli
+        surge-cli # required by skills
+        codegraph # required by coding agents
+        bernstein # orchestrator
+        pi
+        fff # used by agents
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))

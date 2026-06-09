@@ -9,17 +9,19 @@ let
 in
 {
   inherit (p)
-    backlog-md
+    bernstein
     cli-proxy-api
+    codegraph
+    hermes-desktop
     mcporter
     openspec
+    pi
     rtk
-    spec-kit
     tuicr
     ;
   agent-browser = pkgIfVersionMin prev.agent-browser "0.26" p.agent-browser;
   codex = pkgIfVersionMin prev.codex "0.118" p.codex;
   gemini-cli = pkgIfVersionMin prev.gemini-cli "0.30" p.gemini-cli;
   nono = pkgIfVersionMin prev.nono "0.55.0" p.nono;
-  opencode = pkgIfVersionMin prev.opencode "1.15.0" p.opencode;
+  opencode = pkgIfVersionMin prev.opencode "1.16.0" p.opencode;
 }
