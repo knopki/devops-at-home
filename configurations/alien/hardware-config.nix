@@ -128,6 +128,11 @@ in
           KEYBOARD_KEY_95=f17             # left column 4
           KEYBOARD_KEY_96=f18             # left column 5
       '';
+      extraRules = ''
+        # Canon LiDE 220
+        SUBSYSTEM=="usb", ATTR{idVendor}=="04a9", ATTR{idProduct}=="190f", \
+          GROUP="scanner", MODE="0660"
+      '';
     };
 
     pcscd = {
