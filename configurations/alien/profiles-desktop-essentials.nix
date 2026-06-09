@@ -80,7 +80,7 @@ in
         gutenprint
       ];
     };
-    resolved.dnssec = "false";
+    resolved.settings.Resolve.DNSSEC = false;
     xserver.enable = true;
     libinput.enable = true;
   };

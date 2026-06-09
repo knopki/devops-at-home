@@ -1,5 +1,5 @@
 { inputs, self, ... }:
-inputs.nixpkgs-25-11.lib.nixosSystem {
+inputs.nixpkgs-26-05.lib.nixosSystem {
   specialArgs = {
     inherit inputs self;
   };
@@ -10,7 +10,6 @@ inputs.nixpkgs-25-11.lib.nixosSystem {
     ./nixpkgs.nix
     ./hardware-config.nix
     ./profiles-flatpak.nix
-    ./profiles-earlyoom.nix
     ./profiles-cryptowallets.nix
     ./profiles-desktop-essentials.nix
     ./profiles-laptop.nix

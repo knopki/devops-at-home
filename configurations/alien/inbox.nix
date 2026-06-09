@@ -25,7 +25,7 @@ in
     bees
     tor-browser
     # bottles # temporary disabled - not used
-    xorg.xhost
+    xhost
     # yubikey-manager
     httm
   ];

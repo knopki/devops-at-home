@@ -66,9 +66,6 @@ in
     hardware.flipperzero.enable = mkDefault true;
 
     programs = {
-
-      adb.enable = true;
-
       git = {
         enable = true;
         lfs.enable = true;

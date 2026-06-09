@@ -25,7 +25,8 @@
     # nixpkgs
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nixpkgs-25-11.url = "nixpkgs/nixos-25.11";
-    nixpkgs.follows = "nixpkgs-25-11";
+    nixpkgs-26-05.url = "nixpkgs/nixos-26.05";
+    nixpkgs.follows = "nixpkgs-26-05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     # core modules and libraries
@@ -33,9 +34,9 @@
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-lib";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-schemas.url = "github:DeterminateSystems/flake-schemas";
-    home-25-11.inputs.nixpkgs.follows = "nixpkgs-25-11";
-    home-25-11.url = "github:nix-community/home-manager/release-25.11";
-    home.follows = "home-25-11";
+    home-26-05.inputs.nixpkgs.follows = "nixpkgs-26-05";
+    home-26-05.url = "github:nix-community/home-manager/release-26.05";
+    home.follows = "home-26-05";
     sops-nix.url = "flake:sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -57,9 +58,9 @@
 
     llm-agents.url = "github:numtide/llm-agents.nix";
     hermes-agent.url = "github:NousResearch/hermes-agent/v2026.4.3";
-    hermes-agent.inputs.nixpkgs.follows = "nixpkgs-25-11";
+    hermes-agent.inputs.nixpkgs.follows = "nixpkgs-26-05";
     devenv.url = "github:cachix/devenv/heads/main";
-    devenv.inputs.nixpkgs.follows = "nixpkgs-25-11";
+    devenv.inputs.nixpkgs.follows = "nixpkgs-26-05";
   };
 
   outputs =

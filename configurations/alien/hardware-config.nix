@@ -83,7 +83,10 @@ in
     "/" = {
       device = "/dev/disk/by-uuid/e384e984-2dbf-470d-82b2-7d994f4b4a7b";
       fsType = "ext4";
-      options = [ "relatime" ];
+      options = [
+        "relatime"
+        "x-systemd.device-timeout=infinity"
+      ];
     };
   };
 
