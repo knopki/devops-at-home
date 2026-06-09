@@ -25,8 +25,6 @@ in
   options.roles.workstation.enable = mkEnableOption "Workstation role";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.atuin ];
-
     custom = {
       applists = {
         enable = mkDefault true;

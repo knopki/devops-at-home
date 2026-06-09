@@ -414,7 +414,6 @@ in
       // sensitiveJobRepoConfig
       // {
         paths = map (x: "${config.users.users.sk.home}/${x}") [
-          ".local/share/atuin"
           ".local/share/fish"
         ];
       };

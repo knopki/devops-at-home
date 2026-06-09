@@ -151,10 +151,6 @@ let
           ".config/anytype"
           ".local/share/anytype"
         ]
-        ++ optionals (hasPackage pkgs.atuin) [
-          ".config/atuin"
-          ".local/share/atuin"
-        ]
         ++ optional (hasPackage pkgs.brave) ".config/BraveSoftware"
         ++ optional (lib.any hasPackage [
           pkgs.bottles
