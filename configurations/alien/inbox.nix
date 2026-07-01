@@ -162,6 +162,7 @@ in
 
   sops = {
     secrets = {
+      estd-dev-share-secrets = { };
       nix-github-access-token = { };
     };
     templates."nix-access-tokens.conf".content = ''
@@ -180,6 +181,29 @@ in
       systemd-networkd = {
         serviceConfig.SupplementaryGroups = [ config.users.groups.keys.name ];
       };
+    };
+  };
+
+  fileSystems = {
+    "/mnt/estd-dev-sk-share" = {
+      device = "//192.168.80.20/sk-source/";
+      fsType = "cifs";
+      options = [
+        "noauto"
+        "nofail"
+        "x-systemd.automount"
+        "x-systemd.idle-timeout=60"
+        "x-systemd.device-timeout=5s"
+        "x-systemd.mount-timeout=5s"
+        "credentials=${config.sops.secrets.estd-dev-share-secrets.path}"
+        "uid=1000"
+        "gid=1000"
+        "iocharset=utf8"
+        "vers=3.0"
+        "cache=strict"
+        "actimeo=2"
+        "noperm"
+      ];
     };
   };
 }

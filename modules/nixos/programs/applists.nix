@@ -33,6 +33,7 @@ in
         findutils
       ]
       ++ optionals cfg.admin [
+        cifs-utils
         nftables
         tealdeer
         witr
