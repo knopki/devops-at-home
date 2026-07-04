@@ -24,9 +24,9 @@
   inputs = {
     # nixpkgs
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
-    nixpkgs-26-05.url = "nixpkgs/nixos-26.05";
+    nixpkgs-26-05.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs.follows = "nixpkgs-26-05";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # core modules and libraries
     flake-parts.url = "flake:flake-parts";
