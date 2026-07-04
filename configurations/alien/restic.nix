@@ -462,7 +462,7 @@ in
         ];
         paths = [
           config.services.taskchampion-sync-server.dataDir
-          "/var/lib/private/isponsorblocktv"
+          "/var/lib/isponsorblocktv"
           "/var/lib/lampac"
         ]
         ++ (map (x: "${config.users.users.sk.home}/${x}") [
