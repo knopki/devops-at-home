@@ -77,6 +77,8 @@ in
 
       bash.undistractMe.enable = mkDefault true;
 
+      command-not-found.enable = mkDefault false;
+
       iftop.enable = mkDefault true;
 
       vivid = {

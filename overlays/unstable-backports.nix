@@ -8,8 +8,6 @@ let
   p = prev.nixpkgsUnstable;
 in
 {
-  inherit (p) agent-browser nono skills;
-
   anytype =
     let
       unstableAnytype = prev.callPackage p.anytype.override {

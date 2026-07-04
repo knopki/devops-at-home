@@ -45,7 +45,7 @@ in
             lazydocker
           ]
       ++ optionals cfg.adminGUI [
-        anydesk
+        # anydesk
         remmina
       ]
       ++ optionals cfg.cliTools [
@@ -87,7 +87,6 @@ in
         arduino-ide
       ]
       ++ optionals cfg.devAi [
-        codex
         opencode
         hermes-desktop
         # inputs.hermes-agent.packages.${pkgs.system}.default
@@ -108,17 +107,12 @@ in
         # portaudio # required by hermes?
         tirith # required by hermes
         openspec
-        rtk # required by hermes + codex + opencode
         opencv # required by skills
-        python3Packages.ddgs # required by skills
         # ffmpeg # required by skills
         # ocrmypdf
         pandoc # required by skills
         surge-cli # required by skills
         codegraph # required by coding agents
-        bernstein # orchestrator
-        pi
-        fff # used by agents
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
