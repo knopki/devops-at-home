@@ -14,15 +14,15 @@ in
     codegraph
     hermes-desktop
     mcporter
-    pi
     tuicr
-    vix
+    reasonix
     ;
   agent-browser = pkgIfVersionMin prev.agent-browser "0.26" p.agent-browser;
-  codex = pkgIfVersionMin prev.codex "0.118" p.codex;
+  code = pkgIfVersionMin prev.code "0.6.145" p.code;
   gemini-cli = pkgIfVersionMin prev.gemini-cli "0.30" p.gemini-cli;
+  herdr = pkgIfVersionMin prev.herdr "0.8" p.herdr;
   nono = pkgIfVersionMin prev.nono "0.63.0" p.nono;
-  rtk = pkgIfVersionMin prev.rtk "0.41.0" p.rtk;
   opencode = pkgIfVersionMin prev.opencode "1.16.0" p.opencode;
   openspec = pkgIfVersionMin prev.openspec "1.4.0" p.openspec;
+  pi-coding-agent = pkgIfVersionMin prev.pi-coding-agent "0.82" p.pi;
 }

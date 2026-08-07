@@ -8,6 +8,8 @@ let
   p = prev.nixpkgsUnstable;
 in
 {
+  inherit (p) herdr;
+
   anytype =
     let
       unstableAnytype = prev.callPackage p.anytype.override {
@@ -18,7 +20,7 @@ in
 
   chezmoi = pkgIfVersionMin prev.chezmoi "2.67.2" p.chezmoi;
 
-  codex = pkgIfVersionMin prev.codex "0.118" p.codex;
+  code = pkgIfVersionMin prev.code "0.6.144" p.code;
 
   cosmic-applets = pkgIfVersionMin prev.cosmic-applets "1.0.8" p.cosmic-applets;
 
@@ -86,7 +88,10 @@ in
 
   obsidian = pkgIfVersionMin prev.obsidian "1.12" p.obsidian;
 
-  opencode = pkgIfVersionMin prev.opencode "1.15.0" p.opencode;
+  opencode = pkgIfVersionMin prev.opencode "1.18.0" p.opencode;
+  opencode-desktop = pkgIfVersionMin prev.opencode-desktop "1.18.0" p.opencode-desktop;
+
+  pi-coding-agent = pkgIfVersionMin prev.pi-coding-agent "0.82.0" p.pi-coding-agent;
 
   telegram-desktop = pkgIfVersionMin prev.telegram-desktop "6.6.1" p.telegram-desktop;
 
@@ -95,6 +100,8 @@ in
       unstableSimplexChat = prev.callPackage p.simplex-chat-desktop.override { };
     in
     pkgIfVersionMin prev.simplex-chat-desktop "6.4" unstableSimplexChat;
+
+  worktrunk = pkgIfVersionMin prev.worktrunk "0.68.0" p.worktrunk;
 
   xdg-desktop-portal-cosmic =
     pkgIfVersionMin prev.xdg-desktop-portal-cosmic "1.0.8"

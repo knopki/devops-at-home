@@ -66,6 +66,7 @@ in
         tmux
         trashy
         tree
+        herdr
       ]
       ++ optionals cfg.dev [
         android-tools
@@ -83,6 +84,7 @@ in
         python3
         rclone
         unixtools.xxd
+        worktrunk
         surge-cli
         arduino-ide
       ]
@@ -113,6 +115,7 @@ in
         pandoc # required by skills
         surge-cli # required by skills
         codegraph # required by coding agents
+        pi-coding-agent
       ]
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
