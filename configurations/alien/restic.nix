@@ -462,10 +462,13 @@ in
         ];
         paths = [
           config.services.taskchampion-sync-server.dataDir
+          "/var/lib/cliproxyapi"
+          "/var/lib/cliproxyapi-manager-plus"
           "/var/lib/isponsorblocktv"
           "/var/lib/lampac"
         ]
         ++ (map (x: "${config.users.users.sk.home}/${x}") [
+          ".agents"
           ".codex"
           ".config/BraveSoftware"
           ".config/MusicBrainz"
@@ -475,7 +478,6 @@ in
           ".config/opencode"
           ".config/remmina"
           ".hermes"
-          ".honcho"
           ".lima"
           ".local/state/skills"
           ".local/share/Anki"
