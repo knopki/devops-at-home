@@ -1,8 +1,4 @@
-{
-  config,
-  self,
-  ...
-}:
+{ config, ... }:
 let
   lampaWebPort = 9118;
   lampaTorrservePort = 9080;
@@ -10,15 +6,26 @@ let
   lampacDataVol = "/var/lib/lampac";
 in
 {
-  imports = with self.modules.nixos; [
-    service-cli-proxy-api
-  ];
-
-  custom.cli-proxy-api.enable = true;
-
   virtualisation.oci-containers.containers = {
+    cpa = {
+      image = "dockerhub.timeweb.cloud/eceasy/cli-proxy-api:v7.2.115";
+      ports = [ "127.0.0.1:8317:8317" ];
+      volumes = [
+        "/var/lib/cliproxyapi/config.yaml:/CLIProxyAPI/config.yaml"
+        "/var/lib/cliproxyapi/logs:/CLIProxyAPI/logs"
+        "/var/lib/cliproxyapi/plugins:/CLIProxyAPI/plugins"
+        "/var/lib/cliproxyapi/auths:/root/.cli-proxy-api"
+      ];
+    };
+
+    cpa-manager-plus = {
+      image = "dockerhub.timeweb.cloud/seakee/cpa-manager-plus:v1.11.11";
+      ports = [ "127.0.0.1:18317:18317" ];
+      volumes = [ "/var/lib/cliproxyapi-manager-plus:/data" ];
+    };
+
     isponsorblocktv = {
-      image = "dockerhub.timeweb.cloud/dmunozv04/isponsorblocktv:v2.9";
+      image = "dockerhub.timeweb.cloud/dmunozv04/isponsorblocktv:v2.10";
       volumes = [
         "/var/lib/isponsorblocktv:/app/data"
       ];
