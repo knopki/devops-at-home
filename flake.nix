@@ -56,8 +56,6 @@
     # nixpak.inputs.nixpkgs.follows = "nixpkgs";
 
     llm-agents.url = "github:numtide/llm-agents.nix";
-    hermes-agent.url = "github:NousResearch/hermes-agent/v2026.4.3";
-    hermes-agent.inputs.nixpkgs.follows = "nixpkgs-26-05";
     devenv.url = "github:cachix/devenv/heads/main";
     devenv.inputs.nixpkgs.follows = "nixpkgs-26-05";
   };
