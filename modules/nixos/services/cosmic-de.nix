@@ -28,6 +28,8 @@ in
       NIXOS_OZONE_WL = "1";
     };
 
+    environment.cosmic.excludePackages = [ pkgs.cosmic-term ];
+
     environment.systemPackages = with pkgs; [
       (hiPrio cosmic-icons) # no need to install by this will fix collisions
 
@@ -43,13 +45,13 @@ in
       resources
       gparted
       papers # alternative to cosmic reader
-      cosmic-reader # not ready to be a default pdf viewer
       # gnome-calendar # temporary disabled - not used
       gnome-characters
       # gnome-contacts # temporary disabled - not used
       gnome-font-viewer
       kooha
       loupe
+      kitty
 
       hardinfo2 # TODO: create module
 
