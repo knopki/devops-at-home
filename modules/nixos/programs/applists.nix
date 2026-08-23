@@ -37,6 +37,7 @@ in
         nftables
         tealdeer
         witr
+        google-cloud-sdk
       ]
       ++
         optionals
@@ -72,6 +73,7 @@ in
         android-tools
         binutils
         devenv
+        gcc
         gh
         difftastic
         gnupg
@@ -80,6 +82,7 @@ in
         just
         lazygit
         lima
+        mise
         nono
         python3
         rclone
@@ -87,12 +90,11 @@ in
         worktrunk
         surge-cli
         arduino-ide
+        arduino-cli
       ]
       ++ optionals cfg.devAi [
         opencode
-        hermes-desktop
-        # inputs.hermes-agent.packages.${pkgs.system}.default
-        agent-browser # required by hermes and more
+        agent-browser # required by some agents and more
         chromium # for agent-browser
         tuicr
         # ai stuff deps
@@ -116,7 +118,33 @@ in
         surge-cli # required by skills
         codegraph # required by coding agents
         pi-coding-agent
+        dsh
       ]
+      ++ optionals cfg.devAi (
+        with python3Packages;
+        [
+          # standard set of packages for AI
+          cryptography
+          h5py
+          lxml
+          matplotlib
+          markitdown
+          numpy
+          openpyxl
+          pandas
+          pytz
+          pymupdf
+          python-docx
+          pytesseract
+          pyfiglet
+          scipy
+          sklearn-compat
+          seaborn
+          requests
+          reportlab
+          sympy
+        ]
+      )
       ++
         optionals (cfg.dev && (config.virtualisation.docker.enable || config.virtualisation.podman.enable))
           [

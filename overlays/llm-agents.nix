@@ -12,6 +12,7 @@ in
     bernstein
     cli-proxy-api
     codegraph
+    dsh
     hermes-desktop
     mcporter
     tuicr

@@ -80,6 +80,8 @@ in
 
   lima = pkgIfVersionMin prev.lima "2.0" p.lima;
 
+  mise = pkgIfVersionMin prev.mise "2026.8" p.mise;
+
   naps2 =
     let
       unstableNaps2 = prev.callPackage p.naps2.override { };
